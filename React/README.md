@@ -1,7 +1,41 @@
-# FiduciaBanRegio
+# FiduciaWeb Interno Banregio: NextJS
+[![Build Status](https://travis-ci.org/joemccann/dillinger.svg?branch=master)](https://travis-ci.org/joemccann/dillinger)
+Paso 1: Instalar Node.js
+[![Node.js](https://nodejs.org/static/images/logo.svg)](https://nodejs.org/en/)
 
-Sistema Fiduciario para el control de Inmuebles y Desarrollo Inmobiliario
+Paso 2: Navegar a la ruta donde esta la carpeta de React
+```sh
+>cd ..Fiducia-Banregio\React
+```
+Paso 3: Ejecutar la instalacion de las dependencias incluidas
+```sh
+>npm install
+```
+Paso 4: Iniciar la aplicación en modo desarrollador
+```sh
+>npm run dev
+```
+Verificar el despliegue de la aplicacion navegando a la ruta
+```sh
+127.0.0.1:3000
+```
 
-  - Aqui debo poner la instalacion de React
-  - Como Probarlo
-  - Como Modificar las pantallas
+### Plugins
+
+Dillinger is currently extended with the following plugins. Instructions on how to use them in your own application are linked below.
+
+| Plugin | README |
+| ------ | ------ |
+| Dropbox | [plugins/dropbox/README.md][PlDb] |
+| GitHub | [plugins/github/README.md][PlGh] |
+| Google Drive | [plugins/googledrive/README.md][PlGd] |
+| OneDrive | [plugins/onedrive/README.md][PlOd] |
+| Medium | [plugins/medium/README.md][PlMe] |
+| Google Analytics | [plugins/googleanalytics/README.md][PlGa] |
+
+### Todos
+
+ - Reestructurar Pantallas
+ - Separar llamados y funciones
+ - Crear archivo de constantes
+ - Generalizar Tablas
