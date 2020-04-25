@@ -22,7 +22,7 @@ Verificar el despliegue de la aplicacion navegando a la ruta
 
 ### Modulos usados
 
-Dillinger is currently extended with the following plugins. Instructions on how to use them in your own application are linked below.
+Para su funcionamiento se han integrado diversas dependencias de React, cada una tiene sus instrucciones en los siguientes links.
 
 | Plugin | README |
 | ------ | ------ |
