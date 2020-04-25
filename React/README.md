@@ -34,7 +34,7 @@ Para su funcionamiento se han integrado diversas dependencias de React, cada una
 | Date-IO |  |
 | Bootstrap |  |
 | Bootswatch |  |
-| Bootswatch |  |
+| Bootsnipp |  |
 | Date-Fns |  |
 | Jquery |  |
 | PrimeIcons |  |

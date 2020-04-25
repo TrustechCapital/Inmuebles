@@ -1,5 +1,24 @@
 (window["webpackJsonp"] = window["webpackJsonp"] || []).push([["static\\development\\pages\\index.js"],{
 
+/***/ "./components/AxiosCalls.jsx":
+/*!***********************************!*\
+  !*** ./components/AxiosCalls.jsx ***!
+  \***********************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var axios__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! axios */ "./node_modules/axios/index.js");
+/* harmony import */ var axios__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(axios__WEBPACK_IMPORTED_MODULE_0__);
+
+/* harmony default export */ __webpack_exports__["default"] = (axios__WEBPACK_IMPORTED_MODULE_0___default.a.create({
+  /*URL DEMO: http://127.0.0.1:7101/FiduciaWeb/getRef.do?json={"id":"funRegistroGarantias"}*/
+  baseURL: "http://127.0.0.1:7101/FiduciaWeb"
+}));
+
+/***/ }),
+
 /***/ "./components/Bienes/Bienes.jsx":
 /*!**************************************!*\
   !*** ./components/Bienes/Bienes.jsx ***!
@@ -22,15 +41,15 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _material_ui_core_Tab__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! @material-ui/core/Tab */ "./node_modules/@material-ui/core/esm/Tab/index.js");
 /* harmony import */ var _material_ui_core_Typography__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(/*! @material-ui/core/Typography */ "./node_modules/@material-ui/core/esm/Typography/index.js");
 /* harmony import */ var _material_ui_core_Box__WEBPACK_IMPORTED_MODULE_9__ = __webpack_require__(/*! @material-ui/core/Box */ "./node_modules/@material-ui/core/esm/Box/index.js");
-/* harmony import */ var _BienesApi__WEBPACK_IMPORTED_MODULE_10__ = __webpack_require__(/*! ./BienesApi */ "./components/Bienes/BienesApi.jsx");
-/* harmony import */ var _Menu__WEBPACK_IMPORTED_MODULE_11__ = __webpack_require__(/*! ./Menu */ "./components/Bienes/Menu.jsx");
-/* harmony import */ var _material_ui_core__WEBPACK_IMPORTED_MODULE_12__ = __webpack_require__(/*! @material-ui/core */ "./node_modules/@material-ui/core/esm/index.js");
+/* harmony import */ var _MainBienes__WEBPACK_IMPORTED_MODULE_10__ = __webpack_require__(/*! ./MainBienes */ "./components/Bienes/MainBienes.jsx");
+/* harmony import */ var _material_ui_core__WEBPACK_IMPORTED_MODULE_11__ = __webpack_require__(/*! @material-ui/core */ "./node_modules/@material-ui/core/esm/index.js");
 
 
 
 var _jsxFileName = "D:\\GIT\\Eominguer\\Banregio\\Fiducia-Banregio\\React\\components\\Bienes\\Bienes.jsx";
 var __jsx = react__WEBPACK_IMPORTED_MODULE_3___default.a.createElement;
 
+/*Controlador para el menu de Inmuebles/Bienes */
 
 
 
@@ -148,7 +167,7 @@ function VerticalTabs() {
       lineNumber: 75,
       columnNumber: 7
     }
-  }, __jsx(_material_ui_core__WEBPACK_IMPORTED_MODULE_12__["Container"], {
+  }, __jsx(_material_ui_core__WEBPACK_IMPORTED_MODULE_11__["Container"], {
     maxWidth: "md",
     className: "datatable-doc-demo",
     __self: this,
@@ -164,26 +183,11 @@ function VerticalTabs() {
       lineNumber: 77,
       columnNumber: 11
     }
-  }, __jsx(_Menu__WEBPACK_IMPORTED_MODULE_11__["default"], {
+  }, __jsx(_MainBienes__WEBPACK_IMPORTED_MODULE_10__["default"], {
     __self: this,
     __source: {
       fileName: _jsxFileName,
       lineNumber: 78,
-      columnNumber: 13
-    }
-  })), __jsx("div", {
-    className: "datatable-doc-demo",
-    __self: this,
-    __source: {
-      fileName: _jsxFileName,
-      lineNumber: 80,
-      columnNumber: 11
-    }
-  }, __jsx(_BienesApi__WEBPACK_IMPORTED_MODULE_10__["default"], {
-    __self: this,
-    __source: {
-      fileName: _jsxFileName,
-      lineNumber: 81,
       columnNumber: 13
     }
   })))));
@@ -191,10 +195,10 @@ function VerticalTabs() {
 
 /***/ }),
 
-/***/ "./components/Bienes/BienesApi.jsx":
-/*!*****************************************!*\
-  !*** ./components/Bienes/BienesApi.jsx ***!
-  \*****************************************/
+/***/ "./components/Bienes/BienesTabla.jsx":
+/*!*******************************************!*\
+  !*** ./components/Bienes/BienesTabla.jsx ***!
+  \*******************************************/
 /*! exports provided: default */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
@@ -209,17 +213,16 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _babel_runtime_helpers_esm_getPrototypeOf__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! @babel/runtime/helpers/esm/getPrototypeOf */ "./node_modules/@babel/runtime/helpers/esm/getPrototypeOf.js");
 /* harmony import */ var react__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! react */ "./node_modules/react/index.js");
 /* harmony import */ var react__WEBPACK_IMPORTED_MODULE_6___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_6__);
-/* harmony import */ var axios__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! axios */ "./node_modules/axios/index.js");
-/* harmony import */ var axios__WEBPACK_IMPORTED_MODULE_7___default = /*#__PURE__*/__webpack_require__.n(axios__WEBPACK_IMPORTED_MODULE_7__);
-/* harmony import */ var primereact_datatable__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(/*! primereact/datatable */ "./node_modules/primereact/datatable.js");
-/* harmony import */ var primereact_datatable__WEBPACK_IMPORTED_MODULE_8___default = /*#__PURE__*/__webpack_require__.n(primereact_datatable__WEBPACK_IMPORTED_MODULE_8__);
+/* harmony import */ var primereact_datatable__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! primereact/datatable */ "./node_modules/primereact/datatable.js");
+/* harmony import */ var primereact_datatable__WEBPACK_IMPORTED_MODULE_7___default = /*#__PURE__*/__webpack_require__.n(primereact_datatable__WEBPACK_IMPORTED_MODULE_7__);
+/* harmony import */ var _Funciones__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(/*! ../Funciones */ "./components/Funciones.jsx");
 
 
 
 
 
 
-var _jsxFileName = "D:\\GIT\\Eominguer\\Banregio\\Fiducia-Banregio\\React\\components\\Bienes\\BienesApi.jsx";
+var _jsxFileName = "D:\\GIT\\Eominguer\\Banregio\\Fiducia-Banregio\\React\\components\\Bienes\\BienesTabla.jsx";
 var __jsx = react__WEBPACK_IMPORTED_MODULE_6___default.a.createElement;
 
 function _createSuper(Derived) { return function () { var Super = Object(_babel_runtime_helpers_esm_getPrototypeOf__WEBPACK_IMPORTED_MODULE_5__["default"])(Derived), result; if (_isNativeReflectConstruct()) { var NewTarget = Object(_babel_runtime_helpers_esm_getPrototypeOf__WEBPACK_IMPORTED_MODULE_5__["default"])(this).constructor; result = Reflect.construct(Super, arguments, NewTarget); } else { result = Super.apply(this, arguments); } return Object(_babel_runtime_helpers_esm_possibleConstructorReturn__WEBPACK_IMPORTED_MODULE_4__["default"])(this, result); }; }
@@ -250,52 +253,35 @@ var BienesApi = /*#__PURE__*/function (_React$Component) {
   }
 
   Object(_babel_runtime_helpers_esm_createClass__WEBPACK_IMPORTED_MODULE_2__["default"])(BienesApi, [{
-    key: "llamada",
-    value: function llamada() {
-      return _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.async(function llamada$(_context) {
+    key: "componentDidMount",
+    value: function componentDidMount() {
+      var llamados;
+      return _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.async(function componentDidMount$(_context) {
         while (1) {
           switch (_context.prev = _context.next) {
             case 0:
-              return _context.abrupt("return", axios__WEBPACK_IMPORTED_MODULE_7___default.a.get('http://127.0.0.1:7101/FiduciaWeb/getRef.do?json={"id":"funRegistroGarantias"}').then(function (res) {
-                return res;
-              }));
+              llamados = new _Funciones__WEBPACK_IMPORTED_MODULE_8__["default"]();
+              _context.next = 3;
+              return _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.awrap(llamados.datosTabla('json={"id":"funRegistroGarantias"}'));
 
-            case 1:
+            case 3:
+              this.datos = _context.sent;
+              console.log(this.datos);
+              /*this.llamada().then(data => {
+                  this.setState({fiduca: data});
+              });*/
+
+            case 5:
             case "end":
               return _context.stop();
-          }
-        }
-      }, null, null, null, Promise);
-    }
-  }, {
-    key: "componentDidMount",
-    value: function componentDidMount() {
-      var _this2 = this;
-
-      return _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.async(function componentDidMount$(_context2) {
-        while (1) {
-          switch (_context2.prev = _context2.next) {
-            case 0:
-              this.llamada().then(function (data) {
-                _this2.setState({
-                  fiduca: data
-                });
-              });
-
-            case 1:
-            case "end":
-              return _context2.stop();
           }
         }
       }, null, this, null, Promise);
     }
   }, {
-    key: "setFiso",
-    value: function setFiso(datos) {}
-  }, {
     key: "displaySelection",
     value: function displaySelection(data) {
-      var _this3 = this;
+      var _this2 = this;
 
       console.log(data);
 
@@ -307,7 +293,7 @@ var BienesApi = /*#__PURE__*/function (_React$Component) {
           __self: this,
           __source: {
             fileName: _jsxFileName,
-            lineNumber: 38,
+            lineNumber: 31,
             columnNumber: 20
           }
         }, "Sin Selecci\xF3n");
@@ -320,16 +306,16 @@ var BienesApi = /*#__PURE__*/function (_React$Component) {
           __self: this,
           __source: {
             fileName: _jsxFileName,
-            lineNumber: 43,
+            lineNumber: 36,
             columnNumber: 24
           }
         }, data.map(function (bien, i) {
           return __jsx("li", {
             key: bien.fgarIdFideicomiso,
-            __self: _this3,
+            __self: _this2,
             __source: {
               fileName: _jsxFileName,
-              lineNumber: 43,
+              lineNumber: 36,
               columnNumber: 89
             }
           }, bien.fgarIdFideicomiso + ' - ' + bien.fgarCveGarantia2);
@@ -340,7 +326,7 @@ var BienesApi = /*#__PURE__*/function (_React$Component) {
           __self: this,
           __source: {
             fileName: _jsxFileName,
-            lineNumber: 45,
+            lineNumber: 38,
             columnNumber: 24
           }
         }, "Datos elegidos: ", data.fgarIdFideicomiso + ' - ' + data.fgarCveGarantia2);
@@ -349,77 +335,77 @@ var BienesApi = /*#__PURE__*/function (_React$Component) {
   }, {
     key: "render",
     value: function render() {
-      var _this4 = this;
+      var _this3 = this;
 
       return __jsx("div", {
         __self: this,
         __source: {
           fileName: _jsxFileName,
-          lineNumber: 52,
+          lineNumber: 45,
           columnNumber: 13
         }
-      }, __jsx(primereact_datatable__WEBPACK_IMPORTED_MODULE_8__["DataTable"], {
-        value: this.state.fiduca.data,
+      }, __jsx(primereact_datatable__WEBPACK_IMPORTED_MODULE_7__["DataTable"], {
+        value: this.datos,
         paginator: true,
         rows: 10,
         selectionMode: "single",
         footer: this.displaySelection(this.state.electo),
         selection: this.state.electo,
         onSelectionChange: function onSelectionChange(e) {
-          return _this4.setState({
+          return _this3.setState({
             electo: e.value
           });
         },
         __self: this,
         __source: {
           fileName: _jsxFileName,
-          lineNumber: 53,
+          lineNumber: 46,
           columnNumber: 17
         }
-      }, __jsx(primereact_datatable__WEBPACK_IMPORTED_MODULE_8__["Column"], {
+      }, __jsx(primereact_datatable__WEBPACK_IMPORTED_MODULE_7__["Column"], {
         field: "fgarIdFideicomiso",
         header: "Fideicomiso",
         sortable: true,
         __self: this,
         __source: {
           fileName: _jsxFileName,
-          lineNumber: 57,
+          lineNumber: 50,
           columnNumber: 21
         }
-      }), __jsx(primereact_datatable__WEBPACK_IMPORTED_MODULE_8__["Column"], {
+      }), __jsx(primereact_datatable__WEBPACK_IMPORTED_MODULE_7__["Column"], {
         field: "fgarCveGarantia2",
         header: "Tipo de Bien",
         __self: this,
         __source: {
           fileName: _jsxFileName,
-          lineNumber: 58,
+          lineNumber: 51,
           columnNumber: 21
         }
-      }), __jsx(primereact_datatable__WEBPACK_IMPORTED_MODULE_8__["Column"], {
+      }), __jsx(primereact_datatable__WEBPACK_IMPORTED_MODULE_7__["Column"], {
         field: "fgarImpGarantiaFormatted",
         header: "Importe",
         __self: this,
         __source: {
           fileName: _jsxFileName,
-          lineNumber: 59,
+          lineNumber: 52,
           columnNumber: 21
         }
-      }), __jsx(primereact_datatable__WEBPACK_IMPORTED_MODULE_8__["Column"], {
+      }), __jsx(primereact_datatable__WEBPACK_IMPORTED_MODULE_7__["Column"], {
         field: "fgarImpGarantizadFormatted",
         header: "Importe Garantizado",
         __self: this,
         __source: {
           fileName: _jsxFileName,
-          lineNumber: 60,
+          lineNumber: 53,
           columnNumber: 21
         }
-      }), __jsx(primereact_datatable__WEBPACK_IMPORTED_MODULE_8__["Column"], {
+      }), __jsx(primereact_datatable__WEBPACK_IMPORTED_MODULE_7__["Column"], {
         field: "fgarCveStatus",
         header: "Status",
         __self: this,
         __source: {
           fileName: _jsxFileName,
-          lineNumber: 61,
+          lineNumber: 54,
           columnNumber: 21
         }
       })));
@@ -433,10 +419,10 @@ var BienesApi = /*#__PURE__*/function (_React$Component) {
 
 /***/ }),
 
-/***/ "./components/Bienes/Menu.jsx":
-/*!************************************!*\
-  !*** ./components/Bienes/Menu.jsx ***!
-  \************************************/
+/***/ "./components/Bienes/MainBienes.jsx":
+/*!******************************************!*\
+  !*** ./components/Bienes/MainBienes.jsx ***!
+  \******************************************/
 /*! exports provided: default */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
@@ -474,10 +460,12 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _material_ui_core_FilledInput__WEBPACK_IMPORTED_MODULE_27__ = __webpack_require__(/*! @material-ui/core/FilledInput */ "./node_modules/@material-ui/core/esm/FilledInput/index.js");
 /* harmony import */ var _material_ui_core_OutlinedInput__WEBPACK_IMPORTED_MODULE_28__ = __webpack_require__(/*! @material-ui/core/OutlinedInput */ "./node_modules/@material-ui/core/esm/OutlinedInput/index.js");
 /* harmony import */ var _material_ui_core_InputAdornment__WEBPACK_IMPORTED_MODULE_29__ = __webpack_require__(/*! @material-ui/core/InputAdornment */ "./node_modules/@material-ui/core/esm/InputAdornment/index.js");
+/* harmony import */ var _BienesTabla__WEBPACK_IMPORTED_MODULE_30__ = __webpack_require__(/*! ./BienesTabla */ "./components/Bienes/BienesTabla.jsx");
+/* harmony import */ var _Funciones__WEBPACK_IMPORTED_MODULE_31__ = __webpack_require__(/*! ../Funciones */ "./components/Funciones.jsx");
 
 
 
-var _jsxFileName = "D:\\GIT\\Eominguer\\Banregio\\Fiducia-Banregio\\React\\components\\Bienes\\Menu.jsx";
+var _jsxFileName = "D:\\GIT\\Eominguer\\Banregio\\Fiducia-Banregio\\React\\components\\Bienes\\MainBienes.jsx";
 var __jsx = react__WEBPACK_IMPORTED_MODULE_3___default.a.createElement;
 
 function ownKeys(object, enumerableOnly) { var keys = Object.keys(object); if (Object.getOwnPropertySymbols) { var symbols = Object.getOwnPropertySymbols(object); if (enumerableOnly) symbols = symbols.filter(function (sym) { return Object.getOwnPropertyDescriptor(object, sym).enumerable; }); keys.push.apply(keys, symbols); } return keys; }
@@ -512,6 +500,9 @@ function _objectSpread(target) { for (var i = 1; i < arguments.length; i++) { va
 
 
 
+
+
+ //Manejador de llamados a las funciones por URL
 
 var OrangeSwitch = Object(_material_ui_core_styles__WEBPACK_IMPORTED_MODULE_4__["withStyles"])({
   switchBase: {
@@ -622,7 +613,7 @@ var Transition = react__WEBPACK_IMPORTED_MODULE_3___default.a.forwardRef(functio
     __self: this,
     __source: {
       fileName: _jsxFileName,
-      lineNumber: 134,
+      lineNumber: 136,
       columnNumber: 12
     }
   }));
@@ -756,7 +747,7 @@ function Menu() {
     __self: this,
     __source: {
       fileName: _jsxFileName,
-      lineNumber: 222,
+      lineNumber: 223,
       columnNumber: 9
     }
   }, __jsx(_material_ui_core_DialogTitle__WEBPACK_IMPORTED_MODULE_21__["default"], {
@@ -764,14 +755,14 @@ function Menu() {
     __self: this,
     __source: {
       fileName: _jsxFileName,
-      lineNumber: 231,
+      lineNumber: 232,
       columnNumber: 13
     }
   }, "Formulario para " + modtag + "Bienes"), __jsx(_material_ui_core_DialogContent__WEBPACK_IMPORTED_MODULE_19__["default"], {
     __self: this,
     __source: {
       fileName: _jsxFileName,
-      lineNumber: 232,
+      lineNumber: 233,
       columnNumber: 13
     }
   }, __jsx(_material_ui_core_DialogContentText__WEBPACK_IMPORTED_MODULE_20__["default"], {
@@ -779,7 +770,7 @@ function Menu() {
     __self: this,
     __source: {
       fileName: _jsxFileName,
-      lineNumber: 233,
+      lineNumber: 234,
       columnNumber: 17
     }
   }, "Bienes por Fideicomisos"), __jsx("form", {
@@ -789,7 +780,7 @@ function Menu() {
     __self: this,
     __source: {
       fileName: _jsxFileName,
-      lineNumber: 236,
+      lineNumber: 237,
       columnNumber: 17
     }
   }, __jsx(_material_ui_core_InputLabel__WEBPACK_IMPORTED_MODULE_16__["default"], {
@@ -797,7 +788,7 @@ function Menu() {
     __self: this,
     __source: {
       fileName: _jsxFileName,
-      lineNumber: 237,
+      lineNumber: 238,
       columnNumber: 25
     }
   }, "Fideicomiso"), __jsx(_material_ui_core_TextField__WEBPACK_IMPORTED_MODULE_6__["default"], {
@@ -811,7 +802,7 @@ function Menu() {
     __self: this,
     __source: {
       fileName: _jsxFileName,
-      lineNumber: 238,
+      lineNumber: 239,
       columnNumber: 25
     }
   }), __jsx(_material_ui_core_InputLabel__WEBPACK_IMPORTED_MODULE_16__["default"], {
@@ -819,7 +810,7 @@ function Menu() {
     __self: this,
     __source: {
       fileName: _jsxFileName,
-      lineNumber: 247,
+      lineNumber: 248,
       columnNumber: 25
     }
   }, "Sub-Fideicomiso"), __jsx(_material_ui_core_TextField__WEBPACK_IMPORTED_MODULE_6__["default"], {
@@ -833,7 +824,7 @@ function Menu() {
     __self: this,
     __source: {
       fileName: _jsxFileName,
-      lineNumber: 248,
+      lineNumber: 249,
       columnNumber: 25
     }
   }), __jsx(_material_ui_core_FormControl__WEBPACK_IMPORTED_MODULE_11__["default"], {
@@ -842,7 +833,7 @@ function Menu() {
     __self: this,
     __source: {
       fileName: _jsxFileName,
-      lineNumber: 257,
+      lineNumber: 258,
       columnNumber: 25
     }
   }, __jsx(_material_ui_core_InputLabel__WEBPACK_IMPORTED_MODULE_16__["default"], {
@@ -850,7 +841,7 @@ function Menu() {
     __self: this,
     __source: {
       fileName: _jsxFileName,
-      lineNumber: 258,
+      lineNumber: 259,
       columnNumber: 29
     }
   }, "Tipo de Bien"), __jsx(_material_ui_core_Select__WEBPACK_IMPORTED_MODULE_14__["default"], {
@@ -864,7 +855,7 @@ function Menu() {
     __self: this,
     __source: {
       fileName: _jsxFileName,
-      lineNumber: 259,
+      lineNumber: 260,
       columnNumber: 29
     }
   }, __jsx("option", {
@@ -873,7 +864,7 @@ function Menu() {
     __self: this,
     __source: {
       fileName: _jsxFileName,
-      lineNumber: 268,
+      lineNumber: 269,
       columnNumber: 33
     }
   }), __jsx("option", {
@@ -881,7 +872,7 @@ function Menu() {
     __self: this,
     __source: {
       fileName: _jsxFileName,
-      lineNumber: 269,
+      lineNumber: 270,
       columnNumber: 33
     }
   }, "Ten"), __jsx("option", {
@@ -889,7 +880,7 @@ function Menu() {
     __self: this,
     __source: {
       fileName: _jsxFileName,
-      lineNumber: 270,
+      lineNumber: 271,
       columnNumber: 33
     }
   }, "Twenty"), __jsx("option", {
@@ -897,7 +888,7 @@ function Menu() {
     __self: this,
     __source: {
       fileName: _jsxFileName,
-      lineNumber: 271,
+      lineNumber: 272,
       columnNumber: 33
     }
   }, "Thirty"))), __jsx(_material_ui_core_InputLabel__WEBPACK_IMPORTED_MODULE_16__["default"], {
@@ -905,7 +896,7 @@ function Menu() {
     __self: this,
     __source: {
       fileName: _jsxFileName,
-      lineNumber: 274,
+      lineNumber: 275,
       columnNumber: 25
     }
   }, "Importe Garantizado"), __jsx(_material_ui_core_TextField__WEBPACK_IMPORTED_MODULE_6__["default"], {
@@ -918,7 +909,7 @@ function Menu() {
     __self: this,
     __source: {
       fileName: _jsxFileName,
-      lineNumber: 275,
+      lineNumber: 276,
       columnNumber: 25
     }
   }), __jsx(_material_ui_core_InputLabel__WEBPACK_IMPORTED_MODULE_16__["default"], {
@@ -926,7 +917,7 @@ function Menu() {
     __self: this,
     __source: {
       fileName: _jsxFileName,
-      lineNumber: 283,
+      lineNumber: 284,
       columnNumber: 25
     }
   }, "Descripci\xF3n"), __jsx(_material_ui_core_TextField__WEBPACK_IMPORTED_MODULE_6__["default"], {
@@ -939,7 +930,7 @@ function Menu() {
     __self: this,
     __source: {
       fileName: _jsxFileName,
-      lineNumber: 284,
+      lineNumber: 285,
       columnNumber: 25
     }
   }), __jsx(_material_ui_core_InputLabel__WEBPACK_IMPORTED_MODULE_16__["default"], {
@@ -947,7 +938,7 @@ function Menu() {
     __self: this,
     __source: {
       fileName: _jsxFileName,
-      lineNumber: 292,
+      lineNumber: 293,
       columnNumber: 25
     }
   }, "Importe \xDAltima Valuaci\xF3n"), __jsx(_material_ui_core_TextField__WEBPACK_IMPORTED_MODULE_6__["default"], {
@@ -960,7 +951,7 @@ function Menu() {
     __self: this,
     __source: {
       fileName: _jsxFileName,
-      lineNumber: 293,
+      lineNumber: 294,
       columnNumber: 25
     }
   }), __jsx(_material_ui_core_InputLabel__WEBPACK_IMPORTED_MODULE_16__["default"], {
@@ -968,7 +959,7 @@ function Menu() {
     __self: this,
     __source: {
       fileName: _jsxFileName,
-      lineNumber: 301,
+      lineNumber: 302,
       columnNumber: 25
     }
   }, "Comentario"), __jsx(_material_ui_core_TextField__WEBPACK_IMPORTED_MODULE_6__["default"], {
@@ -981,7 +972,7 @@ function Menu() {
     __self: this,
     __source: {
       fileName: _jsxFileName,
-      lineNumber: 302,
+      lineNumber: 303,
       columnNumber: 25
     }
   }), __jsx(_material_ui_pickers__WEBPACK_IMPORTED_MODULE_24__["MuiPickersUtilsProvider"], {
@@ -989,7 +980,7 @@ function Menu() {
     __self: this,
     __source: {
       fileName: _jsxFileName,
-      lineNumber: 310,
+      lineNumber: 311,
       columnNumber: 25
     }
   }, __jsx(_material_ui_pickers__WEBPACK_IMPORTED_MODULE_24__["KeyboardDatePicker"], {
@@ -1005,14 +996,14 @@ function Menu() {
     __self: this,
     __source: {
       fileName: _jsxFileName,
-      lineNumber: 311,
+      lineNumber: 312,
       columnNumber: 29
     }
   })), __jsx("br", {
     __self: this,
     __source: {
       fileName: _jsxFileName,
-      lineNumber: 323,
+      lineNumber: 324,
       columnNumber: 25
     }
   }), __jsx(_material_ui_core_FormControlLabel__WEBPACK_IMPORTED_MODULE_13__["default"], {
@@ -1024,7 +1015,7 @@ function Menu() {
       __self: this,
       __source: {
         fileName: _jsxFileName,
-        lineNumber: 325,
+        lineNumber: 326,
         columnNumber: 29
       }
     }),
@@ -1032,14 +1023,14 @@ function Menu() {
     __self: this,
     __source: {
       fileName: _jsxFileName,
-      lineNumber: 324,
+      lineNumber: 325,
       columnNumber: 25
     }
   }), __jsx("br", {
     __self: this,
     __source: {
       fileName: _jsxFileName,
-      lineNumber: 327,
+      lineNumber: 328,
       columnNumber: 25
     }
   }), __jsx(_material_ui_core_FormControlLabel__WEBPACK_IMPORTED_MODULE_13__["default"], {
@@ -1051,7 +1042,7 @@ function Menu() {
       __self: this,
       __source: {
         fileName: _jsxFileName,
-        lineNumber: 329,
+        lineNumber: 330,
         columnNumber: 29
       }
     }),
@@ -1059,14 +1050,14 @@ function Menu() {
     __self: this,
     __source: {
       fileName: _jsxFileName,
-      lineNumber: 328,
+      lineNumber: 329,
       columnNumber: 25
     }
   }), __jsx("br", {
     __self: this,
     __source: {
       fileName: _jsxFileName,
-      lineNumber: 331,
+      lineNumber: 332,
       columnNumber: 25
     }
   }), __jsx(_material_ui_core_InputLabel__WEBPACK_IMPORTED_MODULE_16__["default"], {
@@ -1074,7 +1065,7 @@ function Menu() {
     __self: this,
     __source: {
       fileName: _jsxFileName,
-      lineNumber: 332,
+      lineNumber: 333,
       columnNumber: 25
     }
   }, "Importe Bien"), __jsx(_material_ui_core_OutlinedInput__WEBPACK_IMPORTED_MODULE_28__["default"], {
@@ -1086,7 +1077,7 @@ function Menu() {
       __self: this,
       __source: {
         fileName: _jsxFileName,
-        lineNumber: 337,
+        lineNumber: 338,
         columnNumber: 45
       }
     }, "$"),
@@ -1094,7 +1085,7 @@ function Menu() {
     __self: this,
     __source: {
       fileName: _jsxFileName,
-      lineNumber: 333,
+      lineNumber: 334,
       columnNumber: 25
     }
   }), __jsx(_material_ui_core_InputLabel__WEBPACK_IMPORTED_MODULE_16__["default"], {
@@ -1102,7 +1093,7 @@ function Menu() {
     __self: this,
     __source: {
       fileName: _jsxFileName,
-      lineNumber: 340,
+      lineNumber: 341,
       columnNumber: 25
     }
   }, "Picnorado"), __jsx(_material_ui_core_OutlinedInput__WEBPACK_IMPORTED_MODULE_28__["default"], {
@@ -1114,7 +1105,7 @@ function Menu() {
       __self: this,
       __source: {
         fileName: _jsxFileName,
-        lineNumber: 345,
+        lineNumber: 346,
         columnNumber: 45
       }
     }, "%"),
@@ -1122,7 +1113,7 @@ function Menu() {
     __self: this,
     __source: {
       fileName: _jsxFileName,
-      lineNumber: 341,
+      lineNumber: 342,
       columnNumber: 25
     }
   }), __jsx(_material_ui_core_FormControl__WEBPACK_IMPORTED_MODULE_11__["default"], {
@@ -1131,7 +1122,7 @@ function Menu() {
     __self: this,
     __source: {
       fileName: _jsxFileName,
-      lineNumber: 348,
+      lineNumber: 349,
       columnNumber: 25
     }
   }, __jsx(_material_ui_core_InputLabel__WEBPACK_IMPORTED_MODULE_16__["default"], {
@@ -1139,7 +1130,7 @@ function Menu() {
     __self: this,
     __source: {
       fileName: _jsxFileName,
-      lineNumber: 349,
+      lineNumber: 350,
       columnNumber: 29
     }
   }, "Periodicidad"), __jsx(_material_ui_core_Select__WEBPACK_IMPORTED_MODULE_14__["default"], {
@@ -1153,7 +1144,7 @@ function Menu() {
     __self: this,
     __source: {
       fileName: _jsxFileName,
-      lineNumber: 350,
+      lineNumber: 351,
       columnNumber: 29
     }
   }, __jsx("option", {
@@ -1162,7 +1153,7 @@ function Menu() {
     __self: this,
     __source: {
       fileName: _jsxFileName,
-      lineNumber: 359,
+      lineNumber: 360,
       columnNumber: 33
     }
   }), __jsx("option", {
@@ -1170,7 +1161,7 @@ function Menu() {
     __self: this,
     __source: {
       fileName: _jsxFileName,
-      lineNumber: 360,
+      lineNumber: 361,
       columnNumber: 33
     }
   }, "Ten"), __jsx("option", {
@@ -1178,7 +1169,7 @@ function Menu() {
     __self: this,
     __source: {
       fileName: _jsxFileName,
-      lineNumber: 361,
+      lineNumber: 362,
       columnNumber: 33
     }
   }, "Twenty"), __jsx("option", {
@@ -1186,7 +1177,7 @@ function Menu() {
     __self: this,
     __source: {
       fileName: _jsxFileName,
-      lineNumber: 362,
+      lineNumber: 363,
       columnNumber: 33
     }
   }, "Thirty"))), __jsx(_material_ui_pickers__WEBPACK_IMPORTED_MODULE_24__["MuiPickersUtilsProvider"], {
@@ -1194,7 +1185,7 @@ function Menu() {
     __self: this,
     __source: {
       fileName: _jsxFileName,
-      lineNumber: 365,
+      lineNumber: 366,
       columnNumber: 25
     }
   }, __jsx(_material_ui_pickers__WEBPACK_IMPORTED_MODULE_24__["KeyboardDatePicker"], {
@@ -1210,7 +1201,7 @@ function Menu() {
     __self: this,
     __source: {
       fileName: _jsxFileName,
-      lineNumber: 366,
+      lineNumber: 367,
       columnNumber: 29
     }
   })), __jsx(_material_ui_pickers__WEBPACK_IMPORTED_MODULE_24__["MuiPickersUtilsProvider"], {
@@ -1218,7 +1209,7 @@ function Menu() {
     __self: this,
     __source: {
       fileName: _jsxFileName,
-      lineNumber: 378,
+      lineNumber: 379,
       columnNumber: 25
     }
   }, __jsx(_material_ui_pickers__WEBPACK_IMPORTED_MODULE_24__["KeyboardDatePicker"], {
@@ -1234,7 +1225,7 @@ function Menu() {
     __self: this,
     __source: {
       fileName: _jsxFileName,
-      lineNumber: 379,
+      lineNumber: 380,
       columnNumber: 29
     }
   })), __jsx(_material_ui_core_FormControl__WEBPACK_IMPORTED_MODULE_11__["default"], {
@@ -1243,7 +1234,7 @@ function Menu() {
     __self: this,
     __source: {
       fileName: _jsxFileName,
-      lineNumber: 391,
+      lineNumber: 392,
       columnNumber: 25
     }
   }, __jsx(_material_ui_core_InputLabel__WEBPACK_IMPORTED_MODULE_16__["default"], {
@@ -1251,7 +1242,7 @@ function Menu() {
     __self: this,
     __source: {
       fileName: _jsxFileName,
-      lineNumber: 392,
+      lineNumber: 393,
       columnNumber: 29
     }
   }, "Status"), __jsx(_material_ui_core_Select__WEBPACK_IMPORTED_MODULE_14__["default"], {
@@ -1265,7 +1256,7 @@ function Menu() {
     __self: this,
     __source: {
       fileName: _jsxFileName,
-      lineNumber: 393,
+      lineNumber: 394,
       columnNumber: 29
     }
   }, __jsx("option", {
@@ -1274,7 +1265,7 @@ function Menu() {
     __self: this,
     __source: {
       fileName: _jsxFileName,
-      lineNumber: 402,
+      lineNumber: 403,
       columnNumber: 33
     }
   }), __jsx("option", {
@@ -1282,7 +1273,7 @@ function Menu() {
     __self: this,
     __source: {
       fileName: _jsxFileName,
-      lineNumber: 403,
+      lineNumber: 404,
       columnNumber: 33
     }
   }, "Ten"), __jsx("option", {
@@ -1290,7 +1281,7 @@ function Menu() {
     __self: this,
     __source: {
       fileName: _jsxFileName,
-      lineNumber: 404,
+      lineNumber: 405,
       columnNumber: 33
     }
   }, "Twenty"), __jsx("option", {
@@ -1298,14 +1289,14 @@ function Menu() {
     __self: this,
     __source: {
       fileName: _jsxFileName,
-      lineNumber: 405,
+      lineNumber: 406,
       columnNumber: 33
     }
   }, "Thirty"))))), __jsx(_material_ui_core_DialogActions__WEBPACK_IMPORTED_MODULE_18__["default"], {
     __self: this,
     __source: {
       fileName: _jsxFileName,
-      lineNumber: 410,
+      lineNumber: 411,
       columnNumber: 13
     }
   }, __jsx(_material_ui_core_Button__WEBPACK_IMPORTED_MODULE_9__["default"], {
@@ -1314,7 +1305,7 @@ function Menu() {
     __self: this,
     __source: {
       fileName: _jsxFileName,
-      lineNumber: 411,
+      lineNumber: 412,
       columnNumber: 17
     }
   }, "Cancelar"), __jsx(_material_ui_core_Button__WEBPACK_IMPORTED_MODULE_9__["default"], {
@@ -1323,7 +1314,7 @@ function Menu() {
     __self: this,
     __source: {
       fileName: _jsxFileName,
-      lineNumber: 414,
+      lineNumber: 415,
       columnNumber: 17
     }
   }, "Aceptar")));
@@ -1333,7 +1324,7 @@ function Menu() {
     __self: this,
     __source: {
       fileName: _jsxFileName,
-      lineNumber: 421,
+      lineNumber: 422,
       columnNumber: 9
     }
   }, __jsx("div", {
@@ -1341,7 +1332,7 @@ function Menu() {
     __self: this,
     __source: {
       fileName: _jsxFileName,
-      lineNumber: 422,
+      lineNumber: 423,
       columnNumber: 13
     }
   }, __jsx(_material_ui_core_Grid__WEBPACK_IMPORTED_MODULE_5__["default"], {
@@ -1351,7 +1342,7 @@ function Menu() {
     __self: this,
     __source: {
       fileName: _jsxFileName,
-      lineNumber: 423,
+      lineNumber: 424,
       columnNumber: 17
     }
   }, __jsx(_material_ui_core_Grid__WEBPACK_IMPORTED_MODULE_5__["default"], {
@@ -1360,7 +1351,7 @@ function Menu() {
     __self: this,
     __source: {
       fileName: _jsxFileName,
-      lineNumber: 424,
+      lineNumber: 425,
       columnNumber: 21
     }
   }, __jsx(_material_ui_core_InputLabel__WEBPACK_IMPORTED_MODULE_16__["default"], {
@@ -1368,7 +1359,7 @@ function Menu() {
     __self: this,
     __source: {
       fileName: _jsxFileName,
-      lineNumber: 425,
+      lineNumber: 426,
       columnNumber: 25
     }
   }, "Fideicomiso"), __jsx(_material_ui_core_TextField__WEBPACK_IMPORTED_MODULE_6__["default"], {
@@ -1378,7 +1369,7 @@ function Menu() {
     __self: this,
     __source: {
       fileName: _jsxFileName,
-      lineNumber: 426,
+      lineNumber: 427,
       columnNumber: 25
     }
   })), __jsx(_material_ui_core_Grid__WEBPACK_IMPORTED_MODULE_5__["default"], {
@@ -1387,7 +1378,7 @@ function Menu() {
     __self: this,
     __source: {
       fileName: _jsxFileName,
-      lineNumber: 428,
+      lineNumber: 429,
       columnNumber: 21
     }
   }, __jsx(_material_ui_core_InputLabel__WEBPACK_IMPORTED_MODULE_16__["default"], {
@@ -1395,7 +1386,7 @@ function Menu() {
     __self: this,
     __source: {
       fileName: _jsxFileName,
-      lineNumber: 429,
+      lineNumber: 430,
       columnNumber: 25
     }
   }, "Sub Fiso"), __jsx(_material_ui_core_TextField__WEBPACK_IMPORTED_MODULE_6__["default"], {
@@ -1405,7 +1396,7 @@ function Menu() {
     __self: this,
     __source: {
       fileName: _jsxFileName,
-      lineNumber: 430,
+      lineNumber: 431,
       columnNumber: 25
     }
   })), __jsx(_material_ui_core_Grid__WEBPACK_IMPORTED_MODULE_5__["default"], {
@@ -1414,7 +1405,7 @@ function Menu() {
     __self: this,
     __source: {
       fileName: _jsxFileName,
-      lineNumber: 432,
+      lineNumber: 433,
       columnNumber: 21
     }
   }, __jsx(_material_ui_core_FormControl__WEBPACK_IMPORTED_MODULE_11__["default"], {
@@ -1423,7 +1414,7 @@ function Menu() {
     __self: this,
     __source: {
       fileName: _jsxFileName,
-      lineNumber: 433,
+      lineNumber: 434,
       columnNumber: 21
     }
   }, __jsx(_material_ui_core_InputLabel__WEBPACK_IMPORTED_MODULE_16__["default"], {
@@ -1431,7 +1422,7 @@ function Menu() {
     __self: this,
     __source: {
       fileName: _jsxFileName,
-      lineNumber: 434,
+      lineNumber: 435,
       columnNumber: 25
     }
   }, "Tipo de Bien"), __jsx(_material_ui_core_Select__WEBPACK_IMPORTED_MODULE_14__["default"], {
@@ -1445,7 +1436,7 @@ function Menu() {
     __self: this,
     __source: {
       fileName: _jsxFileName,
-      lineNumber: 435,
+      lineNumber: 436,
       columnNumber: 25
     }
   }, __jsx("option", {
@@ -1454,7 +1445,7 @@ function Menu() {
     __self: this,
     __source: {
       fileName: _jsxFileName,
-      lineNumber: 444,
+      lineNumber: 445,
       columnNumber: 29
     }
   }), __jsx("option", {
@@ -1462,7 +1453,7 @@ function Menu() {
     __self: this,
     __source: {
       fileName: _jsxFileName,
-      lineNumber: 445,
+      lineNumber: 446,
       columnNumber: 29
     }
   }, "Ten"), __jsx("option", {
@@ -1470,7 +1461,7 @@ function Menu() {
     __self: this,
     __source: {
       fileName: _jsxFileName,
-      lineNumber: 446,
+      lineNumber: 447,
       columnNumber: 29
     }
   }, "Twenty"), __jsx("option", {
@@ -1478,7 +1469,7 @@ function Menu() {
     __self: this,
     __source: {
       fileName: _jsxFileName,
-      lineNumber: 447,
+      lineNumber: 448,
       columnNumber: 29
     }
   }, "Thirty")))), __jsx(_material_ui_core_Grid__WEBPACK_IMPORTED_MODULE_5__["default"], {
@@ -1487,7 +1478,7 @@ function Menu() {
     __self: this,
     __source: {
       fileName: _jsxFileName,
-      lineNumber: 451,
+      lineNumber: 452,
       columnNumber: 21
     }
   }, __jsx(_material_ui_core_InputLabel__WEBPACK_IMPORTED_MODULE_16__["default"], {
@@ -1495,7 +1486,7 @@ function Menu() {
     __self: this,
     __source: {
       fileName: _jsxFileName,
-      lineNumber: 452,
+      lineNumber: 453,
       columnNumber: 25
     }
   }, "Descripcion"), __jsx(_material_ui_core_TextField__WEBPACK_IMPORTED_MODULE_6__["default"], {
@@ -1505,7 +1496,7 @@ function Menu() {
     __self: this,
     __source: {
       fileName: _jsxFileName,
-      lineNumber: 453,
+      lineNumber: 454,
       columnNumber: 25
     }
   })))), __jsx(_material_ui_core_Divider__WEBPACK_IMPORTED_MODULE_7__["default"], {
@@ -1514,7 +1505,7 @@ function Menu() {
     __self: this,
     __source: {
       fileName: _jsxFileName,
-      lineNumber: 457,
+      lineNumber: 458,
       columnNumber: 13
     }
   }), __jsx("div", {
@@ -1522,7 +1513,7 @@ function Menu() {
     __self: this,
     __source: {
       fileName: _jsxFileName,
-      lineNumber: 458,
+      lineNumber: 459,
       columnNumber: 13
     }
   }, __jsx(_material_ui_core_ButtonGroup__WEBPACK_IMPORTED_MODULE_8__["default"], {
@@ -1532,14 +1523,14 @@ function Menu() {
     __self: this,
     __source: {
       fileName: _jsxFileName,
-      lineNumber: 459,
+      lineNumber: 460,
       columnNumber: 17
     }
   }, __jsx(_material_ui_core_Button__WEBPACK_IMPORTED_MODULE_9__["default"], {
     __self: this,
     __source: {
       fileName: _jsxFileName,
-      lineNumber: 460,
+      lineNumber: 461,
       columnNumber: 21
     }
   }, "Buscar Datos"), __jsx(_material_ui_core_Button__WEBPACK_IMPORTED_MODULE_9__["default"], {
@@ -1549,7 +1540,7 @@ function Menu() {
     __self: this,
     __source: {
       fileName: _jsxFileName,
-      lineNumber: 461,
+      lineNumber: 462,
       columnNumber: 21
     }
   }, "Alta"), __jsx(_material_ui_core_Button__WEBPACK_IMPORTED_MODULE_9__["default"], {
@@ -1559,7 +1550,7 @@ function Menu() {
     __self: this,
     __source: {
       fileName: _jsxFileName,
-      lineNumber: 462,
+      lineNumber: 463,
       columnNumber: 21
     }
   }, "Modificaci\xF3n"), __jsx(_material_ui_core_Button__WEBPACK_IMPORTED_MODULE_9__["default"], {
@@ -1569,17 +1560,31 @@ function Menu() {
     __self: this,
     __source: {
       fileName: _jsxFileName,
-      lineNumber: 463,
+      lineNumber: 464,
       columnNumber: 21
     }
   }, "Consulta"), __jsx(_material_ui_core_Button__WEBPACK_IMPORTED_MODULE_9__["default"], {
     __self: this,
     __source: {
       fileName: _jsxFileName,
-      lineNumber: 464,
+      lineNumber: 465,
       columnNumber: 21
     }
-  }, "Baja"))), DialogFormu);
+  }, "Baja"))), __jsx("div", {
+    __self: this,
+    __source: {
+      fileName: _jsxFileName,
+      lineNumber: 468,
+      columnNumber: 13
+    }
+  }, __jsx(_BienesTabla__WEBPACK_IMPORTED_MODULE_30__["default"], {
+    __self: this,
+    __source: {
+      fileName: _jsxFileName,
+      lineNumber: 469,
+      columnNumber: 17
+    }
+  })), DialogFormu);
 }
 
 /***/ }),
@@ -1836,6 +1841,56 @@ function VerticalTabs() {
     }
   }, "Item Seven"));
 }
+
+/***/ }),
+
+/***/ "./components/Funciones.jsx":
+/*!**********************************!*\
+  !*** ./components/Funciones.jsx ***!
+  \**********************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "default", function() { return Funciones; });
+/* harmony import */ var _babel_runtime_helpers_esm_classCallCheck__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! @babel/runtime/helpers/esm/classCallCheck */ "./node_modules/@babel/runtime/helpers/esm/classCallCheck.js");
+/* harmony import */ var _babel_runtime_helpers_esm_createClass__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! @babel/runtime/helpers/esm/createClass */ "./node_modules/@babel/runtime/helpers/esm/createClass.js");
+/* harmony import */ var _AxiosCalls__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./AxiosCalls */ "./components/AxiosCalls.jsx");
+
+
+
+
+var Funciones = /*#__PURE__*/function () {
+  function Funciones() {
+    Object(_babel_runtime_helpers_esm_classCallCheck__WEBPACK_IMPORTED_MODULE_0__["default"])(this, Funciones);
+
+    this.data = null;
+    this.filas = null;
+  }
+
+  Object(_babel_runtime_helpers_esm_createClass__WEBPACK_IMPORTED_MODULE_1__["default"])(Funciones, [{
+    key: "datosTabla",
+    value: function datosTabla(params) {
+      return _AxiosCalls__WEBPACK_IMPORTED_MODULE_2__["default"].get('getRef.do?' + params).then(function (response) {
+        return response.data;
+      }).then(function (data) {
+        this.data = data;
+        this.objetificador();
+        return this.filas; // <--- added return statement
+      }.bind(this));
+    }
+  }, {
+    key: "objetificador",
+    value: function objetificador() {
+      this.filas = JSON.stringify(this.data);
+    }
+  }]);
+
+  return Funciones;
+}();
+
+
 
 /***/ }),
 
