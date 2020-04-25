@@ -121,7 +121,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _Menu__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(/*! ./Menu */ "./components/Bienes/Menu.jsx");
 /* harmony import */ var _material_ui_core__WEBPACK_IMPORTED_MODULE_9__ = __webpack_require__(/*! @material-ui/core */ "@material-ui/core");
 /* harmony import */ var _material_ui_core__WEBPACK_IMPORTED_MODULE_9___default = /*#__PURE__*/__webpack_require__.n(_material_ui_core__WEBPACK_IMPORTED_MODULE_9__);
-var _jsxFileName = "D:\\NextJS\\fiduciaV0\\components\\Bienes\\Bienes.jsx";
+var _jsxFileName = "D:\\GIT\\Eominguer\\Banregio\\Fiducia-Banregio\\React\\components\\Bienes\\Bienes.jsx";
 var __jsx = react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement;
 
 function _extends() { _extends = Object.assign || function (target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i]; for (var key in source) { if (Object.prototype.hasOwnProperty.call(source, key)) { target[key] = source[key]; } } } return target; }; return _extends.apply(this, arguments); }
@@ -302,7 +302,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var axios__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(axios__WEBPACK_IMPORTED_MODULE_1__);
 /* harmony import */ var primereact_datatable__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! primereact/datatable */ "primereact/datatable");
 /* harmony import */ var primereact_datatable__WEBPACK_IMPORTED_MODULE_2___default = /*#__PURE__*/__webpack_require__.n(primereact_datatable__WEBPACK_IMPORTED_MODULE_2__);
-var _jsxFileName = "D:\\NextJS\\fiduciaV0\\components\\Bienes\\BienesApi.jsx";
+var _jsxFileName = "D:\\GIT\\Eominguer\\Banregio\\Fiducia-Banregio\\React\\components\\Bienes\\BienesApi.jsx";
 var __jsx = react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement;
 
 
@@ -524,7 +524,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _material_ui_core_OutlinedInput__WEBPACK_IMPORTED_MODULE_25___default = /*#__PURE__*/__webpack_require__.n(_material_ui_core_OutlinedInput__WEBPACK_IMPORTED_MODULE_25__);
 /* harmony import */ var _material_ui_core_InputAdornment__WEBPACK_IMPORTED_MODULE_26__ = __webpack_require__(/*! @material-ui/core/InputAdornment */ "@material-ui/core/InputAdornment");
 /* harmony import */ var _material_ui_core_InputAdornment__WEBPACK_IMPORTED_MODULE_26___default = /*#__PURE__*/__webpack_require__.n(_material_ui_core_InputAdornment__WEBPACK_IMPORTED_MODULE_26__);
-var _jsxFileName = "D:\\NextJS\\fiduciaV0\\components\\Bienes\\Menu.jsx";
+var _jsxFileName = "D:\\GIT\\Eominguer\\Banregio\\Fiducia-Banregio\\React\\components\\Bienes\\Menu.jsx";
 var __jsx = react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement;
 
 function ownKeys(object, enumerableOnly) { var keys = Object.keys(object); if (Object.getOwnPropertySymbols) { var symbols = Object.getOwnPropertySymbols(object); if (enumerableOnly) symbols = symbols.filter(function (sym) { return Object.getOwnPropertyDescriptor(object, sym).enumerable; }); keys.push.apply(keys, symbols); } return keys; }
@@ -1628,7 +1628,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _material_ui_core_Typography__WEBPACK_IMPORTED_MODULE_5___default = /*#__PURE__*/__webpack_require__.n(_material_ui_core_Typography__WEBPACK_IMPORTED_MODULE_5__);
 /* harmony import */ var _material_ui_core_Box__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! @material-ui/core/Box */ "@material-ui/core/Box");
 /* harmony import */ var _material_ui_core_Box__WEBPACK_IMPORTED_MODULE_6___default = /*#__PURE__*/__webpack_require__.n(_material_ui_core_Box__WEBPACK_IMPORTED_MODULE_6__);
-var _jsxFileName = "D:\\NextJS\\fiduciaV0\\components\\DesarrolloInmob.jsx";
+var _jsxFileName = "D:\\GIT\\Eominguer\\Banregio\\Fiducia-Banregio\\React\\components\\DesarrolloInmob.jsx";
 var __jsx = react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement;
 
 function _extends() { _extends = Object.assign || function (target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i]; for (var key in source) { if (Object.prototype.hasOwnProperty.call(source, key)) { target[key] = source[key]; } } } return target; }; return _extends.apply(this, arguments); }
@@ -1875,7 +1875,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var next_head__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! next/head */ "next/head");
 /* harmony import */ var next_head__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(next_head__WEBPACK_IMPORTED_MODULE_1__);
 /* harmony import */ var _Navbar__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./Navbar */ "./components/Navbar.jsx");
-var _jsxFileName = "D:\\NextJS\\fiduciaV0\\components\\Header.jsx";
+var _jsxFileName = "D:\\GIT\\Eominguer\\Banregio\\Fiducia-Banregio\\React\\components\\Header.jsx";
 
 var __jsx = react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement;
 
@@ -1946,7 +1946,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _material_ui_core_Box__WEBPACK_IMPORTED_MODULE_7___default = /*#__PURE__*/__webpack_require__.n(_material_ui_core_Box__WEBPACK_IMPORTED_MODULE_7__);
 /* harmony import */ var _DesarrolloInmob__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(/*! ./DesarrolloInmob */ "./components/DesarrolloInmob.jsx");
 /* harmony import */ var _Bienes_Bienes__WEBPACK_IMPORTED_MODULE_9__ = __webpack_require__(/*! ./Bienes/Bienes */ "./components/Bienes/Bienes.jsx");
-var _jsxFileName = "D:\\NextJS\\fiduciaV0\\components\\Inmuebles.jsx";
+var _jsxFileName = "D:\\GIT\\Eominguer\\Banregio\\Fiducia-Banregio\\React\\components\\Inmuebles.jsx";
 var __jsx = react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement;
 
 function _extends() { _extends = Object.assign || function (target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i]; for (var key in source) { if (Object.prototype.hasOwnProperty.call(source, key)) { target[key] = source[key]; } } } return target; }; return _extends.apply(this, arguments); }
@@ -2118,7 +2118,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react */ "react");
 /* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_0__);
 /* harmony import */ var _Header__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./Header */ "./components/Header.jsx");
-var _jsxFileName = "D:\\NextJS\\fiduciaV0\\components\\MyLayout.jsx";
+var _jsxFileName = "D:\\GIT\\Eominguer\\Banregio\\Fiducia-Banregio\\React\\components\\MyLayout.jsx";
 
 var __jsx = react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement;
 
@@ -2161,7 +2161,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_0__);
 /* harmony import */ var next_link__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! next/link */ "./node_modules/next/link.js");
 /* harmony import */ var next_link__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(next_link__WEBPACK_IMPORTED_MODULE_1__);
-var _jsxFileName = "D:\\NextJS\\fiduciaV0\\components\\Navbar.jsx";
+var _jsxFileName = "D:\\GIT\\Eominguer\\Banregio\\Fiducia-Banregio\\React\\components\\Navbar.jsx";
 
 var __jsx = react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement;
 
@@ -3949,7 +3949,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_0__);
 /* harmony import */ var _components_MyLayout__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../components/MyLayout */ "./components/MyLayout.jsx");
 /* harmony import */ var _components_Inmuebles__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../components/Inmuebles */ "./components/Inmuebles.jsx");
-var _jsxFileName = "D:\\NextJS\\fiduciaV0\\pages\\index.jsx";
+var _jsxFileName = "D:\\GIT\\Eominguer\\Banregio\\Fiducia-Banregio\\React\\pages\\index.jsx";
 
 var __jsx = react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement;
 
@@ -3984,7 +3984,7 @@ const Index = () => {
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
-module.exports = __webpack_require__(/*! D:\NextJS\fiduciaV0\pages\index.jsx */"./pages/index.jsx");
+module.exports = __webpack_require__(/*! D:\GIT\Eominguer\Banregio\Fiducia-Banregio\React\pages\index.jsx */"./pages/index.jsx");
 
 
 /***/ }),

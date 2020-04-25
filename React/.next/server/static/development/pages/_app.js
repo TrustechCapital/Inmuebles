@@ -133,7 +133,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var react_data_grid_dist_react_data_grid_css__WEBPACK_IMPORTED_MODULE_2___default = /*#__PURE__*/__webpack_require__.n(react_data_grid_dist_react_data_grid_css__WEBPACK_IMPORTED_MODULE_2__);
 /* harmony import */ var _public_DataTable_css__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ../public/DataTable.css */ "./public/DataTable.css");
 /* harmony import */ var _public_DataTable_css__WEBPACK_IMPORTED_MODULE_3___default = /*#__PURE__*/__webpack_require__.n(_public_DataTable_css__WEBPACK_IMPORTED_MODULE_3__);
-var _jsxFileName = "D:\\NextJS\\fiduciaV0\\pages\\_app.jsx";
+var _jsxFileName = "D:\\GIT\\Eominguer\\Banregio\\Fiducia-Banregio\\React\\pages\\_app.jsx";
 
 var __jsx = react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement;
 
