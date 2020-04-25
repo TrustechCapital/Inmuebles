@@ -1,0 +1,137 @@
+showWaitLayer();
+
+var fncInterfase = JSON.parse("{\"id\":\"storeGenArchInterfazSolomon2\"}");
+var objArchivosPlanosParam = JSON.parse("{\"id\":\"conArcPlaTAS\"}");
+var dvFechaParam = JSON.parse("{\"id\":\"ejeFunRegresaFechaAnterior\"}");
+var fvInterfase = new FormValidator();
+var fechaDefault = new Date();
+
+initForms();
+
+function setFechaCal(){}
+function isValidDate(date){ 
+  var today = new Date();
+  if(date > today)
+    return true;
+  else
+    return false;
+}
+
+Calendar.setup({
+    inputField     :    "txtFechaValor",
+    button         :    "txtFechaValor",
+    ifFormat       :    "%d/%m/%Y", //"%a %e/%b/%Y",format of the input field
+    showsTime      :    false,
+    timeFormat     :    "24",
+    onUpdate       :    setFechaCal,
+    disableFunc    :    isValidDate,
+    date           :    fechaDefault,
+    weekNumbers    :    false,
+    cache          :    true,
+    step           :    1
+});
+
+fvInterfase.setup({
+  formName      : "frmDatosInterfase",
+  tipoAlert     : 1,
+  alertFunction : BaloonAlert,
+  sendObjToAlert: true
+});
+function asignaFechaValor(){
+  dvFechaParam.Fecha = GI("txtFechaValor").value;
+  var url = ctxRoot + "/executeRef.do?json=" + JSON.stringify(dvFechaParam);
+  makeAjaxRequest(url, "HTML", asignaEtiquetas, null);
+}
+function asignaEtiquetas(obj, result){
+  var resultado = JSON.parse(result)[0];
+  formsLoaded();
+}
+function ejecutaStoreInterfase(){
+   var valOpc;
+  //if(fvInterfase.checkForm()){
+    showWaitLayer();
+    /*
+     *Acumulado Valores  = 1
+     *Acumulado Bienes   = 2
+     *Acumulado Efectivo = 3
+     *
+     *Desglosado Valores = 4
+     *Desglosado Bienes  = 5
+     *Desgloado Efectivo = 6
+     * */
+    if(GI("chkAV").checked)
+        valOpc=1;
+    if(GI("chkAB").checked)
+        valOpc=2;
+    if(GI("chkAE").checked)
+        valOpc=3;
+    fncInterfase.FechaValor = GI("txtFechaValor").value;
+    //fncInterfase.Opc = valOpc;
+    var url = ctxRoot + "/executeRef.do?json=" + JSON.stringify(fncInterfase);
+    //alert(url)
+    makeAjaxRequest(url, "HTML", validaStoreInterfase, null);
+  //}
+}
+
+function validaStoreInterfase(obj, result){
+  var res = JSON.parse(result).RESULTADO;
+  if(isDefinedAndNotNull(res)){
+    switch(eval(res)){
+      case 0:
+        showWaitLayer();
+        objArchivosPlanosParam.tipoId = 1;
+        objArchivosPlanosParam.fileName = "FIDUCIA_POLIZAHON_" + GI("txtFechaValor").value.split("/")[2] + GI("txtFechaValor").value.split("/")[1] + GI("txtFechaValor").value.split("/")[0];
+        objArchivosPlanosParam.colData = "arpDescripcion";
+        objArchivosPlanosParam.order = "arpDescripcion";
+        var url = ctxRoot + "/getRef.do?json=" + JSON.stringify(objArchivosPlanosParam);
+        makeAjaxRequest(url, "HTML", sugerirNombreArchivoInterfase, null);    
+      break;
+      case 1:alert("Existen errores al generar el archivo!");break;
+      default:alert("Ocurri\u00F3 un error inesperado");
+    }
+  }else
+    alert("Ocurri\u00F3 un error inesperado");
+  hideWaitLayer();
+}
+function sugerirNombreArchivoInterfase(obj , result){
+  var resultado = JSON.parse(result)[0];
+  if(isDefinedAndNotNull(resultado)){
+    alert("Se le sugiere coloque el siguiente nombre " + "FIDUCIA_POLIZAHON_" + GI("txtFechaValor").value.split("/")[2] + GI("txtFechaValor").value.split("/")[1] + GI("txtFechaValor").value.split("/")[0]);
+    delete objArchivosPlanosParam.id;
+    objArchivosPlanosParam.queryId = "conArcPlaTAS";
+     objArchivosPlanosParam.Fecha = GI("txtFechaValor").value;
+    objArchivosPlanosParam.order = "arpSecuencial";
+    objArchivosPlanosParam.fileName = "FIDUCIA_POLIZAHON_" + GI("txtFechaValor").value.split("/")[2] + GI("txtFechaValor").value.split("/")[1] + GI("txtFechaValor").value.split("/")[0];
+    var url = ctxRoot + "/generarArchivoInterfase.do?json=" + encodeURIComponent(JSON.stringify(objArchivosPlanosParam));
+    var liga = GI("ligaArchivo");
+    liga.href = url;
+    liga.click();
+    alert("Proceso concluido satisfactoriamente!");
+    //ObtenReporte();
+    onButtonClickPestania('Interfases.InterfaseSalomon3.PrincipalInterfaseSalomon','');
+    
+  }else
+    alert("Ocurri\u00F3 un error inesperado");
+  hideWaitLayer();
+}
+
+function ponerNombreArchivo(){
+    GI("txtNomArch").value="FIDUCIATEF"+GI("txtFechaValor").value.split("/")[1]+GI("txtFechaValor").value.split("/")[0]+GI("txtFechaValor").value.split("/")[2]; 
+}
+
+
+
+//-------------------------------------------------codigo para nuevos reportes
+
+function ObtenReporte() {
+ 
+ 
+    var cadenota='{"Estructura":"1","sendToJSP":"true","urlReporte":"/modules/Interfases/InterfaseSalomon/ReportePolizaSalomon.jsp","Order":"s","id":"getRepPosicionSalomon"}'
+    var url = ctxRoot + "/imprimirReporte.do?json=" + cadenota;
+    var link = GI('linkReporteNew');
+    link.href=url;
+    link.click();
+    document.onreadystatechange = function() { hideWaitLayer(); document.onreadystatechange = function() {} }
+    hideWaitLayer();
+  
+}

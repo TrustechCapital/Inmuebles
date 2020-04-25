@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<fiduciario-config>
+  <properties>
+    <property name="fopTransformerFactory">org.apache.xalan.processor.TransformerFactoryImpl</property>
+    <property name="toplinkSessionsFile">META-INF/sessions.xml</property>
+    <property name="toplinkSessionName">FiduciarioTxds</property>
+    <property name="LoadToplinkSessions">false</property>
+    <property name="systemDataSource">jdbc/fiduciaDS</property>
+    <property name="defalutContentType">text/html; charset=ISO-8859-1</property>
+    <property name="defalutXMLContentType">text/xml; charset=ISO-8859-1</property><!--Local -->
+    <!--property name="defalutXMLContentType">text/xml; charset=utf-8</property><Actinver -->
+    <property name="guestProfileID">100</property>
+    <property name="mailAdministrador">admin@nafin.com</property>
+    <property name="mailSoporte">soporte@nafin.com</property>
+    <property name="MAIN_URL">soporte@nafin.com</property>
+    <property name="LogSystemOut">enabled</property><!-- enabled/disabled -->
+    <property name="LogSecurityFilter">enabled</property><!-- enabled/disabled -->
+    <property name="CIBANCO_WL_WS_URL">http://10.1.253.9:7101/CIBancoWS/BusquedaPort</property>
+    <property name="ACTINVER_WL_WS_URL">http://esb-qa.actinver.com.mx/WatchListWS</property>
+    <property name="FIDUCIAWEB_WL_URL">https://development.actinver.com.mx/FiduciaWeb/WatchListServices/WatchListsServicePort</property>
+    <property name="CLIENTEUNICO_SERVICE_URL">http://esb-qa.actinver.com.mx/ContractInfoWS</property>
+    <!--property name="FIDUCIAWEB_CUWS_URL">https://development.actinver.com.mx/FiduciaWeb/ContractInfoService/ClienteUnicoServicePort</property-->
+  </properties>
+  <messages>
+    <message code="500" type="ERROR">Error Fatal</message>
+  </messages>
+</fiduciario-config>

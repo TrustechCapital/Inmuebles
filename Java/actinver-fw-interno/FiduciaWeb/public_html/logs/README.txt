@@ -1,0 +1,1 @@
+Carpeta empleada para almacenar los archivos de log de la aplicacion
