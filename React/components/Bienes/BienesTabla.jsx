@@ -10,16 +10,16 @@ class BienesApi extends React.Component {
     constructor(props) {
         super(props);
         this.state = { 
-            fiduca: {
-                data:[]
-            }
+            datos:[]
         };
     }
 
     async componentDidMount() {
         var llamados = new Funciones();
-        this.datos=await llamados.datosTabla('json={"id":"funRegistroGarantias"}');
-        console.log(this.datos);
+
+        let datos=await llamados.datosTabla('json={"id":"funRegistroGarantias"}');
+        console.log(datos);
+        this.setState({datos:datos});
         /*this.llamada().then(data => {
             this.setState({fiduca: data});
         });*/
@@ -43,7 +43,7 @@ class BienesApi extends React.Component {
 
         return (
             <div>
-                <DataTable value={this.datos} paginator={true} rows={10}
+                <DataTable value={this.state.datos} paginator={true} rows={10}
                     selectionMode="single"
                     footer={this.displaySelection(this.state.electo)}
                     selection={this.state.electo} onSelectionChange={e => this.setState({electo: e.value})}>

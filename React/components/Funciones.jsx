@@ -17,6 +17,6 @@ export default class Funciones{
         }.bind(this))
     }
     objetificador(){
-        this.filas=JSON.stringify(this.data);
+        this.filas=this.data;
     }
 }
