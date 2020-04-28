@@ -1,16 +1,22 @@
 import React, { useState } from 'react';
-import {
-    DataTable,
-    Column
-} from 'primereact/datatable';
 import Funciones from '../Funciones'
+import GenericTable from '../commons/GenericTable';
+
+const COLUMNS = [
+    {field:"fgarIdFideicomiso", header:"Fideicomiso"},
+    {field:"fgarCveGarantia2", header:"Tipo de Bien"},
+    {field:"fgarImpGarantiaFormatted", header:"Importe"},
+    {field:"fgarImpGarantizadFormatted", header:"Importe Garantizado"},
+    {field:"fgarCveStatus", header:"Status"}
+];
 
 class BienesApi extends React.Component {
     
     constructor(props) {
         super(props);
         this.state = { 
-            datos:[]
+            datos:[],
+            electo:null
         };
     }
 
@@ -38,22 +44,16 @@ class BienesApi extends React.Component {
                 return <div style={{textAlign: 'left'}}>Datos elegidos: {data.fgarIdFideicomiso + ' - ' + data.fgarCveGarantia2}</div>
         }
     }
+    handleSelect=(valueS)=>{
+        console.log(valueS)
+        this.setState({electo: valueS})
+        this.props.onSelect(valueS)
+    }
 
     render() {
 
         return (
-            <div>
-                <DataTable value={this.state.datos} paginator={true} rows={10}
-                    selectionMode="single"
-                    footer={this.displaySelection(this.state.electo)}
-                    selection={this.state.electo} onSelectionChange={e => this.setState({electo: e.value})}>
-                    <Column field="fgarIdFideicomiso" header="Fideicomiso" sortable={true}/>
-                    <Column field="fgarCveGarantia2" header="Tipo de Bien"/>
-                    <Column field="fgarImpGarantiaFormatted" header="Importe"/>
-                    <Column field="fgarImpGarantizadFormatted" header="Importe Garantizado"/>
-                    <Column field="fgarCveStatus" header="Status"/>
-                </DataTable>
-            </div>
+                <GenericTable data={this.state.datos} columns={COLUMNS} onSelect={this.handleSelect}/>
         );
     }
 }
