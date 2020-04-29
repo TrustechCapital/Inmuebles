@@ -73,7 +73,7 @@ export default function VerticalTabs() {
         <Tab label="Bienes" {...a11yProps(0)} />
       </Tabs>
       <TabPanel value={value} index={0}>
-        <Container maxWidth="md" className="datatable-doc-demo">
+        <Container maxWidth="lg" className="datatable-doc-demo">
           <div>
             <BienesMenu/>
           </div>

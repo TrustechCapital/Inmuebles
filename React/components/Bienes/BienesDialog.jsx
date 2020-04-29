@@ -80,8 +80,6 @@ export default function BienesDialog(props){
       };
 
     const classes = useStyles();
-    
-    
 
     const [state, setState] = React.useState({
         age: '',
@@ -117,17 +115,13 @@ export default function BienesDialog(props){
       const handleChangeStatus = (prop) => (event) => {
         setValues({ ...values, [prop]: event.target.value });
       };
-    
-    const handleClose = () => {
-
-    };
 
     const handleAccept = () => {
         
     };
 
     return(
-        <CatalogDialog opened={props.opened} operacionCatalogo={mode} nombreCatalogo="Bienes" subtitle="Bienes por Fideicomisos" onCancel={handleClose} onAccept={handleAccept}>
+        <CatalogDialog opened={props.opened} operacionCatalogo={mode} nombreCatalogo="Bienes" subtitle="Bienes por Fideicomisos" onCancel={props.handleClose} onAccept={handleAccept}>
             <InputLabel htmlFor="fgarIdFideicomiso">Fideicomiso</InputLabel>
                     <TextField
                         id="fgarIdFideicomiso"

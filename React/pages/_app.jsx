@@ -1,6 +1,5 @@
 import "bootswatch/dist/united/bootstrap.min.css";
 import 'react-data-grid/dist/react-data-grid.css'; 
-import '../public/DataTable.css'; 
 
 
 // This default export is required in a new `pages/_app.js` file.

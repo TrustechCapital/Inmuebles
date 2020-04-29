@@ -84,7 +84,7 @@ export default function Menu(){
         status:'',
         open:false,
         modo:'alta',
-        dtabla:{}
+        dtabla:{},
     });
 
     const handleChange = (event) => {
@@ -105,7 +105,9 @@ export default function Menu(){
     }
     const handleClickOpen = (mode) => {
         setState({open:true,modo:mode});
-        
+    };
+    const handleClose = () => {
+        setState({open:false});
     };
     return(
         <div className={classes.root}>
@@ -157,7 +159,7 @@ export default function Menu(){
             <div>
                 <Tabla onSelect={handleTableSelect}/>
             </div>
-            <BienesDialog mode={state.modo} opened={state.open} selected={state.dtabla}/>
+            <BienesDialog mode={state.modo} opened={state.open} selected={state.dtabla} handleClose={handleClose}/>
         </div>
     );
 }
