@@ -1,27 +1,52 @@
 import React from 'react';
-import {
-    DataTable,
-    Column
-} from 'primereact/datatable';
-const TABLE_STYLE = {
-    width: '100%',
+import { makeStyles } from '@material-ui/core/styles';
+import Table from '@material-ui/core/Table';
+import TableBody from '@material-ui/core/TableBody';
+import TableCell from '@material-ui/core/TableCell';
+import TableContainer from '@material-ui/core/TableContainer';
+import TableHead from '@material-ui/core/TableHead';
+import TableRow from '@material-ui/core/TableRow';
+import Paper from '@material-ui/core/Paper';
+
+const useStyles = makeStyles({
+    root: {
+        width: '100%'
+    }
+});
+
+function createHeaders(columns){
+    return columns.map((col) => <TableCell>{col.header}</TableCell>);
 }
+
+function createRow(row, columns, index){
+    return (
+        <TableRow key={index}>
+            {columns.map((col) => {
+                return <TableCell>{row[col.field]}</TableCell>
+            })}
+        </TableRow>
+    );
+}
+
 export default function GenericTable (props) {
     const {data, columns, onSelect} = props;
-    const dynamicColumns = columns.map((col) => {
-        return <Column key={col.field} field={col.field} header={col.header} style={{width:`${col.percentage}`,margin:'50px'}}/>;
-    });
-    //const carCount = this.state.cars ? this.state.cars.length: 0;
+    const classes = useStyles();
 
+    const headers = createHeaders(columns);
+    const rows = data.map((row, index) => createRow(row, columns, index));
 
     return (
-        <div>
-            <DataTable value={data} paginator={true} rows={10} style={TABLE_STYLE} tableStyle={TABLE_STYLE}
-                paginatorTemplate="FirstPageLink PrevPageLink PageLinks NextPageLink LastPageLink CurrentPageReport RowsPerPageDropdown"
-                currentPageReportTemplate="Mostrando {first} a {last} de {totalRecords} registros."
-                selectionMode="single" onSelectionChange={e => onSelect(e.value)}>
-                {dynamicColumns}
-            </DataTable>
-        </div>
+        <TableContainer component={Paper} className={classes.root}>
+            <Table aria-label="simple table">
+                <TableHead>
+                <TableRow>
+                    {headers}
+                </TableRow>
+                </TableHead>
+                <TableBody>
+                    {rows}
+                </TableBody>
+            </Table>
+        </TableContainer>
     );
 }
