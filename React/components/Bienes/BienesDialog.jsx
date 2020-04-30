@@ -1,35 +1,16 @@
 import React,{useState,useEffect} from 'react';
 import { makeStyles } from '@material-ui/core/styles';
-import { withStyles } from '@material-ui/core/styles';
 import TextField from '@material-ui/core/TextField';
-import Button from '@material-ui/core/Button';
 import FormControl from '@material-ui/core/FormControl';
 import Select from '@material-ui/core/Select';
 import InputLabel from '@material-ui/core/InputLabel';
-import Slide from '@material-ui/core/Slide';
-import { useTheme } from '@material-ui/core/styles';
 import DateFnsUtils from '@date-io/date-fns';
 import {MuiPickersUtilsProvider, KeyboardDatePicker} from '@material-ui/pickers';
-import Switch from '@material-ui/core/Switch';
-import { deepOrange } from '@material-ui/core/colors';
 import OutlinedInput from '@material-ui/core/OutlinedInput';
 import InputAdornment from '@material-ui/core/InputAdornment';
-import FormControlLabel from '@material-ui/core/FormControlLabel';
+import GenericSwitch from '../commons/GenericSwitch';
 import CatalogDialog from '../commons/CatalogDialog';
-
-const OrangeSwitch = withStyles({
-    switchBase: {
-      color: deepOrange[300],
-      '&$checked': {
-        color: deepOrange[500],
-      },
-      '&$checked + $track': {
-        backgroundColor: deepOrange[500],
-      },
-    },
-    checked: {},
-    track: {},
-  })(Switch);
+import GenericTextInput from '../commons/GenericTextInput'
 
 const useStyles = makeStyles((theme) => ({
     root: {
@@ -75,10 +56,6 @@ export default function BienesDialog(props){
         setSelectedDate(date);
     };
 
-    const handleChangeChk = (event) => {
-        setState({ ...state, [event.target.name]: event.target.checked });
-      };
-
     const classes = useStyles();
 
     const [state, setState] = React.useState({
@@ -87,7 +64,7 @@ export default function BienesDialog(props){
         fgarCveRevaluaChk: true,
         fgarEsGarantiaChk: true,
         periodicidad: '',
-        status:'',
+        status:''
     });
 
     const handleChange = (event) => {
@@ -114,24 +91,18 @@ export default function BienesDialog(props){
       };
       const handleChangeStatus = (prop) => (event) => {
         setValues({ ...values, [prop]: event.target.value });
-      };
+    };
 
+    const handleChangeChk = (event) => {
+        setState({ ...state, [event.target.name]: event.target.checked });
+    };
     const handleAccept = () => {
         
     };
 
     return(
         <CatalogDialog opened={props.opened} operacionCatalogo={mode} nombreCatalogo="Bienes" subtitle="Bienes por Fideicomisos" onCancel={props.handleClose} onAccept={handleAccept}>
-            <InputLabel htmlFor="fgarIdFideicomiso">Fideicomiso</InputLabel>
-                    <TextField
-                        id="fgarIdFideicomiso"
-                        fullWidth
-                        defaultValue="0000"
-                        className={classes.textField}
-                        helperText="Fideicomiso a asignar bienes"
-                        margin="dense"
-                        variant="outlined"
-                    />
+            <GenericTextInput label='Fideicomiso' idCampo='fgarIdFideicomiso' helper='Fideicomiso a asignar bienes' required={true} defaultVal='0000'/>
                     <InputLabel htmlFor="fgarIdSubcuenta">Sub-Fideicomiso</InputLabel>
                     <TextField
                         id="fgarIdSubcuenta"
@@ -209,13 +180,9 @@ export default function BienesDialog(props){
                         />
                     </MuiPickersUtilsProvider>
                     <br/>
-                    <FormControlLabel control={
-                        <OrangeSwitch checked={state.fgarCveRevaluaChk} onChange={handleChangeChk} name="fgarCveRevaluaChk" id="fgarCveRevaluaChk" />}
-                        label="Revalua"/>
+                        <GenericSwitch idCampo='fgarCveRevaluaChk' onChange={handleChangeChk} activo={state.fgarCveRevaluaChk} nombreCampo='fgarCveRevaluaChk' label='Revalua'/>
                     <br/>
-                    <FormControlLabel control={
-                        <OrangeSwitch checked={state.fgarEsGarantiaChk} onChange={handleChangeChk} name="fgarEsGarantiaChk" id="fgarEsGarantiaChk" />}
-                    label="¿Es Garantía?"/>
+                        <GenericSwitch idCampo='fgarEsGarantiaChk' onChange={handleChangeChk} activo={state.fgarEsGarantiaChk} nombreCampo='fgarEsGarantiaChk' label='¿Es Garantía?'/>
                     <br/>
                     <InputLabel htmlFor="fgarImpGarantia">Importe Bien</InputLabel>
                     <OutlinedInput
