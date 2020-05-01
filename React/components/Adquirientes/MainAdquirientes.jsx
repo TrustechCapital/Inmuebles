@@ -10,7 +10,7 @@ import FormControl from '@material-ui/core/FormControl';
 import InputLabel from '@material-ui/core/InputLabel';
 import Select from '@material-ui/core/Select';
 //Generic Custom Components
-
+import DialogAdquirientes from './DialogAdquirientes';
 import {OPERACIONES_CATALOGO} from '../../constantes.js';
 
 import Funciones from '../Funciones' //Manejador de llamados a las funciones por URL
@@ -158,7 +158,7 @@ export default function Menu(){
             <div>
                 
             </div>
-            
+                <DialogAdquirientes mode={state.modo} opened={state.open} selected={state.dtabla} handleClose={handleClose}/>
         </div>
     );
 }
