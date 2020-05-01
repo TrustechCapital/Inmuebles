@@ -142,7 +142,7 @@ function GenericTable (props) {
     
     const handleSelectAllClick = (event) => {
         if (event.target.checked) {
-            const newSelecteds = data.map((row) => row[keyColum]);
+            const newSelecteds = currentRows.map((row) => row[keyColum]);
             setSelected(newSelecteds);
             return;
         }
