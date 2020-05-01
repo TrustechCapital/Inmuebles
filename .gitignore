@@ -1,3 +1,6 @@
+# OS files
+.DS_STORE
+
 # Compiled class file
 *.class
 

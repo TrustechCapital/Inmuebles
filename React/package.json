@@ -36,5 +36,9 @@
         "react-markdown": "^4.3.1",
         "react-spring": "^8.0.27",
         "typeface-roboto": "0.0.75"
+    },
+    "devDependencies": {
+        "@types/react": "^16.9.34",
+        "typescript": "^3.8.3"
     }
 }
