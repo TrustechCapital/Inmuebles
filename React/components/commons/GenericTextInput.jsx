@@ -2,8 +2,8 @@ import React from 'react';
 import { makeStyles } from '@material-ui/core/styles';
 import TextField from '@material-ui/core/TextField';
 import FormControl from '@material-ui/core/FormControl';
-import InputLabel from '@material-ui/core/InputLabel';
 import PropTypes from 'prop-types';
+import InputAdornment from '@material-ui/core/InputAdornment';
 
 const useStyles = makeStyles((theme) => ({
     root: {
@@ -36,7 +36,7 @@ const useStyles = makeStyles((theme) => ({
 }));
 
 function GenericTextInput(props){
-    const{label,idCampo,helper,required,defaultVal} = props;
+    const{label,idCampo,helper,required,defaultVal,adornment} = props;
     const classes = useStyles();
     return(
         <FormControl>
@@ -50,6 +50,7 @@ function GenericTextInput(props){
             required={required}
             margin="dense"
             variant="outlined"
+            startAdornment={<InputAdornment position="start">{adornment}</InputAdornment>}
             />
         </FormControl>
     );
@@ -57,9 +58,10 @@ function GenericTextInput(props){
 GenericTextInput.propTypes = {
     label: PropTypes.string.isRequired,
     idCampo: PropTypes.string.isRequired,
-    helper: PropTypes.string.isRequired,
+    helper: PropTypes.string,
     required: PropTypes.bool.isRequired,
-    default: PropTypes.string.isRequired
+    default: PropTypes.string,
+    adornment: PropTypes.string
 };
 
 export default GenericTextInput;

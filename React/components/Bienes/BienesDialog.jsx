@@ -6,11 +6,13 @@ import Select from '@material-ui/core/Select';
 import InputLabel from '@material-ui/core/InputLabel';
 import DateFnsUtils from '@date-io/date-fns';
 import {MuiPickersUtilsProvider, KeyboardDatePicker} from '@material-ui/pickers';
-import OutlinedInput from '@material-ui/core/OutlinedInput';
-import InputAdornment from '@material-ui/core/InputAdornment';
+
+
 import GenericSwitch from '../commons/GenericSwitch';
 import CatalogDialog from '../commons/CatalogDialog';
-import GenericTextInput from '../commons/GenericTextInput'
+import GenericTextInput from '../commons/GenericTextInput';
+import GenericDatePicker from '../commons/GenericDatePicker';
+import GenericSelect from '../commons/GenericSelect';
 
 const useStyles = makeStyles((theme) => ({
     root: {
@@ -113,23 +115,7 @@ export default function BienesDialog(props){
                         margin="dense"
                         variant="outlined"
                     />
-                    <FormControl variant="outlined" className={classes.formControl}>
-                        <InputLabel htmlFor="fgarCveGarantia">Tipo de Bien</InputLabel>
-                        <Select
-                            native
-                            value={state.age}
-                            onChange={handleChange}
-                            inputProps={{
-                                name: 'age',
-                                id: 'fgarCveGarantia',
-                            }}
-                        >
-                            <option aria-label="None" value="" />
-                            <option value={10}>Ten</option>
-                            <option value={20}>Twenty</option>
-                            <option value={30}>Thirty</option>
-                        </Select>
-                    </FormControl>
+                    <GenericSelect labelId='Tipo de Bien' selectId='fgarCveGarantia' selected={state.age} onChange={handleChange} label='Tipo de Bien' />
                     <InputLabel htmlFor="fgarImpGarantizad">Importe Garantizado</InputLabel>
                     <TextField
                         id="fgarImpGarantizad"
@@ -166,40 +152,14 @@ export default function BienesDialog(props){
                         margin="dense"
                         variant="outlined"
                     />
-                    <MuiPickersUtilsProvider utils={DateFnsUtils}>
-                        <KeyboardDatePicker
-                        margin="normal"
-                        id="fgarFecUltValua"
-                        label="Fecha de Última Valuación"
-                        format="MM/dd/yyyy"
-                        value={selectedDate}
-                        onChange={handleDateChange}
-                        KeyboardButtonProps={{
-                            'aria-label': 'change date',
-                        }}
-                        />
-                    </MuiPickersUtilsProvider>
+                    <GenericDatePicker idSelector='fgarFecUltValua' labelSelector='Fecha de Última Valuación' selectedDate={selectedDate} onChange={handleDateChange}/>
                     <br/>
                         <GenericSwitch idCampo='fgarCveRevaluaChk' onChange={handleChangeChk} activo={state.fgarCveRevaluaChk} nombreCampo='fgarCveRevaluaChk' label='Revalua'/>
                     <br/>
                         <GenericSwitch idCampo='fgarEsGarantiaChk' onChange={handleChangeChk} activo={state.fgarEsGarantiaChk} nombreCampo='fgarEsGarantiaChk' label='¿Es Garantía?'/>
                     <br/>
-                    <InputLabel htmlFor="fgarImpGarantia">Importe Bien</InputLabel>
-                    <OutlinedInput
-                        id="fgarImpGarantia"
-                        value={values.amount}
-                        onChange={handleChangeAmount('amount')}
-                        startAdornment={<InputAdornment position="start">$</InputAdornment>}
-                        labelWidth={60}
-                    />
-                    <InputLabel htmlFor="fgarPjePicnorado">Picnorado</InputLabel>
-                    <OutlinedInput
-                        id="fgarPjePicnorado"
-                        value={values.percent}
-                        onChange={handleChangeAmount('percent')}
-                        startAdornment={<InputAdornment position="start">%</InputAdornment>}
-                        labelWidth={60}
-                    />
+                    <GenericTextInput label='Importe Bien' idCampo='fgarImpGarantia' required={true} defaultVal='00.00' adornment='$'/>
+                    <GenericTextInput label='Picnorado' idCampo='fgarPjePicnorado' required={true} defaultVal='00.00' adornment='%'/>
                     <FormControl variant="outlined" className={classes.formControl}>
                         <InputLabel htmlFor="fgarCvePerValua">Periodicidad</InputLabel>
                         <Select
