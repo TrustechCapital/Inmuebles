@@ -105,121 +105,24 @@ export default function BienesDialog(props){
     return(
         <CatalogDialog opened={props.opened} operacionCatalogo={mode} nombreCatalogo="Bienes" subtitle="Bienes por Fideicomisos" onCancel={props.handleClose} onAccept={handleAccept}>
             <GenericTextInput label='Fideicomiso' idCampo='fgarIdFideicomiso' helper='Fideicomiso a asignar bienes' required={true} defaultVal='0000'/>
-                    <InputLabel htmlFor="fgarIdSubcuenta">Sub-Fideicomiso</InputLabel>
-                    <TextField
-                        id="fgarIdSubcuenta"
-                        fullWidth
-                        defaultValue="0000"
-                        className={classes.textField}
-                        helperText="Sub-Fiso"
-                        margin="dense"
-                        variant="outlined"
-                    />
-                    <GenericSelect labelId='Tipo de Bien' selectId='fgarCveGarantia' selected={state.age} onChange={handleChange} label='Tipo de Bien' />
-                    <InputLabel htmlFor="fgarImpGarantizad">Importe Garantizado</InputLabel>
-                    <TextField
-                        id="fgarImpGarantizad"
-                        fullWidth
-                        defaultValue="0000"
-                        className={classes.textField}
-                        margin="dense"
-                        variant="outlined"
-                    />
-                    <InputLabel htmlFor="fgarTexGarantia">Descripción</InputLabel>
-                    <TextField
-                        id="fgarTexGarantia"
-                        fullWidth
-                        defaultValue="0000"
-                        className={classes.textField}
-                        margin="dense"
-                        variant="outlined"
-                    />
-                    <InputLabel htmlFor="fgarImpUltValua">Importe Última Valuación</InputLabel>
-                    <TextField
-                        id="fgarImpUltValua"
-                        fullWidth
-                        defaultValue="0000"
-                        className={classes.textField}
-                        margin="dense"
-                        variant="outlined"
-                    />
-                    <InputLabel htmlFor="fgarTexComentario">Comentario</InputLabel>
-                    <TextField
-                        id="fgarTexComentario"
-                        fullWidth
-                        defaultValue="0000"
-                        className={classes.textField}
-                        margin="dense"
-                        variant="outlined"
-                    />
-                    <GenericDatePicker idSelector='fgarFecUltValua' labelSelector='Fecha de Última Valuación' selectedDate={selectedDate} onChange={handleDateChange}/>
-                    <br/>
-                        <GenericSwitch idCampo='fgarCveRevaluaChk' onChange={handleChangeChk} activo={state.fgarCveRevaluaChk} nombreCampo='fgarCveRevaluaChk' label='Revalua'/>
-                    <br/>
-                        <GenericSwitch idCampo='fgarEsGarantiaChk' onChange={handleChangeChk} activo={state.fgarEsGarantiaChk} nombreCampo='fgarEsGarantiaChk' label='¿Es Garantía?'/>
-                    <br/>
-                    <GenericTextInput label='Importe Bien' idCampo='fgarImpGarantia' required={true} defaultVal='00.00' adornment='$'/>
-                    <GenericTextInput label='Picnorado' idCampo='fgarPjePicnorado' required={true} defaultVal='00.00' adornment='%'/>
-                    <FormControl variant="outlined" className={classes.formControl}>
-                        <InputLabel htmlFor="fgarCvePerValua">Periodicidad</InputLabel>
-                        <Select
-                            native
-                            value={state.periodicidad}
-                            onChange={handleChangePeriodi}
-                            inputProps={{
-                                name: 'periodicidad',
-                                id: 'fgarCvePerValua',
-                            }}
-                        >
-                            <option aria-label="None" value="" />
-                            <option value={10}>Ten</option>
-                            <option value={20}>Twenty</option>
-                            <option value={30}>Thirty</option>
-                        </Select>
-                    </FormControl>
-                    <MuiPickersUtilsProvider utils={DateFnsUtils}>
-                        <KeyboardDatePicker
-                        margin="normal"
-                        id="fgarFecInicio"
-                        label="Fecha de Inicio"
-                        format="MM/dd/yyyy"
-                        value={selectedDate}
-                        onChange={handleDateChangeIni}
-                        KeyboardButtonProps={{
-                            'aria-label': 'change date',
-                        }}
-                        />
-                    </MuiPickersUtilsProvider>
-                    <MuiPickersUtilsProvider utils={DateFnsUtils}>
-                        <KeyboardDatePicker
-                        margin="normal"
-                        id="fgarFecFin"
-                        label="Fecha de Salida"
-                        format="MM/dd/yyyy"
-                        value={selectedDate}
-                        onChange={handleDateChangeSal}
-                        KeyboardButtonProps={{
-                            'aria-label': 'change date',
-                        }}
-                        />
-                    </MuiPickersUtilsProvider>
-                    <FormControl variant="outlined" className={classes.formControl}>
-                        <InputLabel htmlFor="fgarCveStatus">Status</InputLabel>
-                        <Select
-                            native
-                            value={state.status}
-                            onChange={handleChangeStatus}
-                            inputProps={{
-                                name: 'status',
-                                id: 'fgarCveStatus',
-                            }}
-                        >
-                            <option aria-label="None" value="" />
-                            <option value={10}>Ten</option>
-                            <option value={20}>Twenty</option>
-                            <option value={30}>Thirty</option>
-                        </Select>
-                    </FormControl>
+            <GenericTextInput label='Sub-Fideicomiso' idCampo='fgarIdSubcuenta' helper='SubFiso' required={true} defaultVal='0000'/>
+            <GenericSelect labelId='Tipo de Bien' selectId='fgarCveGarantia' selected={state.age} onChange={handleChange} label='Tipo de Bien' />
+            <GenericTextInput label='Importe Garantizado' idCampo='fgarImpGarantizad' required={false} defaultVal='0000'/>
+            <GenericTextInput label='Descripcion' idCampo='fgarTexGarantia' required={false} defaultVal='0000'/>
+            <GenericTextInput label='Importe Última Valuación' idCampo='fgarImpUltValua' required={false} defaultVal='0000'/>
+            <GenericTextInput label='Comentario' idCampo='fgarTexComentario' required={false} defaultVal='0000'/>                            
+            <GenericDatePicker idSelector='fgarFecUltValua' labelSelector='Fecha de Última Valuación' selectedDate={selectedDate} onChange={handleDateChange}/>
+            <br/>
+            <GenericSwitch idCampo='fgarCveRevaluaChk' onChange={handleChangeChk} activo={state.fgarCveRevaluaChk} nombreCampo='fgarCveRevaluaChk' label='Revalua'/>
+            <br/>
+            <GenericSwitch idCampo='fgarEsGarantiaChk' onChange={handleChangeChk} activo={state.fgarEsGarantiaChk} nombreCampo='fgarEsGarantiaChk' label='¿Es Garantía?'/>
+            <br/>
+            <GenericTextInput label='Importe Bien' idCampo='fgarImpGarantia' required={true} defaultVal='00.00' adornment='$'/>
+            <GenericTextInput label='Picnorado' idCampo='fgarPjePicnorado' required={true} defaultVal='00.00' adornment='%'/>
+            <GenericSelect labelId='Periodicidad' selectId='fgarCvePerValua' selected={state.periodicidad} onChange={handleChangePeriodi} label='Periodicidad' />
+            <GenericDatePicker idSelector='fgarFecInicio' labelSelector='Fecha de Inicio' selectedDate={selectedDate} onChange={handleDateChangeIni}/>
+            <GenericDatePicker idSelector='fgarFecFin' labelSelector='Fecha de Salida' selectedDate={selectedDate} onChange={handleDateChangeSal}/>
+            <GenericSelect labelId='Periodicidad' selectId='fgarCvePerfgarCveStatusValua' selected={state.status} onChange={handleChangeStatus} label='Status' />
         </CatalogDialog>
     );
 }

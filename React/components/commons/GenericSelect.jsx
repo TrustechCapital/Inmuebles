@@ -9,7 +9,7 @@ import PropTypes from 'prop-types';
 const useStyles = makeStyles((theme) => ({
     formControl: {
       margin: theme.spacing(1),
-      minWidth: 120,
+      minWidth: 250,
     },
     selectEmpty: {
       marginTop: theme.spacing(2),
@@ -33,9 +33,9 @@ function GenericSelect(props){
                 <MenuItem value="">
                     <em>Seleccione uno</em>
                 </MenuItem>
-                <MenuItem value={10}>Ten</MenuItem>
-                <MenuItem value={20}>Twenty</MenuItem>
-                <MenuItem value={30}>Thirty</MenuItem>
+                <MenuItem value={10}>Opcion 1</MenuItem>
+                <MenuItem value={20}>Opcion 2</MenuItem>
+                <MenuItem value={30}>Opcion 3</MenuItem>
             </Select>
         </FormControl>
     );
