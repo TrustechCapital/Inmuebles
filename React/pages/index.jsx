@@ -1,11 +1,12 @@
-import Layout from '../components/MyLayout';
-import InmueblesTL from "../components/Inmuebles"
-
+import Layout from '../components/Layout';
+import Inmuebles from "../components/Inmuebles"
 
 const Index = () => {
-  return(
+  return (
     <Layout>
-        <InmueblesTL/>
+      <Inmuebles/>
     </Layout>
-)}
-export default Index
+  );
+};
+
+export default Index;

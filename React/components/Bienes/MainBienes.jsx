@@ -1,90 +1,45 @@
 import React from 'react';
 import { makeStyles } from '@material-ui/core/styles';
-import { withStyles } from '@material-ui/core/styles';
+import MenuItem from '@material-ui/core/MenuItem';
 import Grid from '@material-ui/core/Grid';
 import TextField from '@material-ui/core/TextField';
-import Divider from '@material-ui/core/Divider';
 import ButtonGroup from '@material-ui/core/ButtonGroup';
 import Button from '@material-ui/core/Button';
 import FormControl from '@material-ui/core/FormControl';
 import InputLabel from '@material-ui/core/InputLabel';
 import Select from '@material-ui/core/Select';
-//Generic Custom Components
+import DeleteIcon from '@material-ui/icons/Delete';
+import SearchIcon from '@material-ui/icons/Search';
+import EditIcon from '@material-ui/icons/Edit';
+import AddIcon from '@material-ui/icons/Add';
+import FindInPageIcon from '@material-ui/icons/FindInPage';
+import Card from '@material-ui/core/Card';
+import CardActions from '@material-ui/core/CardActions';
+import CardContent from '@material-ui/core/CardContent';
+import Container from '@material-ui/core/Container';
+
 import Tabla from './BienesTabla';
 import BienesDialog from './BienesDialog';
-import {OPERACIONES_CATALOGO} from '../../constantes.js';
+import { OPERACIONES_CATALOGO } from '../../constantes.js';
 
-import Funciones from '../Funciones' //Manejador de llamados a las funciones por URL
 
 const useStyles = makeStyles((theme) => ({
-    root: {
-      width: '100%',
-      maxWidth: 360,
-      backgroundColor: theme.palette.background.paper,
+    searchCard: {
+        borderColor: theme.palette.secondary.main
     },
-    chip: {
-      margin: theme.spacing(0.5),
-    },
-    section1: {
-      margin: theme.spacing(3, 2),
-    },
-    section2: {
-      margin: theme.spacing(2),
-    },
-    section3: {
-      margin: theme.spacing(3, 1, 1),
-    },
-    form: {
-        display: 'flex',
-        flexDirection: 'column',
-        margin: 'auto',
-        width: 'fit-content',
-      },
-    formControl: {
-        marginTop: theme.spacing(2),
-        minWidth: 150,
-    },
-    formControlLabel: {
-        marginTop: theme.spacing(1),
-    },
-    selectEmpty: {
-        marginTop: theme.spacing(2),
-    },
-    modal: {
-        display: 'flex',
-        alignItems: 'center',
-        justifyContent: 'center',
-      },
-    paper: {
-        backgroundColor: theme.palette.background.paper,
-        border: '2px solid #000',
-        boxShadow: theme.shadows[5],
-        padding: theme.spacing(2, 4, 3),
-    },
-    textField: {
-        marginLeft: theme.spacing(1),
-        marginRight: theme.spacing(1),
-        minWidth: '75ch',
-    },
-    
-      
+    rowSpacing: {
+        marginBottom: theme.spacing(2)
+    } 
 }));
 
   
 export default function Menu(){
-    
     const classes = useStyles();
 
     const [state, setState] = React.useState({
-        age: '',
-        name: 'hai',
-        fgarCveRevaluaChk: true,
-        fgarEsGarantiaChk: true,
-        periodicidad: '',
-        status:'',
         open:false,
         modo:'alta',
-        dtabla:{},
+        selectedRowsBienesTabla: [],
     });
 
     const handleChange = (event) => {
@@ -110,56 +65,61 @@ export default function Menu(){
         setState({open:false});
     };
     return(
-        <div className={classes.root}>
-            <div className={classes.section1}>
-                <Grid container alignItems="center" spacing={3}>
-                    <Grid item xs={12}>
-                        <InputLabel htmlFor="outlined-age-native-simple">Fideicomiso</InputLabel>
-                        <TextField id="paramIdFideicomiso"  defaultValue="0000" variant="outlined"/>
-                    </Grid>
-                    <Grid item xs={12}>
-                        <InputLabel htmlFor="paramSubfiso">Sub Fiso</InputLabel>
-                        <TextField id="paramSubfiso" defaultValue="0000" variant="outlined"/>
-                    </Grid>
-                    <Grid item xs={12}>
-                    <FormControl variant="outlined" className={classes.formControl}>
-                        <InputLabel htmlFor="tipoBien">Tipo de Bien</InputLabel>
-                        <Select
-                            native
-                            value={state.age}
-                            onChange={handleChange}
-                            inputProps={{
-                                name: 'age',
-                                id: 'tipoBien',
-                            }}
-                        >
-                            <option aria-label="None" value="" />
-                            <option value={10}>Ten</option>
-                            <option value={20}>Twenty</option>
-                            <option value={30}>Thirty</option>
-                        </Select>
-                    </FormControl>
-                    </Grid>
-                    <Grid item xs={12}>
-                        <InputLabel htmlFor="paramDescripcion">Descripcion</InputLabel>
-                        <TextField id="paramDescripcion" defaultValue="Descripcion del Bien" variant="outlined"/>
-                    </Grid>
+        <div>
+            <Grid container spacing={1} direction="column" className={classes.rowSpacing}>
+                <Card className={classes.searchCard} variant="outlined">
+                    <CardContent>
+                        <Grid container spacing={1} direction="column">
+                            <Grid container className={classes.rowSpacing} spacing={4}>
+                                <Grid item xs={4}>
+                                    <TextField id="paramIdFideicomiso" label="Id Fideicomiso" defaultValue="1" fullWidth/>
+                                </Grid>
+                                <Grid container xs={8} alignItems="center">
+                                    <Container>Fideicomiso 1</Container>
+                                </Grid>
+                            </Grid>
+                            <Grid container spacing={4}>
+                                <Grid item xs={2}>
+                                    <TextField id="paramSubfiso" label="Id Subcuenta" defaultValue="1" fullWidth/>
+                                </Grid>
+                                <Grid item xs={2}>
+                                    <FormControl fullWidth>
+                                        <InputLabel htmlFor="tipoBien">Tipo de Bien</InputLabel>
+                                        <Select labelId="tipoBien" value={1}>
+                                            <MenuItem value={1}>Tipo 1</MenuItem>
+                                            <MenuItem value={2}>Tipo 2</MenuItem>
+                                        </Select>
+                                    </FormControl>
+                                </Grid>
+                                <Grid item xs={8}>
+                                    <TextField id="paramDescripcion" label="Descripcion" fullWidth/>
+                                </Grid>
+                            </Grid>
+                        </Grid>
+                    </CardContent>
+                    <CardActions>
+                        <Grid container justify="flex-end">
+                            <ButtonGroup variant="contained" color="secondary" aria-label="contained primary button group">
+                                <Button color="secondary" startIcon={<SearchIcon />}>Buscar Datos</Button>
+                            </ButtonGroup>
+                        </Grid>
+                    </CardActions>
+                </Card>
+            </Grid>
+            <Grid container spacing={1} direction="column">
+                <Grid xs={12}>
+                    <Tabla onSelect={handleTableSelect}/>
                 </Grid>
-            </div>
-            <Divider variant="middle" flexItem={true}/>
-            <div className={classes.section2}>
-                <ButtonGroup variant="contained" color="primary" aria-label="contained primary button group">
-                    <Button>Buscar Datos</Button>
-                    <Button onClick={() =>handleClickOpen(OPERACIONES_CATALOGO.ALTA)}>Alta</Button>
-                    <Button onClick={() =>handleClickOpen(OPERACIONES_CATALOGO.MODIFICACION)}>Modificación</Button>
-                    <Button onClick={() =>handleClickOpen(OPERACIONES_CATALOGO.CONSULTA)}>Consulta</Button>
-                    <Button>Baja</Button>
-                </ButtonGroup>
-            </div>
-            <div>
-                <Tabla onSelect={handleTableSelect}/>
-            </div>
-            <BienesDialog mode={state.modo} opened={state.open} selected={state.dtabla} handleClose={handleClose}/>
+                <Grid container className={classes.rowSpacing} justify="center">
+                    <ButtonGroup variant="contained" color="secondary" aria-label="contained primary button group">
+                        <Button startIcon={<AddIcon />} onClick={() =>handleClickOpen(OPERACIONES_CATALOGO.ALTA)}>Alta</Button>
+                        <Button startIcon={<EditIcon />} onClick={() =>handleClickOpen(OPERACIONES_CATALOGO.MODIFICACION)}>Modificación</Button>
+                        <Button startIcon={<FindInPageIcon />} onClick={() =>handleClickOpen(OPERACIONES_CATALOGO.CONSULTA)}>Consulta</Button>
+                        <Button startIcon={<DeleteIcon />}>Baja</Button>
+                    </ButtonGroup>
+                </Grid>
+                <BienesDialog mode={state.modo} opened={state.open} selected={state.selectedRowsBienesTabla} handleClose={handleClose}/>
+            </Grid>
         </div>
     );
 }

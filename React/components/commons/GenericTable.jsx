@@ -215,7 +215,7 @@ function GenericTable (props) {
 
 GenericTable.propTypes = {
     data: PropTypes.array.isRequired, 
-    columns: PropTypes.object.isRequired, 
+    columns: PropTypes.array.isRequired, 
     onSelect: PropTypes.func.isRequired
 };
 
