@@ -29,15 +29,10 @@ Para su funcionamiento se han integrado diversas dependencias de React, cada una
 | React |  |
 | NextJS |  |
 | Material UI |  |
-| PrimeReact |  |
+| Material UI Icons |  |
 | Axios |  |
 | Date-IO |  |
-| Bootstrap |  |
-| Bootswatch |  |
-| Bootsnipp |  |
 | Date-Fns |  |
-| Jquery |  |
-| PrimeIcons |  |
 | PropTypes |  |
 
 ### Todos
