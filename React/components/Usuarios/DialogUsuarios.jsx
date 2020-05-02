@@ -1,12 +1,5 @@
 import React,{useState,useEffect} from 'react';
 import { makeStyles } from '@material-ui/core/styles';
-import TextField from '@material-ui/core/TextField';
-import FormControl from '@material-ui/core/FormControl';
-import Select from '@material-ui/core/Select';
-import InputLabel from '@material-ui/core/InputLabel';
-import DateFnsUtils from '@date-io/date-fns';
-import {MuiPickersUtilsProvider, KeyboardDatePicker} from '@material-ui/pickers';
-
 
 import GenericSwitch from '../commons/GenericSwitch';
 import CatalogDialog from '../commons/CatalogDialog';
@@ -103,27 +96,12 @@ export default function DialogAdquirientes(props){
     };
 
     return(
-        <CatalogDialog opened={props.opened} operacionCatalogo={mode} nombreCatalogo="Adquirientes" subtitle="Adquirientes" onCancel={props.handleClose} onAccept={handleAccept}>
-            <GenericTextInput label='Fideicomiso' idCampo='fgarIdFideicomiso' helper='Fideicomiso a asignar bienes' required={true} defaultVal='0000'/>
-            <GenericTextInput label='Sub Cuenta' idCampo='fgarIdSubcuenta' helper='SubFiso' required={true} defaultVal='0000'/>
-            <GenericTextInput label='Expediente Catastro' idCampo='fgarIdSubcuenta' helper='SubFiso' required={true} defaultVal='0000'/>
-            <GenericTextInput label='Número de Inmueble' idCampo='fgarIdSubcuenta' helper='SubFiso' required={true} defaultVal='0000'/>
-            <GenericTextInput label='Edificio' idCampo='fgarIdSubcuenta' helper='SubFiso' required={true} defaultVal='0000'/> 
-            <GenericTextInput label='Número de Unidad' idCampo='fgarIdSubcuenta' helper='SubFiso' required={true} defaultVal='0000'/>
-            <GenericTextInput label='Adquiriente' idCampo='fgarIdSubcuenta' helper='SubFiso' required={true} defaultVal='0000'/>
-            <GenericDatePicker idSelector='fgarFecFin' labelSelector='Fecha de Escritura' selectedDate={selectedDate} onChange={handleDateChangeSal}/> 
-            <GenericTextInput label='Desarrollo' idCampo='fgarIdSubcuenta' helper='SubFiso' required={true} defaultVal='0000'/> 
-            <GenericTextInput label='Escritura' idCampo='fgarIdSubcuenta' helper='SubFiso' required={true} defaultVal='0000'/> 
-            <GenericTextInput label='Prototipo' idCampo='fgarIdSubcuenta' helper='SubFiso' required={true} defaultVal='0000'/> 
-            <GenericTextInput label='Número Oficial' idCampo='fgarIdSubcuenta' helper='SubFiso' required={true} defaultVal='0000'/> 
-            <GenericTextInput label='Notaría' idCampo='fgarIdSubcuenta' helper='SubFiso' required={true} defaultVal='0000'/> 
-            <GenericTextInput label='Delegados Funcionarios' idCampo='fgarIdSubcuenta' helper='SubFiso' required={true} defaultVal='0000'/> 
-            <GenericTextInput label='Valor Liberación' idCampo='fgarIdSubcuenta' helper='SubFiso' required={true} defaultVal='0000'/>
-            <GenericSelect labelId='Notario' label='Notario' selectId='fgarCvePerValua' selected={state.periodicidad} onChange={handleChangePeriodi}  /> 
-            <GenericSelect labelId='Moneda' label='Moneda' selectId='fgarCvePerValua' selected={state.periodicidad} onChange={handleChangePeriodi}  /> 
-            <GenericTextInput label='Localidad' idCampo='fgarIdSubcuenta' helper='SubFiso' required={true} defaultVal='0000'/>
-            <GenericSelect labelId='Tipo de Venta' label='Tipo de Venta' selectId='fgarCvePerValua' selected={state.periodicidad} onChange={handleChangePeriodi}  /> 
-            <GenericSelect labelId='Estatus' label='Estatus' selectId='fgarCvePerValua' selected={state.periodicidad} onChange={handleChangePeriodi}  /> 
+        <CatalogDialog opened={props.opened} operacionCatalogo={mode} nombreCatalogo="Usuarios" subtitle="Mantenimiento de Usuarios" onCancel={props.handleClose} onAccept={handleAccept}>
+            <GenericTextInput label='Nombre' idCampo='usuNumUsuario' helper='Fideicomiso a asignar bienes' required={true} defaultVal='0000'/>
+            <GenericTextInput label='Usuario OID' idCampo='usuNomUsuario' helper='SubFiso' required={true} defaultVal='0000'/>
+            <GenericSelect labelId='Tipo de Usuario' label='Tipo de Usuario' selectId='usuTipoUsuario' selected={state.periodicidad} onChange={handleChangePeriodi}  /> 
+            <GenericSelect labelId='Perfil Cliente' label='Perfil Cliente' selectId='usuNumPuesto' selected={state.periodicidad} onChange={handleChangePeriodi}  /> 
+            <GenericSelect labelId='Status' label='Status' selectId='usuCveStUsuario' selected={state.periodicidad} onChange={handleChangePeriodi}  /> 
         </CatalogDialog>
     );
 }
