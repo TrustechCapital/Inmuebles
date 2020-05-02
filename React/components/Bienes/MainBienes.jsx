@@ -18,8 +18,8 @@ import CardActions from '@material-ui/core/CardActions';
 import CardContent from '@material-ui/core/CardContent';
 import Container from '@material-ui/core/Container';
 
-import Tabla from './BienesTabla';
-import BienesDialog from './BienesDialog';
+import Tabla from './TableBienes';
+import DialogGarantias from './DialogGarantias';
 import { OPERACIONES_CATALOGO } from '../../constantes.js';
 
 
@@ -118,7 +118,7 @@ export default function Menu(){
                         <Button startIcon={<DeleteIcon />}>Baja</Button>
                     </ButtonGroup>
                 </Grid>
-                <BienesDialog mode={state.modo} opened={state.open} selected={state.selectedRowsBienesTabla} handleClose={handleClose}/>
+                <DialogGarantias mode={state.modo} opened={state.open} selected={state.selectedRowsBienesTabla} handleClose={handleClose}/>
             </Grid>
         </div>
     );

@@ -96,7 +96,7 @@ export default function BienesDialog(props){
     };
 
     return(
-        <CatalogDialog opened={props.opened} operacionCatalogo={mode} nombreCatalogo="Bienes" subtitle="Bienes por Fideicomisos" onCancel={props.handleClose} onAccept={handleAccept}>
+        <CatalogDialog opened={props.opened} operacionCatalogo={mode} nombreCatalogo="Garantías" subtitle="Garantías por Fideicomisos" onCancel={props.handleClose} onAccept={handleAccept}>
             <GenericTextInput label='Fideicomiso' idCampo='fgarIdFideicomiso' helper='Fideicomiso a asignar bienes' required={true} defaultVal='0000'/>
             <GenericTextInput label='Sub-Fideicomiso' idCampo='fgarIdSubcuenta' helper='SubFiso' required={true} defaultVal='0000'/>
             <GenericSelect labelId='Tipo de Bien' selectId='fgarCveGarantia' selected={state.age} onChange={handleChange} label='Tipo de Bien' />
