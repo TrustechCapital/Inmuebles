@@ -1,5 +1,6 @@
 import React from 'react';
-import { withStyles, makeStyles } from '@material-ui/core/styles';
+import clsx from 'clsx';
+import { lighten, withStyles, makeStyles } from '@material-ui/core/styles';
 import Table from '@material-ui/core/Table';
 import TableBody from '@material-ui/core/TableBody';
 import TableCell from '@material-ui/core/TableCell';
@@ -10,8 +11,15 @@ import TableSortLabel from '@material-ui/core/TableSortLabel';
 import TableRow from '@material-ui/core/TableRow';
 import Paper from '@material-ui/core/Paper';
 import Checkbox from '@material-ui/core/Checkbox';
-
+import Toolbar from '@material-ui/core/Toolbar';
+import Tooltip from '@material-ui/core/Tooltip';
 import PropTypes from 'prop-types';
+import Typography from '@material-ui/core/Typography';
+import IconButton from '@material-ui/core/IconButton';
+import DeleteIcon from '@material-ui/icons/Delete';
+import EditIcon from '@material-ui/icons/Edit';
+import AddIcon from '@material-ui/icons/Add';
+import FindInPageIcon from '@material-ui/icons/FindInPage';
 
 const SORT_TYPES = {
     ASC: 'asc',
@@ -22,7 +30,8 @@ const ROW_HEIGHT = 53;
 
 const StyledTableCell = withStyles((theme) => ({
     head: {
-      fontWeight: theme.typography.fontWeightBold
+        backgroundColor: '#f5f5f5',
+        fontWeight: theme.typography.fontWeightBold
     }
 }))(TableCell);
 
@@ -37,6 +46,20 @@ const useStyles = makeStyles((theme) => {
         }
     }
 });
+
+const useToolbarStyles = makeStyles((theme) => ({
+    root: {
+      paddingLeft: theme.spacing(2),
+      paddingRight: theme.spacing(1),
+    },
+    highlight: {
+        color: theme.palette.secondary.main,
+        backgroundColor: lighten(theme.palette.secondary.light, 0.85),
+    },
+    title: {
+      flex: '1 1 100%',
+    }
+}));
 
 function toggleSelectedElementInList(selectedElements, id){
     const selectedIndex = selectedElements.indexOf(id);
@@ -97,7 +120,7 @@ function EnhancedTableHead(props) {
     );
   }
   
-  EnhancedTableHead.propTypes = {
+EnhancedTableHead.propTypes = {
     columns: PropTypes.array.isRequired,
     classes: PropTypes.object.isRequired,
     numSelected: PropTypes.number.isRequired,
@@ -106,11 +129,70 @@ function EnhancedTableHead(props) {
     order: PropTypes.oneOf([SORT_TYPES.ASC, SORT_TYPES.ASC]).isRequired,
     orderBy: PropTypes.string.isRequired,
     rowCount: PropTypes.number.isRequired,
-  };
+};
+
+const EnhancedTableToolbar = (props) => {
+    const classes = useToolbarStyles();
+    const { title, numSelected } = props;
+  
+    return (
+      <Toolbar
+        className={clsx(classes.root, {
+          [classes.highlight]: numSelected > 0,
+        })}
+      >
+        {numSelected > 0 ? (
+          <Typography className={classes.title} color="inherit" variant="subtitle1" component="div">
+            {numSelected} seleccionados
+          </Typography>
+        ) : (
+          <Typography className={classes.title} variant="h6" id="tableTitle" component="div">
+            {title}
+          </Typography>
+        )}
+
+        {numSelected > 0 ? (
+          <Tooltip title="Eliminar">
+            <IconButton aria-label="eliminar">
+              <DeleteIcon />
+            </IconButton>
+          </Tooltip>
+        ) : null}
+
+        {numSelected == 1 ? (
+            <Tooltip title="Modificar">
+                <IconButton aria-label="modificar">
+                    <EditIcon />
+                </IconButton>
+            </Tooltip>
+        ) : null}
+
+        {numSelected == 1 ? (
+            <Tooltip title="Consultar">
+                <IconButton aria-label="consultar">
+                    <FindInPageIcon />
+                </IconButton>
+            </Tooltip>
+        ) : null}
+
+        {numSelected == 0 ? (
+            <Tooltip title="Nuevo">
+                <IconButton aria-label="nuevo" color="primary">
+                    <AddIcon />
+                </IconButton>
+            </Tooltip>
+        ) : null}
+      </Toolbar>
+    );
+};
+  
+EnhancedTableToolbar.propTypes = {
+    numSelected: PropTypes.number.isRequired,
+};
 
 
 function GenericTable (props) {
-    const {data, columns, onSelect} = props;
+    const {title, data, columns, onSelect} = props;
     const keyColum = columns.find((col) => col.isKey).field;
     const [order, setOrder] = React.useState(SORT_TYPES.ASC);
     const [orderBy, setOrderBy] = React.useState(keyColum);
@@ -181,7 +263,8 @@ function GenericTable (props) {
     }
 
     return (
-        <Paper className={classes.root}>
+        <Paper className={classes.root} elevation={3}>
+            <EnhancedTableToolbar numSelected={selected.length} title={title}/>
             <TableContainer className={classes.table}>
                 <Table>
                     <EnhancedTableHead

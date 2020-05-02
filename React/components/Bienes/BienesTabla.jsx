@@ -135,7 +135,7 @@ class BienesApi extends React.Component {
     render() {
 
         return (
-                <GenericTable data={this.state.datos} columns={COLUMNS} onSelect={this.handleSelect}/>
+                <GenericTable title="Bienes" data={this.state.datos} columns={COLUMNS} onSelect={this.handleSelect}/>
         );
     }
 }
