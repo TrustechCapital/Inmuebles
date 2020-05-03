@@ -7,7 +7,6 @@ import PropTypes from 'prop-types';
 const useStyles = makeStyles((theme) => ({
     formControl: {
       margin: theme.spacing(2),
-      minWidth: 250,
     }
   }));
 
@@ -24,6 +23,7 @@ function GenericDatePicker(props){
             format="dd/MM/yyyy"
             value={selectedDate}
             onChange={onChange}
+            fullWidth
             KeyboardButtonProps={{
                 'aria-label': 'change date',
             }}
