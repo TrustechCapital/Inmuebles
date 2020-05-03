@@ -6,6 +6,7 @@ import CatalogDialog from '../commons/CatalogDialog';
 import GenericTextInput from '../commons/GenericTextInput';
 import GenericDatePicker from '../commons/GenericDatePicker';
 import GenericSelect from '../commons/GenericSelect';
+import Grid from '@material-ui/core/Grid';
 
 const useStyles = makeStyles((theme) => ({
     root: {
@@ -97,25 +98,79 @@ export default function BienesDialog(props){
 
     return(
         <CatalogDialog opened={props.opened} operacionCatalogo={mode} nombreCatalogo="Garantías" subtitle="Garantías por Fideicomisos" onCancel={props.handleClose} onAccept={handleAccept}>
-            <GenericTextInput label='Fideicomiso' idCampo='fgarIdFideicomiso' helper='Fideicomiso a asignar bienes' required={true} defaultVal='0000'/>
-            <GenericTextInput label='Sub-Fideicomiso' idCampo='fgarIdSubcuenta' helper='SubFiso' required={true} defaultVal='0000'/>
-            <GenericSelect labelId='Tipo de Bien' selectId='fgarCveGarantia' selected={state.age} onChange={handleChange} label='Tipo de Bien' />
-            <GenericTextInput label='Importe Garantizado' idCampo='fgarImpGarantizad' required={false} defaultVal='0000'/>
-            <GenericTextInput label='Descripcion' idCampo='fgarTexGarantia' required={false} defaultVal='0000'/>
-            <GenericTextInput label='Importe Última Valuación' idCampo='fgarImpUltValua' required={false} defaultVal='0000'/>
-            <GenericTextInput label='Comentario' idCampo='fgarTexComentario' required={false} defaultVal='0000'/>                            
-            <GenericDatePicker idSelector='fgarFecUltValua' labelSelector='Fecha de Última Valuación' selectedDate={selectedDate} onChange={handleDateChange}/>
-            <br/>
-            <GenericSwitch idCampo='fgarCveRevaluaChk' onChange={handleChangeChk} activo={state.fgarCveRevaluaChk} nombreCampo='fgarCveRevaluaChk' label='Revalua'/>
-            <br/>
-            <GenericSwitch idCampo='fgarEsGarantiaChk' onChange={handleChangeChk} activo={state.fgarEsGarantiaChk} nombreCampo='fgarEsGarantiaChk' label='¿Es Garantía?'/>
-            <br/>
-            <GenericTextInput label='Importe Bien' idCampo='fgarImpGarantia' required={true} defaultVal='00.00' adornment='$'/>
-            <GenericTextInput label='Picnorado' idCampo='fgarPjePicnorado' required={true} defaultVal='00.00' adornment='%'/>
-            <GenericSelect labelId='Periodicidad' selectId='fgarCvePerValua' selected={state.periodicidad} onChange={handleChangePeriodi} label='Periodicidad' />
-            <GenericDatePicker idSelector='fgarFecInicio' labelSelector='Fecha de Inicio' selectedDate={selectedDate} onChange={handleDateChangeIni}/>
-            <GenericDatePicker idSelector='fgarFecFin' labelSelector='Fecha de Salida' selectedDate={selectedDate} onChange={handleDateChangeSal}/>
-            <GenericSelect labelId='Periodicidad' selectId='fgarCvePerfgarCveStatusValua' selected={state.status} onChange={handleChangeStatus} label='Status' />
+            <Grid container spacing={1} direction="column" className={classes.rowSpacing}>
+                <Grid container spacing={1} direction="column">
+                        <Grid container className={classes.rowSpacing} spacing={4}>
+                            <Grid item xs={3}>
+                                <GenericTextInput label='Fideicomiso' idCampo='fgarIdFideicomiso' helper='Fideicomiso a asignar bienes' required={true} defaultVal='0000'/>
+                            </Grid>
+                            <Grid item xs={3}>
+                                <GenericTextInput label='Nombre de Fideicomiso' idCampo='nomFiso' readOnly={true} defaultVal='0000'/>
+                            </Grid>
+                        </Grid>
+                        <Grid container className={classes.rowSpacing} spacing={4}>
+                            <Grid item xs={3}>
+                                <GenericTextInput label='Sub-Fideicomiso' idCampo='fgarIdSubcuenta' helper='SubFiso' required={true} defaultVal='0000'/>
+                            </Grid>
+                            <Grid item xs={3}>
+                                <GenericSelect labelId='Tipo de Bien' selectId='fgarCveGarantia' selected={state.age} onChange={handleChange} label='Tipo de Bien' />
+                            </Grid>
+                        </Grid>
+                        <Grid container className={classes.rowSpacing} spacing={4}>
+                            <Grid item xs={3}>
+                                <GenericTextInput label='Importe Garantizado' idCampo='fgarImpGarantizad' required={false} defaultVal='0000'/>
+                            </Grid>
+                            <Grid item xs={3}>
+                                <GenericTextInput label='Descripcion' idCampo='fgarTexGarantia' required={false} defaultVal='0000'/>
+                            </Grid>
+                        </Grid>
+                        <Grid container className={classes.rowSpacing} spacing={4}>
+                            <Grid item xs={3}>
+                                <GenericTextInput label='Importe Última Valuación' idCampo='fgarImpUltValua' required={false} defaultVal='0000'/>
+                            </Grid>
+                            <Grid item xs={3}>
+                                <GenericTextInput label='Comentario' idCampo='fgarTexComentario' required={false} defaultVal='0000'/>                            
+                            </Grid>
+                        </Grid>
+                        <Grid container className={classes.rowSpacing} spacing={4}>
+                            <Grid item xs={3}>
+                            <GenericDatePicker idSelector='fgarFecUltValua' labelSelector='Fecha de Última Valuación' selectedDate={selectedDate} onChange={handleDateChange}/>
+                            </Grid>
+                        </Grid>
+                        <Grid container className={classes.rowSpacing} spacing={4}>
+                            <Grid item xs={3}>
+                                <GenericSwitch idCampo='fgarCveRevaluaChk' onChange={handleChangeChk} activo={state.fgarCveRevaluaChk} nombreCampo='fgarCveRevaluaChk' label='Revalua'/>
+                            </Grid>
+                            <Grid item xs={3}>
+                                <GenericSwitch idCampo='fgarEsGarantiaChk' onChange={handleChangeChk} activo={state.fgarEsGarantiaChk} nombreCampo='fgarEsGarantiaChk' label='¿Es Garantía?'/>
+                            </Grid>
+                        </Grid>
+                        <Grid container className={classes.rowSpacing} spacing={4}>
+                            <Grid item xs={3}>
+                                <GenericTextInput label='Importe Bien' idCampo='fgarImpGarantia' required={true} defaultVal='00.00' adornment='$'/>
+                            </Grid>
+                            <Grid item xs={3}>
+                                <GenericTextInput label='Picnorado' idCampo='fgarPjePicnorado' required={true} defaultVal='00.00' adornment='%'/>
+                            </Grid>
+                        </Grid>
+                        <Grid container className={classes.rowSpacing} spacing={4}>
+                            <Grid item xs={3}>
+                                <GenericSelect labelId='Periodicidad' selectId='fgarCvePerValua' selected={state.periodicidad} onChange={handleChangePeriodi} label='Periodicidad' />
+                            </Grid>
+                            <Grid item xs={3}>
+                                <GenericDatePicker idSelector='fgarFecInicio' labelSelector='Fecha de Inicio' selectedDate={selectedDate} onChange={handleDateChangeIni}/>
+                            </Grid>
+                        </Grid>
+                        <Grid container className={classes.rowSpacing} spacing={4}>
+                            <Grid item xs={3}>
+                                <GenericDatePicker idSelector='fgarFecFin' labelSelector='Fecha de Salida' selectedDate={selectedDate} onChange={handleDateChangeSal}/>
+                            </Grid>
+                            <Grid item xs={3}>
+                                <GenericSelect labelId='Periodicidad' selectId='fgarCvePerfgarCveStatusValua' selected={state.status} onChange={handleChangeStatus} label='Status' />
+                            </Grid>
+                        </Grid>
+                </Grid>
+            </Grid>
         </CatalogDialog>
     );
 }
