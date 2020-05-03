@@ -14,12 +14,13 @@ import FIXTURE_GARANTIAS from '../../fixtures/garantias';
 const COLUMNS = [
     { field: 'fadqIdFideicomiso', header: 'Fideicomiso', isKey: true},
     { field: 'fadqIdSubcuenta', header: 'SubFiso'},
-    { field: 'fadqTipo', header: 'Inmueble'},
+    { field: 'fadqTipo', header: 'Id Garantía'},
+    { field: 'fadqTipo', header: 'Id Bien'},
     { field: 'fadqIdBien', header: 'Edificio'},
-    { field: 'fadqIdDepto', header: 'Depto'},
-    { field: 'fadqIdVenta', header: 'Periodo Venta'},
-    { field: 'fadqNombreComprador', header: 'Adquiriente'},
-    { field: 'fadqSaldo', header: 'Saldo', numeric: true}
+    { field: 'fadqIdDepto', header: 'Num. unidad'},
+    { field: 'fadqIdVenta', header: 'Registro Contable'},
+    { field: 'fadqNombreComprador', header: 'Moneda'},
+    { field: 'fadqSaldo', header: 'Estatus'}
 ];
 
 const useStyles = makeStyles((theme) => ({
@@ -28,7 +29,7 @@ const useStyles = makeStyles((theme) => ({
     } 
 }));
 
-export default function TableAdquirientes (props) {
+export default function TableIndividualizaciones (props) {
     const classes = useStyles();
 
     return (
@@ -37,19 +38,14 @@ export default function TableAdquirientes (props) {
                 <GenericSearchForm>
                     <Grid container spacing={1} direction="column">
                         <Grid container className={classes.rowSpacing} spacing={4}>
-                            <Grid item xs={4}>
+                            <Grid item xs={3}>
                                 <TextField id="paramIdFideicomiso" label="Num. Fideicomiso" fullWidth/>
                             </Grid>
-                            <Grid item xs={4}>
-                                <TextField id="paramIdFideicomiso" label="Num. Inmueble" fullWidth/>
-                            </Grid>
-                            <Grid item xs={4}>
+                            <Grid item xs={3}>
                                 <TextField id="paramIdFideicomiso" label="Num. Unidad" fullWidth/>
                             </Grid>
-                        </Grid>
-                        <Grid container spacing={4}>
-                            <Grid item xs={5}>
-                                <TextField id="paramIdFideicomiso" label="Adquiriente" fullWidth/>
+                            <Grid item xs={3}>
+                                <TextField id="paramIdFideicomiso" label="Calle" fullWidth/>
                             </Grid>
                             <Grid item xs={3}>
                                 <FormControl fullWidth>
@@ -57,15 +53,12 @@ export default function TableAdquirientes (props) {
                                     <Select labelId="tipoBien" displayEmpty/>
                                 </FormControl>
                             </Grid>
-                            <Grid item xs={4}>
-                                <TextField id="paramDescripcion" label="Expediente catastro" fullWidth/>
-                            </Grid>
                         </Grid>
                     </Grid>
                 </GenericSearchForm>
             </Grid>
             <Grid container spacing={1}>
-                <GenericTable title='Adquirientes' data={[]} columns={COLUMNS} onSelect={props.onSelect} onNew={props.onNew}/>
+                <GenericTable title='Individualización de Inmuebles' data={[]} columns={COLUMNS} onSelect={props.onSelect} onNew={props.onNew}/>
             </Grid>
         </div>
     );

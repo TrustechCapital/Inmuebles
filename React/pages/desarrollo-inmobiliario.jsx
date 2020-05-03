@@ -7,6 +7,7 @@ import Layout from '../components/Layout';
 import GenericTabPanel from '../components/commons/GenericTabPanel';
 import MainAdquirientes from '../components/Adquirientes/MainAdquirientes';
 import MainLiberacion from '../components/Liberacion/MainLiberacion';
+import MainIndividualizacion from '../components/Individualizacion/MainIndividualizacion';
 
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -50,7 +51,7 @@ export default function ModuloInmuebles() {
                 </Tabs>
                 <div className={classes.tabsContentWrapper}>
                     <GenericTabPanel value={value} index={0}>
-                        Individualización de Inmuebles
+                        <MainIndividualizacion/>
                     </GenericTabPanel>
                     <GenericTabPanel value={value} index={1}>
                         <MainAdquirientes/>
