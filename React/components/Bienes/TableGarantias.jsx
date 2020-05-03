@@ -26,7 +26,7 @@ const useStyles = makeStyles((theme) => ({
     } 
 }));
 
-export default function BienesTabla (props) {
+export default function TableGarantias (props) {
     const classes = useStyles();
 
     return (

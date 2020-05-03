@@ -1,6 +1,6 @@
 import React from 'react';
 
-import GarantiasTable from './GarantiasTable';
+import TableGarantias from './TableGarantias';
 import BienesDialog from './BienesDialog';
 import GenericTable from '../commons/GenericTable';
 
@@ -14,7 +14,7 @@ const COLUMNS_BIENES = [
 export default function MainBienes(props) {
     return(
         <div>
-            <GarantiasTable/>
+            <TableGarantias/>
             <GenericTable title='Bienes en garantía' data={[]} columns={COLUMNS_BIENES} onSelect={props.onSelect} showActionsHeader={false}/>
             <BienesDialog/>
         </div>
