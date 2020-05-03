@@ -7,6 +7,7 @@ import PropTypes from 'prop-types';
 const useStyles = makeStyles((theme) => ({
     formControl: {
       margin: theme.spacing(2),
+      marginLeft: theme.spacing(2),
     }
   }));
 
@@ -15,7 +16,7 @@ function GenericDatePicker(props){
     const classes = useStyles();
 
     return(
-        <MuiPickersUtilsProvider utils={DateFnsUtils} className={classes.formControl}>
+        <MuiPickersUtilsProvider utils={DateFnsUtils} className={classes.formControl} fullWidth>
             <KeyboardDatePicker
             margin="normal"
             id={idSelector}
@@ -23,7 +24,6 @@ function GenericDatePicker(props){
             format="dd/MM/yyyy"
             value={selectedDate}
             onChange={onChange}
-            fullWidth
             KeyboardButtonProps={{
                 'aria-label': 'change date',
             }}

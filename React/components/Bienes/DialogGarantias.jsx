@@ -79,7 +79,7 @@ export default function BienesDialog(props){
     return(
         <CatalogDialog opened={props.opened} operacionCatalogo={mode} nombreCatalogo="Garantías" subtitle="Garantías por Fideicomisos" onCancel={props.handleClose} onAccept={handleAccept}>
             <Grid container spacing={1} direction="column" className={classes.rowSpacing}>
-                <Grid container className={classes.rowSpacing} spacing={1}>
+                <Grid container className={classes.rowSpacing} spacing={3}>
                     <Grid item xs={6}>
                         <GenericTextInput label='Fideicomiso' idCampo='fgarIdFideicomiso' helper='Fideicomiso a asignar bienes' required={true} defaultVal='0000'/>
                     </Grid>
@@ -87,7 +87,7 @@ export default function BienesDialog(props){
                         <GenericTextInput label='Nombre de Fideicomiso' idCampo='fgarNomFideicomiso' readOnly={true} defaultVal='ABCD'/>
                     </Grid>
                 </Grid>
-                <Grid container className={classes.rowSpacing} spacing={1}>
+                <Grid container className={classes.rowSpacing} spacing={3}>
                     <Grid item xs={6}>
                         <GenericTextInput label='Sub-Fideicomiso' idCampo='fgarIdSubcuenta' helper='SubFiso' required={true} defaultVal='0000'/>
                     </Grid>
@@ -95,7 +95,7 @@ export default function BienesDialog(props){
                         <GenericSelect labelId='Tipo de Bien' selectId='fgarCveGarantia' selected={state.age} onChange={handleChange} label='Tipo de Bien' />
                     </Grid>
                 </Grid>
-                <Grid container className={classes.rowSpacing} spacing={1}>
+                <Grid container className={classes.rowSpacing} spacing={3}>
                     <Grid item xs={6}>
                         <GenericTextInput label='Importe Garantizado' idCampo='fgarImpGarantizad' required={false} defaultVal='0000'/>
                     </Grid>
@@ -103,7 +103,7 @@ export default function BienesDialog(props){
                         <GenericTextInput label='Descripcion' idCampo='fgarTexGarantia' required={false} defaultVal='0000'/>
                     </Grid>
                 </Grid>
-                <Grid container className={classes.rowSpacing} spacing={1}>
+                <Grid container className={classes.rowSpacing} spacing={3}>
                     <Grid item xs={6}>
                         <GenericTextInput label='Importe Última Valuación' idCampo='fgarImpUltValua' required={false} defaultVal='0000'/>
                     </Grid>
@@ -111,12 +111,12 @@ export default function BienesDialog(props){
                         <GenericTextInput label='Comentario' idCampo='fgarTexComentario' required={false} defaultVal='0000'/>                            
                     </Grid>
                 </Grid>
-                <Grid container className={classes.rowSpacing} spacing={1}>
+                <Grid container className={classes.rowSpacing} spacing={3}>
                     <Grid item xs={6}>
                     <GenericDatePicker idSelector='fgarFecUltValua' labelSelector='Fecha de Última Valuación' selectedDate={selectedDate} onChange={handleDateChange}/>
                     </Grid>
                 </Grid>
-                <Grid container className={classes.rowSpacing} spacing={1}>
+                <Grid container className={classes.rowSpacing} spacing={3}>
                     <Grid item xs={6}>
                         <GenericSwitch idCampo='fgarCveRevaluaChk' onChange={handleChangeChk} activo={state.fgarCveRevaluaChk} nombreCampo='fgarCveRevaluaChk' label='Revalua'/>
                     </Grid>
@@ -124,7 +124,7 @@ export default function BienesDialog(props){
                         <GenericSwitch idCampo='fgarEsGarantiaChk' onChange={handleChangeChk} activo={state.fgarEsGarantiaChk} nombreCampo='fgarEsGarantiaChk' label='¿Es Garantía?'/>
                     </Grid>
                 </Grid>
-                <Grid container className={classes.rowSpacing} spacing={1}>
+                <Grid container className={classes.rowSpacing} spacing={3}>
                     <Grid item xs={6}>
                         <GenericTextInput label='Importe Bien' idCampo='fgarImpGarantia' required={true} defaultVal='00.00' adornment='$'/>
                     </Grid>
@@ -132,7 +132,7 @@ export default function BienesDialog(props){
                         <GenericTextInput label='Picnorado' idCampo='fgarPjePicnorado' required={true} defaultVal='00.00' adornment='%'/>
                     </Grid>
                 </Grid>
-                <Grid container className={classes.rowSpacing} spacing={1}>
+                <Grid container className={classes.rowSpacing} spacing={3}>
                     <Grid item xs={6}>
                         <GenericSelect labelId='Periodicidad' selectId='fgarCvePerValua' selected={state.periodicidad} onChange={handleChangePeriodi} label='Periodicidad' />
                     </Grid>
@@ -140,7 +140,7 @@ export default function BienesDialog(props){
                         <GenericDatePicker idSelector='fgarFecInicio' labelSelector='Fecha de Inicio' selectedDate={selectedDate} onChange={handleDateChangeIni}/>
                     </Grid>
                 </Grid>
-                <Grid container className={classes.rowSpacing} spacing={1}>
+                <Grid container className={classes.rowSpacing} spacing={3}>
                     <Grid item xs={6}>
                         <GenericDatePicker idSelector='fgarFecFin' labelSelector='Fecha de Salida' selectedDate={selectedDate} onChange={handleDateChangeSal}/>
                     </Grid>

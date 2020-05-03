@@ -20,7 +20,7 @@ function GenericSelect(props){
     const classes = useStyles();
 
     return(
-        <FormControl variant="outlined" className={classes.formControl}>
+        <FormControl variant="outlined" className={classes.formControl} fullWidth>
             <InputLabel id={labelId}>{label}</InputLabel>
             <Select
             labelId={labelId}
@@ -28,14 +28,8 @@ function GenericSelect(props){
             value={selected}
             onChange={onChange}
             label={label}
-            fullWidth
+            displayEmpty
             >
-                <MenuItem value="">
-                    <em>Seleccione uno</em>
-                </MenuItem>
-                <MenuItem value={10}>Opcion 1</MenuItem>
-                <MenuItem value={20}>Opcion 2</MenuItem>
-                <MenuItem value={30}>Opcion 3</MenuItem>
             </Select>
         </FormControl>
     );

@@ -14,7 +14,6 @@ const useStyles = makeStyles((theme) => ({
         display: 'flex',
         flexDirection: 'column',
         margin: 'auto',
-        width: 'fit-content',
       },
     formControl: {
         marginTop: theme.spacing(2),
@@ -36,7 +35,7 @@ function GenericTextInput(props){
     const{label,idCampo,helper,required,defaultVal,adornment,readOnly} = props;
     const classes = useStyles();
     return(
-        <FormControl>
+        <FormControl fullWidth>
             <TextField
             id={idCampo}
             fullWidth
