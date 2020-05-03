@@ -29,11 +29,11 @@ const useStyles = makeStyles((theme) => ({
 
   
 function GenericSearchForm(props) {
-    const { children, onClear, onSearch } = props;
+    const { children, onClear, onSearch, defaultExpanded } = props;
     const classes = useStyles();
     return(
         <div className={classes.root}>
-            <ExpansionPanel defaultExpanded elevation={3}>
+            <ExpansionPanel defaultExpanded={defaultExpanded} elevation={3}>
                 <ExpansionPanelSummary
                     expandIcon={<ExpandMoreIcon />}
                 >

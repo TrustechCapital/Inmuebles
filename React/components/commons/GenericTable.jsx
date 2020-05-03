@@ -133,7 +133,7 @@ EnhancedTableHead.propTypes = {
 
 const EnhancedTableToolbar = (props) => {
     const classes = useToolbarStyles();
-    const { title, numSelected } = props;
+    const { title, numSelected, showActions = true } = props;
   
     return (
       <Toolbar
@@ -151,7 +151,7 @@ const EnhancedTableToolbar = (props) => {
           </Typography>
         )}
 
-        {numSelected > 0 ? (
+        {showActions === true && numSelected > 0 ? (
           <Tooltip title="Eliminar">
             <IconButton aria-label="eliminar">
               <DeleteIcon />
@@ -159,7 +159,7 @@ const EnhancedTableToolbar = (props) => {
           </Tooltip>
         ) : null}
 
-        {numSelected == 1 ? (
+        {showActions === true && numSelected == 1 ? (
             <Tooltip title="Modificar">
                 <IconButton aria-label="modificar">
                     <EditIcon />
@@ -167,7 +167,7 @@ const EnhancedTableToolbar = (props) => {
             </Tooltip>
         ) : null}
 
-        {numSelected == 1 ? (
+        {showActions === true && numSelected == 1 ? (
             <Tooltip title="Consultar">
                 <IconButton aria-label="consultar">
                     <FindInPageIcon />
@@ -175,7 +175,7 @@ const EnhancedTableToolbar = (props) => {
             </Tooltip>
         ) : null}
 
-        {numSelected == 0 ? (
+        {showActions === true && numSelected == 0 ? (
             <Tooltip title="Nuevo">
                 <IconButton aria-label="nuevo" color="primary">
                     <AddIcon />
@@ -187,12 +187,14 @@ const EnhancedTableToolbar = (props) => {
 };
   
 EnhancedTableToolbar.propTypes = {
+    title: PropTypes.string.isRequired,
     numSelected: PropTypes.number.isRequired,
+    showActions: PropTypes.bool
 };
 
 
 function GenericTable (props) {
-    const {title, data, columns, onSelect} = props;
+    const {title, data, columns, onSelect, showActionsHeader = true} = props;
     const keyColum = columns.find((col) => col.isKey).field;
     const [order, setOrder] = React.useState(SORT_TYPES.ASC);
     const [orderBy, setOrderBy] = React.useState(keyColum);
@@ -264,7 +266,7 @@ function GenericTable (props) {
 
     return (
         <Paper className={classes.root} elevation={3}>
-            <EnhancedTableToolbar numSelected={selected.length} title={title}/>
+            <EnhancedTableToolbar numSelected={selected.length} title={title} showActions={showActionsHeader}/>
             <TableContainer className={classes.table}>
                 <Table>
                     <EnhancedTableHead

@@ -1,12 +1,21 @@
 import React from 'react';
 
-import BienesTable from './BienesTable';
+import GarantiasTable from './GarantiasTable';
 import BienesDialog from './BienesDialog';
-  
-export default function Menu(){
+import GenericTable from '../commons/GenericTable';
+
+const COLUMNS_BIENES = [
+    { field: 'fgrsIdFideicomiso', header: 'Fideicomiso', isKey: true},
+    { field: 'forsCveTipoBien', header: 'Clasificacion'},
+    { field: 'forsImpUltValua', header: 'Importe Ult. Valuación', numeric: true},
+    { field: 'forsTextoDescrip', header: 'Descripción'}
+]
+
+export default function MainBienes(props) {
     return(
         <div>
-            <BienesTable/>
+            <GarantiasTable/>
+            <GenericTable title='Bienes en garantía' data={[]} columns={COLUMNS_BIENES} onSelect={props.onSelect} showActionsHeader={false}/>
             <BienesDialog/>
         </div>
     );
