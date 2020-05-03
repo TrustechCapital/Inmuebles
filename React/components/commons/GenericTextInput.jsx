@@ -8,7 +8,6 @@ import InputAdornment from '@material-ui/core/InputAdornment';
 const useStyles = makeStyles((theme) => ({
     root: {
       width: '100%',
-      maxWidth: 360,
       backgroundColor: theme.palette.background.paper,
     },
     form: {
@@ -19,7 +18,6 @@ const useStyles = makeStyles((theme) => ({
       },
     formControl: {
         marginTop: theme.spacing(2),
-        minWidth: 150,
     },
     formControlLabel: {
         marginTop: theme.spacing(1),
@@ -31,7 +29,6 @@ const useStyles = makeStyles((theme) => ({
     textField: {
         marginLeft: theme.spacing(1),
         marginRight: theme.spacing(1),
-        minWidth: '75ch',
     },
 }));
 
