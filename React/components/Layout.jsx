@@ -99,8 +99,8 @@ const useStyles = makeStyles((theme) => ({
   }));
 
 const MODULES = [
-  { label:'Inmuebles', url: '/inmuebles', icon: ApartmentIcon },
-  { label:'Desarrollo Inmobiliario', url: '/desarrollo-inmobiliario', icon: HomeIcon },
+  { label:'Inmuebles', url: '/inmuebles', icon: HomeIcon },
+  { label:'Desarrollo Inmobiliario', url: '/desarrollo-inmobiliario', icon: ApartmentIcon },
   { label:'Usuarios', url: '/usuarios', icon: PeopleIcon },
 ]
 
