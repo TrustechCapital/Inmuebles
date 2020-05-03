@@ -6,6 +6,7 @@ import CatalogDialog from '../commons/CatalogDialog';
 import GenericTextInput from '../commons/GenericTextInput';
 import GenericDatePicker from '../commons/GenericDatePicker';
 import GenericSelect from '../commons/GenericSelect';
+import Grid from '@material-ui/core/Grid';
 
 const useStyles = makeStyles((theme) => ({
     root: {
@@ -97,29 +98,93 @@ export default function BienesDialog(props){
 
     return(
         <CatalogDialog opened={props.opened} operacionCatalogo={mode} nombreCatalogo="Bienes" subtitle="Bienes en Garantía" onCancel={props.handleClose} onAccept={handleAccept}>
-            <GenericTextInput label='Fideicomiso' idCampo='fgrsIdFideicomiso' required={true} defaultVal='0000'/>
-            <GenericSelect labelId='ID Garantía' label='ID Garantía' selectId='fgarCveGarantia' selected={state.age} onChange={handleChange}  />
-            <GenericTextInput label='SubCuenta' idCampo='fgrsIdSubcuenta'  required={true} defaultVal='0000'/>
-            <GenericTextInput label='ID Bien' idCampo='forsIdGarantia'  required={true} defaultVal='0000'/>
-            <GenericSelect labelId='Clave Bien' label='Clave de Bien' selectId='forsCveTipoBien' selected={state.age} onChange={handleChange}  />
-            <GenericDatePicker labelSelector='Fecha Vencimiento' idSelector='forsFecVencimiento' selectedDate={selectedDate} onChange={handleDateChangeSal}/>
-            <GenericTextInput label='Bajo Regimen en Condominio' idCampo='forsRegimenChk'  required={true} defaultVal='0000'/>
-            <GenericTextInput label='Descripción' idCampo='forsTextoDescrip'  required={true} defaultVal='0000'/>
-            <br/>
-            <GenericSwitch nombreCampo='forsCveRevaluaChk' label='Revalua' idCampo='forsCveRevaluaChk' onChange={handleChangeChk} activo={state.fgarCveRevaluaChk}/>
-            <br/>
-            <GenericTextInput label='Importe' idCampo='forsImpBien'  required={true} defaultVal='0000'/>
-            <GenericTextInput label='Importe Última Valuación' idCampo='forsImpUltValua'  required={true} defaultVal='0000'/>
-            <GenericSelect labelId='Moneda' label='Moneda' selectId='forsMoneda' selected={state.age} onChange={handleChange}  />
-            <GenericDatePicker labelSelector='Fecha Última Valuación' idSelector='forsFecUltValua' selectedDate={selectedDate} onChange={handleDateChangeSal}/>
-            <GenericTextInput label='Tipo de Cambio' idCampo='fbifTipoCambio'  required={true} defaultVal='0000'/>
-            <GenericSelect labelId='Periodicidad' label='Periodicidad' selectId='forsCvePerValua' selected={state.age} onChange={handleChange}  />
-            <GenericTextInput label='Escritura' idCampo='forsNumEscritura' required={true} defaultVal='0000'/>
-            <GenericTextInput label='Comentario' idCampo='forsTexComentario' required={true} defaultVal='0000'/>
-            <GenericTextInput label='Notario' idCampo='forsNumNotario' required={true} defaultVal='0000'/>
-            <GenericSelect labelId='Estatus' label='Estatus' selectId='forsCveStatus' selected={state.age} onChange={handleChange}  />
-            <GenericTextInput label='Importe Revaluación' idCampo='txtImporteRevaluacion' required={true} defaultVal='0000'/>
-            <GenericDatePicker labelSelector='Fecha' idSelector='txtFecha' selectedDate={selectedDate} onChange={handleDateChangeSal}/>
+            <Grid container spacing={1} direction="column" className={classes.rowSpacing}>
+                <Grid container className={classes.rowSpacing} spacing={3}>
+                    <Grid item xs={6}>
+                        <GenericTextInput label='Fideicomiso' idCampo='fgrsIdFideicomiso' required={true} defaultVal='0000'/>
+                    </Grid>
+                    <Grid item xs={6}>
+                        <GenericSelect labelId='ID Garantía' label='ID Garantía' selectId='fgarCveGarantia' selected={state.age} onChange={handleChange}  />
+                    </Grid>
+                </Grid>
+                <Grid container className={classes.rowSpacing} spacing={3}>
+                    <Grid item xs={6}>
+                        <GenericTextInput label='SubCuenta' idCampo='fgrsIdSubcuenta'  required={true} defaultVal='0000'/>
+                    </Grid>
+                    <Grid item xs={6}>
+                        <GenericTextInput label='ID Bien' idCampo='forsIdGarantia'  required={true} defaultVal='0000'/>
+                    </Grid>
+                </Grid>
+                <Grid container className={classes.rowSpacing} spacing={3}>
+                    <Grid item xs={6}>
+                        <GenericSelect labelId='Clave Bien' label='Clave de Bien' selectId='forsCveTipoBien' selected={state.age} onChange={handleChange}  />
+                    </Grid>
+                    <Grid item xs={6}>
+                        <GenericDatePicker labelSelector='Fecha Vencimiento' idSelector='forsFecVencimiento' selectedDate={selectedDate} onChange={handleDateChangeSal}/>
+                    </Grid>
+                </Grid>
+                <Grid container className={classes.rowSpacing} spacing={3}>
+                    <Grid item xs={6}>
+                        <GenericTextInput label='Bajo Regimen en Condominio' idCampo='forsRegimenChk'  required={true} defaultVal='0000'/>
+                    </Grid>
+                    <Grid item xs={6}>
+                        <GenericTextInput label='Descripción' idCampo='forsTextoDescrip'  required={true} defaultVal='0000'/>
+                    </Grid>
+                </Grid>
+                <Grid container className={classes.rowSpacing} spacing={3}>
+                    <Grid item xs={6}>
+                        <GenericSwitch nombreCampo='forsCveRevaluaChk' label='Revalua' idCampo='forsCveRevaluaChk' onChange={handleChangeChk} activo={state.fgarCveRevaluaChk}/>
+                    </Grid>
+                    <Grid item xs={6}>
+                        <GenericTextInput label='Importe' idCampo='forsImpBien'  required={true} defaultVal='0000'/>
+                    </Grid>
+                </Grid>
+                <Grid container className={classes.rowSpacing} spacing={3}>
+                    <Grid item xs={6}>
+                        <GenericTextInput label='Importe Última Valuación' idCampo='forsImpUltValua'  required={true} defaultVal='0000'/>
+                    </Grid>
+                    <Grid item xs={6}>
+                        <GenericSelect labelId='Moneda' label='Moneda' selectId='forsMoneda' selected={state.age} onChange={handleChange}  />
+                    </Grid>
+                </Grid>
+                <Grid container className={classes.rowSpacing} spacing={3}>
+                    <Grid item xs={6}>
+                        <GenericDatePicker labelSelector='Fecha Última Valuación' idSelector='forsFecUltValua' selectedDate={selectedDate} onChange={handleDateChangeSal}/>
+                    </Grid>
+                    <Grid item xs={6}>
+                        <GenericTextInput label='Tipo de Cambio' idCampo='fbifTipoCambio'  required={true} defaultVal='0000'/>
+                    </Grid>
+                </Grid>
+                <Grid container className={classes.rowSpacing} spacing={3}>
+                    <Grid item xs={6}>
+                        <GenericSelect labelId='Periodicidad' label='Periodicidad' selectId='forsCvePerValua' selected={state.age} onChange={handleChange}  />
+                    </Grid>
+                    <Grid item xs={6}>
+                        <GenericTextInput label='Escritura' idCampo='forsNumEscritura' required={true} defaultVal='0000'/>
+                    </Grid>
+                </Grid>
+                <Grid container className={classes.rowSpacing} spacing={3}>
+                    <Grid item xs={6}>
+                        <GenericTextInput label='Comentario' idCampo='forsTexComentario' required={true} defaultVal='0000'/>
+                    </Grid>
+                    <Grid item xs={6}>
+                        <GenericTextInput label='Notario' idCampo='forsNumNotario' required={true} defaultVal='0000'/>
+                    </Grid>
+                </Grid>
+                <Grid container className={classes.rowSpacing} spacing={3}>
+                    <Grid item xs={6}>
+                        <GenericSelect labelId='Estatus' label='Estatus' selectId='forsCveStatus' selected={state.age} onChange={handleChange}  />
+                    </Grid>
+                    <Grid item xs={6}>
+                        <GenericTextInput label='Importe Revaluación' idCampo='txtImporteRevaluacion' required={true} defaultVal='0000'/>
+                    </Grid>
+                </Grid>
+                <Grid container className={classes.rowSpacing} spacing={3}>
+                    <Grid item xs={6}>
+                        <GenericDatePicker labelSelector='Fecha' idSelector='txtFecha' selectedDate={selectedDate} onChange={handleDateChangeSal}/>
+                    </Grid>
+                </Grid>
+            </Grid>
         </CatalogDialog>
     );
 }
