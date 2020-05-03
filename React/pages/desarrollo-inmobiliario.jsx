@@ -8,6 +8,7 @@ import GenericTabPanel from '../components/commons/GenericTabPanel';
 import MainAdquirientes from '../components/Adquirientes/MainAdquirientes';
 import MainLiberacion from '../components/Liberacion/MainLiberacion';
 import MainIndividualizacion from '../components/Individualizacion/MainIndividualizacion';
+import MainCargaMasiva from '../components/CargaMasivaInmuebles/MainCargaMasiva';
 
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -21,7 +22,10 @@ const useStyles = makeStyles((theme) => ({
   tabsContentWrapper: {
     display: 'flex',
     justifyContent: 'center',
-    width: '80%'
+    width: '80%',
+    '& > div' : {
+        width: '100%'
+    }
   }
 }));
 
@@ -60,7 +64,7 @@ export default function ModuloInmuebles() {
                         <MainLiberacion/>
                     </GenericTabPanel>
                     <GenericTabPanel value={value} index={3}>
-                        Carga Masiva de Inmuebles
+                        <MainCargaMasiva/>
                     </GenericTabPanel>
                 </div>
             </div>

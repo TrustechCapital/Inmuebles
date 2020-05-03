@@ -21,7 +21,10 @@ const useStyles = makeStyles((theme) => ({
   tabsContentWrapper: {
     display: 'flex',
     justifyContent: 'center',
-    width: '80%'
+    width: '80%',
+    '& > div' : {
+        width: '100%'
+    }
   }
 }));
 

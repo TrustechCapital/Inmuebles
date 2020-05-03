@@ -61,7 +61,7 @@ export default function TableAdquirientes (props) {
                 </GenericSearchForm>
             </Grid>
             <Grid container spacing={1}>
-                <GenericTable title='Adquirientes' data={[]} columns={COLUMNS} onSelect={props.onSelect} onNew={props.onNew}/>
+                <GenericTable title='Usuarios' data={[]} columns={COLUMNS} onSelect={props.onSelect} onNew={props.onNew}/>
             </Grid>
         </div>
     );
