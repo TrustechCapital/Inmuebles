@@ -97,8 +97,8 @@ export default function DialogAdquirientes(props){
 
     return(
         <CatalogDialog opened={props.opened} operacionCatalogo={mode} nombreCatalogo="Usuarios" subtitle="Mantenimiento de Usuarios" onCancel={props.handleClose} onAccept={handleAccept}>
-            <GenericTextInput label='Nombre' idCampo='usuNumUsuario' helper='Fideicomiso a asignar bienes' required={true} defaultVal='0000'/>
-            <GenericTextInput label='Usuario OID' idCampo='usuNomUsuario' helper='SubFiso' required={true} defaultVal='0000'/>
+            <GenericTextInput label='Nombre' idCampo='usuNumUsuario' helper='Fideicomiso a asignar bienes' required={true} defaultVal=''/>
+            <GenericTextInput label='Usuario OID' idCampo='usuNomUsuario' helper='SubFiso' required={true} defaultVal=''/>
             <GenericSelect labelId='Tipo de Usuario' label='Tipo de Usuario' selectId='usuTipoUsuario' selected={state.periodicidad} onChange={handleChangePeriodi}  /> 
             <GenericSelect labelId='Perfil Cliente' label='Perfil Cliente' selectId='usuNumPuesto' selected={state.periodicidad} onChange={handleChangePeriodi}  /> 
             <GenericSelect labelId='Status' label='Status' selectId='usuCveStUsuario' selected={state.periodicidad} onChange={handleChangePeriodi}  /> 

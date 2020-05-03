@@ -82,15 +82,15 @@ export default function BienesDialog(props){
             <Grid container spacing={1} direction="column" className={classes.rowSpacing}>
                 <Grid container className={classes.rowSpacing} spacing={3}>
                     <Grid item xs={6}>
-                        <GenericTextInput label='Fideicomiso' idCampo='fgarIdFideicomiso' helper='Fideicomiso a asignar bienes' required={true} defaultVal='0000'/>
+                        <GenericTextInput label='Fideicomiso' idCampo='fgarIdFideicomiso' helper='Fideicomiso a asignar bienes' required={true} defaultVal=''/>
                     </Grid>
                     <Grid item xs={6}>
-                        <GenericTextInput label='Nombre de Fideicomiso' idCampo='fgarNomFideicomiso' readOnly={true} defaultVal='ABCD'/>
+                        <GenericTextInput label='Nombre de Fideicomiso' idCampo='fgarNomFideicomiso' readOnly={true} defaultVal=''/>
                     </Grid>
                 </Grid>
                 <Grid container className={classes.rowSpacing} spacing={3}>
                     <Grid item xs={6}>
-                        <GenericTextInput label='Sub-Fideicomiso' idCampo='fgarIdSubcuenta' helper='SubFiso' required={true} defaultVal='0000'/>
+                        <GenericTextInput label='Sub-Fideicomiso' idCampo='fgarIdSubcuenta' helper='SubFiso' required={true} defaultVal=''/>
                     </Grid>
                     <Grid item xs={6}>
                         <GenericSelect labelId='Tipo de Bien' selectId='fgarCveGarantia' selected={state.age} onChange={handleChange} label='Tipo de Bien' />
@@ -98,18 +98,18 @@ export default function BienesDialog(props){
                 </Grid>
                 <Grid container className={classes.rowSpacing} spacing={3}>
                     <Grid item xs={6}>
-                        <GenericTextInput label='Importe Garantizado' idCampo='fgarImpGarantizad' required={false} defaultVal='0000'/>
+                        <GenericTextInput label='Importe Garantizado' idCampo='fgarImpGarantizad' required={false} defaultVal=''/>
                     </Grid>
                     <Grid item xs={6}>
-                        <GenericTextInput label='Descripcion' idCampo='fgarTexGarantia' required={false} defaultVal='0000'/>
+                        <GenericTextInput label='Descripcion' idCampo='fgarTexGarantia' required={false} defaultVal=''/>
                     </Grid>
                 </Grid>
                 <Grid container className={classes.rowSpacing} spacing={3}>
                     <Grid item xs={6}>
-                        <GenericTextInput label='Importe Última Valuación' idCampo='fgarImpUltValua' required={false} defaultVal='0000'/>
+                        <GenericTextInput label='Importe Última Valuación' idCampo='fgarImpUltValua' required={false} defaultVal=''/>
                     </Grid>
                     <Grid item xs={6}>
-                        <GenericTextInput label='Comentario' idCampo='fgarTexComentario' required={false} defaultVal='0000'/>                            
+                        <GenericTextInput label='Comentario' idCampo='fgarTexComentario' required={false} defaultVal=''/>                            
                     </Grid>
                 </Grid>
                 <Grid container className={classes.rowSpacing} spacing={3}>

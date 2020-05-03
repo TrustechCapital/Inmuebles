@@ -101,7 +101,7 @@ export default function BienesDialog(props){
             <Grid container spacing={1} direction="column" className={classes.rowSpacing}>
                 <Grid container className={classes.rowSpacing} spacing={3}>
                     <Grid item xs={6}>
-                        <GenericTextInput label='Fideicomiso' idCampo='fgrsIdFideicomiso' required={true} defaultVal='0000'/>
+                        <GenericTextInput label='Fideicomiso' idCampo='fgrsIdFideicomiso' required={true} defaultVal=''/>
                     </Grid>
                     <Grid item xs={6}>
                         <GenericSelect labelId='ID Garantía' label='ID Garantía' selectId='fgarCveGarantia' selected={state.age} onChange={handleChange}  />
@@ -109,10 +109,10 @@ export default function BienesDialog(props){
                 </Grid>
                 <Grid container className={classes.rowSpacing} spacing={3}>
                     <Grid item xs={6}>
-                        <GenericTextInput label='SubCuenta' idCampo='fgrsIdSubcuenta'  required={true} defaultVal='0000'/>
+                        <GenericTextInput label='SubCuenta' idCampo='fgrsIdSubcuenta'  required={true} defaultVal=''/>
                     </Grid>
                     <Grid item xs={6}>
-                        <GenericTextInput label='ID Bien' idCampo='forsIdGarantia'  required={true} defaultVal='0000'/>
+                        <GenericTextInput label='ID Bien' idCampo='forsIdGarantia'  required={true} defaultVal=''/>
                     </Grid>
                 </Grid>
                 <Grid container className={classes.rowSpacing} spacing={3}>
@@ -125,10 +125,10 @@ export default function BienesDialog(props){
                 </Grid>
                 <Grid container className={classes.rowSpacing} spacing={3}>
                     <Grid item xs={6}>
-                        <GenericTextInput label='Bajo Regimen en Condominio' idCampo='forsRegimenChk'  required={true} defaultVal='0000'/>
+                        <GenericTextInput label='Bajo Regimen en Condominio' idCampo='forsRegimenChk'  required={true} defaultVal=''/>
                     </Grid>
                     <Grid item xs={6}>
-                        <GenericTextInput label='Descripción' idCampo='forsTextoDescrip'  required={true} defaultVal='0000'/>
+                        <GenericTextInput label='Descripción' idCampo='forsTextoDescrip'  required={true} defaultVal=''/>
                     </Grid>
                 </Grid>
                 <Grid container className={classes.rowSpacing} spacing={3}>
@@ -136,12 +136,12 @@ export default function BienesDialog(props){
                         <GenericSwitch nombreCampo='forsCveRevaluaChk' label='Revalua' idCampo='forsCveRevaluaChk' onChange={handleChangeChk} activo={state.fgarCveRevaluaChk}/>
                     </Grid>
                     <Grid item xs={6}>
-                        <GenericTextInput label='Importe' idCampo='forsImpBien'  required={true} defaultVal='0000'/>
+                        <GenericTextInput label='Importe' idCampo='forsImpBien'  required={true} defaultVal=''/>
                     </Grid>
                 </Grid>
                 <Grid container className={classes.rowSpacing} spacing={3}>
                     <Grid item xs={6}>
-                        <GenericTextInput label='Importe Última Valuación' idCampo='forsImpUltValua'  required={true} defaultVal='0000'/>
+                        <GenericTextInput label='Importe Última Valuación' idCampo='forsImpUltValua'  required={true} defaultVal=''/>
                     </Grid>
                     <Grid item xs={6}>
                         <GenericSelect labelId='Moneda' label='Moneda' selectId='forsMoneda' selected={state.age} onChange={handleChange}  />
@@ -152,7 +152,7 @@ export default function BienesDialog(props){
                         <GenericDatePicker labelSelector='Fecha Última Valuación' idSelector='forsFecUltValua' selectedDate={selectedDate} onChange={handleDateChangeSal}/>
                     </Grid>
                     <Grid item xs={6}>
-                        <GenericTextInput label='Tipo de Cambio' idCampo='fbifTipoCambio'  required={true} defaultVal='0000'/>
+                        <GenericTextInput label='Tipo de Cambio' idCampo='fbifTipoCambio'  required={true} defaultVal=''/>
                     </Grid>
                 </Grid>
                 <Grid container className={classes.rowSpacing} spacing={3}>
@@ -160,15 +160,15 @@ export default function BienesDialog(props){
                         <GenericSelect labelId='Periodicidad' label='Periodicidad' selectId='forsCvePerValua' selected={state.age} onChange={handleChange}  />
                     </Grid>
                     <Grid item xs={6}>
-                        <GenericTextInput label='Escritura' idCampo='forsNumEscritura' required={true} defaultVal='0000'/>
+                        <GenericTextInput label='Escritura' idCampo='forsNumEscritura' required={true} defaultVal=''/>
                     </Grid>
                 </Grid>
                 <Grid container className={classes.rowSpacing} spacing={3}>
                     <Grid item xs={6}>
-                        <GenericTextInput label='Comentario' idCampo='forsTexComentario' required={true} defaultVal='0000'/>
+                        <GenericTextInput label='Comentario' idCampo='forsTexComentario' required={true} defaultVal=''/>
                     </Grid>
                     <Grid item xs={6}>
-                        <GenericTextInput label='Notario' idCampo='forsNumNotario' required={true} defaultVal='0000'/>
+                        <GenericTextInput label='Notario' idCampo='forsNumNotario' required={true} defaultVal=''/>
                     </Grid>
                 </Grid>
                 <Grid container className={classes.rowSpacing} spacing={3}>
@@ -176,7 +176,7 @@ export default function BienesDialog(props){
                         <GenericSelect labelId='Estatus' label='Estatus' selectId='forsCveStatus' selected={state.age} onChange={handleChange}  />
                     </Grid>
                     <Grid item xs={6}>
-                        <GenericTextInput label='Importe Revaluación' idCampo='txtImporteRevaluacion' required={true} defaultVal='0000'/>
+                        <GenericTextInput label='Importe Revaluación' idCampo='txtImporteRevaluacion' required={true} defaultVal=''/>
                     </Grid>
                 </Grid>
                 <Grid container className={classes.rowSpacing} spacing={3}>
