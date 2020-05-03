@@ -84,7 +84,7 @@ export default function BienesDialog(props){
                         <GenericTextInput label='Fideicomiso' idCampo='fgarIdFideicomiso' helper='Fideicomiso a asignar bienes' required={true} defaultVal='0000'/>
                     </Grid>
                     <Grid item xs={6}>
-                        <GenericTextInput label='Nombre de Fideicomiso' idCampo='nomFiso' readOnly={true} defaultVal='ABCD'/>
+                        <GenericTextInput label='Nombre de Fideicomiso' idCampo='fgarNomFideicomiso' readOnly={true} defaultVal='ABCD'/>
                     </Grid>
                 </Grid>
                 <Grid container className={classes.rowSpacing} spacing={1}>
