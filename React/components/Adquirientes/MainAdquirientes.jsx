@@ -13,8 +13,6 @@ import Select from '@material-ui/core/Select';
 import DialogAdquirientes from './DialogAdquirientes';
 import {OPERACIONES_CATALOGO} from '../../constantes.js';
 
-import Funciones from '../Funciones' //Manejador de llamados a las funciones por URL
-
 const useStyles = makeStyles((theme) => ({
     root: {
       width: '100%',

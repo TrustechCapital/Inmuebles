@@ -1,7 +1,8 @@
 import React from 'react';
+import Link from 'next/link';
 import clsx from 'clsx';
 import { ThemeProvider } from '@material-ui/core/styles';
-import { makeStyles, useTheme } from '@material-ui/core/styles';
+import { makeStyles } from '@material-ui/core/styles';
 import Drawer from '@material-ui/core/Drawer';
 import CssBaseline from '@material-ui/core/CssBaseline';
 import AppBar from '@material-ui/core/AppBar';
@@ -89,6 +90,12 @@ const useStyles = makeStyles((theme) => ({
     },
   }));
 
+const MODULES = [
+  { label:'Inmuebles', url: '/inmuebles' },
+  { label:'Desarrollo Inmobiliario', url: '/desarrollo-inmobiliario' },
+  { label:'Usuarios', url: '/usuarios' },
+]
+
 function BaseLayout(props) {
   const classes = useStyles();
   const [open, setOpen] = React.useState(false);
@@ -144,10 +151,12 @@ function BaseLayout(props) {
           </div>
           <Divider />
           <List>
-            {['Inmuebles', 'Desarrollo Inmobiliario'].map((text, index) => (
-              <ListItem button key={text}>
-                <ListItemText primary={text} />
-              </ListItem>
+            {MODULES.map((module) => (
+              <Link href={module.url}>
+                <ListItem button key={module.label}>
+                    <ListItemText primary={module.label} />
+                </ListItem>
+              </Link>
             ))}
           </List>
         </Drawer>
