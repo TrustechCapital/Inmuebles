@@ -17,6 +17,7 @@ import ListItem from '@material-ui/core/ListItem';
 import ListItemText from '@material-ui/core/ListItemText';
 import { createMuiTheme } from '@material-ui/core/styles';
 import deepOrange from '@material-ui/core/colors/deepOrange';
+import AccountCircle from '@material-ui/icons/AccountCircle';
 
 const theme = createMuiTheme({
     palette: {
@@ -88,6 +89,9 @@ const useStyles = makeStyles((theme) => ({
       }),
       marginLeft: drawerWidth,
     },
+    grow: {
+      flexGrow: 1,
+    }
   }));
 
 const MODULES = [
@@ -127,9 +131,15 @@ function BaseLayout(props) {
             >
               <MenuIcon />
             </IconButton>
-            <Typography variant="h6" noWrap>
+            <Typography variant="h6" noWrap className={classes.grow}>
               Banregio
             </Typography>
+            <IconButton
+              edge="end"
+              color="inherit"
+            >
+              <AccountCircle />
+            </IconButton>
           </Toolbar>
         </AppBar>
         <Drawer
