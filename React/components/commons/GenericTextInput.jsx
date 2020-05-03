@@ -36,7 +36,7 @@ const useStyles = makeStyles((theme) => ({
 }));
 
 function GenericTextInput(props){
-    const{label,idCampo,helper,required,defaultVal,adornment} = props;
+    const{label,idCampo,helper,required,defaultVal,adornment,readOnly} = props;
     const classes = useStyles();
     return(
         <FormControl>
@@ -51,6 +51,9 @@ function GenericTextInput(props){
             margin="dense"
             variant="outlined"
             startAdornment={<InputAdornment position="start">{adornment}</InputAdornment>}
+            InputProps={{
+                readOnly: {readOnly},
+              }}
             />
         </FormControl>
     );
@@ -61,7 +64,8 @@ GenericTextInput.propTypes = {
     helper: PropTypes.string,
     required: PropTypes.bool.isRequired,
     default: PropTypes.string,
-    adornment: PropTypes.string
+    adornment: PropTypes.string,
+    readOnly: PropTypes.bool
 };
 
 export default GenericTextInput;
