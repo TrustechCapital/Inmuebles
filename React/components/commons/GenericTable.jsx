@@ -118,7 +118,7 @@ function EnhancedTableHead(props) {
         </TableRow>
       </TableHead>
     );
-  }
+}
   
 EnhancedTableHead.propTypes = {
     columns: PropTypes.array.isRequired,
@@ -265,6 +265,10 @@ function GenericTable (props) {
         );
     }
 
+    function rowsDisplayedFormatter({ from, to, count }){
+        return `${from}-${to === -1 ? count : to} de ${count !== -1 ? count : 'más de' + to}`;
+    }
+
     return (
         <Paper className={classes.root} elevation={3}>
             <EnhancedTableToolbar numSelected={selected.length} title={title} showActions={showActionsHeader} onNew={onNew}/>
@@ -288,6 +292,10 @@ function GenericTable (props) {
             </TableContainer>
             <TablePagination
                 rowsPerPageOptions={[5, 10, 25]}
+                labelRowsPerPage="Resultados por página:"
+                backIconButtonText="Página anterior"
+                nextIconButtonText="Página siguiente"
+                labelDisplayedRows={rowsDisplayedFormatter}
                 component="div"
                 count={data.length}
                 rowsPerPage={rowsPerPage}
