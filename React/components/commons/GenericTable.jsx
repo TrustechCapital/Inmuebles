@@ -177,7 +177,7 @@ const EnhancedTableToolbar = (props) => {
 
         {showActions === true && numSelected == 0 ? (
             <Tooltip title="Nuevo">
-                <IconButton aria-label="nuevo" color="primary">
+                <IconButton aria-label="nuevo" color="primary" onClick={props.onNew}>
                     <AddIcon />
                 </IconButton>
             </Tooltip>
@@ -189,12 +189,13 @@ const EnhancedTableToolbar = (props) => {
 EnhancedTableToolbar.propTypes = {
     title: PropTypes.string.isRequired,
     numSelected: PropTypes.number.isRequired,
-    showActions: PropTypes.bool
+    showActions: PropTypes.bool,
+    onNew: PropTypes.func
 };
 
 
 function GenericTable (props) {
-    const {title, data, columns, onSelect, showActionsHeader = true} = props;
+    const {title, data, columns, onSelect, onNew, showActionsHeader = true} = props;
     const keyColum = columns.find((col) => col.isKey).field;
     const [order, setOrder] = React.useState(SORT_TYPES.ASC);
     const [orderBy, setOrderBy] = React.useState(keyColum);
@@ -266,7 +267,7 @@ function GenericTable (props) {
 
     return (
         <Paper className={classes.root} elevation={3}>
-            <EnhancedTableToolbar numSelected={selected.length} title={title} showActions={showActionsHeader}/>
+            <EnhancedTableToolbar numSelected={selected.length} title={title} showActions={showActionsHeader} onNew={onNew}/>
             <TableContainer className={classes.table}>
                 <Table>
                     <EnhancedTableHead

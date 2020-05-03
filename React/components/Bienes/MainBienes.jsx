@@ -1,8 +1,9 @@
-import React from 'react';
+import React, { useState } from 'react';
 
 import TableGarantias from './TableGarantias';
 import DialogGarantias from './DialogGarantias';
 import GenericTable from '../commons/GenericTable';
+import { OPERACIONES_CATALOGO } from '../../constantes.js';
 
 const COLUMNS_BIENES = [
     { field: 'fgrsIdFideicomiso', header: 'Fideicomiso', isKey: true},
@@ -12,11 +13,22 @@ const COLUMNS_BIENES = [
 ]
 
 export default function MainBienes(props) {
+    const [modoPantalla, setModoPantalla] = useState(OPERACIONES_CATALOGO.ALTA);
+    const [detalleAbierto, setDetalleAbierto] = useState(false);
+
+    function handleCloseModal() {
+        setDetalleAbierto(false);
+    }
+
+    function handleNuevaGarantia() {
+        setDetalleAbierto(true);
+    }
+
     return(
         <div>
-            <TableGarantias/>
+            <TableGarantias onNew={handleNuevaGarantia}/>
             <GenericTable title='Bienes en garantía' data={[]} columns={COLUMNS_BIENES} onSelect={props.onSelect} showActionsHeader={false}/>
-            <DialogGarantias/>
+            <DialogGarantias mode={modoPantalla} opened={detalleAbierto} handleClose={handleCloseModal}/>
         </div>
     );
 }

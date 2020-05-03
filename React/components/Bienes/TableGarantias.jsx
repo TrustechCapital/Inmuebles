@@ -64,7 +64,7 @@ export default function TableGarantias (props) {
                 </GenericSearchForm>
             </Grid>
             <Grid container spacing={1}>
-                <GenericTable title='Garantias' data={FIXTURE_GARANTIAS.data} columns={COLUMNS} onSelect={props.onSelect}/>
+                <GenericTable title='Garantias' data={FIXTURE_GARANTIAS.data} columns={COLUMNS} onSelect={props.onSelect} onNew={props.onNew}/>
             </Grid>
         </div>
     );
