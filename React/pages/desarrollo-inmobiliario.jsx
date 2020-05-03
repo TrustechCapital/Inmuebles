@@ -52,7 +52,7 @@ export default function ModuloInmuebles() {
                         Individualización de Inmuebles
                     </GenericTabPanel>
                     <GenericTabPanel value={value} index={1}>
-                        {MainAdquirientes}
+                        <MainAdquirientes/>
                     </GenericTabPanel>
                     <GenericTabPanel value={value} index={2}>
                         Liberaciones
