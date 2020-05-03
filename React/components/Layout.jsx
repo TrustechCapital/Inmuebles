@@ -1,7 +1,7 @@
 import React from 'react';
 import Link from 'next/link';
 import clsx from 'clsx';
-import { ThemeProvider } from '@material-ui/core/styles';
+import { ThemeProvider, createMuiTheme } from '@material-ui/core/styles';
 import { makeStyles } from '@material-ui/core/styles';
 import Drawer from '@material-ui/core/Drawer';
 import CssBaseline from '@material-ui/core/CssBaseline';
@@ -15,9 +15,13 @@ import MenuIcon from '@material-ui/icons/Menu';
 import ChevronLeftIcon from '@material-ui/icons/ChevronLeft';
 import ListItem from '@material-ui/core/ListItem';
 import ListItemText from '@material-ui/core/ListItemText';
-import { createMuiTheme } from '@material-ui/core/styles';
 import deepOrange from '@material-ui/core/colors/deepOrange';
 import AccountCircle from '@material-ui/icons/AccountCircle';
+import ListItemIcon from '@material-ui/core/ListItemIcon';
+import ApartmentIcon from '@material-ui/icons/Apartment';
+import HomeIcon from '@material-ui/icons/Home';
+import PeopleIcon from '@material-ui/icons/People';
+
 
 const theme = createMuiTheme({
     palette: {
@@ -95,9 +99,9 @@ const useStyles = makeStyles((theme) => ({
   }));
 
 const MODULES = [
-  { label:'Inmuebles', url: '/inmuebles' },
-  { label:'Desarrollo Inmobiliario', url: '/desarrollo-inmobiliario' },
-  { label:'Usuarios', url: '/usuarios' },
+  { label:'Inmuebles', url: '/inmuebles', icon: HomeIcon },
+  { label:'Desarrollo Inmobiliario', url: '/desarrollo-inmobiliario', icon: ApartmentIcon },
+  { label:'Usuarios', url: '/usuarios', icon: PeopleIcon },
 ]
 
 function BaseLayout(props) {
@@ -164,7 +168,10 @@ function BaseLayout(props) {
             {MODULES.map((module) => (
               <Link href={module.url}>
                 <ListItem button key={module.label}>
-                    <ListItemText primary={module.label} />
+                  <ListItemIcon>
+                    <module.icon />
+                  </ListItemIcon>
+                  <ListItemText primary={module.label} />
                 </ListItem>
               </Link>
             ))}
