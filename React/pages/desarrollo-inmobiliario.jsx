@@ -6,6 +6,7 @@ import Tab from '@material-ui/core/Tab';
 import Layout from '../components/Layout';
 import GenericTabPanel from '../components/commons/GenericTabPanel';
 import MainAdquirientes from '../components/Adquirientes/MainAdquirientes';
+import MainLiberacion from '../components/Liberacion/MainLiberacion';
 
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -55,7 +56,7 @@ export default function ModuloInmuebles() {
                         <MainAdquirientes/>
                     </GenericTabPanel>
                     <GenericTabPanel value={value} index={2}>
-                        Liberaciones
+                        <MainLiberacion/>
                     </GenericTabPanel>
                     <GenericTabPanel value={value} index={3}>
                         Carga Masiva de Inmuebles
