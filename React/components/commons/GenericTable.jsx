@@ -131,10 +131,51 @@ EnhancedTableHead.propTypes = {
     rowCount: PropTypes.number.isRequired,
 };
 
+const EnhancedTableToolbarActions = (props) => {
+    const { numSelected } = props;
+    return (
+        <React.Fragment>
+            {numSelected > 0 ? (
+            <Tooltip title="Eliminar">
+                <IconButton aria-label="eliminar">
+                <DeleteIcon />
+                </IconButton>
+            </Tooltip>
+            ) : null}
+
+            {numSelected == 1 ? (
+                <Tooltip title="Modificar">
+                    <IconButton aria-label="modificar">
+                        <EditIcon />
+                    </IconButton>
+                </Tooltip>
+            ) : null}
+
+            {numSelected == 1 ? (
+                <Tooltip title="Consultar">
+                    <IconButton aria-label="consultar">
+                        <FindInPageIcon />
+                    </IconButton>
+                </Tooltip>
+            ) : null}
+
+            {numSelected == 0 ? (
+                <Tooltip title="Nuevo">
+                    <IconButton aria-label="nuevo" color="primary" onClick={props.onNew}>
+                        <AddIcon />
+                    </IconButton>
+                </Tooltip>
+            ) : null}
+        </React.Fragment>
+    );
+};
+
 const EnhancedTableToolbar = (props) => {
     const classes = useToolbarStyles();
-    const { title, numSelected, showActions = true } = props;
-  
+    const { title, numSelected, showActions = true, actionsComponent } = props;
+
+    const ToolbarActions = actionsComponent || EnhancedTableToolbarActions;
+
     return (
       <Toolbar
         className={clsx(classes.root, {
@@ -151,38 +192,10 @@ const EnhancedTableToolbar = (props) => {
           </Typography>
         )}
 
-        {showActions === true && numSelected > 0 ? (
-          <Tooltip title="Eliminar">
-            <IconButton aria-label="eliminar">
-              <DeleteIcon />
-            </IconButton>
-          </Tooltip>
+        {showActions === true ? (
+            <ToolbarActions {...props}/>
         ) : null}
-
-        {showActions === true && numSelected == 1 ? (
-            <Tooltip title="Modificar">
-                <IconButton aria-label="modificar">
-                    <EditIcon />
-                </IconButton>
-            </Tooltip>
-        ) : null}
-
-        {showActions === true && numSelected == 1 ? (
-            <Tooltip title="Consultar">
-                <IconButton aria-label="consultar">
-                    <FindInPageIcon />
-                </IconButton>
-            </Tooltip>
-        ) : null}
-
-        {showActions === true && numSelected == 0 ? (
-            <Tooltip title="Nuevo">
-                <IconButton aria-label="nuevo" color="primary" onClick={props.onNew}>
-                    <AddIcon />
-                </IconButton>
-            </Tooltip>
-        ) : null}
-      </Toolbar>
+      </Toolbar>      
     );
 };
   
@@ -195,7 +208,7 @@ EnhancedTableToolbar.propTypes = {
 
 
 function GenericTable (props) {
-    const {title, data, columns, onSelect, onNew, showActionsHeader = true} = props;
+    const {title, data, columns, onSelect, onNew, showActionsHeader = true, additionalActions} = props;
     const keyColum = columns.find((col) => col.isKey).field;
     const [order, setOrder] = React.useState(SORT_TYPES.ASC);
     const [orderBy, setOrderBy] = React.useState(keyColum);
@@ -272,7 +285,7 @@ function GenericTable (props) {
 
     return (
         <Paper className={classes.root} elevation={3}>
-            <EnhancedTableToolbar numSelected={selected.length} title={title} showActions={showActionsHeader} onNew={onNew}/>
+            <EnhancedTableToolbar numSelected={selected.length} title={title} showActions={showActionsHeader} onNew={onNew} actionsComponent={props.actionsComponent}/>
             <TableContainer className={classes.table}>
                 <Table>
                     <EnhancedTableHead

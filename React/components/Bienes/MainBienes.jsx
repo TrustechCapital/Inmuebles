@@ -1,6 +1,12 @@
 import React, { useState } from 'react';
 import { makeStyles } from '@material-ui/core/styles';
 import Grid from '@material-ui/core/Grid';
+import IconButton from '@material-ui/core/IconButton';
+import DeleteIcon from '@material-ui/icons/Delete';
+import EditIcon from '@material-ui/icons/Edit';
+import AddIcon from '@material-ui/icons/Add';
+import FindInPageIcon from '@material-ui/icons/FindInPage';
+import Tooltip from '@material-ui/core/Tooltip';
 
 import TableGarantias from './TableGarantias';
 import DialogGarantias from './DialogGarantias';
@@ -21,7 +27,54 @@ const useStyles = makeStyles((theme) => ({
     } 
 }));
 
-export default function MainBienes(props) {
+const ActionsBienesEnGarantia = (props) => {
+    const numSelected = 1;
+    return (
+        <React.Fragment>
+            {numSelected > 0 ? (
+            <Tooltip title="Salida de bien">
+                <IconButton>
+                    <DeleteIcon />
+                </IconButton>
+            </Tooltip>
+            ) : null}
+
+            {numSelected == 1 ? (
+                <Tooltip title="Reevaluación">
+                    <IconButton>
+                        <EditIcon />
+                    </IconButton>
+                </Tooltip>
+            ) : null}
+
+            {numSelected == 1 ? (
+                <Tooltip title="Modificar">
+                    <IconButton>
+                        <EditIcon />
+                    </IconButton>
+                </Tooltip>
+            ) : null}
+
+            {numSelected == 1 ? (
+                <Tooltip title="Consultar">
+                    <IconButton>
+                        <FindInPageIcon />
+                    </IconButton>
+                </Tooltip>
+            ) : null}
+
+            {numSelected == 0 ? (
+                <Tooltip title="Registro de bien">
+                    <IconButton color="primary" onClick={props.onNew}>
+                        <AddIcon />
+                    </IconButton>
+                </Tooltip>
+            ) : null}
+        </React.Fragment>
+    );
+};
+
+export default function MainBienes() {
     const classes = useStyles();
     const [modoPantalla, setModoPantalla] = useState(OPERACIONES_CATALOGO.ALTA);
     const [detalleAbierto, setDetalleAbierto] = useState(false);
@@ -53,7 +106,7 @@ export default function MainBienes(props) {
         <div>
             <TableGarantias onNew={handleNuevaGarantia} onSelect={handleSelectGarantia}/>
             <Grid container spacing={1} direction="column" className={classes.rowSpacing}>
-                <GenericTable title='Bienes en garantía' data={[]} columns={COLUMNS_BIENES} showActionsHeader={showBienesGarantiaActions} onNew={handleNuevoBienEnGarantia}/>
+                <GenericTable title='Bienes en garantía' data={[]} columns={COLUMNS_BIENES} showActionsHeader={showBienesGarantiaActions} onNew={handleNuevoBienEnGarantia} actionsComponent={ActionsBienesEnGarantia}/>
             </Grid>
             <DialogGarantias mode={modoPantalla} opened={detalleAbierto} handleClose={handleCloseModal}/>
             <DialogBienesGarantias mode={modoPantalla} opened={detalleBienesGarantiasAbierto} handleClose={handleCloseModalBienesGarantias}/>
