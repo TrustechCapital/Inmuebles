@@ -7,6 +7,7 @@ import EditIcon from '@material-ui/icons/Edit';
 import AddIcon from '@material-ui/icons/Add';
 import FindInPageIcon from '@material-ui/icons/FindInPage';
 import Tooltip from '@material-ui/core/Tooltip';
+import MonetizationOnIcon from '@material-ui/icons/MonetizationOn';
 
 import TableGarantias from './TableGarantias';
 import DialogGarantias from './DialogGarantias';
@@ -28,10 +29,10 @@ const useStyles = makeStyles((theme) => ({
 }));
 
 const ActionsBienesEnGarantia = (props) => {
-    const numSelected = 1;
+    const garantiasSeleccionadas = 1;
     return (
         <React.Fragment>
-            {numSelected > 0 ? (
+            {garantiasSeleccionadas > 0 ? (
             <Tooltip title="Salida de bien">
                 <IconButton>
                     <DeleteIcon />
@@ -39,15 +40,15 @@ const ActionsBienesEnGarantia = (props) => {
             </Tooltip>
             ) : null}
 
-            {numSelected == 1 ? (
+            {garantiasSeleccionadas == 1 ? (
                 <Tooltip title="Reevaluación">
                     <IconButton>
-                        <EditIcon />
+                        <MonetizationOnIcon />
                     </IconButton>
                 </Tooltip>
             ) : null}
 
-            {numSelected == 1 ? (
+            {garantiasSeleccionadas == 1 ? (
                 <Tooltip title="Modificar">
                     <IconButton>
                         <EditIcon />
@@ -55,7 +56,7 @@ const ActionsBienesEnGarantia = (props) => {
                 </Tooltip>
             ) : null}
 
-            {numSelected == 1 ? (
+            {garantiasSeleccionadas == 1 ? (
                 <Tooltip title="Consultar">
                     <IconButton>
                         <FindInPageIcon />
@@ -63,9 +64,9 @@ const ActionsBienesEnGarantia = (props) => {
                 </Tooltip>
             ) : null}
 
-            {numSelected == 0 ? (
+            {garantiasSeleccionadas == 1 ? (
                 <Tooltip title="Registro de bien">
-                    <IconButton color="primary" onClick={props.onNew}>
+                    <IconButton onClick={props.onNew}>
                         <AddIcon />
                     </IconButton>
                 </Tooltip>
