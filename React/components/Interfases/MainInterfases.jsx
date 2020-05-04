@@ -61,8 +61,6 @@ export default function MainCargaMasiva() {
                     </Grid>
                     <Grid container justify="flex-end">
                         <Button variant="contained" color="primary" disabled>Aceptar</Button>
-                        <hr/>
-                        <Button variant="contained" color="secondary" >Cancelar</Button>
                     </Grid>
                 </Grid>
             </Paper>
