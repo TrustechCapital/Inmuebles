@@ -47,7 +47,7 @@ export default function ModuloApertura() {
                     onChange={handleChange}
                     className={classes.tabs}
                 >
-                    <Tab label="Interfases"/>
+                    <Tab label="Ejecución"/>
                 </Tabs>
                 <div className={classes.tabsContentWrapper}>
                     <GenericTabPanel value={value} index={0}>

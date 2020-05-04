@@ -53,7 +53,7 @@ export default function MainCargaMasiva() {
                     </Grid> 
                     <Grid container className={classes.rowSpacing} direction="column" spacing={4} justify="center" alignItems="center">
                         <Grid item xs={3}>
-                            <GenericSelect label='Plan' labelId='Plan' selectId='fgarCveGarantia' selected={state.plan} onChange={handleChange}  />
+                            <GenericSelect label='Plan' labelId='Plan' selectId='cmbPlanes' selected={state.plan} onChange={handleChange}  />
                         </Grid>
                     </Grid>
                     <Grid container justify="flex-end">
