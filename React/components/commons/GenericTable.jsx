@@ -237,6 +237,7 @@ function GenericTable (props) {
     const handleClick = (event, id) => {
         let newSelected = toggleSelectedElementInList(selected, id);
         setSelected(newSelected);
+        onSelect(newSelected);
     };
 
     const handleChangePage = (event, newPage) => {
