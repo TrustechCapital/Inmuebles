@@ -36,8 +36,5 @@ Para su funcionamiento se han integrado diversas dependencias de React, cada una
 | PropTypes |  |
 
 ### Todos
+ - Separar llamados y funciones 
 
- - Reestructurar Pantallas
- - Separar llamados y funciones
- - Crear archivo de constantes
- - Generalizar Tablas
