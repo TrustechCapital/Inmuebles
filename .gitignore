@@ -3,6 +3,7 @@
 
 # Compiled class file
 *.class
+*.jdb
 
 # Log file
 *.log
@@ -24,6 +25,23 @@
 
 # virtual machine crash logs, see http://www.java.com/en/download/help/error_hotspot.xml
 hs_err_pid*
+
+
+#Backend
+Java/actinver-fw-interno/.data
+Java/actinver-fw-interno/.adf
+Java/actinver-fw-interno/BackEnd/classes
+Java/actinver-fw-interno/EstadosDeCuenta/classes
+Java/actinver-fw-interno/FiduciaWeb/classes
+Java/actinver-fw-interno/FiduciaWeb/deploy
+
+Java/fw-interno/.data
+Java/fw-interno/.adf
+Java/fw-interno/BackEnd/classes
+Java/fw-interno/EstadosDeCuenta/classes
+Java/fw-interno/FiduciaWeb/classes
+Java/fw-interno/FiduciaWeb/deploy
+
 #React
 React/.next
 React/node_modules/
