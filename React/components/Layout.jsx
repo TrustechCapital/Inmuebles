@@ -21,7 +21,8 @@ import ListItemIcon from '@material-ui/core/ListItemIcon';
 import ApartmentIcon from '@material-ui/icons/Apartment';
 import HomeIcon from '@material-ui/icons/Home';
 import PeopleIcon from '@material-ui/icons/People';
-
+import ScheduleIcon from '@material-ui/icons/Schedule';
+import InputIcon from '@material-ui/icons/Input';
 
 const theme = createMuiTheme({
     palette: {
@@ -99,9 +100,12 @@ const useStyles = makeStyles((theme) => ({
   }));
 
 const MODULES = [
+  { label:'Usuarios', url: '/usuarios', icon: PeopleIcon },
   { label:'Inmuebles', url: '/inmuebles', icon: HomeIcon },
   { label:'Desarrollo Inmobiliario', url: '/desarrollo-inmobiliario', icon: ApartmentIcon },
-  { label:'Usuarios', url: '/usuarios', icon: PeopleIcon },
+  { label:'Interfases', url: '/interfases', icon: InputIcon },
+  { label:'Apertura/Cierre', url: '/apertura', icon: ScheduleIcon }
+  
 ]
 
 function BaseLayout(props) {
