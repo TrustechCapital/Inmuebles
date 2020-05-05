@@ -37,12 +37,8 @@
    </list>
    <list n="listOfChildren">
       <hash><url n="URL" path="BackEnd/BackEnd.jpr"/></hash>
-      <hash><url n="URL" path="ContractInfoService/ContractInfoService.jpr"/></hash>
       <hash><url n="URL" path="EstadosDeCuenta/EstadosDeCuenta.jpr"/></hash>
       <hash><url n="URL" path="FiduciaWeb/FiduciaWeb.jpr"/></hash>
-      <hash><url n="URL" path="FinancialOpsServices/FinancialOpsServices.jpr"/></hash>
-      <hash><url n="URL" path="ServiceCommons/ServiceCommons.jpr"/></hash>
-      <hash><url n="URL" path="WatchListServices/WatchListServices.jpr"/></hash>
    </list>
    <hash n="oracle.jdeveloper.deploy.dt.DeploymentProfiles">
       <hash n="profileDefinitions">
