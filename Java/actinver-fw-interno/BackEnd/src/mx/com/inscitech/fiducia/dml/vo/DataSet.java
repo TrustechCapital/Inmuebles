@@ -44,8 +44,13 @@ public class DataSet implements Serializable {
   public void setOrderByFields(String strOrderByFields) {
     this.strOrderByFields = strOrderByFields;
   }
-  
-  /** TODO: No sirve para muchos registros, todos los datos se presentan como String **/
+
+
+    public ArrayList getArDatos() {
+        return arDatos;
+    }
+
+    /** TODO: No sirve para muchos registros, todos los datos se presentan como String **/
   public String toJSON() {
     String result = "";
     DataRow row = null;

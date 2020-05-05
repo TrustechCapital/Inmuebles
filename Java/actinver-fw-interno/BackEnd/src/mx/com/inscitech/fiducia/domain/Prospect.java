@@ -1,6 +1,7 @@
 package mx.com.inscitech.fiducia.domain;
 
 import java.math.BigDecimal;
+
 import java.util.ArrayList;
 
 import mx.com.inscitech.fiducia.domain.base.DomainObject;
@@ -11,1062 +12,1113 @@ import mx.com.inscitech.fiducia.domain.base.DMLObject;
 
 import mx.com.inscitech.fiducia.dml.vo.DataRow;
 
-@PrimaryKey(constraintName = "PROSPECT_PK", columns = {"PRS_NUM_PROSPECTO"}, sequences = { "MAX" })
+@PrimaryKey(constraintName = "PROSPECT_PK", columns = { "PRS_NUM_PROSPECTO" }, sequences = { "MAX" })
 public class Prospect extends DomainObject {
 
-  BigDecimal prsNumProspecto = null;
-  String prsNomProspecto = null;
-  String prsRfc = null;
-  String prsTipoPers = null;
-  String prsCveActividad = null;
-  String prsNomNacion = null;
-  String prsCveMigra = null;
-  String prsNomCalle = null;
-  String prsNomColonia = null;
-  String prsNomPoblacion = null;
-  String prsNomPais = null;
-  String prsNomEstado = null;
-  BigDecimal prsCodigoPostal = null;
-  String prsTelCasa = null;
-  String prsTelOficina = null;
-  String prsTelFax = null;
-  String prsNomContacto = null;
-  String prsTelContacto = null;
-  String prsFaxContacto = null;
-  String prsNomEjecutivo = null;
-  String prsTelEjecutivo = null;
-  BigDecimal prsEjecAsig = null;
-  String prsFecProspecto = null;
-  String prsFecConstit = null;
-  BigDecimal prsNumContrato = null;
-  String prsCveStatus = null;
-  String prsCorreo2 = null;
-  String prsNomDelegacion = null;
-  String prsOrgProspecto = null;
-  String prsReqOpera = null;
-  String prsAntecedentes = null;
-  String prsCaracteristicas = null; 
-  String prsHonorarios = null;
-  String prsAdicionales = null;
+    BigDecimal prsNumProspecto = null;
+    String prsNomProspecto = null;
+    String prsRfc = null;
+    String prsTipoPers = null;
+    String prsCveActividad = null;
+    String prsNomNacion = null;
+    String prsCveMigra = null;
+    String prsNomCalle = null;
+    String prsNomColonia = null;
+    String prsNomPoblacion = null;
+    String prsNomPais = null;
+    String prsNomEstado = null;
+    BigDecimal prsCodigoPostal = null;
+    String prsTelCasa = null;
+    String prsTelOficina = null;
+    String prsTelFax = null;
+    String prsNomContacto = null;
+    String prsTelContacto = null;
+    String prsFaxContacto = null;
+    String prsNomEjecutivo = null;
+    String prsTelEjecutivo = null;
+    BigDecimal prsEjecAsig = null;
+    String prsFecProspecto = null;
+    String prsFecConstit = null;
+    BigDecimal prsNumContrato = null;
+    String prsCveStatus = null;
+    String prsCorreo2 = null;
+    String prsNomDelegacion = null;
+    String prsOrgProspecto = null;
+    String prsReqOpera = null;
+    String prsAntecedentes = null;
+    String prsCaracteristicas = null;
+    String prsHonorarios = null;
+    String prsAdicionales = null;
     String prsValidaln = null;
     String prsTipoNegocio = null;
     String prsTipoRecomenda = null;
 
-  public Prospect() {
-    super();
-    this.pkColumns = 1;
-  }
+    public Prospect() {
+        super();
+        this.pkColumns = 1;
+    }
 
-  @FieldInfo(nullable = false, dataType = "NUMBER", precision = 10, scale = 0, javaClass = BigDecimal.class )
-  public void setPrsNumProspecto(BigDecimal prsNumProspecto) {
-    this.prsNumProspecto = prsNumProspecto;
-  }
 
-  public BigDecimal getPrsNumProspecto() {
-    return this.prsNumProspecto;
-  }
+    public Prospect(BigDecimal prsNumProspecto) {
+        super();
+        this.pkColumns = 1;
+        this.prsNumProspecto = prsNumProspecto;
+    }
 
-  @FieldInfo(nullable = false, dataType = "VARCHAR2", javaClass = String.class )
-  public void setPrsNomProspecto(String prsNomProspecto) {
-    this.prsNomProspecto = prsNomProspecto;
-  }
+    @FieldInfo(nullable = false, dataType = "NUMBER", precision = 10, scale = 0, javaClass = BigDecimal.class)
+    public void setPrsNumProspecto(BigDecimal prsNumProspecto) {
+        this.prsNumProspecto = prsNumProspecto;
+    }
 
-  public String getPrsNomProspecto() {
-    return this.prsNomProspecto;
-  }
+    public BigDecimal getPrsNumProspecto() {
+        return this.prsNumProspecto;
+    }
 
-  @FieldInfo(nullable = true, dataType = "VARCHAR2", javaClass = String.class )
-  public void setPrsRfc(String prsRfc) {
-    this.prsRfc = prsRfc;
-  }
+    @FieldInfo(nullable = false, dataType = "VARCHAR2", javaClass = String.class)
+    public void setPrsNomProspecto(String prsNomProspecto) {
+        this.prsNomProspecto = prsNomProspecto;
+    }
 
-  public String getPrsRfc() {
-    return this.prsRfc;
-  }
+    public String getPrsNomProspecto() {
+        return this.prsNomProspecto;
+    }
 
-  @FieldInfo(nullable = true, dataType = "VARCHAR2", javaClass = String.class )
-  public void setPrsTipoPers(String prsTipoPers) {
-    this.prsTipoPers = prsTipoPers;
-  }
+    @FieldInfo(nullable = true, dataType = "VARCHAR2", javaClass = String.class)
+    public void setPrsRfc(String prsRfc) {
+        this.prsRfc = prsRfc;
+    }
 
-  public String getPrsTipoPers() {
-    return this.prsTipoPers;
-  }
+    public String getPrsRfc() {
+        return this.prsRfc;
+    }
 
-  @FieldInfo(nullable = true, dataType = "VARCHAR2", javaClass = String.class )
-  public void setPrsCveActividad(String prsCveActividad) {
-    this.prsCveActividad = prsCveActividad;
-  }
+    @FieldInfo(nullable = true, dataType = "VARCHAR2", javaClass = String.class)
+    public void setPrsTipoPers(String prsTipoPers) {
+        this.prsTipoPers = prsTipoPers;
+    }
 
-  public String getPrsCveActividad() {
-    return this.prsCveActividad;
-  }
+    public String getPrsTipoPers() {
+        return this.prsTipoPers;
+    }
 
-  @FieldInfo(nullable = true, dataType = "VARCHAR2", javaClass = String.class )
-  public void setPrsNomNacion(String prsNomNacion) {
-    this.prsNomNacion = prsNomNacion;
-  }
+    @FieldInfo(nullable = true, dataType = "VARCHAR2", javaClass = String.class)
+    public void setPrsCveActividad(String prsCveActividad) {
+        this.prsCveActividad = prsCveActividad;
+    }
 
-  public String getPrsNomNacion() {
-    return this.prsNomNacion;
-  }
+    public String getPrsCveActividad() {
+        return this.prsCveActividad;
+    }
 
-  @FieldInfo(nullable = true, dataType = "VARCHAR2", javaClass = String.class )
-  public void setPrsCveMigra(String prsCveMigra) {
-    this.prsCveMigra = prsCveMigra;
-  }
+    @FieldInfo(nullable = true, dataType = "VARCHAR2", javaClass = String.class)
+    public void setPrsNomNacion(String prsNomNacion) {
+        this.prsNomNacion = prsNomNacion;
+    }
 
-  public String getPrsCveMigra() {
-    return this.prsCveMigra;
-  }
+    public String getPrsNomNacion() {
+        return this.prsNomNacion;
+    }
 
-  @FieldInfo(nullable = true, dataType = "VARCHAR2", javaClass = String.class )
-  public void setPrsNomCalle(String prsNomCalle) {
-    this.prsNomCalle = prsNomCalle;
-  }
+    @FieldInfo(nullable = true, dataType = "VARCHAR2", javaClass = String.class)
+    public void setPrsCveMigra(String prsCveMigra) {
+        this.prsCveMigra = prsCveMigra;
+    }
 
-  public String getPrsNomCalle() {
-    return this.prsNomCalle;
-  }
+    public String getPrsCveMigra() {
+        return this.prsCveMigra;
+    }
 
-  @FieldInfo(nullable = true, dataType = "VARCHAR2", javaClass = String.class )
-  public void setPrsNomColonia(String prsNomColonia) {
-    this.prsNomColonia = prsNomColonia;
-  }
+    @FieldInfo(nullable = true, dataType = "VARCHAR2", javaClass = String.class)
+    public void setPrsNomCalle(String prsNomCalle) {
+        this.prsNomCalle = prsNomCalle;
+    }
 
-  public String getPrsNomColonia() {
-    return this.prsNomColonia;
-  }
+    public String getPrsNomCalle() {
+        return this.prsNomCalle;
+    }
 
-  @FieldInfo(nullable = true, dataType = "VARCHAR2", javaClass = String.class )
-  public void setPrsNomPoblacion(String prsNomPoblacion) {
-    this.prsNomPoblacion = prsNomPoblacion;
-  }
+    @FieldInfo(nullable = true, dataType = "VARCHAR2", javaClass = String.class)
+    public void setPrsNomColonia(String prsNomColonia) {
+        this.prsNomColonia = prsNomColonia;
+    }
 
-  public String getPrsNomPoblacion() {
-    return this.prsNomPoblacion;
-  }
+    public String getPrsNomColonia() {
+        return this.prsNomColonia;
+    }
 
-  @FieldInfo(nullable = true, dataType = "VARCHAR2", javaClass = String.class )
-  public void setPrsNomPais(String prsNomPais) {
-    this.prsNomPais = prsNomPais;
-  }
+    @FieldInfo(nullable = true, dataType = "VARCHAR2", javaClass = String.class)
+    public void setPrsNomPoblacion(String prsNomPoblacion) {
+        this.prsNomPoblacion = prsNomPoblacion;
+    }
 
-  public String getPrsNomPais() {
-    return this.prsNomPais;
-  }
+    public String getPrsNomPoblacion() {
+        return this.prsNomPoblacion;
+    }
 
-  @FieldInfo(nullable = true, dataType = "VARCHAR2", javaClass = String.class )
-  public void setPrsNomEstado(String prsNomEstado) {
-    this.prsNomEstado = prsNomEstado;
-  }
+    @FieldInfo(nullable = true, dataType = "VARCHAR2", javaClass = String.class)
+    public void setPrsNomPais(String prsNomPais) {
+        this.prsNomPais = prsNomPais;
+    }
 
-  public String getPrsNomEstado() {
-    return this.prsNomEstado;
-  }
+    public String getPrsNomPais() {
+        return this.prsNomPais;
+    }
 
-  @FieldInfo(nullable = true, dataType = "NUMBER", precision = 10, scale = 0, javaClass = BigDecimal.class )
-  public void setPrsCodigoPostal(BigDecimal prsCodigoPostal) {
-    this.prsCodigoPostal = prsCodigoPostal;
-  }
+    @FieldInfo(nullable = true, dataType = "VARCHAR2", javaClass = String.class)
+    public void setPrsNomEstado(String prsNomEstado) {
+        this.prsNomEstado = prsNomEstado;
+    }
 
-  public BigDecimal getPrsCodigoPostal() {
-    return this.prsCodigoPostal;
-  }
+    public String getPrsNomEstado() {
+        return this.prsNomEstado;
+    }
 
-  @FieldInfo(nullable = true, dataType = "VARCHAR2", javaClass = String.class )
-  public void setPrsTelCasa(String prsTelCasa) {
-    this.prsTelCasa = prsTelCasa;
-  }
+    @FieldInfo(nullable = true, dataType = "NUMBER", precision = 10, scale = 0, javaClass = BigDecimal.class)
+    public void setPrsCodigoPostal(BigDecimal prsCodigoPostal) {
+        this.prsCodigoPostal = prsCodigoPostal;
+    }
 
-  public String getPrsTelCasa() {
-    return this.prsTelCasa;
-  }
+    public BigDecimal getPrsCodigoPostal() {
+        return this.prsCodigoPostal;
+    }
 
-  @FieldInfo(nullable = true, dataType = "VARCHAR2", javaClass = String.class )
-  public void setPrsTelOficina(String prsTelOficina) {
-    this.prsTelOficina = prsTelOficina;
-  }
+    @FieldInfo(nullable = true, dataType = "VARCHAR2", javaClass = String.class)
+    public void setPrsTelCasa(String prsTelCasa) {
+        this.prsTelCasa = prsTelCasa;
+    }
 
-  public String getPrsTelOficina() {
-    return this.prsTelOficina;
-  }
+    public String getPrsTelCasa() {
+        return this.prsTelCasa;
+    }
 
-  @FieldInfo(nullable = true, dataType = "VARCHAR2", javaClass = String.class )
-  public void setPrsTelFax(String prsTelFax) {
-    this.prsTelFax = prsTelFax;
-  }
+    @FieldInfo(nullable = true, dataType = "VARCHAR2", javaClass = String.class)
+    public void setPrsTelOficina(String prsTelOficina) {
+        this.prsTelOficina = prsTelOficina;
+    }
 
-  public String getPrsTelFax() {
-    return this.prsTelFax;
-  }
+    public String getPrsTelOficina() {
+        return this.prsTelOficina;
+    }
 
-  @FieldInfo(nullable = true, dataType = "VARCHAR2", javaClass = String.class )
-  public void setPrsNomContacto(String prsNomContacto) {
-    this.prsNomContacto = prsNomContacto;
-  }
+    @FieldInfo(nullable = true, dataType = "VARCHAR2", javaClass = String.class)
+    public void setPrsTelFax(String prsTelFax) {
+        this.prsTelFax = prsTelFax;
+    }
 
-  public String getPrsNomContacto() {
-    return this.prsNomContacto;
-  }
+    public String getPrsTelFax() {
+        return this.prsTelFax;
+    }
 
-  @FieldInfo(nullable = true, dataType = "VARCHAR2", javaClass = String.class )
-  public void setPrsTelContacto(String prsTelContacto) {
-    this.prsTelContacto = prsTelContacto;
-  }
+    @FieldInfo(nullable = true, dataType = "VARCHAR2", javaClass = String.class)
+    public void setPrsNomContacto(String prsNomContacto) {
+        this.prsNomContacto = prsNomContacto;
+    }
 
-  public String getPrsTelContacto() {
-    return this.prsTelContacto;
-  }
+    public String getPrsNomContacto() {
+        return this.prsNomContacto;
+    }
 
-  @FieldInfo(nullable = true, dataType = "VARCHAR2", javaClass = String.class )
-  public void setPrsFaxContacto(String prsFaxContacto) {
-    this.prsFaxContacto = prsFaxContacto;
-  }
+    @FieldInfo(nullable = true, dataType = "VARCHAR2", javaClass = String.class)
+    public void setPrsTelContacto(String prsTelContacto) {
+        this.prsTelContacto = prsTelContacto;
+    }
 
-  public String getPrsFaxContacto() {
-    return this.prsFaxContacto;
-  }
+    public String getPrsTelContacto() {
+        return this.prsTelContacto;
+    }
 
-  @FieldInfo(nullable = true, dataType = "VARCHAR2", javaClass = String.class )
-  public void setPrsNomEjecutivo(String prsNomEjecutivo) {
-    this.prsNomEjecutivo = prsNomEjecutivo;
-  }
+    @FieldInfo(nullable = true, dataType = "VARCHAR2", javaClass = String.class)
+    public void setPrsFaxContacto(String prsFaxContacto) {
+        this.prsFaxContacto = prsFaxContacto;
+    }
 
-  public String getPrsNomEjecutivo() {
-    return this.prsNomEjecutivo;
-  }
+    public String getPrsFaxContacto() {
+        return this.prsFaxContacto;
+    }
 
-  @FieldInfo(nullable = true, dataType = "VARCHAR2", javaClass = String.class )
-  public void setPrsTelEjecutivo(String prsTelEjecutivo) {
-    this.prsTelEjecutivo = prsTelEjecutivo;
-  }
+    @FieldInfo(nullable = true, dataType = "VARCHAR2", javaClass = String.class)
+    public void setPrsNomEjecutivo(String prsNomEjecutivo) {
+        this.prsNomEjecutivo = prsNomEjecutivo;
+    }
 
-  public String getPrsTelEjecutivo() {
-    return this.prsTelEjecutivo;
-  }
+    public String getPrsNomEjecutivo() {
+        return this.prsNomEjecutivo;
+    }
 
-  @FieldInfo(nullable = false, dataType = "NUMBER", precision = 4, scale = 0, javaClass = BigDecimal.class )
-  public void setPrsEjecAsig(BigDecimal prsEjecAsig) {
-    this.prsEjecAsig = prsEjecAsig;
-  }
+    @FieldInfo(nullable = true, dataType = "VARCHAR2", javaClass = String.class)
+    public void setPrsTelEjecutivo(String prsTelEjecutivo) {
+        this.prsTelEjecutivo = prsTelEjecutivo;
+    }
 
-  public BigDecimal getPrsEjecAsig() {
-    return this.prsEjecAsig;
-  }
+    public String getPrsTelEjecutivo() {
+        return this.prsTelEjecutivo;
+    }
 
-  @FieldInfo(nullable = true, dataType = "VARCHAR2", javaClass = String.class )
-  public void setPrsFecProspecto(String prsFecProspecto) {
-    this.prsFecProspecto = prsFecProspecto;
-  }
+    @FieldInfo(nullable = false, dataType = "NUMBER", precision = 4, scale = 0, javaClass = BigDecimal.class)
+    public void setPrsEjecAsig(BigDecimal prsEjecAsig) {
+        this.prsEjecAsig = prsEjecAsig;
+    }
 
-  public String getPrsFecProspecto() {
-    return this.prsFecProspecto;
-  }
+    public BigDecimal getPrsEjecAsig() {
+        return this.prsEjecAsig;
+    }
 
-  @FieldInfo(nullable = true, dataType = "VARCHAR2", javaClass = String.class )
-  public void setPrsFecConstit(String prsFecConstit) {
-    this.prsFecConstit = prsFecConstit;
-  }
+    @FieldInfo(nullable = true, dataType = "VARCHAR2", javaClass = String.class)
+    public void setPrsFecProspecto(String prsFecProspecto) {
+        this.prsFecProspecto = prsFecProspecto;
+    }
 
-  public String getPrsFecConstit() {
-    return this.prsFecConstit;
-  }
+    public String getPrsFecProspecto() {
+        return this.prsFecProspecto;
+    }
 
-  @FieldInfo(nullable = true, dataType = "NUMBER", precision = 10, scale = 0, javaClass = BigDecimal.class )
-  public void setPrsNumContrato(BigDecimal prsNumContrato) {
-    this.prsNumContrato = prsNumContrato;
-  }
+    @FieldInfo(nullable = true, dataType = "VARCHAR2", javaClass = String.class)
+    public void setPrsFecConstit(String prsFecConstit) {
+        this.prsFecConstit = prsFecConstit;
+    }
 
-  public BigDecimal getPrsNumContrato() {
-    return this.prsNumContrato;
-  }
+    public String getPrsFecConstit() {
+        return this.prsFecConstit;
+    }
 
-  @FieldInfo(nullable = true, dataType = "VARCHAR2", javaClass = String.class )
-  public void setPrsCveStatus(String prsCveStatus) {
-    this.prsCveStatus = prsCveStatus;
-  }
+    @FieldInfo(nullable = true, dataType = "NUMBER", precision = 10, scale = 0, javaClass = BigDecimal.class)
+    public void setPrsNumContrato(BigDecimal prsNumContrato) {
+        this.prsNumContrato = prsNumContrato;
+    }
 
-  public String getPrsCveStatus() {
-    return this.prsCveStatus;
-  }
+    public BigDecimal getPrsNumContrato() {
+        return this.prsNumContrato;
+    }
 
-  @FieldInfo(nullable = true, dataType = "VARCHAR2", javaClass = String.class )
-  public void setPrsCorreo2(String prsCorreo2) {
-    this.prsCorreo2 = prsCorreo2;
-  }
+    @FieldInfo(nullable = true, dataType = "VARCHAR2", javaClass = String.class)
+    public void setPrsCveStatus(String prsCveStatus) {
+        this.prsCveStatus = prsCveStatus;
+    }
 
-  public String getPrsCorreo2() {
-    return this.prsCorreo2;
-  }
+    public String getPrsCveStatus() {
+        return this.prsCveStatus;
+    }
 
-  @FieldInfo(nullable = true, dataType = "VARCHAR2", javaClass = String.class )
-  public void setPrsNomDelegacion(String prsNomDelegacion) {
-    this.prsNomDelegacion = prsNomDelegacion;
-  }
+    @FieldInfo(nullable = true, dataType = "VARCHAR2", javaClass = String.class)
+    public void setPrsCorreo2(String prsCorreo2) {
+        this.prsCorreo2 = prsCorreo2;
+    }
 
-  public String getPrsNomDelegacion() {
-    return this.prsNomDelegacion;
-  }
-  
-    @FieldInfo(nullable = true, dataType = "VARCHAR2", javaClass = String.class )
+    public String getPrsCorreo2() {
+        return this.prsCorreo2;
+    }
+
+    @FieldInfo(nullable = true, dataType = "VARCHAR2", javaClass = String.class)
+    public void setPrsNomDelegacion(String prsNomDelegacion) {
+        this.prsNomDelegacion = prsNomDelegacion;
+    }
+
+    public String getPrsNomDelegacion() {
+        return this.prsNomDelegacion;
+    }
+
+    @FieldInfo(nullable = true, dataType = "VARCHAR2", javaClass = String.class)
     public void setPrsOrgProspecto(String prsOrgProspecto) {
-      this.prsOrgProspecto = prsOrgProspecto;
+        this.prsOrgProspecto = prsOrgProspecto;
     }
-    
+
     public String getPrsOrgProspecto() {
-      return this.prsOrgProspecto;
+        return this.prsOrgProspecto;
     }
 
-    @FieldInfo(nullable = true, dataType = "VARCHAR2", javaClass = String.class )
+    @FieldInfo(nullable = true, dataType = "VARCHAR2", javaClass = String.class)
     public void setPrsReqOpera(String prsReqOpera) {
-      this.prsReqOpera = prsReqOpera;
+        this.prsReqOpera = prsReqOpera;
     }
-    
+
     public String getPrsReqOpera() {
-      return this.prsReqOpera;
+        return this.prsReqOpera;
     }
-    
-    @FieldInfo(nullable = true, dataType = "VARCHAR2", javaClass = String.class )
-     public void setprsAntecedentes(String prsAntecedentes) {
-       this.prsAntecedentes = prsAntecedentes;
-     }
-     
-     public String getprsAntecedentes() {
-       return this.prsAntecedentes;
-     }
+
+    @FieldInfo(nullable = true, dataType = "VARCHAR2", javaClass = String.class)
+    public void setprsAntecedentes(String prsAntecedentes) {
+        this.prsAntecedentes = prsAntecedentes;
+    }
+
+    public String getprsAntecedentes() {
+        return this.prsAntecedentes;
+    }
 
 
-     @FieldInfo(nullable = true, dataType = "VARCHAR2", javaClass = String.class )
-     public void setPrsCaracteristicas(String prsCaracteristicas) {
-       this.prsCaracteristicas = prsCaracteristicas;
-     }
-     
-     public String getPrsCaracteristicas() {
-       return this.prsCaracteristicas;
-     }
+    @FieldInfo(nullable = true, dataType = "VARCHAR2", javaClass = String.class)
+    public void setPrsCaracteristicas(String prsCaracteristicas) {
+        this.prsCaracteristicas = prsCaracteristicas;
+    }
 
-     @FieldInfo(nullable = true, dataType = "VARCHAR2", javaClass = String.class )
-     public void setPrsHonorarios(String prsHonorarios) {
-       this.prsHonorarios = prsHonorarios;
-     }
-     
-     public String getPrsHonorarios() {
-       return this.prsHonorarios;
-     }
+    public String getPrsCaracteristicas() {
+        return this.prsCaracteristicas;
+    }
 
-     @FieldInfo(nullable = true, dataType = "VARCHAR2", javaClass = String.class )
-     public void setPrsAdicionales(String prsAdicionales) {
-       this.prsAdicionales = prsAdicionales;
-     }
-     
-     public String getPrsAdicionales() {
-       return this.prsAdicionales;
-     }    
+    @FieldInfo(nullable = true, dataType = "VARCHAR2", javaClass = String.class)
+    public void setPrsHonorarios(String prsHonorarios) {
+        this.prsHonorarios = prsHonorarios;
+    }
 
-    @FieldInfo(nullable = true, dataType = "VARCHAR2", javaClass = String.class )
+    public String getPrsHonorarios() {
+        return this.prsHonorarios;
+    }
+
+    @FieldInfo(nullable = true, dataType = "VARCHAR2", javaClass = String.class)
+    public void setPrsAdicionales(String prsAdicionales) {
+        this.prsAdicionales = prsAdicionales;
+    }
+
+    public String getPrsAdicionales() {
+        return this.prsAdicionales;
+    }
+
+    @FieldInfo(nullable = true, dataType = "VARCHAR2", javaClass = String.class)
     public void setPrsValidaln(String prsValidaln) {
-      this.prsValidaln = prsValidaln;
+        this.prsValidaln = prsValidaln;
     }
-    
+
     public String getPrsValidaln() {
-      return this.prsValidaln;
-    } 
-    
-    @FieldInfo(nullable = true, dataType = "VARCHAR2", javaClass = String.class )
+        return this.prsValidaln;
+    }
+
+    @FieldInfo(nullable = true, dataType = "VARCHAR2", javaClass = String.class)
     public void setPrsTipoNegocio(String prsTipoNegocio) {
-      this.prsTipoNegocio = prsTipoNegocio;
+        this.prsTipoNegocio = prsTipoNegocio;
     }
-    
+
     public String getPrsTipoNegocio() {
-      return this.prsTipoNegocio;
-    }     
+        return this.prsTipoNegocio;
+    }
 
-    @FieldInfo(nullable = true, dataType = "VARCHAR2", javaClass = String.class )
+    @FieldInfo(nullable = true, dataType = "VARCHAR2", javaClass = String.class)
     public void setPrsTipoRecomenda(String prsTipoRecomenda) {
-      this.prsTipoRecomenda = prsTipoRecomenda;
+        this.prsTipoRecomenda = prsTipoRecomenda;
     }
-    
+
     public String getPrsTipoRecomenda() {
-      return this.prsTipoRecomenda;
-    }     
-    
-  public DMLObject getSelectByPK() {
-    if(!retrieveSQL) return null;
-    DMLObject result = new DMLObject();
-    String sql = "SELECT * FROM PROSPECT ";
-
-    String conditions = "";
-    ArrayList values = new ArrayList();
-
-    if(this.getPrsNumProspecto() != null && this.getPrsNumProspecto().longValue() == -999) {
-      conditions += " AND PRS_NUM_PROSPECTO IS NULL";
-    } else if(this.getPrsNumProspecto() != null) {
-      conditions += " AND PRS_NUM_PROSPECTO = ?";
-      values.add(this.getPrsNumProspecto());
+        return this.prsTipoRecomenda;
     }
 
-    if(!"".equals(conditions)) {
+    public DMLObject getSelectByPK() {
+        if (!retrieveSQL)
+            return null;
+        DMLObject result = new DMLObject();
+        String sql = "SELECT * FROM PROSPECT ";
 
-      conditions = conditions.substring(4).trim();
-      sql += "WHERE " + conditions;
-      result.setSql(sql);
-      result.setParameters(values.toArray());
+        String conditions = "";
+        ArrayList values = new ArrayList();
+
+        if (this.getPrsNumProspecto() != null && this.getPrsNumProspecto().longValue() == -999) {
+            conditions += " AND PRS_NUM_PROSPECTO IS NULL";
+        } else if (this.getPrsNumProspecto() != null) {
+            conditions += " AND PRS_NUM_PROSPECTO = ?";
+            values.add(this.getPrsNumProspecto());
+        }
+
+        if (!"".equals(conditions)) {
+
+            conditions = conditions.substring(4).trim();
+            sql += "WHERE " + conditions;
+            result.setSql(sql);
+            result.setParameters(values.toArray());
+        }
+
+        return result;
+
     }
 
-    return result;
+    public DMLObject getSelect() {
+        if (!retrieveSQL)
+            return null;
+        DMLObject result = new DMLObject();
+        String sql = "SELECT * FROM PROSPECT ";
 
-  }
+        String conditions = "";
+        ArrayList values = new ArrayList();
 
-  public DMLObject getSelect() {
-    if(!retrieveSQL) return null;
-    DMLObject result = new DMLObject();
-    String sql = "SELECT * FROM PROSPECT ";
+        if (this.getPrsNumProspecto() != null && this.getPrsNumProspecto().longValue() == -999) {
+            conditions += " AND PRS_NUM_PROSPECTO IS NULL";
+        } else if (this.getPrsNumProspecto() != null) {
+            conditions += " AND PRS_NUM_PROSPECTO = ?";
+            values.add(this.getPrsNumProspecto());
+        }
 
-    String conditions = "";
-    ArrayList values = new ArrayList();
+        if (this.getPrsNomProspecto() != null && "null".equals(this.getPrsNomProspecto())) {
+            conditions += " AND PRS_NOM_PROSPECTO IS NULL";
+        } else if (this.getPrsNomProspecto() != null) {
+            conditions += " AND PRS_NOM_PROSPECTO = ?";
+            values.add(this.getPrsNomProspecto());
+        }
 
-    if(this.getPrsNumProspecto() != null && this.getPrsNumProspecto().longValue() == -999) {
-      conditions += " AND PRS_NUM_PROSPECTO IS NULL";
-    } else if(this.getPrsNumProspecto() != null) {
-      conditions += " AND PRS_NUM_PROSPECTO = ?";
-      values.add(this.getPrsNumProspecto());
+        if (this.getPrsRfc() != null && "null".equals(this.getPrsRfc())) {
+            conditions += " AND PRS_RFC IS NULL";
+        } else if (this.getPrsRfc() != null) {
+            conditions += " AND PRS_RFC = ?";
+            values.add(this.getPrsRfc());
+        }
+
+        if (this.getPrsTipoPers() != null && "null".equals(this.getPrsTipoPers())) {
+            conditions += " AND PRS_TIPO_PERS IS NULL";
+        } else if (this.getPrsTipoPers() != null) {
+            conditions += " AND PRS_TIPO_PERS = ?";
+            values.add(this.getPrsTipoPers());
+        }
+
+        if (this.getPrsCveActividad() != null && "null".equals(this.getPrsCveActividad())) {
+            conditions += " AND PRS_CVE_ACTIVIDAD IS NULL";
+        } else if (this.getPrsCveActividad() != null) {
+            conditions += " AND PRS_CVE_ACTIVIDAD = ?";
+            values.add(this.getPrsCveActividad());
+        }
+
+        if (this.getPrsNomNacion() != null && "null".equals(this.getPrsNomNacion())) {
+            conditions += " AND PRS_NOM_NACION IS NULL";
+        } else if (this.getPrsNomNacion() != null) {
+            conditions += " AND PRS_NOM_NACION = ?";
+            values.add(this.getPrsNomNacion());
+        }
+
+        if (this.getPrsCveMigra() != null && "null".equals(this.getPrsCveMigra())) {
+            conditions += " AND PRS_CVE_MIGRA IS NULL";
+        } else if (this.getPrsCveMigra() != null) {
+            conditions += " AND PRS_CVE_MIGRA = ?";
+            values.add(this.getPrsCveMigra());
+        }
+
+        if (this.getPrsNomCalle() != null && "null".equals(this.getPrsNomCalle())) {
+            conditions += " AND PRS_NOM_CALLE IS NULL";
+        } else if (this.getPrsNomCalle() != null) {
+            conditions += " AND PRS_NOM_CALLE = ?";
+            values.add(this.getPrsNomCalle());
+        }
+
+        if (this.getPrsNomColonia() != null && "null".equals(this.getPrsNomColonia())) {
+            conditions += " AND PRS_NOM_COLONIA IS NULL";
+        } else if (this.getPrsNomColonia() != null) {
+            conditions += " AND PRS_NOM_COLONIA = ?";
+            values.add(this.getPrsNomColonia());
+        }
+
+        if (this.getPrsNomPoblacion() != null && "null".equals(this.getPrsNomPoblacion())) {
+            conditions += " AND PRS_NOM_POBLACION IS NULL";
+        } else if (this.getPrsNomPoblacion() != null) {
+            conditions += " AND PRS_NOM_POBLACION = ?";
+            values.add(this.getPrsNomPoblacion());
+        }
+
+        if (this.getPrsNomPais() != null && "null".equals(this.getPrsNomPais())) {
+            conditions += " AND PRS_NOM_PAIS IS NULL";
+        } else if (this.getPrsNomPais() != null) {
+            conditions += " AND PRS_NOM_PAIS = ?";
+            values.add(this.getPrsNomPais());
+        }
+
+        if (this.getPrsNomEstado() != null && "null".equals(this.getPrsNomEstado())) {
+            conditions += " AND PRS_NOM_ESTADO IS NULL";
+        } else if (this.getPrsNomEstado() != null) {
+            conditions += " AND PRS_NOM_ESTADO = ?";
+            values.add(this.getPrsNomEstado());
+        }
+
+        if (this.getPrsCodigoPostal() != null && this.getPrsCodigoPostal().longValue() == -999) {
+            conditions += " AND PRS_CODIGO_POSTAL IS NULL";
+        } else if (this.getPrsCodigoPostal() != null) {
+            conditions += " AND PRS_CODIGO_POSTAL = ?";
+            values.add(this.getPrsCodigoPostal());
+        }
+
+        if (this.getPrsTelCasa() != null && "null".equals(this.getPrsTelCasa())) {
+            conditions += " AND PRS_TEL_CASA IS NULL";
+        } else if (this.getPrsTelCasa() != null) {
+            conditions += " AND PRS_TEL_CASA = ?";
+            values.add(this.getPrsTelCasa());
+        }
+
+        if (this.getPrsTelOficina() != null && "null".equals(this.getPrsTelOficina())) {
+            conditions += " AND PRS_TEL_OFICINA IS NULL";
+        } else if (this.getPrsTelOficina() != null) {
+            conditions += " AND PRS_TEL_OFICINA = ?";
+            values.add(this.getPrsTelOficina());
+        }
+
+        if (this.getPrsTelFax() != null && "null".equals(this.getPrsTelFax())) {
+            conditions += " AND PRS_TEL_FAX IS NULL";
+        } else if (this.getPrsTelFax() != null) {
+            conditions += " AND PRS_TEL_FAX = ?";
+            values.add(this.getPrsTelFax());
+        }
+
+        if (this.getPrsNomContacto() != null && "null".equals(this.getPrsNomContacto())) {
+            conditions += " AND PRS_NOM_CONTACTO IS NULL";
+        } else if (this.getPrsNomContacto() != null) {
+            conditions += " AND PRS_NOM_CONTACTO = ?";
+            values.add(this.getPrsNomContacto());
+        }
+
+        if (this.getPrsTelContacto() != null && "null".equals(this.getPrsTelContacto())) {
+            conditions += " AND PRS_TEL_CONTACTO IS NULL";
+        } else if (this.getPrsTelContacto() != null) {
+            conditions += " AND PRS_TEL_CONTACTO = ?";
+            values.add(this.getPrsTelContacto());
+        }
+
+        if (this.getPrsFaxContacto() != null && "null".equals(this.getPrsFaxContacto())) {
+            conditions += " AND PRS_FAX_CONTACTO IS NULL";
+        } else if (this.getPrsFaxContacto() != null) {
+            conditions += " AND PRS_FAX_CONTACTO = ?";
+            values.add(this.getPrsFaxContacto());
+        }
+
+        if (this.getPrsNomEjecutivo() != null && "null".equals(this.getPrsNomEjecutivo())) {
+            conditions += " AND PRS_NOM_EJECUTIVO IS NULL";
+        } else if (this.getPrsNomEjecutivo() != null) {
+            conditions += " AND PRS_NOM_EJECUTIVO = ?";
+            values.add(this.getPrsNomEjecutivo());
+        }
+
+        if (this.getPrsTelEjecutivo() != null && "null".equals(this.getPrsTelEjecutivo())) {
+            conditions += " AND PRS_TEL_EJECUTIVO IS NULL";
+        } else if (this.getPrsTelEjecutivo() != null) {
+            conditions += " AND PRS_TEL_EJECUTIVO = ?";
+            values.add(this.getPrsTelEjecutivo());
+        }
+
+        if (this.getPrsEjecAsig() != null && this.getPrsEjecAsig().longValue() == -999) {
+            conditions += " AND PRS_EJEC_ASIG IS NULL";
+        } else if (this.getPrsEjecAsig() != null) {
+            conditions += " AND PRS_EJEC_ASIG = ?";
+            values.add(this.getPrsEjecAsig());
+        }
+
+        if (this.getPrsFecProspecto() != null && "null".equals(this.getPrsFecProspecto())) {
+            conditions += " AND PRS_FEC_PROSPECTO IS NULL";
+        } else if (this.getPrsFecProspecto() != null) {
+            conditions += " AND PRS_FEC_PROSPECTO = ?";
+            values.add(this.getPrsFecProspecto());
+        }
+
+        if (this.getPrsFecConstit() != null && "null".equals(this.getPrsFecConstit())) {
+            conditions += " AND PRS_FEC_CONSTIT IS NULL";
+        } else if (this.getPrsFecConstit() != null) {
+            conditions += " AND PRS_FEC_CONSTIT = ?";
+            values.add(this.getPrsFecConstit());
+        }
+
+        if (this.getPrsNumContrato() != null && this.getPrsNumContrato().longValue() == -999) {
+            conditions += " AND PRS_NUM_CONTRATO IS NULL";
+        } else if (this.getPrsNumContrato() != null) {
+            conditions += " AND PRS_NUM_CONTRATO = ?";
+            values.add(this.getPrsNumContrato());
+        }
+
+        if (this.getPrsCveStatus() != null && "null".equals(this.getPrsCveStatus())) {
+            conditions += " AND PRS_CVE_STATUS IS NULL";
+        } else if (this.getPrsCveStatus() != null) {
+            conditions += " AND PRS_CVE_STATUS = ?";
+            values.add(this.getPrsCveStatus());
+        }
+
+        if (this.getPrsCorreo2() != null && "null".equals(this.getPrsCorreo2())) {
+            conditions += " AND PRS_CORREO2 IS NULL";
+        } else if (this.getPrsCorreo2() != null) {
+            conditions += " AND PRS_CORREO2 = ?";
+            values.add(this.getPrsCorreo2());
+        }
+
+        if (this.getPrsNomDelegacion() != null && "null".equals(this.getPrsNomDelegacion())) {
+            conditions += " AND PRS_NOM_DELEGACION IS NULL";
+        } else if (this.getPrsNomDelegacion() != null) {
+            conditions += " AND PRS_NOM_DELEGACION = ?";
+            values.add(this.getPrsNomDelegacion());
+        }
+
+        if (this.getPrsReqOpera() != null && "null".equals(this.getPrsReqOpera())) {
+            conditions += " AND PRS_REQ_OPERA IS NULL";
+        } else if (this.getPrsReqOpera() != null) {
+            conditions += " AND PRS_REQ_OPERA = ?";
+            values.add(this.getPrsReqOpera());
+        }
+
+        if (this.getprsAntecedentes() != null && "null".equals(this.getprsAntecedentes())) {
+            conditions += " AND PRS_ANTECEDENTES IS NULL";
+        } else if (this.getprsAntecedentes() != null) {
+            conditions += " AND PRS_ANTECEDENTES = ?";
+            values.add(this.getprsAntecedentes());
+        }
+
+        if (this.getPrsCaracteristicas() != null && "null".equals(this.getPrsCaracteristicas())) {
+            conditions += " AND PRS_CARACTERISTICAS IS NULL";
+        } else if (this.getPrsCaracteristicas() != null) {
+            conditions += " AND PRS_CARACTERISTICAS = ?";
+            values.add(this.getPrsCaracteristicas());
+        }
+
+        if (this.getPrsHonorarios() != null && "null".equals(this.getPrsHonorarios())) {
+            conditions += " AND PRS_HONORARIOS IS NULL";
+        } else if (this.getPrsHonorarios() != null) {
+            conditions += " AND PRS_HONORARIOS = ?";
+            values.add(this.getPrsHonorarios());
+        }
+
+        if (this.getPrsAdicionales() != null && "null".equals(this.getPrsAdicionales())) {
+            conditions += " AND PRS_ADICIONALES IS NULL";
+        } else if (this.getPrsAdicionales() != null) {
+            conditions += " AND PRS_ADICIONALES = ?";
+            values.add(this.getPrsAdicionales());
+        }
+
+        if (this.getPrsValidaln() != null && "null".equals(this.getPrsValidaln())) {
+            conditions += " AND PRS_VALIDALN IS NULL";
+        } else if (this.getPrsValidaln() != null) {
+            conditions += " AND PRS_VALIDALN = ?";
+            values.add(this.getPrsValidaln());
+        }
+
+        if (this.getPrsTipoNegocio() != null && "null".equals(this.getPrsTipoNegocio())) {
+            conditions += " AND PRS_VALIDALN IS NULL";
+        } else if (this.getPrsTipoNegocio() != null) {
+            conditions += " AND PRS_VALIDALN = ?";
+            values.add(this.getPrsTipoNegocio());
+        }
+
+        if (this.getPrsTipoRecomenda() != null && "null".equals(this.getPrsTipoRecomenda())) {
+            conditions += " AND PRS_TIPO_RECOMENDA IS NULL";
+        } else if (this.getPrsTipoRecomenda() != null) {
+            conditions += " AND PRS_TIPO_RECOMENDA = ?";
+            values.add(this.getPrsTipoRecomenda());
+        }
+
+        if (!"".equals(conditions)) {
+
+            conditions = conditions.substring(4).trim();
+            sql += "WHERE " + conditions;
+            result.setSql(sql);
+            result.setParameters(values.toArray());
+        }
+
+        return result;
+
     }
 
-    if(this.getPrsNomProspecto() != null && "null".equals(this.getPrsNomProspecto())) {
-      conditions += " AND PRS_NOM_PROSPECTO IS NULL";
-    } else if(this.getPrsNomProspecto() != null) {
-      conditions += " AND PRS_NOM_PROSPECTO = ?";
-      values.add(this.getPrsNomProspecto());
-    }
+    public DMLObject getUpdate() {
+        if (!retrieveSQL)
+            return null;
+        DMLObject result = new DMLObject();
+        String sql = "UPDATE PROSPECT SET ";
 
-    if(this.getPrsRfc() != null && "null".equals(this.getPrsRfc())) {
-      conditions += " AND PRS_RFC IS NULL";
-    } else if(this.getPrsRfc() != null) {
-      conditions += " AND PRS_RFC = ?";
-      values.add(this.getPrsRfc());
-    }
+        String fields = "";
+        String conditions = "";
+        ArrayList pkValues = new ArrayList();
+        ArrayList values = new ArrayList();
 
-    if(this.getPrsTipoPers() != null && "null".equals(this.getPrsTipoPers())) {
-      conditions += " AND PRS_TIPO_PERS IS NULL";
-    } else if(this.getPrsTipoPers() != null) {
-      conditions += " AND PRS_TIPO_PERS = ?";
-      values.add(this.getPrsTipoPers());
-    }
-
-    if(this.getPrsCveActividad() != null && "null".equals(this.getPrsCveActividad())) {
-      conditions += " AND PRS_CVE_ACTIVIDAD IS NULL";
-    } else if(this.getPrsCveActividad() != null) {
-      conditions += " AND PRS_CVE_ACTIVIDAD = ?";
-      values.add(this.getPrsCveActividad());
-    }
-
-    if(this.getPrsNomNacion() != null && "null".equals(this.getPrsNomNacion())) {
-      conditions += " AND PRS_NOM_NACION IS NULL";
-    } else if(this.getPrsNomNacion() != null) {
-      conditions += " AND PRS_NOM_NACION = ?";
-      values.add(this.getPrsNomNacion());
-    }
-
-    if(this.getPrsCveMigra() != null && "null".equals(this.getPrsCveMigra())) {
-      conditions += " AND PRS_CVE_MIGRA IS NULL";
-    } else if(this.getPrsCveMigra() != null) {
-      conditions += " AND PRS_CVE_MIGRA = ?";
-      values.add(this.getPrsCveMigra());
-    }
-
-    if(this.getPrsNomCalle() != null && "null".equals(this.getPrsNomCalle())) {
-      conditions += " AND PRS_NOM_CALLE IS NULL";
-    } else if(this.getPrsNomCalle() != null) {
-      conditions += " AND PRS_NOM_CALLE = ?";
-      values.add(this.getPrsNomCalle());
-    }
-
-    if(this.getPrsNomColonia() != null && "null".equals(this.getPrsNomColonia())) {
-      conditions += " AND PRS_NOM_COLONIA IS NULL";
-    } else if(this.getPrsNomColonia() != null) {
-      conditions += " AND PRS_NOM_COLONIA = ?";
-      values.add(this.getPrsNomColonia());
-    }
-
-    if(this.getPrsNomPoblacion() != null && "null".equals(this.getPrsNomPoblacion())) {
-      conditions += " AND PRS_NOM_POBLACION IS NULL";
-    } else if(this.getPrsNomPoblacion() != null) {
-      conditions += " AND PRS_NOM_POBLACION = ?";
-      values.add(this.getPrsNomPoblacion());
-    }
-
-    if(this.getPrsNomPais() != null && "null".equals(this.getPrsNomPais())) {
-      conditions += " AND PRS_NOM_PAIS IS NULL";
-    } else if(this.getPrsNomPais() != null) {
-      conditions += " AND PRS_NOM_PAIS = ?";
-      values.add(this.getPrsNomPais());
-    }
-
-    if(this.getPrsNomEstado() != null && "null".equals(this.getPrsNomEstado())) {
-      conditions += " AND PRS_NOM_ESTADO IS NULL";
-    } else if(this.getPrsNomEstado() != null) {
-      conditions += " AND PRS_NOM_ESTADO = ?";
-      values.add(this.getPrsNomEstado());
-    }
-
-    if(this.getPrsCodigoPostal() != null && this.getPrsCodigoPostal().longValue() == -999) {
-      conditions += " AND PRS_CODIGO_POSTAL IS NULL";
-    } else if(this.getPrsCodigoPostal() != null) {
-      conditions += " AND PRS_CODIGO_POSTAL = ?";
-      values.add(this.getPrsCodigoPostal());
-    }
-
-    if(this.getPrsTelCasa() != null && "null".equals(this.getPrsTelCasa())) {
-      conditions += " AND PRS_TEL_CASA IS NULL";
-    } else if(this.getPrsTelCasa() != null) {
-      conditions += " AND PRS_TEL_CASA = ?";
-      values.add(this.getPrsTelCasa());
-    }
-
-    if(this.getPrsTelOficina() != null && "null".equals(this.getPrsTelOficina())) {
-      conditions += " AND PRS_TEL_OFICINA IS NULL";
-    } else if(this.getPrsTelOficina() != null) {
-      conditions += " AND PRS_TEL_OFICINA = ?";
-      values.add(this.getPrsTelOficina());
-    }
-
-    if(this.getPrsTelFax() != null && "null".equals(this.getPrsTelFax())) {
-      conditions += " AND PRS_TEL_FAX IS NULL";
-    } else if(this.getPrsTelFax() != null) {
-      conditions += " AND PRS_TEL_FAX = ?";
-      values.add(this.getPrsTelFax());
-    }
-
-    if(this.getPrsNomContacto() != null && "null".equals(this.getPrsNomContacto())) {
-      conditions += " AND PRS_NOM_CONTACTO IS NULL";
-    } else if(this.getPrsNomContacto() != null) {
-      conditions += " AND PRS_NOM_CONTACTO = ?";
-      values.add(this.getPrsNomContacto());
-    }
-
-    if(this.getPrsTelContacto() != null && "null".equals(this.getPrsTelContacto())) {
-      conditions += " AND PRS_TEL_CONTACTO IS NULL";
-    } else if(this.getPrsTelContacto() != null) {
-      conditions += " AND PRS_TEL_CONTACTO = ?";
-      values.add(this.getPrsTelContacto());
-    }
-
-    if(this.getPrsFaxContacto() != null && "null".equals(this.getPrsFaxContacto())) {
-      conditions += " AND PRS_FAX_CONTACTO IS NULL";
-    } else if(this.getPrsFaxContacto() != null) {
-      conditions += " AND PRS_FAX_CONTACTO = ?";
-      values.add(this.getPrsFaxContacto());
-    }
-
-    if(this.getPrsNomEjecutivo() != null && "null".equals(this.getPrsNomEjecutivo())) {
-      conditions += " AND PRS_NOM_EJECUTIVO IS NULL";
-    } else if(this.getPrsNomEjecutivo() != null) {
-      conditions += " AND PRS_NOM_EJECUTIVO = ?";
-      values.add(this.getPrsNomEjecutivo());
-    }
-
-    if(this.getPrsTelEjecutivo() != null && "null".equals(this.getPrsTelEjecutivo())) {
-      conditions += " AND PRS_TEL_EJECUTIVO IS NULL";
-    } else if(this.getPrsTelEjecutivo() != null) {
-      conditions += " AND PRS_TEL_EJECUTIVO = ?";
-      values.add(this.getPrsTelEjecutivo());
-    }
-
-    if(this.getPrsEjecAsig() != null && this.getPrsEjecAsig().longValue() == -999) {
-      conditions += " AND PRS_EJEC_ASIG IS NULL";
-    } else if(this.getPrsEjecAsig() != null) {
-      conditions += " AND PRS_EJEC_ASIG = ?";
-      values.add(this.getPrsEjecAsig());
-    }
-
-    if(this.getPrsFecProspecto() != null && "null".equals(this.getPrsFecProspecto())) {
-      conditions += " AND PRS_FEC_PROSPECTO IS NULL";
-    } else if(this.getPrsFecProspecto() != null) {
-      conditions += " AND PRS_FEC_PROSPECTO = ?";
-      values.add(this.getPrsFecProspecto());
-    }
-
-    if(this.getPrsFecConstit() != null && "null".equals(this.getPrsFecConstit())) {
-      conditions += " AND PRS_FEC_CONSTIT IS NULL";
-    } else if(this.getPrsFecConstit() != null) {
-      conditions += " AND PRS_FEC_CONSTIT = ?";
-      values.add(this.getPrsFecConstit());
-    }
-
-    if(this.getPrsNumContrato() != null && this.getPrsNumContrato().longValue() == -999) {
-      conditions += " AND PRS_NUM_CONTRATO IS NULL";
-    } else if(this.getPrsNumContrato() != null) {
-      conditions += " AND PRS_NUM_CONTRATO = ?";
-      values.add(this.getPrsNumContrato());
-    }
-
-    if(this.getPrsCveStatus() != null && "null".equals(this.getPrsCveStatus())) {
-      conditions += " AND PRS_CVE_STATUS IS NULL";
-    } else if(this.getPrsCveStatus() != null) {
-      conditions += " AND PRS_CVE_STATUS = ?";
-      values.add(this.getPrsCveStatus());
-    }
-
-    if(this.getPrsCorreo2() != null && "null".equals(this.getPrsCorreo2())) {
-      conditions += " AND PRS_CORREO2 IS NULL";
-    } else if(this.getPrsCorreo2() != null) {
-      conditions += " AND PRS_CORREO2 = ?";
-      values.add(this.getPrsCorreo2());
-    }
-
-    if(this.getPrsNomDelegacion() != null && "null".equals(this.getPrsNomDelegacion())) {
-      conditions += " AND PRS_NOM_DELEGACION IS NULL";
-    } else if(this.getPrsNomDelegacion() != null) {
-      conditions += " AND PRS_NOM_DELEGACION = ?";
-      values.add(this.getPrsNomDelegacion());
-    }
-
-      if(this.getPrsReqOpera() != null && "null".equals(this.getPrsReqOpera())) {
-        conditions += " AND PRS_REQ_OPERA IS NULL";
-      } else if(this.getPrsReqOpera() != null) {
-        conditions += " AND PRS_REQ_OPERA = ?";
+        conditions += " AND PRS_NUM_PROSPECTO = ?";
+        pkValues.add(this.getPrsNumProspecto());
+        fields += " PRS_NOM_PROSPECTO = ?, ";
+        values.add(this.getPrsNomProspecto());
+        fields += " PRS_RFC = ?, ";
+        values.add(this.getPrsRfc());
+        fields += " PRS_TIPO_PERS = ?, ";
+        values.add(this.getPrsTipoPers());
+        fields += " PRS_CVE_ACTIVIDAD = ?, ";
+        values.add(this.getPrsCveActividad());
+        fields += " PRS_NOM_NACION = ?, ";
+        values.add(this.getPrsNomNacion());
+        fields += " PRS_CVE_MIGRA = ?, ";
+        values.add(this.getPrsCveMigra());
+        fields += " PRS_NOM_CALLE = ?, ";
+        values.add(this.getPrsNomCalle());
+        fields += " PRS_NOM_COLONIA = ?, ";
+        values.add(this.getPrsNomColonia());
+        fields += " PRS_NOM_POBLACION = ?, ";
+        values.add(this.getPrsNomPoblacion());
+        fields += " PRS_NOM_PAIS = ?, ";
+        values.add(this.getPrsNomPais());
+        fields += " PRS_NOM_ESTADO = ?, ";
+        values.add(this.getPrsNomEstado());
+        fields += " PRS_CODIGO_POSTAL = ?, ";
+        values.add(this.getPrsCodigoPostal());
+        fields += " PRS_TEL_CASA = ?, ";
+        values.add(this.getPrsTelCasa());
+        fields += " PRS_TEL_OFICINA = ?, ";
+        values.add(this.getPrsTelOficina());
+        fields += " PRS_TEL_FAX = ?, ";
+        values.add(this.getPrsTelFax());
+        fields += " PRS_NOM_CONTACTO = ?, ";
+        values.add(this.getPrsNomContacto());
+        fields += " PRS_TEL_CONTACTO = ?, ";
+        values.add(this.getPrsTelContacto());
+        fields += " PRS_FAX_CONTACTO = ?, ";
+        values.add(this.getPrsFaxContacto());
+        fields += " PRS_NOM_EJECUTIVO = ?, ";
+        values.add(this.getPrsNomEjecutivo());
+        fields += " PRS_TEL_EJECUTIVO = ?, ";
+        values.add(this.getPrsTelEjecutivo());
+        fields += " PRS_EJEC_ASIG = ?, ";
+        values.add(this.getPrsEjecAsig());
+        fields += " PRS_FEC_PROSPECTO = ?, ";
+        values.add(this.getPrsFecProspecto());
+        fields += " PRS_FEC_CONSTIT = ?, ";
+        values.add(this.getPrsFecConstit());
+        fields += " PRS_NUM_CONTRATO = ?, ";
+        values.add(this.getPrsNumContrato());
+        fields += " PRS_CVE_STATUS = ?, ";
+        values.add(this.getPrsCveStatus());
+        fields += " PRS_CORREO2 = ?, ";
+        values.add(this.getPrsCorreo2());
+        fields += " PRS_NOM_DELEGACION = ?, ";
+        values.add(this.getPrsNomDelegacion());
+        fields += " PRS_ORG_PROSPECTO = ?, ";
+        values.add(this.getPrsOrgProspecto());
+        fields += " PRS_REQ_OPERA = ?, ";
         values.add(this.getPrsReqOpera());
-      }
 
-      if(this.getprsAntecedentes() != null && "null".equals(this.getprsAntecedentes())) {
-        conditions += " AND PRS_ANTECEDENTES IS NULL";
-      } else if(this.getprsAntecedentes() != null) {
-        conditions += " AND PRS_ANTECEDENTES = ?";
+        fields += " PRS_ANTECEDENTES = ?, ";
         values.add(this.getprsAntecedentes());
-      }
-
-      if(this.getPrsCaracteristicas() != null && "null".equals(this.getPrsCaracteristicas())) {
-        conditions += " AND PRS_CARACTERISTICAS IS NULL";
-      } else if(this.getPrsCaracteristicas() != null) {
-        conditions += " AND PRS_CARACTERISTICAS = ?";
+        fields += " PRS_CARACTERISTICAS = ?, ";
         values.add(this.getPrsCaracteristicas());
-      }
-      
-      if(this.getPrsHonorarios() != null && "null".equals(this.getPrsHonorarios())) {
-        conditions += " AND PRS_HONORARIOS IS NULL";
-      } else if(this.getPrsHonorarios() != null) {
-        conditions += " AND PRS_HONORARIOS = ?";
+        fields += " PRS_HONORARIOS = ?, ";
         values.add(this.getPrsHonorarios());
-      }    
-
-      if(this.getPrsAdicionales() != null && "null".equals(this.getPrsAdicionales())) {
-        conditions += " AND PRS_ADICIONALES IS NULL";
-      } else if(this.getPrsAdicionales() != null) {
-        conditions += " AND PRS_ADICIONALES = ?";
+        fields += " PRS_ADICIONALES = ?, ";
         values.add(this.getPrsAdicionales());
-      }         
-
-      if(this.getPrsValidaln() != null && "null".equals(this.getPrsValidaln())) {
-        conditions += " AND PRS_VALIDALN IS NULL";
-      } else if(this.getPrsValidaln() != null) {
-        conditions += " AND PRS_VALIDALN = ?";
+        fields += " PRS_VALIDALN = ?, ";
         values.add(this.getPrsValidaln());
-      }         
-
-      if(this.getPrsTipoNegocio() != null && "null".equals(this.getPrsTipoNegocio())) {
-        conditions += " AND PRS_VALIDALN IS NULL";
-      } else if(this.getPrsTipoNegocio() != null) {
-        conditions += " AND PRS_VALIDALN = ?";
+        fields += " PRS_TIPO_NEGOCIO = ?, ";
         values.add(this.getPrsTipoNegocio());
-      }    
-
-      if(this.getPrsTipoRecomenda() != null && "null".equals(this.getPrsTipoRecomenda())) {
-        conditions += " AND PRS_TIPO_RECOMENDA IS NULL";
-      } else if(this.getPrsTipoRecomenda() != null) {
-        conditions += " AND PRS_TIPO_RECOMENDA = ?";
+        fields += " PRS_TIPO_RECOMENDA = ?, ";
         values.add(this.getPrsTipoRecomenda());
-      }    
-      
-    if(!"".equals(conditions)) {
 
-      conditions = conditions.substring(4).trim();
-      sql += "WHERE " + conditions;
-      result.setSql(sql);
-      result.setParameters(values.toArray());
+        for (int i = 0; i < pkValues.size(); i++) {
+            values.add(pkValues.get(i));
+        }
+        ;
+
+        fields = fields.substring(0, fields.length() - 2).trim();
+        conditions = conditions.substring(4).trim();
+        sql += fields + " WHERE " + conditions;
+        result.setSql(sql);
+        result.setParameters(values.toArray());
+
+        return result;
     }
 
-    return result;
+    public DMLObject getInsert() {
+        if (!retrieveSQL)
+            return null;
+        DMLObject result = new DMLObject();
+        String sql = "INSERT INTO PROSPECT ( ";
 
-  }
+        String fields = "";
+        String fieldValues = "";
+        ArrayList values = new ArrayList();
 
-  public DMLObject getUpdate() {
-    if(!retrieveSQL) return null;
-    DMLObject result = new DMLObject();
-    String sql = "UPDATE PROSPECT SET ";
+        fields += ", PRS_NUM_PROSPECTO";
+        fieldValues += ", ?";
+        values.add(this.getPrsNumProspecto());
 
-    String fields = "";
-    String conditions = "";
-    ArrayList pkValues = new ArrayList();
-    ArrayList values = new ArrayList();
+        fields += ", PRS_NOM_PROSPECTO";
+        fieldValues += ", ?";
+        values.add(this.getPrsNomProspecto());
 
-    conditions += " AND PRS_NUM_PROSPECTO = ?";
-    pkValues.add(this.getPrsNumProspecto());
-    fields += " PRS_NOM_PROSPECTO = ?, ";
-    values.add(this.getPrsNomProspecto());
-    fields += " PRS_RFC = ?, ";
-    values.add(this.getPrsRfc());
-    fields += " PRS_TIPO_PERS = ?, ";
-    values.add(this.getPrsTipoPers());
-    fields += " PRS_CVE_ACTIVIDAD = ?, ";
-    values.add(this.getPrsCveActividad());
-    fields += " PRS_NOM_NACION = ?, ";
-    values.add(this.getPrsNomNacion());
-    fields += " PRS_CVE_MIGRA = ?, ";
-    values.add(this.getPrsCveMigra());
-    fields += " PRS_NOM_CALLE = ?, ";
-    values.add(this.getPrsNomCalle());
-    fields += " PRS_NOM_COLONIA = ?, ";
-    values.add(this.getPrsNomColonia());
-    fields += " PRS_NOM_POBLACION = ?, ";
-    values.add(this.getPrsNomPoblacion());
-    fields += " PRS_NOM_PAIS = ?, ";
-    values.add(this.getPrsNomPais());
-    fields += " PRS_NOM_ESTADO = ?, ";
-    values.add(this.getPrsNomEstado());
-    fields += " PRS_CODIGO_POSTAL = ?, ";
-    values.add(this.getPrsCodigoPostal());
-    fields += " PRS_TEL_CASA = ?, ";
-    values.add(this.getPrsTelCasa());
-    fields += " PRS_TEL_OFICINA = ?, ";
-    values.add(this.getPrsTelOficina());
-    fields += " PRS_TEL_FAX = ?, ";
-    values.add(this.getPrsTelFax());
-    fields += " PRS_NOM_CONTACTO = ?, ";
-    values.add(this.getPrsNomContacto());
-    fields += " PRS_TEL_CONTACTO = ?, ";
-    values.add(this.getPrsTelContacto());
-    fields += " PRS_FAX_CONTACTO = ?, ";
-    values.add(this.getPrsFaxContacto());
-    fields += " PRS_NOM_EJECUTIVO = ?, ";
-    values.add(this.getPrsNomEjecutivo());
-    fields += " PRS_TEL_EJECUTIVO = ?, ";
-    values.add(this.getPrsTelEjecutivo());
-    fields += " PRS_EJEC_ASIG = ?, ";
-    values.add(this.getPrsEjecAsig());
-    fields += " PRS_FEC_PROSPECTO = ?, ";
-    values.add(this.getPrsFecProspecto());
-    fields += " PRS_FEC_CONSTIT = ?, ";
-    values.add(this.getPrsFecConstit());
-    fields += " PRS_NUM_CONTRATO = ?, ";
-    values.add(this.getPrsNumContrato());
-    fields += " PRS_CVE_STATUS = ?, ";
-    values.add(this.getPrsCveStatus());
-    fields += " PRS_CORREO2 = ?, ";
-    values.add(this.getPrsCorreo2());
-    fields += " PRS_NOM_DELEGACION = ?, ";
-    values.add(this.getPrsNomDelegacion());
-    fields += " PRS_ORG_PROSPECTO = ?, ";
-    values.add(this.getPrsOrgProspecto());
-      fields += " PRS_REQ_OPERA = ?, ";
-      values.add(this.getPrsReqOpera());    
+        fields += ", PRS_RFC";
+        fieldValues += ", ?";
+        values.add(this.getPrsRfc());
 
-      fields += " PRS_ANTECEDENTES = ?, ";
-      values.add(this.getprsAntecedentes());    
-      fields += " PRS_CARACTERISTICAS = ?, ";
-      values.add(this.getPrsCaracteristicas());    
-      fields += " PRS_HONORARIOS = ?, ";
-      values.add(this.getPrsHonorarios());    
-      fields += " PRS_ADICIONALES = ?, ";
-      values.add(this.getPrsAdicionales());    
-      fields += " PRS_VALIDALN = ?, ";
-      values.add(this.getPrsValidaln()); 
-      fields += " PRS_TIPO_NEGOCIO = ?, ";
-      values.add(this.getPrsTipoNegocio()); 
-      fields += " PRS_TIPO_RECOMENDA = ?, ";
-      values.add(this.getPrsTipoRecomenda()); 
+        fields += ", PRS_TIPO_PERS";
+        fieldValues += ", ?";
+        values.add(this.getPrsTipoPers());
 
-    for(int i = 0; i < pkValues.size(); i++) {
-      values.add(pkValues.get(i));
-    };
+        fields += ", PRS_CVE_ACTIVIDAD";
+        fieldValues += ", ?";
+        values.add(this.getPrsCveActividad());
 
-    fields = fields.substring(0, fields.length() - 2).trim();
-    conditions = conditions.substring(4).trim();
-    sql += fields + " WHERE " + conditions;
-    result.setSql(sql);
-    result.setParameters(values.toArray());
+        fields += ", PRS_NOM_NACION";
+        fieldValues += ", ?";
+        values.add(this.getPrsNomNacion());
 
-    return result;
-  }
+        fields += ", PRS_CVE_MIGRA";
+        fieldValues += ", ?";
+        values.add(this.getPrsCveMigra());
 
-  public DMLObject getInsert() {
-    if(!retrieveSQL) return null;
-    DMLObject result = new DMLObject();
-    String sql = "INSERT INTO PROSPECT ( ";
+        fields += ", PRS_NOM_CALLE";
+        fieldValues += ", ?";
+        values.add(this.getPrsNomCalle());
 
-    String fields = "";
-    String fieldValues = "";
-    ArrayList values = new ArrayList();
+        fields += ", PRS_NOM_COLONIA";
+        fieldValues += ", ?";
+        values.add(this.getPrsNomColonia());
 
-    fields += ", PRS_NUM_PROSPECTO";
-    fieldValues += ", ?";
-    values.add(this.getPrsNumProspecto());
+        fields += ", PRS_NOM_POBLACION";
+        fieldValues += ", ?";
+        values.add(this.getPrsNomPoblacion());
 
-    fields += ", PRS_NOM_PROSPECTO";
-    fieldValues += ", ?";
-    values.add(this.getPrsNomProspecto());
+        fields += ", PRS_NOM_PAIS";
+        fieldValues += ", ?";
+        values.add(this.getPrsNomPais());
 
-    fields += ", PRS_RFC";
-    fieldValues += ", ?";
-    values.add(this.getPrsRfc());
+        fields += ", PRS_NOM_ESTADO";
+        fieldValues += ", ?";
+        values.add(this.getPrsNomEstado());
 
-    fields += ", PRS_TIPO_PERS";
-    fieldValues += ", ?";
-    values.add(this.getPrsTipoPers());
+        fields += ", PRS_CODIGO_POSTAL";
+        fieldValues += ", ?";
+        values.add(this.getPrsCodigoPostal());
 
-    fields += ", PRS_CVE_ACTIVIDAD";
-    fieldValues += ", ?";
-    values.add(this.getPrsCveActividad());
+        fields += ", PRS_TEL_CASA";
+        fieldValues += ", ?";
+        values.add(this.getPrsTelCasa());
 
-    fields += ", PRS_NOM_NACION";
-    fieldValues += ", ?";
-    values.add(this.getPrsNomNacion());
+        fields += ", PRS_TEL_OFICINA";
+        fieldValues += ", ?";
+        values.add(this.getPrsTelOficina());
 
-    fields += ", PRS_CVE_MIGRA";
-    fieldValues += ", ?";
-    values.add(this.getPrsCveMigra());
+        fields += ", PRS_TEL_FAX";
+        fieldValues += ", ?";
+        values.add(this.getPrsTelFax());
 
-    fields += ", PRS_NOM_CALLE";
-    fieldValues += ", ?";
-    values.add(this.getPrsNomCalle());
+        fields += ", PRS_NOM_CONTACTO";
+        fieldValues += ", ?";
+        values.add(this.getPrsNomContacto());
 
-    fields += ", PRS_NOM_COLONIA";
-    fieldValues += ", ?";
-    values.add(this.getPrsNomColonia());
+        fields += ", PRS_TEL_CONTACTO";
+        fieldValues += ", ?";
+        values.add(this.getPrsTelContacto());
 
-    fields += ", PRS_NOM_POBLACION";
-    fieldValues += ", ?";
-    values.add(this.getPrsNomPoblacion());
+        fields += ", PRS_FAX_CONTACTO";
+        fieldValues += ", ?";
+        values.add(this.getPrsFaxContacto());
 
-    fields += ", PRS_NOM_PAIS";
-    fieldValues += ", ?";
-    values.add(this.getPrsNomPais());
+        fields += ", PRS_NOM_EJECUTIVO";
+        fieldValues += ", ?";
+        values.add(this.getPrsNomEjecutivo());
 
-    fields += ", PRS_NOM_ESTADO";
-    fieldValues += ", ?";
-    values.add(this.getPrsNomEstado());
+        fields += ", PRS_TEL_EJECUTIVO";
+        fieldValues += ", ?";
+        values.add(this.getPrsTelEjecutivo());
 
-    fields += ", PRS_CODIGO_POSTAL";
-    fieldValues += ", ?";
-    values.add(this.getPrsCodigoPostal());
+        fields += ", PRS_EJEC_ASIG";
+        fieldValues += ", ?";
+        values.add(this.getPrsEjecAsig());
 
-    fields += ", PRS_TEL_CASA";
-    fieldValues += ", ?";
-    values.add(this.getPrsTelCasa());
+        fields += ", PRS_FEC_PROSPECTO";
+        fieldValues += ", ?";
+        values.add(this.getPrsFecProspecto());
 
-    fields += ", PRS_TEL_OFICINA";
-    fieldValues += ", ?";
-    values.add(this.getPrsTelOficina());
+        fields += ", PRS_FEC_CONSTIT";
+        fieldValues += ", ?";
+        values.add(this.getPrsFecConstit());
 
-    fields += ", PRS_TEL_FAX";
-    fieldValues += ", ?";
-    values.add(this.getPrsTelFax());
+        fields += ", PRS_NUM_CONTRATO";
+        fieldValues += ", ?";
+        values.add(this.getPrsNumContrato());
 
-    fields += ", PRS_NOM_CONTACTO";
-    fieldValues += ", ?";
-    values.add(this.getPrsNomContacto());
+        fields += ", PRS_CVE_STATUS";
+        fieldValues += ", ?";
+        values.add(this.getPrsCveStatus());
 
-    fields += ", PRS_TEL_CONTACTO";
-    fieldValues += ", ?";
-    values.add(this.getPrsTelContacto());
+        fields += ", PRS_CORREO2";
+        fieldValues += ", ?";
+        values.add(this.getPrsCorreo2());
 
-    fields += ", PRS_FAX_CONTACTO";
-    fieldValues += ", ?";
-    values.add(this.getPrsFaxContacto());
+        fields += ", PRS_NOM_DELEGACION";
+        fieldValues += ", ?";
+        values.add(this.getPrsNomDelegacion());
 
-    fields += ", PRS_NOM_EJECUTIVO";
-    fieldValues += ", ?";
-    values.add(this.getPrsNomEjecutivo());
+        fields += ", PRS_ORG_PROSPECTO";
+        fieldValues += ", ?";
+        values.add(this.getPrsOrgProspecto());
 
-    fields += ", PRS_TEL_EJECUTIVO";
-    fieldValues += ", ?";
-    values.add(this.getPrsTelEjecutivo());
-
-    fields += ", PRS_EJEC_ASIG";
-    fieldValues += ", ?";
-    values.add(this.getPrsEjecAsig());
-
-    fields += ", PRS_FEC_PROSPECTO";
-    fieldValues += ", ?";
-    values.add(this.getPrsFecProspecto());
-
-    fields += ", PRS_FEC_CONSTIT";
-    fieldValues += ", ?";
-    values.add(this.getPrsFecConstit());
-
-    fields += ", PRS_NUM_CONTRATO";
-    fieldValues += ", ?";
-    values.add(this.getPrsNumContrato());
-
-    fields += ", PRS_CVE_STATUS";
-    fieldValues += ", ?";
-    values.add(this.getPrsCveStatus());
-
-    fields += ", PRS_CORREO2";
-    fieldValues += ", ?";
-    values.add(this.getPrsCorreo2());
-
-    fields += ", PRS_NOM_DELEGACION";
-    fieldValues += ", ?";
-    values.add(this.getPrsNomDelegacion());
-    
-    fields += ", PRS_ORG_PROSPECTO";
-    fieldValues += ", ?";
-    values.add(this.getPrsOrgProspecto());
-
-      fields += ", PRS_REQ_OPERA";
-      fieldValues += ", ?";
-      values.add(this.getPrsReqOpera());
+        fields += ", PRS_REQ_OPERA";
+        fieldValues += ", ?";
+        values.add(this.getPrsReqOpera());
 
 
-      fields += ", PRS_ANTECEDENTES";
-      fieldValues += ", ?";
-      values.add(this.getprsAntecedentes());
-      fields += ", PRS_CARACTERISTICAS";
-      fieldValues += ", ?";
-      values.add(this.getPrsCaracteristicas());
-      fields += ", PRS_HONORARIOS";
-      fieldValues += ", ?";
-      values.add(this.getPrsHonorarios());
-      fields += ", PRS_ADICIONALES";
-      fieldValues += ", ?";
-      values.add(this.getPrsAdicionales());
-      fields += ", PRS_VALIDALN";
-      fieldValues += ", ?";
-      values.add(this.getPrsValidaln());
-      fields += ", PRS_TIPO_NEGOCIO";
-      fieldValues += ", ?";
-      values.add(this.getPrsTipoNegocio());
+        fields += ", PRS_ANTECEDENTES";
+        fieldValues += ", ?";
+        values.add(this.getprsAntecedentes());
+        fields += ", PRS_CARACTERISTICAS";
+        fieldValues += ", ?";
+        values.add(this.getPrsCaracteristicas());
+        fields += ", PRS_HONORARIOS";
+        fieldValues += ", ?";
+        values.add(this.getPrsHonorarios());
+        fields += ", PRS_ADICIONALES";
+        fieldValues += ", ?";
+        values.add(this.getPrsAdicionales());
+        fields += ", PRS_VALIDALN";
+        fieldValues += ", ?";
+        values.add(this.getPrsValidaln());
+        fields += ", PRS_TIPO_NEGOCIO";
+        fieldValues += ", ?";
+        values.add(this.getPrsTipoNegocio());
 
-      fields += ", PRS_TIPO_RECOMENDA";
-      fieldValues += ", ?";
-      values.add(this.getPrsTipoRecomenda());
+        fields += ", PRS_TIPO_RECOMENDA";
+        fieldValues += ", ?";
+        values.add(this.getPrsTipoRecomenda());
 
 
-    fields = fields.substring(1).trim();
-    fieldValues = fieldValues.substring(1).trim();
+        fields = fields.substring(1).trim();
+        fieldValues = fieldValues.substring(1).trim();
 
-    sql += fields + " ) VALUES (" + fieldValues + ")";
+        sql += fields + " ) VALUES (" + fieldValues + ")";
 
-    result.setSql(sql);
-    result.setParameters(values.toArray());
+        result.setSql(sql);
+        result.setParameters(values.toArray());
 
-    return result;
-  }
+        return result;
+    }
 
-  public DMLObject getDelete() {
-    if(!retrieveSQL) return null;
-    DMLObject result = new DMLObject();
-    String sql = "DELETE FROM PROSPECT WHERE ";
+    public DMLObject getDelete() {
+        if (!retrieveSQL)
+            return null;
+        DMLObject result = new DMLObject();
+        String sql = "DELETE FROM PROSPECT WHERE ";
 
-    String conditions = "";
-    ArrayList values = new ArrayList();
+        String conditions = "";
+        ArrayList values = new ArrayList();
 
-    conditions += " AND PRS_NUM_PROSPECTO = ?";
-    values.add(this.getPrsNumProspecto());
-    conditions = conditions.substring(4).trim();
-    result.setSql(sql + conditions);
-    result.setParameters(values.toArray());
-    return result;
+        conditions += " AND PRS_NUM_PROSPECTO = ?";
+        values.add(this.getPrsNumProspecto());
+        conditions = conditions.substring(4).trim();
+        result.setSql(sql + conditions);
+        result.setParameters(values.toArray());
+        return result;
 
-  }
+    }
 
-  public boolean validate() {
-    return true;  }
+    public boolean validate() {
+        return true;
+    }
 
-  public boolean doCompare(Object compareWith) {
-    Prospect instance = (Prospect)compareWith;
-    boolean equalObjects = true;
-    if(equalObjects && !this.getPrsNumProspecto().equals(instance.getPrsNumProspecto())) equalObjects = false;
-    if(equalObjects && !this.getPrsNomProspecto().equals(instance.getPrsNomProspecto())) equalObjects = false;
-    if(equalObjects && !this.getPrsRfc().equals(instance.getPrsRfc())) equalObjects = false;
-    if(equalObjects && !this.getPrsTipoPers().equals(instance.getPrsTipoPers())) equalObjects = false;
-    if(equalObjects && !this.getPrsCveActividad().equals(instance.getPrsCveActividad())) equalObjects = false;
-    if(equalObjects && !this.getPrsNomNacion().equals(instance.getPrsNomNacion())) equalObjects = false;
-    if(equalObjects && !this.getPrsCveMigra().equals(instance.getPrsCveMigra())) equalObjects = false;
-    if(equalObjects && !this.getPrsNomCalle().equals(instance.getPrsNomCalle())) equalObjects = false;
-    if(equalObjects && !this.getPrsNomColonia().equals(instance.getPrsNomColonia())) equalObjects = false;
-    if(equalObjects && !this.getPrsNomPoblacion().equals(instance.getPrsNomPoblacion())) equalObjects = false;
-    if(equalObjects && !this.getPrsNomPais().equals(instance.getPrsNomPais())) equalObjects = false;
-    if(equalObjects && !this.getPrsNomEstado().equals(instance.getPrsNomEstado())) equalObjects = false;
-    if(equalObjects && !this.getPrsCodigoPostal().equals(instance.getPrsCodigoPostal())) equalObjects = false;
-    if(equalObjects && !this.getPrsTelCasa().equals(instance.getPrsTelCasa())) equalObjects = false;
-    if(equalObjects && !this.getPrsTelOficina().equals(instance.getPrsTelOficina())) equalObjects = false;
-    if(equalObjects && !this.getPrsTelFax().equals(instance.getPrsTelFax())) equalObjects = false;
-    if(equalObjects && !this.getPrsNomContacto().equals(instance.getPrsNomContacto())) equalObjects = false;
-    if(equalObjects && !this.getPrsTelContacto().equals(instance.getPrsTelContacto())) equalObjects = false;
-    if(equalObjects && !this.getPrsFaxContacto().equals(instance.getPrsFaxContacto())) equalObjects = false;
-    if(equalObjects && !this.getPrsNomEjecutivo().equals(instance.getPrsNomEjecutivo())) equalObjects = false;
-    if(equalObjects && !this.getPrsTelEjecutivo().equals(instance.getPrsTelEjecutivo())) equalObjects = false;
-    if(equalObjects && !this.getPrsEjecAsig().equals(instance.getPrsEjecAsig())) equalObjects = false;
-    if(equalObjects && !this.getPrsFecProspecto().equals(instance.getPrsFecProspecto())) equalObjects = false;
-    if(equalObjects && !this.getPrsFecConstit().equals(instance.getPrsFecConstit())) equalObjects = false;
-    if(equalObjects && !this.getPrsNumContrato().equals(instance.getPrsNumContrato())) equalObjects = false;
-    if(equalObjects && !this.getPrsCveStatus().equals(instance.getPrsCveStatus())) equalObjects = false;
-    if(equalObjects && !this.getPrsCorreo2().equals(instance.getPrsCorreo2())) equalObjects = false;
-    if(equalObjects && !this.getPrsNomDelegacion().equals(instance.getPrsNomDelegacion())) equalObjects = false;
-    if(equalObjects && !this.getPrsOrgProspecto().equals(instance.getPrsOrgProspecto())) equalObjects = false;
-      if(equalObjects && !this.getPrsReqOpera().equals(instance.getPrsReqOpera())) equalObjects = false;
-      
-      if(equalObjects && !this.getprsAntecedentes().equals(instance.getprsAntecedentes())) equalObjects = false;
-      if(equalObjects && !this.getPrsCaracteristicas().equals(instance.getPrsCaracteristicas())) equalObjects = false;
-      if(equalObjects && !this.getPrsHonorarios().equals(instance.getPrsHonorarios())) equalObjects = false;
-      if(equalObjects && !this.getPrsAdicionales().equals(instance.getPrsAdicionales())) equalObjects = false;
-      if(equalObjects && !this.getPrsValidaln().equals(instance.getPrsValidaln())) equalObjects = false;
-      if(equalObjects && !this.getPrsTipoNegocio().equals(instance.getPrsTipoNegocio())) equalObjects = false;
-      
-      if(equalObjects && !this.getPrsTipoRecomenda().equals(instance.getPrsTipoRecomenda())) equalObjects = false;
-      
-    return equalObjects;
-  }
+    public boolean doCompare(Object compareWith) {
+        Prospect instance = (Prospect) compareWith;
+        boolean equalObjects = true;
+        if (equalObjects && !this.getPrsNumProspecto().equals(instance.getPrsNumProspecto()))
+            equalObjects = false;
+        if (equalObjects && !this.getPrsNomProspecto().equals(instance.getPrsNomProspecto()))
+            equalObjects = false;
+        if (equalObjects && !this.getPrsRfc().equals(instance.getPrsRfc()))
+            equalObjects = false;
+        if (equalObjects && !this.getPrsTipoPers().equals(instance.getPrsTipoPers()))
+            equalObjects = false;
+        if (equalObjects && !this.getPrsCveActividad().equals(instance.getPrsCveActividad()))
+            equalObjects = false;
+        if (equalObjects && !this.getPrsNomNacion().equals(instance.getPrsNomNacion()))
+            equalObjects = false;
+        if (equalObjects && !this.getPrsCveMigra().equals(instance.getPrsCveMigra()))
+            equalObjects = false;
+        if (equalObjects && !this.getPrsNomCalle().equals(instance.getPrsNomCalle()))
+            equalObjects = false;
+        if (equalObjects && !this.getPrsNomColonia().equals(instance.getPrsNomColonia()))
+            equalObjects = false;
+        if (equalObjects && !this.getPrsNomPoblacion().equals(instance.getPrsNomPoblacion()))
+            equalObjects = false;
+        if (equalObjects && !this.getPrsNomPais().equals(instance.getPrsNomPais()))
+            equalObjects = false;
+        if (equalObjects && !this.getPrsNomEstado().equals(instance.getPrsNomEstado()))
+            equalObjects = false;
+        if (equalObjects && !this.getPrsCodigoPostal().equals(instance.getPrsCodigoPostal()))
+            equalObjects = false;
+        if (equalObjects && !this.getPrsTelCasa().equals(instance.getPrsTelCasa()))
+            equalObjects = false;
+        if (equalObjects && !this.getPrsTelOficina().equals(instance.getPrsTelOficina()))
+            equalObjects = false;
+        if (equalObjects && !this.getPrsTelFax().equals(instance.getPrsTelFax()))
+            equalObjects = false;
+        if (equalObjects && !this.getPrsNomContacto().equals(instance.getPrsNomContacto()))
+            equalObjects = false;
+        if (equalObjects && !this.getPrsTelContacto().equals(instance.getPrsTelContacto()))
+            equalObjects = false;
+        if (equalObjects && !this.getPrsFaxContacto().equals(instance.getPrsFaxContacto()))
+            equalObjects = false;
+        if (equalObjects && !this.getPrsNomEjecutivo().equals(instance.getPrsNomEjecutivo()))
+            equalObjects = false;
+        if (equalObjects && !this.getPrsTelEjecutivo().equals(instance.getPrsTelEjecutivo()))
+            equalObjects = false;
+        if (equalObjects && !this.getPrsEjecAsig().equals(instance.getPrsEjecAsig()))
+            equalObjects = false;
+        if (equalObjects && !this.getPrsFecProspecto().equals(instance.getPrsFecProspecto()))
+            equalObjects = false;
+        if (equalObjects && !this.getPrsFecConstit().equals(instance.getPrsFecConstit()))
+            equalObjects = false;
+        if (equalObjects && !this.getPrsNumContrato().equals(instance.getPrsNumContrato()))
+            equalObjects = false;
+        if (equalObjects && !this.getPrsCveStatus().equals(instance.getPrsCveStatus()))
+            equalObjects = false;
+        if (equalObjects && !this.getPrsCorreo2().equals(instance.getPrsCorreo2()))
+            equalObjects = false;
+        if (equalObjects && !this.getPrsNomDelegacion().equals(instance.getPrsNomDelegacion()))
+            equalObjects = false;
+        if (equalObjects && !this.getPrsOrgProspecto().equals(instance.getPrsOrgProspecto()))
+            equalObjects = false;
+        if (equalObjects && !this.getPrsReqOpera().equals(instance.getPrsReqOpera()))
+            equalObjects = false;
 
-  public Object selectAsObject() {
-    Prospect result = new Prospect();
-    DataRow objectData = null;
-    objectData = selectAsDataRow();
+        if (equalObjects && !this.getprsAntecedentes().equals(instance.getprsAntecedentes()))
+            equalObjects = false;
+        if (equalObjects && !this.getPrsCaracteristicas().equals(instance.getPrsCaracteristicas()))
+            equalObjects = false;
+        if (equalObjects && !this.getPrsHonorarios().equals(instance.getPrsHonorarios()))
+            equalObjects = false;
+        if (equalObjects && !this.getPrsAdicionales().equals(instance.getPrsAdicionales()))
+            equalObjects = false;
+        if (equalObjects && !this.getPrsValidaln().equals(instance.getPrsValidaln()))
+            equalObjects = false;
+        if (equalObjects && !this.getPrsTipoNegocio().equals(instance.getPrsTipoNegocio()))
+            equalObjects = false;
 
-    result.setPrsNumProspecto((BigDecimal)objectData.getData("PRS_NUM_PROSPECTO"));
-    result.setPrsNomProspecto((String)objectData.getData("PRS_NOM_PROSPECTO"));
-    result.setPrsRfc((String)objectData.getData("PRS_RFC"));
-    result.setPrsTipoPers((String)objectData.getData("PRS_TIPO_PERS"));
-    result.setPrsCveActividad((String)objectData.getData("PRS_CVE_ACTIVIDAD"));
-    result.setPrsNomNacion((String)objectData.getData("PRS_NOM_NACION"));
-    result.setPrsCveMigra((String)objectData.getData("PRS_CVE_MIGRA"));
-    result.setPrsNomCalle((String)objectData.getData("PRS_NOM_CALLE"));
-    result.setPrsNomColonia((String)objectData.getData("PRS_NOM_COLONIA"));
-    result.setPrsNomPoblacion((String)objectData.getData("PRS_NOM_POBLACION"));
-    result.setPrsNomPais((String)objectData.getData("PRS_NOM_PAIS"));
-    result.setPrsNomEstado((String)objectData.getData("PRS_NOM_ESTADO"));
-    result.setPrsCodigoPostal((BigDecimal)objectData.getData("PRS_CODIGO_POSTAL"));
-    result.setPrsTelCasa((String)objectData.getData("PRS_TEL_CASA"));
-    result.setPrsTelOficina((String)objectData.getData("PRS_TEL_OFICINA"));
-    result.setPrsTelFax((String)objectData.getData("PRS_TEL_FAX"));
-    result.setPrsNomContacto((String)objectData.getData("PRS_NOM_CONTACTO"));
-    result.setPrsTelContacto((String)objectData.getData("PRS_TEL_CONTACTO"));
-    result.setPrsFaxContacto((String)objectData.getData("PRS_FAX_CONTACTO"));
-    result.setPrsNomEjecutivo((String)objectData.getData("PRS_NOM_EJECUTIVO"));
-    result.setPrsTelEjecutivo((String)objectData.getData("PRS_TEL_EJECUTIVO"));
-    result.setPrsEjecAsig((BigDecimal)objectData.getData("PRS_EJEC_ASIG"));
-    result.setPrsFecProspecto((String)objectData.getData("PRS_FEC_PROSPECTO"));
-    result.setPrsFecConstit((String)objectData.getData("PRS_FEC_CONSTIT"));
-    result.setPrsNumContrato((BigDecimal)objectData.getData("PRS_NUM_CONTRATO"));
-    result.setPrsCveStatus((String)objectData.getData("PRS_CVE_STATUS"));
-    result.setPrsCorreo2((String)objectData.getData("PRS_CORREO2"));
-    result.setPrsNomDelegacion((String)objectData.getData("PRS_NOM_DELEGACION"));
-    result.setPrsOrgProspecto((String)objectData.getData("PRS_ORG_PROSPECTO"));
-      result.setPrsReqOpera((String)objectData.getData("PRS_REQ_OPERA"));
-      
-      result.setprsAntecedentes((String)objectData.getData("PRS_ANTECEDENTES"));
-      result.setPrsCaracteristicas((String)objectData.getData("PRS_CARACTERISTICAS"));
-      result.setPrsHonorarios((String)objectData.getData("PRS_HONORARIOS"));
-      result.setPrsAdicionales((String)objectData.getData("PRS_ADICIONALES"));
-      result.setPrsValidaln((String)objectData.getData("PRS_VALIDALN"));
-      result.setPrsTipoNegocio((String)objectData.getData("PRS_TIPO_NEGOCIO"));
-      
-      result.setPrsTipoRecomenda((String)objectData.getData("PRS_TIPO_RECOMENDA"));
+        if (equalObjects && !this.getPrsTipoRecomenda().equals(instance.getPrsTipoRecomenda()))
+            equalObjects = false;
 
-    return result;
+        return equalObjects;
+    }
 
-  }
+    public Object selectAsObject() {
+        Prospect result = new Prospect();
+        DataRow objectData = null;
+        objectData = selectAsDataRow();
+
+        result.setPrsNumProspecto((BigDecimal) objectData.getData("PRS_NUM_PROSPECTO"));
+        result.setPrsNomProspecto((String) objectData.getData("PRS_NOM_PROSPECTO"));
+        result.setPrsRfc((String) objectData.getData("PRS_RFC"));
+        result.setPrsTipoPers((String) objectData.getData("PRS_TIPO_PERS"));
+        result.setPrsCveActividad((String) objectData.getData("PRS_CVE_ACTIVIDAD"));
+        result.setPrsNomNacion((String) objectData.getData("PRS_NOM_NACION"));
+        result.setPrsCveMigra((String) objectData.getData("PRS_CVE_MIGRA"));
+        result.setPrsNomCalle((String) objectData.getData("PRS_NOM_CALLE"));
+        result.setPrsNomColonia((String) objectData.getData("PRS_NOM_COLONIA"));
+        result.setPrsNomPoblacion((String) objectData.getData("PRS_NOM_POBLACION"));
+        result.setPrsNomPais((String) objectData.getData("PRS_NOM_PAIS"));
+        result.setPrsNomEstado((String) objectData.getData("PRS_NOM_ESTADO"));
+        result.setPrsCodigoPostal((BigDecimal) objectData.getData("PRS_CODIGO_POSTAL"));
+        result.setPrsTelCasa((String) objectData.getData("PRS_TEL_CASA"));
+        result.setPrsTelOficina((String) objectData.getData("PRS_TEL_OFICINA"));
+        result.setPrsTelFax((String) objectData.getData("PRS_TEL_FAX"));
+        result.setPrsNomContacto((String) objectData.getData("PRS_NOM_CONTACTO"));
+        result.setPrsTelContacto((String) objectData.getData("PRS_TEL_CONTACTO"));
+        result.setPrsFaxContacto((String) objectData.getData("PRS_FAX_CONTACTO"));
+        result.setPrsNomEjecutivo((String) objectData.getData("PRS_NOM_EJECUTIVO"));
+        result.setPrsTelEjecutivo((String) objectData.getData("PRS_TEL_EJECUTIVO"));
+        result.setPrsEjecAsig((BigDecimal) objectData.getData("PRS_EJEC_ASIG"));
+        result.setPrsFecProspecto((String) objectData.getData("PRS_FEC_PROSPECTO"));
+        result.setPrsFecConstit((String) objectData.getData("PRS_FEC_CONSTIT"));
+        result.setPrsNumContrato((BigDecimal) objectData.getData("PRS_NUM_CONTRATO"));
+        result.setPrsCveStatus((String) objectData.getData("PRS_CVE_STATUS"));
+        result.setPrsCorreo2((String) objectData.getData("PRS_CORREO2"));
+        result.setPrsNomDelegacion((String) objectData.getData("PRS_NOM_DELEGACION"));
+        result.setPrsOrgProspecto((String) objectData.getData("PRS_ORG_PROSPECTO"));
+        result.setPrsReqOpera((String) objectData.getData("PRS_REQ_OPERA"));
+
+        result.setprsAntecedentes((String) objectData.getData("PRS_ANTECEDENTES"));
+        result.setPrsCaracteristicas((String) objectData.getData("PRS_CARACTERISTICAS"));
+        result.setPrsHonorarios((String) objectData.getData("PRS_HONORARIOS"));
+        result.setPrsAdicionales((String) objectData.getData("PRS_ADICIONALES"));
+        result.setPrsValidaln((String) objectData.getData("PRS_VALIDALN"));
+        result.setPrsTipoNegocio((String) objectData.getData("PRS_TIPO_NEGOCIO"));
+
+        result.setPrsTipoRecomenda((String) objectData.getData("PRS_TIPO_RECOMENDA"));
+
+        return result;
+
+    }
 
 }

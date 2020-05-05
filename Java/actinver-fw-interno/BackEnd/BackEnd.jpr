@@ -125,10 +125,6 @@
    <hash n="oracle.jdevimpl.config.JProjectLibraries">
       <list n="exportedReferences">
          <hash>
-            <value n="id" v="Oracle JDBC"/>
-            <value n="isJDK" v="false"/>
-         </hash>
-         <hash>
             <value n="id" v="Dependencias"/>
             <value n="isJDK" v="false"/>
          </hash>
@@ -182,6 +178,7 @@
                   <url path="../lib/POI/poi-scratchpad-3.17.jar" jar-entry=""/>
                   <url path="../lib/POI/xmlbeans-2.6.0.jar" jar-entry=""/>
                   <url path="../lib/ServiciosBridger-Client.jar" jar-entry=""/>
+                  <url path="../lib/ojdbc6.jar" jar-entry=""/>
                </list>
                <value n="description" v="Dependencias"/>
                <value n="id" v="Dependencias"/>
@@ -189,10 +186,6 @@
          </list>
       </hash>
       <list n="libraryReferences">
-         <hash>
-            <value n="id" v="Oracle JDBC"/>
-            <value n="isJDK" v="false"/>
-         </hash>
          <hash>
             <value n="id" v="Dependencias"/>
             <value n="isJDK" v="false"/>

@@ -9,48 +9,54 @@ import java.util.Map;
 
 public class DataRow implements Serializable {
 
-  @SuppressWarnings("compatibility:1235470106920307740")
-  private static final long serialVersionUID = 2490982374418435141L;
+    @SuppressWarnings("compatibility:1235470106920307740")
+    private static final long serialVersionUID = 2490982374418435141L;
 
-  private Map dataRow;
-  private ArrayList fields;
-  
-  public DataRow() {
-    dataRow = Collections.synchronizedMap(new HashMap<String, Object>());
-    fields = new ArrayList();
-  }
+    private Map dataRow;
+    private ArrayList fields;
 
-  public void addData(String key, Object value) {
-    dataRow.put(key, value);
-    fields.add(key);
-  }
+    public DataRow() {
+        dataRow = Collections.synchronizedMap(new HashMap<String, Object>());
+        fields = new ArrayList();
+    }
 
-  public void removeData(String key, Object value) {
-    dataRow.remove(value);
-    fields.remove(key);
-  }
+    public void addData(String key, Object value) {
+        dataRow.put(key, value);
+        fields.add(key);
+    }
 
-  public Object getData(String key) {
-    return dataRow.get(key);
-  }
+    public void removeData(String key, Object value) {
+        dataRow.remove(value);
+        fields.remove(key);
+    }
 
-  public String getString(String key) {    
-    return dataRow.get(key) == null ? null : ""+dataRow.get(key);
-  }
+    public Object getData(String key) {
+        return dataRow.get(key);
+    }
 
-  public int getFieldCount() {
-    return fields.size();
-  }
+    public String getString(String key) {
+        return dataRow.get(key) == null ? null : "" + dataRow.get(key);
+    }
 
-  public ArrayList getFieldNames() {
-    return fields;
-  }
-  
-  public void close() {
-    if(dataRow != null) dataRow.clear();
-    if(fields != null) fields.clear();
-    
-    dataRow = null;
-    fields = null;
-  }
+    public int getFieldCount() {
+        return fields.size();
+    }
+
+    public boolean hasData() {
+        return fields.size() > 0;
+    }
+
+    public ArrayList getFieldNames() {
+        return fields;
+    }
+
+    public void close() {
+        if (dataRow != null)
+            dataRow.clear();
+        if (fields != null)
+            fields.clear();
+
+        dataRow = null;
+        fields = null;
+    }
 }
