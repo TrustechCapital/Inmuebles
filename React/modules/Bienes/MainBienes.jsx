@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { makeStyles } from '@material-ui/core/styles';
 import Grid from '@material-ui/core/Grid';
 import IconButton from '@material-ui/core/IconButton';
@@ -14,9 +14,11 @@ import DialogGarantias from './DialogGarantias';
 import DialogBienesGarantias from './DialogBienesGar';
 import GenericTable from '../../sharedComponents/GenericTable';
 import { OPERACIONES_CATALOGO } from '../../constants';
+import { garantiasApi } from './services';
 
 const COLUMNS_BIENES = [
-    { field: 'fgrsIdFideicomiso', header: 'Fideicomiso', isKey: true },
+    { field: 'id', header: 'Id', isKey: true },
+    { field: 'fgrsIdFideicomiso', header: 'Fideicomiso' },
     { field: 'forsCveTipoBien', header: 'Clasificacion' },
     {
         field: 'forsImpUltValua',
@@ -34,6 +36,7 @@ const useStyles = makeStyles((theme) => ({
 
 const ActionsBienesEnGarantia = (props) => {
     const garantiasSeleccionadas = 1;
+
     return (
         <React.Fragment>
             {garantiasSeleccionadas > 0 ? (
@@ -82,6 +85,7 @@ const ActionsBienesEnGarantia = (props) => {
 export default function MainBienes() {
     const classes = useStyles();
     const [modoPantalla, setModoPantalla] = useState(OPERACIONES_CATALOGO.ALTA);
+    const [garantiasList, setGarantiasList] = useState([]);
     const [detalleAbierto, setDetalleAbierto] = useState(false);
     const [
         detalleBienesGarantiasAbierto,
@@ -90,6 +94,15 @@ export default function MainBienes() {
     const [showBienesGarantiaActions, setShowBienesGarantiaActions] = useState(
         false
     );
+
+    useEffect(() => {
+        const fetchAllGarantias = async () => {
+            const garantias = await garantiasApi.findAll();
+            console.log('garantias', garantias);
+            setGarantiasList(garantias.data);
+        };
+        fetchAllGarantias();
+    }, []);
 
     function handleCloseModal() {
         setDetalleAbierto(false);
@@ -114,6 +127,7 @@ export default function MainBienes() {
     return (
         <div>
             <TableGarantias
+                data={garantiasList}
                 onNew={handleNuevaGarantia}
                 onSelect={handleSelectGarantia}
             />

@@ -13,7 +13,8 @@ import GenericTable from '../../sharedComponents/GenericTable';
 import FIXTURE_GARANTIAS from '../../fixtures/garantias';
 
 const COLUMNS = [
-    { field: 'fgarIdFideicomiso', header: 'Fideicomiso', isKey: true },
+    { field: 'id', header: 'Id', isKey: true },
+    { field: 'fgarIdFideicomiso', header: 'Fideicomiso' },
     { field: 'fgarCveGarantia2', header: 'Tipo de Bien' },
     { field: 'fgarImpGarantiaFormatted', header: 'Importe', numeric: true },
     {
@@ -31,6 +32,7 @@ const useStyles = makeStyles((theme) => ({
 }));
 
 export default function TableGarantias(props) {
+    const { data, onSelect, onNew } = props;
     const classes = useStyles();
 
     return (
@@ -93,10 +95,10 @@ export default function TableGarantias(props) {
             <Grid container spacing={1}>
                 <GenericTable
                     title="Garantias"
-                    data={FIXTURE_GARANTIAS.data}
+                    data={data}
                     columns={COLUMNS}
-                    onSelect={props.onSelect}
-                    onNew={props.onNew}
+                    onSelect={onSelect}
+                    onNew={onNew}
                 />
             </Grid>
         </div>
