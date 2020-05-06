@@ -4,8 +4,6 @@ import Tabs from '@material-ui/core/Tabs';
 import Tab from '@material-ui/core/Tab';
 import Box from '@material-ui/core/Box';
 
-import { TabsLayout } from '../types';
-
 const useStyles = makeStyles((theme) => ({
     root: {
         flexGrow: 1,
@@ -24,6 +22,11 @@ const useStyles = makeStyles((theme) => ({
         },
     },
 }));
+
+export type TabsLayout = {
+    label: String;
+    component: React.ReactType;
+};
 
 type Props = {
     tabs: Array<TabsLayout>;
