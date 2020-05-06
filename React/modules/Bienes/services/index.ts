@@ -20,22 +20,25 @@ class BienResultRow {
     }
 }
 
+/*type ParametrosBusqueda = {
+    idFideicomiso: number;
+    idSubcuenta: number;
+    idGarantia: number;
+};
+*/
+
 class GarantiasApi extends Api {
     constructor() {
         super({});
     }
 
     async findAll(): Promise<BienResultRow[]> {
-        return await this.get('getRef.do?json={"id":"funRegistroGarantias"}', {
-            transformResponse: (rawdata: string) => {
-                const data: Object[] = JSON.parse(rawdata);
-                return data.map((row, index) => {
-                    let garantia = new BienResultRow(row);
-                    garantia.id = index;
-                    return garantia;
-                });
-            },
-        });
+        const params = {
+            IdFideicomiso: 10,
+            Subfiso: null,
+            Garantia: null,
+        };
+        return await this.getRef('funRegistroGarantias', params);
     }
 }
 

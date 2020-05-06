@@ -98,8 +98,7 @@ export default function MainBienes() {
     useEffect(() => {
         const fetchAllGarantias = async () => {
             const garantias = await garantiasApi.findAll();
-            console.log('garantias', garantias);
-            setGarantiasList(garantias.data);
+            setGarantiasList(garantias);
         };
         fetchAllGarantias();
     }, []);

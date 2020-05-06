@@ -72,4 +72,32 @@ export class Api {
     ): Promise<R> {
         return this.api.patch(url, data, config);
     }
+
+    public async getRef(refName: string, params: any): Promise<any[]> {
+        let filteredParams: any = {
+            id: refName,
+        };
+
+        Object.keys(params).forEach((paramKey) => {
+            const value = params[paramKey];
+            if (value !== null && value !== undefined) {
+                filteredParams[paramKey] = value;
+            }
+        });
+
+        const jsonParams = JSON.stringify(filteredParams);
+
+        return this.get('getRef.do', {
+            params: {
+                json: jsonParams,
+            },
+        }).then((response: any) => {
+            return response.data.map((row: any, index: any) => {
+                return {
+                    ...row,
+                    id: index,
+                };
+            });
+        });
+    }
 }
