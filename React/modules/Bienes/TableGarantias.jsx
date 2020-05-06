@@ -52,7 +52,7 @@ export default function TableGarantias(props) {
                         >
                             <Grid item xs={3}>
                                 <TextField
-                                    id="paramIdFideicomiso"
+                                    id="IdFideicomiso"
                                     label="Id Fideicomiso"
                                     fullWidth
                                 />
@@ -64,7 +64,7 @@ export default function TableGarantias(props) {
                         <Grid container spacing={4}>
                             <Grid item xs={2}>
                                 <TextField
-                                    id="paramSubfiso"
+                                    id="Subfiso"
                                     label="Id Subcuenta"
                                     fullWidth
                                 />
@@ -74,7 +74,7 @@ export default function TableGarantias(props) {
                                     <InputLabel htmlFor="tipoBien">
                                         Tipo de Bien
                                     </InputLabel>
-                                    <Select labelId="tipoBien" displayEmpty>
+                                    <Select id="Garantia" labelId="tipoBien" displayEmpty>
                                         <MenuItem value=""></MenuItem>
                                         <MenuItem value={1}>Tipo 1</MenuItem>
                                         <MenuItem value={2}>Tipo 2</MenuItem>
@@ -83,7 +83,7 @@ export default function TableGarantias(props) {
                             </Grid>
                             <Grid item xs={7}>
                                 <TextField
-                                    id="paramDescripcion"
+                                    id="Descripcion"
                                     label="Descripcion"
                                     fullWidth
                                 />
