@@ -1,8 +1,8 @@
 import React from 'react';
 
-import { TabsLayout } from '../components/types';
-import GenericTabs from '../components/commons/GenericTabs';
-import MainInterfases from '../components/Interfases/MainInterfases';
+import { TabsLayout } from '../types';
+import GenericTabs from '../sharedComponents/GenericTabs';
+import MainInterfases from '../modules/Interfases/MainInterfases';
 
 const TABS: Array<TabsLayout> = [
     {

@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 
 import TableUsuarios from './TableUsuarios';
 import DialogUsuarios from './DialogUsuarios';
-import { OPERACIONES_CATALOGO } from '../../constantes.js';
+import { OPERACIONES_CATALOGO } from '../../constants';
 
 export default function MainUsuarios() {
     const [modoPantalla, setModoPantalla] = useState(OPERACIONES_CATALOGO.ALTA);
@@ -16,10 +16,14 @@ export default function MainUsuarios() {
         setDetalleAbierto(true);
     }
 
-    return(
+    return (
         <div>
-            <TableUsuarios onNew={handleNewModel}/>
-            <DialogUsuarios mode={modoPantalla} opened={detalleAbierto} handleClose={handleCloseModal}/>
+            <TableUsuarios onNew={handleNewModel} />
+            <DialogUsuarios
+                mode={modoPantalla}
+                opened={detalleAbierto}
+                handleClose={handleCloseModal}
+            />
         </div>
     );
 }

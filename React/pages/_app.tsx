@@ -1,6 +1,6 @@
 import { AppProps } from 'next/app';
 
-import Layout from '../components/Layout';
+import Layout from '../sharedComponents/Layout';
 
 function App({ Component, pageProps }: AppProps) {
     return (

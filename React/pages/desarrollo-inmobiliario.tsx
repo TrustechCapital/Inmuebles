@@ -1,11 +1,11 @@
 import React from 'react';
 
-import { TabsLayout } from '../components/types';
-import GenericTabs from '../components/commons/GenericTabs';
-import MainAdquirientes from '../components/Adquirientes/MainAdquirientes';
-import MainLiberacion from '../components/Liberacion/MainLiberacion';
-import MainIndividualizacion from '../components/Individualizacion/MainIndividualizacion';
-import MainCargaMasiva from '../components/CargaMasivaInmuebles/MainCargaMasiva';
+import { TabsLayout } from '../types';
+import GenericTabs from '../sharedComponents/GenericTabs';
+import MainAdquirientes from '../modules/Adquirientes/MainAdquirientes';
+import MainLiberacion from '../modules/Liberacion/MainLiberacion';
+import MainIndividualizacion from '../modules/Individualizacion/MainIndividualizacion';
+import MainCargaMasiva from '../modules/CargaMasivaInmuebles/MainCargaMasiva';
 
 const TABS: Array<TabsLayout> = [
     {

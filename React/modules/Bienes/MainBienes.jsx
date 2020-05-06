@@ -12,20 +12,24 @@ import MonetizationOnIcon from '@material-ui/icons/MonetizationOn';
 import TableGarantias from './TableGarantias';
 import DialogGarantias from './DialogGarantias';
 import DialogBienesGarantias from './DialogBienesGar';
-import GenericTable from '../commons/GenericTable';
-import { OPERACIONES_CATALOGO } from '../../constantes.js';
+import GenericTable from '../../sharedComponents/GenericTable';
+import { OPERACIONES_CATALOGO } from '../../constants';
 
 const COLUMNS_BIENES = [
-    { field: 'fgrsIdFideicomiso', header: 'Fideicomiso', isKey: true},
-    { field: 'forsCveTipoBien', header: 'Clasificacion'},
-    { field: 'forsImpUltValua', header: 'Importe Ult. Valuación', numeric: true},
-    { field: 'forsTextoDescrip', header: 'Descripción'}
-]
+    { field: 'fgrsIdFideicomiso', header: 'Fideicomiso', isKey: true },
+    { field: 'forsCveTipoBien', header: 'Clasificacion' },
+    {
+        field: 'forsImpUltValua',
+        header: 'Importe Ult. Valuación',
+        numeric: true,
+    },
+    { field: 'forsTextoDescrip', header: 'Descripción' },
+];
 
 const useStyles = makeStyles((theme) => ({
     rowSpacing: {
-        marginBottom: theme.spacing(2)
-    } 
+        marginBottom: theme.spacing(2),
+    },
 }));
 
 const ActionsBienesEnGarantia = (props) => {
@@ -33,11 +37,11 @@ const ActionsBienesEnGarantia = (props) => {
     return (
         <React.Fragment>
             {garantiasSeleccionadas > 0 ? (
-            <Tooltip title="Salida de bien">
-                <IconButton>
-                    <DeleteIcon />
-                </IconButton>
-            </Tooltip>
+                <Tooltip title="Salida de bien">
+                    <IconButton>
+                        <DeleteIcon />
+                    </IconButton>
+                </Tooltip>
             ) : null}
 
             {garantiasSeleccionadas == 1 ? (
@@ -79,9 +83,13 @@ export default function MainBienes() {
     const classes = useStyles();
     const [modoPantalla, setModoPantalla] = useState(OPERACIONES_CATALOGO.ALTA);
     const [detalleAbierto, setDetalleAbierto] = useState(false);
-    const [detalleBienesGarantiasAbierto, setDetalleBienesGarantiasAbierto] = useState(false);
-    const [showBienesGarantiaActions, setShowBienesGarantiaActions] = useState(false);
-    
+    const [
+        detalleBienesGarantiasAbierto,
+        setDetalleBienesGarantiasAbierto,
+    ] = useState(false);
+    const [showBienesGarantiaActions, setShowBienesGarantiaActions] = useState(
+        false
+    );
 
     function handleCloseModal() {
         setDetalleAbierto(false);
@@ -103,14 +111,37 @@ export default function MainBienes() {
         setDetalleBienesGarantiasAbierto(true);
     }
 
-    return(
+    return (
         <div>
-            <TableGarantias onNew={handleNuevaGarantia} onSelect={handleSelectGarantia}/>
-            <Grid container spacing={1} direction="column" className={classes.rowSpacing}>
-                <GenericTable title='Bienes en garantía' data={[]} columns={COLUMNS_BIENES} showActionsHeader={showBienesGarantiaActions} onNew={handleNuevoBienEnGarantia} actionsComponent={ActionsBienesEnGarantia}/>
+            <TableGarantias
+                onNew={handleNuevaGarantia}
+                onSelect={handleSelectGarantia}
+            />
+            <Grid
+                container
+                spacing={1}
+                direction="column"
+                className={classes.rowSpacing}
+            >
+                <GenericTable
+                    title="Bienes en garantía"
+                    data={[]}
+                    columns={COLUMNS_BIENES}
+                    showActionsHeader={showBienesGarantiaActions}
+                    onNew={handleNuevoBienEnGarantia}
+                    actionsComponent={ActionsBienesEnGarantia}
+                />
             </Grid>
-            <DialogGarantias mode={modoPantalla} opened={detalleAbierto} handleClose={handleCloseModal}/>
-            <DialogBienesGarantias mode={modoPantalla} opened={detalleBienesGarantiasAbierto} handleClose={handleCloseModalBienesGarantias}/>
+            <DialogGarantias
+                mode={modoPantalla}
+                opened={detalleAbierto}
+                handleClose={handleCloseModal}
+            />
+            <DialogBienesGarantias
+                mode={modoPantalla}
+                opened={detalleBienesGarantiasAbierto}
+                handleClose={handleCloseModalBienesGarantias}
+            />
         </div>
     );
 }

@@ -1,7 +1,5 @@
-import Layout from '../components/Layout';
-
 const IndexPage = () => {
-    return <Layout />;
+    return null;
 };
 
 export default IndexPage;

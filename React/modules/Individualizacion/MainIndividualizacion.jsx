@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 
 import TableIndividualizaciones from './TableIndividualizaciones';
 import DialogIndivizualizacion from './DialogIndividualizacion';
-import { OPERACIONES_CATALOGO } from '../../constantes.js';
+import { OPERACIONES_CATALOGO } from '../../constants';
 
 export default function MainIndividualizacion() {
     const [modoPantalla, setModoPantalla] = useState(OPERACIONES_CATALOGO.ALTA);
@@ -16,10 +16,14 @@ export default function MainIndividualizacion() {
         setDetalleAbierto(true);
     }
 
-    return(
+    return (
         <div>
-            <TableIndividualizaciones onNew={handleNewModel}/>
-            <DialogIndivizualizacion mode={modoPantalla} opened={detalleAbierto} handleClose={handleCloseModal}/>
+            <TableIndividualizaciones onNew={handleNewModel} />
+            <DialogIndivizualizacion
+                mode={modoPantalla}
+                opened={detalleAbierto}
+                handleClose={handleCloseModal}
+            />
         </div>
     );
 }

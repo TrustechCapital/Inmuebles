@@ -1,8 +1,8 @@
 import React from 'react';
 
-import { TabsLayout } from '../components/types';
-import GenericTabs from '../components/commons/GenericTabs';
-import MainEjecutor from '../components/AperturaCierre/MainEjecutor';
+import { TabsLayout } from '../types';
+import GenericTabs from '../sharedComponents/GenericTabs';
+import MainEjecutor from '../modules/AperturaCierre/MainEjecutor';
 
 const TABS: Array<TabsLayout> = [
     {
