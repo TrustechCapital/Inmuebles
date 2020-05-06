@@ -29,175 +29,178 @@ const theme = createMuiTheme({
         primary: deepOrange,
         secondary: {
             main: '#9575cd',
-        }
-    }
+        },
+    },
 });
 
 const drawerWidth = 240;
 
 const useStyles = makeStyles((theme) => ({
-    root: {
-      
-    },
+    root: {},
     appBar: {
-      transition: theme.transitions.create(['margin', 'width'], {
-        easing: theme.transitions.easing.sharp,
-        duration: theme.transitions.duration.leavingScreen,
-      }),
+        transition: theme.transitions.create(['margin', 'width'], {
+            easing: theme.transitions.easing.sharp,
+            duration: theme.transitions.duration.leavingScreen,
+        }),
     },
     appBarBrand: {
         marginRight: '20px',
-        marginTop: '4px'
+        marginTop: '4px',
     },
     appBarShift: {
-      width: `calc(100% - ${drawerWidth}px)`,
-      marginLeft: drawerWidth,
-      transition: theme.transitions.create(['margin', 'width'], {
-        easing: theme.transitions.easing.easeOut,
-        duration: theme.transitions.duration.enteringScreen,
-      }),
+        width: `calc(100% - ${drawerWidth}px)`,
+        marginLeft: drawerWidth,
+        transition: theme.transitions.create(['margin', 'width'], {
+            easing: theme.transitions.easing.easeOut,
+            duration: theme.transitions.duration.enteringScreen,
+        }),
     },
     menuButton: {
-      marginRight: theme.spacing(2),
+        marginRight: theme.spacing(2),
     },
     hide: {
-      display: 'none',
+        display: 'none',
     },
     drawer: {
-      width: drawerWidth,
-      flexShrink: 0,
+        width: drawerWidth,
+        flexShrink: 0,
     },
     drawerPaper: {
-      width: drawerWidth,
+        width: drawerWidth,
     },
     drawerHeader: {
-      display: 'flex',
-      alignItems: 'center',
-      padding: theme.spacing(0, 1),
-      // necessary for content to be below app bar
-      ...theme.mixins.toolbar,
-      justifyContent: 'flex-end',
+        display: 'flex',
+        alignItems: 'center',
+        padding: theme.spacing(0, 1),
+        // necessary for content to be below app bar
+        ...theme.mixins.toolbar,
+        justifyContent: 'flex-end',
     },
     content: {
-      flexGrow: 1,
-      padding: theme.spacing(3),
-      transition: theme.transitions.create('margin', {
-        easing: theme.transitions.easing.sharp,
-        duration: theme.transitions.duration.leavingScreen,
-      }),
-      marginLeft: 0,
+        flexGrow: 1,
+        padding: theme.spacing(3),
+        transition: theme.transitions.create('margin', {
+            easing: theme.transitions.easing.sharp,
+            duration: theme.transitions.duration.leavingScreen,
+        }),
+        marginLeft: 0,
     },
     contentShift: {
-      transition: theme.transitions.create('margin', {
-        easing: theme.transitions.easing.easeOut,
-        duration: theme.transitions.duration.enteringScreen,
-      }),
-      marginLeft: drawerWidth,
+        transition: theme.transitions.create('margin', {
+            easing: theme.transitions.easing.easeOut,
+            duration: theme.transitions.duration.enteringScreen,
+        }),
+        marginLeft: drawerWidth,
     },
     grow: {
-      flexGrow: 1,
-    }
-  }));
+        flexGrow: 1,
+    },
+}));
 
 const MODULES = [
-  { label:'Usuarios', url: '/usuarios', icon: PeopleIcon },
-  { label:'Inmuebles', url: '/inmuebles', icon: HomeIcon },
-  { label:'Desarrollo Inmobiliario', url: '/desarrollo-inmobiliario', icon: ApartmentIcon },
-  { label:'Interfases', url: '/interfases', icon: InputIcon },
-  { label:'Apertura/Cierre', url: '/apertura', icon: ScheduleIcon }
-  
-]
+    { label: 'Usuarios', url: '/usuarios', icon: PeopleIcon },
+    { label: 'Inmuebles', url: '/inmuebles', icon: HomeIcon },
+    {
+        label: 'Desarrollo Inmobiliario',
+        url: '/desarrollo-inmobiliario',
+        icon: ApartmentIcon,
+    },
+    { label: 'Interfases', url: '/interfases', icon: InputIcon },
+    { label: 'Apertura/Cierre', url: '/apertura', icon: ScheduleIcon },
+];
 
 function BaseLayout(props) {
-  const classes = useStyles();
-  const [open, setOpen] = React.useState(false);
+    const classes = useStyles();
+    const [open, setOpen] = React.useState(false);
 
-  const handleDrawerOpen = () => {
-    setOpen(true);
-  };
+    const handleDrawerOpen = () => {
+        setOpen(true);
+    };
 
-  const handleDrawerClose = () => {
-    setOpen(false);
-  };
+    const handleDrawerClose = () => {
+        setOpen(false);
+    };
 
-  return (
-      <div className={classes.root}>
-        <CssBaseline />
-        <AppBar
-          position="static"
-          className={clsx(classes.appBar, {
-            [classes.appBarShift]: open,
-          })}
-        >
-          <Toolbar>
-            <IconButton
-              color="inherit"
-              aria-label="open drawer"
-              onClick={handleDrawerOpen}
-              edge="start"
-              className={clsx(classes.menuButton, open && classes.hide)}
+    return (
+        <div className={classes.root}>
+            <CssBaseline />
+            <AppBar
+                position="static"
+                className={clsx(classes.appBar, {
+                    [classes.appBarShift]: open,
+                })}
             >
-              <MenuIcon />
-            </IconButton>
-            <Typography variant="h6" noWrap className={classes.grow}>
-              Banregio
-            </Typography>
-            <IconButton
-              edge="end"
-              color="inherit"
+                <Toolbar>
+                    <IconButton
+                        color="inherit"
+                        aria-label="open drawer"
+                        onClick={handleDrawerOpen}
+                        edge="start"
+                        className={clsx(
+                            classes.menuButton,
+                            open && classes.hide
+                        )}
+                    >
+                        <MenuIcon />
+                    </IconButton>
+                    <Typography variant="h6" noWrap className={classes.grow}>
+                        Banregio
+                    </Typography>
+                    <IconButton edge="end" color="inherit">
+                        <AccountCircle />
+                    </IconButton>
+                </Toolbar>
+            </AppBar>
+            <Drawer
+                className={classes.drawer}
+                variant="persistent"
+                anchor="left"
+                open={open}
+                classes={{
+                    paper: classes.drawerPaper,
+                }}
             >
-              <AccountCircle />
-            </IconButton>
-          </Toolbar>
-        </AppBar>
-        <Drawer
-          className={classes.drawer}
-          variant="persistent"
-          anchor="left"
-          open={open}
-          classes={{
-            paper: classes.drawerPaper,
-          }}
-        >
-          <div className={classes.drawerHeader}>
-            <Typography variant="h6" noWrap className={classes.appBarBrand}>
-              Fiducia Web
-            </Typography>
-            <IconButton onClick={handleDrawerClose}>
-              <ChevronLeftIcon />
-            </IconButton>
-          </div>
-          <Divider />
-          <List>
-            {MODULES.map((module) => (
-              <Link href={module.url}>
-                <ListItem button key={module.label}>
-                  <ListItemIcon>
-                    <module.icon />
-                  </ListItemIcon>
-                  <ListItemText primary={module.label} />
-                </ListItem>
-              </Link>
-            ))}
-          </List>
-        </Drawer>
-        <main
-            className={clsx(classes.content, {
-            [classes.contentShift]: open,
-            })}
-        >
-          {props.children}
-        </main>
-      </div>
-  );
+                <div className={classes.drawerHeader}>
+                    <Typography
+                        variant="h6"
+                        noWrap
+                        className={classes.appBarBrand}
+                    >
+                        Fiducia Web
+                    </Typography>
+                    <IconButton onClick={handleDrawerClose}>
+                        <ChevronLeftIcon />
+                    </IconButton>
+                </div>
+                <Divider />
+                <List>
+                    {MODULES.map((module) => (
+                        <Link href={module.url}>
+                            <ListItem button key={module.label}>
+                                <ListItemIcon>
+                                    <module.icon />
+                                </ListItemIcon>
+                                <ListItemText primary={module.label} />
+                            </ListItem>
+                        </Link>
+                    ))}
+                </List>
+            </Drawer>
+            <main
+                className={clsx(classes.content, {
+                    [classes.contentShift]: open,
+                })}
+            >
+                {props.children}
+            </main>
+        </div>
+    );
 }
 
-export default function Layout(props){
+export default function Layout(props) {
     return (
         <ThemeProvider theme={theme}>
-            <BaseLayout>
-                {props.children}
-            </BaseLayout>
+            <BaseLayout>{props.children}</BaseLayout>
         </ThemeProvider>
-    )
-};
+    );
+}
