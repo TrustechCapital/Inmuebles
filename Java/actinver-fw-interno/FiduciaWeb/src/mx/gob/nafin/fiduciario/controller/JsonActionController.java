@@ -25,11 +25,11 @@ import org.springframework.web.servlet.mvc.multiaction.MultiActionController;
 
 /**
  * Clase encargada de la logica de presentacion cuando se trata del envio y recepcion de objetos JavaScript
- * @author Inscitech México inscitech@inscitechmexico.com
+ * @author Inscitech Mï¿½xico inscitech@inscitechmexico.com
  */
 public class JsonActionController extends MultiActionController {
 
-    protected static String DEFAULT_CONTENT_TYPE = null;
+    protected static String DEFAULT_CONTENT_TYPE = "application/json";
 
     protected LoggingService logger = LoggingService.getInstance();
 
@@ -65,30 +65,33 @@ public class JsonActionController extends MultiActionController {
      */
     protected ModelAndView respondObject(HttpServletResponse response, Object object) {
         response.setHeader("Cache-Control", "no-cache");
+        response.setHeader("Access-Control-Allow-Origin", "*");
 
-        if(DEFAULT_CONTENT_TYPE == null) {
-            logger.log(Thread.currentThread().getClass(), Thread.currentThread(), LoggingService.LEVEL.DEBUG, "Set default content-type to: " + DEFAULT_CONTENT_TYPE);
-            DEFAULT_CONTENT_TYPE = ConfigurationService.getInstance().getProperty("defalutContentType");            
+        if (DEFAULT_CONTENT_TYPE == null) {
+            logger.log(Thread.currentThread().getClass(), Thread.currentThread(), LoggingService.LEVEL.DEBUG,
+                       "Set default content-type to: " + DEFAULT_CONTENT_TYPE);
+            DEFAULT_CONTENT_TYPE = ConfigurationService.getInstance().getProperty("defalutContentType");
         }
-        
-        if(DEFAULT_CONTENT_TYPE != null) {
+
+        if (DEFAULT_CONTENT_TYPE != null) {
             response.setContentType(DEFAULT_CONTENT_TYPE);
         } else {
             response.setContentType("text/html;charset=ISO-8859-1");
         }
-        
+
         try {
 
             String cadenaJSON = "{}";
-    
+
             if (object instanceof List)
                 cadenaJSON = JSONArray.fromObject(object).toString();
             else
                 cadenaJSON = JSONObject.fromObject(object).toString();
 
             object = null;
-            
-            logger.log(Thread.currentThread().getClass(), Thread.currentThread(), LoggingService.LEVEL.DEBUG, "Cadena JSON: " + cadenaJSON);
+
+            logger.log(Thread.currentThread().getClass(), Thread.currentThread(), LoggingService.LEVEL.DEBUG,
+                       "Cadena JSON: " + cadenaJSON);
             response.getWriter().write(cadenaJSON);
 
         } catch (IOException e) {
@@ -105,14 +108,15 @@ public class JsonActionController extends MultiActionController {
      */
     protected void setSessionAttributesAsParameters(HttpSession session, Map parametros) {
         logger.log(this, Thread.currentThread(), LoggingService.LEVEL.DEBUG, "setSessionAttributesAsParameters");
-        
+
         Enumeration names = session.getAttributeNames();
-        
-        if(parametros == null || names == null) {
-            logger.log(this, Thread.currentThread(), LoggingService.LEVEL.DEBUG, "Parameters: " + parametros + " Names: " + names);
+
+        if (parametros == null || names == null) {
+            logger.log(this, Thread.currentThread(), LoggingService.LEVEL.DEBUG,
+                       "Parameters: " + parametros + " Names: " + names);
             return;
         }
-        
+
         while (names.hasMoreElements()) {
             String name = (String) names.nextElement();
             parametros.put(name, session.getAttribute(name));
