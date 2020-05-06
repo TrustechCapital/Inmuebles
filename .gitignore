@@ -28,6 +28,7 @@ hs_err_pid*
 
 
 #Backend
+Java/actinver-fw-interno/src
 Java/actinver-fw-interno/.data
 Java/actinver-fw-interno/.adf
 Java/actinver-fw-interno/BackEnd/classes
@@ -35,6 +36,7 @@ Java/actinver-fw-interno/EstadosDeCuenta/classes
 Java/actinver-fw-interno/FiduciaWeb/classes
 Java/actinver-fw-interno/FiduciaWeb/deploy
 
+Java/fw-interno/src
 Java/fw-interno/.data
 Java/fw-interno/.adf
 Java/fw-interno/BackEnd/classes
@@ -44,4 +46,5 @@ Java/fw-interno/FiduciaWeb/deploy
 
 #React
 React/.next
+React/out
 React/node_modules/
