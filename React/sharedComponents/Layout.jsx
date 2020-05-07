@@ -19,7 +19,6 @@ import deepOrange from '@material-ui/core/colors/deepOrange';
 import AccountCircle from '@material-ui/icons/AccountCircle';
 import ListItemIcon from '@material-ui/core/ListItemIcon';
 import ApartmentIcon from '@material-ui/icons/Apartment';
-import HomeIcon from '@material-ui/icons/Home';
 import PeopleIcon from '@material-ui/icons/People';
 import ScheduleIcon from '@material-ui/icons/Schedule';
 import InputIcon from '@material-ui/icons/Input';
@@ -98,15 +97,10 @@ const useStyles = makeStyles((theme) => ({
 }));
 
 const MODULES = [
-    { label: 'Usuarios', url: '/usuarios', icon: PeopleIcon },
-    { label: 'Inmuebles', url: '/inmuebles', icon: HomeIcon },
-    {
-        label: 'Desarrollo Inmobiliario',
-        url: '/desarrollo-inmobiliario',
-        icon: ApartmentIcon,
-    },
+    { label: 'Bienes', url: '/bienes', icon: ApartmentIcon },
     { label: 'Interfases', url: '/interfases', icon: InputIcon },
     { label: 'Apertura/Cierre', url: '/apertura', icon: ScheduleIcon },
+    { label: 'Usuarios', url: '/usuarios', icon: PeopleIcon },
 ];
 
 function BaseLayout(props) {

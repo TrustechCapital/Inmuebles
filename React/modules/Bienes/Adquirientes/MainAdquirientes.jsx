@@ -1,8 +1,8 @@
 import React, { useState } from 'react';
 
-import TableLiberaciones from './TableLiberaciones';
-import DialogLiberacion from './DialogLiberacion';
-import { OPERACIONES_CATALOGO } from '../../constants';
+import TableAdquirientes from './TableAdquirientes';
+import DialogAdquirientes from './DialogAdquirientes';
+import { OPERACIONES_CATALOGO } from '../../../constants';
 
 export default function MainAdquirientes() {
     const [modoPantalla, setModoPantalla] = useState(OPERACIONES_CATALOGO.ALTA);
@@ -18,8 +18,8 @@ export default function MainAdquirientes() {
 
     return (
         <div>
-            <TableLiberaciones onNew={handleNewModel} />
-            <DialogLiberacion
+            <TableAdquirientes onNew={handleNewModel} />
+            <DialogAdquirientes
                 mode={modoPantalla}
                 opened={detalleAbierto}
                 handleClose={handleCloseModal}

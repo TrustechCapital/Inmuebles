@@ -8,11 +8,11 @@ import InputLabel from '@material-ui/core/InputLabel';
 import Select from '@material-ui/core/Select';
 import Container from '@material-ui/core/Container';
 
-import GenericSearchForm from '../../sharedComponents/GenericSearchForm';
-import GenericTable from '../../sharedComponents/GenericTable';
-import GenericTextInput from '../../sharedComponents/GenericTextInput';
+import GenericSearchForm from '../../../sharedComponents/GenericSearchForm';
+import GenericTable from '../../../sharedComponents/GenericTable';
+import GenericTextInput from '../../../sharedComponents/GenericTextInput';
 
-import FIXTURE_GARANTIAS from '../../fixtures/garantias';
+import FIXTURE_GARANTIAS from '../../../fixtures/garantias';
 
 const COLUMNS = [
     { field: 'id', header: 'Id', isKey: true },

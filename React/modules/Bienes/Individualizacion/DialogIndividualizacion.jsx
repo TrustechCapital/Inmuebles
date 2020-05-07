@@ -2,10 +2,10 @@ import React, { useState, useEffect } from 'react';
 import { makeStyles } from '@material-ui/core/styles';
 import Grid from '@material-ui/core/Grid';
 
-import CatalogDialog from '../../sharedComponents/CatalogDialog';
-import GenericTextInput from '../../sharedComponents/GenericTextInput';
-import GenericDatePicker from '../../sharedComponents/GenericDatePicker';
-import GenericSelect from '../../sharedComponents/GenericSelect';
+import CatalogDialog from '../../../sharedComponents/CatalogDialog';
+import GenericTextInput from '../../../sharedComponents/GenericTextInput';
+import GenericDatePicker from '../../../sharedComponents/GenericDatePicker';
+import GenericSelect from '../../../sharedComponents/GenericSelect';
 
 const useStyles = makeStyles((theme) => ({
     root: {

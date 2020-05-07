@@ -1,4 +1,4 @@
-import { Api } from '../../../core/api';
+import { Api } from '../../../../core/api';
 import GarantiaResultRow from '../models/GarantiaResultRow';
 
 export type GarantiasSearchParameters = {

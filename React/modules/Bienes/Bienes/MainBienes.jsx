@@ -12,8 +12,8 @@ import MonetizationOnIcon from '@material-ui/icons/MonetizationOn';
 import TableGarantias from './TableGarantias';
 import DialogGarantias from './DialogGarantias';
 import DialogBienesGarantias from './DialogBienesGar';
-import GenericTable from '../../sharedComponents/GenericTable';
-import { OPERACIONES_CATALOGO } from '../../constants';
+import GenericTable from '../../../sharedComponents/GenericTable';
+import { OPERACIONES_CATALOGO } from '../../../constants';
 import { garantiasApi } from './services';
 
 const COLUMNS_BIENES = [

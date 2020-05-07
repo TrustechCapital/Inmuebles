@@ -2,11 +2,10 @@ import React, { useState, useEffect } from 'react';
 import { makeStyles } from '@material-ui/core/styles';
 import Grid from '@material-ui/core/Grid';
 
-import GenericSwitch from '../../sharedComponents/GenericSwitch';
-import CatalogDialog from '../../sharedComponents/CatalogDialog';
-import GenericTextInput from '../../sharedComponents/GenericTextInput';
-import GenericDatePicker from '../../sharedComponents/GenericDatePicker';
-import GenericSelect from '../../sharedComponents/GenericSelect';
+import CatalogDialog from '../../../sharedComponents/CatalogDialog';
+import GenericTextInput from '../../../sharedComponents/GenericTextInput';
+import GenericDatePicker from '../../../sharedComponents/GenericDatePicker';
+import GenericSelect from '../../../sharedComponents/GenericSelect';
 
 const useStyles = makeStyles((theme) => ({
     root: {
@@ -37,7 +36,7 @@ const useStyles = makeStyles((theme) => ({
         minWidth: '75ch',
     },
 }));
-export default function BienesDialog(props) {
+export default function DialogAdquirientes(props) {
     const { mode, selected } = props;
 
     const [selectedDate, setSelectedDate] = useState(new Date('2020-04-20'));
@@ -98,8 +97,8 @@ export default function BienesDialog(props) {
         <CatalogDialog
             opened={props.opened}
             operacionCatalogo={mode}
-            nombreCatalogo="Bienes"
-            subtitle="Bienes en Garantía"
+            nombreCatalogo="Adquirientes"
+            subtitle="Adquirientes"
             onCancel={props.handleClose}
             onAccept={handleAccept}
         >
@@ -113,53 +112,76 @@ export default function BienesDialog(props) {
                     <Grid item xs={6}>
                         <GenericTextInput
                             label="Fideicomiso"
-                            idCampo="fgrsIdFideicomiso"
+                            idCampo="fadqIdFideicomiso"
+                            helper="Fideicomiso a asignar bienes"
                             required={true}
-                            value=""
+                            value="0000"
                         />
                     </Grid>
                     <Grid item xs={6}>
-                        <GenericSelect
-                            labelId="ID Garantía"
-                            label="ID Garantía"
-                            selectId="fgarCveGarantia"
-                            selected={state.age}
-                            onChange={handleChange}
+                        <GenericTextInput
+                            label="Sub Cuenta"
+                            idCampo="fadqIdSubcuenta"
+                            helper="SubFiso"
+                            required={true}
+                            value="0000"
                         />
                     </Grid>
                 </Grid>
                 <Grid container className={classes.rowSpacing} spacing={3}>
                     <Grid item xs={6}>
                         <GenericTextInput
-                            label="SubCuenta"
-                            idCampo="fgrsIdSubcuenta"
+                            label="Expediente Catastro"
+                            idCampo="fadqExpCatast"
+                            helper="SubFiso"
                             required={true}
-                            value=""
+                            value="0000"
                         />
                     </Grid>
                     <Grid item xs={6}>
                         <GenericTextInput
-                            label="ID Bien"
-                            idCampo="forsIdGarantia"
+                            label="Número de Inmueble"
+                            idCampo="fadqIdBien"
+                            helper="SubFiso"
                             required={true}
-                            value=""
+                            value="0000"
                         />
                     </Grid>
                 </Grid>
                 <Grid container className={classes.rowSpacing} spacing={3}>
                     <Grid item xs={6}>
-                        <GenericSelect
-                            labelId="Clave Bien"
-                            label="Clave de Bien"
-                            selectId="forsCveTipoBien"
-                            selected={state.age}
-                            onChange={handleChange}
+                        <GenericTextInput
+                            label="Edificio"
+                            idCampo="fadqIdEdificio"
+                            helper="SubFiso"
+                            required={true}
+                            value="0000"
+                        />
+                    </Grid>
+                    <Grid item xs={6}>
+                        <GenericTextInput
+                            label="Número de Unidad"
+                            idCampo="fadqIdDepto"
+                            helper="SubFiso"
+                            required={true}
+                            value="0000"
+                        />
+                    </Grid>
+                </Grid>
+                <Grid container className={classes.rowSpacing} spacing={3}>
+                    <Grid item xs={6}>
+                        <GenericTextInput
+                            label="Adquiriente"
+                            idCampo="fadqNombreComprador"
+                            helper="SubFiso"
+                            required={true}
+                            value="0000"
                         />
                     </Grid>
                     <Grid item xs={6}>
                         <GenericDatePicker
-                            labelSelector="Fecha Vencimiento"
-                            idSelector="forsFecVencimiento"
+                            idSelector="fadqFecEscricom"
+                            labelSelector="Fecha de Escritura"
                             selectedDate={selectedDate}
                             onChange={handleDateChangeSal}
                         />
@@ -168,140 +190,120 @@ export default function BienesDialog(props) {
                 <Grid container className={classes.rowSpacing} spacing={3}>
                     <Grid item xs={6}>
                         <GenericTextInput
-                            label="Bajo Regimen en Condominio"
-                            idCampo="forsRegimenChk"
+                            label="Desarrollo"
+                            idCampo="fadqNomComprador"
+                            helper="SubFiso"
                             required={true}
-                            value=""
-                        />
-                    </Grid>
-                    <Grid item xs={6}>
-                        <GenericTextInput
-                            label="Descripción"
-                            idCampo="forsTextoDescrip"
-                            required={true}
-                            value=""
-                        />
-                    </Grid>
-                </Grid>
-                <Grid container className={classes.rowSpacing} spacing={3}>
-                    <Grid item xs={6}>
-                        <GenericSwitch
-                            nombreCampo="forsCveRevaluaChk"
-                            label="Revalua"
-                            idCampo="forsCveRevaluaChk"
-                            onChange={handleChangeChk}
-                            activo={state.fgarCveRevaluaChk}
-                        />
-                    </Grid>
-                    <Grid item xs={6}>
-                        <GenericTextInput
-                            label="Importe"
-                            idCampo="forsImpBien"
-                            required={true}
-                            value=""
-                        />
-                    </Grid>
-                </Grid>
-                <Grid container className={classes.rowSpacing} spacing={3}>
-                    <Grid item xs={6}>
-                        <GenericTextInput
-                            label="Importe Última Valuación"
-                            idCampo="forsImpUltValua"
-                            required={true}
-                            value=""
-                        />
-                    </Grid>
-                    <Grid item xs={6}>
-                        <GenericSelect
-                            labelId="Moneda"
-                            label="Moneda"
-                            selectId="forsMoneda"
-                            selected={state.age}
-                            onChange={handleChange}
-                        />
-                    </Grid>
-                </Grid>
-                <Grid container className={classes.rowSpacing} spacing={3}>
-                    <Grid item xs={6}>
-                        <GenericDatePicker
-                            labelSelector="Fecha Última Valuación"
-                            idSelector="forsFecUltValua"
-                            selectedDate={selectedDate}
-                            onChange={handleDateChangeSal}
-                        />
-                    </Grid>
-                    <Grid item xs={6}>
-                        <GenericTextInput
-                            label="Tipo de Cambio"
-                            idCampo="fbifTipoCambio"
-                            required={true}
-                            value=""
-                        />
-                    </Grid>
-                </Grid>
-                <Grid container className={classes.rowSpacing} spacing={3}>
-                    <Grid item xs={6}>
-                        <GenericSelect
-                            labelId="Periodicidad"
-                            label="Periodicidad"
-                            selectId="forsCvePerValua"
-                            selected={state.age}
-                            onChange={handleChange}
+                            value="0000"
                         />
                     </Grid>
                     <Grid item xs={6}>
                         <GenericTextInput
                             label="Escritura"
-                            idCampo="forsNumEscritura"
+                            idCampo="fadqNumEscrcom"
+                            helper="SubFiso"
                             required={true}
-                            value=""
+                            value="0000"
                         />
                     </Grid>
                 </Grid>
                 <Grid container className={classes.rowSpacing} spacing={3}>
                     <Grid item xs={6}>
                         <GenericTextInput
-                            label="Comentario"
-                            idCampo="forsTexComentario"
+                            label="Prototipo"
+                            idCampo="fadqPrototipo"
+                            helper="SubFiso"
                             required={true}
-                            value=""
+                            value="0000"
                         />
                     </Grid>
                     <Grid item xs={6}>
                         <GenericTextInput
-                            label="Notario"
-                            idCampo="forsNumNotario"
+                            label="Número Oficial"
+                            idCampo="fadqNumeroOficial"
+                            helper="SubFiso"
                             required={true}
-                            value=""
+                            value="0000"
+                        />
+                    </Grid>
+                </Grid>
+                <Grid container className={classes.rowSpacing} spacing={3}>
+                    <Grid item xs={6}>
+                        <GenericTextInput
+                            label="Notaría"
+                            idCampo="fadqNotaria"
+                            helper="SubFiso"
+                            required={true}
+                            value="0000"
+                        />
+                    </Grid>
+                    <Grid item xs={6}>
+                        <GenericTextInput
+                            label="Delegados Funcionarios"
+                            idCampo="fadqDelegadoFiduciario"
+                            helper="SubFiso"
+                            required={true}
+                            value="0000"
+                        />
+                    </Grid>
+                </Grid>
+                <Grid container className={classes.rowSpacing} spacing={3}>
+                    <Grid item xs={6}>
+                        <GenericTextInput
+                            label="Valor Liberación"
+                            idCampo="fadqValor"
+                            helper="SubFiso"
+                            required={true}
+                            value="0000"
+                        />
+                    </Grid>
+                    <Grid item xs={6}>
+                        <GenericSelect
+                            labelId="Notario"
+                            label="Notario"
+                            selectId="fadqNotario"
+                            selected={state.periodicidad}
+                            onChange={handleChangePeriodi}
                         />
                     </Grid>
                 </Grid>
                 <Grid container className={classes.rowSpacing} spacing={3}>
                     <Grid item xs={6}>
                         <GenericSelect
-                            labelId="Estatus"
-                            label="Estatus"
-                            selectId="forsCveStatus"
-                            selected={state.age}
-                            onChange={handleChange}
+                            labelId="Moneda"
+                            label="Moneda"
+                            selectId="fadqMoneda"
+                            selected={state.periodicidad}
+                            onChange={handleChangePeriodi}
                         />
                     </Grid>
                     <Grid item xs={6}>
                         <GenericTextInput
-                            label="Importe Revaluación"
-                            idCampo="txtImporteRevaluacion"
+                            label="Localidad"
+                            idCampo="fadqLocalidad"
+                            helper="SubFiso"
                             required={true}
-                            value=""
+                            value="0000"
                         />
                     </Grid>
                 </Grid>
                 <Grid container className={classes.rowSpacing} spacing={3}>
                     <Grid item xs={6}>
-                        <GenericDatePicker
-                            labelSelector="Fecha"
-                            idSelector="txtFecha"
-                            selectedDate={selectedDate}
-                            onChange={handleDateChangeSal}
+                        <GenericSelect
+                            labelId="Tipo de Venta"
+                            label="Tipo de Venta"
+                            selectId="fadqTipoVenta"
+                            selected={state.periodicidad}
+                            onChange={handleChangePeriodi}
+                        />
+                    </Grid>
+                    <Grid item xs={6}>
+                        <GenericSelect
+                            labelId="Estatus"
+                            label="Estatus"
+                            selectId="fadqStatus"
+                            selected={state.periodicidad}
+                            onChange={handleChangePeriodi}
                         />
                     </Grid>
                 </Grid>

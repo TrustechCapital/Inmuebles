@@ -7,19 +7,18 @@ import FormControl from '@material-ui/core/FormControl';
 import InputLabel from '@material-ui/core/InputLabel';
 import Select from '@material-ui/core/Select';
 
-import GenericSearchForm from '../../sharedComponents/GenericSearchForm';
-import GenericTable from '../../sharedComponents/GenericTable';
-import FIXTURE_GARANTIAS from '../../fixtures/garantias';
+import GenericSearchForm from '../../../sharedComponents/GenericSearchForm';
+import GenericTable from '../../../sharedComponents/GenericTable';
 
 const COLUMNS = [
     { field: 'fadqIdFideicomiso', header: 'Fideicomiso', isKey: true },
     { field: 'fadqIdSubcuenta', header: 'SubFiso' },
     { field: 'fadqTipo', header: 'Inmueble' },
     { field: 'fadqIdBien', header: 'Edificio' },
-    { field: 'fadqIdDepto', header: 'Depto' },
-    { field: 'fadqIdVenta', header: 'Periodo Venta' },
-    { field: 'fadqNombreComprador', header: 'Adquiriente' },
-    { field: 'fadqSaldo', header: 'Saldo', numeric: true },
+    { field: 'fadqIdDepto', header: 'Num. Unidad' },
+    { field: 'fadqIdVenta', header: 'Registro Contable' },
+    { field: 'fadqNombreComprador', header: 'Moneda' },
+    { field: 'fadqSaldo', header: 'Estatus' },
 ];
 
 const useStyles = makeStyles((theme) => ({
@@ -28,7 +27,7 @@ const useStyles = makeStyles((theme) => ({
     },
 }));
 
-export default function TableAdquirientes(props) {
+export default function TableGarantias(props) {
     const classes = useStyles();
 
     return (
@@ -56,27 +55,11 @@ export default function TableAdquirientes(props) {
                             <Grid item xs={4}>
                                 <TextField
                                     id="paramIdFideicomiso"
-                                    label="Num. Inmueble"
-                                    fullWidth
-                                />
-                            </Grid>
-                            <Grid item xs={4}>
-                                <TextField
-                                    id="paramIdFideicomiso"
                                     label="Num. Unidad"
                                     fullWidth
                                 />
                             </Grid>
-                        </Grid>
-                        <Grid container spacing={4}>
-                            <Grid item xs={5}>
-                                <TextField
-                                    id="paramIdFideicomiso"
-                                    label="Adquiriente"
-                                    fullWidth
-                                />
-                            </Grid>
-                            <Grid item xs={3}>
+                            <Grid item xs={4}>
                                 <FormControl fullWidth>
                                     <InputLabel htmlFor="tipoBien">
                                         Estatus
@@ -84,20 +67,13 @@ export default function TableAdquirientes(props) {
                                     <Select labelId="tipoBien" displayEmpty />
                                 </FormControl>
                             </Grid>
-                            <Grid item xs={4}>
-                                <TextField
-                                    id="paramDescripcion"
-                                    label="Expediente catastro"
-                                    fullWidth
-                                />
-                            </Grid>
                         </Grid>
                     </Grid>
                 </GenericSearchForm>
             </Grid>
             <Grid container spacing={1}>
                 <GenericTable
-                    title="Adquirientes"
+                    title="Liberaciones"
                     data={[]}
                     columns={COLUMNS}
                     onSelect={props.onSelect}
