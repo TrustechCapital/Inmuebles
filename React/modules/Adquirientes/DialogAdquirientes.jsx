@@ -115,7 +115,7 @@ export default function DialogAdquirientes(props) {
                             idCampo="fadqIdFideicomiso"
                             helper="Fideicomiso a asignar bienes"
                             required={true}
-                            defaultVal="0000"
+                            value="0000"
                         />
                     </Grid>
                     <Grid item xs={6}>
@@ -124,7 +124,7 @@ export default function DialogAdquirientes(props) {
                             idCampo="fadqIdSubcuenta"
                             helper="SubFiso"
                             required={true}
-                            defaultVal="0000"
+                            value="0000"
                         />
                     </Grid>
                 </Grid>
@@ -135,7 +135,7 @@ export default function DialogAdquirientes(props) {
                             idCampo="fadqExpCatast"
                             helper="SubFiso"
                             required={true}
-                            defaultVal="0000"
+                            value="0000"
                         />
                     </Grid>
                     <Grid item xs={6}>
@@ -144,7 +144,7 @@ export default function DialogAdquirientes(props) {
                             idCampo="fadqIdBien"
                             helper="SubFiso"
                             required={true}
-                            defaultVal="0000"
+                            value="0000"
                         />
                     </Grid>
                 </Grid>
@@ -155,7 +155,7 @@ export default function DialogAdquirientes(props) {
                             idCampo="fadqIdEdificio"
                             helper="SubFiso"
                             required={true}
-                            defaultVal="0000"
+                            value="0000"
                         />
                     </Grid>
                     <Grid item xs={6}>
@@ -164,7 +164,7 @@ export default function DialogAdquirientes(props) {
                             idCampo="fadqIdDepto"
                             helper="SubFiso"
                             required={true}
-                            defaultVal="0000"
+                            value="0000"
                         />
                     </Grid>
                 </Grid>
@@ -175,7 +175,7 @@ export default function DialogAdquirientes(props) {
                             idCampo="fadqNombreComprador"
                             helper="SubFiso"
                             required={true}
-                            defaultVal="0000"
+                            value="0000"
                         />
                     </Grid>
                     <Grid item xs={6}>
@@ -194,7 +194,7 @@ export default function DialogAdquirientes(props) {
                             idCampo="fadqNomComprador"
                             helper="SubFiso"
                             required={true}
-                            defaultVal="0000"
+                            value="0000"
                         />
                     </Grid>
                     <Grid item xs={6}>
@@ -203,7 +203,7 @@ export default function DialogAdquirientes(props) {
                             idCampo="fadqNumEscrcom"
                             helper="SubFiso"
                             required={true}
-                            defaultVal="0000"
+                            value="0000"
                         />
                     </Grid>
                 </Grid>
@@ -214,7 +214,7 @@ export default function DialogAdquirientes(props) {
                             idCampo="fadqPrototipo"
                             helper="SubFiso"
                             required={true}
-                            defaultVal="0000"
+                            value="0000"
                         />
                     </Grid>
                     <Grid item xs={6}>
@@ -223,7 +223,7 @@ export default function DialogAdquirientes(props) {
                             idCampo="fadqNumeroOficial"
                             helper="SubFiso"
                             required={true}
-                            defaultVal="0000"
+                            value="0000"
                         />
                     </Grid>
                 </Grid>
@@ -234,7 +234,7 @@ export default function DialogAdquirientes(props) {
                             idCampo="fadqNotaria"
                             helper="SubFiso"
                             required={true}
-                            defaultVal="0000"
+                            value="0000"
                         />
                     </Grid>
                     <Grid item xs={6}>
@@ -243,7 +243,7 @@ export default function DialogAdquirientes(props) {
                             idCampo="fadqDelegadoFiduciario"
                             helper="SubFiso"
                             required={true}
-                            defaultVal="0000"
+                            value="0000"
                         />
                     </Grid>
                 </Grid>
@@ -254,7 +254,7 @@ export default function DialogAdquirientes(props) {
                             idCampo="fadqValor"
                             helper="SubFiso"
                             required={true}
-                            defaultVal="0000"
+                            value="0000"
                         />
                     </Grid>
                     <Grid item xs={6}>
@@ -283,7 +283,7 @@ export default function DialogAdquirientes(props) {
                             idCampo="fadqLocalidad"
                             helper="SubFiso"
                             required={true}
-                            defaultVal="0000"
+                            value="0000"
                         />
                     </Grid>
                 </Grid>

@@ -114,7 +114,7 @@ export default function DialogLiberaciones(props) {
                             label="Fideicomiso"
                             idCampo="funiIdFideicomiso"
                             required={true}
-                            defaultVal=""
+                            value=""
                         />
                     </Grid>
                     <Grid item xs={6}>
@@ -122,7 +122,7 @@ export default function DialogLiberaciones(props) {
                             label="Número de Inmueble"
                             idCampo="funiIdBien"
                             required={true}
-                            defaultVal=""
+                            value=""
                         />
                     </Grid>
                 </Grid>
@@ -132,7 +132,7 @@ export default function DialogLiberaciones(props) {
                             label="SubCuenta"
                             idCampo="funiIdSubcuenta"
                             required={true}
-                            defaultVal=""
+                            value=""
                         />
                     </Grid>
                     <Grid item xs={6}>
@@ -140,7 +140,7 @@ export default function DialogLiberaciones(props) {
                             label="Edificio"
                             idCampo="funiIdSubcuenta"
                             required={true}
-                            defaultVal=""
+                            value=""
                         />
                     </Grid>
                 </Grid>
@@ -150,7 +150,7 @@ export default function DialogLiberaciones(props) {
                             label="Unidad Condominal"
                             idCampo="funiIdDepto"
                             required={true}
-                            defaultVal=""
+                            value=""
                         />
                     </Grid>
                     <Grid item xs={6}>
@@ -158,7 +158,7 @@ export default function DialogLiberaciones(props) {
                             label="Niveles"
                             idCampo="funiNiveles"
                             required={true}
-                            defaultVal=""
+                            value=""
                         />
                     </Grid>
                 </Grid>
@@ -168,7 +168,7 @@ export default function DialogLiberaciones(props) {
                             label="Calle"
                             idCampo="funiCalleNum"
                             required={true}
-                            defaultVal=""
+                            value=""
                         />
                     </Grid>
                     <Grid item xs={6}>
@@ -176,7 +176,7 @@ export default function DialogLiberaciones(props) {
                             label="Colonia"
                             idCampo="funiNomColonia"
                             required={true}
-                            defaultVal=""
+                            value=""
                         />
                     </Grid>
                 </Grid>
@@ -186,7 +186,7 @@ export default function DialogLiberaciones(props) {
                             label="Población"
                             idCampo="funiNomPoblacion"
                             required={true}
-                            defaultVal=""
+                            value=""
                         />
                     </Grid>
                     <Grid item xs={6}>
@@ -194,7 +194,7 @@ export default function DialogLiberaciones(props) {
                             label="Código Postal"
                             idCampo="funiCodigoPostal"
                             required={true}
-                            defaultVal=""
+                            value=""
                         />
                     </Grid>
                 </Grid>
@@ -224,7 +224,7 @@ export default function DialogLiberaciones(props) {
                             label="Estacionamiento 1"
                             idCampo="funiEstacionamiento1"
                             required={true}
-                            defaultVal=""
+                            value=""
                         />
                     </Grid>
                     <Grid item xs={6}>
@@ -232,7 +232,7 @@ export default function DialogLiberaciones(props) {
                             label="Estacionamiento 2"
                             idCampo="funiEstacionamiento2"
                             required={true}
-                            defaultVal=""
+                            value=""
                         />
                     </Grid>
                 </Grid>
@@ -242,7 +242,7 @@ export default function DialogLiberaciones(props) {
                             label="Estacionamiento 3"
                             idCampo="funiEstacionamiento3"
                             required={true}
-                            defaultVal=""
+                            value=""
                         />
                     </Grid>
                     <Grid item xs={6}>
@@ -250,7 +250,7 @@ export default function DialogLiberaciones(props) {
                             label="Otro"
                             idCampo="funiRoofGarden"
                             required={true}
-                            defaultVal=""
+                            value=""
                         />
                     </Grid>
                 </Grid>
@@ -260,7 +260,7 @@ export default function DialogLiberaciones(props) {
                             label="Superficie Otro"
                             idCampo="funiRoofSuperficie"
                             required={true}
-                            defaultVal=""
+                            value=""
                         />
                     </Grid>
                     <Grid item xs={6}>
@@ -268,7 +268,7 @@ export default function DialogLiberaciones(props) {
                             label="Otro 2"
                             idCampo="funiSotano"
                             required={true}
-                            defaultVal=""
+                            value=""
                         />
                     </Grid>
                 </Grid>
@@ -278,7 +278,7 @@ export default function DialogLiberaciones(props) {
                             label="Superficie Otro 2"
                             idCampo="funiSotanoSuperficie"
                             required={true}
-                            defaultVal=""
+                            value=""
                         />
                     </Grid>
                     <Grid item xs={6}>
@@ -286,7 +286,7 @@ export default function DialogLiberaciones(props) {
                             label="Indiviso"
                             idCampo="funiIndiviso"
                             required={true}
-                            defaultVal=""
+                            value=""
                         />
                     </Grid>
                 </Grid>
@@ -296,7 +296,7 @@ export default function DialogLiberaciones(props) {
                             label="Registro Contable"
                             idCampo="funiPrecio"
                             required={true}
-                            defaultVal=""
+                            value=""
                         />
                     </Grid>
                     <Grid item xs={6}>
@@ -304,7 +304,7 @@ export default function DialogLiberaciones(props) {
                             label="Precio Catastro"
                             idCampo="funiPrecioCatastro"
                             required={true}
-                            defaultVal=""
+                            value=""
                         />
                     </Grid>
                 </Grid>
@@ -334,7 +334,7 @@ export default function DialogLiberaciones(props) {
                             label="Acto 1"
                             idCampo="funiActo1"
                             required={true}
-                            defaultVal=""
+                            value=""
                         />
                     </Grid>
                     <Grid item xs={6}>
@@ -342,7 +342,7 @@ export default function DialogLiberaciones(props) {
                             label="Acto 2"
                             idCampo="funiActo2"
                             required={true}
-                            defaultVal=""
+                            value=""
                         />
                     </Grid>
                 </Grid>
@@ -352,7 +352,7 @@ export default function DialogLiberaciones(props) {
                             label="Acto 3"
                             idCampo="funiActo3"
                             required={true}
-                            defaultVal=""
+                            value=""
                         />
                     </Grid>
                     <Grid item xs={6}>
@@ -360,7 +360,7 @@ export default function DialogLiberaciones(props) {
                             label="Acto 4"
                             idCampo="funiActo4"
                             required={true}
-                            defaultVal=""
+                            value=""
                         />
                     </Grid>
                 </Grid>
@@ -370,7 +370,7 @@ export default function DialogLiberaciones(props) {
                             label="Notario"
                             idCampo="funiNotario"
                             required={true}
-                            defaultVal=""
+                            value=""
                         />
                     </Grid>
                     <Grid item xs={6}>
@@ -378,7 +378,7 @@ export default function DialogLiberaciones(props) {
                             label="Escritura"
                             idCampo="funiNumEscritura"
                             required={true}
-                            defaultVal=""
+                            value=""
                         />
                     </Grid>
                 </Grid>
@@ -388,7 +388,7 @@ export default function DialogLiberaciones(props) {
                             label="Folio"
                             idCampo="funiFolioReal"
                             required={true}
-                            defaultVal=""
+                            value=""
                         />
                     </Grid>
                     <Grid item xs={6}>

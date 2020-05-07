@@ -115,7 +115,7 @@ export default function BienesDialog(props) {
                             label="Fideicomiso"
                             idCampo="fgrsIdFideicomiso"
                             required={true}
-                            defaultVal=""
+                            value=""
                         />
                     </Grid>
                     <Grid item xs={6}>
@@ -134,7 +134,7 @@ export default function BienesDialog(props) {
                             label="SubCuenta"
                             idCampo="fgrsIdSubcuenta"
                             required={true}
-                            defaultVal=""
+                            value=""
                         />
                     </Grid>
                     <Grid item xs={6}>
@@ -142,7 +142,7 @@ export default function BienesDialog(props) {
                             label="ID Bien"
                             idCampo="forsIdGarantia"
                             required={true}
-                            defaultVal=""
+                            value=""
                         />
                     </Grid>
                 </Grid>
@@ -171,7 +171,7 @@ export default function BienesDialog(props) {
                             label="Bajo Regimen en Condominio"
                             idCampo="forsRegimenChk"
                             required={true}
-                            defaultVal=""
+                            value=""
                         />
                     </Grid>
                     <Grid item xs={6}>
@@ -179,7 +179,7 @@ export default function BienesDialog(props) {
                             label="Descripción"
                             idCampo="forsTextoDescrip"
                             required={true}
-                            defaultVal=""
+                            value=""
                         />
                     </Grid>
                 </Grid>
@@ -198,7 +198,7 @@ export default function BienesDialog(props) {
                             label="Importe"
                             idCampo="forsImpBien"
                             required={true}
-                            defaultVal=""
+                            value=""
                         />
                     </Grid>
                 </Grid>
@@ -208,7 +208,7 @@ export default function BienesDialog(props) {
                             label="Importe Última Valuación"
                             idCampo="forsImpUltValua"
                             required={true}
-                            defaultVal=""
+                            value=""
                         />
                     </Grid>
                     <Grid item xs={6}>
@@ -235,7 +235,7 @@ export default function BienesDialog(props) {
                             label="Tipo de Cambio"
                             idCampo="fbifTipoCambio"
                             required={true}
-                            defaultVal=""
+                            value=""
                         />
                     </Grid>
                 </Grid>
@@ -254,7 +254,7 @@ export default function BienesDialog(props) {
                             label="Escritura"
                             idCampo="forsNumEscritura"
                             required={true}
-                            defaultVal=""
+                            value=""
                         />
                     </Grid>
                 </Grid>
@@ -264,7 +264,7 @@ export default function BienesDialog(props) {
                             label="Comentario"
                             idCampo="forsTexComentario"
                             required={true}
-                            defaultVal=""
+                            value=""
                         />
                     </Grid>
                     <Grid item xs={6}>
@@ -272,7 +272,7 @@ export default function BienesDialog(props) {
                             label="Notario"
                             idCampo="forsNumNotario"
                             required={true}
-                            defaultVal=""
+                            value=""
                         />
                     </Grid>
                 </Grid>
@@ -291,7 +291,7 @@ export default function BienesDialog(props) {
                             label="Importe Revaluación"
                             idCampo="txtImporteRevaluacion"
                             required={true}
-                            defaultVal=""
+                            value=""
                         />
                     </Grid>
                 </Grid>

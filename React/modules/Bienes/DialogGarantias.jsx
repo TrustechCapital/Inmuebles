@@ -96,7 +96,7 @@ export default function BienesDialog(props) {
                             idCampo="fgarIdFideicomiso"
                             helper="Fideicomiso a asignar bienes"
                             required={true}
-                            defaultVal=""
+                            value=""
                         />
                     </Grid>
                     <Grid item xs={6}>
@@ -104,7 +104,7 @@ export default function BienesDialog(props) {
                             label="Nombre de Fideicomiso"
                             idCampo="fgarNomFideicomiso"
                             readOnly={true}
-                            defaultVal=""
+                            value=""
                         />
                     </Grid>
                 </Grid>
@@ -115,7 +115,7 @@ export default function BienesDialog(props) {
                             idCampo="fgarIdSubcuenta"
                             helper="SubFiso"
                             required={true}
-                            defaultVal=""
+                            value=""
                         />
                     </Grid>
                     <Grid item xs={6}>
@@ -134,7 +134,7 @@ export default function BienesDialog(props) {
                             label="Importe Garantizado"
                             idCampo="fgarImpGarantizad"
                             required={false}
-                            defaultVal=""
+                            value=""
                         />
                     </Grid>
                     <Grid item xs={6}>
@@ -142,7 +142,7 @@ export default function BienesDialog(props) {
                             label="Descripcion"
                             idCampo="fgarTexGarantia"
                             required={false}
-                            defaultVal=""
+                            value=""
                         />
                     </Grid>
                 </Grid>
@@ -152,7 +152,7 @@ export default function BienesDialog(props) {
                             label="Importe Última Valuación"
                             idCampo="fgarImpUltValua"
                             required={false}
-                            defaultVal=""
+                            value=""
                         />
                     </Grid>
                     <Grid item xs={6}>
@@ -160,7 +160,7 @@ export default function BienesDialog(props) {
                             label="Comentario"
                             idCampo="fgarTexComentario"
                             required={false}
-                            defaultVal=""
+                            value=""
                         />
                     </Grid>
                 </Grid>
@@ -200,7 +200,7 @@ export default function BienesDialog(props) {
                             label="Importe Bien"
                             idCampo="fgarImpGarantia"
                             required={true}
-                            defaultVal="00.00"
+                            value="00.00"
                             adornment="$"
                         />
                     </Grid>
@@ -209,7 +209,7 @@ export default function BienesDialog(props) {
                             label="Picnorado"
                             idCampo="fgarPjePicnorado"
                             required={true}
-                            defaultVal="00.00"
+                            value="00.00"
                             adornment="%"
                         />
                     </Grid>

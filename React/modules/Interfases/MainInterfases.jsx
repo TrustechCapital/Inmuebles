@@ -71,7 +71,7 @@ export default function MainCargaMasiva() {
                                     label="Nombre de Archivo"
                                     idCampo="txtNomArch"
                                     required={true}
-                                    defaultVal=""
+                                    value=""
                                 />
                             </FormControl>
                         </Grid>
