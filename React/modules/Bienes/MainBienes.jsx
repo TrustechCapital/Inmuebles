@@ -91,17 +91,10 @@ export default function MainBienes() {
         detalleBienesGarantiasAbierto,
         setDetalleBienesGarantiasAbierto,
     ] = useState(false);
+
     const [showBienesGarantiaActions, setShowBienesGarantiaActions] = useState(
         false
     );
-
-    useEffect(() => {
-        const fetchAllGarantias = async () => {
-            const garantias = await garantiasApi.findAll();
-            setGarantiasList(garantias);
-        };
-        fetchAllGarantias();
-    }, []);
 
     function handleCloseModal() {
         setDetalleAbierto(false);
@@ -123,12 +116,28 @@ export default function MainBienes() {
         setDetalleBienesGarantiasAbierto(true);
     }
 
+    async function searchGarantias({ params }) {
+        let { idFideicomiso } = params;
+
+        //TODO: manejar tipo de dato desde los componentes
+        if (idFideicomiso.trim() !== '') {
+            idFideicomiso = parseInt(idFideicomiso, 10);
+        }
+
+        const garantias = await garantiasApi.find({
+            ...params,
+            idFideicomiso: idFideicomiso,
+        });
+        setGarantiasList(garantias);
+    }
+
     return (
         <div>
             <TableGarantias
                 data={garantiasList}
                 onNew={handleNuevaGarantia}
                 onSelect={handleSelectGarantia}
+                onSearch={searchGarantias}
             />
             <Grid
                 container

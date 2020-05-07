@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState, useReducer } from 'react';
 import { makeStyles } from '@material-ui/core/styles';
 import MenuItem from '@material-ui/core/MenuItem';
 import Grid from '@material-ui/core/Grid';
@@ -10,19 +10,21 @@ import Container from '@material-ui/core/Container';
 
 import GenericSearchForm from '../../sharedComponents/GenericSearchForm';
 import GenericTable from '../../sharedComponents/GenericTable';
+import GenericTextInput from '../../sharedComponents/GenericTextInput';
+
 import FIXTURE_GARANTIAS from '../../fixtures/garantias';
 
 const COLUMNS = [
     { field: 'id', header: 'Id', isKey: true },
-    { field: 'fgarIdFideicomiso', header: 'Fideicomiso' },
-    { field: 'fgarCveGarantia2', header: 'Tipo de Bien' },
-    { field: 'fgarImpGarantiaFormatted', header: 'Importe', numeric: true },
+    { field: 'idFideicomiso', header: 'Fideicomiso' },
+    { field: 'claveGarantia', header: 'Tipo de Bien' },
+    { field: 'importeGarantiaFormateado', header: 'Importe', numeric: true },
     {
-        field: 'fgarImpGarantizadFormatted',
+        field: 'importeGarantiaGarantizadoYFormateado',
         header: 'Importe Garantizado',
         numeric: true,
     },
-    { field: 'fgarCveStatus', header: 'Estatus' },
+    { field: 'claveEstatus', header: 'Estatus' },
 ];
 
 const useStyles = makeStyles((theme) => ({
@@ -31,9 +33,32 @@ const useStyles = makeStyles((theme) => ({
     },
 }));
 
+function searchParamsReducer(state, action) {
+    switch (action.type) {
+        case 'change':
+            return {
+                ...state,
+                [action.field]: action.value,
+            };
+    }
+}
+
+const initialState = {
+    idFideicomiso: '',
+    idSubcuenta: '',
+    claveGarantia: '',
+};
+
 export default function TableGarantias(props) {
-    const { data, onSelect, onNew } = props;
+    const { data, onSelect, onNew, onSearch } = props;
     const classes = useStyles();
+    const [state, dispatch] = useReducer(searchParamsReducer, initialState);
+
+    const handleSearch = () => {
+        onSearch({
+            params: state,
+        });
+    };
 
     return (
         <div>
@@ -43,7 +68,7 @@ export default function TableGarantias(props) {
                 direction="column"
                 className={classes.rowSpacing}
             >
-                <GenericSearchForm>
+                <GenericSearchForm onSearch={handleSearch}>
                     <Grid container spacing={1} direction="column">
                         <Grid
                             container
@@ -51,10 +76,16 @@ export default function TableGarantias(props) {
                             spacing={4}
                         >
                             <Grid item xs={3}>
-                                <TextField
-                                    id="paramIdFideicomiso"
+                                <GenericTextInput
                                     label="Id Fideicomiso"
-                                    fullWidth
+                                    value={state.idFideicomiso}
+                                    onChange={(e) =>
+                                        dispatch({
+                                            type: 'change',
+                                            field: 'idFideicomiso',
+                                            value: e.target.value,
+                                        })
+                                    }
                                 />
                             </Grid>
                             <Grid container xs={9} alignItems="center">
@@ -63,10 +94,16 @@ export default function TableGarantias(props) {
                         </Grid>
                         <Grid container spacing={4}>
                             <Grid item xs={2}>
-                                <TextField
-                                    id="paramSubfiso"
+                                <GenericTextInput
                                     label="Id Subcuenta"
-                                    fullWidth
+                                    value={state.idSubcuenta}
+                                    onChange={(e) =>
+                                        dispatch({
+                                            type: 'change',
+                                            field: 'idSubcuenta',
+                                            value: e.target.value,
+                                        })
+                                    }
                                 />
                             </Grid>
                             <Grid item xs={3}>
@@ -80,13 +117,6 @@ export default function TableGarantias(props) {
                                         <MenuItem value={2}>Tipo 2</MenuItem>
                                     </Select>
                                 </FormControl>
-                            </Grid>
-                            <Grid item xs={7}>
-                                <TextField
-                                    id="paramDescripcion"
-                                    label="Descripcion"
-                                    fullWidth
-                                />
                             </Grid>
                         </Grid>
                     </Grid>
