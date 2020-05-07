@@ -107,14 +107,14 @@ export default function DialogAdquirientes(props) {
                 idCampo="usuNumUsuario"
                 helper="Fideicomiso a asignar bienes"
                 required={true}
-                defaultVal=""
+                value=""
             />
             <GenericTextInput
                 label="Usuario OID"
                 idCampo="usuNomUsuario"
                 helper="SubFiso"
                 required={true}
-                defaultVal=""
+                value=""
             />
             <GenericSelect
                 labelId="Tipo de Usuario"

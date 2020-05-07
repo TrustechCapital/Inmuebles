@@ -7,9 +7,8 @@ import FormControl from '@material-ui/core/FormControl';
 import InputLabel from '@material-ui/core/InputLabel';
 import Select from '@material-ui/core/Select';
 
-import GenericSearchForm from '../../sharedComponents/GenericSearchForm';
-import GenericTable from '../../sharedComponents/GenericTable';
-import FIXTURE_GARANTIAS from '../../fixtures/garantias';
+import GenericSearchForm from '../../../sharedComponents/GenericSearchForm';
+import GenericTable from '../../../sharedComponents/GenericTable';
 
 const COLUMNS = [
     { field: 'fadqIdFideicomiso', header: 'Fideicomiso', isKey: true },

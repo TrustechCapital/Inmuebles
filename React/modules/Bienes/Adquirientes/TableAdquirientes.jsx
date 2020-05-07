@@ -6,23 +6,19 @@ import TextField from '@material-ui/core/TextField';
 import FormControl from '@material-ui/core/FormControl';
 import InputLabel from '@material-ui/core/InputLabel';
 import Select from '@material-ui/core/Select';
-import Container from '@material-ui/core/Container';
 
-import GenericSearchForm from '../../sharedComponents/GenericSearchForm';
-import GenericTable from '../../sharedComponents/GenericTable';
-import FIXTURE_GARANTIAS from '../../fixtures/garantias';
+import GenericSearchForm from '../../../sharedComponents/GenericSearchForm';
+import GenericTable from '../../../sharedComponents/GenericTable';
 
 const COLUMNS = [
-    { field: 'id', header: 'Id', isKey: true },
-    { field: 'fgarIdFideicomiso', header: 'Fideicomiso' },
-    { field: 'fgarCveGarantia2', header: 'Tipo de Bien' },
-    { field: 'fgarImpGarantiaFormatted', header: 'Importe', numeric: true },
-    {
-        field: 'fgarImpGarantizadFormatted',
-        header: 'Importe Garantizado',
-        numeric: true,
-    },
-    { field: 'fgarCveStatus', header: 'Estatus' },
+    { field: 'fadqIdFideicomiso', header: 'Fideicomiso', isKey: true },
+    { field: 'fadqIdSubcuenta', header: 'SubFiso' },
+    { field: 'fadqTipo', header: 'Inmueble' },
+    { field: 'fadqIdBien', header: 'Edificio' },
+    { field: 'fadqIdDepto', header: 'Depto' },
+    { field: 'fadqIdVenta', header: 'Periodo Venta' },
+    { field: 'fadqNombreComprador', header: 'Adquiriente' },
+    { field: 'fadqSaldo', header: 'Saldo', numeric: true },
 ];
 
 const useStyles = makeStyles((theme) => ({
@@ -31,8 +27,7 @@ const useStyles = makeStyles((theme) => ({
     },
 }));
 
-export default function TableGarantias(props) {
-    const { data, onSelect, onNew } = props;
+export default function TableAdquirientes(props) {
     const classes = useStyles();
 
     return (
@@ -50,41 +45,48 @@ export default function TableGarantias(props) {
                             className={classes.rowSpacing}
                             spacing={4}
                         >
-                            <Grid item xs={3}>
+                            <Grid item xs={4}>
                                 <TextField
-                                    id="IdFideicomiso"
-                                    label="Id Fideicomiso"
+                                    id="paramIdFideicomiso"
+                                    label="Num. Fideicomiso"
                                     fullWidth
                                 />
                             </Grid>
-                            <Grid container xs={9} alignItems="center">
-                                <Container></Container>
+                            <Grid item xs={4}>
+                                <TextField
+                                    id="paramIdFideicomiso"
+                                    label="Num. Inmueble"
+                                    fullWidth
+                                />
+                            </Grid>
+                            <Grid item xs={4}>
+                                <TextField
+                                    id="paramIdFideicomiso"
+                                    label="Num. Unidad"
+                                    fullWidth
+                                />
                             </Grid>
                         </Grid>
                         <Grid container spacing={4}>
-                            <Grid item xs={2}>
+                            <Grid item xs={5}>
                                 <TextField
-                                    id="Subfiso"
-                                    label="Id Subcuenta"
+                                    id="paramIdFideicomiso"
+                                    label="Adquiriente"
                                     fullWidth
                                 />
                             </Grid>
                             <Grid item xs={3}>
                                 <FormControl fullWidth>
                                     <InputLabel htmlFor="tipoBien">
-                                        Tipo de Bien
+                                        Estatus
                                     </InputLabel>
-                                    <Select id="Garantia" labelId="tipoBien" displayEmpty>
-                                        <MenuItem value=""></MenuItem>
-                                        <MenuItem value={1}>Tipo 1</MenuItem>
-                                        <MenuItem value={2}>Tipo 2</MenuItem>
-                                    </Select>
+                                    <Select labelId="tipoBien" displayEmpty />
                                 </FormControl>
                             </Grid>
-                            <Grid item xs={7}>
+                            <Grid item xs={4}>
                                 <TextField
-                                    id="Descripcion"
-                                    label="Descripcion"
+                                    id="paramDescripcion"
+                                    label="Expediente catastro"
                                     fullWidth
                                 />
                             </Grid>
@@ -94,11 +96,11 @@ export default function TableGarantias(props) {
             </Grid>
             <Grid container spacing={1}>
                 <GenericTable
-                    title="Garantias"
-                    data={data}
+                    title="Adquirientes"
+                    data={[]}
                     columns={COLUMNS}
-                    onSelect={onSelect}
-                    onNew={onNew}
+                    onSelect={props.onSelect}
+                    onNew={props.onNew}
                 />
             </Grid>
         </div>
