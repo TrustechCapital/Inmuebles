@@ -1,5 +1,8 @@
 import axios, { AxiosInstance, AxiosRequestConfig, AxiosResponse } from 'axios';
 import { apiConfig } from './api.config';
+import { filterEmptyParameters } from './utils';
+
+type ModelMapper = (object: any, index: number) => any;
 
 export class Api {
     private api: AxiosInstance;
@@ -73,31 +76,25 @@ export class Api {
         return this.api.patch(url, data, config);
     }
 
-    public async getRef(refName: string, params: any): Promise<any[]> {
-        let filteredParams: any = {
+    public async getRef<T>(
+        refName: string,
+        params: object,
+        transformer: ModelMapper
+    ): Promise<T[]> {
+        let filteredParams = filterEmptyParameters(params);
+
+        Object.assign(filteredParams, {
             id: refName,
-        };
-
-        Object.keys(params).forEach((paramKey) => {
-            const value = params[paramKey];
-            if (value !== null && value !== undefined) {
-                filteredParams[paramKey] = value;
-            }
         });
-
-        const jsonParams = JSON.stringify(filteredParams);
 
         return this.get('getRef.do', {
             params: {
-                json: jsonParams,
+                json: JSON.stringify(filteredParams),
             },
-        }).then((response: any) => {
-            return response.data.map((row: any, index: any) => {
-                return {
-                    ...row,
-                    id: index,
-                };
-            });
+        }).then((response) => {
+            const data = response.data as object[];
+
+            return data.map(transformer);
         });
     }
 }
