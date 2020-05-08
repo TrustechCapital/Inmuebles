@@ -1,31 +1,29 @@
 import { Api } from '../../../../core/api';
-import GarantiaResultRow from '../models/GarantiaResultRow';
+import BienResultRow from '../models/BienResultRow';
 
-export type GarantiasSearchParameters = {
+export type BienesSearchParameters = {
     idFideicomiso: number;
     idSubcuenta: number;
-    claveGarantia: number;
+    claveTipoBien: number;
 };
 
-class GarantiasApi extends Api {
+class BienesApi extends Api {
     constructor() {
         super({});
     }
 
-    async find(
-        parameters: GarantiasSearchParameters
-    ): Promise<GarantiaResultRow[]> {
+    async find(parameters: BienesSearchParameters): Promise<BienResultRow[]> {
         const params = {
             IdFideicomiso: parameters.idFideicomiso,
             Subfiso: parameters.idSubcuenta,
-            Garantia: parameters.claveGarantia,
+            Garantia: parameters.claveTipoBien,
         };
         return await this.getRef(
             'funRegistroGarantias',
             params,
-            GarantiaResultRow.fromObject
+            BienResultRow.fromObject
         );
     }
 }
 
-export const garantiasApi = new GarantiasApi();
+export const bienesApi = new BienesApi();

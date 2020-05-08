@@ -17,7 +17,7 @@ const useStyles = makeStyles((theme) => ({
         marginBottom: theme.spacing(2),
     },
 }));
-export default function BienesDialog(props) {
+export default function DialogBienes(props) {
     const { mode, selected } = props;
 
     const [selectedDate, setSelectedDate] = useState(new Date('2020-04-20'));

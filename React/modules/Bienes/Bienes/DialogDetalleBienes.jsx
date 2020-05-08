@@ -37,7 +37,7 @@ const useStyles = makeStyles((theme) => ({
         minWidth: '75ch',
     },
 }));
-export default function BienesDialog(props) {
+export default function DialogDetalleBienes(props) {
     const { mode, selected } = props;
 
     const [selectedDate, setSelectedDate] = useState(new Date('2020-04-20'));

@@ -12,8 +12,6 @@ import GenericSearchForm from '../../../sharedComponents/GenericSearchForm';
 import GenericTable from '../../../sharedComponents/GenericTable';
 import GenericTextInput from '../../../sharedComponents/GenericTextInput';
 
-import FIXTURE_GARANTIAS from '../../../fixtures/garantias';
-
 const COLUMNS = [
     { field: 'id', header: 'Id', isKey: true },
     { field: 'idFideicomiso', header: 'Fideicomiso' },
@@ -46,10 +44,10 @@ function searchParamsReducer(state, action) {
 const initialState = {
     idFideicomiso: '',
     idSubcuenta: '',
-    claveGarantia: '',
+    claveTipoBien: '',
 };
 
-export default function TableGarantias(props) {
+export default function TableBienes(props) {
     const { data, onSelect, onNew, onSearch } = props;
     const classes = useStyles();
     const [state, dispatch] = useReducer(searchParamsReducer, initialState);
@@ -124,7 +122,7 @@ export default function TableGarantias(props) {
             </Grid>
             <Grid container spacing={1}>
                 <GenericTable
-                    title="Garantias"
+                    title="Bienes"
                     data={data}
                     columns={COLUMNS}
                     onSelect={onSelect}
