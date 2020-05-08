@@ -39,6 +39,7 @@ type Props = {
     adornment?: string;
     readOnly: boolean;
     onChange: (event: any) => void;
+    dataType: string;
 };
 
 function GenericTextInput(props: Props) {
@@ -51,6 +52,7 @@ function GenericTextInput(props: Props) {
         adornment,
         readOnly,
         onChange,
+        dataType
     } = props;
 
     const classes = useStyles();
@@ -76,6 +78,7 @@ function GenericTextInput(props: Props) {
                 variant="outlined"
                 InputProps={inputProps}
                 onChange={onChange}
+                type={dataType}
             />
         </FormControl>
     );
