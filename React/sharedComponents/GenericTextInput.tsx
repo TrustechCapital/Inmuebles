@@ -39,7 +39,7 @@ type Props = {
     adornment?: string;
     readOnly?: boolean;
     onChange: (event: any) => void;
-    dataType: string;
+    dataType?: 'text' | 'number';
 };
 
 const GenericTextInput: FunctionComponent<Props> = ({
@@ -51,7 +51,7 @@ const GenericTextInput: FunctionComponent<Props> = ({
     adornment,
     readOnly = false,
     onChange,
-    dataType,
+    dataType = 'text',
 }) => {
     const classes = useStyles();
 
