@@ -23,16 +23,16 @@ import FindInPageIcon from '@material-ui/icons/FindInPage';
 
 const SORT_TYPES = {
     ASC: 'asc',
-    DESC: 'desc'
-}
+    DESC: 'desc',
+};
 
 const ROW_HEIGHT = 53;
 
 const StyledTableCell = withStyles((theme) => ({
     head: {
         backgroundColor: '#f5f5f5',
-        fontWeight: theme.typography.fontWeightBold
-    }
+        fontWeight: theme.typography.fontWeightBold,
+    },
 }))(TableCell);
 
 const useStyles = makeStyles((theme) => {
@@ -42,26 +42,26 @@ const useStyles = makeStyles((theme) => {
             marginBottom: theme.spacing(2),
         },
         table: {
-            width: '100%'
-        }
-    }
+            width: '100%',
+        },
+    };
 });
 
 const useToolbarStyles = makeStyles((theme) => ({
     root: {
-      paddingLeft: theme.spacing(2),
-      paddingRight: theme.spacing(1),
+        paddingLeft: theme.spacing(2),
+        paddingRight: theme.spacing(1),
     },
     highlight: {
         color: theme.palette.secondary.main,
         backgroundColor: lighten(theme.palette.secondary.light, 0.85),
     },
     title: {
-      flex: '1 1 100%',
-    }
+        flex: '1 1 100%',
+    },
 }));
 
-function toggleSelectedElementInList(selectedElements, id){
+function toggleSelectedElementInList(selectedElements, id) {
     const selectedIndex = selectedElements.indexOf(id);
     let newSelected = [];
 
@@ -70,56 +70,67 @@ function toggleSelectedElementInList(selectedElements, id){
     } else {
         newSelected = newSelected.concat(
             selectedElements.slice(0, selectedIndex),
-            selectedElements.slice(selectedIndex + 1),
+            selectedElements.slice(selectedIndex + 1)
         );
     }
 
     return newSelected;
-}   
+}
 
 function EnhancedTableHead(props) {
-    const { columns, classes, onSelectAllClick, order, orderBy, numSelected, rowCount, onRequestSort } = props;
+    const {
+        columns,
+        classes,
+        onSelectAllClick,
+        order,
+        orderBy,
+        numSelected,
+        rowCount,
+        onRequestSort,
+    } = props;
     const createSortHandler = (property) => (event) => {
-      onRequestSort(event, property);
+        onRequestSort(event, property);
     };
 
-    function createHeader(column){
+    function createHeader(column) {
         const sortActive = orderBy === column.field;
         return (
             <StyledTableCell
-              key={column.field}
-              align={column.numeric ? 'right' : 'left'}
-              sortDirection={sortActive ? order : false}
+                key={column.field}
+                align={column.numeric ? 'right' : 'left'}
+                sortDirection={sortActive ? order : false}
             >
-              <TableSortLabel
-                active={sortActive}
-                direction={sortActive ? order : SORT_TYPES.ASC}
-                onClick={createSortHandler(column.field)}
-              >
-                {column.header}
-              </TableSortLabel>
+                <TableSortLabel
+                    active={sortActive}
+                    direction={sortActive ? order : SORT_TYPES.ASC}
+                    onClick={createSortHandler(column.field)}
+                >
+                    {column.header}
+                </TableSortLabel>
             </StyledTableCell>
-        )
+        );
     }
 
     const headers = columns.map(createHeader);
-  
+
     return (
-      <TableHead>
-        <TableRow>
-          <StyledTableCell padding="checkbox">
-            <Checkbox
-              indeterminate={numSelected > 0 && numSelected < rowCount}
-              checked={rowCount > 0 && numSelected === rowCount}
-              onChange={onSelectAllClick}
-            />
-          </StyledTableCell>
-          {headers}
-        </TableRow>
-      </TableHead>
+        <TableHead>
+            <TableRow>
+                <StyledTableCell padding="checkbox">
+                    <Checkbox
+                        indeterminate={
+                            numSelected > 0 && numSelected < rowCount
+                        }
+                        checked={rowCount > 0 && numSelected === rowCount}
+                        onChange={onSelectAllClick}
+                    />
+                </StyledTableCell>
+                {headers}
+            </TableRow>
+        </TableHead>
     );
 }
-  
+
 EnhancedTableHead.propTypes = {
     columns: PropTypes.array.isRequired,
     classes: PropTypes.object.isRequired,
@@ -136,11 +147,11 @@ const EnhancedTableToolbarActions = (props) => {
     return (
         <React.Fragment>
             {numSelected > 0 ? (
-            <Tooltip title="Eliminar">
-                <IconButton aria-label="eliminar">
-                <DeleteIcon />
-                </IconButton>
-            </Tooltip>
+                <Tooltip title="Eliminar">
+                    <IconButton aria-label="eliminar">
+                        <DeleteIcon />
+                    </IconButton>
+                </Tooltip>
             ) : null}
 
             {numSelected == 1 ? (
@@ -161,7 +172,11 @@ const EnhancedTableToolbarActions = (props) => {
 
             {numSelected == 0 ? (
                 <Tooltip title="Nuevo">
-                    <IconButton aria-label="nuevo" color="primary" onClick={props.onNew}>
+                    <IconButton
+                        aria-label="nuevo"
+                        color="primary"
+                        onClick={props.onNew}
+                    >
                         <AddIcon />
                     </IconButton>
                 </Tooltip>
@@ -177,38 +192,53 @@ const EnhancedTableToolbar = (props) => {
     const ToolbarActions = actionsComponent || EnhancedTableToolbarActions;
 
     return (
-      <Toolbar
-        className={clsx(classes.root, {
-          [classes.highlight]: numSelected > 0,
-        })}
-      >
-        {numSelected > 0 ? (
-          <Typography className={classes.title} color="inherit" variant="subtitle1" component="div">
-            {numSelected} seleccionados
-          </Typography>
-        ) : (
-          <Typography className={classes.title} variant="h6" id="tableTitle" component="div">
-            {title}
-          </Typography>
-        )}
+        <Toolbar
+            className={clsx(classes.root, {
+                [classes.highlight]: numSelected > 0,
+            })}
+        >
+            {numSelected > 0 ? (
+                <Typography
+                    className={classes.title}
+                    color="inherit"
+                    variant="subtitle1"
+                    component="div"
+                >
+                    {numSelected} seleccionados
+                </Typography>
+            ) : (
+                <Typography
+                    className={classes.title}
+                    variant="h6"
+                    id="tableTitle"
+                    component="div"
+                >
+                    {title}
+                </Typography>
+            )}
 
-        {showActions === true ? (
-            <ToolbarActions {...props}/>
-        ) : null}
-      </Toolbar>      
+            {showActions === true ? <ToolbarActions {...props} /> : null}
+        </Toolbar>
     );
 };
-  
+
 EnhancedTableToolbar.propTypes = {
     title: PropTypes.string.isRequired,
     numSelected: PropTypes.number.isRequired,
     showActions: PropTypes.bool,
-    onNew: PropTypes.func
+    onNew: PropTypes.func,
 };
 
-
-function GenericTable (props) {
-    const {title, data, columns, onSelect, onNew, showActionsHeader = true, additionalActions} = props;
+function GenericTable(props) {
+    const {
+        title,
+        data,
+        columns,
+        onSelect,
+        onNew,
+        showActionsHeader = true,
+        additionalActions,
+    } = props;
     const keyColum = columns.find((col) => col.isKey).field;
     const [order, setOrder] = React.useState(SORT_TYPES.ASC);
     const [orderBy, setOrderBy] = React.useState(keyColum);
@@ -219,7 +249,10 @@ function GenericTable (props) {
     const classes = useStyles();
     const isSelected = (id) => selected.indexOf(id) !== -1;
 
-    const currentRows = data.slice(page * rowsPerPage, page * rowsPerPage + rowsPerPage);
+    const currentRows = data.slice(
+        page * rowsPerPage,
+        page * rowsPerPage + rowsPerPage
+    );
     let rows = currentRows.map((row, index) => createRow(row, columns, index));
     const emptyRowsCount = rowsPerPage - currentRows.length;
     let emptyRowsPlaceholder = null;
@@ -236,8 +269,8 @@ function GenericTable (props) {
         const isAsc = orderBy === property && order === SORT_TYPES.ASC;
         setOrder(isAsc ? SORT_TYPES.ASC : SORT_TYPES.ASC);
         setOrderBy(property);
-      };
-    
+    };
+
     const handleSelectAllClick = (event) => {
         if (event.target.checked) {
             const newSelecteds = currentRows.map((row) => row[keyColum]);
@@ -262,30 +295,43 @@ function GenericTable (props) {
         setPage(0);
     };
 
-    function createRow(row, columns, index){
+    function createRow(row, columns, index) {
         const keyField = row[keyColum];
         const isItemSelected = isSelected(keyField);
         return (
-            <TableRow key={keyField} onClick={(event) => handleClick(event, keyField)}>
+            <TableRow
+                key={keyField}
+                onClick={(event) => handleClick(event, keyField)}
+            >
                 <TableCell padding="checkbox">
-                    <Checkbox
-                        checked={isItemSelected}
-                    />
+                    <Checkbox checked={isItemSelected} />
                 </TableCell>
                 {columns.map((col) => {
-                    return <StyledTableCell align={col.numeric ? 'right' : 'left'}>{row[col.field]}</StyledTableCell>
+                    return (
+                        <StyledTableCell align={col.numeric ? 'right' : 'left'}>
+                            {row[col.field]}
+                        </StyledTableCell>
+                    );
                 })}
             </TableRow>
         );
     }
 
-    function rowsDisplayedFormatter({ from, to, count }){
-        return `${from}-${to === -1 ? count : to} de ${count !== -1 ? count : 'más de' + to}`;
+    function rowsDisplayedFormatter({ from, to, count }) {
+        return `${from}-${to === -1 ? count : to} de ${
+            count !== -1 ? count : 'más de' + to
+        }`;
     }
 
     return (
         <Paper className={classes.root} elevation={3}>
-            <EnhancedTableToolbar numSelected={selected.length} title={title} showActions={showActionsHeader} onNew={onNew} actionsComponent={props.actionsComponent}/>
+            <EnhancedTableToolbar
+                numSelected={selected.length}
+                title={title}
+                showActions={showActionsHeader}
+                onNew={onNew}
+                actionsComponent={props.actionsComponent}
+            />
             <TableContainer className={classes.table}>
                 <Table>
                     <EnhancedTableHead
@@ -322,9 +368,11 @@ function GenericTable (props) {
 }
 
 GenericTable.propTypes = {
-    data: PropTypes.array.isRequired, 
-    columns: PropTypes.array.isRequired, 
-    onSelect: PropTypes.func.isRequired
+    title: PropTypes.string.isRequired,
+    data: PropTypes.array.isRequired,
+    columns: PropTypes.array.isRequired,
+    onSelect: PropTypes.func.isRequired,
+    onNew: PropTypes.func,
 };
 
 export default GenericTable;

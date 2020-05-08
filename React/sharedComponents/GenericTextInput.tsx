@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { FunctionComponent } from 'react';
 import { makeStyles } from '@material-ui/core/styles';
 import TextField from '@material-ui/core/TextField';
 import FormControl from '@material-ui/core/FormControl';
@@ -32,27 +32,25 @@ const useStyles = makeStyles((theme) => ({
 
 type Props = {
     label: string;
-    idCampo: string;
+    idCampo?: string;
     helper?: string;
     required?: boolean;
-    value?: string;
+    value: string | number | null;
     adornment?: string;
-    readOnly: boolean;
+    readOnly?: boolean;
     onChange: (event: any) => void;
 };
 
-function GenericTextInput(props: Props) {
-    const {
-        label,
-        idCampo,
-        helper,
-        required = false,
-        value,
-        adornment,
-        readOnly,
-        onChange,
-    } = props;
-
+const GenericTextInput: FunctionComponent<Props> = ({
+    label,
+    idCampo,
+    helper,
+    required = false,
+    value,
+    adornment,
+    readOnly = false,
+    onChange,
+}) => {
     const classes = useStyles();
 
     const inputProps = {
@@ -79,6 +77,6 @@ function GenericTextInput(props: Props) {
             />
         </FormControl>
     );
-}
+};
 
 export default GenericTextInput;

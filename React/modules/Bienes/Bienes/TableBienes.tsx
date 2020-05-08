@@ -1,8 +1,7 @@
-import React, { useState, useReducer } from 'react';
+import React, { FunctionComponent, useReducer } from 'react';
 import { makeStyles } from '@material-ui/core/styles';
 import MenuItem from '@material-ui/core/MenuItem';
 import Grid from '@material-ui/core/Grid';
-import TextField from '@material-ui/core/TextField';
 import FormControl from '@material-ui/core/FormControl';
 import InputLabel from '@material-ui/core/InputLabel';
 import Select from '@material-ui/core/Select';
@@ -31,24 +30,52 @@ const useStyles = makeStyles((theme) => ({
     },
 }));
 
-function searchParamsReducer(state, action) {
-    switch (action.type) {
-        case 'change':
-            return {
-                ...state,
-                [action.field]: action.value,
-            };
-    }
+interface TableBienesState {
+    idFideicomiso: number | null;
+    idSubcuenta: string;
+    claveTipoBien: string;
 }
 
-const initialState = {
-    idFideicomiso: '',
+const initialState: TableBienesState = {
+    idFideicomiso: null,
     idSubcuenta: '',
     claveTipoBien: '',
 };
 
-export default function TableBienes(props) {
-    const { data, onSelect, onNew, onSearch } = props;
+type TableBienesActions = {
+    type: 'field';
+    fieldName: string;
+    value: string | number;
+};
+
+function searchParamsReducer(
+    state: TableBienesState,
+    action: TableBienesActions
+) {
+    switch (action.type) {
+        case 'field':
+            return {
+                ...state,
+                [action.fieldName]: action.value,
+            };
+        default:
+            return state;
+    }
+}
+
+type Props = {
+    data: object[];
+    onSelect: (selectedItems: object[]) => void;
+    onNew: () => void;
+    onSearch: (searchParams: any) => void;
+};
+
+const TableBienes: FunctionComponent<Props> = ({
+    data,
+    onSelect,
+    onNew,
+    onSearch,
+}) => {
     const classes = useStyles();
     const [state, dispatch] = useReducer(searchParamsReducer, initialState);
 
@@ -58,6 +85,8 @@ export default function TableBienes(props) {
         });
     };
 
+    const handleClearSearch = () => {};
+
     return (
         <div>
             <Grid
@@ -66,7 +95,10 @@ export default function TableBienes(props) {
                 direction="column"
                 className={classes.rowSpacing}
             >
-                <GenericSearchForm onSearch={handleSearch}>
+                <GenericSearchForm
+                    onSearch={handleSearch}
+                    onClear={handleClearSearch}
+                >
                     <Grid container spacing={1} direction="column">
                         <Grid
                             container
@@ -79,8 +111,8 @@ export default function TableBienes(props) {
                                     value={state.idFideicomiso}
                                     onChange={(e) =>
                                         dispatch({
-                                            type: 'change',
-                                            field: 'idFideicomiso',
+                                            type: 'field',
+                                            fieldName: 'idFideicomiso',
                                             value: e.target.value,
                                         })
                                     }
@@ -97,8 +129,8 @@ export default function TableBienes(props) {
                                     value={state.idSubcuenta}
                                     onChange={(e) =>
                                         dispatch({
-                                            type: 'change',
-                                            field: 'idSubcuenta',
+                                            type: 'field',
+                                            fieldName: 'idSubcuenta',
                                             value: e.target.value,
                                         })
                                     }
@@ -131,4 +163,6 @@ export default function TableBienes(props) {
             </Grid>
         </div>
     );
-}
+};
+
+export default TableBienes;
