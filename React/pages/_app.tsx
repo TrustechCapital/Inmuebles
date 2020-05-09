@@ -1,8 +1,14 @@
+import { useEffect } from 'react';
 import { AppProps } from 'next/app';
 
 import Layout from '../sharedComponents/Layout';
+import { catalogsApi } from '../core/catalogs';
 
 function App({ Component, pageProps }: AppProps) {
+    useEffect(() => {
+        catalogsApi.fetchAllCatalogs();
+    }, []);
+
     return (
         <Layout>
             <Component {...pageProps} />
