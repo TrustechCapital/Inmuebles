@@ -1,6 +1,3 @@
-import React from 'react';
-
-import { TabsLayout } from '../types';
 import GenericTabs from '../sharedComponents/GenericTabs';
 import MainAdquirientes from '../modules/Bienes/Adquirientes/MainAdquirientes';
 import MainLiberacion from '../modules/Bienes/Liberacion/MainLiberacion';
@@ -8,7 +5,7 @@ import MainIndividualizacion from '../modules/Bienes/Individualizacion/MainIndiv
 import MainCargaMasiva from '../modules/Bienes/CargaMasivaInmuebles/MainCargaMasiva';
 import MainBienes from '../modules/Bienes/Bienes/MainBienes';
 
-const TABS: Array<TabsLayout> = [
+const TABS = [
     {
         label: 'Bienes',
         component: MainBienes,

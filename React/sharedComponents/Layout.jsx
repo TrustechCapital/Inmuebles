@@ -169,8 +169,8 @@ function BaseLayout(props) {
                 <Divider />
                 <List>
                     {MODULES.map((module) => (
-                        <Link href={module.url}>
-                            <ListItem button key={module.label}>
+                        <Link href={module.url} key={module.label}>
+                            <ListItem button>
                                 <ListItemIcon>
                                     <module.icon />
                                 </ListItemIcon>

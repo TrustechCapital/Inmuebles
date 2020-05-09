@@ -1,9 +1,7 @@
-import React from 'react';
-
-import GenericTabs, { TabsLayout } from '../sharedComponents/GenericTabs';
+import GenericTabs from '../sharedComponents/GenericTabs';
 import MainEjecutor from '../modules/AperturaCierre/MainEjecutor';
 
-const TABS: TabsLayout[] = [
+const TABS = [
     {
         label: 'Ejecución',
         component: MainEjecutor,
