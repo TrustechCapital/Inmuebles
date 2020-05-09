@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React from 'react';
 import { makeStyles } from '@material-ui/core/styles';
 import Grid from '@material-ui/core/Grid';
 import IconButton from '@material-ui/core/IconButton';
@@ -9,12 +9,13 @@ import FindInPageIcon from '@material-ui/icons/FindInPage';
 import Tooltip from '@material-ui/core/Tooltip';
 import MonetizationOnIcon from '@material-ui/icons/MonetizationOn';
 
-import TableBienes from './TableBienes';
-import DialogBienes from './DialogBienes';
-import DialogDetalleBienes from './DialogDetalleBienes';
 import GenericTable from '../../../sharedComponents/GenericTable';
-import { OPERACIONES_CATALOGO } from '../../../constants';
-import { bienesApi } from './services';
+
+const useStyles = makeStyles((theme) => ({
+    rowSpacing: {
+        marginBottom: theme.spacing(2),
+    },
+}));
 
 const COLUMNS_DETALLE_BIENES = [
     { field: 'id', header: 'Id', isKey: true },
@@ -28,13 +29,11 @@ const COLUMNS_DETALLE_BIENES = [
     { field: 'forsTextoDescrip', header: 'Descripción' },
 ];
 
-const useStyles = makeStyles((theme) => ({
-    rowSpacing: {
-        marginBottom: theme.spacing(2),
-    },
-}));
+type ActionsProps = {
+    onNew: () => void;
+};
 
-const ActionsDetalleBienes = (props) => {
+const ActionsDetalleBienes: React.FC<ActionsProps> = (props) => {
     const bienesSeleccionados = 1;
 
     return (
@@ -82,64 +81,23 @@ const ActionsDetalleBienes = (props) => {
     );
 };
 
-export default function MainBienes() {
+type Props = {
+    data: object[];
+    showActionsHeader: boolean;
+    onNew: () => void;
+    onSelect: (selectedItems: object[]) => void;
+};
+
+const TableDetalleBienes: React.FC<Props> = ({
+    data,
+    showActionsHeader,
+    onNew,
+    onSelect,
+}) => {
     const classes = useStyles();
-    const [modoPantalla, setModoPantalla] = useState(OPERACIONES_CATALOGO.ALTA);
-    const [bienesList, setBienesList] = useState([]);
-    const [detalleAbierto, setDetalleAbierto] = useState(false);
-    const [modalDetalleBienesAbierto, setModalDetalleBienesAbierto] = useState(
-        false
-    );
-
-    const [showActionsDetalleBienes, setShowActionsDetalleBienes] = useState(
-        false
-    );
-
-    function handleCloseModal() {
-        setDetalleAbierto(false);
-    }
-
-    function handleCloseModalDetalleBienes() {
-        setModalDetalleBienesAbierto(false);
-    }
-
-    function handleNewBien() {
-        setDetalleAbierto(true);
-    }
-
-    function handleSelectBien(selectedRows) {
-        setShowActionsDetalleBienes(selectedRows.length === 1);
-    }
-
-    function handleNewDetalleBien() {
-        setModalDetalleBienesAbierto(true);
-    }
-
-    function handleSelectDetalleBien() {}
-
-    async function searchBienes({ params }) {
-        let { idFideicomiso } = params;
-
-        //TODO: manejar tipo de dato desde los componentes
-        if (idFideicomiso !== null && idFideicomiso.trim() !== '') {
-            idFideicomiso = parseInt(idFideicomiso, 10);
-        }
-
-        const bienes = await bienesApi.find({
-            ...params,
-            idFideicomiso: idFideicomiso,
-        });
-        setBienesList(bienes);
-    }
 
     return (
         <div>
-            <TableBienes
-                data={bienesList}
-                onNew={handleNewBien}
-                onSelect={handleSelectBien}
-                onSearch={searchBienes}
-            />
             <Grid
                 container
                 spacing={1}
@@ -148,24 +106,16 @@ export default function MainBienes() {
             >
                 <GenericTable
                     title="Detalle de bienes"
-                    data={[]}
+                    data={data}
                     columns={COLUMNS_DETALLE_BIENES}
-                    showActionsHeader={showActionsDetalleBienes}
-                    onNew={handleNewDetalleBien}
-                    onSelect={handleSelectDetalleBien}
+                    showActionsHeader={showActionsHeader}
+                    onNew={onNew}
+                    onSelect={onSelect}
                     actionsComponent={ActionsDetalleBienes}
                 />
             </Grid>
-            <DialogBienes
-                mode={modoPantalla}
-                opened={detalleAbierto}
-                handleClose={handleCloseModal}
-            />
-            <DialogDetalleBienes
-                mode={modoPantalla}
-                opened={modalDetalleBienesAbierto}
-                handleClose={handleCloseModalDetalleBienes}
-            />
         </div>
     );
-}
+};
+
+export default TableDetalleBienes;

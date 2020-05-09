@@ -2,6 +2,8 @@ import React, { FunctionComponent, useReducer } from 'react';
 import { makeStyles } from '@material-ui/core/styles';
 import Grid from '@material-ui/core/Grid';
 
+import { ITableBienesParameters } from './types';
+import BienResultRow from './models/BienResultRow';
 import GenericSearchForm from '../../../sharedComponents/GenericSearchForm';
 import GenericTable from '../../../sharedComponents/GenericTable';
 import GenericTextInput from '../../../sharedComponents/GenericTextInput';
@@ -26,13 +28,7 @@ const useStyles = makeStyles((theme) => ({
     },
 }));
 
-interface TableBienesState {
-    idFideicomiso: number | null;
-    idSubcuenta: string;
-    idTipoBien: number | null;
-}
-
-const initialState: TableBienesState = {
+const initialState: ITableBienesParameters = {
     idFideicomiso: null,
     idSubcuenta: '',
     idTipoBien: null,
@@ -45,7 +41,7 @@ type TableBienesActions = {
 };
 
 function searchParamsReducer(
-    state: TableBienesState,
+    state: ITableBienesParameters,
     action: TableBienesActions
 ) {
     switch (action.type) {
@@ -61,9 +57,9 @@ function searchParamsReducer(
 
 type Props = {
     data: object[];
-    onSelect: (value: number | null) => void;
+    onSelect: (selectedItems: BienResultRow[]) => void;
     onNew: () => void;
-    onSearch: (searchParams: any) => void;
+    onSearch: (searchParams: ITableBienesParameters) => void;
 };
 
 const TableBienes: FunctionComponent<Props> = ({
@@ -76,9 +72,7 @@ const TableBienes: FunctionComponent<Props> = ({
     const [state, dispatch] = useReducer(searchParamsReducer, initialState);
 
     const handleSearch = () => {
-        onSearch({
-            params: state,
-        });
+        onSearch(state);
     };
 
     const handleClearSearch = () => {};
@@ -105,11 +99,12 @@ const TableBienes: FunctionComponent<Props> = ({
                                 <GenericTextInput
                                     label="Id Fideicomiso"
                                     value={state.idFideicomiso}
-                                    onChange={(e) =>
+                                    dataType="number"
+                                    onChange={(value) =>
                                         dispatch({
                                             type: 'field',
                                             fieldName: 'idFideicomiso',
-                                            value: e.target.value,
+                                            value: value,
                                         })
                                     }
                                 />
@@ -125,11 +120,11 @@ const TableBienes: FunctionComponent<Props> = ({
                                 <GenericTextInput
                                     label="Id Subcuenta"
                                     value={state.idSubcuenta}
-                                    onChange={(e) =>
+                                    onChange={(value) =>
                                         dispatch({
                                             type: 'field',
                                             fieldName: 'idSubcuenta',
-                                            value: e.target.value,
+                                            value: value,
                                         })
                                     }
                                 />
