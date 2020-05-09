@@ -1,20 +1,17 @@
 import React, { FunctionComponent, useReducer } from 'react';
 import { makeStyles } from '@material-ui/core/styles';
-import MenuItem from '@material-ui/core/MenuItem';
 import Grid from '@material-ui/core/Grid';
-import FormControl from '@material-ui/core/FormControl';
-import InputLabel from '@material-ui/core/InputLabel';
-import Select from '@material-ui/core/Select';
 import Container from '@material-ui/core/Container';
 
 import GenericSearchForm from '../../../sharedComponents/GenericSearchForm';
 import GenericTable from '../../../sharedComponents/GenericTable';
 import GenericTextInput from '../../../sharedComponents/GenericTextInput';
+import CatalogSelect from '../../../sharedComponents/CatalogSelect';
 
 const COLUMNS = [
     { field: 'id', header: 'Id', isKey: true },
     { field: 'idFideicomiso', header: 'Fideicomiso' },
-    { field: 'claveGarantia', header: 'Tipo de Bien' },
+    { field: 'idTipoBien', header: 'Tipo de Bien' },
     { field: 'importeGarantiaFormateado', header: 'Importe', numeric: true },
     {
         field: 'importeGarantiaGarantizadoYFormateado',
@@ -33,19 +30,19 @@ const useStyles = makeStyles((theme) => ({
 interface TableBienesState {
     idFideicomiso: number | null;
     idSubcuenta: string;
-    claveTipoBien: string;
+    idTipoBien: number | null;
 }
 
 const initialState: TableBienesState = {
     idFideicomiso: null,
     idSubcuenta: '',
-    claveTipoBien: '',
+    idTipoBien: null,
 };
 
 type TableBienesActions = {
     type: 'field';
     fieldName: string;
-    value: string | number;
+    value: string | number | null;
 };
 
 function searchParamsReducer(
@@ -65,7 +62,7 @@ function searchParamsReducer(
 
 type Props = {
     data: object[];
-    onSelect: (selectedItems: object[]) => void;
+    onSelect: (value: number | null) => void;
     onNew: () => void;
     onSearch: (searchParams: any) => void;
 };
@@ -137,16 +134,19 @@ const TableBienes: FunctionComponent<Props> = ({
                                 />
                             </Grid>
                             <Grid item xs={3}>
-                                <FormControl fullWidth>
-                                    <InputLabel htmlFor="tipoBien">
-                                        Tipo de Bien
-                                    </InputLabel>
-                                    <Select labelId="tipoBien" displayEmpty>
-                                        <MenuItem value=""></MenuItem>
-                                        <MenuItem value={1}>Tipo 1</MenuItem>
-                                        <MenuItem value={2}>Tipo 2</MenuItem>
-                                    </Select>
-                                </FormControl>
+                                <CatalogSelect
+                                    label="Tipo de bien"
+                                    catalogId={38}
+                                    value={state.idTipoBien}
+                                    fullWidth
+                                    onChange={(value) =>
+                                        dispatch({
+                                            type: 'field',
+                                            fieldName: 'idTipoBien',
+                                            value: value,
+                                        })
+                                    }
+                                />
                             </Grid>
                         </Grid>
                     </Grid>
