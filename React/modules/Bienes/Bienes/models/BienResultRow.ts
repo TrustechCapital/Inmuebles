@@ -2,7 +2,7 @@ class BienResultRow {
     id?: number;
     idFideicomiso: number;
     idSubcuenta: number;
-    claveBien: number;
+    tipoBien: number;
     claveEstatus: string;
     bienDisponible: string;
     importeBien: number;
@@ -27,7 +27,7 @@ class BienResultRow {
     ) {
         this.idFideicomiso = idFideicomiso;
         this.idSubcuenta = idSubcuenta;
-        this.claveBien = claveBien;
+        this.tipoBien = claveBien;
         this.claveEstatus = claveEstatus;
         this.bienDisponible = bienDisponible;
         this.importeBien = importeBien;
@@ -43,7 +43,7 @@ class BienResultRow {
             id: index,
             idFideicomiso: obj.fgarIdFideicomiso,
             idSubcuenta: obj.fgarIdSubcuenta,
-            claveBien: obj.fgarCveGarantia,
+            tipoBien: obj.fgarCveGarantia2,
             claveEstatus: obj.fgarCveStatus,
             bienDisponible: obj.disponibleBien,
             importeBien: obj.fgarImpGarantia,

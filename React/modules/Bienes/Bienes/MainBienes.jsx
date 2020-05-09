@@ -121,7 +121,7 @@ export default function MainBienes() {
         let { idFideicomiso } = params;
 
         //TODO: manejar tipo de dato desde los componentes
-        if (idFideicomiso.trim() !== '') {
+        if (idFideicomiso !== null && idFideicomiso.trim() !== '') {
             idFideicomiso = parseInt(idFideicomiso, 10);
         }
 

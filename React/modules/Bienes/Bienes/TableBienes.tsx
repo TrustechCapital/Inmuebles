@@ -10,10 +10,10 @@ import CatalogSelect from '../../../sharedComponents/CatalogSelect';
 const COLUMNS = [
     { field: 'id', header: 'Id', isKey: true },
     { field: 'idFideicomiso', header: 'Fideicomiso' },
-    { field: 'idTipoBien', header: 'Tipo de Bien' },
-    { field: 'importeGarantiaFormateado', header: 'Importe', numeric: true },
+    { field: 'tipoBien', header: 'Tipo de Bien' },
+    { field: 'importeBienFormateado', header: 'Importe', numeric: true },
     {
-        field: 'importeGarantiaGarantizadoYFormateado',
+        field: 'importeBienGarantizadoYFormateado',
         header: 'Importe Garantizado',
         numeric: true,
     },
