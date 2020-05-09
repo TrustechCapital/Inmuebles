@@ -115,6 +115,8 @@ export default function MainBienes() {
         setModalDetalleBienesAbierto(true);
     }
 
+    function handleSelectDetalleBien() {}
+
     async function searchBienes({ params }) {
         let { idFideicomiso } = params;
 
@@ -150,6 +152,7 @@ export default function MainBienes() {
                     columns={COLUMNS_DETALLE_BIENES}
                     showActionsHeader={showActionsDetalleBienes}
                     onNew={handleNewDetalleBien}
+                    onSelect={handleSelectDetalleBien}
                     actionsComponent={ActionsDetalleBienes}
                 />
             </Grid>

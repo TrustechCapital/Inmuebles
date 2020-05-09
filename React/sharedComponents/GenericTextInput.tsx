@@ -57,9 +57,9 @@ const GenericTextInput: FunctionComponent<Props> = ({
 
     const inputProps = {
         readOnly: readOnly,
-        startAdornment: (
+        startAdornment: adornment ? (
             <InputAdornment position="start">{adornment}</InputAdornment>
-        ),
+        ) : null,
     };
 
     return (
@@ -68,7 +68,7 @@ const GenericTextInput: FunctionComponent<Props> = ({
                 id={idCampo}
                 fullWidth
                 label={label}
-                value={value}
+                value={value == null ? '' : value}
                 className={classes.textField}
                 helperText={helper}
                 required={required}

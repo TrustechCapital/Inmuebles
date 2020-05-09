@@ -1,7 +1,6 @@
 import React, { FunctionComponent, useReducer } from 'react';
 import { makeStyles } from '@material-ui/core/styles';
 import Grid from '@material-ui/core/Grid';
-import Container from '@material-ui/core/Container';
 
 import GenericSearchForm from '../../../sharedComponents/GenericSearchForm';
 import GenericTable from '../../../sharedComponents/GenericTable';
@@ -115,12 +114,14 @@ const TableBienes: FunctionComponent<Props> = ({
                                     }
                                 />
                             </Grid>
-                            <Grid container xs={9} alignItems="center">
-                                <Container></Container>
+                            <Grid item xs={9}>
+                                <Grid container alignItems="center">
+                                    <span></span>
+                                </Grid>
                             </Grid>
                         </Grid>
                         <Grid container spacing={4}>
-                            <Grid item xs={2}>
+                            <Grid item xs={3}>
                                 <GenericTextInput
                                     label="Id Subcuenta"
                                     value={state.idSubcuenta}

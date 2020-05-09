@@ -1,4 +1,4 @@
-import React, { ReactType } from 'react';
+import React, { ReactType, useState } from 'react';
 import { makeStyles } from '@material-ui/core/styles';
 import Tabs from '@material-ui/core/Tabs';
 import Tab from '@material-ui/core/Tab';
@@ -24,7 +24,7 @@ const useStyles = makeStyles((theme) => ({
 }));
 
 export type TabsLayout = {
-    label: String;
+    label: string;
     component: React.ReactType;
 };
 
@@ -35,25 +35,20 @@ type Props = {
 const ModuloInmuebles = ({ tabs }: Props) => {
     const classes = useStyles();
 
-    const [value, setValue] = React.useState(0);
+    const [value, setValue] = useState(0);
 
     const handleChange = (event: any, newValue: number) => {
         setValue(newValue);
     };
 
     const tabLabels = tabs.map((tab: TabsLayout) => {
-        return <Tab label={tab.label} />;
+        return <Tab key={tab.label} label={tab.label} />;
     });
 
     const tabPanels = tabs.map((tab: TabsLayout, index: number) => {
         const Component: ReactType = tab.component;
         return (
-            <div
-                role="tabpanel"
-                hidden={value !== index}
-                id={`vertical-tabpanel-${index}`}
-                aria-labelledby={`vertical-tab-${index}`}
-            >
+            <div key={tab.label} role="tabpanel" hidden={value !== index}>
                 {value === index && <Component />}
             </div>
         );

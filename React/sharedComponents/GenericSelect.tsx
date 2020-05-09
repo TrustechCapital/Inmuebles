@@ -9,6 +9,12 @@ const useStyles = makeStyles((theme) => ({
     formControl: {
         margin: theme.spacing(1),
     },
+    outlinedSelect: {
+        padding: '10px',
+    },
+    outlinedSelectLabel: {
+        transform: 'translate(14px, 12px) scale(1)',
+    },
 }));
 
 type Props = {
@@ -24,15 +30,12 @@ type Props = {
 };
 
 const GenericSelect: FunctionComponent<Props> = ({
-    labelId,
-    selectId,
-    selected = null,
-    onChange,
     label,
-    value,
+    value = '',
     items = [],
     valueKey,
     labelKey,
+    onChange,
 }) => {
     const classes = useStyles();
     const [open, setOpen] = React.useState(false);
@@ -55,11 +58,12 @@ const GenericSelect: FunctionComponent<Props> = ({
             className={classes.formControl}
             fullWidth
         >
-            <InputLabel id={labelId}>{label}</InputLabel>
+            <InputLabel classes={{ outlined: classes.outlinedSelectLabel }}>
+                {label}
+            </InputLabel>
             <Select
-                labelId={labelId}
-                id={selectId}
-                value={value}
+                classes={{ outlined: classes.outlinedSelect }}
+                value={value === null ? '' : value}
                 open={open}
                 onClose={handleClose}
                 onOpen={handleOpen}
@@ -67,9 +71,6 @@ const GenericSelect: FunctionComponent<Props> = ({
                 label={label}
                 displayEmpty
             >
-                <MenuItem value="">
-                    <em>--Seleccione--</em>
-                </MenuItem>
                 {items.map((item: any) => {
                     const label = item[labelKey || 'label'];
                     const value = item[valueKey || 'value'];
