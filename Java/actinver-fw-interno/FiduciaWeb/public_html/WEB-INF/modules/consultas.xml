@@ -37837,7 +37837,7 @@
                                 <value>Garantia</value>
                             </property>
                             <property name="sqlName">
-                                <value>CVE_DESC_CLAVE</value>
+                                <value>CVE_NUM_SEC_CLAVE</value>
                             </property>
                             <property name="clauseType">
                                 <value>AND</value>
