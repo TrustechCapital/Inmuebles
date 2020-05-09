@@ -372,6 +372,8 @@ function GenericTable(props) {
 
 GenericTable.propTypes = {
     title: PropTypes.string.isRequired,
+    showActionsHeader: PropTypes.bool,
+    actionsComponent: PropTypes.any,
     data: PropTypes.array.isRequired,
     columns: PropTypes.array.isRequired,
     onSelect: PropTypes.func.isRequired,

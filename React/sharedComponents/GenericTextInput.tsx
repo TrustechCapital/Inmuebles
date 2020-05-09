@@ -38,7 +38,7 @@ type Props = {
     value: string | number | null;
     adornment?: string;
     readOnly?: boolean;
-    onChange: (event: any) => void;
+    onChange: (value: string | number | null) => void;
     dataType?: 'text' | 'number';
 };
 
@@ -62,6 +62,10 @@ const GenericTextInput: FunctionComponent<Props> = ({
         ) : null,
     };
 
+    function handleChange(e: any) {
+        onChange(e.target.value);
+    }
+
     return (
         <FormControl fullWidth>
             <TextField
@@ -75,7 +79,7 @@ const GenericTextInput: FunctionComponent<Props> = ({
                 margin="dense"
                 variant="outlined"
                 InputProps={inputProps}
-                onChange={onChange}
+                onChange={handleChange}
                 type={dataType}
             />
         </FormControl>
