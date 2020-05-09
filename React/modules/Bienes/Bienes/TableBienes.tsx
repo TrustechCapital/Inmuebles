@@ -34,11 +34,13 @@ const initialState: ITableBienesParameters = {
     idTipoBien: null,
 };
 
-type TableBienesActions = {
-    type: 'field';
-    fieldName: string;
-    value: string | number | null;
-};
+type TableBienesActions =
+    | {
+          type: 'field';
+          fieldName: string;
+          value: string | number | null;
+      }
+    | { type: 'clear' };
 
 function searchParamsReducer(
     state: ITableBienesParameters,
@@ -49,6 +51,10 @@ function searchParamsReducer(
             return {
                 ...state,
                 [action.fieldName]: action.value,
+            };
+        case 'clear':
+            return {
+                ...initialState,
             };
         default:
             return state;
@@ -75,8 +81,6 @@ const TableBienes: FunctionComponent<Props> = ({
         onSearch(state);
     };
 
-    const handleClearSearch = () => {};
-
     return (
         <div>
             <Grid
@@ -87,7 +91,11 @@ const TableBienes: FunctionComponent<Props> = ({
             >
                 <GenericSearchForm
                     onSearch={handleSearch}
-                    onClear={handleClearSearch}
+                    onClear={() =>
+                        dispatch({
+                            type: 'clear',
+                        })
+                    }
                 >
                     <Grid container spacing={1} direction="column">
                         <Grid
