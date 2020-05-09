@@ -308,7 +308,10 @@ function GenericTable(props) {
                 </TableCell>
                 {columns.map((col) => {
                     return (
-                        <StyledTableCell align={col.numeric ? 'right' : 'left'}>
+                        <StyledTableCell
+                            key={col.field}
+                            align={col.numeric ? 'right' : 'left'}
+                        >
                             {row[col.field]}
                         </StyledTableCell>
                     );
