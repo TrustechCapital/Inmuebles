@@ -29,22 +29,16 @@ const useStyles = makeStyles((theme) => {
 });
 
 function toggleSelectedElementInList(
-    selectedElements: number[],
-    id: number
-): number[] {
-    const selectedIndex = selectedElements.indexOf(id);
-    let newSelected: number[] = [];
-
-    if (selectedIndex === -1) {
-        newSelected = [...selectedElements, id];
+    selectedElements: Set<object>,
+    row: object
+): Set<object> {
+    if (selectedElements.has(row)) {
+        selectedElements.delete(row);
     } else {
-        newSelected = newSelected.concat(
-            selectedElements.slice(0, selectedIndex),
-            selectedElements.slice(selectedIndex + 1)
-        );
+        selectedElements.add(row);
     }
 
-    return newSelected;
+    return new Set(selectedElements);
 }
 
 function rowsDisplayedFormatter(props: any) {
@@ -85,11 +79,13 @@ function GenericTable<T extends ITableRow>(props: TableProps<T>) {
     const [order, setOrder] = React.useState<SortTypes>(SortTypes.Asc);
     const [orderBy, setOrderBy] = React.useState(keyColum);
     const [page, setPage] = React.useState(0);
-    const [selectedRows, setSelectedRows] = React.useState<number[]>([]);
+    const [selectedRows, setSelectedRows] = React.useState<Set<object>>(
+        new Set()
+    );
     const [rowsPerPage, setRowsPerPage] = React.useState(5);
 
     const classes = useStyles();
-    const isSelected = (id: number) => selectedRows.indexOf(id) !== -1;
+    const isSelected = (row: object) => selectedRows.has(row);
 
     const currentRows = data.slice(
         page * rowsPerPage,
@@ -97,16 +93,16 @@ function GenericTable<T extends ITableRow>(props: TableProps<T>) {
     );
 
     function handleClick(row: any) {
-        let newSelected = toggleSelectedElementInList(selectedRows, row.id);
-        setSelectedRows(newSelected);
-        onSelect(row);
+        let newSelectedSet = toggleSelectedElementInList(selectedRows, row);
+        setSelectedRows(newSelectedSet);
+        onSelect(Array.from(newSelectedSet) as T[]);
     }
 
     const rows = currentRows.map((row) => (
         <GenericTableRow
             key={row.id}
             row={row}
-            isSelected={isSelected(row.id)}
+            isSelected={isSelected(row)}
             onClick={handleClick}
             columns={columns}
         />
@@ -131,11 +127,10 @@ function GenericTable<T extends ITableRow>(props: TableProps<T>) {
 
     const handleSelectAllClick = (checked: boolean) => {
         if (checked) {
-            const newSelecteds = currentRows.map((row) => row.id);
-            setSelectedRows(newSelecteds);
+            setSelectedRows(new Set(currentRows));
             return;
         }
-        setSelectedRows([]);
+        setSelectedRows(new Set());
     };
 
     const handleChangePage = (event: any, newPage: number) => {
@@ -150,7 +145,7 @@ function GenericTable<T extends ITableRow>(props: TableProps<T>) {
     return (
         <Paper className={classes.root} elevation={3}>
             <GenericTableToolbar
-                numSelected={selectedRows.length}
+                numSelected={selectedRows.size}
                 title={title}
                 showActions={showActionsHeader}
                 toolbarActionsProps={toolbarActionsProps}
@@ -160,7 +155,7 @@ function GenericTable<T extends ITableRow>(props: TableProps<T>) {
                 <Table>
                     <GenericTableHead
                         columns={columns}
-                        numSelected={selectedRows.length}
+                        numSelected={selectedRows.size}
                         order={order}
                         orderBy={orderBy}
                         onSelectAllClick={handleSelectAllClick}

@@ -120,7 +120,10 @@ const EnhancedTableToolbar: React.FC<TableToolbarProps> = ({
             )}
 
             {showActions === true ? (
-                <ToolbarActions {...toolbarActionsProps} />
+                <ToolbarActions
+                    numSelected={numSelected}
+                    {...toolbarActionsProps}
+                />
             ) : null}
         </Toolbar>
     );
