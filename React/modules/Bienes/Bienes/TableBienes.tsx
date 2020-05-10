@@ -1,8 +1,9 @@
-import React, { FunctionComponent, useReducer } from 'react';
+import React from 'react';
 import { makeStyles } from '@material-ui/core/styles';
 import Grid from '@material-ui/core/Grid';
 
 import { ITableBienesParameters } from './types';
+import { useSearchParamsReducer } from '../../../sharedHooks/tableSearch';
 import BienResultRow from './models/BienResultRow';
 import GenericSearchForm from '../../../sharedComponents/GenericSearchForm';
 import GenericTable from '../../../sharedComponents/GenericTable';
@@ -34,33 +35,6 @@ const initialState: ITableBienesParameters = {
     idTipoBien: null,
 };
 
-type TableBienesActions =
-    | {
-          type: 'field';
-          fieldName: string;
-          value: string | number | null;
-      }
-    | { type: 'clear' };
-
-function searchParamsReducer(
-    state: ITableBienesParameters,
-    action: TableBienesActions
-) {
-    switch (action.type) {
-        case 'field':
-            return {
-                ...state,
-                [action.fieldName]: action.value,
-            };
-        case 'clear':
-            return {
-                ...initialState,
-            };
-        default:
-            return state;
-    }
-}
-
 type Props = {
     data: object[];
     onSelect: (selectedItems: BienResultRow[]) => void;
@@ -68,14 +42,11 @@ type Props = {
     onSearch: (searchParams: ITableBienesParameters) => void;
 };
 
-const TableBienes: FunctionComponent<Props> = ({
-    data,
-    onSelect,
-    onNew,
-    onSearch,
-}) => {
+const TableBienes: React.FC<Props> = ({ data, onSelect, onNew, onSearch }) => {
     const classes = useStyles();
-    const [state, dispatch] = useReducer(searchParamsReducer, initialState);
+    const [state, dispatch] = useSearchParamsReducer<ITableBienesParameters>(
+        initialState
+    );
 
     const handleSearch = () => {
         onSearch(state);
@@ -94,6 +65,7 @@ const TableBienes: FunctionComponent<Props> = ({
                     onClear={() =>
                         dispatch({
                             type: 'clear',
+                            initialState: initialState,
                         })
                     }
                 >
