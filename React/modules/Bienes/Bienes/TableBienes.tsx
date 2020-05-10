@@ -1,4 +1,5 @@
 import React from 'react';
+
 import { makeStyles } from '@material-ui/core/styles';
 import Grid from '@material-ui/core/Grid';
 
@@ -7,11 +8,13 @@ import { useSearchParamsReducer } from '../../../sharedHooks/tableSearch';
 import { ClavesModuloBienes } from '../../../constants/bienes';
 import BienResultRow from './models/BienResultRow';
 import GenericSearchForm from '../../../sharedComponents/GenericSearchForm';
-import GenericTable from '../../../sharedComponents/GenericTable';
+import GenericTable, {
+    IGenericColumn,
+} from '../../../sharedComponents/GenericTable';
 import GenericTextInput from '../../../sharedComponents/GenericTextInput';
 import CatalogSelect from '../../../sharedComponents/CatalogSelect';
 
-const COLUMNS = [
+const COLUMNS: IGenericColumn[] = [
     { field: 'id', header: 'Id', isKey: true },
     { field: 'idFideicomiso', header: 'Fideicomiso' },
     { field: 'tipoBien', header: 'Tipo de Bien' },
@@ -37,7 +40,7 @@ const initialState: ITableBienesParameters = {
 };
 
 type Props = {
-    data: object[];
+    data: BienResultRow[];
     onSelect: (selectedItems: BienResultRow[]) => void;
     onNew: () => void;
     onSearch: (searchParams: ITableBienesParameters) => void;

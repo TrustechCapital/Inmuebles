@@ -9,7 +9,10 @@ import FindInPageIcon from '@material-ui/icons/FindInPage';
 import Tooltip from '@material-ui/core/Tooltip';
 import MonetizationOnIcon from '@material-ui/icons/MonetizationOn';
 
-import GenericTable from '../../../sharedComponents/GenericTable';
+import GenericTable, {
+    IGenericColumn,
+} from '../../../sharedComponents/GenericTable';
+import DetalleBienResultRow from './models/DetalleBienResultRow';
 
 const useStyles = makeStyles((theme) => ({
     rowSpacing: {
@@ -17,7 +20,7 @@ const useStyles = makeStyles((theme) => ({
     },
 }));
 
-const COLUMNS_DETALLE_BIENES = [
+const COLUMNS_DETALLE_BIENES: IGenericColumn[] = [
     { field: 'id', header: 'Id', isKey: true },
     { field: 'fgrsIdFideicomiso', header: 'Fideicomiso' },
     { field: 'forsCveTipoBien', header: 'Clasificacion' },
@@ -82,10 +85,10 @@ const ActionsDetalleBienes: React.FC<ActionsProps> = (props) => {
 };
 
 type Props = {
-    data: object[];
+    data: DetalleBienResultRow[];
     showActionsHeader: boolean;
     onNew: () => void;
-    onSelect: (selectedItems: object[]) => void;
+    onSelect: (selectedItems: DetalleBienResultRow[]) => void;
 };
 
 const TableDetalleBienes: React.FC<Props> = ({
@@ -111,7 +114,7 @@ const TableDetalleBienes: React.FC<Props> = ({
                     showActionsHeader={showActionsHeader}
                     onNew={onNew}
                     onSelect={onSelect}
-                    actionsComponent={ActionsDetalleBienes}
+                    additionalActionsComponent={ActionsDetalleBienes}
                 />
             </Grid>
         </div>

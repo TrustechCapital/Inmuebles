@@ -1,5 +1,5 @@
 class BienResultRow {
-    id?: number;
+    id: number;
     idFideicomiso: number;
     idSubcuenta: number;
     tipoBien: number;
@@ -13,6 +13,7 @@ class BienResultRow {
     numeroEscritura: string;
 
     constructor(
+        id: number,
         idFideicomiso: number,
         idSubcuenta: number,
         claveBien: number,
@@ -25,6 +26,7 @@ class BienResultRow {
         importePagosBien: number,
         numeroEscritura: string
     ) {
+        this.id = id;
         this.idFideicomiso = idFideicomiso;
         this.idSubcuenta = idSubcuenta;
         this.tipoBien = claveBien;
