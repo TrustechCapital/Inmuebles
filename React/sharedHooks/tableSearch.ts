@@ -8,11 +8,6 @@ type TableSearchActions =
       }
     | { type: 'clear'; initialState: any };
 
-type SearchParamsReducer<T> = Reducer<T, TableSearchActions>;
-type SearchParamsDispatcher<T> = Dispatch<
-    ReducerAction<SearchParamsReducer<T>>
->;
-
 function searchParamsReducer<T>(state: T, action: TableSearchActions): T {
     switch (action.type) {
         case 'field':
@@ -28,6 +23,12 @@ function searchParamsReducer<T>(state: T, action: TableSearchActions): T {
             return state;
     }
 }
+
+// Tipos auxiliares para cumplir con la estructura requerida del hook React.useReducer
+type SearchParamsReducer<T> = Reducer<T, TableSearchActions>;
+type SearchParamsDispatcher<T> = Dispatch<
+    ReducerAction<SearchParamsReducer<T>>
+>;
 
 export function useSearchParamsReducer<T>(
     initialState: T
