@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 
 import { makeStyles } from '@material-ui/core/styles';
 import Table from '@material-ui/core/Table';
@@ -91,6 +91,10 @@ function GenericTable<T extends ITableRow>(props: TableProps<T>) {
         page * rowsPerPage,
         page * rowsPerPage + rowsPerPage
     );
+
+    useEffect(() => {
+        setSelectedRows(new Set());
+    }, [data]);
 
     function handleClick(row: any) {
         let newSelectedSet = toggleSelectedElementInList(selectedRows, row);

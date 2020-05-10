@@ -131,6 +131,10 @@ const MainBienes: React.FC = () => {
     const [state, dispatch] = useReducer(mainBienesReducer, initialState);
 
     async function searchBienes(parameters: ITableBienesParameters) {
+        dispatch({
+            type: 'bienesList',
+            results: [],
+        });
         const bienes = await bienesApi.find(parameters);
         dispatch({
             type: 'bienesList',
