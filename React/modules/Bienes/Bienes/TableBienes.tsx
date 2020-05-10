@@ -4,6 +4,7 @@ import Grid from '@material-ui/core/Grid';
 
 import { ITableBienesParameters } from './types';
 import { useSearchParamsReducer } from '../../../sharedHooks/tableSearch';
+import { ClavesModuloBienes } from '../../../constants/bienes';
 import BienResultRow from './models/BienResultRow';
 import GenericSearchForm from '../../../sharedComponents/GenericSearchForm';
 import GenericTable from '../../../sharedComponents/GenericTable';
@@ -112,7 +113,7 @@ const TableBienes: React.FC<Props> = ({ data, onSelect, onNew, onSearch }) => {
                             <Grid item xs={3}>
                                 <CatalogSelect
                                     label="Tipo de bien"
-                                    catalogId={38}
+                                    catalogId={ClavesModuloBienes.TiposDeBienes}
                                     value={state.idTipoBien}
                                     fullWidth
                                     onChange={(value) =>
