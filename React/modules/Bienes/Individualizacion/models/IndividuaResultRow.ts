@@ -1,5 +1,5 @@
 class IndividuaResultRow {
-    id?: number;
+    id: number;
     idFideicomiso: number;
     idSubcuenta: number;
     idBien: number;
@@ -49,6 +49,7 @@ class IndividuaResultRow {
     delegado: string;
 
     constructor(
+        id: number,
         idFideicomiso: number,
         idSubcuenta: number,
         idBien: number,
@@ -97,6 +98,7 @@ class IndividuaResultRow {
         fecFirma: any, //Formato Date
         delegado: string
     ) {
+        this.id = id;
         this.idFideicomiso = idFideicomiso;
         this.idSubcuenta = idSubcuenta;
         this.idBien = idBien;

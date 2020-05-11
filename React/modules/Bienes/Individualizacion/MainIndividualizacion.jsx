@@ -18,7 +18,7 @@ export default function MainIndividualizacion() {
 
     return (
         <div>
-            <TableIndividualizaciones onNew={handleNewModel} />
+            <TableIndividualizaciones onNew={handleNewModel} data={[]} />
             <DialogIndivizualizacion
                 mode={modoPantalla}
                 opened={detalleAbierto}

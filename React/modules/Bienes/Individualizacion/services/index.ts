@@ -2,7 +2,7 @@ import { Api } from '../../../../core/api';
 import { ITableIndivParameters } from '../types';
 import IndividuaResultRow from '../models/IndividuaResultRow';
 
-class IndividApi extends Api {
+class IndividualizacionBienesApi extends Api {
     constructor() {
         super({});
     }
@@ -23,4 +23,4 @@ class IndividApi extends Api {
     }
 }
 
-export const individApi = new IndividApi();
+export const individualizacionBienesApi = new IndividualizacionBienesApi();

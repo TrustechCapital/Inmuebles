@@ -7,11 +7,13 @@ import { useSearchParamsReducer } from '../../../sharedHooks/tableSearch';
 import { ClavesModuloBienes } from '../../../constants/bienes';
 import IndividuaResultRow from './models/IndividuaResultRow';
 import GenericSearchForm from '../../../sharedComponents/GenericSearchForm';
-import GenericTable from '../../../sharedComponents/GenericTable';
+import GenericTable, {
+    IGenericColumn,
+} from '../../../sharedComponents/GenericTable';
 import GenericTextInput from '../../../sharedComponents/GenericTextInput';
 import CatalogSelect from '../../../sharedComponents/CatalogSelect';
 
-const COLUMNS = [
+const COLUMNS: IGenericColumn[] = [
     { field: 'fadqIdFideicomiso', header: 'Fideicomiso', isKey: true },
     { field: 'fadqIdSubcuenta', header: 'SubFiso' },
     { field: 'fadqTipo', header: 'Id Garantía' },
@@ -36,7 +38,7 @@ const initialState: ITableIndivParameters = {
 };
 
 type Props = {
-    data: object[];
+    data: IndividuaResultRow[];
     onSelect: (selectedItems: IndividuaResultRow[]) => void;
     onNew: () => void;
     onSearch: (searchParams: ITableIndivParameters) => void;
