@@ -1,4 +1,4 @@
-import { Api } from '../api';
+import { Api } from './base';
 import CatalogItem from '../../models/CatalogItem';
 
 class CatalogNotFoundException extends Error {

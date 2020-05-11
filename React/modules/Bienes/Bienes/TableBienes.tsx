@@ -43,10 +43,17 @@ type Props = {
     data: BienResultRow[];
     onSelect: (selectedItems: BienResultRow[]) => void;
     onNew: () => void;
+    onView: () => void;
     onSearch: (searchParams: ITableBienesParameters) => void;
 };
 
-const TableBienes: React.FC<Props> = ({ data, onSelect, onNew, onSearch }) => {
+const TableBienes: React.FC<Props> = ({
+    data,
+    onSelect,
+    onNew,
+    onSearch,
+    onView,
+}) => {
     const classes = useStyles();
     const [state, dispatch] = useSearchParamsReducer<ITableBienesParameters>(
         initialState
@@ -139,6 +146,7 @@ const TableBienes: React.FC<Props> = ({ data, onSelect, onNew, onSearch }) => {
                     columns={COLUMNS}
                     onSelect={onSelect}
                     onNew={onNew}
+                    onView={onView}
                 />
             </Grid>
         </div>

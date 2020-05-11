@@ -2,7 +2,7 @@ import { useEffect } from 'react';
 import { AppProps } from 'next/app';
 
 import Layout from '../sharedComponents/Layout';
-import { catalogsApi } from '../core/catalogs';
+import { catalogsApi } from '../core/api';
 
 function App({ Component, pageProps }: AppProps) {
     useEffect(() => {

@@ -56,7 +56,8 @@ interface TableProps<T> {
     data: T[];
     columns: IColumn[];
     onSelect: (selectedRows: T[]) => void;
-    onNew: () => void;
+    onNew?: () => void;
+    onView?: () => void;
 }
 
 function GenericTable<T extends ITableRow>(props: TableProps<T>) {
@@ -66,7 +67,8 @@ function GenericTable<T extends ITableRow>(props: TableProps<T>) {
         columns = [],
         onSelect,
         onNew,
-        toolbarActionsProps = { onNew: onNew },
+        onView,
+        toolbarActionsProps = { onNew: onNew, onView: onView },
         showActionsHeader = true,
         additionalActionsComponent = null,
     } = props;

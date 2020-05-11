@@ -7,6 +7,7 @@ import TableDetalleBienes from './TableDetalleBienes';
 import DialogBienes from './DialogBienes';
 import DialogDetalleBienes from './DialogDetalleBienes';
 import { OperacionesCatalogo } from '../../../constants';
+import Bien from '../../../models/Bien';
 import { bienesApi } from './services';
 
 type MainBienesState = {
@@ -144,6 +145,21 @@ const MainBienes: React.FC = () => {
 
     function handleSelectDetalleBien() {}
 
+    async function handleViewDetalleBien() {
+        const bienResultRow = state.selectedBienes[0];
+        const bien = new Bien(
+            bienResultRow.idFideicomiso,
+            bienResultRow.idSubcuenta,
+            bienResultRow.idTipoBien
+        );
+
+        await bienesApi.findByPK(bien);
+        dispatch({
+            type: 'openBienesModal',
+            mode: OperacionesCatalogo.Consulta,
+        });
+    }
+
     return (
         <div>
             <TableBienes
@@ -154,6 +170,7 @@ const MainBienes: React.FC = () => {
                         mode: OperacionesCatalogo.Alta,
                     })
                 }
+                onView={handleViewDetalleBien}
                 onSelect={(selectedBienes) =>
                     dispatch({
                         type: 'selectedBienesRows',

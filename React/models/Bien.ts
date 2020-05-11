@@ -1,19 +1,42 @@
-class Bien {
-    fgarIdFideicomiso?: number;
-    fgarIdSubcuenta?: number;
-    fgarCveGarantia?: number;
-    fgarCveGarantia2?: string;
-    fgarCveStatus?: string;
-    disponibleBien?: string;
-    fgarImpGarantia?: number;
-    fgarImpGarantiaFormatted?: string;
-    fgarImpGarantizad?: number;
-    fgarImpGarantizadFormatted?: string;
-    pagosBien?: string;
-    ctoNumEscritura?: string;
+import BaseModel, { IModel } from './BaseModel';
 
-    getIdentifier(): string {
-        return `${this.fgarIdFideicomiso}-${this.fgarIdSubcuenta}-${this.fgarCveGarantia}`;
+class Bien extends BaseModel implements IModel {
+    backendModelReference = 'mx.com.inscitech.fiducia.domain.FGarantias';
+
+    fgarIdFideicomiso: number;
+    fgarIdSubcuenta: number;
+    fgarCveGarantia: number;
+    fgarTexGarantia?: string;
+    fgarTexComentario?: string;
+    fgarCveRevalua?: number;
+    fgarImpGarantia?: number;
+    fgarImpGarantizad?: number;
+    fgarPjePicnorado?: number;
+    fgarImpUltValua?: number;
+    fgarCvePerValua?: string;
+    fgarFecUltValua?: string;
+    fgarFecInicio?: string;
+    fgarFecFin?: string;
+    fgarCveStatus?: string;
+    fgarEsGarantia?: number;
+
+    constructor(
+        fgarIdFideicomiso: number,
+        fgarIdSubcuenta: number,
+        fgarCveGarantia: number
+    ) {
+        super();
+        this.fgarIdFideicomiso = fgarIdFideicomiso;
+        this.fgarIdSubcuenta = fgarIdSubcuenta;
+        this.fgarCveGarantia = fgarCveGarantia;
+    }
+
+    getPKValues() {
+        return {
+            fgarIdFideicomiso: this.fgarIdFideicomiso,
+            fgarIdSubcuenta: this.fgarIdSubcuenta,
+            fgarCveGarantia: this.fgarCveGarantia,
+        };
     }
 }
 

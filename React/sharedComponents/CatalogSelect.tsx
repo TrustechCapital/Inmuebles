@@ -1,7 +1,7 @@
 import React from 'react';
 import GenericSelect from './GenericSelect';
 
-import { catalogsApi } from '../core/catalogs';
+import { catalogsApi } from '../core/api';
 
 function toInt(value: string) {
     if (value === null || (typeof value === 'string' && value.trim() === '')) {

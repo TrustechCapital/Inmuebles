@@ -1,8 +1,8 @@
 import axios, { AxiosInstance, AxiosRequestConfig, AxiosResponse } from 'axios';
-import { apiConfig } from './api.config';
+import { apiConfig } from '../api.config';
 import { filterEmptyParameters } from './utils';
 
-type ModelMapper = (object: any, index: number) => any;
+export type ModelMapper = (object: any, index: number) => any;
 
 export class Api {
     private api: AxiosInstance;

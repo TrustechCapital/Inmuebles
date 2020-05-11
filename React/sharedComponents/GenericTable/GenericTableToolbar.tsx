@@ -27,12 +27,14 @@ const useStyles = makeStyles((theme) => ({
 
 type ToolbarActionsProps = {
     numSelected: number;
-    onNew: () => void;
+    onNew?: () => void;
+    onView?: () => void;
 };
 
 const EnhancedTableToolbarActions: React.FC<ToolbarActionsProps> = ({
     numSelected,
     onNew,
+    onView,
 }) => {
     return (
         <React.Fragment>
@@ -54,7 +56,7 @@ const EnhancedTableToolbarActions: React.FC<ToolbarActionsProps> = ({
 
             {numSelected == 1 ? (
                 <Tooltip title="Consultar">
-                    <IconButton aria-label="consultar">
+                    <IconButton aria-label="consultar" onClick={onView}>
                         <FindInPageIcon />
                     </IconButton>
                 </Tooltip>
