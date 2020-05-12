@@ -1,7 +1,7 @@
 import { ModelsApi } from '../../../../core/api';
 import { ITableBienesParameters } from '../types';
 import BienResultRow from '../models/BienResultRow';
-import Bien from '../../../..//models/Bien';
+import Bien from '../../../../models/Bien';
 
 function objectToModel(data: any): Bien {
     return data as Bien;
