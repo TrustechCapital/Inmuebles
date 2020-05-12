@@ -6,23 +6,24 @@ import {
 } from '@material-ui/pickers';
 
 type Props = {
-    idSelector: string;
-    labelSelector: string;
-    selectedDate: string;
+    label?: string; // TODO: cambiar a requerido
+    value?: string | Date; // TODO: cambiar a requerido
+    labelSelector?: string; // TODO: eliminar cuando ya no se use
+    selectedDate?: string | Date; // TODO: eliminar cuando ya no se use
     onChange: (value: any) => void; // TODO: importar el tipo correcto
 };
 
 const GenericDatePicker: React.FC<Props> = ({
-    idSelector,
     labelSelector,
     selectedDate,
+    label = labelSelector,
+    value = selectedDate || '',
     onChange,
 }) => {
     return (
         <MuiPickersUtilsProvider utils={DateFnsUtils}>
             <KeyboardDatePicker
                 margin="normal"
-                id={idSelector}
                 label={labelSelector}
                 format="dd/MM/yyyy"
                 value={selectedDate}
