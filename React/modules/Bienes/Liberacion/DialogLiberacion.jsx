@@ -113,16 +113,16 @@ export default function DialogAdquirientes(props) {
                         <GenericTextInput
                             label="Fideicomiso"
                             idCampo="funiIdFideicomiso"
-                            required={true}
-                            value=""
+                            value="1"
+                            disabled
                         />
                     </Grid>
                     <Grid item xs={6}>
                         <GenericTextInput
                             label="Número de Bien"
                             idCampo="funiIdBien"
-                            required={true}
-                            value=""
+                            value="11"
+                            disabled
                         />
                     </Grid>
                 </Grid>
@@ -131,8 +131,8 @@ export default function DialogAdquirientes(props) {
                         <GenericTextInput
                             label="SubCuenta"
                             idCampo="funiIdSubcuenta"
-                            required={true}
-                            value=""
+                            value="0"
+                            disabled
                         />
                     </Grid>
                 </Grid>
