@@ -98,8 +98,8 @@ export default function DialogDetalleBienes(props) {
         <CatalogDialog
             opened={props.opened}
             operacionCatalogo={mode}
-            nombreCatalogo="Bienes"
-            subtitle="Bienes en Garantía"
+            nombreCatalogo="Detalle Bienes"
+            subtitle="Detalle de Bien"
             onCancel={props.handleClose}
             onAccept={handleAccept}
         >
@@ -120,8 +120,8 @@ export default function DialogDetalleBienes(props) {
                     </Grid>
                     <Grid item xs={6}>
                         <GenericSelect
-                            labelId="ID Garantía"
-                            label="ID Garantía"
+                            labelId="Id Bien"
+                            label="Id Bien"
                             selectId="fgarCveGarantia"
                             selected={state.age}
                             onChange={handleChange}
@@ -139,7 +139,7 @@ export default function DialogDetalleBienes(props) {
                     </Grid>
                     <Grid item xs={6}>
                         <GenericTextInput
-                            label="ID Bien"
+                            label="Id Bien"
                             idCampo="forsIdGarantia"
                             required={true}
                             value=""

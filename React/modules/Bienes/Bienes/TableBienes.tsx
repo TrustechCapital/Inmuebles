@@ -21,7 +21,7 @@ const COLUMNS: IGenericColumn[] = [
     { field: 'importeBienFormateado', header: 'Importe', numeric: true },
     {
         field: 'importeBienGarantizadoYFormateado',
-        header: 'Importe Garantizado',
+        header: 'Importe de Bien',
         numeric: true,
     },
     { field: 'claveEstatus', header: 'Estatus' },

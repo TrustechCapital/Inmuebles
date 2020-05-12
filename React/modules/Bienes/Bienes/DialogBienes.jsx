@@ -78,8 +78,8 @@ export default function DialogBienes(props) {
         <CatalogDialog
             opened={props.opened}
             operacionCatalogo={mode}
-            nombreCatalogo="Garantías"
-            subtitle="Garantías por Fideicomisos"
+            nombreCatalogo="Bienes"
+            subtitle="Bienes por Fideicomisos"
             onCancel={props.handleClose}
             onAccept={handleAccept}
         >
@@ -131,7 +131,7 @@ export default function DialogBienes(props) {
                 <Grid container className={classes.rowSpacing} spacing={3}>
                     <Grid item xs={6}>
                         <GenericTextInput
-                            label="Importe Garantizado"
+                            label="Importe de Bien"
                             idCampo="fgarImpGarantizad"
                             required={false}
                             value=""
