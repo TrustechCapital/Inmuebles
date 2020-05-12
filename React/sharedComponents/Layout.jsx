@@ -22,6 +22,7 @@ import ApartmentIcon from '@material-ui/icons/Apartment';
 import PeopleIcon from '@material-ui/icons/People';
 import ScheduleIcon from '@material-ui/icons/Schedule';
 import InputIcon from '@material-ui/icons/Input';
+import BarChartIcon from '@material-ui/icons/BarChart';
 
 const theme = createMuiTheme({
     palette: {
@@ -100,6 +101,7 @@ const MODULES = [
     { label: 'Bienes', url: '/bienes', icon: ApartmentIcon },
     { label: 'Interfases', url: '/interfases', icon: InputIcon },
     { label: 'Apertura/Cierre', url: '/apertura', icon: ScheduleIcon },
+    { label: 'Reportes', url: '/reportes', icon: BarChartIcon },
     { label: 'Usuarios', url: '/usuarios', icon: PeopleIcon },
 ];
 
