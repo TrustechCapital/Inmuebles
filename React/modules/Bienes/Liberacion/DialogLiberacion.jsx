@@ -119,7 +119,7 @@ export default function DialogAdquirientes(props) {
                     </Grid>
                     <Grid item xs={6}>
                         <GenericTextInput
-                            label="Número de Inmueble"
+                            label="Número de Bien"
                             idCampo="funiIdBien"
                             required={true}
                             value=""
@@ -135,10 +135,18 @@ export default function DialogAdquirientes(props) {
                             value=""
                         />
                     </Grid>
+                </Grid>
+                <Grid container className={classes.rowSpacing} spacing={3}>
                     <Grid item xs={6}>
                         <GenericTextInput
-                            label="Edificio"
-                            idCampo="funiIdSubcuenta"
+                            label="Nombre del Adquiriente"
+                            required={true}
+                            value=""
+                        />
+                    </Grid>
+                    <Grid item xs={6}>
+                        <GenericTextInput
+                            label="Nombre del Notario"
                             required={true}
                             value=""
                         />
@@ -147,254 +155,15 @@ export default function DialogAdquirientes(props) {
                 <Grid container className={classes.rowSpacing} spacing={3}>
                     <Grid item xs={6}>
                         <GenericTextInput
-                            label="Unidad Condominal"
-                            idCampo="funiIdDepto"
-                            required={true}
-                            value=""
-                        />
-                    </Grid>
-                    <Grid item xs={6}>
-                        <GenericTextInput
-                            label="Niveles"
-                            idCampo="funiNiveles"
-                            required={true}
-                            value=""
-                        />
-                    </Grid>
-                </Grid>
-                <Grid container className={classes.rowSpacing} spacing={3}>
-                    <Grid item xs={6}>
-                        <GenericTextInput
-                            label="Calle"
+                            label="Valor de la Operación"
                             idCampo="funiCalleNum"
                             required={true}
                             value=""
                         />
                     </Grid>
                     <Grid item xs={6}>
-                        <GenericTextInput
-                            label="Colonia"
-                            idCampo="funiNomColonia"
-                            required={true}
-                            value=""
-                        />
-                    </Grid>
-                </Grid>
-                <Grid container className={classes.rowSpacing} spacing={3}>
-                    <Grid item xs={6}>
-                        <GenericTextInput
-                            label="Población"
-                            idCampo="funiNomPoblacion"
-                            required={true}
-                            value=""
-                        />
-                    </Grid>
-                    <Grid item xs={6}>
-                        <GenericTextInput
-                            label="Código Postal"
-                            idCampo="funiCodigoPostal"
-                            required={true}
-                            value=""
-                        />
-                    </Grid>
-                </Grid>
-                <Grid container className={classes.rowSpacing} spacing={3}>
-                    <Grid item xs={6}>
-                        <GenericSelect
-                            labelId="País"
-                            label="País"
-                            selectId="funiNumPais"
-                            selected={state.periodicidad}
-                            onChange={handleChangePeriodi}
-                        />
-                    </Grid>
-                    <Grid item xs={6}>
-                        <GenericSelect
-                            labelId="Estado"
-                            label="Estado"
-                            selectId="funiNumEstado"
-                            selected={state.periodicidad}
-                            onChange={handleChangePeriodi}
-                        />
-                    </Grid>
-                </Grid>
-                <Grid container className={classes.rowSpacing} spacing={3}>
-                    <Grid item xs={6}>
-                        <GenericTextInput
-                            label="Estacionamiento 1"
-                            idCampo="funiEstacionamiento1"
-                            required={true}
-                            value=""
-                        />
-                    </Grid>
-                    <Grid item xs={6}>
-                        <GenericTextInput
-                            label="Estacionamiento 2"
-                            idCampo="funiEstacionamiento2"
-                            required={true}
-                            value=""
-                        />
-                    </Grid>
-                </Grid>
-                <Grid container className={classes.rowSpacing} spacing={3}>
-                    <Grid item xs={6}>
-                        <GenericTextInput
-                            label="Estacionamiento 3"
-                            idCampo="funiEstacionamiento3"
-                            required={true}
-                            value=""
-                        />
-                    </Grid>
-                    <Grid item xs={6}>
-                        <GenericTextInput
-                            label="Otro"
-                            idCampo="funiRoofGarden"
-                            required={true}
-                            value=""
-                        />
-                    </Grid>
-                </Grid>
-                <Grid container className={classes.rowSpacing} spacing={3}>
-                    <Grid item xs={6}>
-                        <GenericTextInput
-                            label="Superficie Otro"
-                            idCampo="funiRoofSuperficie"
-                            required={true}
-                            value=""
-                        />
-                    </Grid>
-                    <Grid item xs={6}>
-                        <GenericTextInput
-                            label="Otro 2"
-                            idCampo="funiSotano"
-                            required={true}
-                            value=""
-                        />
-                    </Grid>
-                </Grid>
-                <Grid container className={classes.rowSpacing} spacing={3}>
-                    <Grid item xs={6}>
-                        <GenericTextInput
-                            label="Superficie Otro 2"
-                            idCampo="funiSotanoSuperficie"
-                            required={true}
-                            value=""
-                        />
-                    </Grid>
-                    <Grid item xs={6}>
-                        <GenericTextInput
-                            label="Indiviso"
-                            idCampo="funiIndiviso"
-                            required={true}
-                            value=""
-                        />
-                    </Grid>
-                </Grid>
-                <Grid container className={classes.rowSpacing} spacing={3}>
-                    <Grid item xs={6}>
-                        <GenericTextInput
-                            label="Registro Contable"
-                            idCampo="funiPrecio"
-                            required={true}
-                            value=""
-                        />
-                    </Grid>
-                    <Grid item xs={6}>
-                        <GenericTextInput
-                            label="Precio Catastro"
-                            idCampo="funiPrecioCatastro"
-                            required={true}
-                            value=""
-                        />
-                    </Grid>
-                </Grid>
-                <Grid container className={classes.rowSpacing} spacing={3}>
-                    <Grid item xs={6}>
-                        <GenericSelect
-                            labelId="Moneda"
-                            label="Moneda"
-                            selectId="funiMoneda"
-                            selected={state.periodicidad}
-                            onChange={handleChangePeriodi}
-                        />
-                    </Grid>
-                    <Grid item xs={6}>
-                        <GenericSelect
-                            labelId="Estatus"
-                            label="Estatus"
-                            selectId="funiStatus"
-                            selected={state.periodicidad}
-                            onChange={handleChangePeriodi}
-                        />
-                    </Grid>
-                </Grid>
-                <Grid container className={classes.rowSpacing} spacing={3}>
-                    <Grid item xs={6}>
-                        <GenericTextInput
-                            label="Acto 1"
-                            idCampo="funiActo1"
-                            required={true}
-                            value=""
-                        />
-                    </Grid>
-                    <Grid item xs={6}>
-                        <GenericTextInput
-                            label="Acto 2"
-                            idCampo="funiActo2"
-                            required={true}
-                            value=""
-                        />
-                    </Grid>
-                </Grid>
-                <Grid container className={classes.rowSpacing} spacing={3}>
-                    <Grid item xs={6}>
-                        <GenericTextInput
-                            label="Acto 3"
-                            idCampo="funiActo3"
-                            required={true}
-                            value=""
-                        />
-                    </Grid>
-                    <Grid item xs={6}>
-                        <GenericTextInput
-                            label="Acto 4"
-                            idCampo="funiActo4"
-                            required={true}
-                            value=""
-                        />
-                    </Grid>
-                </Grid>
-                <Grid container className={classes.rowSpacing} spacing={3}>
-                    <Grid item xs={6}>
-                        <GenericTextInput
-                            label="Notario"
-                            idCampo="funiNotario"
-                            required={true}
-                            value=""
-                        />
-                    </Grid>
-                    <Grid item xs={6}>
-                        <GenericTextInput
-                            label="Escritura"
-                            idCampo="funiNumEscritura"
-                            required={true}
-                            value=""
-                        />
-                    </Grid>
-                </Grid>
-                <Grid container className={classes.rowSpacing} spacing={3}>
-                    <Grid item xs={6}>
-                        <GenericTextInput
-                            label="Folio"
-                            idCampo="funiFolioReal"
-                            required={true}
-                            value=""
-                        />
-                    </Grid>
-                    <Grid item xs={6}>
                         <GenericDatePicker
-                            idSelector="funiFechaTrasladoDominio"
-                            labelSelector="Fecha Traslativo"
+                            labelSelector="Fecha de la Escrituración"
                             selectedDate={selectedDate}
                             onChange={handleDateChangeSal}
                         />

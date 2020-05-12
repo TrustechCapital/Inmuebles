@@ -12,12 +12,11 @@ import GenericTable from '../../../sharedComponents/GenericTable';
 
 const COLUMNS = [
     { field: 'fadqIdFideicomiso', header: 'Fideicomiso', isKey: true },
-    { field: 'fadqIdSubcuenta', header: 'SubFiso' },
-    { field: 'fadqTipo', header: 'Inmueble' },
-    { field: 'fadqIdBien', header: 'Edificio' },
-    { field: 'fadqIdDepto', header: 'Num. Unidad' },
-    { field: 'fadqIdVenta', header: 'Registro Contable' },
-    { field: 'fadqNombreComprador', header: 'Moneda' },
+    { field: 'fadqIdSubcuenta', header: 'SubCuenta' },
+    { field: 'fadqTipo', header: 'Bien' },
+    { field: 'fadqIdBien', header: 'Adquiriente' },
+    { field: 'fadqIdDepto', header: 'Notario' },
+    { field: 'fadqIdVenta', header: 'Valor de la Operación' },
     { field: 'fadqSaldo', header: 'Estatus' },
 ];
 
