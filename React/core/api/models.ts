@@ -3,11 +3,16 @@ import { IModel } from '../../models/BaseModel';
 
 const DEFAULT_DATE_FORMAT = 'dd/MM/yyyy';
 
+export interface IModelMapper<T> {
+    fromObject: (data: any) => T;
+    toObject: (model: T) => object;
+}
+
 interface IModelsApi<T extends IModel> {
-    findByPK: (model: T, transformer: (data: object) => T) => Promise<T>;
-    create: (model: T, transformer: (data: object) => T) => Promise<T>;
-    update: (model: T, transformer: (data: object) => T) => Promise<T>;
-    destroy: (model: T) => Promise<void>;
+    findByPK: (model: T, transformer: IModelMapper<T>) => Promise<T>;
+    create: (model: T, transformer: IModelMapper<T>) => Promise<T>;
+    update: (model: T, transformer: IModelMapper<T>) => Promise<T>;
+    destroy: (model: T, transformer: IModelMapper<T>) => Promise<void>;
 }
 
 export class ModelsApi<T extends IModel> extends Api implements IModelsApi<T> {
@@ -17,9 +22,12 @@ export class ModelsApi<T extends IModel> extends Api implements IModelsApi<T> {
 
     private createBackendParameters(
         model: T,
+        transformer: IModelMapper<T>,
         sendPkOnly: boolean = false
     ): object {
-        const catalogParams = sendPkOnly ? model.getPKValues() : model;
+        const catalogParams = transformer.toObject(
+            sendPkOnly ? (model.getPKValues() as T) : model
+        );
         return {
             params: {
                 json: JSON.stringify({
@@ -31,37 +39,37 @@ export class ModelsApi<T extends IModel> extends Api implements IModelsApi<T> {
         };
     }
 
-    async findByPK(model: T, transformer: (data: object) => T): Promise<T> {
+    async findByPK(model: T, transformer: IModelMapper<T>): Promise<T> {
         return this.get(
             'obtenerCatalogo.do',
-            this.createBackendParameters(model, true)
+            this.createBackendParameters(model, transformer, true)
         ).then((response) => {
-            return transformer(response.data as object);
+            return transformer.fromObject(response.data as object);
         });
     }
 
-    async create(model: T, transformer: (data: object) => T): Promise<T> {
+    async create(model: T, transformer: IModelMapper<T>): Promise<T> {
         return this.get(
             'altaCatalogo.do',
-            this.createBackendParameters(model)
+            this.createBackendParameters(model, transformer)
         ).then((response) => {
-            return transformer(response.data as object);
+            return transformer.fromObject(response.data as object);
         });
     }
 
-    async update(model: T, transformer: (data: object) => T): Promise<T> {
+    async update(model: T, transformer: IModelMapper<T>): Promise<T> {
         return this.get(
             'modificaCatalogo.do',
-            this.createBackendParameters(model)
+            this.createBackendParameters(model, transformer)
         ).then((response) => {
-            return transformer(response.data as object);
+            return transformer.fromObject(response.data as object);
         });
     }
 
-    async destroy(model: T): Promise<void> {
+    async destroy(model: T, transformer: IModelMapper<T>): Promise<void> {
         await this.get<void, void>(
             'modificaCatalogo.do',
-            this.createBackendParameters(model, true)
+            this.createBackendParameters(model, transformer, true)
         );
     }
 }

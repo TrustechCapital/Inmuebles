@@ -3,39 +3,39 @@ import BaseModel, { IModel } from './BaseModel';
 class Bien extends BaseModel implements IModel {
     backendModelReference = 'mx.com.inscitech.fiducia.domain.FGarantias';
 
-    fgarIdFideicomiso: number;
-    fgarIdSubcuenta: number;
-    fgarCveGarantia: number;
-    fgarTexGarantia?: string;
-    fgarTexComentario?: string;
-    fgarCveRevalua?: number;
-    fgarImpGarantia?: number;
-    fgarImpGarantizad?: number;
-    fgarPjePicnorado?: number;
-    fgarImpUltValua?: number;
-    fgarCvePerValua?: string;
-    fgarFecUltValua?: string;
-    fgarFecInicio?: string;
-    fgarFecFin?: string;
-    fgarCveStatus?: string;
-    fgarEsGarantia?: number;
+    idFideicomiso: number;
+    idSubcuenta: number;
+    idTipoBien: number;
+    textoBien?: string = '';
+    comentario?: string = '';
+    idClaveRevaluacion?: number | null = null;
+    importeDeGarantia?: number | null = null;
+    importeDelBien?: number | null = null;
+    picnorado?: number | null = null;
+    importeUltimaValuacion?: number | null = null;
+    idClavePeriodicidadRevaluacion?: number | null = null;
+    fechaUltimaValuacion?: string | null = null;
+    fechaInicio?: string | null = null;
+    fechaFin?: string | null = null;
+    estatus?: string | null = null;
+    esGarantia?: boolean = false;
 
     constructor(
-        fgarIdFideicomiso: number,
-        fgarIdSubcuenta: number,
-        fgarCveGarantia: number
+        idFideicomiso: number,
+        idSubcuenta: number,
+        idTipoBien: number
     ) {
         super();
-        this.fgarIdFideicomiso = fgarIdFideicomiso;
-        this.fgarIdSubcuenta = fgarIdSubcuenta;
-        this.fgarCveGarantia = fgarCveGarantia;
+        this.idFideicomiso = idFideicomiso;
+        this.idSubcuenta = idSubcuenta;
+        this.idTipoBien = idTipoBien;
     }
 
     getPKValues() {
         return {
-            fgarIdFideicomiso: this.fgarIdFideicomiso,
-            fgarIdSubcuenta: this.fgarIdSubcuenta,
-            fgarCveGarantia: this.fgarCveGarantia,
+            idFideicomiso: this.idFideicomiso,
+            idSubcuenta: this.idSubcuenta,
+            idTipoBien: this.idTipoBien,
         };
     }
 }
