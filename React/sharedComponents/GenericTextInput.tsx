@@ -38,6 +38,7 @@ type Props = {
     value: string | number | null;
     adornment?: string;
     readOnly?: boolean;
+    disabled?: boolean;
     onChange: (value: string | number | null) => void;
     dataType?: 'text' | 'number';
 };
@@ -50,6 +51,7 @@ const GenericTextInput: FunctionComponent<Props> = ({
     value,
     adornment,
     readOnly = false,
+    disabled,
     onChange,
     dataType = 'text',
 }) => {
@@ -81,6 +83,7 @@ const GenericTextInput: FunctionComponent<Props> = ({
                 InputProps={inputProps}
                 onChange={handleChange}
                 type={dataType}
+                disabled={disabled}
             />
         </FormControl>
     );
