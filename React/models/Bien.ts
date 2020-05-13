@@ -6,19 +6,19 @@ class Bien extends BaseModel {
     idFideicomiso: number | null = null;
     idSubcuenta: number | null = null;
     idTipoBien: number | null = null;
-    textoBien?: string = '';
-    comentario?: string = '';
-    idClaveRevaluacion?: number | null = null;
-    importeDeGarantia?: number | null = null;
-    importeDelBien?: number | null = null;
-    picnorado?: number | null = null;
-    importeUltimaValuacion?: number | null = null;
-    idClavePeriodicidadRevaluacion?: number | null = null;
-    fechaUltimaValuacion?: string | null = null;
-    fechaInicio?: string | null = null;
-    fechaFin?: string | null = null;
-    estatus?: string | null = null;
-    esGarantia?: boolean = false;
+    textoBien: string = '';
+    comentario: string = '';
+    idClaveRevaluacion: number | null = null;
+    importeDeGarantia: number | null = null;
+    importeDelBien: number | null = null;
+    picnorado: number | null = null;
+    importeUltimaValuacion: number | null = null;
+    idClavePeriodicidadRevaluacion: number | null = null;
+    fechaUltimaValuacion: string | null = null;
+    fechaInicio: string | null = null;
+    fechaFin: string | null = null;
+    estatus: string | null = null;
+    esGarantia: boolean = false;
 
     constructor(
         idFideicomiso: number | null,
