@@ -1,39 +1,34 @@
 import React from 'react';
-import GenericSelect from './GenericSelect';
+import GenericSelect, { GenericSelectProps } from './GenericSelect';
 
 import { catalogsApi } from '../core/api';
 
-function toInt(value: string) {
-    if (value === null || (typeof value === 'string' && value.trim() === '')) {
-        return null;
-    } else {
-        return parseInt(value, 10);
-    }
-}
-
-type Props = {
-    label: string;
-    value: number | null;
+type CatalogSelectProps = Omit<GenericSelectProps, 'value' | 'onChange'> & {
     catalogId: number;
-    fullWidth: boolean;
-    onChange: (value: number | null) => void;
+    useLabelAsValue?: boolean;
+    value: number | string | null;
+    onChange: (value: number | string | null) => void;
 };
 
-const CatalogSelect: React.FC<Props> = ({
+const CatalogSelect: React.FC<CatalogSelectProps> = ({
     catalogId,
     value,
     onChange,
+    useLabelAsValue = false,
+    valueKey,
     ...selectProps
 }) => {
+    const items = catalogsApi.getCatalogById(catalogId);
+
     const handleOnSelect = (value: string) => {
-        onChange(toInt(value));
+        onChange(useLabelAsValue ? value : parseInt(value, 10));
     };
 
-    const items = catalogsApi.getCatalogById(catalogId);
     return (
         <GenericSelect
             items={items}
             value={value}
+            valueKey={useLabelAsValue ? 'label' : valueKey}
             onChange={handleOnSelect}
             {...selectProps}
         />
