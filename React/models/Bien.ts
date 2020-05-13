@@ -1,11 +1,11 @@
-import BaseModel, { IModel } from './BaseModel';
+import BaseModel from './BaseModel';
 
-class Bien extends BaseModel implements IModel {
+class Bien extends BaseModel {
     backendModelReference = 'mx.com.inscitech.fiducia.domain.FGarantias';
 
-    idFideicomiso: number;
-    idSubcuenta: number;
-    idTipoBien: number;
+    idFideicomiso: number | null = null;
+    idSubcuenta: number | null = null;
+    idTipoBien: number | null = null;
     textoBien?: string = '';
     comentario?: string = '';
     idClaveRevaluacion?: number | null = null;
@@ -21,9 +21,9 @@ class Bien extends BaseModel implements IModel {
     esGarantia?: boolean = false;
 
     constructor(
-        idFideicomiso: number,
-        idSubcuenta: number,
-        idTipoBien: number
+        idFideicomiso: number | null,
+        idSubcuenta: number | null,
+        idTipoBien: number | null
     ) {
         super();
         this.idFideicomiso = idFideicomiso;

@@ -14,7 +14,8 @@ type MainBienesState = {
     searchParameters: ITableBienesParameters;
     modalBienesMode: OperacionesCatalogo;
     bienesList: BienResultRow[];
-    selectedBienes: BienResultRow[];
+    selectedBienesRows: BienResultRow[];
+    currentBienModel: Bien;
     modalBienesOpen: boolean;
     modalDetalleBienesOpen: boolean;
     modalDetalleBienesMode: OperacionesCatalogo;
@@ -28,7 +29,11 @@ type MainBienesActions =
       }
     | {
           type: 'selectedBienesRows';
-          selectedBienes: BienResultRow[];
+          selectedRows: BienResultRow[];
+      }
+    | {
+          type: 'loadBienesModel';
+          model: Bien;
       }
     | {
           type: 'openBienesModal';
@@ -53,7 +58,8 @@ const initialState: MainBienesState = {
     },
     modalBienesMode: OperacionesCatalogo.Alta,
     bienesList: [],
-    selectedBienes: [],
+    selectedBienesRows: [],
+    currentBienModel: new Bien(null, null, null),
     modalBienesOpen: false,
     modalDetalleBienesOpen: false,
     modalDetalleBienesMode: OperacionesCatalogo.Alta,
@@ -72,14 +78,14 @@ function mainBienesReducer(state: MainBienesState, action: MainBienesActions) {
         case 'selectedBienesRows':
             return {
                 ...state,
-                selectedBienes: action.selectedBienes,
+                selectedBienesRows: action.selectedRows,
                 showActionsDetalleBienesTable: true,
             };
         case 'openBienesModal':
             if (
                 (action.mode === OperacionesCatalogo.Consulta ||
                     action.mode === OperacionesCatalogo.Modificacion) &&
-                state.selectedBienes.length === 1
+                state.selectedBienesRows.length === 1
             ) {
                 return {
                     ...state,
@@ -90,7 +96,7 @@ function mainBienesReducer(state: MainBienesState, action: MainBienesActions) {
 
             if (
                 action.mode === OperacionesCatalogo.Baja &&
-                state.selectedBienes.length > 0
+                state.selectedBienesRows.length > 0
             ) {
                 return {
                     ...state,
@@ -145,15 +151,35 @@ const MainBienes: React.FC = () => {
 
     function handleSelectDetalleBien() {}
 
-    async function handleViewDetalleBien() {
-        const bienResultRow = state.selectedBienes[0];
-        const bien = new Bien(
+    async function fetchDetalleBien() {
+        if (state.selectedBienesRows.length !== 1) {
+            return;
+        }
+
+        const bienResultRow = state.selectedBienesRows[0];
+        let bien = new Bien(
             bienResultRow.idFideicomiso,
             bienResultRow.idSubcuenta,
             bienResultRow.idTipoBien
         );
 
-        await bienesApi.findByPK(bien);
+        const isModelAlreadyLoaded = state.currentBienModel?.hasSamePkAs(bien);
+
+        if (isModelAlreadyLoaded) {
+            return;
+        }
+
+        bien = await bienesApi.findByPK(bien);
+
+        dispatch({
+            type: 'loadBienesModel',
+            model: bien,
+        });
+    }
+
+    async function handleViewDetalleBien() {
+        await fetchDetalleBien();
+
         dispatch({
             type: 'openBienesModal',
             mode: OperacionesCatalogo.Consulta,
@@ -171,10 +197,10 @@ const MainBienes: React.FC = () => {
                     })
                 }
                 onView={handleViewDetalleBien}
-                onSelect={(selectedBienes) =>
+                onSelect={(selectedRows) =>
                     dispatch({
                         type: 'selectedBienesRows',
-                        selectedBienes: selectedBienes,
+                        selectedRows: selectedRows,
                     })
                 }
                 onSearch={searchBienes}
@@ -193,6 +219,7 @@ const MainBienes: React.FC = () => {
             <DialogBienes
                 mode={state.modalBienesMode}
                 opened={state.modalBienesOpen}
+                model={state.currentBienModel}
                 handleClose={() =>
                     dispatch({
                         type: 'closeBienesModal',
