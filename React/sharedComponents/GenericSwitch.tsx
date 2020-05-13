@@ -15,6 +15,7 @@ const GenericSwitch: React.FC<GenericSwitchProps> = ({
     checked,
     label,
     onChange,
+    ...switchProps
 }) => {
     function handleClick(e: any) {
         onChange(e.target.checked);
@@ -27,6 +28,7 @@ const GenericSwitch: React.FC<GenericSwitchProps> = ({
                     color="primary"
                     checked={checked}
                     onChange={handleClick}
+                    {...switchProps}
                 />
             }
             label={label}
