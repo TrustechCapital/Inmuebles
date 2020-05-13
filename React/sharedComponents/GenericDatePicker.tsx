@@ -8,26 +8,34 @@ import {
 
 type GenericDatePickerProps = Pick<
     KeyboardDatePickerProps,
-    | 'disabled'
-    | 'disableFuture'
-    | 'disablePast'
-    | 'format'
-    | 'readOnly'
-    | 'views'
+    'disabled' | 'disableFuture' | 'disablePast' | 'readOnly' | 'views'
 > & {
     label?: string; // TODO: cambiar a requerido
     value?: string | Date | null; // TODO: cambiar a requerido
     labelSelector?: string; // TODO: eliminar cuando ya no se use
-    selectedDate?: string | Date; // TODO: eliminar cuando ya no se use
+    selectedDate?: string | Date | null; // TODO: eliminar cuando ya no se use
     onChange: (value: any) => void; // TODO: importar el tipo correcto
 };
+
+function getDefaultDateValue(value?: string | Date | null): Date | string {
+    if (
+        value === undefined ||
+        value === null ||
+        (typeof value === 'string' && value.trim() === '')
+    ) {
+        return new Date();
+    }
+
+    return value;
+}
 
 const GenericDatePicker: React.FC<GenericDatePickerProps> = ({
     labelSelector,
     selectedDate,
     label = labelSelector,
-    value = selectedDate || '',
+    value,
     onChange,
+    ...datePickerProps
 }) => {
     return (
         <MuiPickersUtilsProvider utils={DateFnsUtils}>
@@ -35,11 +43,12 @@ const GenericDatePicker: React.FC<GenericDatePickerProps> = ({
                 margin="normal"
                 label={label}
                 format="dd/MM/yyyy"
-                value={value}
+                value={getDefaultDateValue(value)}
                 onChange={onChange}
                 KeyboardButtonProps={{
                     'aria-label': 'change date',
                 }}
+                {...datePickerProps}
             />
         </MuiPickersUtilsProvider>
     );
