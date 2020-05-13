@@ -9,7 +9,7 @@ class BienModelMapper implements IModelMapper<Bien> {
             data.fgarCveGarantia
         );
         Object.assign(bien, {
-            textoBien: data.fgarTexGarantia,
+            descripcion: data.fgarTexGarantia,
             comentario: data.fgarTexComentario,
             idClaveRevaluacion: data.fgarCveRevalua,
             importeDeGarantia: data.fgarImpGarantia,
@@ -31,7 +31,7 @@ class BienModelMapper implements IModelMapper<Bien> {
             fgarIdFideicomiso: bien.idFideicomiso,
             fgarIdSubcuenta: bien.idSubcuenta,
             fgarCveGarantia: bien.idTipoBien,
-            fgarTexGarantia: bien.textoBien,
+            fgarTexGarantia: bien.descripcion,
             fgarTexComentario: bien.comentario,
             fgarCveRevalua: bien.idClaveRevaluacion,
             fgarImpGarantia: bien.importeDeGarantia,

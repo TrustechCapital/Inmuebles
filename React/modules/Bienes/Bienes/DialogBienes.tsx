@@ -4,12 +4,14 @@ import Grid from '@material-ui/core/Grid';
 
 import { ICatalogDialog } from '../../../types';
 import { OperacionesCatalogo } from '../../../constants';
+import { ClavesModuloBienes } from '../../../constants/bienes';
+
 import Bien from '../../../models/Bien';
 import GenericSwitch from '../../../sharedComponents/GenericSwitch';
 import CatalogDialog from '../../../sharedComponents/CatalogDialog';
 import GenericTextInput from '../../../sharedComponents/GenericTextInput';
 import GenericDatePicker from '../../../sharedComponents/GenericDatePicker';
-import GenericSelect from '../../../sharedComponents/GenericSelect';
+import CatalogSelect from '../../../sharedComponents/CatalogSelect';
 
 const useStyles = makeStyles((theme) => ({
     root: {
@@ -82,7 +84,8 @@ const DialogBienes: React.FC<ICatalogDialog<Bien>> = ({
                         />
                     </Grid>
                     <Grid item xs={6}>
-                        <GenericSelect
+                        <CatalogSelect
+                            catalogId={ClavesModuloBienes.TiposDeBienes}
                             label="Tipo de Bien"
                             required={true}
                             disabled={allFieldsDisabled}
@@ -98,6 +101,14 @@ const DialogBienes: React.FC<ICatalogDialog<Bien>> = ({
                             disabled={allFieldsDisabled}
                             value={model.importeDelBien}
                             onChange={onModelFieldChange('importeDelBien')}
+                        />
+                    </Grid>
+                    <Grid item xs={6}>
+                        <GenericTextInput
+                            label="Descripción"
+                            disabled={allFieldsDisabled}
+                            value={model.descripcion}
+                            onChange={onModelFieldChange('descripcion')}
                         />
                     </Grid>
                 </Grid>
@@ -175,7 +186,10 @@ const DialogBienes: React.FC<ICatalogDialog<Bien>> = ({
                 </Grid>
                 <Grid container className={classes.rowSpacing} spacing={3}>
                     <Grid item xs={6}>
-                        <GenericSelect
+                        <CatalogSelect
+                            catalogId={
+                                ClavesModuloBienes.PeriodicidadDeRevaluacion
+                            }
                             label="Periodicidad"
                             disabled={allFieldsDisabled}
                             value={model.idClavePeriodicidadRevaluacion}
@@ -203,7 +217,9 @@ const DialogBienes: React.FC<ICatalogDialog<Bien>> = ({
                         />
                     </Grid>
                     <Grid item xs={6}>
-                        <GenericSelect
+                        <CatalogSelect
+                            catalogId={ClavesModuloBienes.Estatus}
+                            useLabelAsValue={true}
                             label="Estatus"
                             disabled={allFieldsDisabled}
                             value={model.estatus}

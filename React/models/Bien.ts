@@ -6,7 +6,7 @@ class Bien extends BaseModel {
     idFideicomiso: number | null = null;
     idSubcuenta: number | null = null;
     idTipoBien: number | null = null;
-    textoBien: string = '';
+    descripcion: string = '';
     comentario: string = '';
     idClaveRevaluacion: number | null = null;
     importeDeGarantia: number | null = null;
