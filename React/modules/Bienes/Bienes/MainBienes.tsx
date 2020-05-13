@@ -81,6 +81,11 @@ function mainBienesReducer(state: MainBienesState, action: MainBienesActions) {
                 selectedBienesRows: action.selectedRows,
                 showActionsDetalleBienesTable: true,
             };
+        case 'loadBienesModel':
+            return {
+                ...state,
+                currentBienModel: action.model,
+            };
         case 'openBienesModal':
             if (
                 (action.mode === OperacionesCatalogo.Consulta ||
@@ -163,7 +168,7 @@ const MainBienes: React.FC = () => {
             bienResultRow.idTipoBien
         );
 
-        const isModelAlreadyLoaded = state.currentBienModel?.hasSamePkAs(bien);
+        const isModelAlreadyLoaded = state.currentBienModel.hasSamePkAs(bien);
 
         if (isModelAlreadyLoaded) {
             return;
