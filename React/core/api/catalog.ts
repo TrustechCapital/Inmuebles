@@ -7,6 +7,8 @@ class CatalogNotFoundException extends Error {
     }
 }
 
+const CATALOGS_CACHE_KEY = 'catalogoClaves';
+
 class CatalogsApi extends Api {
     private cachedClavesCatalog: Map<number, CatalogItem[]> = new Map();
 
@@ -30,13 +32,22 @@ class CatalogsApi extends Api {
     }
 
     private async fetchClavesCatalog() {
-        const results = await this.getRef<CatalogItem>(
-            'catalogoCompletoclaves',
-            {},
-            CatalogItem.fromObject
-        );
+        let results: CatalogItem[] = [];
+        const cachedResults = sessionStorage.getItem(CATALOGS_CACHE_KEY);
 
-        this.cachedClavesCatalog = results.reduce((prev, catalog) => {
+        if (cachedResults) {
+            results = JSON.parse(cachedResults) as CatalogItem[];
+        } else {
+            results = await this.getRef<CatalogItem>(
+                'catalogoCompletoclaves',
+                {},
+                CatalogItem.fromObject
+            );
+
+            sessionStorage.setItem(CATALOGS_CACHE_KEY, JSON.stringify(results));
+        }
+
+        const catalogsMap = results.reduce((prev, catalog) => {
             if (!prev.has(catalog.catalogId)) {
                 prev.set(catalog.catalogId, [catalog]);
             } else {
@@ -47,6 +58,8 @@ class CatalogsApi extends Api {
 
             return prev;
         }, new Map<number, CatalogItem[]>());
+
+        this.cachedClavesCatalog = catalogsMap;
     }
 }
 
