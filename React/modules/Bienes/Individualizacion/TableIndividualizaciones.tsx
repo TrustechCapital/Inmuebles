@@ -119,7 +119,7 @@ const TableIndividualizaciones: React.FC<Props> = ({
                             <Grid item xs={3}>
                                 <CatalogSelect
                                     label="Status"
-                                    catalogId={ClavesModuloBienes.Status}
+                                    catalogId={ClavesModuloBienes.Estatus}
                                     value={state.idStatus}
                                     fullWidth
                                     onChange={(value) =>
