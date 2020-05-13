@@ -3,7 +3,7 @@ import { useReducer, Dispatch, Reducer, ReducerAction } from 'react';
 type TableSearchActions =
     | {
           type: 'field';
-          fieldName: string;
+          fieldName: string; // TODO: Cambiar ek tipo por "typeof T"
           value: string | number | null;
       }
     | { type: 'clear'; initialState: any };
