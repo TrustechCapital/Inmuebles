@@ -186,6 +186,12 @@ const MainBienes: React.FC = () => {
         });
     }
 
+    function handleModelBienFieldChange(fieldName: string) {
+        return (value: any) => {};
+    }
+
+    function handleSaveBienModel() {}
+
     return (
         <div>
             <TableBienes
@@ -218,13 +224,15 @@ const MainBienes: React.FC = () => {
             />
             <DialogBienes
                 mode={state.modalBienesMode}
-                opened={state.modalBienesOpen}
+                open={state.modalBienesOpen}
                 model={state.currentBienModel}
-                handleClose={() =>
+                onClose={() =>
                     dispatch({
                         type: 'closeBienesModal',
                     })
                 }
+                onSaveRequest={handleSaveBienModel}
+                onModelFieldChange={handleModelBienFieldChange}
             />
             <DialogDetalleBienes
                 mode={state.modalDetalleBienesMode}

@@ -48,8 +48,6 @@ export default function MainCargaMasiva() {
                         <Grid item xs={4}>
                             <GenericSelect
                                 label="Tipo de Reporte"
-                                labelId="Plan"
-                                selectId="cmbPlanes"
                                 onChange={() => {}}
                                 value=""
                                 items={[]}

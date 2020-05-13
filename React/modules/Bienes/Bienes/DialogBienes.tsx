@@ -1,7 +1,10 @@
-import React, { useState, useEffect } from 'react';
+import React from 'react';
 import { makeStyles } from '@material-ui/core/styles';
 import Grid from '@material-ui/core/Grid';
 
+import { ICatalogDialog } from '../../../types';
+import { OperacionesCatalogo } from '../../../constants';
+import Bien from '../../../models/Bien';
 import GenericSwitch from '../../../sharedComponents/GenericSwitch';
 import CatalogDialog from '../../../sharedComponents/CatalogDialog';
 import GenericTextInput from '../../../sharedComponents/GenericTextInput';
@@ -17,71 +20,29 @@ const useStyles = makeStyles((theme) => ({
         marginBottom: theme.spacing(2),
     },
 }));
-export default function DialogBienes(props) {
-    const { mode, selected } = props;
 
-    const [selectedDate, setSelectedDate] = useState(new Date('2020-04-20'));
-
-    const handleDateChange = (date) => {
-        setSelectedDate(date);
-    };
-    const handleDateChangeIni = (date) => {
-        setSelectedDate(date);
-    };
-    const handleDateChangeSal = (date) => {
-        setSelectedDate(date);
-    };
-
+const DialogBienes: React.FC<ICatalogDialog<Bien>> = ({
+    mode,
+    model,
+    open,
+    onClose,
+    onSaveRequest,
+    onModelFieldChange,
+}) => {
     const classes = useStyles();
 
-    const [state, setState] = React.useState({
-        age: '',
-        name: 'hai',
-        fgarCveRevaluaChk: true,
-        fgarEsGarantiaChk: true,
-        periodicidad: '',
-        status: '',
-    });
-
-    const handleChange = (event) => {
-        const name = event.target.name;
-        setState({
-            ...state,
-            [name]: event.target.value,
-        });
-    };
-    const handleChangePeriodi = (event) => {
-        const name = event.target.name;
-        setState({
-            ...state,
-            [name]: event.target.value,
-        });
-    };
-    const [values, setValues] = React.useState({
-        amount: '',
-        percent: '',
-    });
-
-    const handleChangeAmount = (prop) => (event) => {
-        setValues({ ...values, [prop]: event.target.value });
-    };
-    const handleChangeStatus = (prop) => (event) => {
-        setValues({ ...values, [prop]: event.target.value });
-    };
-
-    const handleChangeChk = (event) => {
-        setState({ ...state, [event.target.name]: event.target.checked });
-    };
-    const handleAccept = () => {};
+    const allFieldsDisabled = mode === OperacionesCatalogo.Consulta;
+    const pkFieldsDisabled =
+        allFieldsDisabled || mode === OperacionesCatalogo.Modificacion;
 
     return (
         <CatalogDialog
-            opened={props.opened}
-            operacionCatalogo={mode}
+            opened={open}
+            operacionCatalogo={mode.toString()}
             nombreCatalogo="Bienes"
             subtitle="Bienes por Fideicomisos"
-            onCancel={props.handleClose}
-            onAccept={handleAccept}
+            onCancel={onClose}
+            onAccept={onSaveRequest}
         >
             <Grid
                 container
@@ -93,18 +54,19 @@ export default function DialogBienes(props) {
                     <Grid item xs={6}>
                         <GenericTextInput
                             label="Fideicomiso"
-                            idCampo="fgarIdFideicomiso"
-                            helper="Fideicomiso a asignar bienes"
+                            helperText="Fideicomiso a asignar bienes"
                             required={true}
-                            value=""
+                            disabled={pkFieldsDisabled}
+                            value={model.idFideicomiso}
+                            onChange={onModelFieldChange('idFideicomiso')}
                         />
                     </Grid>
                     <Grid item xs={6}>
                         <GenericTextInput
                             label="Nombre de Fideicomiso"
-                            idCampo="fgarNomFideicomiso"
                             readOnly={true}
                             value=""
+                            onChange={() => {}}
                         />
                     </Grid>
                 </Grid>
@@ -112,19 +74,20 @@ export default function DialogBienes(props) {
                     <Grid item xs={6}>
                         <GenericTextInput
                             label="Sub-Fideicomiso"
-                            idCampo="fgarIdSubcuenta"
-                            helper="SubFiso"
+                            helperText="SubFiso"
                             required={true}
-                            value=""
+                            disabled={pkFieldsDisabled}
+                            value={model.idSubcuenta}
+                            onChange={onModelFieldChange('idSubcuenta')}
                         />
                     </Grid>
                     <Grid item xs={6}>
                         <GenericSelect
-                            labelId="Tipo de Bien"
-                            selectId="fgarCveGarantia"
-                            selected={state.age}
-                            onChange={handleChange}
                             label="Tipo de Bien"
+                            required={true}
+                            disabled={allFieldsDisabled}
+                            value={model.idTipoBien}
+                            onChange={onModelFieldChange('idTipoBien')}
                         />
                     </Grid>
                 </Grid>
@@ -132,17 +95,9 @@ export default function DialogBienes(props) {
                     <Grid item xs={6}>
                         <GenericTextInput
                             label="Importe de Bien"
-                            idCampo="fgarImpGarantizad"
-                            required={false}
-                            value=""
-                        />
-                    </Grid>
-                    <Grid item xs={6}>
-                        <GenericTextInput
-                            label="Descripcion"
-                            idCampo="fgarTexGarantia"
-                            required={false}
-                            value=""
+                            disabled={allFieldsDisabled}
+                            value={model.importeDelBien}
+                            onChange={onModelFieldChange('importeDelBien')}
                         />
                     </Grid>
                 </Grid>
@@ -150,47 +105,49 @@ export default function DialogBienes(props) {
                     <Grid item xs={6}>
                         <GenericTextInput
                             label="Importe Última Valuación"
-                            idCampo="fgarImpUltValua"
-                            required={false}
-                            value=""
+                            disabled={allFieldsDisabled}
+                            value={model.importeUltimaValuacion}
+                            onChange={onModelFieldChange(
+                                'importeUltimaValuacion'
+                            )}
                         />
                     </Grid>
                     <Grid item xs={6}>
                         <GenericTextInput
                             label="Comentario"
-                            idCampo="fgarTexComentario"
-                            required={false}
-                            value=""
+                            disabled={allFieldsDisabled}
+                            value={model.comentario}
+                            onChange={onModelFieldChange('comentario')}
                         />
                     </Grid>
                 </Grid>
                 <Grid container className={classes.rowSpacing} spacing={3}>
                     <Grid item xs={6}>
                         <GenericDatePicker
-                            idSelector="fgarFecUltValua"
-                            labelSelector="Fecha de Última Valuación"
-                            selectedDate={selectedDate}
-                            onChange={handleDateChange}
+                            label="Fecha de Última Valuación"
+                            disabled={allFieldsDisabled}
+                            value={model.fechaUltimaValuacion}
+                            onChange={onModelFieldChange(
+                                'fechaUltimaValuacion'
+                            )}
                         />
                     </Grid>
                 </Grid>
                 <Grid container className={classes.rowSpacing} spacing={3}>
                     <Grid item xs={6}>
                         <GenericSwitch
-                            idCampo="fgarCveRevaluaChk"
-                            onChange={handleChangeChk}
-                            activo={state.fgarCveRevaluaChk}
-                            nombreCampo="fgarCveRevaluaChk"
                             label="Revalua"
+                            disabled={allFieldsDisabled}
+                            checked
+                            onChange={() => {}}
                         />
                     </Grid>
                     <Grid item xs={6}>
                         <GenericSwitch
-                            idCampo="fgarEsGarantiaChk"
-                            onChange={handleChangeChk}
-                            activo={state.fgarEsGarantiaChk}
-                            nombreCampo="fgarEsGarantiaChk"
                             label="¿Es Garantía?"
+                            disabled={allFieldsDisabled}
+                            checked={model.esGarantia}
+                            onChange={onModelFieldChange('esGarantia')}
                         />
                     </Grid>
                 </Grid>
@@ -198,61 +155,65 @@ export default function DialogBienes(props) {
                     <Grid item xs={6}>
                         <GenericTextInput
                             label="Importe Bien"
-                            idCampo="fgarImpGarantia"
+                            disabled={allFieldsDisabled}
                             required={true}
-                            value="00.00"
+                            value={model.importeDeGarantia}
+                            onChange={onModelFieldChange('importeDeGarantia')}
                             adornment="$"
                         />
                     </Grid>
                     <Grid item xs={6}>
                         <GenericTextInput
                             label="Picnorado"
-                            idCampo="fgarPjePicnorado"
+                            disabled={allFieldsDisabled}
                             required={true}
-                            value="00.00"
-                            adornment="%"
+                            value={model.picnorado}
+                            onChange={onModelFieldChange('picnorado')}
+                            adornment="$"
                         />
                     </Grid>
                 </Grid>
                 <Grid container className={classes.rowSpacing} spacing={3}>
                     <Grid item xs={6}>
                         <GenericSelect
-                            labelId="Periodicidad"
-                            selectId="fgarCvePerValua"
-                            selected={state.periodicidad}
-                            onChange={handleChangePeriodi}
                             label="Periodicidad"
+                            disabled={allFieldsDisabled}
+                            value={model.idClavePeriodicidadRevaluacion}
+                            onChange={onModelFieldChange(
+                                'idClavePeriodicidadRevaluacion'
+                            )}
                         />
                     </Grid>
                     <Grid item xs={6}>
                         <GenericDatePicker
-                            idSelector="fgarFecInicio"
-                            labelSelector="Fecha de Inicio"
-                            selectedDate={selectedDate}
-                            onChange={handleDateChangeIni}
+                            label="Fecha de Inicio"
+                            disabled={allFieldsDisabled}
+                            value={model.fechaInicio}
+                            onChange={onModelFieldChange('fechaInicio')}
                         />
                     </Grid>
                 </Grid>
                 <Grid container className={classes.rowSpacing} spacing={3}>
                     <Grid item xs={6}>
                         <GenericDatePicker
-                            idSelector="fgarFecFin"
-                            labelSelector="Fecha de Salida"
-                            selectedDate={selectedDate}
-                            onChange={handleDateChangeSal}
+                            label="Fecha de Salida"
+                            disabled={allFieldsDisabled}
+                            value={model.fechaFin}
+                            onChange={onModelFieldChange('fechaFin')}
                         />
                     </Grid>
                     <Grid item xs={6}>
                         <GenericSelect
-                            labelId="Periodicidad"
-                            selectId="fgarCvePerfgarCveStatusValua"
-                            selected={state.status}
-                            onChange={handleChangeStatus}
-                            label="Status"
+                            label="Estatus"
+                            disabled={allFieldsDisabled}
+                            value={model.estatus}
+                            onChange={onModelFieldChange('estatus')}
                         />
                     </Grid>
                 </Grid>
             </Grid>
         </CatalogDialog>
     );
-}
+};
+
+export default DialogBienes;
