@@ -1,6 +1,6 @@
 import React, { FunctionComponent } from 'react';
 import { makeStyles } from '@material-ui/core/styles';
-import TextField from '@material-ui/core/TextField';
+import TextField, { TextFieldProps } from '@material-ui/core/TextField';
 import FormControl from '@material-ui/core/FormControl';
 import InputAdornment from '@material-ui/core/InputAdornment';
 
@@ -30,30 +30,35 @@ const useStyles = makeStyles((theme) => ({
     },
 }));
 
-type Props = {
+type GenericInputProps = Pick<
+    TextFieldProps,
+    | 'defaultValue'
+    | 'disabled'
+    | 'helperText'
+    | 'id'
+    | 'multiline'
+    | 'placeholder'
+    | 'required'
+    | 'rows'
+    | 'rowsMax'
+    | 'size'
+> & {
     label: string;
-    idCampo?: string;
-    helper?: string;
-    required?: boolean;
     value: string | number | null;
-    adornment?: string;
     readOnly?: boolean;
-    disabled?: boolean;
     onChange: (value: string | number | null) => void;
     dataType?: 'text' | 'number';
+    adornment?: string;
 };
 
-const GenericTextInput: FunctionComponent<Props> = ({
+const GenericTextInput: FunctionComponent<GenericInputProps> = ({
     label,
-    idCampo,
-    helper,
-    required = false,
     value,
-    adornment,
     readOnly = false,
-    disabled,
     onChange,
     dataType = 'text',
+    adornment,
+    ...textFieldProps
 }) => {
     const classes = useStyles();
 
@@ -71,19 +76,16 @@ const GenericTextInput: FunctionComponent<Props> = ({
     return (
         <FormControl fullWidth>
             <TextField
-                id={idCampo}
                 fullWidth
                 label={label}
-                value={value == null ? '' : value}
+                value={value === null ? '' : value}
                 className={classes.textField}
-                helperText={helper}
-                required={required}
                 margin="dense"
                 variant="outlined"
                 InputProps={inputProps}
                 onChange={handleChange}
                 type={dataType}
-                disabled={disabled}
+                {...textFieldProps}
             />
         </FormControl>
     );

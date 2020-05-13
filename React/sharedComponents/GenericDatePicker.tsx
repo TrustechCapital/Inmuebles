@@ -3,17 +3,26 @@ import DateFnsUtils from '@date-io/date-fns';
 import {
     MuiPickersUtilsProvider,
     KeyboardDatePicker,
+    KeyboardDatePickerProps,
 } from '@material-ui/pickers';
 
-type Props = {
+type GenericDatePickerProps = Pick<
+    KeyboardDatePickerProps,
+    | 'disabled'
+    | 'disableFuture'
+    | 'disablePast'
+    | 'format'
+    | 'readOnly'
+    | 'views'
+> & {
     label?: string; // TODO: cambiar a requerido
-    value?: string | Date; // TODO: cambiar a requerido
+    value?: string | Date | null; // TODO: cambiar a requerido
     labelSelector?: string; // TODO: eliminar cuando ya no se use
     selectedDate?: string | Date; // TODO: eliminar cuando ya no se use
     onChange: (value: any) => void; // TODO: importar el tipo correcto
 };
 
-const GenericDatePicker: React.FC<Props> = ({
+const GenericDatePicker: React.FC<GenericDatePickerProps> = ({
     labelSelector,
     selectedDate,
     label = labelSelector,
@@ -24,9 +33,9 @@ const GenericDatePicker: React.FC<Props> = ({
         <MuiPickersUtilsProvider utils={DateFnsUtils}>
             <KeyboardDatePicker
                 margin="normal"
-                label={labelSelector}
+                label={label}
                 format="dd/MM/yyyy"
-                value={selectedDate}
+                value={value}
                 onChange={onChange}
                 KeyboardButtonProps={{
                     'aria-label': 'change date',

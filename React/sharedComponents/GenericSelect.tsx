@@ -1,6 +1,6 @@
 import React, { FunctionComponent } from 'react';
 import FormControl from '@material-ui/core/FormControl';
-import Select from '@material-ui/core/Select';
+import Select, { SelectProps } from '@material-ui/core/Select';
 import InputLabel from '@material-ui/core/InputLabel';
 import MenuItem from '@material-ui/core/MenuItem';
 import { makeStyles } from '@material-ui/core/styles';
@@ -17,31 +17,39 @@ const useStyles = makeStyles((theme) => ({
     },
 }));
 
-type Props = {
-    labelId?: string; // TODO: eliminar propiedad
-    selectId?: string; // TODO: eliminar propiedad
-    selected?: boolean; // TODO: eliminar propiedad
+// TODO: agregar descriptiones de cada propiedad
+type GenericSelectProps = Pick<
+    SelectProps,
+    | 'defaultValue'
+    | 'id'
+    | 'multiple'
+    | 'disabled'
+    | 'readOnly'
+    | 'required'
+    | 'rows'
+> & {
+    label: string;
+    value: string | number | null;
+    onChange: (value: any) => void; // TODO: Cambiar tipo de dato?
+    items?: Object[]; // TODO: Quitar valor opcional
     valueKey?: string;
     labelKey?: string;
-    onChange: (selected: string) => void;
-    label: string;
-    value: any; // TODO: use generic
-    items: object[];
 };
 
-const GenericSelect: FunctionComponent<Props> = ({
+const GenericSelect: FunctionComponent<GenericSelectProps> = ({
     label,
     value = '',
-    items = [],
-    valueKey,
-    labelKey,
     onChange,
+    items = [],
+    labelKey = 'label',
+    valueKey = 'value',
+    ...selectProps
 }) => {
     const classes = useStyles();
     const [open, setOpen] = React.useState(false);
 
-    const handleOnSelect = (e: React.ChangeEvent<{ value: unknown }>) => {
-        onChange(e.target.value as string);
+    const handleOnSelect = (e: any) => {
+        onChange(e.target.value);
     };
 
     const handleClose = () => {
@@ -70,10 +78,11 @@ const GenericSelect: FunctionComponent<Props> = ({
                 onChange={handleOnSelect}
                 label={label}
                 displayEmpty
+                {...selectProps}
             >
                 {items.map((item: any) => {
-                    const label = item[labelKey || 'label'];
-                    const value = item[valueKey || 'value'];
+                    const label = item[labelKey];
+                    const value = item[valueKey];
                     return (
                         <MenuItem key={value} value={value}>
                             {label}
