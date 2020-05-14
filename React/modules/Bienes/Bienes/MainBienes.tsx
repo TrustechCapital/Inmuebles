@@ -22,6 +22,8 @@ type MainBienesState = {
     showActionsDetalleBienesTable: boolean;
 };
 
+type ValidFormValue = string | number | boolean | Date | null;
+
 type MainBienesActions =
     | {
           type: 'bienesList';
@@ -34,6 +36,11 @@ type MainBienesActions =
     | {
           type: 'loadBienesModel';
           model: Bien;
+      }
+    | {
+          type: 'updateBienesModelField';
+          fieldName: string;
+          value: ValidFormValue;
       }
     | {
           type: 'openBienesModal';
@@ -85,6 +92,14 @@ function mainBienesReducer(state: MainBienesState, action: MainBienesActions) {
             return {
                 ...state,
                 currentBienModel: action.model,
+            };
+        case 'updateBienesModelField':
+            Object.assign(state.currentBienModel, {
+                [action.fieldName]: action.value,
+            });
+            return {
+                ...state,
+                currentBienModel: state.currentBienModel,
             };
         case 'openBienesModal':
             if (
@@ -192,7 +207,13 @@ const MainBienes: React.FC = () => {
     }
 
     function handleModelBienFieldChange(fieldName: string) {
-        return (value: any) => {};
+        return (value: any) => {
+            dispatch({
+                type: 'updateBienesModelField',
+                fieldName,
+                value,
+            });
+        };
     }
 
     function handleSaveBienModel() {}
