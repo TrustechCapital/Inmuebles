@@ -15,6 +15,7 @@ type GenericDatePickerProps = Pick<
     labelSelector?: string; // TODO: eliminar cuando ya no se use
     selectedDate?: string | Date | null; // TODO: eliminar cuando ya no se use
     onChange: (value: any) => void; // TODO: importar el tipo correcto
+    fullWidth?: boolean;
 };
 
 function getDefaultDateValue(value?: string | Date | null): Date | string {
@@ -35,22 +36,27 @@ const GenericDatePicker: React.FC<GenericDatePickerProps> = ({
     label = labelSelector,
     value,
     onChange,
+    fullWidth,
     ...datePickerProps
 }) => {
+    const fullWidthClassName = fullWidth === false ? '' : 'full-width';
     return (
-        <MuiPickersUtilsProvider utils={DateFnsUtils}>
-            <KeyboardDatePicker
-                margin="normal"
-                label={label}
-                format="dd/MM/yyyy"
-                value={getDefaultDateValue(value)}
-                onChange={onChange}
-                KeyboardButtonProps={{
-                    'aria-label': 'change date',
-                }}
-                {...datePickerProps}
-            />
-        </MuiPickersUtilsProvider>
+        <div className={`generic-date-picker ${fullWidthClassName}`}>
+            <MuiPickersUtilsProvider utils={DateFnsUtils}>
+                <KeyboardDatePicker
+                    margin="normal"
+                    label={label}
+                    format="dd/MM/yyyy"
+                    value={getDefaultDateValue(value)}
+                    onChange={onChange}
+                    inputVariant="outlined"
+                    KeyboardButtonProps={{
+                        'aria-label': 'change date',
+                    }}
+                    {...datePickerProps}
+                />
+            </MuiPickersUtilsProvider>
+        </div>
     );
 };
 

@@ -5,17 +5,18 @@ import InputLabel from '@material-ui/core/InputLabel';
 import MenuItem from '@material-ui/core/MenuItem';
 import { makeStyles } from '@material-ui/core/styles';
 
-const useStyles = makeStyles((theme) => ({
-    formControl: {
-        margin: theme.spacing(1),
+const useStyles = makeStyles({
+    root: {
+        marginTop: '8px',
+        marginBottom: '4px',
     },
     outlinedSelect: {
-        padding: '10px',
+        padding: '11px',
     },
     outlinedSelectLabel: {
         transform: 'translate(14px, 12px) scale(1)',
     },
-}));
+});
 
 // TODO: agregar descriptiones de cada propiedad
 export type GenericSelectProps = Pick<
@@ -65,8 +66,8 @@ const GenericSelect: FunctionComponent<GenericSelectProps> = ({
     return (
         <FormControl
             variant="outlined"
-            className={classes.formControl}
             fullWidth={fullWidth}
+            className={classes.root}
         >
             <InputLabel classes={{ outlined: classes.outlinedSelectLabel }}>
                 {label}
@@ -80,6 +81,7 @@ const GenericSelect: FunctionComponent<GenericSelectProps> = ({
                 onChange={handleOnSelect}
                 label={label}
                 displayEmpty
+                inputProps={{ marginDense: true }}
                 {...selectProps}
             >
                 {items.map((item: any) => {
