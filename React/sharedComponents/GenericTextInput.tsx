@@ -3,7 +3,7 @@ import TextField, { TextFieldProps } from '@material-ui/core/TextField';
 import FormControl from '@material-ui/core/FormControl';
 import InputAdornment from '@material-ui/core/InputAdornment';
 
-type GenericInputProps = Pick<
+export type GenericInputProps = Pick<
     TextFieldProps,
     | 'defaultValue'
     | 'disabled'
@@ -15,11 +15,11 @@ type GenericInputProps = Pick<
     | 'rows'
     | 'rowsMax'
     | 'size'
+    | 'onChange'
 > & {
     label: string;
-    value: string | number | null;
+    value: any;
     readOnly?: boolean;
-    onChange: (value: string | number | null) => void;
     dataType?: 'text' | 'number';
     adornment?: string;
     fullWidth?: boolean;
@@ -29,7 +29,6 @@ const GenericTextInput: FunctionComponent<GenericInputProps> = ({
     label,
     value,
     readOnly = false,
-    onChange,
     dataType = 'text',
     fullWidth = true,
     adornment,
@@ -42,10 +41,6 @@ const GenericTextInput: FunctionComponent<GenericInputProps> = ({
         ) : null,
     };
 
-    function handleChange(e: any) {
-        onChange(e.target.value);
-    }
-
     return (
         <FormControl fullWidth>
             <TextField
@@ -55,7 +50,6 @@ const GenericTextInput: FunctionComponent<GenericInputProps> = ({
                 margin="dense"
                 variant="outlined"
                 InputProps={inputProps}
-                onChange={handleChange}
                 type={dataType}
                 {...textFieldProps}
             />

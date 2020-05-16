@@ -3,17 +3,21 @@ import { useReducer, Dispatch, Reducer, ReducerAction } from 'react';
 type TableSearchActions =
     | {
           type: 'field';
-          fieldName: string; // TODO: Cambiar ek tipo por "typeof T"
-          value: string | number | null;
+          fieldName: string; // TODO: Cambiar el tipo por "typeof T"
+          value: any;
       }
     | { type: 'clear'; initialState: any };
 
 function searchParamsReducer<T>(state: T, action: TableSearchActions): T {
     switch (action.type) {
         case 'field':
+            //TODO: Cambiar esto para que soporte checkbox
+            const value = action.value.target
+                ? action.value.target.value
+                : action.value;
             return {
                 ...state,
-                [action.fieldName]: action.value,
+                [action.fieldName]: value,
             };
         case 'clear':
             return {

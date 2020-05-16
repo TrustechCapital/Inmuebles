@@ -28,10 +28,10 @@ export type GenericSelectProps = Pick<
     | 'readOnly'
     | 'required'
     | 'rows'
+    | 'onChange'
 > & {
     label: string;
     value: string | number | null;
-    onChange: (value: any) => void; // TODO: Cambiar tipo de dato?
     items?: Object[]; // TODO: Quitar valor opcional
     valueKey?: string;
     labelKey?: string;
@@ -41,7 +41,6 @@ export type GenericSelectProps = Pick<
 const GenericSelect: FunctionComponent<GenericSelectProps> = ({
     label,
     value = '',
-    onChange,
     items = [],
     labelKey = 'label',
     valueKey = 'value',
@@ -50,10 +49,6 @@ const GenericSelect: FunctionComponent<GenericSelectProps> = ({
 }) => {
     const classes = useStyles();
     const [open, setOpen] = React.useState(false);
-
-    const handleOnSelect = (e: any) => {
-        onChange(e.target.value);
-    };
 
     const handleClose = () => {
         setOpen(false);
@@ -78,7 +73,6 @@ const GenericSelect: FunctionComponent<GenericSelectProps> = ({
                 open={open}
                 onClose={handleClose}
                 onOpen={handleOpen}
-                onChange={handleOnSelect}
                 label={label}
                 displayEmpty
                 inputProps={{ marginDense: true }}

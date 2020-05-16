@@ -6,9 +6,9 @@ import {
     KeyboardDatePickerProps,
 } from '@material-ui/pickers';
 
-type GenericDatePickerProps = Pick<
+export type GenericDatePickerProps = Pick<
     KeyboardDatePickerProps,
-    'disabled' | 'disableFuture' | 'disablePast' | 'readOnly' | 'views'
+    'disabled' | 'disableFuture' | 'disablePast' | 'readOnly' | 'views' | 'name'
 > & {
     label?: string; // TODO: cambiar a requerido
     value?: string | Date | null; // TODO: cambiar a requerido
@@ -40,6 +40,18 @@ const GenericDatePicker: React.FC<GenericDatePickerProps> = ({
     ...datePickerProps
 }) => {
     const fullWidthClassName = fullWidth === false ? '' : 'full-width';
+
+    // IMPORTANTE: Esta funcion se utiliza para mantener consistentes los eventos
+    // en el sistema (mismos de Material UI)
+    function handleChange(value: any) {
+        onChange({
+            target: {
+                value: value,
+                name: datePickerProps.name, // La propiedad nombre es ocupada por el componente FormDatePickerField
+            },
+        });
+    }
+
     return (
         <div className={`generic-date-picker ${fullWidthClassName}`}>
             <MuiPickersUtilsProvider utils={DateFnsUtils}>
@@ -48,7 +60,7 @@ const GenericDatePicker: React.FC<GenericDatePickerProps> = ({
                     label={label}
                     format="dd/MM/yyyy"
                     value={getDefaultDateValue(value)}
-                    onChange={onChange}
+                    onChange={handleChange}
                     inputVariant="outlined"
                     KeyboardButtonProps={{
                         'aria-label': 'change date',

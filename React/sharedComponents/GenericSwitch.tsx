@@ -2,35 +2,20 @@ import React from 'react';
 import FormControlLabel from '@material-ui/core/FormControlLabel';
 import Switch, { SwitchProps } from '@material-ui/core/Switch';
 
-type GenericSwitchProps = Pick<
+export type GenericSwitchProps = Pick<
     SwitchProps,
-    'disabled' | 'required' | 'size' | 'id'
+    'disabled' | 'required' | 'size' | 'id' | 'checked' | 'onChange'
 > & {
-    checked: boolean;
     label: string;
-    onChange: (checked: boolean) => void;
 };
 
 const GenericSwitch: React.FC<GenericSwitchProps> = ({
-    checked,
     label,
-    onChange,
     ...switchProps
 }) => {
-    function handleClick(e: any) {
-        onChange(e.target.checked);
-    }
-
     return (
         <FormControlLabel
-            control={
-                <Switch
-                    color="primary"
-                    checked={checked}
-                    onChange={handleClick}
-                    {...switchProps}
-                />
-            }
+            control={<Switch color="primary" {...switchProps} />}
             label={label}
         />
     );
