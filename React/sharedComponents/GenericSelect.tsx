@@ -75,7 +75,6 @@ const GenericSelect: FunctionComponent<GenericSelectProps> = ({
                 onOpen={handleOpen}
                 label={label}
                 displayEmpty
-                inputProps={{ marginDense: true }}
                 {...selectProps}
             >
                 {items.map((item: any) => {
