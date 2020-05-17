@@ -8,16 +8,22 @@ export interface IModelMapper<T> {
     toObject: (model: T) => object;
 }
 
+type ModelOptions<T> = {
+    transformer?: IModelMapper<T> | null;
+};
+
 interface IModelsApi<T extends IModel> {
-    findByPK: (model: T, transformer: IModelMapper<T>) => Promise<T>;
-    create: (model: T, transformer: IModelMapper<T>) => Promise<T>;
-    update: (model: T, transformer: IModelMapper<T>) => Promise<T>;
-    destroy: (model: T, transformer: IModelMapper<T>) => Promise<void>;
+    findByPK: (model: T, options?: ModelOptions<T>) => Promise<T>;
+    create: (model: T, options?: ModelOptions<T>) => Promise<T>;
+    update: (model: T, options?: ModelOptions<T>) => Promise<T>;
+    destroy: (model: T, options?: ModelOptions<T>) => Promise<void>;
 }
 
 export class ModelsApi<T extends IModel> extends Api implements IModelsApi<T> {
-    constructor() {
+    transformer: IModelMapper<T>;
+    constructor(transformer: IModelMapper<T>) {
         super({});
+        this.transformer = transformer;
     }
 
     private createBackendParameters(
@@ -39,7 +45,14 @@ export class ModelsApi<T extends IModel> extends Api implements IModelsApi<T> {
         };
     }
 
-    async findByPK(model: T, transformer: IModelMapper<T>): Promise<T> {
+    private getTransformer(options?: ModelOptions<T>) {
+        return options && options.transformer
+            ? options.transformer
+            : this.transformer;
+    }
+
+    async findByPK(model: T, options?: ModelOptions<T>): Promise<T> {
+        const transformer = this.getTransformer();
         return this.get(
             'obtenerCatalogo.do',
             this.createBackendParameters(model, transformer, true)
@@ -48,7 +61,8 @@ export class ModelsApi<T extends IModel> extends Api implements IModelsApi<T> {
         });
     }
 
-    async create(model: T, transformer: IModelMapper<T>): Promise<T> {
+    async create(model: T, options?: ModelOptions<T>): Promise<T> {
+        const transformer = this.getTransformer();
         return this.get(
             'altaCatalogo.do',
             this.createBackendParameters(model, transformer)
@@ -57,7 +71,8 @@ export class ModelsApi<T extends IModel> extends Api implements IModelsApi<T> {
         });
     }
 
-    async update(model: T, transformer: IModelMapper<T>): Promise<T> {
+    async update(model: T, options?: ModelOptions<T>): Promise<T> {
+        const transformer = this.getTransformer();
         return this.get(
             'modificaCatalogo.do',
             this.createBackendParameters(model, transformer)
@@ -66,7 +81,8 @@ export class ModelsApi<T extends IModel> extends Api implements IModelsApi<T> {
         });
     }
 
-    async destroy(model: T, transformer: IModelMapper<T>): Promise<void> {
+    async destroy(model: T, options?: ModelOptions<T>): Promise<void> {
+        const transformer = this.getTransformer();
         await this.get<void, void>(
             'modificaCatalogo.do',
             this.createBackendParameters(model, transformer, true)
@@ -74,4 +90,4 @@ export class ModelsApi<T extends IModel> extends Api implements IModelsApi<T> {
     }
 }
 
-export const modelsApi = new ModelsApi();
+export default ModelsApi;

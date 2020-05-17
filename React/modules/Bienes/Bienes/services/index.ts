@@ -16,10 +16,6 @@ class BienesApi extends ModelsApi<Bien> {
             BienResultRow.fromObject
         );
     }
-
-    async findByPK(model: Bien): Promise<Bien> {
-        return await super.findByPK(model, BienesModelMapper);
-    }
 }
 
-export const bienesApi = new BienesApi();
+export const bienesApi = new BienesApi(BienesModelMapper);
