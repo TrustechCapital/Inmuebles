@@ -76,8 +76,8 @@ export class ModelsApi<T extends IModel> extends Api implements IModelsApi<T> {
         return this.get(
             'modificaCatalogo.do',
             this.createBackendParameters(model, transformer)
-        ).then((response) => {
-            return transformer.fromObject(response.data as object);
+        ).then(() => {
+            return model;
         });
     }
 
