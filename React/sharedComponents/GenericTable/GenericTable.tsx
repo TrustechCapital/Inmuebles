@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react';
+import React, { useEffect, useContext } from 'react';
 
 import { makeStyles } from '@material-ui/core/styles';
 import Table from '@material-ui/core/Table';
@@ -13,6 +13,7 @@ import { IColumn, ITableRow, SortTypes } from './types';
 import GenericTableRow from './GenericTableRow';
 import GenericTableToolbar from './GenericTableToolbar';
 import GenericTableHead from './GenericTableHead';
+import { GenericTableCallbacksContext } from './context';
 
 const ROW_HEIGHT = 53;
 
@@ -55,20 +56,18 @@ interface TableProps<T> {
     toolbarActionsProps?: any;
     data: T[];
     columns: IColumn[];
-    onSelect: (selectedRows: T[]) => void;
+    onSelect?: (selectedRows: T[]) => void;
     onNew?: () => void;
     onView?: () => void;
 }
 
 function GenericTable<T extends ITableRow>(props: TableProps<T>) {
+    const { onSelect } = useContext(GenericTableCallbacksContext);
+
     const {
         title,
         data,
         columns = [],
-        onSelect,
-        onNew,
-        onView,
-        toolbarActionsProps = { onNew: onNew, onView: onView },
         showActionsHeader = true,
         additionalActionsComponent = null,
     } = props;
@@ -154,7 +153,6 @@ function GenericTable<T extends ITableRow>(props: TableProps<T>) {
                 numSelected={selectedRows.size}
                 title={title}
                 showActions={showActionsHeader}
-                toolbarActionsProps={toolbarActionsProps}
                 actionsComponent={additionalActionsComponent}
             />
             <TableContainer className={classes.table}>

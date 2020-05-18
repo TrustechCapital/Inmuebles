@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useContext } from 'react';
 
 import { makeStyles } from '@material-ui/core/styles';
 import Grid from '@material-ui/core/Grid';
@@ -10,6 +10,7 @@ import BienResultRow from './models/BienResultRow';
 import GenericSearchForm from '../../../sharedComponents/GenericSearchForm';
 import GenericTable, {
     IGenericColumn,
+    GenericTableCallbacksContext,
 } from '../../../sharedComponents/GenericTable';
 import GenericTextInput from '../../../sharedComponents/GenericTextInput';
 import CatalogSelect from '../../../sharedComponents/CatalogSelect';
@@ -39,21 +40,12 @@ const initialState: ITableBienesParameters = {
     idTipoBien: null,
 };
 
-type Props = {
+type TableBienesProps = {
     data: BienResultRow[];
-    onSelect: (selectedItems: BienResultRow[]) => void;
-    onNew: () => void;
-    onView: () => void;
-    onSearch: (searchParams: ITableBienesParameters) => void;
 };
 
-const TableBienes: React.FC<Props> = ({
-    data,
-    onSelect,
-    onNew,
-    onSearch,
-    onView,
-}) => {
+const TableBienes: React.FC<TableBienesProps> = ({ data }) => {
+    const { onSearch } = useContext(GenericTableCallbacksContext);
     const classes = useStyles();
     const [state, dispatch] = useSearchParamsReducer<ITableBienesParameters>(
         initialState
@@ -140,14 +132,7 @@ const TableBienes: React.FC<Props> = ({
                 </GenericSearchForm>
             </Grid>
             <Grid container spacing={1}>
-                <GenericTable
-                    title="Bienes"
-                    data={data}
-                    columns={COLUMNS}
-                    onSelect={onSelect}
-                    onNew={onNew}
-                    onView={onView}
-                />
+                <GenericTable title="Bienes" data={data} columns={COLUMNS} />
             </Grid>
         </div>
     );

@@ -112,8 +112,6 @@ const TableDetalleBienes: React.FC<Props> = ({
                     data={data}
                     columns={COLUMNS_DETALLE_BIENES}
                     showActionsHeader={showActionsHeader}
-                    onNew={onNew}
-                    onSelect={onSelect}
                     additionalActionsComponent={ActionsDetalleBienes}
                 />
             </Grid>

@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useContext } from 'react';
 
 import clsx from 'clsx';
 import { lighten, makeStyles } from '@material-ui/core/styles';
@@ -10,6 +10,7 @@ import DeleteIcon from '@material-ui/icons/Delete';
 import EditIcon from '@material-ui/icons/Edit';
 import AddIcon from '@material-ui/icons/Add';
 import FindInPageIcon from '@material-ui/icons/FindInPage';
+import { GenericTableCallbacksContext } from './context';
 
 const useStyles = makeStyles((theme) => ({
     root: {
@@ -27,15 +28,15 @@ const useStyles = makeStyles((theme) => ({
 
 type ToolbarActionsProps = {
     numSelected: number;
-    onNew?: () => void;
-    onView?: () => void;
 };
 
 const EnhancedTableToolbarActions: React.FC<ToolbarActionsProps> = ({
     numSelected,
-    onNew,
-    onView,
 }) => {
+    const { onNew, onView, onModify } = useContext(
+        GenericTableCallbacksContext
+    );
+
     return (
         <React.Fragment>
             {numSelected > 0 ? (
@@ -48,7 +49,7 @@ const EnhancedTableToolbarActions: React.FC<ToolbarActionsProps> = ({
 
             {numSelected == 1 ? (
                 <Tooltip title="Modificar">
-                    <IconButton aria-label="modificar">
+                    <IconButton aria-label="modificar" onClick={onModify}>
                         <EditIcon />
                     </IconButton>
                 </Tooltip>
@@ -82,7 +83,6 @@ type TableToolbarProps = {
     numSelected: number;
     showActions: boolean;
     actionsComponent: any;
-    toolbarActionsProps: any;
 };
 
 const EnhancedTableToolbar: React.FC<TableToolbarProps> = ({
@@ -90,7 +90,6 @@ const EnhancedTableToolbar: React.FC<TableToolbarProps> = ({
     numSelected,
     showActions = true,
     actionsComponent,
-    toolbarActionsProps = {},
 }) => {
     const classes = useStyles();
     const ToolbarActions = actionsComponent || EnhancedTableToolbarActions;
@@ -122,10 +121,7 @@ const EnhancedTableToolbar: React.FC<TableToolbarProps> = ({
             )}
 
             {showActions === true ? (
-                <ToolbarActions
-                    numSelected={numSelected}
-                    {...toolbarActionsProps}
-                />
+                <ToolbarActions numSelected={numSelected} />
             ) : null}
         </Toolbar>
     );
