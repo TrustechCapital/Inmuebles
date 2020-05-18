@@ -11,6 +11,5 @@ export interface ICatalogDialog<T extends IModel> {
     model: T;
     open: boolean;
     onClose: () => void;
-    onSaveRequest: () => void;
-    onModelFieldChange: (field: keyof T) => (value: any) => void;
+    onSaveRequest: (model: T) => void;
 }

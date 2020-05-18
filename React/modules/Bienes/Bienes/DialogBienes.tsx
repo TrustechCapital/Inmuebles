@@ -1,17 +1,24 @@
 import React from 'react';
 import { makeStyles } from '@material-ui/core/styles';
 import Grid from '@material-ui/core/Grid';
+import { Formik } from 'formik';
 
 import { ICatalogDialog } from '../../../types';
 import { OperacionesCatalogo } from '../../../constants';
 import { ClavesModuloBienes } from '../../../constants/bienes';
 
 import Bien from '../../../models/Bien';
-import GenericSwitch from '../../../sharedComponents/GenericSwitch';
 import CatalogDialog from '../../../sharedComponents/CatalogDialog';
 import GenericTextInput from '../../../sharedComponents/GenericTextInput';
-import GenericDatePicker from '../../../sharedComponents/GenericDatePicker';
-import CatalogSelect from '../../../sharedComponents/CatalogSelect';
+import GenericSwitch from '../../../sharedComponents/GenericSwitch';
+import GenericForm from '../../../sharedComponents/Forms';
+
+const {
+    FormTextField,
+    FormCatalogSelectField,
+    FormDatePickerField,
+    FormSwitchField,
+} = new GenericForm<Bien>();
 
 const useStyles = makeStyles((theme) => ({
     root: {
@@ -29,7 +36,6 @@ const DialogBienes: React.FC<ICatalogDialog<Bien>> = ({
     open,
     onClose,
     onSaveRequest,
-    onModelFieldChange,
 }) => {
     const classes = useStyles();
 
@@ -38,197 +44,219 @@ const DialogBienes: React.FC<ICatalogDialog<Bien>> = ({
         allFieldsDisabled || mode === OperacionesCatalogo.Modificacion;
 
     return (
-        <CatalogDialog
-            opened={open}
-            operacionCatalogo={mode.toString()}
-            nombreCatalogo="Bienes"
-            subtitle="Bienes por Fideicomisos"
-            onCancel={onClose}
-            onAccept={onSaveRequest}
+        <Formik
+            initialValues={model}
+            onSubmit={onSaveRequest}
+            enableReinitialize={true}
         >
-            <Grid
-                container
-                spacing={1}
-                direction="column"
-                className={classes.rowSpacing}
-            >
-                <Grid container className={classes.rowSpacing} spacing={3}>
-                    <Grid item xs={6}>
-                        <GenericTextInput
-                            label="Fideicomiso"
-                            helperText="Fideicomiso a asignar bienes"
-                            required={true}
-                            disabled={pkFieldsDisabled}
-                            value={model.idFideicomiso}
-                            onChange={onModelFieldChange('idFideicomiso')}
-                        />
+            {(props) => (
+                <CatalogDialog
+                    opened={open}
+                    operacionCatalogo={mode}
+                    nombreCatalogo="Bienes"
+                    subtitle="Bienes por Fideicomisos"
+                    onCancel={onClose}
+                    onAccept={props.handleSubmit}
+                >
+                    <Grid
+                        container
+                        spacing={1}
+                        direction="column"
+                        className={classes.rowSpacing}
+                    >
+                        <Grid
+                            container
+                            className={classes.rowSpacing}
+                            spacing={3}
+                        >
+                            <Grid item xs={6}>
+                                <FormTextField
+                                    name="idFideicomiso"
+                                    label="Fideicomiso"
+                                    helperText="Fideicomiso a asignar bienes"
+                                    required={true}
+                                    disabled={pkFieldsDisabled}
+                                />
+                            </Grid>
+                            <Grid item xs={6}>
+                                <GenericTextInput
+                                    label="Nombre de Fideicomiso"
+                                    readOnly={true}
+                                    value=""
+                                    onChange={() => {}}
+                                />
+                            </Grid>
+                        </Grid>
+                        <Grid
+                            container
+                            className={classes.rowSpacing}
+                            spacing={3}
+                        >
+                            <Grid item xs={6}>
+                                <FormTextField
+                                    name="idSubcuenta"
+                                    label="Sub-Fideicomiso"
+                                    helperText="SubFiso"
+                                    required={true}
+                                    disabled={pkFieldsDisabled}
+                                />
+                            </Grid>
+                            <Grid item xs={6}>
+                                <FormCatalogSelectField
+                                    name="idTipoBien"
+                                    catalogId={ClavesModuloBienes.TiposDeBienes}
+                                    label="Tipo de Bien"
+                                    required={true}
+                                    disabled={allFieldsDisabled}
+                                />
+                            </Grid>
+                        </Grid>
+                        <Grid
+                            container
+                            className={classes.rowSpacing}
+                            spacing={3}
+                        >
+                            <Grid item xs={6}>
+                                <FormTextField
+                                    name="importeDelBien"
+                                    label="Importe de Bien"
+                                    disabled={allFieldsDisabled}
+                                />
+                            </Grid>
+                            <Grid item xs={6}>
+                                <FormTextField
+                                    name="descripcion"
+                                    label="Descripción"
+                                    disabled={allFieldsDisabled}
+                                />
+                            </Grid>
+                        </Grid>
+                        <Grid
+                            container
+                            className={classes.rowSpacing}
+                            spacing={3}
+                        >
+                            <Grid item xs={6}>
+                                <FormTextField
+                                    name="importeUltimaValuacion"
+                                    label="Importe Última Valuación"
+                                    disabled={allFieldsDisabled}
+                                />
+                            </Grid>
+                            <Grid item xs={6}>
+                                <FormTextField
+                                    name="comentario"
+                                    label="Comentario"
+                                    disabled={allFieldsDisabled}
+                                />
+                            </Grid>
+                        </Grid>
+                        <Grid
+                            container
+                            className={classes.rowSpacing}
+                            spacing={3}
+                        >
+                            <Grid item xs={6}>
+                                <FormDatePickerField
+                                    name="fechaUltimaValuacion"
+                                    label="Fecha de Última Valuación"
+                                    disabled={allFieldsDisabled}
+                                />
+                            </Grid>
+                        </Grid>
+                        <Grid
+                            container
+                            className={classes.rowSpacing}
+                            spacing={3}
+                        >
+                            <Grid item xs={6}>
+                                <GenericSwitch
+                                    label="Revalua"
+                                    disabled={allFieldsDisabled}
+                                    onChange={() => {}}
+                                />
+                            </Grid>
+                            <Grid item xs={6}>
+                                <FormSwitchField
+                                    name="esGarantia"
+                                    label="¿Es Garantía?"
+                                    disabled={allFieldsDisabled}
+                                />
+                            </Grid>
+                        </Grid>
+                        <Grid
+                            container
+                            className={classes.rowSpacing}
+                            spacing={3}
+                        >
+                            <Grid item xs={6}>
+                                <FormTextField
+                                    name="importeDeGarantia"
+                                    label="Importe Bien"
+                                    disabled={allFieldsDisabled}
+                                    required={true}
+                                    adornment="$"
+                                />
+                            </Grid>
+                            <Grid item xs={6}>
+                                <FormTextField
+                                    name="picnorado"
+                                    label="Picnorado"
+                                    disabled={allFieldsDisabled}
+                                    required={true}
+                                    adornment="$"
+                                />
+                            </Grid>
+                        </Grid>
+                        <Grid
+                            container
+                            className={classes.rowSpacing}
+                            spacing={3}
+                        >
+                            <Grid item xs={6}>
+                                <FormCatalogSelectField
+                                    name="idClavePeriodicidadRevaluacion"
+                                    catalogId={
+                                        ClavesModuloBienes.PeriodicidadDeRevaluacion
+                                    }
+                                    label="Periodicidad"
+                                    disabled={allFieldsDisabled}
+                                />
+                            </Grid>
+                            <Grid item xs={6}>
+                                <FormDatePickerField
+                                    name="fechaInicio"
+                                    label="Fecha de Inicio"
+                                    disabled={allFieldsDisabled}
+                                />
+                            </Grid>
+                        </Grid>
+                        <Grid
+                            container
+                            className={classes.rowSpacing}
+                            spacing={3}
+                        >
+                            <Grid item xs={6}>
+                                <FormDatePickerField
+                                    name="fechaFin"
+                                    label="Fecha de Salida"
+                                    disabled={allFieldsDisabled}
+                                />
+                            </Grid>
+                            <Grid item xs={6}>
+                                <FormCatalogSelectField
+                                    name="estatus"
+                                    catalogId={ClavesModuloBienes.Estatus}
+                                    useLabelAsValue={true}
+                                    label="Estatus"
+                                    disabled={allFieldsDisabled}
+                                />
+                            </Grid>
+                        </Grid>
                     </Grid>
-                    <Grid item xs={6}>
-                        <GenericTextInput
-                            label="Nombre de Fideicomiso"
-                            readOnly={true}
-                            value=""
-                            onChange={() => {}}
-                        />
-                    </Grid>
-                </Grid>
-                <Grid container className={classes.rowSpacing} spacing={3}>
-                    <Grid item xs={6}>
-                        <GenericTextInput
-                            label="Sub-Fideicomiso"
-                            helperText="SubFiso"
-                            required={true}
-                            disabled={pkFieldsDisabled}
-                            value={model.idSubcuenta}
-                            onChange={onModelFieldChange('idSubcuenta')}
-                        />
-                    </Grid>
-                    <Grid item xs={6}>
-                        <CatalogSelect
-                            catalogId={ClavesModuloBienes.TiposDeBienes}
-                            label="Tipo de Bien"
-                            required={true}
-                            disabled={allFieldsDisabled}
-                            value={model.idTipoBien}
-                            onChange={onModelFieldChange('idTipoBien')}
-                        />
-                    </Grid>
-                </Grid>
-                <Grid container className={classes.rowSpacing} spacing={3}>
-                    <Grid item xs={6}>
-                        <GenericTextInput
-                            label="Importe de Bien"
-                            disabled={allFieldsDisabled}
-                            value={model.importeDelBien}
-                            onChange={onModelFieldChange('importeDelBien')}
-                        />
-                    </Grid>
-                    <Grid item xs={6}>
-                        <GenericTextInput
-                            label="Descripción"
-                            disabled={allFieldsDisabled}
-                            value={model.descripcion}
-                            onChange={onModelFieldChange('descripcion')}
-                        />
-                    </Grid>
-                </Grid>
-                <Grid container className={classes.rowSpacing} spacing={3}>
-                    <Grid item xs={6}>
-                        <GenericTextInput
-                            label="Importe Última Valuación"
-                            disabled={allFieldsDisabled}
-                            value={model.importeUltimaValuacion}
-                            onChange={onModelFieldChange(
-                                'importeUltimaValuacion'
-                            )}
-                        />
-                    </Grid>
-                    <Grid item xs={6}>
-                        <GenericTextInput
-                            label="Comentario"
-                            disabled={allFieldsDisabled}
-                            value={model.comentario}
-                            onChange={onModelFieldChange('comentario')}
-                        />
-                    </Grid>
-                </Grid>
-                <Grid container className={classes.rowSpacing} spacing={3}>
-                    <Grid item xs={6}>
-                        <GenericDatePicker
-                            label="Fecha de Última Valuación"
-                            disabled={allFieldsDisabled}
-                            value={model.fechaUltimaValuacion}
-                            onChange={onModelFieldChange(
-                                'fechaUltimaValuacion'
-                            )}
-                        />
-                    </Grid>
-                </Grid>
-                <Grid container className={classes.rowSpacing} spacing={3}>
-                    <Grid item xs={6}>
-                        <GenericSwitch
-                            label="Revalua"
-                            disabled={allFieldsDisabled}
-                            checked
-                            onChange={() => {}}
-                        />
-                    </Grid>
-                    <Grid item xs={6}>
-                        <GenericSwitch
-                            label="¿Es Garantía?"
-                            disabled={allFieldsDisabled}
-                            checked={model.esGarantia}
-                            onChange={onModelFieldChange('esGarantia')}
-                        />
-                    </Grid>
-                </Grid>
-                <Grid container className={classes.rowSpacing} spacing={3}>
-                    <Grid item xs={6}>
-                        <GenericTextInput
-                            label="Importe Bien"
-                            disabled={allFieldsDisabled}
-                            required={true}
-                            value={model.importeDeGarantia}
-                            onChange={onModelFieldChange('importeDeGarantia')}
-                            adornment="$"
-                        />
-                    </Grid>
-                    <Grid item xs={6}>
-                        <GenericTextInput
-                            label="Picnorado"
-                            disabled={allFieldsDisabled}
-                            required={true}
-                            value={model.picnorado}
-                            onChange={onModelFieldChange('picnorado')}
-                            adornment="$"
-                        />
-                    </Grid>
-                </Grid>
-                <Grid container className={classes.rowSpacing} spacing={3}>
-                    <Grid item xs={6}>
-                        <CatalogSelect
-                            catalogId={
-                                ClavesModuloBienes.PeriodicidadDeRevaluacion
-                            }
-                            label="Periodicidad"
-                            disabled={allFieldsDisabled}
-                            value={model.idClavePeriodicidadRevaluacion}
-                            onChange={onModelFieldChange(
-                                'idClavePeriodicidadRevaluacion'
-                            )}
-                        />
-                    </Grid>
-                    <Grid item xs={6}>
-                        <GenericDatePicker
-                            label="Fecha de Inicio"
-                            disabled={allFieldsDisabled}
-                            value={model.fechaInicio}
-                            onChange={onModelFieldChange('fechaInicio')}
-                        />
-                    </Grid>
-                </Grid>
-                <Grid container className={classes.rowSpacing} spacing={3}>
-                    <Grid item xs={6}>
-                        <GenericDatePicker
-                            label="Fecha de Salida"
-                            disabled={allFieldsDisabled}
-                            value={model.fechaFin}
-                            onChange={onModelFieldChange('fechaFin')}
-                        />
-                    </Grid>
-                    <Grid item xs={6}>
-                        <CatalogSelect
-                            catalogId={ClavesModuloBienes.Estatus}
-                            useLabelAsValue={true}
-                            label="Estatus"
-                            disabled={allFieldsDisabled}
-                            value={model.estatus}
-                            onChange={onModelFieldChange('estatus')}
-                        />
-                    </Grid>
-                </Grid>
-            </Grid>
-        </CatalogDialog>
+                </CatalogDialog>
+            )}
+        </Formik>
     );
 };
 
