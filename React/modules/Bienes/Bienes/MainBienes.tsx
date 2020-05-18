@@ -1,6 +1,7 @@
-import React, { useReducer } from 'react';
+import React, { useMemo, useCallback } from 'react';
+import useThunkReducer from 'react-hook-thunk-reducer';
 
-import { ITableBienesParameters } from './types';
+import { ITableBienesParameters, MainBienesState } from './types';
 import BienResultRow from './models/BienResultRow';
 import TableBienes from './TableBienes';
 import TableDetalleBienes from './TableDetalleBienes';
@@ -8,47 +9,14 @@ import DialogBienes from './DialogBienes';
 import DialogDetalleBienes from './DialogDetalleBienes';
 import { OperacionesCatalogo } from '../../../constants';
 import Bien from '../../../models/Bien';
-import { bienesApi } from './services';
+import {
+    mainBienesReducer,
+    fetchAndDisplayModel,
+    searchBienes,
+    saveBienModel,
+} from './reducers';
 
-type MainBienesState = {
-    searchParameters: ITableBienesParameters;
-    modalBienesMode: OperacionesCatalogo;
-    bienesList: BienResultRow[];
-    selectedBienesRows: BienResultRow[];
-    currentBienModel: Bien;
-    modalBienesOpen: boolean;
-    modalDetalleBienesOpen: boolean;
-    modalDetalleBienesMode: OperacionesCatalogo;
-    showActionsDetalleBienesTable: boolean;
-};
-
-type MainBienesActions =
-    | {
-          type: 'bienesList';
-          results: BienResultRow[];
-      }
-    | {
-          type: 'selectedBienesRows';
-          selectedRows: BienResultRow[];
-      }
-    | {
-          type: 'loadBienesModel';
-          model: Bien;
-      }
-    | {
-          type: 'openBienesModal';
-          mode: OperacionesCatalogo;
-      }
-    | {
-          type: 'closeBienesModal';
-      }
-    | {
-          type: 'openDetalleBienesModal';
-          mode: OperacionesCatalogo;
-      }
-    | {
-          type: 'closeDetalleBienesModal';
-      };
+import { GenericTableCallbacksContext } from '../../../sharedComponents/GenericTable';
 
 const initialState: MainBienesState = {
     searchParameters: {
@@ -66,154 +34,56 @@ const initialState: MainBienesState = {
     showActionsDetalleBienesTable: false,
 };
 
-function mainBienesReducer(state: MainBienesState, action: MainBienesActions) {
-    switch (action.type) {
-        case 'bienesList':
-            return {
-                ...state,
-                bienesList: action.results,
-                selectedBienes: [],
-                showActionsDetalleBienesTable: false,
-            };
-        case 'selectedBienesRows':
-            return {
-                ...state,
-                selectedBienesRows: action.selectedRows,
-                showActionsDetalleBienesTable: true,
-            };
-        case 'loadBienesModel':
-            return {
-                ...state,
-                currentBienModel: action.model,
-            };
-        case 'openBienesModal':
-            if (
-                (action.mode === OperacionesCatalogo.Consulta ||
-                    action.mode === OperacionesCatalogo.Modificacion) &&
-                state.selectedBienesRows.length === 1
-            ) {
-                return {
-                    ...state,
-                    modalBienesOpen: true,
-                    modalBienesMode: action.mode,
-                };
-            }
-
-            if (
-                action.mode === OperacionesCatalogo.Baja &&
-                state.selectedBienesRows.length > 0
-            ) {
-                return {
-                    ...state,
-                    modalBienesOpen: true,
-                    modalBienesMode: action.mode,
-                };
-            }
-
-            if (action.mode === OperacionesCatalogo.Alta) {
-                return {
-                    ...state,
-                    modalBienesOpen: true,
-                    modalBienesMode: action.mode,
-                };
-            }
-
-            return state;
-        case 'closeBienesModal':
-            return {
-                ...state,
-                modalBienesOpen: false,
-            };
-        case 'openDetalleBienesModal':
-            return {
-                ...state,
-                modalDetalleBienesOpen: true,
-            };
-        case 'closeDetalleBienesModal':
-            return {
-                ...state,
-                modalDetalleBienesOpen: false,
-            };
-        default:
-            return state;
-    }
-}
-
 const MainBienes: React.FC = () => {
-    const [state, dispatch] = useReducer(mainBienesReducer, initialState);
-
-    async function searchBienes(parameters: ITableBienesParameters) {
-        dispatch({
-            type: 'bienesList',
-            results: [],
-        });
-        const bienes = await bienesApi.find(parameters);
-        dispatch({
-            type: 'bienesList',
-            results: bienes,
-        });
-    }
+    const [state, dispatch] = useThunkReducer(mainBienesReducer, initialState);
 
     function handleSelectDetalleBien() {}
 
-    async function fetchDetalleBien() {
-        if (state.selectedBienesRows.length !== 1) {
-            return;
-        }
-
-        const bienResultRow = state.selectedBienesRows[0];
-        let bien = new Bien(
-            bienResultRow.idFideicomiso,
-            bienResultRow.idSubcuenta,
-            bienResultRow.idTipoBien
-        );
-
-        const isModelAlreadyLoaded = state.currentBienModel.hasSamePkAs(bien);
-
-        if (isModelAlreadyLoaded) {
-            return;
-        }
-
-        bien = await bienesApi.findByPK(bien);
-
+    const closeBienesModal = useCallback(() => {
         dispatch({
-            type: 'loadBienesModel',
-            model: bien,
+            type: 'closeBienesModal',
         });
-    }
+    }, []);
 
-    async function handleViewDetalleBien() {
-        await fetchDetalleBien();
+    const saveBienesModel = useCallback((model: Bien) => {
+        dispatch(saveBienModel(model));
+    }, []);
 
-        dispatch({
-            type: 'openBienesModal',
-            mode: OperacionesCatalogo.Consulta,
-        });
-    }
-
-    async function handleSaveBienModel(bien: Bien) {
-        await bienesApi.update(bien);
-    }
+    const BienesActionCallbacks = useMemo(() => {
+        return {
+            onSearch: (parameters: ITableBienesParameters) => {
+                dispatch(searchBienes(parameters));
+            },
+            onSelect: (selectedRows: BienResultRow[]) => {
+                dispatch({
+                    type: 'selectedBienesRows',
+                    selectedRows: selectedRows,
+                });
+            },
+            onNew: () => {
+                dispatch({
+                    type: 'openBienesModal',
+                    mode: OperacionesCatalogo.Alta,
+                });
+            },
+            onView: () => {
+                dispatch(fetchAndDisplayModel(OperacionesCatalogo.Consulta));
+            },
+            onModify: () => {
+                dispatch(
+                    fetchAndDisplayModel(OperacionesCatalogo.Modificacion)
+                );
+            },
+        };
+    }, []);
 
     return (
-        <div>
-            <TableBienes
-                data={state.bienesList}
-                onNew={() =>
-                    dispatch({
-                        type: 'openBienesModal',
-                        mode: OperacionesCatalogo.Alta,
-                    })
-                }
-                onView={handleViewDetalleBien}
-                onSelect={(selectedRows) =>
-                    dispatch({
-                        type: 'selectedBienesRows',
-                        selectedRows: selectedRows,
-                    })
-                }
-                onSearch={searchBienes}
-            />
+        <React.Fragment>
+            <GenericTableCallbacksContext.Provider
+                value={BienesActionCallbacks}
+            >
+                <TableBienes data={state.bienesList} />
+            </GenericTableCallbacksContext.Provider>
             <TableDetalleBienes
                 data={[]}
                 showActionsHeader={state.showActionsDetalleBienesTable}
@@ -229,12 +99,8 @@ const MainBienes: React.FC = () => {
                 mode={state.modalBienesMode}
                 open={state.modalBienesOpen}
                 model={state.currentBienModel}
-                onClose={() =>
-                    dispatch({
-                        type: 'closeBienesModal',
-                    })
-                }
-                onSaveRequest={handleSaveBienModel}
+                onClose={closeBienesModal}
+                onSaveRequest={saveBienesModel}
             />
             <DialogDetalleBienes
                 mode={state.modalDetalleBienesMode}
@@ -245,7 +111,7 @@ const MainBienes: React.FC = () => {
                     })
                 }
             />
-        </div>
+        </React.Fragment>
     );
 };
 
