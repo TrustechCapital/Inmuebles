@@ -7,8 +7,8 @@ import DialogContent from '@material-ui/core/DialogContent';
 import DialogContentText from '@material-ui/core/DialogContentText';
 import DialogTitle from '@material-ui/core/DialogTitle';
 import Slide from '@material-ui/core/Slide';
-import { OPERACIONES_CATALOGO } from '../constants';
-import PropTypes from 'prop-types';
+import { TransitionProps } from '@material-ui/core/transitions';
+import { OperacionesCatalogo } from '../constants';
 
 const useStyles = makeStyles((theme) => ({
     root: {
@@ -16,33 +16,53 @@ const useStyles = makeStyles((theme) => ({
         backgroundColor: theme.palette.background.paper,
     },
 }));
-const Transition = React.forwardRef(function Transition(props, ref) {
+
+const Transition = React.forwardRef(function Transition(
+    props: TransitionProps & { children?: React.ReactElement<any, any> },
+    ref: React.Ref<unknown>
+) {
     return <Slide direction="up" ref={ref} {...props} />;
 });
 
-function getTitle(operacionCatalogo, nombreCatalogo) {
+function getTitle(
+    operacionCatalogo: OperacionesCatalogo,
+    nombreCatalogo: string
+): string {
     switch (operacionCatalogo) {
-        case OPERACIONES_CATALOGO.ALTA:
+        case OperacionesCatalogo.Alta:
             return `Alta de ${nombreCatalogo}`;
-        case OPERACIONES_CATALOGO.MODIFICACION:
+        case OperacionesCatalogo.Modificacion:
             return `Modificación de ${nombreCatalogo}`;
-        case OPERACIONES_CATALOGO.CONSULTA:
+        case OperacionesCatalogo.Consulta:
             return `Consulta de ${nombreCatalogo}`;
+        default:
+            return '';
     }
 }
-function CatalogDialog(props) {
-    const {
-        operacionCatalogo,
-        nombreCatalogo,
-        subtitle,
-        onCancel,
-        onAccept,
-    } = props;
+
+type CatalogDialogProps = {
+    operacionCatalogo: OperacionesCatalogo;
+    nombreCatalogo: string;
+    subtitle: string;
+    onCancel: () => void;
+    onAccept: () => void;
+    opened: boolean;
+};
+
+const CatalogDialog: React.FC<CatalogDialogProps> = ({
+    operacionCatalogo,
+    nombreCatalogo,
+    subtitle,
+    onCancel,
+    onAccept,
+    opened,
+    children,
+}) => {
     const [open, setOpen] = useState(false);
 
     useEffect(() => {
-        setOpen(props.opened);
-    }, [props]);
+        setOpen(opened);
+    }, [opened]);
 
     const classes = useStyles();
 
@@ -56,16 +76,12 @@ function CatalogDialog(props) {
             fullWidth={true}
             maxWidth="md"
             onClose={onCancel}
-            aria-labelledby="alert-dialog-slide-title"
-            aria-describedby="alert-dialog-slide-description"
         >
-            <DialogTitle id="alert-dialog-slide-title">{title}</DialogTitle>
+            <DialogTitle>{title}</DialogTitle>
             <DialogContent>
-                <DialogContentText id="alert-dialog-slide-description">
-                    {subtitle}
-                </DialogContentText>
+                <DialogContentText>{subtitle}</DialogContentText>
                 <form className={classes.root} noValidate autoComplete="off">
-                    {props.children}
+                    {children}
                 </form>
             </DialogContent>
             <DialogActions>
@@ -78,14 +94,6 @@ function CatalogDialog(props) {
             </DialogActions>
         </Dialog>
     );
-}
-CatalogDialog.propTypes = {
-    operacionCatalogo: PropTypes.string.isRequired,
-    nombreCatalogo: PropTypes.string.isRequired,
-    subtitle: PropTypes.string.isRequired,
-    onCancel: PropTypes.func.isRequired,
-    onAccept: PropTypes.func.isRequired,
-    opened: PropTypes.bool.isRequired,
-    children: PropTypes.element.isRequired,
 };
+
 export default CatalogDialog;
