@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from 'react';
+
 import { makeStyles } from '@material-ui/core/styles';
 import Button from '@material-ui/core/Button';
 import Dialog from '@material-ui/core/Dialog';
@@ -8,6 +9,8 @@ import DialogContentText from '@material-ui/core/DialogContentText';
 import DialogTitle from '@material-ui/core/DialogTitle';
 import Slide from '@material-ui/core/Slide';
 import { TransitionProps } from '@material-ui/core/transitions';
+import SaveIcon from '@material-ui/icons/Save';
+
 import { OperacionesCatalogo } from '../constants';
 
 const useStyles = makeStyles((theme) => ({
@@ -85,11 +88,19 @@ const CatalogDialog: React.FC<CatalogDialogProps> = ({
                 </form>
             </DialogContent>
             <DialogActions>
-                <Button onClick={onCancel} color="primary">
+                <Button onClick={onCancel} variant="contained">
                     Cancelar
                 </Button>
-                <Button onClick={onAccept} color="primary">
-                    Aceptar
+                <Button
+                    onClick={onAccept}
+                    variant="contained"
+                    color="primary"
+                    startIcon={<SaveIcon />}
+                    disabled={
+                        operacionCatalogo === OperacionesCatalogo.Consulta
+                    }
+                >
+                    Guardar
                 </Button>
             </DialogActions>
         </Dialog>
