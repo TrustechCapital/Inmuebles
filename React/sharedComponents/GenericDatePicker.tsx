@@ -58,13 +58,9 @@ const GenericDatePicker: React.FC<GenericDatePickerProps> = ({
                 <KeyboardDatePicker
                     margin="normal"
                     label={label}
-                    format="dd/MM/yyyy"
                     value={getDefaultDateValue(value)}
                     onChange={handleChange}
                     inputVariant="outlined"
-                    KeyboardButtonProps={{
-                        'aria-label': 'change date',
-                    }}
                     {...datePickerProps}
                 />
             </MuiPickersUtilsProvider>
