@@ -11,3 +11,10 @@ export enum OperacionesCatalogo {
     Consulta,
     Baja,
 }
+
+export enum SavingStatus {
+    Initial,
+    Saving,
+    Success,
+    Error,
+}

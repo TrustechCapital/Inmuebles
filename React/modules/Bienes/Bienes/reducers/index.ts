@@ -1,7 +1,7 @@
 import BienResultRow from '../models/BienResultRow';
 import { MainBienesState, ITableBienesParameters } from '../types';
 import Bien from '../../../../models/Bien';
-import { OperacionesCatalogo } from '../../../../constants';
+import { OperacionesCatalogo, SavingStatus } from '../../../../constants';
 import { bienesApi } from '../services';
 
 type MainBienesActions =
@@ -25,7 +25,11 @@ type MainBienesActions =
           type: 'SAVE_BIEN_MODEL';
       }
     | {
-          type: 'SAVE_BIEN_MODEL';
+          type: 'SET_MODEL_SAVE_SUCCESS';
+      }
+    | {
+          type: 'SET_MODEL_SAVE_ERROR';
+          error: string;
       }
     | {
           type: 'CLOSE_BIENES_MODAL';
@@ -107,6 +111,32 @@ function mainBienesReducer(
                 bienes: {
                     ...state.bienes,
                     modalOpen: false,
+                },
+            };
+        case 'SAVE_BIEN_MODEL':
+            return {
+                ...state,
+                bienes: {
+                    ...state.bienes,
+                    savingStatus: SavingStatus.Saving,
+                    modalErrorMessage: null,
+                },
+            };
+        case 'SET_MODEL_SAVE_SUCCESS':
+            return {
+                ...state,
+                bienes: {
+                    ...state.bienes,
+                    savingStatus: SavingStatus.Success,
+                },
+            };
+        case 'SET_MODEL_SAVE_ERROR':
+            return {
+                ...state,
+                bienes: {
+                    ...state.bienes,
+                    savingStatus: SavingStatus.Error,
+                    modalErrorMessage: action.error,
                 },
             };
         case 'OPEN_DETALLE_BIENES_MODAL':
@@ -195,11 +225,21 @@ function searchBienes(parameters: ITableBienesParameters) {
 
 function saveBienModel(model: Bien) {
     return async (dispatch: BienesDispatcher) => {
-        const updatedBien = await bienesApi.update(model);
         dispatch({
-            type: 'SET_BIEN_MODEL',
-            model: updatedBien,
+            type: 'SAVE_BIEN_MODEL',
         });
+
+        try {
+            await bienesApi.update(model);
+            dispatch({
+                type: 'SET_MODEL_SAVE_SUCCESS',
+            });
+        } catch (err) {
+            dispatch({
+                type: 'SET_MODEL_SAVE_ERROR',
+                error: err.message,
+            });
+        }
     };
 }
 

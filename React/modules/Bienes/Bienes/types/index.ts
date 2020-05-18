@@ -1,6 +1,6 @@
 import BienResultRow from '../models/BienResultRow';
 import Bien from '../../../../models/Bien';
-import { OperacionesCatalogo } from '../../../../constants';
+import { OperacionesCatalogo, SavingStatus } from '../../../../constants';
 
 export interface ITableBienesParameters {
     idFideicomiso: number | null;
@@ -16,6 +16,9 @@ export type MainBienesState = {
         currentModel: Bien;
         modalOpen: boolean;
         modalMode: OperacionesCatalogo;
+        savingStatus: SavingStatus;
+        isLoadingModel: boolean;
+        modalErrorMessage: string | null;
     };
     detalleBienes: {
         modalOpen: boolean;

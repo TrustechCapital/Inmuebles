@@ -9,14 +9,24 @@ import DialogContentText from '@material-ui/core/DialogContentText';
 import DialogTitle from '@material-ui/core/DialogTitle';
 import Slide from '@material-ui/core/Slide';
 import { TransitionProps } from '@material-ui/core/transitions';
-import SaveIcon from '@material-ui/icons/Save';
+import ErrorOutlineIcon from '@material-ui/icons/ErrorOutline';
 
 import { OperacionesCatalogo } from '../constants';
+import SavingButton from './SavingButton';
 
 const useStyles = makeStyles((theme) => ({
     root: {
         width: '100%',
         backgroundColor: theme.palette.background.paper,
+    },
+    errorMessage: {
+        display: 'flex',
+        alignItems: 'center',
+        color: theme.palette.error.main,
+        padding: theme.spacing(1.5),
+    },
+    errorMessageIcon: {
+        marginRight: theme.spacing(0.5),
     },
 }));
 
@@ -50,6 +60,9 @@ type CatalogDialogProps = {
     onCancel: () => void;
     onAccept: () => void;
     opened: boolean;
+    errorMessage: string | null;
+    saving: boolean;
+    success: boolean;
 };
 
 const CatalogDialog: React.FC<CatalogDialogProps> = ({
@@ -60,6 +73,9 @@ const CatalogDialog: React.FC<CatalogDialogProps> = ({
     onAccept,
     opened,
     children,
+    errorMessage,
+    saving,
+    success,
 }) => {
     const [open, setOpen] = useState(false);
 
@@ -68,7 +84,6 @@ const CatalogDialog: React.FC<CatalogDialogProps> = ({
     }, [opened]);
 
     const classes = useStyles();
-
     let title = getTitle(operacionCatalogo, nombreCatalogo);
 
     return (
@@ -88,20 +103,25 @@ const CatalogDialog: React.FC<CatalogDialogProps> = ({
                 </form>
             </DialogContent>
             <DialogActions>
+                {errorMessage && (
+                    <div className={classes.errorMessage}>
+                        <ErrorOutlineIcon
+                            className={classes.errorMessageIcon}
+                        />
+                        {errorMessage}
+                    </div>
+                )}
                 <Button onClick={onCancel} variant="contained">
                     Cancelar
                 </Button>
-                <Button
+                <SavingButton
                     onClick={onAccept}
-                    variant="contained"
-                    color="primary"
-                    startIcon={<SaveIcon />}
+                    loading={saving}
+                    success={success}
                     disabled={
                         operacionCatalogo === OperacionesCatalogo.Consulta
                     }
-                >
-                    Guardar
-                </Button>
+                />
             </DialogActions>
         </Dialog>
     );

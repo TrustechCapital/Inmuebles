@@ -1,12 +1,12 @@
 import React from 'react';
+
 import { makeStyles } from '@material-ui/core/styles';
 import Grid from '@material-ui/core/Grid';
 import { Formik } from 'formik';
 
 import { ICatalogDialog } from '../../../types';
-import { OperacionesCatalogo } from '../../../constants';
+import { OperacionesCatalogo, SavingStatus } from '../../../constants';
 import { ClavesModuloBienes } from '../../../constants/bienes';
-
 import Bien from '../../../models/Bien';
 import CatalogDialog from '../../../sharedComponents/CatalogDialog';
 import GenericTextInput from '../../../sharedComponents/GenericTextInput';
@@ -30,10 +30,18 @@ const useStyles = makeStyles((theme) => ({
     },
 }));
 
-const DialogBienes: React.FC<ICatalogDialog<Bien>> = ({
+type DialogBienesProps = ICatalogDialog<Bien> & {
+    savingStatus: SavingStatus;
+    isLoading: boolean;
+    errorMessage: string | null;
+};
+
+const DialogBienes: React.FC<DialogBienesProps> = ({
     mode,
     model,
     open,
+    errorMessage,
+    savingStatus,
     onClose,
     onSaveRequest,
 }) => {
@@ -57,6 +65,9 @@ const DialogBienes: React.FC<ICatalogDialog<Bien>> = ({
                     subtitle="Bienes por Fideicomisos"
                     onCancel={onClose}
                     onAccept={props.handleSubmit}
+                    errorMessage={errorMessage}
+                    saving={savingStatus === SavingStatus.Saving}
+                    success={savingStatus === SavingStatus.Success}
                 >
                     <Grid
                         container

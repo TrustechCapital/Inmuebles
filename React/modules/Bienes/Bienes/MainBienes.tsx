@@ -7,7 +7,7 @@ import TableBienes from './TableBienes';
 import TableDetalleBienes from './TableDetalleBienes';
 import DialogBienes from './DialogBienes';
 import DialogDetalleBienes from './DialogDetalleBienes';
-import { OperacionesCatalogo } from '../../../constants';
+import { OperacionesCatalogo, SavingStatus } from '../../../constants';
 import Bien from '../../../models/Bien';
 import {
     mainBienesReducer,
@@ -30,6 +30,9 @@ const initialState: MainBienesState = {
         currentModel: new Bien(null, null, null),
         modalMode: OperacionesCatalogo.Alta,
         modalOpen: false,
+        isLoadingModel: false,
+        savingStatus: SavingStatus.Initial,
+        modalErrorMessage: null,
     },
     detalleBienes: {
         modalOpen: false,
@@ -103,6 +106,9 @@ const MainBienes: React.FC = () => {
                 mode={state.bienes.modalMode}
                 open={state.bienes.modalOpen}
                 model={state.bienes.currentModel}
+                isLoading={state.bienes.isLoadingModel}
+                savingStatus={state.bienes.savingStatus}
+                errorMessage={state.bienes.modalErrorMessage}
                 onClose={closeBienesModal}
                 onSaveRequest={saveBienesModel}
             />
