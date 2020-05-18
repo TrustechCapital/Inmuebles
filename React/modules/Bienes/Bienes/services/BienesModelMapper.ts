@@ -1,8 +1,19 @@
 import { IModelMapper } from '../../../../core/api';
 import Bien from '../../../../models/Bien';
+import DateUtils from '../../../../utils/DateUtils';
 
 class BienModelMapper implements IModelMapper<Bien> {
     fromObject(data: any) {
+        const [
+            fechaUltimaValuacion,
+            fechaInicio,
+            fechaFin,
+        ] = DateUtils.toDates([
+            data.fgarFecUltValua,
+            data.fgarFecInicio,
+            data.fgarFecFin,
+        ]);
+
         const bien = new Bien(
             data.fgarIdFideicomiso,
             data.fgarIdSubcuenta,
@@ -17,9 +28,9 @@ class BienModelMapper implements IModelMapper<Bien> {
             picnorado: data.fgarPjePicnorado, // TODO: revisar nombre correcto del campo
             importeUltimaValuacion: data.fgarImpUltValua,
             idClavePeriodicidadRevaluacion: data.fgarCvePerValua,
-            fechaUltimaValuacion: data.fgarFecUltValua,
-            fechaInicio: data.fgarFecInicio,
-            fechaFin: data.fgarFecFin,
+            fechaUltimaValuacion: fechaUltimaValuacion,
+            fechaInicio: fechaInicio,
+            fechaFin: fechaFin,
             estatus: data.fgarCveStatus,
             esGarantia: data.fgarEsGarantia,
         });
@@ -27,6 +38,16 @@ class BienModelMapper implements IModelMapper<Bien> {
     }
 
     toObject(bien: Bien) {
+        const [
+            fechaUltimaValuacion,
+            fechaInicio,
+            fechaFin,
+        ] = DateUtils.fromDates([
+            bien.fechaUltimaValuacion,
+            bien.fechaInicio,
+            bien.fechaFin,
+        ]);
+
         return {
             fgarIdFideicomiso: bien.idFideicomiso,
             fgarIdSubcuenta: bien.idSubcuenta,
@@ -39,9 +60,9 @@ class BienModelMapper implements IModelMapper<Bien> {
             fgarPjePicnorado: bien.picnorado,
             fgarImpUltValua: bien.importeUltimaValuacion,
             fgarCvePerValua: bien.idClavePeriodicidadRevaluacion,
-            fgarFecUltValua: bien.fechaUltimaValuacion,
-            fgarFecInicio: bien.fechaInicio,
-            fgarFecFin: bien.fechaFin,
+            fgarFecUltValua: fechaUltimaValuacion,
+            fgarFecInicio: fechaInicio,
+            fgarFecFin: fechaFin,
             fgarCveStatus: bien.estatus,
             fgarEsGarantia: bien.esGarantia,
         };

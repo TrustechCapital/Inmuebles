@@ -14,9 +14,9 @@ class Bien extends BaseModel {
     picnorado: number | null = null;
     importeUltimaValuacion: number | null = null;
     idClavePeriodicidadRevaluacion: number | null = null;
-    fechaUltimaValuacion: string | null = null;
-    fechaInicio: string | null = null;
-    fechaFin: string | null = null;
+    fechaUltimaValuacion: Date | null = null;
+    fechaInicio: Date | null = null;
+    fechaFin: Date | null = null;
     estatus: string | null = null;
     esGarantia: boolean = false;
 
