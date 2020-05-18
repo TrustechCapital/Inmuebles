@@ -19,19 +19,23 @@ import {
 import { GenericTableCallbacksContext } from '../../../sharedComponents/GenericTable';
 
 const initialState: MainBienesState = {
-    searchParameters: {
-        idFideicomiso: null,
-        idTipoBien: null,
-        idSubcuenta: '',
+    bienes: {
+        searchParameters: {
+            idFideicomiso: null,
+            idTipoBien: null,
+            idSubcuenta: '',
+        },
+        searchResults: [],
+        selectedRows: [],
+        currentModel: new Bien(null, null, null),
+        modalMode: OperacionesCatalogo.Alta,
+        modalOpen: false,
     },
-    modalBienesMode: OperacionesCatalogo.Alta,
-    bienesList: [],
-    selectedBienesRows: [],
-    currentBienModel: new Bien(null, null, null),
-    modalBienesOpen: false,
-    modalDetalleBienesOpen: false,
-    modalDetalleBienesMode: OperacionesCatalogo.Alta,
-    showActionsDetalleBienesTable: false,
+    detalleBienes: {
+        modalOpen: false,
+        modalMode: OperacionesCatalogo.Alta,
+        showActionsToolbar: false,
+    },
 };
 
 const MainBienes: React.FC = () => {
@@ -41,7 +45,7 @@ const MainBienes: React.FC = () => {
 
     const closeBienesModal = useCallback(() => {
         dispatch({
-            type: 'closeBienesModal',
+            type: 'CLOSE_BIENES_MODAL',
         });
     }, []);
 
@@ -56,13 +60,13 @@ const MainBienes: React.FC = () => {
             },
             onSelect: (selectedRows: BienResultRow[]) => {
                 dispatch({
-                    type: 'selectedBienesRows',
+                    type: 'SET_BIENES_ROWS_SELECTION',
                     selectedRows: selectedRows,
                 });
             },
             onNew: () => {
                 dispatch({
-                    type: 'openBienesModal',
+                    type: 'OPEN_BIENES_MODAL',
                     mode: OperacionesCatalogo.Alta,
                 });
             },
@@ -82,32 +86,32 @@ const MainBienes: React.FC = () => {
             <GenericTableCallbacksContext.Provider
                 value={BienesActionCallbacks}
             >
-                <TableBienes data={state.bienesList} />
+                <TableBienes data={state.bienes.searchResults} />
             </GenericTableCallbacksContext.Provider>
             <TableDetalleBienes
                 data={[]}
-                showActionsHeader={state.showActionsDetalleBienesTable}
+                showActionsHeader={state.detalleBienes.showActionsToolbar}
                 onNew={() =>
                     dispatch({
-                        type: 'openDetalleBienesModal',
+                        type: 'OPEN_DETALLE_BIENES_MODAL',
                         mode: OperacionesCatalogo.Alta,
                     })
                 }
                 onSelect={handleSelectDetalleBien}
             />
             <DialogBienes
-                mode={state.modalBienesMode}
-                open={state.modalBienesOpen}
-                model={state.currentBienModel}
+                mode={state.bienes.modalMode}
+                open={state.bienes.modalOpen}
+                model={state.bienes.currentModel}
                 onClose={closeBienesModal}
                 onSaveRequest={saveBienesModel}
             />
             <DialogDetalleBienes
-                mode={state.modalDetalleBienesMode}
-                opened={state.modalDetalleBienesOpen}
+                mode={state.detalleBienes.modalMode}
+                opened={state.detalleBienes.modalOpen}
                 handleClose={() =>
                     dispatch({
-                        type: 'closeDetalleBienesModal',
+                        type: 'CLOSE_DETALLE_BIENES_MODAL',
                     })
                 }
             />

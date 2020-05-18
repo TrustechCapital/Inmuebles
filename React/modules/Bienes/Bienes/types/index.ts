@@ -9,13 +9,17 @@ export interface ITableBienesParameters {
 }
 
 export type MainBienesState = {
-    searchParameters: ITableBienesParameters;
-    modalBienesMode: OperacionesCatalogo;
-    bienesList: BienResultRow[];
-    selectedBienesRows: BienResultRow[];
-    currentBienModel: Bien;
-    modalBienesOpen: boolean;
-    modalDetalleBienesOpen: boolean;
-    modalDetalleBienesMode: OperacionesCatalogo;
-    showActionsDetalleBienesTable: boolean;
+    bienes: {
+        searchParameters: ITableBienesParameters;
+        searchResults: BienResultRow[];
+        selectedRows: BienResultRow[];
+        currentModel: Bien;
+        modalOpen: boolean;
+        modalMode: OperacionesCatalogo;
+    };
+    detalleBienes: {
+        modalOpen: boolean;
+        modalMode: OperacionesCatalogo;
+        showActionsToolbar: boolean;
+    };
 };

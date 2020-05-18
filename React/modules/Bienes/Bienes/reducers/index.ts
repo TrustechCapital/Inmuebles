@@ -6,101 +6,124 @@ import { bienesApi } from '../services';
 
 type MainBienesActions =
     | {
-          type: 'bienesList';
+          type: 'SET_BIENES_SEARCH_RESULTS';
           results: BienResultRow[];
       }
     | {
-          type: 'selectedBienesRows';
+          type: 'SET_BIENES_ROWS_SELECTION';
           selectedRows: BienResultRow[];
       }
     | {
-          type: 'loadBienesModel';
+          type: 'SET_BIEN_MODEL';
           model: Bien;
       }
     | {
-          type: 'openBienesModal';
+          type: 'OPEN_BIENES_MODAL';
           mode: OperacionesCatalogo;
       }
     | {
-          type: 'closeBienesModal';
+          type: 'SAVE_BIEN_MODEL';
       }
     | {
-          type: 'openDetalleBienesModal';
+          type: 'SAVE_BIEN_MODEL';
+      }
+    | {
+          type: 'CLOSE_BIENES_MODAL';
+      }
+    | {
+          type: 'OPEN_DETALLE_BIENES_MODAL';
           mode: OperacionesCatalogo;
       }
     | {
-          type: 'closeDetalleBienesModal';
+          type: 'CLOSE_DETALLE_BIENES_MODAL';
       };
 
 type BienesDispatcher = React.Dispatch<MainBienesActions>;
 
-function mainBienesReducer(state: MainBienesState, action: MainBienesActions) {
+function mainBienesReducer(
+    state: MainBienesState,
+    action: MainBienesActions
+): MainBienesState {
     switch (action.type) {
-        case 'bienesList':
+        case 'SET_BIENES_SEARCH_RESULTS':
             return {
                 ...state,
-                bienesList: action.results,
-                selectedBienes: [],
-                showActionsDetalleBienesTable: false,
+                bienes: {
+                    ...state.bienes,
+                    searchResults: action.results,
+                    selectedRows: [],
+                },
+                detalleBienes: {
+                    ...state.detalleBienes,
+                    showActionsToolbar: false,
+                },
             };
-        case 'selectedBienesRows':
+        case 'SET_BIENES_ROWS_SELECTION':
             return {
                 ...state,
-                selectedBienesRows: action.selectedRows,
-                showActionsDetalleBienesTable: true,
+                bienes: {
+                    ...state.bienes,
+                    selectedRows: action.selectedRows,
+                },
+                detalleBienes: {
+                    ...state.detalleBienes,
+                    showActionsToolbar: true,
+                },
             };
-        case 'loadBienesModel':
+        case 'SET_BIEN_MODEL':
             return {
                 ...state,
-                currentBienModel: action.model,
+                bienes: {
+                    ...state.bienes,
+                    currentModel: action.model,
+                },
             };
-        case 'openBienesModal':
-            if (
-                (action.mode === OperacionesCatalogo.Consulta ||
-                    action.mode === OperacionesCatalogo.Modificacion) &&
-                state.selectedBienesRows.length === 1
-            ) {
-                return {
-                    ...state,
-                    modalBienesOpen: true,
-                    modalBienesMode: action.mode,
-                };
-            }
+        case 'OPEN_BIENES_MODAL':
+            const esConsultaOModificacion =
+                action.mode === OperacionesCatalogo.Consulta ||
+                action.mode === OperacionesCatalogo.Modificacion;
+            const esAlta = action.mode === OperacionesCatalogo.Alta;
 
-            if (
-                action.mode === OperacionesCatalogo.Baja &&
-                state.selectedBienesRows.length > 0
-            ) {
-                return {
-                    ...state,
-                    modalBienesOpen: true,
-                    modalBienesMode: action.mode,
-                };
-            }
+            const shouldOpenModal =
+                esAlta ||
+                (esConsultaOModificacion &&
+                    state.bienes.selectedRows.length === 1);
 
-            if (action.mode === OperacionesCatalogo.Alta) {
+            if (shouldOpenModal) {
                 return {
                     ...state,
-                    modalBienesOpen: true,
-                    modalBienesMode: action.mode,
+                    bienes: {
+                        ...state.bienes,
+                        modalOpen: true,
+                        modalMode: action.mode,
+                    },
                 };
             }
 
             return state;
-        case 'closeBienesModal':
+        case 'CLOSE_BIENES_MODAL':
             return {
                 ...state,
-                modalBienesOpen: false,
+                bienes: {
+                    ...state.bienes,
+                    modalOpen: false,
+                },
             };
-        case 'openDetalleBienesModal':
+        case 'OPEN_DETALLE_BIENES_MODAL':
             return {
                 ...state,
-                modalDetalleBienesOpen: true,
+                detalleBienes: {
+                    ...state.detalleBienes,
+                    modalOpen: true,
+                },
             };
-        case 'closeDetalleBienesModal':
+        case 'CLOSE_DETALLE_BIENES_MODAL':
             return {
                 ...state,
-                modalDetalleBienesOpen: false,
+                detalleBienes: {
+                    ...state.detalleBienes,
+                    modalOpen: false,
+                },
             };
         default:
             return state;
@@ -136,19 +159,19 @@ function fetchAndDisplayModel(mode: OperacionesCatalogo) {
         const state: MainBienesState = getState();
 
         const loadedModel = await fetchDetalleBien(
-            state.selectedBienesRows,
-            state.currentBienModel
+            state.bienes.selectedRows,
+            state.bienes.currentModel
         );
 
         if (loadedModel !== null) {
             dispatch({
-                type: 'loadBienesModel',
+                type: 'SET_BIEN_MODEL',
                 model: loadedModel,
             });
         }
 
         dispatch({
-            type: 'openBienesModal',
+            type: 'OPEN_BIENES_MODAL',
             mode: mode,
         });
     };
@@ -157,14 +180,14 @@ function fetchAndDisplayModel(mode: OperacionesCatalogo) {
 function searchBienes(parameters: ITableBienesParameters) {
     return async (dispatch: BienesDispatcher) => {
         dispatch({
-            type: 'bienesList',
+            type: 'SET_BIENES_SEARCH_RESULTS',
             results: [],
         });
 
         const bienes = await bienesApi.find(parameters);
 
         dispatch({
-            type: 'bienesList',
+            type: 'SET_BIENES_SEARCH_RESULTS',
             results: bienes,
         });
     };
@@ -172,10 +195,9 @@ function searchBienes(parameters: ITableBienesParameters) {
 
 function saveBienModel(model: Bien) {
     return async (dispatch: BienesDispatcher) => {
-        debugger;
         const updatedBien = await bienesApi.update(model);
         dispatch({
-            type: 'loadBienesModel',
+            type: 'SET_BIEN_MODEL',
             model: updatedBien,
         });
     };
