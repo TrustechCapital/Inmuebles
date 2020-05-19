@@ -100,6 +100,7 @@ function mainBienesReducer(
                         ...state.bienes,
                         modalOpen: true,
                         modalMode: action.mode,
+                        savingStatus: SavingStatus.Initial,
                     },
                 };
             }
@@ -174,12 +175,6 @@ async function fetchDetalleBien(
         bienResultRow.idSubcuenta,
         bienResultRow.idTipoBien
     );
-
-    const isModelAlreadyLoaded = currentBienModel.hasSamePkAs(bien);
-
-    if (isModelAlreadyLoaded) {
-        return null;
-    }
 
     return await bienesApi.findByPK(bien);
 }
