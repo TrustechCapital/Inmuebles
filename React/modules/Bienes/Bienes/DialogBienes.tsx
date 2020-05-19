@@ -118,7 +118,7 @@ const DialogBienes: React.FC<DialogBienesProps> = ({
                                     catalogId={ClavesModuloBienes.TiposDeBienes}
                                     label="Tipo de Bien"
                                     required={true}
-                                    disabled={allFieldsDisabled}
+                                    disabled={pkFieldsDisabled}
                                 />
                             </Grid>
                         </Grid>

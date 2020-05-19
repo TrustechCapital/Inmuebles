@@ -162,8 +162,7 @@ function mainBienesReducer(
 }
 
 async function fetchDetalleBien(
-    selectedBienesRow: BienResultRow[],
-    currentBienModel: Bien
+    selectedBienesRow: BienResultRow[]
 ): Promise<Bien | null> {
     if (selectedBienesRow.length !== 1) {
         return null;
@@ -183,10 +182,7 @@ function fetchAndDisplayModel(mode: OperacionesCatalogo) {
     return async (dispatch: BienesDispatcher, getState: any) => {
         const state: MainBienesState = getState();
 
-        const loadedModel = await fetchDetalleBien(
-            state.bienes.selectedRows,
-            state.bienes.currentModel
-        );
+        const loadedModel = await fetchDetalleBien(state.bienes.selectedRows);
 
         if (loadedModel !== null) {
             dispatch({

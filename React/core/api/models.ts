@@ -5,7 +5,7 @@ const DEFAULT_DATE_FORMAT = 'dd/MM/yyyy';
 
 export interface IModelMapper<T> {
     fromObject: (data: any) => T;
-    toObject: (model: T) => object;
+    toObject: (model: T, pkOnly: boolean) => object;
 }
 
 type ModelOptions<T> = {
@@ -31,9 +31,7 @@ export class ModelsApi<T extends IModel> extends Api implements IModelsApi<T> {
         transformer: IModelMapper<T>,
         sendPkOnly: boolean = false
     ): object {
-        const catalogParams = transformer.toObject(
-            sendPkOnly ? (model.getPKValues() as T) : model
-        );
+        const catalogParams = transformer.toObject(model, sendPkOnly);
         return {
             params: {
                 json: JSON.stringify({

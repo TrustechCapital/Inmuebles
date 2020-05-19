@@ -37,7 +37,15 @@ class BienModelMapper implements IModelMapper<Bien> {
         return bien;
     }
 
-    toObject(bien: Bien) {
+    toObject(bien: Bien, pkOnly: boolean = false) {
+        if (pkOnly) {
+            return {
+                fgarIdFideicomiso: bien.idFideicomiso,
+                fgarIdSubcuenta: bien.idSubcuenta,
+                fgarCveGarantia: bien.idTipoBien,
+            };
+        }
+
         const [
             fechaUltimaValuacion,
             fechaInicio,
