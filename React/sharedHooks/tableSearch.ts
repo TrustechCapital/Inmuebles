@@ -11,13 +11,9 @@ type TableSearchActions =
 function searchParamsReducer<T>(state: T, action: TableSearchActions): T {
     switch (action.type) {
         case 'field':
-            //TODO: Cambiar esto para que soporte checkbox
-            const value = action.value.target
-                ? action.value.target.value
-                : action.value;
             return {
                 ...state,
-                [action.fieldName]: value,
+                [action.fieldName]: action.value,
             };
         case 'clear':
             return {

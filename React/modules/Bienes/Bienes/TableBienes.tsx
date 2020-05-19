@@ -83,11 +83,11 @@ const TableBienes: React.FC<TableBienesProps> = ({ data }) => {
                                     label="Id Fideicomiso"
                                     value={state.idFideicomiso}
                                     dataType="number"
-                                    onChange={(value) =>
+                                    onChange={(e) =>
                                         dispatch({
                                             type: 'field',
                                             fieldName: 'idFideicomiso',
-                                            value: value,
+                                            value: e.target.value,
                                         })
                                     }
                                 />
@@ -103,11 +103,11 @@ const TableBienes: React.FC<TableBienesProps> = ({ data }) => {
                                 <GenericTextInput
                                     label="Id Subcuenta"
                                     value={state.idSubcuenta}
-                                    onChange={(value) =>
+                                    onChange={(e) =>
                                         dispatch({
                                             type: 'field',
                                             fieldName: 'idSubcuenta',
-                                            value: value,
+                                            value: e.target.value,
                                         })
                                     }
                                 />
@@ -118,11 +118,11 @@ const TableBienes: React.FC<TableBienesProps> = ({ data }) => {
                                     catalogId={ClavesModuloBienes.TiposDeBienes}
                                     value={state.idTipoBien}
                                     fullWidth
-                                    onChange={(value) =>
+                                    onChange={(e) =>
                                         dispatch({
                                             type: 'field',
                                             fieldName: 'idTipoBien',
-                                            value: value,
+                                            value: e.target.value,
                                         })
                                     }
                                 />
