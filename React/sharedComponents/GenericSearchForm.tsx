@@ -1,4 +1,5 @@
-import React, { FunctionComponent } from 'react';
+import React, { FunctionComponent, useCallback } from 'react';
+
 import { makeStyles } from '@material-ui/core/styles';
 import Grid from '@material-ui/core/Grid';
 import Button from '@material-ui/core/Button';
@@ -39,8 +40,14 @@ const GenericSearchForm: FunctionComponent<Props> = ({
     defaultExpanded = false,
 }) => {
     const classes = useStyles();
+
+    const handleSubmit = useCallback((e: any) => {
+        e.preventDefault();
+        onSearch();
+    }, []);
+
     return (
-        <div className={classes.root}>
+        <form className={classes.root} onSubmit={handleSubmit}>
             <ExpansionPanel defaultExpanded={defaultExpanded} elevation={3}>
                 <ExpansionPanelSummary expandIcon={<ExpandMoreIcon />}>
                     <Grid
@@ -73,6 +80,7 @@ const GenericSearchForm: FunctionComponent<Props> = ({
                         <Button
                             variant="contained"
                             color="secondary"
+                            type="submit"
                             startIcon={<SearchIcon />}
                             onClick={onSearch}
                             className={classes.searchButton}
@@ -82,7 +90,7 @@ const GenericSearchForm: FunctionComponent<Props> = ({
                     </Grid>
                 </ExpansionPanelActions>
             </ExpansionPanel>
-        </div>
+        </form>
     );
 };
 
