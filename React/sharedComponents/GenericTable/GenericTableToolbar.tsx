@@ -28,14 +28,18 @@ const useStyles = makeStyles((theme) => ({
 
 type ToolbarActionsProps = {
     numSelected: number;
+    onNew?: () => void;
 };
 
 const EnhancedTableToolbarActions: React.FC<ToolbarActionsProps> = ({
     numSelected,
+    ...props
 }) => {
     const { onNew, onView, onModify } = useContext(
         GenericTableCallbacksContext
     );
+
+    const onNewHandler = props.onNew || onNew;
 
     return (
         <React.Fragment>
@@ -68,7 +72,7 @@ const EnhancedTableToolbarActions: React.FC<ToolbarActionsProps> = ({
                     <IconButton
                         aria-label="nuevo"
                         color="primary"
-                        onClick={onNew}
+                        onClick={onNewHandler}
                     >
                         <AddIcon />
                     </IconButton>
@@ -83,6 +87,7 @@ type TableToolbarProps = {
     numSelected: number;
     showActions: boolean;
     actionsComponent: any;
+    onNew?: () => void;
 };
 
 const EnhancedTableToolbar: React.FC<TableToolbarProps> = ({
@@ -90,6 +95,7 @@ const EnhancedTableToolbar: React.FC<TableToolbarProps> = ({
     numSelected,
     showActions = true,
     actionsComponent,
+    onNew,
 }) => {
     const classes = useStyles();
     const ToolbarActions = actionsComponent || EnhancedTableToolbarActions;
@@ -121,7 +127,7 @@ const EnhancedTableToolbar: React.FC<TableToolbarProps> = ({
             )}
 
             {showActions === true ? (
-                <ToolbarActions numSelected={numSelected} />
+                <ToolbarActions numSelected={numSelected} onNew={onNew} />
             ) : null}
         </Toolbar>
     );

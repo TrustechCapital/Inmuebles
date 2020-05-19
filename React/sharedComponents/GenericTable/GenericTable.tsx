@@ -62,6 +62,7 @@ interface TableProps<T> {
 }
 
 function GenericTable<T extends ITableRow>(props: TableProps<T>) {
+    const { onNew } = props;
     const { onSelect } = useContext(GenericTableCallbacksContext);
 
     const {
@@ -152,6 +153,7 @@ function GenericTable<T extends ITableRow>(props: TableProps<T>) {
             <GenericTableToolbar
                 numSelected={selectedRows.size}
                 title={title}
+                onNew={onNew}
                 showActions={showActionsHeader}
                 actionsComponent={additionalActionsComponent}
             />
