@@ -380,8 +380,9 @@ public class FGarantias extends DomainObject {
         pkValues.add(this.getFgarIdFideicomiso());
         conditions += " AND FGAR_ID_SUBCUENTA = ?";
         pkValues.add(this.getFgarIdSubcuenta());
-        fields += " FGAR_CVE_GARANTIA = ?, ";
-        values.add(this.getFgarCveGarantia());
+        conditions += " AND FGAR_CVE_GARANTIA = ?";
+        pkValues.add(this.getFgarCveGarantia());
+
         fields += " FGAR_TEX_GARANTIA = ?, ";
         values.add(this.getFgarTexGarantia());
         fields += " FGAR_TEX_COMENTARIO = ?, ";
