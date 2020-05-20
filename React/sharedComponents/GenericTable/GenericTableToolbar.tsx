@@ -35,7 +35,7 @@ const EnhancedTableToolbarActions: React.FC<ToolbarActionsProps> = ({
     numSelected,
     ...props
 }) => {
-    const { onNew, onView, onModify } = useContext(
+    const { onNew, onView, onModify, onDelete } = useContext(
         GenericTableCallbacksContext
     );
 
@@ -45,7 +45,7 @@ const EnhancedTableToolbarActions: React.FC<ToolbarActionsProps> = ({
         <React.Fragment>
             {numSelected > 0 ? (
                 <Tooltip title="Eliminar">
-                    <IconButton aria-label="eliminar">
+                    <IconButton aria-label="eliminar" onClick={onDelete}>
                         <DeleteIcon />
                     </IconButton>
                 </Tooltip>

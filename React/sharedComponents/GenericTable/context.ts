@@ -5,6 +5,7 @@ export type GenericTableCallbacksContextProps<T> = {
     onNew: () => void;
     onView: () => void;
     onModify: () => void;
+    onDelete: () => void;
 };
 
 export const GenericTableCallbacksContext = createContext<
@@ -14,4 +15,5 @@ export const GenericTableCallbacksContext = createContext<
     onNew: () => {},
     onView: () => {},
     onModify: () => {},
+    onDelete: () => {},
 });
