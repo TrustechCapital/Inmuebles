@@ -124,11 +124,19 @@ function mainBienesReducer(
                 },
             };
         case 'SET_MODEL_SAVE_SUCCESS':
+            let modalMode = state.bienes.modalMode;
+
+            // Cambiar modo de edicion del modal
+            if (modalMode === OperacionesCatalogo.Alta) {
+                modalMode = OperacionesCatalogo.Modificacion;
+            }
+
             return {
                 ...state,
                 bienes: {
                     ...state.bienes,
                     savingStatus: SavingStatus.Success,
+                    modalMode: modalMode,
                 },
             };
         case 'SET_MODEL_SAVE_ERROR':
@@ -179,9 +187,11 @@ async function fetchDetalleBien(
 }
 
 function fetchAndDisplayModel(mode: OperacionesCatalogo) {
-    return async (dispatch: BienesDispatcher, getState: any) => {
-        const state: MainBienesState = getState();
-
+    return async (
+        dispatch: BienesDispatcher,
+        getState: () => MainBienesState
+    ) => {
+        const state = getState();
         const loadedModel = await fetchDetalleBien(state.bienes.selectedRows);
 
         if (loadedModel !== null) {
@@ -215,13 +225,22 @@ function searchBienes(parameters: ITableBienesParameters) {
 }
 
 function saveBienModel(model: Bien) {
-    return async (dispatch: BienesDispatcher) => {
+    return async (
+        dispatch: BienesDispatcher,
+        getState: () => MainBienesState
+    ) => {
+        const state = getState();
         dispatch({
             type: 'SAVE_BIEN_MODEL',
         });
 
         try {
-            await bienesApi.update(model);
+            if (state.bienes.modalMode === OperacionesCatalogo.Alta) {
+                await bienesApi.create(model);
+            } else {
+                await bienesApi.update(model);
+            }
+
             dispatch({
                 type: 'SET_MODEL_SAVE_SUCCESS',
             });

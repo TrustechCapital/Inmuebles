@@ -84,7 +84,6 @@ const MainBienes: React.FC = () => {
                 <TableBienes
                     data={state.bienes.searchResults}
                     onSearch={(parameters: ITableBienesParameters) => {
-                        debugger;
                         dispatch(searchBienes(parameters));
                     }}
                 />
