@@ -41,10 +41,13 @@ const GenericSearchForm: FunctionComponent<Props> = ({
 }) => {
     const classes = useStyles();
 
-    const handleSubmit = useCallback((e: any) => {
-        e.preventDefault();
-        onSearch();
-    }, []);
+    const handleSubmit = useCallback(
+        (e: any) => {
+            onSearch();
+            e.preventDefault();
+        },
+        [onSearch]
+    );
 
     return (
         <form className={classes.root} onSubmit={handleSubmit}>
@@ -82,7 +85,6 @@ const GenericSearchForm: FunctionComponent<Props> = ({
                             color="secondary"
                             type="submit"
                             startIcon={<SearchIcon />}
-                            onClick={onSearch}
                             className={classes.searchButton}
                         >
                             Buscar
