@@ -95,10 +95,15 @@ function mainBienesReducer(
                 },
             };
         case 'OPEN_BIENES_MODAL':
+            let currentModel = state.bienes.currentModel;
             const esConsultaOModificacion =
                 action.mode === OperacionesCatalogo.Consulta ||
                 action.mode === OperacionesCatalogo.Modificacion;
             const esAlta = action.mode === OperacionesCatalogo.Alta;
+
+            if (esAlta) {
+                currentModel = new Bien(null, null, null);
+            }
 
             const shouldOpenModal =
                 esAlta ||
@@ -113,6 +118,7 @@ function mainBienesReducer(
                         modalOpen: true,
                         modalMode: action.mode,
                         savingStatus: SavingStatus.Initial,
+                        currentModel: currentModel,
                     },
                 };
             }
