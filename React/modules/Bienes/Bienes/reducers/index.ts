@@ -236,11 +236,18 @@ async function searchBienes(
     parameters: ITableBienesParameters
 ) {
     const bienes = await bienesApi.find(parameters);
-
     dispatch({
         type: 'SET_BIENES_SEARCH_RESULTS',
         results: bienes,
     });
+}
+
+async function repeatCurrentSearch(
+    dispatch: BienesDispatcher,
+    getState: () => MainBienesState
+) {
+    const state = getState();
+    await searchBienes(dispatch, state.bienes.searchParameters);
 }
 
 function saveBienModel(model: Bien) {
@@ -264,7 +271,7 @@ function saveBienModel(model: Bien) {
                 type: 'SET_MODEL_SAVE_SUCCESS',
             });
 
-            await searchBienes(dispatch, state.bienes.searchParameters);
+            repeatCurrentSearch(dispatch, getState);
         } catch (err) {
             dispatch({
                 type: 'SET_MODEL_SAVE_ERROR',
@@ -289,7 +296,7 @@ function deleteSelectedBienModels() {
             bienesApi
                 .destroy(model)
                 .then(() => {
-                    searchBienes(dispatch, state.bienes.searchParameters);
+                    repeatCurrentSearch(dispatch, getState);
                 })
                 .catch((e) => {
                     console.log(
