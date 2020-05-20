@@ -5,6 +5,14 @@ import Bien from '../../../../models/Bien';
 import BienesModelMapper from './BienesModelMapper';
 
 class BienesApi extends ModelsApi<Bien> {
+    getModelFromResultRow(parameters: ITableBienesParameters) {
+        return new Bien(
+            parameters.idFideicomiso,
+            parameters.idSubcuenta,
+            parameters.idTipoBien
+        );
+    }
+
     async find(parameters: ITableBienesParameters): Promise<BienResultRow[]> {
         return await this.getRef(
             'funRegistroGarantias',

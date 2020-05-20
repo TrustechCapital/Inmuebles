@@ -274,9 +274,38 @@ function saveBienModel(model: Bien) {
     };
 }
 
+function deleteSelectedBienModels() {
+    return async (
+        dispatch: BienesDispatcher,
+        getState: () => MainBienesState
+    ) => {
+        const state = getState();
+        const selectedRows = state.bienes.selectedRows;
+
+        selectedRows.forEach(() => {
+            const model = bienesApi.getModelFromResultRow(
+                state.bienes.selectedRows[0]
+            );
+            bienesApi
+                .destroy(model)
+                .then(() => {
+                    searchBienes(dispatch, state.bienes.searchParameters);
+                })
+                .catch((e) => {
+                    console.log(
+                        'Ocurrio un error al eliminar el bien',
+                        selectedRows,
+                        e
+                    );
+                });
+        });
+    };
+}
+
 export {
     mainBienesReducer,
     fetchAndDisplayModel,
     newSearchBienes,
     saveBienModel,
+    deleteSelectedBienModels,
 };

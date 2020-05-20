@@ -14,6 +14,7 @@ import {
     fetchAndDisplayModel,
     newSearchBienes,
     saveBienModel,
+    deleteSelectedBienModels,
 } from './reducers';
 
 import { GenericTableCallbacksContext } from '../../../sharedComponents/GenericTable';
@@ -81,6 +82,9 @@ const MainBienes: React.FC = () => {
                 dispatch(
                     fetchAndDisplayModel(OperacionesCatalogo.Modificacion)
                 );
+            },
+            onDelete: () => {
+                dispatch(deleteSelectedBienModels());
             },
         };
     }, []);
