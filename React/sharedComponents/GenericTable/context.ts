@@ -1,7 +1,6 @@
 import { createContext } from 'react';
 
 export type GenericTableCallbacksContextProps<T> = {
-    onSearch: (parameters: any) => void;
     onSelect: (selectedRows: T[]) => void;
     onNew: () => void;
     onView: () => void;
@@ -11,7 +10,6 @@ export type GenericTableCallbacksContextProps<T> = {
 export const GenericTableCallbacksContext = createContext<
     GenericTableCallbacksContextProps<any>
 >({
-    onSearch: () => {},
     onSelect: () => {},
     onNew: () => {},
     onView: () => {},
