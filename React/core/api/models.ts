@@ -82,7 +82,7 @@ export class ModelsApi<T extends IModel> extends Api implements IModelsApi<T> {
     async destroy(model: T, options?: ModelOptions<T>): Promise<void> {
         const transformer = this.getTransformer();
         await this.get<void, void>(
-            'modificaCatalogo.do',
+            'bajaCatalogo.do',
             this.createBackendParameters(model, transformer, true)
         );
     }
