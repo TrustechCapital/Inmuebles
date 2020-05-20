@@ -529,6 +529,9 @@ public class FGarantias extends DomainObject {
         values.add(this.getFgarIdFideicomiso());
         conditions += " AND FGAR_ID_SUBCUENTA = ?";
         values.add(this.getFgarIdSubcuenta());
+        conditions += " AND FGAR_CVE_GARANTIA = ?";
+        values.add(this.getFgarCveGarantia());
+
         conditions = conditions.substring(4).trim();
         result.setSql(sql + conditions);
         result.setParameters(values.toArray());
