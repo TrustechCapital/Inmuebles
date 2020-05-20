@@ -20,11 +20,6 @@ import { GenericTableCallbacksContext } from '../../../sharedComponents/GenericT
 
 const initialState: MainBienesState = {
     bienes: {
-        searchParameters: {
-            idFideicomiso: null,
-            idTipoBien: null,
-            idSubcuenta: '',
-        },
         searchResults: [],
         selectedRows: [],
         currentModel: new Bien(null, null, null),
@@ -58,9 +53,6 @@ const MainBienes: React.FC = () => {
 
     const BienesActionCallbacks = useMemo(() => {
         return {
-            onSearch: (parameters: ITableBienesParameters) => {
-                dispatch(searchBienes(parameters));
-            },
             onSelect: (selectedRows: BienResultRow[]) => {
                 dispatch({
                     type: 'SET_BIENES_ROWS_SELECTION',
@@ -89,7 +81,13 @@ const MainBienes: React.FC = () => {
             <GenericTableCallbacksContext.Provider
                 value={BienesActionCallbacks}
             >
-                <TableBienes data={state.bienes.searchResults} />
+                <TableBienes
+                    data={state.bienes.searchResults}
+                    onSearch={(parameters: ITableBienesParameters) => {
+                        debugger;
+                        dispatch(searchBienes(parameters));
+                    }}
+                />
             </GenericTableCallbacksContext.Provider>
             <TableDetalleBienes
                 data={[]}

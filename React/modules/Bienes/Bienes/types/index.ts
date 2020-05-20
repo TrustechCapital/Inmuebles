@@ -10,7 +10,6 @@ export interface ITableBienesParameters {
 
 export type MainBienesState = {
     bienes: {
-        searchParameters: ITableBienesParameters;
         searchResults: BienResultRow[];
         selectedRows: BienResultRow[];
         currentModel: Bien;
