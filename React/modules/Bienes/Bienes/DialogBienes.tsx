@@ -100,7 +100,6 @@ const DialogBienes: React.FC<DialogBienesProps> = ({
                                     name="idFideicomiso"
                                     label="Fideicomiso"
                                     helperText="Fideicomiso a asignar bienes"
-                                    required={true}
                                     disabled={pkFieldsDisabled}
                                     dataType="number"
                                 />
@@ -124,8 +123,8 @@ const DialogBienes: React.FC<DialogBienesProps> = ({
                                     name="idSubcuenta"
                                     label="Sub-Fideicomiso"
                                     helperText="SubFiso"
-                                    required={true}
                                     disabled={pkFieldsDisabled}
+                                    dataType="number"
                                 />
                             </Grid>
                             <Grid item xs={6}>
@@ -133,7 +132,6 @@ const DialogBienes: React.FC<DialogBienesProps> = ({
                                     name="idTipoBien"
                                     catalogId={ClavesModuloBienes.TiposDeBienes}
                                     label="Tipo de Bien"
-                                    required={true}
                                     disabled={pkFieldsDisabled}
                                 />
                             </Grid>
@@ -148,6 +146,7 @@ const DialogBienes: React.FC<DialogBienesProps> = ({
                                     name="importeDelBien"
                                     label="Importe de Bien"
                                     disabled={allFieldsDisabled}
+                                    dataType="number"
                                 />
                             </Grid>
                             <Grid item xs={6}>
@@ -168,6 +167,7 @@ const DialogBienes: React.FC<DialogBienesProps> = ({
                                     name="importeUltimaValuacion"
                                     label="Importe Última Valuación"
                                     disabled={allFieldsDisabled}
+                                    dataType="number"
                                 />
                             </Grid>
                             <Grid item xs={6}>
@@ -221,7 +221,7 @@ const DialogBienes: React.FC<DialogBienesProps> = ({
                                     name="importeDeGarantia"
                                     label="Importe Bien"
                                     disabled={allFieldsDisabled}
-                                    required={true}
+                                    dataType="number"
                                     adornment="$"
                                 />
                             </Grid>
@@ -230,7 +230,7 @@ const DialogBienes: React.FC<DialogBienesProps> = ({
                                     name="picnorado"
                                     label="Picnorado"
                                     disabled={allFieldsDisabled}
-                                    required={true}
+                                    dataType="number"
                                     adornment="$"
                                 />
                             </Grid>

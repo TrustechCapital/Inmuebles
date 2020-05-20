@@ -102,6 +102,7 @@ const TableBienes: React.FC<TableBienesProps> = ({ data, onSearch }) => {
                                 <GenericTextInput
                                     label="Id Subcuenta"
                                     value={state.idSubcuenta}
+                                    dataType="number"
                                     onChange={(e) =>
                                         dispatch({
                                             type: 'field',
