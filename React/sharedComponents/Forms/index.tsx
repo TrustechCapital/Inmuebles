@@ -41,13 +41,33 @@ class GenericForm<Model> {
     FormTextField(
         props: ValidModelName<Model> & OmittedProperties<GenericInputProps>
     ) {
-        return <Field {...props} as={GenericTextInput} />;
+        const [field, meta] = useField(props);
+        const helperText = meta.error ? meta.error : props.helperText;
+
+        return (
+            <GenericTextInput
+                {...field}
+                {...props}
+                error={!!meta.error}
+                helperText={helperText}
+            />
+        );
     }
 
     FormCatalogSelectField(
         props: ValidModelName<Model> & OmittedProperties<CatalogSelectProps>
     ) {
-        return <Field {...props} as={CatalogSelect} />;
+        const [field, meta] = useField(props);
+        const helperText = meta.error ? meta.error : props.helperText;
+
+        return (
+            <CatalogSelect
+                {...field}
+                {...props}
+                error={!!meta.error}
+                helperText={helperText}
+            />
+        );
     }
 
     FormDatePickerField(

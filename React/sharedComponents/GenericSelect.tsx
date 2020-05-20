@@ -1,6 +1,7 @@
 import React, { FunctionComponent } from 'react';
 import FormControl from '@material-ui/core/FormControl';
 import Select, { SelectProps } from '@material-ui/core/Select';
+import FormHelperText from '@material-ui/core/FormHelperText';
 import InputLabel from '@material-ui/core/InputLabel';
 import MenuItem from '@material-ui/core/MenuItem';
 import { makeStyles } from '@material-ui/core/styles';
@@ -36,6 +37,8 @@ export type GenericSelectProps = Pick<
     valueKey?: string;
     labelKey?: string;
     fullWidth?: boolean;
+    error?: boolean;
+    helperText?: string;
 };
 
 const GenericSelect: FunctionComponent<GenericSelectProps> = ({
@@ -45,6 +48,8 @@ const GenericSelect: FunctionComponent<GenericSelectProps> = ({
     labelKey = 'label',
     valueKey = 'value',
     fullWidth = true,
+    error,
+    helperText,
     ...selectProps
 }) => {
     const classes = useStyles();
@@ -63,6 +68,7 @@ const GenericSelect: FunctionComponent<GenericSelectProps> = ({
             variant="outlined"
             fullWidth={fullWidth}
             className={classes.root}
+            error={error}
         >
             <InputLabel classes={{ outlined: classes.outlinedSelectLabel }}>
                 {label}
@@ -87,6 +93,7 @@ const GenericSelect: FunctionComponent<GenericSelectProps> = ({
                     );
                 })}
             </Select>
+            {helperText && <FormHelperText>{helperText}</FormHelperText>}
         </FormControl>
     );
 };

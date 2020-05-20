@@ -12,6 +12,9 @@ import CatalogDialog from '../../../sharedComponents/CatalogDialog';
 import GenericTextInput from '../../../sharedComponents/GenericTextInput';
 import GenericSwitch from '../../../sharedComponents/GenericSwitch';
 import GenericForm from '../../../sharedComponents/Forms';
+import FormValidator, {
+    ValidationHelpers,
+} from '../../../services/FormValidator';
 
 const {
     FormTextField,
@@ -36,6 +39,14 @@ type DialogBienesProps = ICatalogDialog<Bien> & {
     errorMessage: string | null;
 };
 
+const BienesFormValidator = new FormValidator<Bien>({
+    idFideicomiso: ValidationHelpers.validateFideicomiso,
+    idSubcuenta: ValidationHelpers.validateSubcuenta,
+    idTipoBien: ValidationHelpers.validateRequiredNumber(
+        'El tipo de bien es un campo requerido'
+    ),
+});
+
 const DialogBienes: React.FC<DialogBienesProps> = ({
     mode,
     model,
@@ -56,6 +67,7 @@ const DialogBienes: React.FC<DialogBienesProps> = ({
             initialValues={model}
             onSubmit={onSaveRequest}
             enableReinitialize={true}
+            validationSchema={BienesFormValidator.validationSchema}
         >
             {(props) => (
                 <CatalogDialog
@@ -63,7 +75,10 @@ const DialogBienes: React.FC<DialogBienesProps> = ({
                     operacionCatalogo={mode}
                     nombreCatalogo="Bienes"
                     subtitle="Bienes por Fideicomisos"
-                    onCancel={onClose}
+                    onCancel={() => {
+                        props.resetForm();
+                        onClose();
+                    }}
                     onAccept={props.handleSubmit}
                     errorMessage={errorMessage}
                     saving={savingStatus === SavingStatus.Saving}
@@ -87,6 +102,7 @@ const DialogBienes: React.FC<DialogBienesProps> = ({
                                     helperText="Fideicomiso a asignar bienes"
                                     required={true}
                                     disabled={pkFieldsDisabled}
+                                    dataType="number"
                                 />
                             </Grid>
                             <Grid item xs={6}>

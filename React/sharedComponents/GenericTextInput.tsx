@@ -16,6 +16,7 @@ export type GenericInputProps = Pick<
     | 'rowsMax'
     | 'size'
     | 'onChange'
+    | 'error'
 > & {
     label: string;
     value: any;
