@@ -35,7 +35,7 @@ const useStyles = makeStyles((theme) => ({
 
 const initialState: ITableBienesParameters = {
     idFideicomiso: null,
-    idSubcuenta: '',
+    idSubcuenta: null,
     idTipoBien: null,
 };
 

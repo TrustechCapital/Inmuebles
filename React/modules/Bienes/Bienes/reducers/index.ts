@@ -6,6 +6,10 @@ import { bienesApi } from '../services';
 
 type MainBienesActions =
     | {
+          type: 'SET_BIENES_SEARCH_PARAMETERS';
+          searchParameters: ITableBienesParameters;
+      }
+    | {
           type: 'SET_BIENES_SEARCH_RESULTS';
           results: BienResultRow[];
       }
@@ -49,13 +53,21 @@ function mainBienesReducer(
     action: MainBienesActions
 ): MainBienesState {
     switch (action.type) {
+        case 'SET_BIENES_SEARCH_PARAMETERS':
+            return {
+                ...state,
+                bienes: {
+                    ...state.bienes,
+                    searchParameters: action.searchParameters,
+                    selectedRows: [],
+                },
+            };
         case 'SET_BIENES_SEARCH_RESULTS':
             return {
                 ...state,
                 bienes: {
                     ...state.bienes,
                     searchResults: action.results,
-                    selectedRows: [],
                 },
                 detalleBienes: {
                     ...state.detalleBienes,
@@ -208,20 +220,27 @@ function fetchAndDisplayModel(mode: OperacionesCatalogo) {
     };
 }
 
-function searchBienes(parameters: ITableBienesParameters) {
+function newSearchBienes(parameters: ITableBienesParameters) {
     return async (dispatch: BienesDispatcher) => {
         dispatch({
-            type: 'SET_BIENES_SEARCH_RESULTS',
-            results: [],
+            type: 'SET_BIENES_SEARCH_PARAMETERS',
+            searchParameters: parameters,
         });
 
-        const bienes = await bienesApi.find(parameters);
-
-        dispatch({
-            type: 'SET_BIENES_SEARCH_RESULTS',
-            results: bienes,
-        });
+        await searchBienes(dispatch, parameters);
     };
+}
+
+async function searchBienes(
+    dispatch: BienesDispatcher,
+    parameters: ITableBienesParameters
+) {
+    const bienes = await bienesApi.find(parameters);
+
+    dispatch({
+        type: 'SET_BIENES_SEARCH_RESULTS',
+        results: bienes,
+    });
 }
 
 function saveBienModel(model: Bien) {
@@ -244,6 +263,8 @@ function saveBienModel(model: Bien) {
             dispatch({
                 type: 'SET_MODEL_SAVE_SUCCESS',
             });
+
+            await searchBienes(dispatch, state.bienes.searchParameters);
         } catch (err) {
             dispatch({
                 type: 'SET_MODEL_SAVE_ERROR',
@@ -253,4 +274,9 @@ function saveBienModel(model: Bien) {
     };
 }
 
-export { mainBienesReducer, fetchAndDisplayModel, searchBienes, saveBienModel };
+export {
+    mainBienesReducer,
+    fetchAndDisplayModel,
+    newSearchBienes,
+    saveBienModel,
+};

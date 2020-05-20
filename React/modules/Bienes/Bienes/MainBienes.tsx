@@ -12,7 +12,7 @@ import Bien from '../../../models/Bien';
 import {
     mainBienesReducer,
     fetchAndDisplayModel,
-    searchBienes,
+    newSearchBienes,
     saveBienModel,
 } from './reducers';
 
@@ -20,6 +20,11 @@ import { GenericTableCallbacksContext } from '../../../sharedComponents/GenericT
 
 const initialState: MainBienesState = {
     bienes: {
+        searchParameters: {
+            idFideicomiso: null,
+            idSubcuenta: null,
+            idTipoBien: null,
+        },
         searchResults: [],
         selectedRows: [],
         currentModel: new Bien(null, null, null),
@@ -49,6 +54,10 @@ const MainBienes: React.FC = () => {
 
     const saveBienesModel = useCallback((model: Bien) => {
         dispatch(saveBienModel(model));
+    }, []);
+
+    const searchBienes = useCallback((parameters: ITableBienesParameters) => {
+        dispatch(newSearchBienes(parameters));
     }, []);
 
     const BienesActionCallbacks = useMemo(() => {
@@ -83,9 +92,7 @@ const MainBienes: React.FC = () => {
             >
                 <TableBienes
                     data={state.bienes.searchResults}
-                    onSearch={(parameters: ITableBienesParameters) => {
-                        dispatch(searchBienes(parameters));
-                    }}
+                    onSearch={searchBienes}
                 />
             </GenericTableCallbacksContext.Provider>
             <TableDetalleBienes
