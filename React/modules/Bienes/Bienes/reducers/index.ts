@@ -30,6 +30,7 @@ function mainBienesReducer(
                 detalleBienes: {
                     ...state.detalleBienes,
                     searchResults: action.detalleBienesSearchResults,
+                    showActionsToolbar: true,
                 },
             };
         default:

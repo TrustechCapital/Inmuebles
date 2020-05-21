@@ -34,6 +34,7 @@ const initialState: MainBienesState = {
     },
     detalleBienes: {
         searchResults: [],
+        selectedRows: [],
         modalOpen: false,
         modalMode: OperacionesCatalogo.Alta,
         showActionsToolbar: false,
@@ -93,7 +94,10 @@ const MainBienes: React.FC = () => {
     const DetalleBienesActionCallbacks = useMemo(() => {
         return {
             onSelect: (selectedRows: DetalleBienResultRow[]) => {
-                debugger;
+                dispatch({
+                    type: 'SET_DETALLE_BIENES_ROWS_SELECTION',
+                    selectedRows: selectedRows,
+                });
             },
             onNew: () => {
                 dispatch({

@@ -14,6 +14,7 @@ import GenericTable, {
 import GenericTextInput from '../../../sharedComponents/GenericTextInput';
 import CatalogSelect from '../../../sharedComponents/CatalogSelect';
 
+// TODO: Usar tipado fuerte en base a generico
 const COLUMNS: IGenericColumn[] = [
     { field: 'id', header: 'Id', isKey: true },
     { field: 'idFideicomiso', header: 'Fideicomiso' },

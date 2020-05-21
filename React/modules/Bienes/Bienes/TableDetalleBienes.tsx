@@ -11,6 +11,7 @@ import MonetizationOnIcon from '@material-ui/icons/MonetizationOn';
 
 import GenericTable, {
     IGenericColumn,
+    GenericToolbarActionsProps,
 } from '../../../sharedComponents/GenericTable';
 import DetalleBienResultRow from './models/DetalleBienResultRow';
 import { DetalleBienesTableCallbacksContext } from './context';
@@ -21,6 +22,7 @@ const useStyles = makeStyles((theme) => ({
     },
 }));
 
+// TODO: Usar tipado fuerte en base a generico
 const COLUMNS_DETALLE_BIENES: IGenericColumn[] = [
     { field: 'id', header: 'Id', isKey: true },
     { field: 'idFideicomiso', header: 'Fideicomiso' },
@@ -33,13 +35,16 @@ const COLUMNS_DETALLE_BIENES: IGenericColumn[] = [
     { field: 'descripcion', header: 'Descripción' },
 ];
 
-const ActionsDetalleBienes: React.FC<any> = (props) => {
+type ActionsDetalleBienes = GenericToolbarActionsProps;
+
+const ActionsDetalleBienes: React.FC<ActionsDetalleBienes> = ({
+    numSelected,
+}) => {
     const { onNew } = useContext(DetalleBienesTableCallbacksContext);
-    const bienesSeleccionados = 1;
 
     return (
         <React.Fragment>
-            {bienesSeleccionados > 0 ? (
+            {numSelected > 0 ? (
                 <Tooltip title="Salida de bien">
                     <IconButton>
                         <DeleteIcon />
@@ -47,7 +52,7 @@ const ActionsDetalleBienes: React.FC<any> = (props) => {
                 </Tooltip>
             ) : null}
 
-            {bienesSeleccionados == 1 ? (
+            {numSelected == 1 ? (
                 <Tooltip title="Reevaluación">
                     <IconButton>
                         <MonetizationOnIcon />
@@ -55,7 +60,7 @@ const ActionsDetalleBienes: React.FC<any> = (props) => {
                 </Tooltip>
             ) : null}
 
-            {bienesSeleccionados == 1 ? (
+            {numSelected == 1 ? (
                 <Tooltip title="Modificar">
                     <IconButton>
                         <EditIcon />
@@ -63,7 +68,7 @@ const ActionsDetalleBienes: React.FC<any> = (props) => {
                 </Tooltip>
             ) : null}
 
-            {bienesSeleccionados == 1 ? (
+            {numSelected == 1 ? (
                 <Tooltip title="Consultar">
                     <IconButton>
                         <FindInPageIcon />
@@ -71,7 +76,7 @@ const ActionsDetalleBienes: React.FC<any> = (props) => {
                 </Tooltip>
             ) : null}
 
-            {bienesSeleccionados == 1 ? (
+            {numSelected === 0 ? (
                 <Tooltip title="Registro de bien">
                     <IconButton onClick={onNew}>
                         <AddIcon />

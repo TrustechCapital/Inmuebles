@@ -23,6 +23,7 @@ export type BienesState = {
 
 export type DetalleBienesState = {
     searchResults: DetalleBienResultRow[];
+    selectedRows: DetalleBienResultRow[];
     modalOpen: boolean;
     modalMode: OperacionesCatalogo;
     showActionsToolbar: boolean;
@@ -69,6 +70,10 @@ export type BienesActions =
       };
 
 export type DetalleBienesActions =
+    | {
+          type: 'SET_DETALLE_BIENES_ROWS_SELECTION';
+          selectedRows: DetalleBienResultRow[];
+      }
     | {
           type: 'OPEN_DETALLE_BIENES_MODAL';
           mode: OperacionesCatalogo;

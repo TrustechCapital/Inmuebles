@@ -7,6 +7,11 @@ function detalleBienesReducer(
     action: DetalleBienesActions
 ): DetalleBienesState {
     switch (action.type) {
+        case 'SET_DETALLE_BIENES_ROWS_SELECTION':
+            return {
+                ...state,
+                selectedRows: action.selectedRows,
+            };
         case 'OPEN_DETALLE_BIENES_MODAL':
             return {
                 ...state,
