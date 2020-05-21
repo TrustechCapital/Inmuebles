@@ -26,7 +26,7 @@ const useStyles = makeStyles((theme) => ({
     },
 }));
 
-type ToolbarActionsProps = {
+export type ToolbarActionsProps = {
     numSelected: number;
     onNew?: () => void;
 };
