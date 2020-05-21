@@ -66,6 +66,8 @@ function GenericTable<T extends ITableRow>(props: TableProps<T>) {
     const { onNew, multipleSelect = true } = props;
     const { onSelect } = useContext(GenericTableCallbacksContext);
 
+    const onSelectHandler = props.onSelect || onSelect;
+
     const {
         title,
         data,
@@ -103,10 +105,10 @@ function GenericTable<T extends ITableRow>(props: TableProps<T>) {
         if (multipleSelect) {
             let newSelectedSet = toggleSelectedElementInList(selectedRows, row);
             setSelectedRows(newSelectedSet);
-            onSelect(Array.from(newSelectedSet) as T[]);
+            onSelectHandler(Array.from(newSelectedSet) as T[]);
         } else {
             setSelectedRows(new Set([row]));
-            onSelect([row] as T[]);
+            onSelectHandler([row] as T[]);
         }
     }
 
