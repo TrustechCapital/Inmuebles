@@ -22,14 +22,14 @@ const useStyles = makeStyles((theme) => ({
 
 const COLUMNS_DETALLE_BIENES: IGenericColumn[] = [
     { field: 'id', header: 'Id', isKey: true },
-    { field: 'fgrsIdFideicomiso', header: 'Fideicomiso' },
-    { field: 'forsCveTipoBien', header: 'Clasificacion' },
+    { field: 'idFideicomiso', header: 'Fideicomiso' },
+    { field: 'tipoBien', header: 'Clasificacion' },
     {
-        field: 'forsImpUltValua',
+        field: 'importeUltimaValuacionFormateado',
         header: 'Importe Ult. Valuación',
         numeric: true,
     },
-    { field: 'forsTextoDescrip', header: 'Descripción' },
+    { field: 'descripcion', header: 'Descripción' },
 ];
 
 type ActionsProps = {

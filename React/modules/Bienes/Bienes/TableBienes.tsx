@@ -132,7 +132,12 @@ const TableBienes: React.FC<TableBienesProps> = ({ data, onSearch }) => {
                 </GenericSearchForm>
             </Grid>
             <Grid container spacing={1}>
-                <GenericTable title="Bienes" data={data} columns={COLUMNS} />
+                <GenericTable
+                    title="Bienes"
+                    data={data}
+                    columns={COLUMNS}
+                    multipleSelect={false}
+                />
             </Grid>
         </div>
     );

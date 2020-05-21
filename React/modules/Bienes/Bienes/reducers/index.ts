@@ -2,7 +2,8 @@ import BienResultRow from '../models/BienResultRow';
 import { MainBienesState, ITableBienesParameters } from '../types';
 import Bien from '../../../../models/Bien';
 import { OperacionesCatalogo, SavingStatus } from '../../../../constants';
-import { bienesApi } from '../services';
+import { bienesApi, detalleBienesApi } from '../services';
+import DetalleBienResultRow from '../models/DetalleBienResultRow';
 
 type MainBienesActions =
     | {
@@ -15,7 +16,8 @@ type MainBienesActions =
       }
     | {
           type: 'SET_BIENES_ROWS_SELECTION';
-          selectedRows: BienResultRow[];
+          selectedRow: BienResultRow;
+          detalleBienSearchResults: DetalleBienResultRow[];
       }
     | {
           type: 'SET_BIEN_MODEL';
@@ -59,7 +61,7 @@ function mainBienesReducer(
                 bienes: {
                     ...state.bienes,
                     searchParameters: action.searchParameters,
-                    selectedRows: [],
+                    selectedRow: null,
                 },
             };
         case 'SET_BIENES_SEARCH_RESULTS':
@@ -79,10 +81,11 @@ function mainBienesReducer(
                 ...state,
                 bienes: {
                     ...state.bienes,
-                    selectedRows: action.selectedRows,
+                    selectedRow: action.selectedRow,
                 },
                 detalleBienes: {
                     ...state.detalleBienes,
+                    searchResults: action.detalleBienSearchResults,
                     showActionsToolbar: true,
                 },
             };
@@ -106,9 +109,7 @@ function mainBienesReducer(
             }
 
             const shouldOpenModal =
-                esAlta ||
-                (esConsultaOModificacion &&
-                    state.bienes.selectedRows.length === 1);
+                esAlta || (esConsultaOModificacion && state.bienes.selectedRow);
 
             if (shouldOpenModal) {
                 return {
@@ -188,20 +189,36 @@ function mainBienesReducer(
 }
 
 async function fetchDetalleBien(
-    selectedBienesRow: BienResultRow[]
+    selectedBienesRow: BienResultRow | null
 ): Promise<Bien | null> {
-    if (selectedBienesRow.length !== 1) {
+    if (!selectedBienesRow) {
         return null;
     }
 
-    const bienResultRow = selectedBienesRow[0];
     let bien = new Bien(
-        bienResultRow.idFideicomiso,
-        bienResultRow.idSubcuenta,
-        bienResultRow.idTipoBien
+        selectedBienesRow.idFideicomiso,
+        selectedBienesRow.idSubcuenta,
+        selectedBienesRow.idTipoBien
     );
 
     return await bienesApi.findByPK(bien);
+}
+
+function selectBienesRow(selectedRow: BienResultRow) {
+    return async (
+        dispatch: BienesDispatcher,
+        getState: () => MainBienesState
+    ) => {
+        const detalleBienesSearchResults = await detalleBienesApi.find(
+            selectedRow
+        );
+
+        dispatch({
+            type: 'SET_BIENES_ROWS_SELECTION',
+            selectedRow: selectedRow,
+            detalleBienSearchResults: detalleBienesSearchResults,
+        });
+    };
 }
 
 function fetchAndDisplayModel(mode: OperacionesCatalogo) {
@@ -210,7 +227,7 @@ function fetchAndDisplayModel(mode: OperacionesCatalogo) {
         getState: () => MainBienesState
     ) => {
         const state = getState();
-        const loadedModel = await fetchDetalleBien(state.bienes.selectedRows);
+        const loadedModel = await fetchDetalleBien(state.bienes.selectedRow);
 
         if (loadedModel !== null) {
             dispatch({
@@ -293,30 +310,20 @@ function deleteSelectedBienModels() {
         getState: () => MainBienesState
     ) => {
         const state = getState();
-        const selectedRows = state.bienes.selectedRows;
 
-        selectedRows.forEach(() => {
-            const model = bienesApi.getModelFromResultRow(
-                state.bienes.selectedRows[0]
-            );
-            bienesApi
-                .destroy(model)
-                .then(() => {
-                    repeatCurrentSearch(dispatch, getState);
-                })
-                .catch((e) => {
-                    console.log(
-                        'Ocurrio un error al eliminar el bien',
-                        selectedRows,
-                        e
-                    );
-                });
-        });
+        if (!state.bienes.selectedRow) {
+            return;
+        }
+
+        const model = bienesApi.getModelFromResultRow(state.bienes.selectedRow);
+        await bienesApi.destroy(model);
+        repeatCurrentSearch(dispatch, getState);
     };
 }
 
 export {
     mainBienesReducer,
+    selectBienesRow,
     fetchAndDisplayModel,
     newSearchBienes,
     saveBienModel,

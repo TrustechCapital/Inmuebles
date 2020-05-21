@@ -1,46 +1,20 @@
 class BienResultRow {
     id: number;
-    idFideicomiso: number;
-    idSubcuenta: number;
-    idTipoBien: number;
-    tipoBien: string;
-    claveEstatus: string;
-    bienDisponible: string;
-    importeBien: number;
-    importeBienFormateado: string;
-    importeBienGarantizado: number;
-    importeBienGarantizadoYFormateado: string;
-    importePagosBien: number;
-    numeroEscritura: string;
+    idFideicomiso: number | null = null;
+    idSubcuenta: number | null = null;
+    idTipoBien: number | null = null;
+    tipoBien: string = '';
+    claveEstatus: string = '';
+    bienDisponible: string = '';
+    importeBien: number | null = null;
+    importeBienFormateado: string = '';
+    importeBienGarantizado: number | null = null;
+    importeBienGarantizadoYFormateado: string = '';
+    importePagosBien: number | null = null;
+    numeroEscritura: string = '';
 
-    constructor(
-        id: number,
-        idFideicomiso: number,
-        idSubcuenta: number,
-        idTipoBien: number,
-        tipoBien: string,
-        claveEstatus: string,
-        bienDisponible: string,
-        importeBien: number,
-        importeBienFormateado: string,
-        importeBienGarantizado: number,
-        importeBienGarantizadoYFormateado: string,
-        importePagosBien: number,
-        numeroEscritura: string
-    ) {
+    constructor(id: number) {
         this.id = id;
-        this.idFideicomiso = idFideicomiso;
-        this.idSubcuenta = idSubcuenta;
-        this.idTipoBien = idTipoBien;
-        this.tipoBien = tipoBien;
-        this.claveEstatus = claveEstatus;
-        this.bienDisponible = bienDisponible;
-        this.importeBien = importeBien;
-        this.importeBienFormateado = importeBienFormateado;
-        this.importeBienGarantizado = importeBienGarantizado;
-        this.importeBienGarantizadoYFormateado = importeBienGarantizadoYFormateado;
-        this.importePagosBien = importePagosBien;
-        this.numeroEscritura = numeroEscritura;
     }
 
     public static fromObject(obj: any, index: number): BienResultRow {

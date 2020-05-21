@@ -11,6 +11,7 @@ import { OperacionesCatalogo, SavingStatus } from '../../../constants';
 import Bien from '../../../models/Bien';
 import {
     mainBienesReducer,
+    selectBienesRow,
     fetchAndDisplayModel,
     newSearchBienes,
     saveBienModel,
@@ -27,7 +28,7 @@ const initialState: MainBienesState = {
             idTipoBien: null,
         },
         searchResults: [],
-        selectedRows: [],
+        selectedRow: null,
         currentModel: new Bien(null, null, null),
         modalMode: OperacionesCatalogo.Alta,
         modalOpen: false,
@@ -36,6 +37,7 @@ const initialState: MainBienesState = {
         modalErrorMessage: null,
     },
     detalleBienes: {
+        searchResults: [],
         modalOpen: false,
         modalMode: OperacionesCatalogo.Alta,
         showActionsToolbar: false,
@@ -64,10 +66,7 @@ const MainBienes: React.FC = () => {
     const BienesActionCallbacks = useMemo(() => {
         return {
             onSelect: (selectedRows: BienResultRow[]) => {
-                dispatch({
-                    type: 'SET_BIENES_ROWS_SELECTION',
-                    selectedRows: selectedRows,
-                });
+                dispatch(selectBienesRow(selectedRows[0]));
             },
             onNew: () => {
                 dispatch({
@@ -100,7 +99,7 @@ const MainBienes: React.FC = () => {
                 />
             </GenericTableCallbacksContext.Provider>
             <TableDetalleBienes
-                data={[]}
+                data={state.detalleBienes.searchResults}
                 showActionsHeader={state.detalleBienes.showActionsToolbar}
                 onNew={() =>
                     dispatch({
