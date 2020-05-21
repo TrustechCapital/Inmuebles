@@ -9,16 +9,18 @@ import DialogBienes from './DialogBienes';
 import DialogDetalleBienes from './DialogDetalleBienes';
 import { OperacionesCatalogo, SavingStatus } from '../../../constants';
 import Bien from '../../../models/Bien';
+import { mainBienesReducer } from './reducers';
 import {
-    mainBienesReducer,
     selectBienesRow,
     fetchAndDisplayModel,
     newSearchBienes,
     saveBienModel,
     deleteSelectedBienModels,
-} from './reducers';
+} from './reducers/BienesActionCreators';
 
 import { GenericTableCallbacksContext } from '../../../sharedComponents/GenericTable';
+import { DetalleBienesTableCallbacksContext } from './context';
+import DetalleBienResultRow from './models/DetalleBienResultRow';
 
 const initialState: MainBienesState = {
     bienes: {
@@ -88,6 +90,32 @@ const MainBienes: React.FC = () => {
         };
     }, []);
 
+    const DetalleBienesActionCallbacks = useMemo(() => {
+        return {
+            onSelect: (selectedRows: DetalleBienResultRow[]) => {
+                debugger;
+            },
+            onNew: () => {
+                dispatch({
+                    type: 'OPEN_DETALLE_BIENES_MODAL',
+                    mode: OperacionesCatalogo.Alta,
+                });
+            },
+            onView: () => {
+                debugger;
+            },
+            onModify: () => {
+                debugger;
+            },
+            onDelete: () => {
+                debugger;
+            },
+            onRevaluacion: () => {
+                debugger;
+            },
+        };
+    }, []);
+
     return (
         <React.Fragment>
             <GenericTableCallbacksContext.Provider
@@ -98,17 +126,22 @@ const MainBienes: React.FC = () => {
                     onSearch={searchBienes}
                 />
             </GenericTableCallbacksContext.Provider>
-            <TableDetalleBienes
-                data={state.detalleBienes.searchResults}
-                showActionsHeader={state.detalleBienes.showActionsToolbar}
-                onNew={() =>
-                    dispatch({
-                        type: 'OPEN_DETALLE_BIENES_MODAL',
-                        mode: OperacionesCatalogo.Alta,
-                    })
-                }
-                onSelect={handleSelectDetalleBien}
-            />
+            <DetalleBienesTableCallbacksContext.Provider
+                value={DetalleBienesActionCallbacks}
+            >
+                <TableDetalleBienes
+                    data={state.detalleBienes.searchResults}
+                    showActionsHeader={state.detalleBienes.showActionsToolbar}
+                    onNew={() => {
+                        debugger;
+                        dispatch({
+                            type: 'OPEN_DETALLE_BIENES_MODAL',
+                            mode: OperacionesCatalogo.Alta,
+                        });
+                    }}
+                    onSelect={handleSelectDetalleBien}
+                />
+            </DetalleBienesTableCallbacksContext.Provider>
             <DialogBienes
                 mode={state.bienes.modalMode}
                 open={state.bienes.modalOpen}

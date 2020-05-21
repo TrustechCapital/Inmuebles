@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useContext } from 'react';
 import { makeStyles } from '@material-ui/core/styles';
 import Grid from '@material-ui/core/Grid';
 import IconButton from '@material-ui/core/IconButton';
@@ -13,6 +13,7 @@ import GenericTable, {
     IGenericColumn,
 } from '../../../sharedComponents/GenericTable';
 import DetalleBienResultRow from './models/DetalleBienResultRow';
+import { DetalleBienesTableCallbacksContext } from './context';
 
 const useStyles = makeStyles((theme) => ({
     rowSpacing: {
@@ -32,11 +33,8 @@ const COLUMNS_DETALLE_BIENES: IGenericColumn[] = [
     { field: 'descripcion', header: 'Descripción' },
 ];
 
-type ActionsProps = {
-    onNew: () => void;
-};
-
-const ActionsDetalleBienes: React.FC<ActionsProps> = (props) => {
+const ActionsDetalleBienes: React.FC<any> = (props) => {
+    const { onNew } = useContext(DetalleBienesTableCallbacksContext);
     const bienesSeleccionados = 1;
 
     return (
@@ -75,7 +73,7 @@ const ActionsDetalleBienes: React.FC<ActionsProps> = (props) => {
 
             {bienesSeleccionados == 1 ? (
                 <Tooltip title="Registro de bien">
-                    <IconButton onClick={props.onNew}>
+                    <IconButton onClick={onNew}>
                         <AddIcon />
                     </IconButton>
                 </Tooltip>
