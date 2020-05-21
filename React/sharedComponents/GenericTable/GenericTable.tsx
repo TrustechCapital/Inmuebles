@@ -59,10 +59,11 @@ interface TableProps<T> {
     onSelect?: (selectedRows: T[]) => void;
     onNew?: () => void;
     onView?: () => void;
+    multipleSelect?: boolean;
 }
 
 function GenericTable<T extends ITableRow>(props: TableProps<T>) {
-    const { onNew } = props;
+    const { onNew, multipleSelect = true } = props;
     const { onSelect } = useContext(GenericTableCallbacksContext);
 
     const {
@@ -99,9 +100,14 @@ function GenericTable<T extends ITableRow>(props: TableProps<T>) {
     }, [data]);
 
     function handleClick(row: any) {
-        let newSelectedSet = toggleSelectedElementInList(selectedRows, row);
-        setSelectedRows(newSelectedSet);
-        onSelect(Array.from(newSelectedSet) as T[]);
+        if (multipleSelect) {
+            let newSelectedSet = toggleSelectedElementInList(selectedRows, row);
+            setSelectedRows(newSelectedSet);
+            onSelect(Array.from(newSelectedSet) as T[]);
+        } else {
+            setSelectedRows(new Set([row]));
+            onSelect([row] as T[]);
+        }
     }
 
     const rows = currentRows.map((row) => (
@@ -111,6 +117,7 @@ function GenericTable<T extends ITableRow>(props: TableProps<T>) {
             isSelected={isSelected(row)}
             onClick={handleClick}
             columns={columns}
+            useCheckbox={multipleSelect}
         />
     ));
 
@@ -155,6 +162,7 @@ function GenericTable<T extends ITableRow>(props: TableProps<T>) {
                 title={title}
                 onNew={onNew}
                 showActions={showActionsHeader}
+                showSelectedCount={multipleSelect}
                 actionsComponent={additionalActionsComponent}
             />
             <TableContainer className={classes.table}>
@@ -167,6 +175,7 @@ function GenericTable<T extends ITableRow>(props: TableProps<T>) {
                         onSelectAllClick={handleSelectAllClick}
                         onRequestSort={handleRequestSort}
                         rowCount={rows.length}
+                        multipleSelect={multipleSelect}
                     />
                     <TableBody>
                         {rows}

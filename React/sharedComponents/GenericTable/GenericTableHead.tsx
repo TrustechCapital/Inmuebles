@@ -10,10 +10,11 @@ type TableHeadProps = {
     columns: IColumn[];
     numSelected: number;
     onRequestSort: (sortField: string) => void;
-    onSelectAllClick: (checked: boolean) => void;
+    onSelectAllClick?: (checked: boolean) => void;
     order: SortTypes;
     orderBy: string;
     rowCount: number;
+    multipleSelect: boolean;
 };
 
 const EnhancedTableHead: React.FC<TableHeadProps> = ({
@@ -24,6 +25,7 @@ const EnhancedTableHead: React.FC<TableHeadProps> = ({
     numSelected,
     rowCount,
     onRequestSort,
+    multipleSelect,
 }) => {
     function createHeader(column: IColumn) {
         const sortActive = orderBy === column.field;
@@ -49,20 +51,24 @@ const EnhancedTableHead: React.FC<TableHeadProps> = ({
     const headers = columns.map(createHeader);
 
     function handleSelectAll(e: any) {
-        onSelectAllClick(e.target.checked);
+        if (onSelectAllClick) {
+            onSelectAllClick(e.target.checked);
+        }
     }
 
     return (
         <TableHead>
             <TableRow>
                 <GenericTableCell padding="checkbox">
-                    <Checkbox
-                        indeterminate={
-                            numSelected > 0 && numSelected < rowCount
-                        }
-                        checked={rowCount > 0 && numSelected === rowCount}
-                        onChange={handleSelectAll}
-                    />
+                    {multipleSelect && (
+                        <Checkbox
+                            indeterminate={
+                                numSelected > 0 && numSelected < rowCount
+                            }
+                            checked={rowCount > 0 && numSelected === rowCount}
+                            onChange={handleSelectAll}
+                        />
+                    )}
                 </GenericTableCell>
                 {headers}
             </TableRow>

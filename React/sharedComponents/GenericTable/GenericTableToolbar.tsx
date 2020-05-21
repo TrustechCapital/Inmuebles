@@ -85,6 +85,7 @@ const EnhancedTableToolbarActions: React.FC<ToolbarActionsProps> = ({
 type TableToolbarProps = {
     title: string;
     numSelected: number;
+    showSelectedCount: boolean;
     showActions: boolean;
     actionsComponent: any;
     onNew?: () => void;
@@ -93,6 +94,7 @@ type TableToolbarProps = {
 const EnhancedTableToolbar: React.FC<TableToolbarProps> = ({
     title,
     numSelected,
+    showSelectedCount,
     showActions = true,
     actionsComponent,
     onNew,
@@ -103,10 +105,10 @@ const EnhancedTableToolbar: React.FC<TableToolbarProps> = ({
     return (
         <Toolbar
             className={clsx(classes.root, {
-                [classes.highlight]: numSelected > 0,
+                [classes.highlight]: showSelectedCount && numSelected > 0,
             })}
         >
-            {numSelected > 0 ? (
+            {showSelectedCount && numSelected > 0 ? (
                 <Typography
                     className={classes.title}
                     color="inherit"
