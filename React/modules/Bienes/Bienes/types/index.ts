@@ -1,6 +1,7 @@
 import BienResultRow from '../models/BienResultRow';
 import DetalleBienResultRow from '../models/DetalleBienResultRow';
 import Bien from '../../../../models/Bien';
+import DetalleBien from '../../../../models/DetalleBien';
 import { OperacionesCatalogo, SavingStatus } from '../../../../constants';
 
 export interface ITableBienesParameters {
@@ -24,6 +25,7 @@ export type BienesState = {
 export type DetalleBienesState = {
     searchResults: DetalleBienResultRow[];
     selectedRows: DetalleBienResultRow[];
+    currentModel: DetalleBien;
     modalOpen: boolean;
     modalMode: OperacionesCatalogo;
     showActionsToolbar: boolean;
@@ -73,6 +75,10 @@ export type DetalleBienesActions =
     | {
           type: 'SET_DETALLE_BIENES_ROWS_SELECTION';
           selectedRows: DetalleBienResultRow[];
+      }
+    | {
+          type: 'SET_DETALLE_BIEN_MODEL';
+          model: DetalleBien;
       }
     | {
           type: 'OPEN_DETALLE_BIENES_MODAL';

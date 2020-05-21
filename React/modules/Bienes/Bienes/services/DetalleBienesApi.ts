@@ -1,10 +1,10 @@
 import { ModelsApi } from '../../../../core/api';
 import { ITableBienesParameters } from '../types';
 import DetalleBienResultRow from '../models/DetalleBienResultRow';
-import Bien from '../../../../models/Bien';
-import BienesModelMapper from './BienesModelMapper';
+import DetalleBien from '../../../../models/DetalleBien';
+import DetalleBienesModelMapper from './DetalleBienesModelMapper';
 
-class DetalleBienesApi extends ModelsApi<Bien> {
+class DetalleBienesApi extends ModelsApi<DetalleBien> {
     async find(
         parameters: ITableBienesParameters
     ): Promise<DetalleBienResultRow[]> {
@@ -20,4 +20,4 @@ class DetalleBienesApi extends ModelsApi<Bien> {
     }
 }
 
-export const detalleBienesApi = new DetalleBienesApi(BienesModelMapper);
+export const detalleBienesApi = new DetalleBienesApi(DetalleBienesModelMapper);

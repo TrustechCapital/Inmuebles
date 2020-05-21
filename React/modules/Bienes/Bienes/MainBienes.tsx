@@ -11,10 +11,12 @@ import { OperacionesCatalogo, SavingStatus } from '../../../constants';
 import Bien from '../../../models/Bien';
 import { mainBienesReducer } from './reducers';
 import bienesActions from './actions/bienes';
+import detalleBienesActions from './actions/detalleBienes';
 
 import { GenericTableCallbacksContext } from '../../../sharedComponents/GenericTable';
 import { DetalleBienesTableCallbacksContext } from './context';
 import DetalleBienResultRow from './models/DetalleBienResultRow';
+import DetalleBien from '../../../models/DetalleBien';
 
 const initialState: MainBienesState = {
     bienes: {
@@ -35,6 +37,7 @@ const initialState: MainBienesState = {
     detalleBienes: {
         searchResults: [],
         selectedRows: [],
+        currentModel: new DetalleBien(null, null, null, null, null),
         modalOpen: false,
         modalMode: OperacionesCatalogo.Alta,
         showActionsToolbar: false,
@@ -44,7 +47,15 @@ const initialState: MainBienesState = {
 const MainBienes: React.FC = () => {
     const [state, dispatch] = useThunkReducer(mainBienesReducer, initialState);
 
-    function handleSelectDetalleBien() {}
+    const handleSelectDetalleBien = useCallback(
+        (selectedRows: DetalleBienResultRow[]) => {
+            dispatch({
+                type: 'SET_DETALLE_BIENES_ROWS_SELECTION',
+                selectedRows: selectedRows,
+            });
+        },
+        []
+    );
 
     const closeBienesModal = useCallback(() => {
         dispatch({
@@ -93,12 +104,6 @@ const MainBienes: React.FC = () => {
 
     const DetalleBienesActionCallbacks = useMemo(() => {
         return {
-            onSelect: (selectedRows: DetalleBienResultRow[]) => {
-                dispatch({
-                    type: 'SET_DETALLE_BIENES_ROWS_SELECTION',
-                    selectedRows: selectedRows,
-                });
-            },
             onNew: () => {
                 dispatch({
                     type: 'OPEN_DETALLE_BIENES_MODAL',
@@ -106,10 +111,18 @@ const MainBienes: React.FC = () => {
                 });
             },
             onView: () => {
-                debugger;
+                dispatch(
+                    detalleBienesActions.fetchAndDisplayModel(
+                        OperacionesCatalogo.Consulta
+                    )
+                );
             },
             onModify: () => {
-                debugger;
+                dispatch(
+                    detalleBienesActions.fetchAndDisplayModel(
+                        OperacionesCatalogo.Modificacion
+                    )
+                );
             },
             onDelete: () => {
                 debugger;
@@ -136,13 +149,6 @@ const MainBienes: React.FC = () => {
                 <TableDetalleBienes
                     data={state.detalleBienes.searchResults}
                     showActionsHeader={state.detalleBienes.showActionsToolbar}
-                    onNew={() => {
-                        debugger;
-                        dispatch({
-                            type: 'OPEN_DETALLE_BIENES_MODAL',
-                            mode: OperacionesCatalogo.Alta,
-                        });
-                    }}
                     onSelect={handleSelectDetalleBien}
                 />
             </DetalleBienesTableCallbacksContext.Provider>

@@ -10,7 +10,7 @@ import { OperacionesCatalogo } from '../../../../constants';
 
 type MainBienesDispatcher = React.Dispatch<MainBienesActions>;
 
-async function fetchDetalleBien(
+async function fetchFullModel(
     selectedBienesRow: BienResultRow | null
 ): Promise<Bien | null> {
     if (!selectedBienesRow) {
@@ -46,7 +46,7 @@ function fetchAndDisplayModel(mode: OperacionesCatalogo) {
         getState: () => MainBienesState
     ) => {
         const state = getState();
-        const loadedModel = await fetchDetalleBien(state.bienes.selectedRow);
+        const loadedModel = await fetchFullModel(state.bienes.selectedRow);
 
         if (loadedModel !== null) {
             dispatch({

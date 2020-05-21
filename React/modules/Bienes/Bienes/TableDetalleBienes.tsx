@@ -40,7 +40,9 @@ type ActionsDetalleBienes = GenericToolbarActionsProps;
 const ActionsDetalleBienes: React.FC<ActionsDetalleBienes> = ({
     numSelected,
 }) => {
-    const { onNew } = useContext(DetalleBienesTableCallbacksContext);
+    const { onNew, onView, onModify } = useContext(
+        DetalleBienesTableCallbacksContext
+    );
 
     return (
         <React.Fragment>
@@ -62,7 +64,7 @@ const ActionsDetalleBienes: React.FC<ActionsDetalleBienes> = ({
 
             {numSelected == 1 ? (
                 <Tooltip title="Modificar">
-                    <IconButton>
+                    <IconButton onClick={onModify}>
                         <EditIcon />
                     </IconButton>
                 </Tooltip>
@@ -70,7 +72,7 @@ const ActionsDetalleBienes: React.FC<ActionsDetalleBienes> = ({
 
             {numSelected == 1 ? (
                 <Tooltip title="Consultar">
-                    <IconButton>
+                    <IconButton onClick={onView}>
                         <FindInPageIcon />
                     </IconButton>
                 </Tooltip>
@@ -90,14 +92,12 @@ const ActionsDetalleBienes: React.FC<ActionsDetalleBienes> = ({
 type Props = {
     data: DetalleBienResultRow[];
     showActionsHeader: boolean;
-    onNew: () => void;
     onSelect: (selectedItems: DetalleBienResultRow[]) => void;
 };
 
 const TableDetalleBienes: React.FC<Props> = ({
     data,
     showActionsHeader,
-    onNew,
     onSelect,
 }) => {
     const classes = useStyles();
@@ -116,6 +116,7 @@ const TableDetalleBienes: React.FC<Props> = ({
                     columns={COLUMNS_DETALLE_BIENES}
                     showActionsHeader={showActionsHeader}
                     additionalActionsComponent={ActionsDetalleBienes}
+                    onSelect={onSelect}
                 />
             </Grid>
         </div>

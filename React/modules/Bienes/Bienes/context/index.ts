@@ -1,8 +1,6 @@
 import { createContext } from 'react';
-import DetalleBienResultRow from '../models/DetalleBienResultRow';
 
 export type DetalleBienesTableCallbacksContextProps = {
-    onSelect: (selectedRows: DetalleBienResultRow[]) => void;
     onNew: () => void;
     onView: () => void;
     onModify: () => void;
@@ -13,7 +11,6 @@ export type DetalleBienesTableCallbacksContextProps = {
 export const DetalleBienesTableCallbacksContext = createContext<
     DetalleBienesTableCallbacksContextProps
 >({
-    onSelect: () => {},
     onNew: () => {},
     onView: () => {},
     onModify: () => {},
