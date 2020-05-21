@@ -5,8 +5,8 @@ import {
     DetalleBienesActions,
 } from '../types';
 
-import { bienesReducer } from './BienesReducer';
-import { detalleBienesReducer } from './DetalleBienesReducer';
+import { bienesReducer } from './bienes';
+import { detalleBienesReducer } from './detalleBienes';
 
 function mainBienesReducer(
     state: MainBienesState,

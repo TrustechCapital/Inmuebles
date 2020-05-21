@@ -10,13 +10,7 @@ import DialogDetalleBienes from './DialogDetalleBienes';
 import { OperacionesCatalogo, SavingStatus } from '../../../constants';
 import Bien from '../../../models/Bien';
 import { mainBienesReducer } from './reducers';
-import {
-    selectBienesRow,
-    fetchAndDisplayModel,
-    newSearchBienes,
-    saveBienModel,
-    deleteSelectedBienModels,
-} from './reducers/BienesActionCreators';
+import bienesActions from './actions/bienes';
 
 import { GenericTableCallbacksContext } from '../../../sharedComponents/GenericTable';
 import { DetalleBienesTableCallbacksContext } from './context';
@@ -58,17 +52,17 @@ const MainBienes: React.FC = () => {
     }, []);
 
     const saveBienesModel = useCallback((model: Bien) => {
-        dispatch(saveBienModel(model));
+        dispatch(bienesActions.saveBienModel(model));
     }, []);
 
     const searchBienes = useCallback((parameters: ITableBienesParameters) => {
-        dispatch(newSearchBienes(parameters));
+        dispatch(bienesActions.newSearchBienes(parameters));
     }, []);
 
     const BienesActionCallbacks = useMemo(() => {
         return {
             onSelect: (selectedRows: BienResultRow[]) => {
-                dispatch(selectBienesRow(selectedRows[0]));
+                dispatch(bienesActions.selectBienesRow(selectedRows[0]));
             },
             onNew: () => {
                 dispatch({
@@ -77,15 +71,21 @@ const MainBienes: React.FC = () => {
                 });
             },
             onView: () => {
-                dispatch(fetchAndDisplayModel(OperacionesCatalogo.Consulta));
+                dispatch(
+                    bienesActions.fetchAndDisplayModel(
+                        OperacionesCatalogo.Consulta
+                    )
+                );
             },
             onModify: () => {
                 dispatch(
-                    fetchAndDisplayModel(OperacionesCatalogo.Modificacion)
+                    bienesActions.fetchAndDisplayModel(
+                        OperacionesCatalogo.Modificacion
+                    )
                 );
             },
             onDelete: () => {
-                dispatch(deleteSelectedBienModels());
+                dispatch(bienesActions.deleteSelectedBienModels());
             },
         };
     }, []);

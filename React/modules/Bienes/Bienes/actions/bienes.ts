@@ -140,7 +140,7 @@ function deleteSelectedBienModels() {
     };
 }
 
-export {
+export default {
     selectBienesRow,
     fetchAndDisplayModel,
     newSearchBienes,
