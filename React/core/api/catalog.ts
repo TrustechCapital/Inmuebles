@@ -17,8 +17,36 @@ class CatalogsApi extends Api {
         super({});
     }
 
-    fetchAll() {
-        return this.fetchClavesCatalog();
+    async fetchAll(): Promise<CatalogItem[]> {
+        let results: CatalogItem[] | null = CacheService.get(
+            CATALOGS_CACHE_KEY
+        );
+
+        if (!results) {
+            results = await this.getRef<CatalogItem>(
+                'catalogoCompletoclaves',
+                {},
+                CatalogItem.fromObject
+            );
+
+            CacheService.set(CATALOGS_CACHE_KEY, results);
+        }
+
+        const catalogsMap = results.reduce((prev, catalog) => {
+            if (!prev.has(catalog.catalogId)) {
+                prev.set(catalog.catalogId, [catalog]);
+            } else {
+                let currentValues = prev.get(catalog.catalogId) || [];
+                currentValues?.push(catalog);
+                prev.set(catalog.catalogId, currentValues);
+            }
+
+            return prev;
+        }, new Map<number, CatalogItem[]>());
+
+        this.cachedClavesCatalog = catalogsMap;
+
+        return results;
     }
 
     getCachedCatalogs() {
@@ -63,35 +91,6 @@ class CatalogsApi extends Api {
         } catch (error) {
             return [];
         }
-    }
-
-    private async fetchClavesCatalog() {
-        let results: CatalogItem[] = [];
-        const cachedResults = CacheService.get(CATALOGS_CACHE_KEY);
-
-        if (!cachedResults) {
-            results = await this.getRef<CatalogItem>(
-                'catalogoCompletoclaves',
-                {},
-                CatalogItem.fromObject
-            );
-
-            CacheService.set(CATALOGS_CACHE_KEY, results);
-        }
-
-        const catalogsMap = results.reduce((prev, catalog) => {
-            if (!prev.has(catalog.catalogId)) {
-                prev.set(catalog.catalogId, [catalog]);
-            } else {
-                let currentValues = prev.get(catalog.catalogId) || [];
-                currentValues?.push(catalog);
-                prev.set(catalog.catalogId, currentValues);
-            }
-
-            return prev;
-        }, new Map<number, CatalogItem[]>());
-
-        this.cachedClavesCatalog = catalogsMap;
     }
 }
 
