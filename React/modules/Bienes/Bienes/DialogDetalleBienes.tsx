@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState, useEffect } from 'react';
 
 import { makeStyles } from '@material-ui/core/styles';
 import Grid from '@material-ui/core/Grid';
@@ -14,9 +14,11 @@ import FormValidator, {
     ValidationHelpers,
 } from '../../../services/FormValidator';
 import DetalleBien from '../../../models/DetalleBien';
+import { monedasApi } from '../../../core/api/monedas';
 
 const {
     FormTextField,
+    FormSelectField,
     FormCatalogSelectField,
     FormDatePickerField,
 } = new GenericForm<DetalleBien>();
@@ -48,11 +50,18 @@ const DialogDetalleBienes: React.FC<ICatalogDialog<DetalleBien>> = ({
     onClose,
     onSaveRequest,
 }) => {
+    const [monedas, setMonedas] = useState([]);
     const classes = useStyles();
 
     const allFieldsDisabled = mode === OperacionesCatalogo.Consulta;
     const pkFieldsDisabled =
         allFieldsDisabled || mode === OperacionesCatalogo.Modificacion;
+
+    useEffect(() => {
+        monedasApi.fetchAll().then((monedas) => {
+            setMonedas(monedas);
+        });
+    }, []);
 
     return (
         <Formik
@@ -200,9 +209,11 @@ const DialogDetalleBienes: React.FC<ICatalogDialog<DetalleBien>> = ({
                                 />
                             </Grid>
                             <Grid item xs={6}>
-                                <FormCatalogSelectField
+                                <FormSelectField
                                     name="idMoneda"
-                                    catalogId={ClavesModuloBienes.TiposDeBienes}
+                                    items={monedas}
+                                    valueKey="idPais"
+                                    labelKey="nombreMoneda"
                                     label="Moneda"
                                     disabled={allFieldsDisabled}
                                 />
