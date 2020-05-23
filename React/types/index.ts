@@ -1,5 +1,5 @@
 import { IModel } from '../models/BaseModel';
-import { OperacionesCatalogo } from '../constants';
+import { OperacionesCatalogo, SavingStatus } from '../constants';
 
 export type TabsLayout = {
     label: String;
@@ -10,6 +10,9 @@ export interface ICatalogDialog<T extends IModel> {
     mode: OperacionesCatalogo;
     model: T;
     open: boolean;
+    savingStatus: SavingStatus;
+    isLoading: boolean;
+    errorMessage: string | null;
     onClose: () => void;
     onSaveRequest: (model: T) => void;
 }
