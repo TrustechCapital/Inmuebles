@@ -1,16 +1,16 @@
 class Moneda {
-    numPais: number;
-    nomMoneda: string;
+    idPais: number;
+    nombreMoneda: string;
 
-    constructor(numPais: number, nomMoneda: string) {
-        this.numPais = numPais;
-        this.nomMoneda = nomMoneda;
+    constructor(idPais: number, nombreMoneda: string) {
+        this.idPais = idPais;
+        this.nombreMoneda = nombreMoneda;
     }
 
     public static fromObject(obj: any, index: number): Moneda {
         return {
-            numPais: obj.monNumPais,
-            nomMoneda: obj.monNomMoneda,
+            idPais: obj.monNumPais,
+            nombreMoneda: obj.monNomMoneda,
         };
     }
 }

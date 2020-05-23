@@ -26,4 +26,4 @@ class MonedasApi extends Api {
     }
 }
 
-export const catalogsApi = new MonedasApi();
+export const monedasApi = new MonedasApi();
