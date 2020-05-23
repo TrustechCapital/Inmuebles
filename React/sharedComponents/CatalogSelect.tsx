@@ -10,42 +10,31 @@ export type CatalogSelectProps = {
     useLabelAsValue?: boolean;
 } & GenericSelectProps;
 
-function CatalogSelect(props: CatalogSelectProps) {
-    const {
-        catalogId,
-        parentCatalogId,
-        useLabelAsValue = false,
-        valueKey,
-        ...selectProps
-    } = props;
-
+const CatalogSelect: React.FC<CatalogSelectProps> = ({
+    catalogId,
+    parentValue,
+    parentCatalogId,
+    useLabelAsValue = false,
+    valueKey,
+    ...selectProps
+}) => {
+    let items = [];
     if (parentCatalogId) {
-        const items =
-            props.parentValue === undefined
+        items =
+            parentValue === undefined
                 ? []
-                : catalogsApi.getChildCatalog(
-                      parentCatalogId,
-                      props.parentValue
-                  );
-
-        return (
-            <GenericSelect
-                items={items}
-                valueKey={useLabelAsValue ? 'label' : valueKey}
-                {...selectProps}
-            />
-        );
+                : catalogsApi.getChildCatalog(parentCatalogId, parentValue);
     } else {
-        const items = !catalogId ? [] : catalogsApi.getCatalogById(catalogId);
-
-        return (
-            <GenericSelect
-                items={items}
-                valueKey={useLabelAsValue ? 'label' : valueKey}
-                {...selectProps}
-            />
-        );
+        items = !catalogId ? [] : catalogsApi.getCatalogById(catalogId);
     }
-}
+
+    return (
+        <GenericSelect
+            items={items}
+            valueKey={useLabelAsValue ? 'label' : valueKey}
+            {...selectProps}
+        />
+    );
+};
 
 export default CatalogSelect;

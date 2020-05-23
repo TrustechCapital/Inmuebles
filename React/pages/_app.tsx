@@ -9,7 +9,7 @@ function App({ Component, pageProps }: AppProps) {
     const [loadingApp, setLoadingApp] = useState(true);
 
     useEffect(() => {
-        catalogsApi.fetchAllCatalogs().then((params) => {
+        catalogsApi.fetchAll().then((params) => {
             setLoadingApp(false);
         });
     }, []);

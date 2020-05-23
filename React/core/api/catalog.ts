@@ -1,5 +1,6 @@
 import { Api } from './base';
 import CatalogItem from '../../models/CatalogItem';
+import CacheService from '../../services/CacheService';
 
 class CatalogNotFoundException extends Error {
     constructor(catalogId: number) {
@@ -16,7 +17,7 @@ class CatalogsApi extends Api {
         super({});
     }
 
-    fetchAllCatalogs() {
+    fetchAll() {
         return this.fetchClavesCatalog();
     }
 
@@ -35,7 +36,6 @@ class CatalogsApi extends Api {
         parentCatalogId: number | null,
         parentValue?: number | string | null
     ): CatalogItem[] {
-        debugger;
         if (parentCatalogId === null) {
             return [];
         }
@@ -67,18 +67,16 @@ class CatalogsApi extends Api {
 
     private async fetchClavesCatalog() {
         let results: CatalogItem[] = [];
-        const cachedResults = sessionStorage.getItem(CATALOGS_CACHE_KEY);
+        const cachedResults = CacheService.get(CATALOGS_CACHE_KEY);
 
-        if (cachedResults) {
-            results = JSON.parse(cachedResults) as CatalogItem[];
-        } else {
+        if (!cachedResults) {
             results = await this.getRef<CatalogItem>(
                 'catalogoCompletoclaves',
                 {},
                 CatalogItem.fromObject
             );
 
-            sessionStorage.setItem(CATALOGS_CACHE_KEY, JSON.stringify(results));
+            CacheService.set(CATALOGS_CACHE_KEY, results);
         }
 
         const catalogsMap = results.reduce((prev, catalog) => {
