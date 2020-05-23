@@ -1,6 +1,7 @@
 import { Field, useField } from 'formik';
 import GenericTextInput, { GenericInputProps } from '../GenericTextInput';
 import CatalogSelect, { CatalogSelectProps } from '../CatalogSelect';
+import GenericSelect, { GenericSelectProps } from '../GenericSelect';
 import GenericSwitch, { GenericSwitchProps } from '../GenericSwitch';
 import GenericDatePicker, {
     GenericDatePickerProps,
@@ -62,6 +63,22 @@ class GenericForm<Model> {
 
         return (
             <CatalogSelect
+                {...field}
+                {...props}
+                error={!!meta.error}
+                helperText={helperText}
+            />
+        );
+    }
+
+    FormSelectField(
+        props: ValidModelName<Model> & OmittedProperties<GenericSelectProps>
+    ) {
+        const [field, meta] = useField(props);
+        const helperText = meta.error ? meta.error : props.helperText;
+
+        return (
+            <GenericSelect
                 {...field}
                 {...props}
                 error={!!meta.error}
