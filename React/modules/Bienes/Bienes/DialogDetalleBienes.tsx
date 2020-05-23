@@ -131,7 +131,10 @@ const DialogDetalleBienes: React.FC<ICatalogDialog<DetalleBien>> = ({
                             <Grid item xs={6}>
                                 <FormCatalogSelectField
                                     name="idTipoDetalleBien"
-                                    catalogId={ClavesModuloBienes.TiposDeBienes}
+                                    parentCatalogId={
+                                        ClavesModuloBienes.TiposDeBienes
+                                    }
+                                    parentValue={props.values.idTipoBien}
                                     label="Clave de Bien"
                                     disabled={pkFieldsDisabled}
                                 />
