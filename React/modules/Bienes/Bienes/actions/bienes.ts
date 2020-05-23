@@ -92,7 +92,7 @@ async function repeatCurrentSearch(
     await searchBienes(dispatch, state.bienes.searchParameters);
 }
 
-function saveBienModel(model: Bien) {
+function saveModel(model: Bien) {
     return async (
         dispatch: MainBienesDispatcher,
         getState: () => MainBienesState
@@ -144,6 +144,6 @@ export default {
     selectBienesRow,
     fetchAndDisplayModel,
     newSearchBienes,
-    saveBienModel,
+    saveModel,
     deleteSelectedBienModels,
 };

@@ -7,21 +7,19 @@ import { Formik } from 'formik';
 import { ICatalogDialog } from '../../../types';
 import { OperacionesCatalogo, SavingStatus } from '../../../constants';
 import { ClavesModuloBienes } from '../../../constants/bienes';
-import Bien from '../../../models/Bien';
 import CatalogDialog from '../../../sharedComponents/CatalogDialog';
-import GenericTextInput from '../../../sharedComponents/GenericTextInput';
 import GenericSwitch from '../../../sharedComponents/GenericSwitch';
 import GenericForm from '../../../sharedComponents/Forms';
 import FormValidator, {
     ValidationHelpers,
 } from '../../../services/FormValidator';
+import DetalleBien from '../../../models/DetalleBien';
 
 const {
     FormTextField,
     FormCatalogSelectField,
     FormDatePickerField,
-    FormSwitchField,
-} = new GenericForm<Bien>();
+} = new GenericForm<DetalleBien>();
 
 //TODO: Usar estilos genericos
 const useStyles = makeStyles((theme) => ({
@@ -30,15 +28,18 @@ const useStyles = makeStyles((theme) => ({
     },
 }));
 
-const BienesFormValidator = new FormValidator<Bien>({
+const DetalleBienesFormValidator = new FormValidator<DetalleBien>({
     idFideicomiso: ValidationHelpers.validateFideicomiso,
     idSubcuenta: ValidationHelpers.validateSubcuenta,
     idTipoBien: ValidationHelpers.validateRequiredNumber(
         'El tipo de bien es un campo requerido'
     ),
+    idTipoDetalleBien: ValidationHelpers.validateRequiredNumber(
+        'El tipo de bien es un campo requerido'
+    ),
 });
 
-const DialogBienes: React.FC<ICatalogDialog<Bien>> = ({
+const DialogDetalleBienes: React.FC<ICatalogDialog<DetalleBien>> = ({
     mode,
     model,
     open,
@@ -58,14 +59,14 @@ const DialogBienes: React.FC<ICatalogDialog<Bien>> = ({
             initialValues={model}
             onSubmit={onSaveRequest}
             enableReinitialize={true}
-            validationSchema={BienesFormValidator.validationSchema}
+            validationSchema={DetalleBienesFormValidator.validationSchema}
         >
             {(props) => (
                 <CatalogDialog
                     opened={open}
                     operacionCatalogo={mode}
-                    nombreCatalogo="Bienes"
-                    subtitle="Bienes por Fideicomisos"
+                    nombreCatalogo="Detalle Bienes"
+                    subtitle="Detalle del Bien"
                     onCancel={() => {
                         props.resetForm();
                         onClose();
@@ -90,17 +91,15 @@ const DialogBienes: React.FC<ICatalogDialog<Bien>> = ({
                                 <FormTextField
                                     name="idFideicomiso"
                                     label="Fideicomiso"
-                                    helperText="Fideicomiso a asignar bienes"
                                     disabled={pkFieldsDisabled}
-                                    dataType="number"
                                 />
                             </Grid>
                             <Grid item xs={6}>
-                                <GenericTextInput
-                                    label="Nombre de Fideicomiso"
-                                    readOnly={true}
-                                    value=""
-                                    onChange={() => {}}
+                                <FormCatalogSelectField
+                                    name="idTipoBien"
+                                    catalogId={ClavesModuloBienes.TiposDeBienes}
+                                    label="Tipo Bien"
+                                    disabled={pkFieldsDisabled}
                                 />
                             </Grid>
                         </Grid>
@@ -113,17 +112,35 @@ const DialogBienes: React.FC<ICatalogDialog<Bien>> = ({
                                 <FormTextField
                                     name="idSubcuenta"
                                     label="Subcuenta"
-                                    helperText="SubFiso"
                                     disabled={pkFieldsDisabled}
-                                    dataType="number"
                                 />
                             </Grid>
                             <Grid item xs={6}>
+                                <FormTextField
+                                    name="idDetalleBien"
+                                    label="Id Detalle Bien"
+                                    disabled={true}
+                                />
+                            </Grid>
+                        </Grid>
+                        <Grid
+                            container
+                            className={classes.rowSpacing}
+                            spacing={3}
+                        >
+                            <Grid item xs={6}>
                                 <FormCatalogSelectField
-                                    name="idTipoBien"
+                                    name="idTipoDetalleBien"
                                     catalogId={ClavesModuloBienes.TiposDeBienes}
-                                    label="Tipo de Bien"
+                                    label="Clave de Bien"
                                     disabled={pkFieldsDisabled}
+                                />
+                            </Grid>
+                            <Grid item xs={6}>
+                                <FormDatePickerField
+                                    name="fechaVencimiento"
+                                    label="Fecha Vencimiento"
+                                    disabled={allFieldsDisabled}
                                 />
                             </Grid>
                         </Grid>
@@ -134,10 +151,9 @@ const DialogBienes: React.FC<ICatalogDialog<Bien>> = ({
                         >
                             <Grid item xs={6}>
                                 <FormTextField
-                                    name="importeDelBien"
-                                    label="Importe de Bien"
+                                    name="idRegimen"
+                                    label="Bajo Regimen en Condominio"
                                     disabled={allFieldsDisabled}
-                                    dataType="number"
                                 />
                             </Grid>
                             <Grid item xs={6}>
@@ -154,17 +170,37 @@ const DialogBienes: React.FC<ICatalogDialog<Bien>> = ({
                             spacing={3}
                         >
                             <Grid item xs={6}>
-                                <FormTextField
-                                    name="importeUltimaValuacion"
-                                    label="Importe Última Valuación"
+                                <GenericSwitch
+                                    id="forsCveRevaluaChk"
+                                    label="Revalua"
                                     disabled={allFieldsDisabled}
-                                    dataType="number"
                                 />
                             </Grid>
                             <Grid item xs={6}>
                                 <FormTextField
-                                    name="comentario"
-                                    label="Comentario"
+                                    name="importeDelBien"
+                                    label="Importe"
+                                    disabled={allFieldsDisabled}
+                                />
+                            </Grid>
+                        </Grid>
+                        <Grid
+                            container
+                            className={classes.rowSpacing}
+                            spacing={3}
+                        >
+                            <Grid item xs={6}>
+                                <FormTextField
+                                    name="importeUltimaValuacion"
+                                    label="Importe Última Valuación"
+                                    disabled={allFieldsDisabled}
+                                />
+                            </Grid>
+                            <Grid item xs={6}>
+                                <FormCatalogSelectField
+                                    name="idMoneda"
+                                    catalogId={ClavesModuloBienes.TiposDeBienes}
+                                    label="Moneda"
                                     disabled={allFieldsDisabled}
                                 />
                             </Grid>
@@ -177,52 +213,8 @@ const DialogBienes: React.FC<ICatalogDialog<Bien>> = ({
                             <Grid item xs={6}>
                                 <FormDatePickerField
                                     name="fechaUltimaValuacion"
-                                    label="Fecha de Última Valuación"
+                                    label="Fecha Última Valuación"
                                     disabled={allFieldsDisabled}
-                                />
-                            </Grid>
-                        </Grid>
-                        <Grid
-                            container
-                            className={classes.rowSpacing}
-                            spacing={3}
-                        >
-                            <Grid item xs={6}>
-                                <GenericSwitch
-                                    label="Revalua"
-                                    disabled={allFieldsDisabled}
-                                    onChange={() => {}}
-                                />
-                            </Grid>
-                            <Grid item xs={6}>
-                                <FormSwitchField
-                                    name="esGarantia"
-                                    label="¿Es Garantía?"
-                                    disabled={allFieldsDisabled}
-                                />
-                            </Grid>
-                        </Grid>
-                        <Grid
-                            container
-                            className={classes.rowSpacing}
-                            spacing={3}
-                        >
-                            <Grid item xs={6}>
-                                <FormTextField
-                                    name="importeDeGarantia"
-                                    label="Importe Bien"
-                                    disabled={allFieldsDisabled}
-                                    dataType="number"
-                                    adornment="$"
-                                />
-                            </Grid>
-                            <Grid item xs={6}>
-                                <FormTextField
-                                    name="picnorado"
-                                    label="Picnorado"
-                                    disabled={allFieldsDisabled}
-                                    dataType="number"
-                                    adornment="$"
                                 />
                             </Grid>
                         </Grid>
@@ -242,9 +234,9 @@ const DialogBienes: React.FC<ICatalogDialog<Bien>> = ({
                                 />
                             </Grid>
                             <Grid item xs={6}>
-                                <FormDatePickerField
-                                    name="fechaInicio"
-                                    label="Fecha de Inicio"
+                                <FormTextField
+                                    name="numeroEscritura"
+                                    label="Escritura"
                                     disabled={allFieldsDisabled}
                                 />
                             </Grid>
@@ -255,18 +247,38 @@ const DialogBienes: React.FC<ICatalogDialog<Bien>> = ({
                             spacing={3}
                         >
                             <Grid item xs={6}>
-                                <FormDatePickerField
-                                    name="fechaFin"
-                                    label="Fecha de Salida"
+                                <FormTextField
+                                    name="comentario"
+                                    label="Comentario"
                                     disabled={allFieldsDisabled}
                                 />
                             </Grid>
                             <Grid item xs={6}>
+                                <FormTextField
+                                    name="numeroNotario"
+                                    label="Notario"
+                                    disabled={allFieldsDisabled}
+                                />
+                            </Grid>
+                        </Grid>
+                        <Grid
+                            container
+                            className={classes.rowSpacing}
+                            spacing={3}
+                        >
+                            <Grid item xs={6}>
                                 <FormCatalogSelectField
-                                    name="estatus"
+                                    name="claveEstatus"
                                     catalogId={ClavesModuloBienes.Estatus}
                                     useLabelAsValue={true}
                                     label="Estatus"
+                                    disabled={allFieldsDisabled}
+                                />
+                            </Grid>
+                            <Grid item xs={6}>
+                                <FormTextField
+                                    name="importeUltimaValuacion"
+                                    label="Importe Revaluación"
                                     disabled={allFieldsDisabled}
                                 />
                             </Grid>
@@ -278,4 +290,4 @@ const DialogBienes: React.FC<ICatalogDialog<Bien>> = ({
     );
 };
 
-export default DialogBienes;
+export default DialogDetalleBienes;

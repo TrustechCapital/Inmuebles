@@ -1,5 +1,5 @@
 import { DetalleBienesState, DetalleBienesActions } from '../types';
-import { OperacionesCatalogo } from '../../../../constants';
+import { OperacionesCatalogo, SavingStatus } from '../../../../constants';
 import DetalleBien from '../../../../models/DetalleBien';
 
 export type BienesDispatcher = React.Dispatch<DetalleBienesActions>;
@@ -48,6 +48,31 @@ function detalleBienesReducer(
             return {
                 ...state,
                 modalOpen: false,
+            };
+        case 'SAVE_DETALLE_BIEN_MODEL':
+            return {
+                ...state,
+                savingStatus: SavingStatus.Saving,
+                modalErrorMessage: null,
+            };
+        case 'SET_DETALLE_BIEN_MODEL_SAVE_SUCCESS':
+            let modalMode = state.modalMode;
+
+            // Cambiar modo de edicion del modal
+            if (modalMode === OperacionesCatalogo.Alta) {
+                modalMode = OperacionesCatalogo.Modificacion;
+            }
+
+            return {
+                ...state,
+                savingStatus: SavingStatus.Success,
+                modalMode: modalMode,
+            };
+        case 'SET_DETALLE_BIEN_MODEL_SAVE_ERROR':
+            return {
+                ...state,
+                savingStatus: SavingStatus.Error,
+                modalErrorMessage: action.error,
             };
         default:
             return state;

@@ -29,6 +29,9 @@ export type DetalleBienesState = {
     modalOpen: boolean;
     modalMode: OperacionesCatalogo;
     showActionsToolbar: boolean;
+    savingStatus: SavingStatus;
+    isLoadingModel: boolean;
+    modalErrorMessage: string | null;
 };
 
 export type MainBienesState = {
@@ -86,6 +89,19 @@ export type DetalleBienesActions =
       }
     | {
           type: 'CLOSE_DETALLE_BIENES_MODAL';
+      }
+    | {
+          type: 'SAVE_DETALLE_BIEN_MODEL';
+      }
+    | {
+          type: 'SET_DETALLE_BIEN_MODEL_SAVE_SUCCESS';
+      }
+    | {
+          type: 'SET_DETALLE_BIEN_MODEL_SAVE_ERROR';
+          error: string;
+      }
+    | {
+          type: 'CLOSE_BIENES_MODAL';
       };
 
 export type MainBienesActions =

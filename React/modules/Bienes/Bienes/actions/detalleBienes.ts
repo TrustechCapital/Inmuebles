@@ -48,6 +48,36 @@ function fetchAndDisplayModel(mode: OperacionesCatalogo) {
     };
 }
 
+function saveModel(model: DetalleBien) {
+    return async (
+        dispatch: MainBienesDispatcher,
+        getState: () => MainBienesState
+    ) => {
+        const state = getState();
+        dispatch({
+            type: 'SAVE_DETALLE_BIEN_MODEL',
+        });
+
+        try {
+            if (state.bienes.modalMode === OperacionesCatalogo.Alta) {
+                await detalleBienesApi.create(model);
+            } else {
+                await detalleBienesApi.update(model);
+            }
+
+            dispatch({
+                type: 'SET_DETALLE_BIEN_MODEL_SAVE_SUCCESS',
+            });
+        } catch (err) {
+            dispatch({
+                type: 'SET_DETALLE_BIEN_MODEL_SAVE_ERROR',
+                error: err.message,
+            });
+        }
+    };
+}
+
 export default {
     fetchAndDisplayModel,
+    saveModel,
 };

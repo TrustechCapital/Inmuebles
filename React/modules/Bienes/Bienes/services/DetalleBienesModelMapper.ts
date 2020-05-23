@@ -12,9 +12,9 @@ class BienModelMapper implements IModelMapper<DetalleBien> {
         const model = new DetalleBien(
             data.fgrsIdFideicomiso,
             data.fgrsIdSubcuenta,
-            data.forsCveTipoBien,
+            data.forsCveTipoGarantia,
             data.forsIdGarantia,
-            data.forsCveTipoGarantia
+            data.forsCveTipoBien
         );
 
         Object.assign(model, {
@@ -41,9 +41,9 @@ class BienModelMapper implements IModelMapper<DetalleBien> {
             return {
                 fgrsIdFideicomiso: model.idFideicomiso,
                 fgrsIdSubcuenta: model.idSubcuenta,
-                forsCveTipoBien: model.idTipoBien,
+                forsCveTipoGarantia: model.idTipoBien,
                 forsIdGarantia: model.idDetalleBien,
-                forsCveTipoGarantia: model.idTipoDetalleBien,
+                forsCveTipoBien: model.idTipoDetalleBien,
             };
         }
 

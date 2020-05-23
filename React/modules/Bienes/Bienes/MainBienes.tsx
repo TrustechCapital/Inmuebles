@@ -41,6 +41,9 @@ const initialState: MainBienesState = {
         modalOpen: false,
         modalMode: OperacionesCatalogo.Alta,
         showActionsToolbar: false,
+        isLoadingModel: false,
+        savingStatus: SavingStatus.Initial,
+        modalErrorMessage: null,
     },
 };
 
@@ -64,11 +67,21 @@ const MainBienes: React.FC = () => {
     }, []);
 
     const saveBienesModel = useCallback((model: Bien) => {
-        dispatch(bienesActions.saveBienModel(model));
+        dispatch(bienesActions.saveModel(model));
     }, []);
 
     const searchBienes = useCallback((parameters: ITableBienesParameters) => {
         dispatch(bienesActions.newSearchBienes(parameters));
+    }, []);
+
+    const closeDetalleBienesModal = useCallback(() => {
+        dispatch({
+            type: 'CLOSE_DETALLE_BIENES_MODAL',
+        });
+    }, []);
+
+    const saveDetalleBienesModel = useCallback((model: DetalleBien) => {
+        dispatch(detalleBienesActions.saveModel(model));
     }, []);
 
     const BienesActionCallbacks = useMemo(() => {
@@ -164,12 +177,13 @@ const MainBienes: React.FC = () => {
             />
             <DialogDetalleBienes
                 mode={state.detalleBienes.modalMode}
-                opened={state.detalleBienes.modalOpen}
-                handleClose={() =>
-                    dispatch({
-                        type: 'CLOSE_DETALLE_BIENES_MODAL',
-                    })
-                }
+                open={state.detalleBienes.modalOpen}
+                model={state.detalleBienes.currentModel}
+                isLoading={state.bienes.isLoadingModel}
+                savingStatus={state.bienes.savingStatus}
+                errorMessage={state.bienes.modalErrorMessage}
+                onClose={closeDetalleBienesModal}
+                onSaveRequest={saveDetalleBienesModel}
             />
         </React.Fragment>
     );
