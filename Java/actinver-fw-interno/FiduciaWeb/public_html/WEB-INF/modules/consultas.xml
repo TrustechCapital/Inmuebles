@@ -57,7 +57,7 @@
                 <entry key="conNumMonNomMon2" value="SELECT MON_NUM_PAIS, MON_NOM_MONEDA FROM MONEDAS ORDER BY MON_NOM_MONEDA ASC"/>
                 <entry key="claves" value="SELECT CVE_NUM_SEC_CLAVE,CVE_DESC_CLAVE FROM CLAVES WHERE CVE_CVE_ST_CLAVE = 'ACTIVO'"/>
                 <!-- A causa de error por parametros se quito "ORDER BY CVE_DESC_CLAVE ASC" -->
-                <entry key="catalogoCompletoclaves" value="SELECT CVE_NUM_CLAVE, CVE_NUM_SEC_CLAVE, CVE_DESC_CLAVE FROM CLAVES WHERE CVE_CVE_ST_CLAVE = 'ACTIVO' ORDER BY CVE_NUM_CLAVE, CVE_NUM_SEC_CLAVE ASC"/>
+                <entry key="catalogoCompletoclaves" value="SELECT CVE_NUM_CLAVE, CVE_NUM_SEC_CLAVE, CVE_DESC_CLAVE, CVE_FORMA_EMP_CVE FROM CLAVES WHERE CVE_CVE_ST_CLAVE = 'ACTIVO' ORDER BY CVE_NUM_CLAVE, CVE_NUM_SEC_CLAVE ASC"/>
                 <entry key="claveActinverBanco" value="SELECT CVE_NUM_SEC_CLAVE,CVE_DESC_CLAVE FROM CLAVES WHERE CVE_CVE_ST_CLAVE = 'ACTIVO' AND CVE_NUM_CLAVE=27 AND CVE_DESC_CLAVE LIKE 'BANCO ACTINVER'"/>
                 <entry key="claveActividad" value="SELECT ACT_NUM_RAMA,ACT_NOM_RAMA FROM ACTIVIDA where act_num_srama = 0 order by ACT_NOM_RAMA"/>
                 <entry key="claveNacionalidad" value="SELECT NAC_NUM_PAIS,NAC_NOM_NACIONAL FROM NACIONAL"/>

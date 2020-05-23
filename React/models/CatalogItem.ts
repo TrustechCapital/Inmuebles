@@ -2,6 +2,7 @@ class CatalogItem {
     catalogId: number;
     value: number;
     label: string;
+    childCatalogId: string | null = null;
 
     constructor(catalogId: number, value: number, label: string) {
         this.catalogId = catalogId;
@@ -14,6 +15,7 @@ class CatalogItem {
             catalogId: obj.cveNumClave,
             value: obj.cveNumSecClave,
             label: obj.cveDescClave,
+            childCatalogId: obj.cveFormaEmpCve,
         };
     }
 }

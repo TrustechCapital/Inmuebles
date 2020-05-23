@@ -31,6 +31,40 @@ class CatalogsApi extends Api {
         return this.cachedClavesCatalog.get(id) || [];
     }
 
+    getChildCatalog(
+        parentCatalogId: number | null,
+        parentValue?: number | string | null
+    ): CatalogItem[] {
+        debugger;
+        if (parentCatalogId === null) {
+            return [];
+        }
+
+        if (!this.cachedClavesCatalog.has(parentCatalogId)) {
+            throw new CatalogNotFoundException(parentCatalogId);
+        }
+        const parentCatalogItems =
+            this.cachedClavesCatalog.get(parentCatalogId) || [];
+
+        const parentItemSelected = parentCatalogItems.find((catalogItem) => {
+            return catalogItem.value === parentValue;
+        });
+
+        if (!parentItemSelected || !parentItemSelected.childCatalogId)
+            return [];
+
+        try {
+            const childCatalogId = parseInt(
+                parentItemSelected.childCatalogId,
+                0
+            );
+
+            return this.getCatalogById(childCatalogId);
+        } catch (error) {
+            return [];
+        }
+    }
+
     private async fetchClavesCatalog() {
         let results: CatalogItem[] = [];
         const cachedResults = sessionStorage.getItem(CATALOGS_CACHE_KEY);
