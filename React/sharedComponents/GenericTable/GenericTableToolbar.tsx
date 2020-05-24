@@ -27,11 +27,13 @@ const useStyles = makeStyles((theme) => ({
 }));
 
 export type ToolbarActionsProps = {
+    multipleSelect: boolean;
     numSelected: number;
     onNew?: () => void;
 };
 
 const EnhancedTableToolbarActions: React.FC<ToolbarActionsProps> = ({
+    multipleSelect,
     numSelected,
     ...props
 }) => {
@@ -67,7 +69,7 @@ const EnhancedTableToolbarActions: React.FC<ToolbarActionsProps> = ({
                 </Tooltip>
             ) : null}
 
-            {numSelected == 0 ? (
+            {!multipleSelect || numSelected == 0 ? (
                 <Tooltip title="Nuevo">
                     <IconButton
                         aria-label="nuevo"
@@ -85,7 +87,7 @@ const EnhancedTableToolbarActions: React.FC<ToolbarActionsProps> = ({
 type TableToolbarProps = {
     title: string;
     numSelected: number;
-    showSelectedCount: boolean;
+    multipleSelect: boolean;
     showActions: boolean;
     actionsComponent: any;
     onNew?: () => void;
@@ -94,7 +96,7 @@ type TableToolbarProps = {
 const EnhancedTableToolbar: React.FC<TableToolbarProps> = ({
     title,
     numSelected,
-    showSelectedCount,
+    multipleSelect,
     showActions = true,
     actionsComponent,
     onNew,
@@ -105,10 +107,10 @@ const EnhancedTableToolbar: React.FC<TableToolbarProps> = ({
     return (
         <Toolbar
             className={clsx(classes.root, {
-                [classes.highlight]: showSelectedCount && numSelected > 0,
+                [classes.highlight]: multipleSelect && numSelected > 0,
             })}
         >
-            {showSelectedCount && numSelected > 0 ? (
+            {multipleSelect && numSelected > 0 ? (
                 <Typography
                     className={classes.title}
                     color="inherit"
@@ -129,7 +131,11 @@ const EnhancedTableToolbar: React.FC<TableToolbarProps> = ({
             )}
 
             {showActions === true ? (
-                <ToolbarActions numSelected={numSelected} onNew={onNew} />
+                <ToolbarActions
+                    multipleSelect={multipleSelect}
+                    numSelected={numSelected}
+                    onNew={onNew}
+                />
             ) : null}
         </Toolbar>
     );

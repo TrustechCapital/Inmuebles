@@ -164,7 +164,7 @@ function GenericTable<T extends ITableRow>(props: TableProps<T>) {
                 title={title}
                 onNew={onNew}
                 showActions={showActionsHeader}
-                showSelectedCount={multipleSelect}
+                multipleSelect={multipleSelect}
                 actionsComponent={additionalActionsComponent}
             />
             <TableContainer className={classes.table}>

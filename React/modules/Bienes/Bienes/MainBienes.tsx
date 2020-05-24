@@ -111,12 +111,12 @@ const MainBienes: React.FC = () => {
                 );
             },
             onDelete: () => {
-                dispatch(bienesActions.deleteSelectedModels());
+                dispatch(bienesActions.deleteSelectedModel());
             },
         };
     }, []);
 
-    const DetalleBienesActionCallbacks = useMemo(() => {
+    const DetalleBienesTableConext = useMemo(() => {
         return {
             onNew: () => {
                 dispatch(detalleBienesActions.newDetalleBienes());
@@ -159,7 +159,7 @@ const MainBienes: React.FC = () => {
                 />
             </GenericTableCallbacksContext.Provider>
             <DetalleBienesTableCallbacksContext.Provider
-                value={DetalleBienesActionCallbacks}
+                value={DetalleBienesTableConext}
             >
                 <TableDetalleBienes
                     data={state.detalleBienes.searchResults}
