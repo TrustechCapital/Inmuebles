@@ -17,11 +17,11 @@ class DetalleBienResultRow {
         return {
             id: index,
             idFideicomiso: obj.fgrsIdFideicomiso,
-            idSubcuenta: obj.fgrs_id_subcuenta,
-            idTipoBien: obj.fors_cve_tipo_bien,
+            idSubcuenta: obj.fgrsIdSubcuenta,
+            idTipoBien: obj.forsCveTipoBien,
             tipoBien: obj.descripbien,
-            idDetalleBien: obj.fors_id_garantia,
-            idTipoDetalleBien: obj.fors_cve_tipo_garantia,
+            idDetalleBien: obj.forsIdGarantia,
+            idTipoDetalleBien: obj.forsCveTipoGarantia,
 
             importeUltimaValuacionFormateado: obj.forsImpUltValuaFormatted,
             descripcion: obj.forsTextoDescrip,

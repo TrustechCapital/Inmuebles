@@ -111,7 +111,7 @@ const MainBienes: React.FC = () => {
                 );
             },
             onDelete: () => {
-                dispatch(bienesActions.deleteSelectedBienModels());
+                dispatch(bienesActions.deleteSelectedModels());
             },
         };
     }, []);
@@ -136,7 +136,7 @@ const MainBienes: React.FC = () => {
                 );
             },
             onDelete: () => {
-                debugger;
+                dispatch(detalleBienesActions.deleteSelectedModels());
             },
             onRevaluacion: () => {
                 dispatch(

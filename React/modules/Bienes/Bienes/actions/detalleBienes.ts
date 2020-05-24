@@ -129,8 +129,68 @@ function saveModel(model: DetalleBien) {
     };
 }
 
+function deleteSelectedModels() {
+    return async (
+        dispatch: MainBienesDispatcher,
+        getState: () => MainBienesState
+    ) => {
+        const state = getState();
+        const selectedRows = state.detalleBienes.selectedRows;
+
+        if (!selectedRows.length) {
+            return;
+        }
+
+        const allPromises = selectedRows.reduce(
+            (promises: Promise<void>[], selectedRow) => {
+                const model = new DetalleBien(
+                    selectedRow.idFideicomiso,
+                    selectedRow.idSubcuenta,
+                    selectedRow.idTipoBien,
+                    selectedRow.idDetalleBien,
+                    selectedRow.idTipoDetalleBien
+                );
+
+                const deletePromise = detalleBienesApi
+                    .destroy(model)
+                    .catch(() => {
+                        return Promise.reject(model.idDetalleBien);
+                    });
+                promises.push(deletePromise);
+                return promises;
+            },
+            []
+        );
+
+        Promise.allSettled(allPromises).then((results) => {
+            let notDeletedIds: number[] = [];
+
+            results.forEach((result) => {
+                if (result.status === 'rejected') {
+                    notDeletedIds.push(result.reason);
+                }
+            });
+
+            if (!notDeletedIds.length) {
+                // TODO: convertir esto en un mensaje global
+                console.log('Registros eliminados exitosamente');
+            } else {
+                // TODO: convertir esto en un mensaje global
+                console.log(
+                    `Los registros con Id ${notDeletedIds.join(
+                        ', '
+                    )} no pudieron ser eliminados`
+                );
+            }
+
+            repeatCurrentSearch(dispatch, getState);
+        });
+    };
+}
+
 export default {
     newDetalleBienes,
     fetchAndDisplayModel,
     saveModel,
+    deleteSelectedModels,
 };

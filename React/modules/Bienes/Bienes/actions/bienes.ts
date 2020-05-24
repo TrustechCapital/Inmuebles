@@ -123,7 +123,7 @@ function saveModel(model: Bien) {
     };
 }
 
-function deleteSelectedBienModels() {
+function deleteSelectedModels() {
     return async (
         dispatch: MainBienesDispatcher,
         getState: () => MainBienesState
@@ -145,5 +145,5 @@ export default {
     fetchAndDisplayModel,
     newSearchBienes,
     saveModel,
-    deleteSelectedBienModels,
+    deleteSelectedModels,
 };
