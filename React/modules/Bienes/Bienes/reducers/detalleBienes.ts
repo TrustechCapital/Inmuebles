@@ -1,6 +1,7 @@
 import { DetalleBienesState, DetalleBienesActions } from '../types';
-import { OperacionesCatalogo, SavingStatus } from '../../../../constants';
+import { SavingStatus } from '../../../../constants';
 import DetalleBien from '../../../../models/DetalleBien';
+import { OperacionesCatalogoDetalleBienes } from '../constants';
 
 export type BienesDispatcher = React.Dispatch<DetalleBienesActions>;
 
@@ -21,18 +22,14 @@ function detalleBienesReducer(
             };
         case 'OPEN_DETALLE_BIENES_MODAL':
             let currentModel = state.currentModel;
-            const esConsultaOModificacion =
-                action.mode === OperacionesCatalogo.Consulta ||
-                action.mode === OperacionesCatalogo.Modificacion;
-            const esAlta = action.mode === OperacionesCatalogo.Alta;
+            const esAlta =
+                action.mode === OperacionesCatalogoDetalleBienes.Registro;
 
             if (esAlta) {
                 currentModel = new DetalleBien(null, null, null, null, null);
             }
 
-            const shouldOpenModal =
-                esAlta ||
-                (esConsultaOModificacion && state.selectedRows.length === 1);
+            const shouldOpenModal = esAlta || state.selectedRows.length === 1;
 
             if (shouldOpenModal) {
                 return {
@@ -59,8 +56,8 @@ function detalleBienesReducer(
             let modalMode = state.modalMode;
 
             // Cambiar modo de edicion del modal
-            if (modalMode === OperacionesCatalogo.Alta) {
-                modalMode = OperacionesCatalogo.Modificacion;
+            if (modalMode === OperacionesCatalogoDetalleBienes.Registro) {
+                modalMode = OperacionesCatalogoDetalleBienes.Modificacion;
             }
 
             return {

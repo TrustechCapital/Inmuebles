@@ -40,7 +40,7 @@ type ActionsDetalleBienes = GenericToolbarActionsProps;
 const ActionsDetalleBienes: React.FC<ActionsDetalleBienes> = ({
     numSelected,
 }) => {
-    const { onNew, onView, onModify } = useContext(
+    const { onNew, onView, onModify, onRevaluacion } = useContext(
         DetalleBienesTableCallbacksContext
     );
 
@@ -56,7 +56,7 @@ const ActionsDetalleBienes: React.FC<ActionsDetalleBienes> = ({
 
             {numSelected == 1 ? (
                 <Tooltip title="Reevaluación">
-                    <IconButton>
+                    <IconButton onClick={onRevaluacion}>
                         <MonetizationOnIcon />
                     </IconButton>
                 </Tooltip>

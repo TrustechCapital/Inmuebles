@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useCallback } from 'react';
 
 import { makeStyles } from '@material-ui/core/styles';
 import Grid from '@material-ui/core/Grid';
@@ -15,6 +15,8 @@ import FormValidator, {
 } from '../../../services/FormValidator';
 import DetalleBien from '../../../models/DetalleBien';
 import { monedasApi } from '../../../core/api/monedas';
+import GenericDatePicker from '../../../sharedComponents/GenericDatePicker';
+import { OperacionesCatalogoDetalleBienes } from './constants';
 
 const {
     FormTextField,
@@ -30,6 +32,22 @@ const useStyles = makeStyles((theme) => ({
     },
 }));
 
+function castOperacionCatalogo(
+    mode: OperacionesCatalogoDetalleBienes
+): OperacionesCatalogo {
+    switch (mode) {
+        case OperacionesCatalogoDetalleBienes.Registro:
+            return OperacionesCatalogo.Alta;
+        case OperacionesCatalogoDetalleBienes.Modificacion:
+        case OperacionesCatalogoDetalleBienes.Revaluacion:
+            return OperacionesCatalogo.Modificacion;
+        case OperacionesCatalogoDetalleBienes.Consulta:
+            return OperacionesCatalogo.Consulta;
+        default:
+            return OperacionesCatalogo.Baja;
+    }
+}
+
 const DetalleBienesFormValidator = new FormValidator<DetalleBien>({
     idFideicomiso: ValidationHelpers.validateFideicomiso,
     idSubcuenta: ValidationHelpers.validateSubcuenta,
@@ -41,7 +59,11 @@ const DetalleBienesFormValidator = new FormValidator<DetalleBien>({
     ),
 });
 
-const DialogDetalleBienes: React.FC<ICatalogDialog<DetalleBien>> = ({
+type DialogDetalleBienesProps = Omit<ICatalogDialog<DetalleBien>, 'mode'> & {
+    mode: OperacionesCatalogoDetalleBienes;
+};
+
+const DialogDetalleBienes: React.FC<DialogDetalleBienesProps> = ({
     mode,
     model,
     open,
@@ -50,17 +72,32 @@ const DialogDetalleBienes: React.FC<ICatalogDialog<DetalleBien>> = ({
     onClose,
     onSaveRequest,
 }) => {
+    const [fechaRevaluacion, setFechaRevaluacion] = useState(new Date());
+
     const [monedas, setMonedas] = useState([]);
     const classes = useStyles();
 
-    const allFieldsDisabled = mode === OperacionesCatalogo.Consulta;
+    const allFieldsDisabled =
+        mode === OperacionesCatalogoDetalleBienes.Consulta ||
+        mode === OperacionesCatalogoDetalleBienes.Revaluacion;
+
     const pkFieldsDisabled =
-        allFieldsDisabled || mode === OperacionesCatalogo.Modificacion;
+        allFieldsDisabled ||
+        mode === OperacionesCatalogoDetalleBienes.Modificacion ||
+        mode === OperacionesCatalogoDetalleBienes.Revaluacion;
+
+    const revaluacionFieldsDisabled =
+        mode === OperacionesCatalogoDetalleBienes.Consulta ||
+        mode !== OperacionesCatalogoDetalleBienes.Revaluacion;
 
     useEffect(() => {
         monedasApi.fetchAll().then((monedas) => {
             setMonedas(monedas);
         });
+    }, []);
+
+    const handleChangeFechaRevaluacion = useCallback((e: any) => {
+        setFechaRevaluacion(e.target.value);
     }, []);
 
     return (
@@ -73,7 +110,7 @@ const DialogDetalleBienes: React.FC<ICatalogDialog<DetalleBien>> = ({
             {(props) => (
                 <CatalogDialog
                     opened={open}
-                    operacionCatalogo={mode}
+                    operacionCatalogo={castOperacionCatalogo(mode)}
                     nombreCatalogo="Detalle Bienes"
                     subtitle="Detalle del Bien"
                     onCancel={() => {
@@ -182,13 +219,6 @@ const DialogDetalleBienes: React.FC<ICatalogDialog<DetalleBien>> = ({
                             spacing={3}
                         >
                             <Grid item xs={6}>
-                                <GenericSwitch
-                                    id="forsCveRevaluaChk"
-                                    label="Revalua"
-                                    disabled={allFieldsDisabled}
-                                />
-                            </Grid>
-                            <Grid item xs={6}>
                                 <FormTextField
                                     name="importeDelBien"
                                     label="Importe"
@@ -294,6 +324,44 @@ const DialogDetalleBienes: React.FC<ICatalogDialog<DetalleBien>> = ({
                                     name="importeUltimaValuacion"
                                     label="Importe Revaluación"
                                     disabled={allFieldsDisabled}
+                                />
+                            </Grid>
+                        </Grid>
+                        <Grid
+                            container
+                            className={classes.rowSpacing}
+                            spacing={3}
+                        >
+                            <Grid item xs={6}>
+                                <GenericSwitch
+                                    id="forsCveRevaluaChk"
+                                    label="Revalua"
+                                    checked={
+                                        mode ===
+                                        OperacionesCatalogoDetalleBienes.Revaluacion
+                                    }
+                                    disabled={revaluacionFieldsDisabled}
+                                />
+                            </Grid>
+                        </Grid>
+                        <Grid
+                            container
+                            className={classes.rowSpacing}
+                            spacing={3}
+                        >
+                            <Grid item xs={6}>
+                                <FormTextField
+                                    name="importeUltimaValuacion"
+                                    label="Importe Revaluación"
+                                    disabled={revaluacionFieldsDisabled}
+                                />
+                            </Grid>
+                            <Grid item xs={6}>
+                                <GenericDatePicker
+                                    label="Fecha Revaluación"
+                                    value={fechaRevaluacion}
+                                    onChange={handleChangeFechaRevaluacion}
+                                    disabled={revaluacionFieldsDisabled}
                                 />
                             </Grid>
                         </Grid>

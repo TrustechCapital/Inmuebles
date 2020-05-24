@@ -1,8 +1,8 @@
 import { MainBienesActions, MainBienesState } from '../types';
 import { detalleBienesApi } from '../services';
-import { OperacionesCatalogo } from '../../../../constants';
 import DetalleBienResultRow from '../models/DetalleBienResultRow';
 import DetalleBien from '../../../../models/DetalleBien';
+import { OperacionesCatalogoDetalleBienes } from '../constants';
 
 type MainBienesDispatcher = React.Dispatch<MainBienesActions>;
 
@@ -24,7 +24,7 @@ async function fetchFullModel(
     return await detalleBienesApi.findByPK(detalleBien);
 }
 
-function fetchAndDisplayModel(mode: OperacionesCatalogo) {
+function fetchAndDisplayModel(mode: OperacionesCatalogoDetalleBienes) {
     return async (
         dispatch: MainBienesDispatcher,
         getState: () => MainBienesState
@@ -59,7 +59,10 @@ function saveModel(model: DetalleBien) {
         });
 
         try {
-            if (state.bienes.modalMode === OperacionesCatalogo.Alta) {
+            if (
+                state.detalleBienes.modalMode ===
+                OperacionesCatalogoDetalleBienes.Registro
+            ) {
                 await detalleBienesApi.create(model);
             } else {
                 await detalleBienesApi.update(model);

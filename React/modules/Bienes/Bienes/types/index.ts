@@ -3,6 +3,7 @@ import DetalleBienResultRow from '../models/DetalleBienResultRow';
 import Bien from '../../../../models/Bien';
 import DetalleBien from '../../../../models/DetalleBien';
 import { OperacionesCatalogo, SavingStatus } from '../../../../constants';
+import { OperacionesCatalogoDetalleBienes } from '../constants';
 
 export interface ITableBienesParameters {
     idFideicomiso: number | null;
@@ -27,7 +28,7 @@ export type DetalleBienesState = {
     selectedRows: DetalleBienResultRow[];
     currentModel: DetalleBien;
     modalOpen: boolean;
-    modalMode: OperacionesCatalogo;
+    modalMode: OperacionesCatalogoDetalleBienes;
     showActionsToolbar: boolean;
     savingStatus: SavingStatus;
     isLoadingModel: boolean;
@@ -85,7 +86,7 @@ export type DetalleBienesActions =
       }
     | {
           type: 'OPEN_DETALLE_BIENES_MODAL';
-          mode: OperacionesCatalogo;
+          mode: OperacionesCatalogoDetalleBienes;
       }
     | {
           type: 'CLOSE_DETALLE_BIENES_MODAL';

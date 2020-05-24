@@ -17,6 +17,7 @@ import { GenericTableCallbacksContext } from '../../../sharedComponents/GenericT
 import { DetalleBienesTableCallbacksContext } from './context';
 import DetalleBienResultRow from './models/DetalleBienResultRow';
 import DetalleBien from '../../../models/DetalleBien';
+import { OperacionesCatalogoDetalleBienes } from './constants';
 
 const initialState: MainBienesState = {
     bienes: {
@@ -39,7 +40,7 @@ const initialState: MainBienesState = {
         selectedRows: [],
         currentModel: new DetalleBien(null, null, null, null, null),
         modalOpen: false,
-        modalMode: OperacionesCatalogo.Alta,
+        modalMode: OperacionesCatalogoDetalleBienes.Registro,
         showActionsToolbar: false,
         isLoadingModel: false,
         savingStatus: SavingStatus.Initial,
@@ -120,20 +121,20 @@ const MainBienes: React.FC = () => {
             onNew: () => {
                 dispatch({
                     type: 'OPEN_DETALLE_BIENES_MODAL',
-                    mode: OperacionesCatalogo.Alta,
+                    mode: OperacionesCatalogoDetalleBienes.Registro,
                 });
             },
             onView: () => {
                 dispatch(
                     detalleBienesActions.fetchAndDisplayModel(
-                        OperacionesCatalogo.Consulta
+                        OperacionesCatalogoDetalleBienes.Consulta
                     )
                 );
             },
             onModify: () => {
                 dispatch(
                     detalleBienesActions.fetchAndDisplayModel(
-                        OperacionesCatalogo.Modificacion
+                        OperacionesCatalogoDetalleBienes.Modificacion
                     )
                 );
             },
@@ -141,7 +142,11 @@ const MainBienes: React.FC = () => {
                 debugger;
             },
             onRevaluacion: () => {
-                debugger;
+                dispatch(
+                    detalleBienesActions.fetchAndDisplayModel(
+                        OperacionesCatalogoDetalleBienes.Revaluacion
+                    )
+                );
             },
         };
     }, []);
