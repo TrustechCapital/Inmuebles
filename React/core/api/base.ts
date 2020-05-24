@@ -92,9 +92,12 @@ export class Api {
                 json: JSON.stringify(filteredParams),
             },
         }).then((response) => {
-            const data = response.data as object[];
-
-            return data.map(transformer);
+            if (response === null) {
+                throw new Error('Ocurrio un error al procesar el request');
+            } else {
+                const data = response.data as object[];
+                return data.map(transformer);
+            }
         });
     }
 }
