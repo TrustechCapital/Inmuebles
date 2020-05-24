@@ -9,6 +9,11 @@ function detalleBienesReducer(
     action: DetalleBienesActions
 ): DetalleBienesState {
     switch (action.type) {
+        case 'SET_DETALLE_BIENES_SEARCH_RESULTS':
+            return {
+                ...state,
+                searchResults: action.results,
+            };
         case 'SET_DETALLE_BIENES_ROWS_SELECTION':
             return {
                 ...state,

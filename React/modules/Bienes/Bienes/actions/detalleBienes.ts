@@ -3,8 +3,24 @@ import { detalleBienesApi } from '../services';
 import DetalleBienResultRow from '../models/DetalleBienResultRow';
 import DetalleBien from '../../../../models/DetalleBien';
 import { OperacionesCatalogoDetalleBienes } from '../constants';
+import BienResultRow from '../models/BienResultRow';
 
 type MainBienesDispatcher = React.Dispatch<MainBienesActions>;
+
+async function repeatCurrentSearch(
+    dispatch: MainBienesDispatcher,
+    getState: () => MainBienesState
+) {
+    const state = getState();
+    const detalleBienesSearchResults = await detalleBienesApi.find(
+        state.bienes.selectedRow as BienResultRow
+    );
+
+    dispatch({
+        type: 'SET_DETALLE_BIENES_SEARCH_RESULTS',
+        results: detalleBienesSearchResults,
+    });
+}
 
 async function fetchFullModel(
     resultRow: DetalleBienResultRow | null
@@ -53,6 +69,7 @@ function newDetalleBienes() {
         });
     };
 }
+
 function fetchAndDisplayModel(mode: OperacionesCatalogoDetalleBienes) {
     return async (
         dispatch: MainBienesDispatcher,
@@ -101,6 +118,8 @@ function saveModel(model: DetalleBien) {
             dispatch({
                 type: 'SET_DETALLE_BIEN_MODEL_SAVE_SUCCESS',
             });
+
+            repeatCurrentSearch(dispatch, getState);
         } catch (err) {
             dispatch({
                 type: 'SET_DETALLE_BIEN_MODEL_SAVE_ERROR',

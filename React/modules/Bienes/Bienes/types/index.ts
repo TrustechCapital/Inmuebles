@@ -77,6 +77,10 @@ export type BienesActions =
 
 export type DetalleBienesActions =
     | {
+          type: 'SET_DETALLE_BIENES_SEARCH_RESULTS';
+          results: DetalleBienResultRow[];
+      }
+    | {
           type: 'SET_DETALLE_BIENES_ROWS_SELECTION';
           selectedRows: DetalleBienResultRow[];
       }

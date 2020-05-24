@@ -181,9 +181,9 @@ const MainBienes: React.FC = () => {
                 mode={state.detalleBienes.modalMode}
                 open={state.detalleBienes.modalOpen}
                 model={state.detalleBienes.currentModel}
-                isLoading={state.bienes.isLoadingModel}
-                savingStatus={state.bienes.savingStatus}
-                errorMessage={state.bienes.modalErrorMessage}
+                isLoading={state.detalleBienes.isLoadingModel}
+                savingStatus={state.detalleBienes.savingStatus}
+                errorMessage={state.detalleBienes.modalErrorMessage}
                 onClose={closeDetalleBienesModal}
                 onSaveRequest={saveDetalleBienesModel}
             />
