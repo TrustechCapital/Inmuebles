@@ -53,6 +53,11 @@ class BienModelMapper implements IModelMapper<DetalleBien> {
         ]);
 
         return {
+            fgrsIdFideicomiso: model.idFideicomiso,
+            fgrsIdSubcuenta: model.idSubcuenta,
+            forsCveTipoGarantia: model.idTipoBien,
+            forsIdGarantia: model.idDetalleBien,
+            forsCveTipoBien: model.idTipoDetalleBien,
             forsIdentificacion: model.identificacion,
             forsTextoDescrip: model.descripcion,
             forsTexComentario: model.comentario,

@@ -18,6 +18,26 @@ class DetalleBienesApi extends ModelsApi<DetalleBien> {
             DetalleBienResultRow.fromObject
         );
     }
+
+    async getNextId(
+        idFideicomiso: number,
+        idSubcuenta: number,
+        idTipoBien: number
+    ): Promise<number> {
+        return this.getRef<number>(
+            'consultaSigBienesGar',
+            {
+                Fiso: idFideicomiso,
+                SubFiso: idSubcuenta,
+                CveTipoGar: idTipoBien,
+            },
+            (data) => {
+                return data.idSigBien;
+            }
+        ).then((data) => {
+            return data[0];
+        });
+    }
 }
 
 export const detalleBienesApi = new DetalleBienesApi(DetalleBienesModelMapper);

@@ -49,13 +49,9 @@ function castOperacionCatalogo(
 }
 
 const DetalleBienesFormValidator = new FormValidator<DetalleBien>({
-    idFideicomiso: ValidationHelpers.validateFideicomiso,
-    idSubcuenta: ValidationHelpers.validateSubcuenta,
-    idTipoBien: ValidationHelpers.validateRequiredNumber(
-        'El tipo de bien es un campo requerido'
-    ),
-    idTipoDetalleBien: ValidationHelpers.validateRequiredNumber(
-        'El tipo de bien es un campo requerido'
+    idTipoDetalleBien: ValidationHelpers.validateRequiredNumber('Tipo de bien'),
+    importeDelBien: ValidationHelpers.validateRequiredNumber(
+        'Importe del bien'
     ),
 });
 

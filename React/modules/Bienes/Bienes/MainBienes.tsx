@@ -119,10 +119,7 @@ const MainBienes: React.FC = () => {
     const DetalleBienesActionCallbacks = useMemo(() => {
         return {
             onNew: () => {
-                dispatch({
-                    type: 'OPEN_DETALLE_BIENES_MODAL',
-                    mode: OperacionesCatalogoDetalleBienes.Registro,
-                });
+                dispatch(detalleBienesActions.newDetalleBienes());
             },
             onView: () => {
                 dispatch(

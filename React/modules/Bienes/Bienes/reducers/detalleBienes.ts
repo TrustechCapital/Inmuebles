@@ -19,7 +19,23 @@ function detalleBienesReducer(
                 ...state,
                 currentModel: action.model,
             };
+        case 'OPEN_NEW_DETALLE_BIENES_MODAL':
+            return {
+                ...state,
+                modalOpen: true,
+                modalMode: OperacionesCatalogoDetalleBienes.Registro,
+                currentModel: action.newModel,
+            };
+        case 'OPEN_DETALLE_BIENES_MODAL':
+            if (state.selectedRows.length === 1) {
+                return {
+                    ...state,
+                    modalOpen: true,
+                    modalMode: action.mode,
+                };
+            }
 
+            return state;
         case 'CLOSE_DETALLE_BIENES_MODAL':
             return {
                 ...state,

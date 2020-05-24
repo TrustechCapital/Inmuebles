@@ -85,6 +85,10 @@ export type DetalleBienesActions =
           model: DetalleBien;
       }
     | {
+          type: 'OPEN_NEW_DETALLE_BIENES_MODAL';
+          newModel: DetalleBien;
+      }
+    | {
           type: 'OPEN_DETALLE_BIENES_MODAL';
           mode: OperacionesCatalogoDetalleBienes;
       }

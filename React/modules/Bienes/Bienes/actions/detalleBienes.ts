@@ -24,12 +24,42 @@ async function fetchFullModel(
     return await detalleBienesApi.findByPK(detalleBien);
 }
 
+function newDetalleBienes() {
+    return async (
+        dispatch: MainBienesDispatcher,
+        getState: () => MainBienesState
+    ) => {
+        const state = getState();
+        const currentBienModel = state.bienes.currentModel;
+
+        const nextDetalleBienId = await detalleBienesApi.getNextId(
+            currentBienModel.idFideicomiso as number,
+            currentBienModel.idSubcuenta as number,
+            currentBienModel.idTipoBien as number
+        );
+
+        const newCurrentModel = new DetalleBien(
+            currentBienModel.idFideicomiso,
+            currentBienModel.idSubcuenta,
+            currentBienModel.idTipoBien,
+            nextDetalleBienId,
+            null
+        );
+
+        dispatch({
+            type: 'OPEN_NEW_DETALLE_BIENES_MODAL',
+            mode: OperacionesCatalogoDetalleBienes.Registro,
+            newModel: newCurrentModel,
+        });
+    };
+}
 function fetchAndDisplayModel(mode: OperacionesCatalogoDetalleBienes) {
     return async (
         dispatch: MainBienesDispatcher,
         getState: () => MainBienesState
     ) => {
         const state = getState();
+
         const loadedModel = await fetchFullModel(
             state.detalleBienes.selectedRows[0]
         );
@@ -81,6 +111,7 @@ function saveModel(model: DetalleBien) {
 }
 
 export default {
+    newDetalleBienes,
     fetchAndDisplayModel,
     saveModel,
 };
