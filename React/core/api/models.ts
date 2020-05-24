@@ -86,6 +86,28 @@ export class ModelsApi<T extends IModel> extends Api implements IModelsApi<T> {
             this.createBackendParameters(model, transformer, true)
         );
     }
+
+    async destroyMany(models: T[]): Promise<T[]> {
+        const allPromises = models.reduce(
+            (promises: Promise<void>[], model) => {
+                promises.push(this.destroy(model));
+                return promises;
+            },
+            []
+        );
+
+        return Promise.allSettled(allPromises).then((results) => {
+            let failedModels: T[] = [];
+
+            results.forEach((result, index) => {
+                if (result.status === 'rejected') {
+                    failedModels.push(models[index]);
+                }
+            });
+
+            return failedModels;
+        });
+    }
 }
 
 export default ModelsApi;
