@@ -1,6 +1,5 @@
 import { DetalleBienesState, DetalleBienesActions } from '../types';
 import { SavingStatus } from '../../../../constants';
-import DetalleBien from '../../../../models/DetalleBien';
 import { OperacionesCatalogoDetalleBienes } from '../constants';
 
 export type BienesDispatcher = React.Dispatch<DetalleBienesActions>;
@@ -20,27 +19,7 @@ function detalleBienesReducer(
                 ...state,
                 currentModel: action.model,
             };
-        case 'OPEN_DETALLE_BIENES_MODAL':
-            let currentModel = state.currentModel;
-            const esAlta =
-                action.mode === OperacionesCatalogoDetalleBienes.Registro;
 
-            if (esAlta) {
-                currentModel = new DetalleBien(null, null, null, null, null);
-            }
-
-            const shouldOpenModal = esAlta || state.selectedRows.length === 1;
-
-            if (shouldOpenModal) {
-                return {
-                    ...state,
-                    modalOpen: true,
-                    modalMode: action.mode,
-                    currentModel: currentModel,
-                };
-            }
-
-            return state;
         case 'CLOSE_DETALLE_BIENES_MODAL':
             return {
                 ...state,

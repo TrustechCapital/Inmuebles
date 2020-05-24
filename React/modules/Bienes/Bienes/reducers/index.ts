@@ -7,6 +7,8 @@ import {
 
 import { bienesReducer } from './bienes';
 import { detalleBienesReducer } from './detalleBienes';
+import { OperacionesCatalogoDetalleBienes } from '../constants';
+import DetalleBien from '../../../../models/DetalleBien';
 
 function mainBienesReducer(
     state: MainBienesState,
@@ -33,6 +35,39 @@ function mainBienesReducer(
                     showActionsToolbar: true,
                 },
             };
+
+        case 'OPEN_DETALLE_BIENES_MODAL':
+            const currentBienModel = state.bienes.currentModel;
+            let currentModel = state.detalleBienes.currentModel;
+            const esAlta =
+                action.mode === OperacionesCatalogoDetalleBienes.Registro;
+
+            if (esAlta) {
+                currentModel = new DetalleBien(
+                    currentBienModel.idFideicomiso,
+                    currentBienModel.idSubcuenta,
+                    currentBienModel.idTipoBien,
+                    null,
+                    null
+                );
+            }
+
+            const shouldOpenModal =
+                esAlta || state.detalleBienes.selectedRows.length === 1;
+
+            if (shouldOpenModal) {
+                return {
+                    ...state,
+                    detalleBienes: {
+                        ...state.detalleBienes,
+                        modalOpen: true,
+                        modalMode: action.mode,
+                        currentModel: currentModel,
+                    },
+                };
+            }
+
+            return state;
         default:
             return {
                 bienes: bienesReducer(state.bienes, action as BienesActions),

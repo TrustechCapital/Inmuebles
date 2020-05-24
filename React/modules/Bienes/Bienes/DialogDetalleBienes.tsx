@@ -81,10 +81,7 @@ const DialogDetalleBienes: React.FC<DialogDetalleBienesProps> = ({
         mode === OperacionesCatalogoDetalleBienes.Consulta ||
         mode === OperacionesCatalogoDetalleBienes.Revaluacion;
 
-    const pkFieldsDisabled =
-        allFieldsDisabled ||
-        mode === OperacionesCatalogoDetalleBienes.Modificacion ||
-        mode === OperacionesCatalogoDetalleBienes.Revaluacion;
+    const pkFieldsDisabled = mode !== OperacionesCatalogoDetalleBienes.Registro;
 
     const revaluacionFieldsDisabled =
         mode === OperacionesCatalogoDetalleBienes.Consulta ||
@@ -137,7 +134,7 @@ const DialogDetalleBienes: React.FC<DialogDetalleBienesProps> = ({
                                 <FormTextField
                                     name="idFideicomiso"
                                     label="Fideicomiso"
-                                    disabled={pkFieldsDisabled}
+                                    disabled={true}
                                 />
                             </Grid>
                             <Grid item xs={6}>
@@ -145,7 +142,7 @@ const DialogDetalleBienes: React.FC<DialogDetalleBienesProps> = ({
                                     name="idTipoBien"
                                     catalogId={ClavesModuloBienes.TiposDeBienes}
                                     label="Tipo Bien"
-                                    disabled={pkFieldsDisabled}
+                                    disabled={true}
                                 />
                             </Grid>
                         </Grid>
@@ -158,7 +155,7 @@ const DialogDetalleBienes: React.FC<DialogDetalleBienesProps> = ({
                                 <FormTextField
                                     name="idSubcuenta"
                                     label="Subcuenta"
-                                    disabled={pkFieldsDisabled}
+                                    disabled={true}
                                 />
                             </Grid>
                             <Grid item xs={6}>

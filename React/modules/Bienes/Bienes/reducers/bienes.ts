@@ -16,9 +16,15 @@ function bienesReducer(state: BienesState, action: BienesActions): BienesState {
                 searchResults: action.results,
             };
         case 'SET_BIENES_ROWS_SELECTION':
+            const selectedRow = action.selectedRow;
             return {
                 ...state,
                 selectedRow: action.selectedRow,
+                currentModel: new Bien(
+                    selectedRow.idFideicomiso,
+                    selectedRow.idSubcuenta,
+                    selectedRow.idTipoBien
+                ),
             };
         case 'SET_BIEN_MODEL':
             return {
