@@ -21,6 +21,7 @@ function mainBienesReducer(
                 detalleBienes: {
                     ...state.detalleBienes,
                     showActionsToolbar: false,
+                    searchResults: [],
                 },
             };
         case 'SELECT_BIENES_RESULT_ROW':
