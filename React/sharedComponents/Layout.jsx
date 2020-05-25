@@ -24,7 +24,7 @@ import ScheduleIcon from '@material-ui/icons/Schedule';
 import InputIcon from '@material-ui/icons/Input';
 import BarChartIcon from '@material-ui/icons/BarChart';
 
-const theme = createMuiTheme({
+export const theme = createMuiTheme({
     palette: {
         primary: deepOrange,
         secondary: {
@@ -195,8 +195,11 @@ function BaseLayout(props) {
 
 export default function Layout(props) {
     return (
-        <ThemeProvider theme={theme}>
-            <BaseLayout>{props.children}</BaseLayout>
-        </ThemeProvider>
+        <>
+            <div id="confirmation-message-placeholder"></div>
+            <ThemeProvider theme={theme}>
+                <BaseLayout>{props.children}</BaseLayout>
+            </ThemeProvider>
+        </>
     );
 }
