@@ -18,6 +18,7 @@ import { DetalleBienesTableCallbacksContext } from './context';
 import DetalleBienResultRow from './models/DetalleBienResultRow';
 import DetalleBien from '../../../models/DetalleBien';
 import { OperacionesCatalogoDetalleBienes } from './constants';
+import { requestConfirmation } from '../../../sharedComponents/ConfirmationModal';
 
 const initialState: MainBienesState = {
     bienes: {
@@ -110,8 +111,11 @@ const MainBienes: React.FC = () => {
                     )
                 );
             },
-            onDelete: () => {
-                dispatch(bienesActions.deleteSelectedModel());
+            onDelete: async () => {
+                const confirmed = await requestConfirmation();
+                if (confirmed) {
+                    dispatch(bienesActions.deleteSelectedModel());
+                }
             },
         };
     }, []);
@@ -135,7 +139,7 @@ const MainBienes: React.FC = () => {
                     )
                 );
             },
-            onDelete: () => {
+            onDelete: async () => {
                 dispatch(detalleBienesActions.deleteSelectedModels());
             },
             onRevaluacion: () => {

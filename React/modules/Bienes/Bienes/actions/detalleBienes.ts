@@ -4,6 +4,7 @@ import DetalleBienResultRow from '../models/DetalleBienResultRow';
 import DetalleBien from '../../../../models/DetalleBien';
 import { OperacionesCatalogoDetalleBienes } from '../constants';
 import BienResultRow from '../models/BienResultRow';
+import { requestConfirmation } from '../../../../sharedComponents/ConfirmationModal';
 
 type MainBienesDispatcher = React.Dispatch<MainBienesActions>;
 
@@ -138,6 +139,15 @@ function deleteSelectedModels() {
         const selectedRows = state.detalleBienes.selectedRows;
 
         if (!selectedRows.length) {
+            return;
+        }
+
+        const confirmed = await requestConfirmation({
+            title: `Esta seguro de continuar?`,
+            bodyText: `Esta a punto de eliminar eliminar ${selectedRows.length} registros. Esta operacion no se puede revertir.`,
+        });
+
+        if (!confirmed) {
             return;
         }
 
