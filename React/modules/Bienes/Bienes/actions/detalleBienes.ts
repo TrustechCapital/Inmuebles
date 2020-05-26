@@ -161,17 +161,8 @@ function deleteSelectedModels() {
             );
         });
 
-        const notSavedModels = await detalleBienesApi.destroyMany(models);
-
-        if (!notSavedModels.length) {
-            // TODO: convertir esto en un mensaje global
-            console.log('Registros eliminados exitosamente');
-        } else {
-            // TODO: convertir esto en un mensaje global
-            console.log('Algunos registros no fueron eliminados correctamente');
-        }
-
-        repeatCurrentSearch(dispatch, getState);
+        await detalleBienesApi.destroyMany(models);
+        await repeatCurrentSearch(dispatch, getState);
     };
 }
 

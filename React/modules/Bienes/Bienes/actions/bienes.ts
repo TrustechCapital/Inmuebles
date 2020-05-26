@@ -89,7 +89,7 @@ async function repeatCurrentSearch(
     getState: () => MainBienesState
 ) {
     const state = getState();
-    await searchBienes(dispatch, state.bienes.searchParameters);
+    return await searchBienes(dispatch, state.bienes.searchParameters);
 }
 
 function saveModel(model: Bien) {
@@ -136,7 +136,7 @@ function deleteSelectedModel() {
 
         const model = bienesApi.getModelFromResultRow(state.bienes.selectedRow);
         await bienesApi.destroy(model);
-        repeatCurrentSearch(dispatch, getState);
+        await repeatCurrentSearch(dispatch, getState);
     };
 }
 

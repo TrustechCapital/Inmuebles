@@ -1,5 +1,4 @@
 import React, { useMemo, useCallback } from 'react';
-import useThunkReducer from 'react-hook-thunk-reducer';
 
 import { ITableBienesParameters, MainBienesState } from './types';
 import BienResultRow from './models/BienResultRow';
@@ -19,6 +18,8 @@ import DetalleBienResultRow from './models/DetalleBienResultRow';
 import DetalleBien from '../../../models/DetalleBien';
 import { OperacionesCatalogoDetalleBienes } from './constants';
 import { requestConfirmation } from '../../../sharedComponents/ConfirmationModal';
+import { useGlobalNotification } from '../../../sharedHooks/globalMessages';
+import { useEnhancedReducer } from '../../../sharedHooks/enhancedReducer';
 
 const initialState: MainBienesState = {
     bienes: {
@@ -50,7 +51,11 @@ const initialState: MainBienesState = {
 };
 
 const MainBienes: React.FC = () => {
-    const [state, dispatch] = useThunkReducer(mainBienesReducer, initialState);
+    const [state, dispatch, promiseDispatch] = useEnhancedReducer(
+        mainBienesReducer,
+        initialState
+    );
+    const { alertSuccess, alertError } = useGlobalNotification();
 
     const handleSelectDetalleBien = useCallback(
         (selectedRows: DetalleBienResultRow[]) => {
@@ -114,7 +119,13 @@ const MainBienes: React.FC = () => {
             onDelete: async () => {
                 const confirmed = await requestConfirmation();
                 if (confirmed) {
-                    dispatch(bienesActions.deleteSelectedModel());
+                    promiseDispatch(bienesActions.deleteSelectedModel())
+                        .then(() => {
+                            alertSuccess('Registros eliminados exitosamente');
+                        })
+                        .catch((e: Error) => {
+                            alertError(e.message);
+                        });
                 }
             },
         };
@@ -140,7 +151,13 @@ const MainBienes: React.FC = () => {
                 );
             },
             onDelete: async () => {
-                dispatch(detalleBienesActions.deleteSelectedModels());
+                promiseDispatch(detalleBienesActions.deleteSelectedModels())
+                    .then(() => {
+                        alertSuccess('Registros eliminados exitosamente');
+                    })
+                    .catch((e: Error) => {
+                        alertError(e.message);
+                    });
             },
             onRevaluacion: () => {
                 dispatch(
