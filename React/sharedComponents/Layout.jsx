@@ -1,6 +1,7 @@
 import React from 'react';
 import Link from 'next/link';
 import clsx from 'clsx';
+
 import { ThemeProvider, createMuiTheme } from '@material-ui/core/styles';
 import { makeStyles } from '@material-ui/core/styles';
 import Drawer from '@material-ui/core/Drawer';
@@ -23,6 +24,7 @@ import PeopleIcon from '@material-ui/icons/People';
 import ScheduleIcon from '@material-ui/icons/Schedule';
 import InputIcon from '@material-ui/icons/Input';
 import BarChartIcon from '@material-ui/icons/BarChart';
+import { SnackbarProvider } from 'notistack';
 
 export const theme = createMuiTheme({
     palette: {
@@ -198,7 +200,9 @@ export default function Layout(props) {
         <>
             <div id="confirmation-message-placeholder"></div>
             <ThemeProvider theme={theme}>
-                <BaseLayout>{props.children}</BaseLayout>
+                <SnackbarProvider maxSnack={3}>
+                    <BaseLayout>{props.children}</BaseLayout>
+                </SnackbarProvider>
             </ThemeProvider>
         </>
     );
