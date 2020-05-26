@@ -1,5 +1,6 @@
 import { Api } from './base';
 import { IModel } from '../../models/BaseModel';
+import { BatchOperationError } from './exceptions';
 
 const DEFAULT_DATE_FORMAT = 'dd/MM/yyyy';
 
@@ -87,7 +88,7 @@ export class ModelsApi<T extends IModel> extends Api implements IModelsApi<T> {
         );
     }
 
-    async destroyMany(models: T[]): Promise<T[]> {
+    async destroyMany(models: T[]): Promise<void> {
         const allPromises = models.reduce(
             (promises: Promise<void>[], model) => {
                 promises.push(this.destroy(model));
@@ -105,7 +106,10 @@ export class ModelsApi<T extends IModel> extends Api implements IModelsApi<T> {
                 }
             });
 
-            return failedModels;
+            if (failedModels.length) {
+                const errorMessage = `Operacion incompleta. Ocurrio un error al eliminar ${failedModels.length} de ${models.length} registro(s).`;
+                throw new BatchOperationError(failedModels, errorMessage);
+            }
         });
     }
 }
