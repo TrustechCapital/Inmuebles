@@ -8,8 +8,7 @@ import java.util.Arrays;
 import java.util.Date;
 import java.util.List;
 
-import java.util.stream.Stream;
-
+import mx.com.inscitech.fiducia.common.ProceadureData;
 import mx.com.inscitech.fiducia.common.util.DateUtils;
 import mx.com.inscitech.fiducia.domain.Claves;
 import mx.com.inscitech.fiducia.domain.FAdquirentes;
@@ -47,8 +46,6 @@ import mx.com.inscitech.fiducia.repository.PagosBienesRepository;
 import mx.com.inscitech.fiducia.repository.ProcesoLiberacionRepository;
 import mx.com.inscitech.fiducia.repository.RetirosRepository;
 import mx.com.inscitech.fiducia.repository.UnidadRepository;
-
-import oracle.sql.NUMBER;
 
 public class OperacionesBienes {
 
@@ -171,6 +168,10 @@ public class OperacionesBienes {
     private DetliquiRepository detliquiRepository;
     private LiquidacionesBienesRepository liquidacionesBienesRepository;
 
+    public OperacionesBienes() {
+        
+    }
+    
     public OperacionesBienes(AdquirienteRepository adquirienteRepository, UnidadRepository unidadRepository,
                              GarantiasRepository garantiasRepository, BienesRepository bienesRepository,
                              FoliosRepository foliosRepository, ClavesRepository clavesRepository,
@@ -234,7 +235,9 @@ public class OperacionesBienes {
         }
     }
 
+    @ProceadureData(id = "ejeFunModificacionGarantia", fields = {"numFiso", "numScta", "numIdGarantia"})
     public void transformaGarantias(BigDecimal idFideicomiso, BigDecimal idSubcuenta, BigDecimal idTipoBien) {
+        // TODO: Debe de arrojar una excepcion pues de momento el controller no soporta objetos de retorno y es necesario saber si se ejecuto bien o no el contenido
         List<FGarantias> garantias = garantiasRepository.findByFideicomisoYSubcuenta(idFideicomiso, idSubcuenta);
 
         for (FGarantias garantia : garantias) {

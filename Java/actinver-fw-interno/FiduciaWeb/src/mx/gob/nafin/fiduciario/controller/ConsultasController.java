@@ -3,13 +3,21 @@ package mx.gob.nafin.fiduciario.controller;
 import java.io.ByteArrayOutputStream;
 import java.io.OutputStream;
 
+import java.lang.reflect.Method;
+
+import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import mx.com.inscitech.fiducia.common.ParameterInfo;
+import mx.com.inscitech.fiducia.common.ProceadureData;
+import mx.com.inscitech.fiducia.common.ProceadureInfo;
 import mx.com.inscitech.fiducia.common.services.LoggingService;
+import mx.com.inscitech.fiducia.negocio.OperacionesBienes;
 import mx.com.inscitech.fiducia.util.ExecuteRefAsyncResponse;
 import mx.com.inscitech.fiducia.util.ExecuteRefAsyncRunner;
 import mx.com.inscitech.fiducia.util.XLSDataWriter;
@@ -23,7 +31,6 @@ import net.sf.json.JSONObject;
 
 import org.springframework.web.servlet.ModelAndView;
 
-
 /**
  * Clase que se encarga de ejecutar las consultas generiacas del sistema, definidas en el archivo
  * WEB-INF/modules/consultas.xml; cada consulta puede o no tener parametros, los cuales son procesados
@@ -34,7 +41,14 @@ import org.springframework.web.servlet.ModelAndView;
  */
 public class ConsultasController extends JsonActionController {
 
+    Class[] proceadureClasses = new Class[]{OperacionesBienes.class};
+    private static HashMap<String, ProceadureInfo> processesMapping = new HashMap<>();
+    
     protected GenericDataAccessService genericDataAccessService;
+
+    static {
+        new ConsultasController().startup();
+    }
 
     public void setGenericDataAccessService(GenericDataAccessService genericDataAccessService) {
         this.genericDataAccessService = genericDataAccessService;
@@ -42,6 +56,43 @@ public class ConsultasController extends JsonActionController {
 
     public GenericDataAccessService getGenericDataAccessService() {
         return genericDataAccessService;
+    }
+
+    private void startup() {
+
+        try {
+            
+            for(Class c : proceadureClasses) {
+                for(Method m : c.getMethods()) {
+                    
+                    ProceadureData pd = m.getAnnotation(ProceadureData.class);
+                    
+                    if(pd != null && pd.id() != "") {
+
+                        String methodID = pd.id();
+                        String[] fields = pd.fields();
+                            
+                        ArrayList<ParameterInfo> parameters = new ArrayList<>();
+
+                        ProceadureInfo pi = new ProceadureInfo();
+                        pi.setTheClass(c);
+                        pi.setTheMethod(m);
+
+                        Class[] pt = m.getParameterTypes();
+                        for(int i = 0; i < pt.length; i++) {
+                            parameters.add(new ParameterInfo(fields[i], pt[i]));
+                        }
+                        
+                        pi.setParameters(parameters);
+                        processesMapping.put(methodID, pi);
+                    }
+                }
+            }
+            
+        } catch (Exception e) {
+            logger.log(Thread.currentThread().getClass(), Thread.currentThread(), LoggingService.LEVEL.DEBUG, "Error loading Processes: " + e.getMessage());
+        }
+
     }
 
     /**
@@ -116,8 +167,22 @@ public class ConsultasController extends JsonActionController {
         try {
             
             JSONObject jsonObject = getJSONRequestObject(request);
-            Map parametros = (Map) JSONObject.toBean(jsonObject, Map.class);
+            Map<String, Object> parametros = (Map) JSONObject.toBean(jsonObject, Map.class);
             setSessionAttributesAsParameters(request.getSession(), parametros);
+
+            if(processesMapping.containsKey(parametros.get("id").toString())) {
+                ProceadureInfo pi = processesMapping.get("altaFiso");
+                List<Object> paramArray = new ArrayList<>();
+                
+                for(ParameterInfo param : pi.getParameters()) {
+                    String pv = (String)parametros.get(param.getId());
+                    Object value = param.getType().getConstructor(String.class).newInstance(pv);
+                    paramArray.add(value);
+                }
+                
+                Object procObj = pi.getTheClass().newInstance();
+                pi.getTheMethod().invoke(procObj, paramArray.toArray());                
+            }
 
             return respondObject(response, genericDataAccessService.ejecutaProcedimiento(parametros));
 
