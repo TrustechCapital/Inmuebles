@@ -46,6 +46,8 @@ public class ConsultasController extends JsonActionController {
     
     protected GenericDataAccessService genericDataAccessService;
 
+    private Map<String, Object> parametros;
+
     static {
         new ConsultasController().startup();
     }
@@ -95,6 +97,12 @@ public class ConsultasController extends JsonActionController {
 
     }
 
+    private void setParameterMapping(HttpServletRequest request) {
+        JSONObject jsonObject = getJSONRequestObject(request);
+        parametros = (Map) JSONObject.toBean(jsonObject, Map.class);
+        setSessionAttributesAsParameters(request.getSession(), parametros);
+    }
+    
     /**
      * Metodo utilizado para ejecutar las consultas definidas en el archivo de consultas.
      * @throws java.lang.Exception
@@ -106,10 +114,7 @@ public class ConsultasController extends JsonActionController {
         logger.log(Thread.currentThread().getClass(), Thread.currentThread(), LoggingService.LEVEL.DEBUG, "Cadena JSON: " + request.getParameter("json"));
 
         try {
-            
-            JSONObject jsonObject = getJSONRequestObject(request);
-            Map parametros = (Map) JSONObject.toBean(jsonObject, Map.class);
-            setSessionAttributesAsParameters(request.getSession(), parametros);
+            setParameterMapping(request);
 
             List consulta = genericDataAccessService.ejecutaConsulta(parametros);
             //response.addHeader("Access-Control-Allow-Origin", "*");
@@ -132,11 +137,8 @@ public class ConsultasController extends JsonActionController {
     public ModelAndView ejecutaQuery(HttpServletRequest request, HttpServletResponse response) throws Exception {
         logger.log(Thread.currentThread().getClass(), Thread.currentThread(), LoggingService.LEVEL.DEBUG, "Cadena JSON: " + request.getParameter("json"));
         
-        try {
-            
-            JSONObject jsonObject = getJSONRequestObject(request);
-            Map parametros = (Map) JSONObject.toBean(jsonObject, Map.class);
-            setSessionAttributesAsParameters(request.getSession(), parametros);
+        try {           
+            setParameterMapping(request);
 
             int registrosAfectados = 0;
             List result = genericDataAccessService.ejecutaQuery(parametros);
@@ -165,10 +167,7 @@ public class ConsultasController extends JsonActionController {
         logger.log(Thread.currentThread().getClass(), Thread.currentThread(), LoggingService.LEVEL.DEBUG, "Cadena JSON: " + request.getParameter("json"));
         
         try {
-            
-            JSONObject jsonObject = getJSONRequestObject(request);
-            Map<String, Object> parametros = (Map) JSONObject.toBean(jsonObject, Map.class);
-            setSessionAttributesAsParameters(request.getSession(), parametros);
+            setParameterMapping(request);
 
             if(processesMapping.containsKey(parametros.get("id").toString())) {
                 ProceadureInfo pi = processesMapping.get("altaFiso");
@@ -198,12 +197,8 @@ public class ConsultasController extends JsonActionController {
             
         ByteArrayOutputStream outByteStream = null;
         
-        try {
-            
-            JSONObject jsonObject = getJSONRequestObject(request);
-            Map parametros = (Map) JSONObject.toBean(jsonObject, Map.class);
-            
-            setSessionAttributesAsParameters(request.getSession(), parametros);
+        try {            
+            setParameterMapping(request);
 
             //TODO: Optimizar este codigo para que no de tantas vueltas la informacion... la mejor es: De base de datos a excel sin pasar por otros componentes
             List consulta = genericDataAccessService.ejecutaConsulta(parametros);
@@ -250,10 +245,7 @@ public class ConsultasController extends JsonActionController {
         ExecuteRefAsyncResponse responseObj = new ExecuteRefAsyncResponse();
         
         try {
-            
-            JSONObject jsonObject = getJSONRequestObject(request);
-            Map parametros = (Map) JSONObject.toBean(jsonObject, Map.class);
-            setSessionAttributesAsParameters(request.getSession(), parametros);
+            setParameterMapping(request);
             
             ExecuteRefAsyncRunner runner = new ExecuteRefAsyncRunner();
             runner.getParametros().putAll(parametros);            
