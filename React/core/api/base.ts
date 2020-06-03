@@ -1,8 +1,13 @@
 import axios, { AxiosInstance, AxiosRequestConfig, AxiosResponse } from 'axios';
 import { apiConfig } from '../api.config';
-import { filterEmptyParameters } from './utils';
+import { filterEmptyParameters as removeEemptyParameters } from './utils';
 
 export type ModelMapper = (object: any, index: number) => any;
+
+enum FiduciaDynamicEndpoints {
+    Get = 'getRef.do',
+    Execute = 'executeRef.do',
+}
 
 export class Api {
     private api: AxiosInstance;
@@ -76,18 +81,21 @@ export class Api {
         return this.api.patch(url, data, config);
     }
 
-    public async getRef<T>(
+    private async sendDynamicRequest(
+        endpoint: FiduciaDynamicEndpoints,
         refName: string,
         params: object,
-        transformer: ModelMapper
-    ): Promise<T[]> {
-        let filteredParams = filterEmptyParameters(params);
+        filterEmptyParameters: boolean = true
+    ): Promise<AxiosResponse<unknown>> {
+        let filteredParams = filterEmptyParameters
+            ? removeEemptyParameters(params)
+            : params;
 
         Object.assign(filteredParams, {
             id: refName,
         });
 
-        return this.get('getRef.do', {
+        return this.get(endpoint, {
             params: {
                 json: JSON.stringify(filteredParams),
             },
@@ -95,9 +103,32 @@ export class Api {
             if (response === null) {
                 throw new Error('Ocurrio un error al procesar el request');
             } else {
-                const data = response.data as object[];
-                return data.map(transformer);
+                return response;
             }
         });
+    }
+
+    public async getRef<T>(
+        refName: string,
+        params: object,
+        transformer: ModelMapper
+    ): Promise<T[]> {
+        return this.sendDynamicRequest(
+            FiduciaDynamicEndpoints.Get,
+            refName,
+            params
+        ).then((response) => {
+            const data = response.data as object[];
+            return data.map(transformer);
+        });
+    }
+
+    public async executeRef(refName: string, params: object) {
+        return this.sendDynamicRequest(
+            FiduciaDynamicEndpoints.Execute,
+            refName,
+            params,
+            false
+        );
     }
 }
