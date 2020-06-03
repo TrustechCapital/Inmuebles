@@ -169,9 +169,9 @@ public class OperacionesBienes {
     private LiquidacionesBienesRepository liquidacionesBienesRepository;
 
     public OperacionesBienes() {
-        
+
     }
-    
+
     public OperacionesBienes(AdquirienteRepository adquirienteRepository, UnidadRepository unidadRepository,
                              GarantiasRepository garantiasRepository, BienesRepository bienesRepository,
                              FoliosRepository foliosRepository, ClavesRepository clavesRepository,
@@ -235,7 +235,7 @@ public class OperacionesBienes {
         }
     }
 
-    @ProceadureData(id = "ejeFunModificacionGarantia", fields = {"numFiso", "numScta", "numIdGarantia"})
+    @ProceadureData(id = "ejeFunModificacionGarantia", fields = { "numFiso", "numScta", "numIdGarantia" })
     public void transformaGarantias(BigDecimal idFideicomiso, BigDecimal idSubcuenta, BigDecimal idTipoBien) {
         // TODO: Debe de arrojar una excepcion pues de momento el controller no soporta objetos de retorno y es necesario saber si se ejecuto bien o no el contenido
         List<FGarantias> garantias = garantiasRepository.findByFideicomisoYSubcuenta(idFideicomiso, idSubcuenta);
@@ -510,13 +510,22 @@ public class OperacionesBienes {
 
     }
 
-    public int generaGarantias(int pTipoOperacion, BigDecimal pIdFideicomiso, BigDecimal pIdSubcuenta,
-                               BigDecimal pIdGarantia, BigDecimal pClaveGarantia, BigDecimal pIdTipoBien,
-                               String pIdentificacion, String pTextoDescripcion, String pTextoComentario,
-                               BigDecimal pImporte, BigDecimal pMoneda, BigDecimal pClaveRevalua, String pClavePerValua,
-                               BigDecimal pImporteUltimaValuacion, String pFechaUltimaValuacion,
-                               String pFechaVencimiento, String pNumeroEscitura, String pNumeroNotario,
-                               BigDecimal pValuacion, String pFechaValuacion, BigDecimal pClaveRegimen) {
+    @ProceadureData(id = "funRegistroBienesGar",
+                    fields =
+                    { "tipoOperacion", "idFideicomiso", "idSubcuenta", "idDetalleBien", "idTipoBien",
+                      "idTipoDetalleBien", "identificacion", "descripcion", "comentario", "importeDelBien", "idMoneda",
+                      "idRevaluacion", "idClavePeriodicidadRevaluacion", "importeUltimaValuacion",
+                      "fechaUltimaValuacion", "fechaVencimiento", "numeroEscritura", "numeroNotario",
+                      "importeValuacion", "fechaValuacion", "idRegimen"
+        })
+    public Integer generaGarantias(Integer pTipoOperacion, BigDecimal pIdFideicomiso, BigDecimal pIdSubcuenta,
+                                   BigDecimal pIdGarantia, BigDecimal pClaveGarantia, BigDecimal pIdTipoBien,
+                                   String pIdentificacion, String pTextoDescripcion, String pTextoComentario,
+                                   BigDecimal pImporte, BigDecimal pMoneda, BigDecimal pClaveRevalua,
+                                   String pClavePerValua, BigDecimal pImporteUltimaValuacion,
+                                   String pFechaUltimaValuacion, String pFechaVencimiento, String pNumeroEscitura,
+                                   String pNumeroNotario, BigDecimal pValuacion, String pFechaValuacion,
+                                   BigDecimal pClaveRegimen) {
 
         try {
 

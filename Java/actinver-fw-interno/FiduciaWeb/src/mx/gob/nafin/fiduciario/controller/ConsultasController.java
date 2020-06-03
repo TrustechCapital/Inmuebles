@@ -174,16 +174,24 @@ public class ConsultasController extends JsonActionController {
         try {
             setParameterMapping(request);
 
-            if (processesMapping.containsKey(parametros.get("id").toString())) {
-                ProcedureInfo pi = processesMapping.get("altaFiso");
+            String parameterId = parametros.get("id").toString();
+
+            if (processesMapping.containsKey(parameterId)) {
+                ProcedureInfo pi = processesMapping.get(parameterId);
                 List<Object> paramArray = new ArrayList<>();
 
                 for (ParameterInfo param : pi.getParameters()) {
-                    String pv = (String) parametros.get(param.getId());
-                    Object value = param.getType()
-                                        .getConstructor(String.class)
-                                        .newInstance(pv);
-                    paramArray.add(value);
+                    Object rawValue = parametros.get(param.getId());
+
+                    if (rawValue == null) {
+                        paramArray.add(null);
+                    } else {
+                        String pv = String.valueOf(rawValue);
+                        Object value = param.getType()
+                                            .getConstructor(String.class)
+                                            .newInstance(pv);
+                        paramArray.add(value);
+                    }
                 }
 
                 Object procObj = pi.getTheClass().newInstance();

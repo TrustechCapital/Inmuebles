@@ -1212,7 +1212,8 @@
                 <entry key="consultarBienesGarSaldoTotal" value="SELECT DISTINCT FGRS_ID_FIDEICOMISO,FGRS_ID_SUBCUENTA,FORS_CVE_TIPO_GARANTIA,                       TO_CHAR(                           (SELECT NVL(SUM(FPB_IMPORTE_EXT),0) FROM F_PAGOS_BIENES                                WHERE FPB_ID_FIDEICOMISO = FGRS_ID_FIDEICOMISO                                 AND FPB_ID_SUBCUENTA = FGRS_ID_SUBCUENTA                                 AND FPB_ID_GARANTIA = FORS_CVE_TIPO_GARANTIA)-                           (SELECT NVL(SUM(FLB_IMPORTE_EXT),0) FROM F_LIQUIDACIONES_BIENES                                WHERE FLB_ID_FIDEICOMISO = FGRS_ID_FIDEICOMISO                                 AND FLB_ID_SUBCUENTA = FGRS_ID_SUBCUENTA                                 AND FLB_ID_GARANTIA = FORS_CVE_TIPO_GARANTIA)                           ,'999,999,999,999,990.00') SALDO_BIEN                 FROM F_BIENESGAR WHERE 1=1"/>
                 <entry key="consultaSigBienesGar" value="SELECT NVL(MAX(FORS_ID_GARANTIA),0)+1 ID_SIG_BIEN FROM F_BIENESGAR"/>
                 <entry key="consultarBienesGarPagos" value="SELECT FPB_ID_FIDEICOMISO,FPB_ID_SUBCUENTA,FPB_ID_GARANTIA,FPB_ID_BIEN_GARANTIA,FPB_ID_COBRO,                   FPB_IMPORTE, TO_CHAR(FPB_IMPORTE,'999,999,999,999,990.00') FPB_IMPORTE_FORMATTED,                   FPB_CVE_MONEDA,MON_NOM_MONEDA FPB_TXT_MONEDA,                   FPB_TIPO_CAMBIO,                   TO_CHAR(FPB_TIPO_CAMBIO,'999,999,999,999,990.009999') FPB_TIPO_CAMBIO_FORMATTED,                   FPB_IMPORTE_EXT,                   TO_CHAR(FPB_IMPORTE_EXT,'999,999,999,999,990.00') FPB_IMPORTE_EXT_FORMATTED,                   TO_CHAR(FPB_FECHA,'DD/MM/YYYY') FPB_FECHA,                   FPB_COMENTARIO               FROM F_PAGOS_BIENES, MONEDAS                 WHERE FPB_CVE_MONEDA = MON_NUM_PAIS"/>
-                <entry key="funRegistroBienesGar" value="{? = call GARINMUEBLES.GENERA_GARANTIAS(?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)}"/>
+                <entry key="funRegistroBienesGar" value=""/>
+                <!-- <entry key="funRegistroBienesGar" value="{? = call GARINMUEBLES.GENERA_GARANTIAS(?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)}"/> -->
                 <!-- Ejecuta la Carga de Bienes en garantia -->
                 <entry key="funRegistroBienesGarPago" value="{? = call GARINMUEBLES.GENERA_PAGO_BIENES(?,?,?,?,?,?,?,?,?,?)}"/>
                 <!-- Ejecuta la Pagos de Bienes en garantia -->
@@ -38137,6 +38138,7 @@
                         </bean>
                     </list>
                 </entry>
+                <!--
                 <entry key="funRegistroBienesGar">
                     <list>
                         <bean class="mx.gob.nafin.fiduciario.common.beans.ParametroQueryBean">
@@ -38177,9 +38179,6 @@
                                 <value>TipoBien</value>
                             </property>
                         </bean>
-                        <!--<bean class="mx.gob.nafin.fiduciario.common.beans.ParametroQueryBean">
-              <property name="name"><value>TipoBien2</value></property>
-              </bean>-->
                         <bean class="mx.gob.nafin.fiduciario.common.beans.ParametroQueryBean">
                             <property name="name">
                                 <value>Identificacion</value>
@@ -38269,6 +38268,122 @@
                         <bean class="mx.gob.nafin.fiduciario.common.beans.ParametroQueryBean">
                             <property name="name">
                                 <value>CveRegimen</value>
+                            </property>
+                        </bean>
+                    </list>
+                </entry>
+                -->
+                <entry key="funRegistroBienesGar">
+                    <list>
+                        <bean class="mx.gob.nafin.fiduciario.common.beans.ParametroQueryBean">
+                            <property name="name">
+                                <value>tipoOperacion</value>
+                            </property>
+                        </bean>
+                        <bean class="mx.gob.nafin.fiduciario.common.beans.ParametroQueryBean">
+                            <property name="name">
+                                <value>idFideicomiso</value>
+                            </property>
+                        </bean>
+                        <bean class="mx.gob.nafin.fiduciario.common.beans.ParametroQueryBean">
+                            <property name="name">
+                                <value>idSubcuenta</value>
+                            </property>
+                        </bean>
+                        <bean class="mx.gob.nafin.fiduciario.common.beans.ParametroQueryBean">
+                            <property name="name">
+                                <value>idDetalleBien</value>
+                            </property>
+                        </bean>
+                        <bean class="mx.gob.nafin.fiduciario.common.beans.ParametroQueryBean">
+                            <property name="name">
+                                <value>idTipoBien</value>
+                            </property>
+                        </bean>
+                        <bean class="mx.gob.nafin.fiduciario.common.beans.ParametroQueryBean">
+                            <property name="name">
+                                <value>idTipoDetalleBien</value>
+                            </property>
+                        </bean>
+                        <bean class="mx.gob.nafin.fiduciario.common.beans.ParametroQueryBean">
+                            <property name="name">
+                                <value>identificacion</value>
+                            </property>
+                        </bean>
+                        <bean class="mx.gob.nafin.fiduciario.common.beans.ParametroQueryBean">
+                            <property name="name">
+                                <value>descripcion</value>
+                            </property>
+                        </bean>
+                        <bean class="mx.gob.nafin.fiduciario.common.beans.ParametroQueryBean">
+                            <property name="name">
+                                <value>comentario</value>
+                            </property>
+                        </bean>
+                        <bean class="mx.gob.nafin.fiduciario.common.beans.ParametroQueryBean">
+                            <property name="name">
+                                <value>importeDelBien</value>
+                            </property>
+                            <property name="type">
+                                <value>DOUBLE</value>
+                            </property>
+                        </bean>
+                        <bean class="mx.gob.nafin.fiduciario.common.beans.ParametroQueryBean">
+                            <property name="name">
+                                <value>idMoneda</value>
+                            </property>
+                        </bean>
+                        <bean class="mx.gob.nafin.fiduciario.common.beans.ParametroQueryBean">
+                            <property name="name">
+                                <value>idRevaluacion</value>
+                            </property>
+                        </bean>
+                        <bean class="mx.gob.nafin.fiduciario.common.beans.ParametroQueryBean">
+                            <property name="name">
+                                <value>idClavePeriodicidadRevaluacion</value>
+                            </property>
+                        </bean>
+                        <bean class="mx.gob.nafin.fiduciario.common.beans.ParametroQueryBean">
+                            <property name="name">
+                                <value>importeUltimaValuacion</value>
+                            </property>
+                            <property name="type">
+                                <value>DOUBLE</value>
+                            </property>
+                        </bean>
+                        <bean class="mx.gob.nafin.fiduciario.common.beans.ParametroQueryBean">
+                            <property name="name">
+                                <value>fechaUltimaValuacion</value>
+                            </property>
+                        </bean>
+                        <bean class="mx.gob.nafin.fiduciario.common.beans.ParametroQueryBean">
+                            <property name="name">
+                                <value>fechaVencimiento</value>
+                            </property>
+                        </bean>
+                        <bean class="mx.gob.nafin.fiduciario.common.beans.ParametroQueryBean">
+                            <property name="name">
+                                <value>numeroEscritura</value>
+                            </property>
+                        </bean>
+                        <bean class="mx.gob.nafin.fiduciario.common.beans.ParametroQueryBean">
+                            <property name="name">
+                                <value>numeroNotario</value>
+                            </property>
+                        </bean>
+                        <bean class="mx.gob.nafin.fiduciario.common.beans.ParametroQueryBean">
+                            <property name="name">
+                                <value>importeValuacion</value>
+                            </property>
+                        </bean>
+                        <bean class="mx.gob.nafin.fiduciario.common.beans.ParametroQueryBean">
+                            <property name="name">
+                                <value>fechaValuacion</value>
+                            </property>
+                        </bean>
+                        <bean class="mx.gob.nafin.fiduciario.common.beans.ParametroQueryBean">
+                            <property name="name">
+                                <value>idRegimen</value>
                             </property>
                         </bean>
                     </list>
