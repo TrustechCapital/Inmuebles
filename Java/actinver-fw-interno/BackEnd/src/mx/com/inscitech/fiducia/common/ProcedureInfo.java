@@ -4,17 +4,17 @@ import java.lang.reflect.Method;
 
 import java.util.List;
 
-public class ProceadureInfo {
-    
+public class ProcedureInfo {
+
     Class theClass = null;
     Method theMethod = null;
     List<ParameterInfo> parameters = null;
 
-    public ProceadureInfo() {
+    public ProcedureInfo() {
         super();
     }
 
-    public ProceadureInfo(Class theClass, Method theMethod, List<ParameterInfo> parameters) {
+    public ProcedureInfo(Class theClass, Method theMethod, List<ParameterInfo> parameters) {
         this.theClass = theClass;
         this.theMethod = theMethod;
         this.parameters = parameters;

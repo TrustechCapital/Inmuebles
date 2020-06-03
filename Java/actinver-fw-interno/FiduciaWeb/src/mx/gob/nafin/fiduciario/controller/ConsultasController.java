@@ -15,7 +15,7 @@ import javax.servlet.http.HttpServletResponse;
 
 import mx.com.inscitech.fiducia.common.ParameterInfo;
 import mx.com.inscitech.fiducia.common.ProceadureData;
-import mx.com.inscitech.fiducia.common.ProceadureInfo;
+import mx.com.inscitech.fiducia.common.ProcedureInfo;
 import mx.com.inscitech.fiducia.common.services.LoggingService;
 import mx.com.inscitech.fiducia.negocio.OperacionesBienes;
 import mx.com.inscitech.fiducia.util.ExecuteRefAsyncResponse;
@@ -37,13 +37,13 @@ import org.springframework.web.servlet.ModelAndView;
  * por el servicio de acceso a datos @see mx.gob.nafin.fiduciario.business.services.GenericDataAccessService
  * Tambien son enviados como parametros los atributos que se encuentran en session, los cuales sobreescriben a
  * los de request.
- * @author Inscitech México inscitech@inscitechmexico.com
+ * @author Inscitech Mï¿½xico inscitech@inscitechmexico.com
  */
 public class ConsultasController extends JsonActionController {
 
-    Class[] proceadureClasses = new Class[]{OperacionesBienes.class};
-    private static HashMap<String, ProceadureInfo> processesMapping = new HashMap<>();
-    
+    Class[] proceadureClasses = new Class[] { OperacionesBienes.class };
+    private static HashMap<String, ProcedureInfo> processesMapping = new HashMap<>();
+
     protected GenericDataAccessService genericDataAccessService;
 
     private Map<String, Object> parametros;
@@ -63,36 +63,37 @@ public class ConsultasController extends JsonActionController {
     private void startup() {
 
         try {
-            
-            for(Class c : proceadureClasses) {
-                for(Method m : c.getMethods()) {
-                    
+
+            for (Class c : proceadureClasses) {
+                for (Method m : c.getMethods()) {
+
                     ProceadureData pd = m.getAnnotation(ProceadureData.class);
-                    
-                    if(pd != null && pd.id() != "") {
+
+                    if (pd != null && pd.id() != "") {
 
                         String methodID = pd.id();
                         String[] fields = pd.fields();
-                            
+
                         ArrayList<ParameterInfo> parameters = new ArrayList<>();
 
-                        ProceadureInfo pi = new ProceadureInfo();
+                        ProcedureInfo pi = new ProcedureInfo();
                         pi.setTheClass(c);
                         pi.setTheMethod(m);
 
                         Class[] pt = m.getParameterTypes();
-                        for(int i = 0; i < pt.length; i++) {
+                        for (int i = 0; i < pt.length; i++) {
                             parameters.add(new ParameterInfo(fields[i], pt[i]));
                         }
-                        
+
                         pi.setParameters(parameters);
                         processesMapping.put(methodID, pi);
                     }
                 }
             }
-            
+
         } catch (Exception e) {
-            logger.log(Thread.currentThread().getClass(), Thread.currentThread(), LoggingService.LEVEL.DEBUG, "Error loading Processes: " + e.getMessage());
+            logger.log(Thread.currentThread().getClass(), Thread.currentThread(), LoggingService.LEVEL.DEBUG,
+                       "Error loading Processes: " + e.getMessage());
         }
 
     }
@@ -102,7 +103,7 @@ public class ConsultasController extends JsonActionController {
         parametros = (Map) JSONObject.toBean(jsonObject, Map.class);
         setSessionAttributesAsParameters(request.getSession(), parametros);
     }
-    
+
     /**
      * Metodo utilizado para ejecutar las consultas definidas en el archivo de consultas.
      * @throws java.lang.Exception
@@ -111,7 +112,8 @@ public class ConsultasController extends JsonActionController {
      * @param request
      */
     public ModelAndView ejecutaConsulta(HttpServletRequest request, HttpServletResponse response) throws Exception {
-        logger.log(Thread.currentThread().getClass(), Thread.currentThread(), LoggingService.LEVEL.DEBUG, "Cadena JSON: " + request.getParameter("json"));
+        logger.log(Thread.currentThread().getClass(), Thread.currentThread(), LoggingService.LEVEL.DEBUG,
+                   "Cadena JSON: " + request.getParameter("json"));
 
         try {
             setParameterMapping(request);
@@ -135,9 +137,10 @@ public class ConsultasController extends JsonActionController {
      * @param request
      */
     public ModelAndView ejecutaQuery(HttpServletRequest request, HttpServletResponse response) throws Exception {
-        logger.log(Thread.currentThread().getClass(), Thread.currentThread(), LoggingService.LEVEL.DEBUG, "Cadena JSON: " + request.getParameter("json"));
-        
-        try {           
+        logger.log(Thread.currentThread().getClass(), Thread.currentThread(), LoggingService.LEVEL.DEBUG,
+                   "Cadena JSON: " + request.getParameter("json"));
+
+        try {
             setParameterMapping(request);
 
             int registrosAfectados = 0;
@@ -150,7 +153,7 @@ public class ConsultasController extends JsonActionController {
             } else {
                 return respondObject(response, result);
             }
-            
+
         } catch (BusinessException e) {
             return respondObject(response, new ErrorBean(ErrorBean.ERROR, e.getErrorCode(), e.getErrorMessage()));
         }
@@ -163,24 +166,28 @@ public class ConsultasController extends JsonActionController {
      * @param response
      * @param request
      */
-    public ModelAndView ejecutaProcedimiento(HttpServletRequest request, HttpServletResponse response) throws Exception {
-        logger.log(Thread.currentThread().getClass(), Thread.currentThread(), LoggingService.LEVEL.DEBUG, "Cadena JSON: " + request.getParameter("json"));
-        
+    public ModelAndView ejecutaProcedimiento(HttpServletRequest request,
+                                             HttpServletResponse response) throws Exception {
+        logger.log(Thread.currentThread().getClass(), Thread.currentThread(), LoggingService.LEVEL.DEBUG,
+                   "Cadena JSON: " + request.getParameter("json"));
+
         try {
             setParameterMapping(request);
 
-            if(processesMapping.containsKey(parametros.get("id").toString())) {
-                ProceadureInfo pi = processesMapping.get("altaFiso");
+            if (processesMapping.containsKey(parametros.get("id").toString())) {
+                ProcedureInfo pi = processesMapping.get("altaFiso");
                 List<Object> paramArray = new ArrayList<>();
-                
-                for(ParameterInfo param : pi.getParameters()) {
-                    String pv = (String)parametros.get(param.getId());
-                    Object value = param.getType().getConstructor(String.class).newInstance(pv);
+
+                for (ParameterInfo param : pi.getParameters()) {
+                    String pv = (String) parametros.get(param.getId());
+                    Object value = param.getType()
+                                        .getConstructor(String.class)
+                                        .newInstance(pv);
                     paramArray.add(value);
                 }
-                
+
                 Object procObj = pi.getTheClass().newInstance();
-                pi.getTheMethod().invoke(procObj, paramArray.toArray());                
+                pi.getTheMethod().invoke(procObj, paramArray.toArray());
             }
 
             return respondObject(response, genericDataAccessService.ejecutaProcedimiento(parametros));
@@ -190,77 +197,82 @@ public class ConsultasController extends JsonActionController {
         }
     }
 
-    public ModelAndView ejecutaConsultaExcel(HttpServletRequest request, HttpServletResponse response) throws Exception {
-        logger.log(Thread.currentThread().getClass(), Thread.currentThread(), LoggingService.LEVEL.DEBUG, "Cadena JSON: " + request.getParameter("json"));
+    public ModelAndView ejecutaConsultaExcel(HttpServletRequest request,
+                                             HttpServletResponse response) throws Exception {
+        logger.log(Thread.currentThread().getClass(), Thread.currentThread(), LoggingService.LEVEL.DEBUG,
+                   "Cadena JSON: " + request.getParameter("json"));
 
-        response.setHeader("Cache-Control", "no-cache");        
-            
+        response.setHeader("Cache-Control", "no-cache");
+
         ByteArrayOutputStream outByteStream = null;
-        
-        try {            
+
+        try {
             setParameterMapping(request);
 
             //TODO: Optimizar este codigo para que no de tantas vueltas la informacion... la mejor es: De base de datos a excel sin pasar por otros componentes
             List consulta = genericDataAccessService.ejecutaConsulta(parametros);
-            
-            String[] tableHeaders = new String[]{};
-            if(request.getParameter("headers") != null) {
+
+            String[] tableHeaders = new String[] { };
+            if (request.getParameter("headers") != null) {
                 tableHeaders = request.getParameter("headers").split(",");
             }
-            
+
             boolean esXLSX = false;
-            if((""+request.getRequestURL()).indexOf("XLSX") != -1) esXLSX = true;
-            
-            if(esXLSX) {
-                
+            if (("" + request.getRequestURL()).indexOf("XLSX") != -1)
+                esXLSX = true;
+
+            if (esXLSX) {
+
                 response.setContentType("application/vnd.openxmlformats-officedocument.spreadsheetml.sheet");
-                response.setContentType("Content-Disposition: inline; filename=\"DatosFiduciarios.xlsx\"");//Content-Disposition: attachment; filename="DatosFiduciarios.xlsx"
+                response.setContentType("Content-Disposition: inline; filename=\"DatosFiduciarios.xlsx\""); //Content-Disposition: attachment; filename="DatosFiduciarios.xlsx"
                 XLSXDataWriter xlsx = new XLSXDataWriter();
                 outByteStream = xlsx.generateExcel(consulta, tableHeaders);
-                
+
             } else {
 
                 response.setContentType("application/vnd.ms-excel");
                 response.setContentType("Content-Disposition: inline; filename=\"DatosFiduciarios.xls\"");
-                
+
                 XLSDataWriter xlsx = new XLSDataWriter();
                 outByteStream = xlsx.generateExcel(consulta, tableHeaders);
-                                
+
             }
-            
+
             OutputStream outStream = response.getOutputStream();
             outStream.write(outByteStream.toByteArray());
             outStream.flush();
-            
+
         } catch (BusinessException e) {
             return respondObject(response, new ErrorBean(ErrorBean.ERROR, e.getErrorCode(), e.getErrorMessage()));
         }
-        
+
         return null;
     }
 
-    public ModelAndView ejecutaProcedimientoAsync(HttpServletRequest request, HttpServletResponse response) throws Exception {
-        logger.log(Thread.currentThread().getClass(), Thread.currentThread(), LoggingService.LEVEL.DEBUG, "Cadena JSON: " + request.getParameter("json"));
-        
+    public ModelAndView ejecutaProcedimientoAsync(HttpServletRequest request,
+                                                  HttpServletResponse response) throws Exception {
+        logger.log(Thread.currentThread().getClass(), Thread.currentThread(), LoggingService.LEVEL.DEBUG,
+                   "Cadena JSON: " + request.getParameter("json"));
+
         ExecuteRefAsyncResponse responseObj = new ExecuteRefAsyncResponse();
-        
+
         try {
             setParameterMapping(request);
-            
+
             ExecuteRefAsyncRunner runner = new ExecuteRefAsyncRunner();
-            runner.getParametros().putAll(parametros);            
+            runner.getParametros().putAll(parametros);
             runner.setDataService(genericDataAccessService);
-            new Thread(runner).start();            
-            
+            new Thread(runner).start();
+
             responseObj.setMessage("Operacion solicitada iniciada exitosamente");
             responseObj.setSuccedded(true);
-            
+
         } catch (Exception e) {
             responseObj.setErrorCode("FIDW-CON-001");
             responseObj.setErrorMessage(e.getMessage());
         }
-        
+
         return respondObject(response, responseObj);
     }
-    
+
 }
