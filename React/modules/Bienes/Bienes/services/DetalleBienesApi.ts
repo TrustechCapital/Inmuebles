@@ -3,6 +3,7 @@ import { ITableBienesParameters } from '../types';
 import DetalleBienResultRow from '../models/DetalleBienResultRow';
 import DetalleBien from '../../../../models/DetalleBien';
 import DetalleBienesModelMapper from './DetalleBienesModelMapper';
+import { OperacionesCatalogoDetalleBienes } from '../constants';
 
 class DetalleBienesApi extends ModelsApi<DetalleBien> {
     async find(
@@ -37,6 +38,25 @@ class DetalleBienesApi extends ModelsApi<DetalleBien> {
         ).then((data) => {
             return data[0];
         });
+    }
+
+    async updateWithBussinessLogic(
+        model: DetalleBien,
+        mode: OperacionesCatalogoDetalleBienes
+    ) {
+        await this.update(model);
+        const parameters = {
+            ...model,
+            tipoOperacion: mode,
+        };
+
+        try {
+            await this.executeRef('funRegistroBienesGar', parameters);
+        } catch (error) {
+            throw new Error(
+                'Los datos fueron guardados pero el proceso no fue completado. Intente nuevamente'
+            );
+        }
     }
 }
 

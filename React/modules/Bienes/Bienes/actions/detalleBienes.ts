@@ -102,18 +102,16 @@ function saveModel(model: DetalleBien) {
         getState: () => MainBienesState
     ) => {
         const state = getState();
+        const mode = state.detalleBienes.modalMode;
         dispatch({
             type: 'SAVE_DETALLE_BIEN_MODEL',
         });
 
         try {
-            if (
-                state.detalleBienes.modalMode ===
-                OperacionesCatalogoDetalleBienes.Registro
-            ) {
+            if (mode === OperacionesCatalogoDetalleBienes.Registro) {
                 await detalleBienesApi.create(model);
             } else {
-                await detalleBienesApi.update(model);
+                await detalleBienesApi.updateWithBussinessLogic(model, mode);
             }
 
             dispatch({

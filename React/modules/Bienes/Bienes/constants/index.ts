@@ -1,7 +1,7 @@
 export enum OperacionesCatalogoDetalleBienes {
-    Registro,
-    Modificacion,
-    Consulta,
-    Revaluacion,
-    Salida,
+    Registro = 1,
+    Modificacion = 2,
+    Revaluacion = 3,
+    Consulta = 4,
+    Salida = 5,
 }
