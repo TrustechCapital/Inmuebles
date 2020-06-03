@@ -9,6 +9,12 @@ enum FiduciaDynamicEndpoints {
     Execute = 'executeRef.do',
 }
 
+class BackendException extends Error {
+    constructor(message: string) {
+        super(message);
+    }
+}
+
 export class Api {
     private api: AxiosInstance;
 
@@ -129,6 +135,13 @@ export class Api {
             refName,
             params,
             false
-        );
+        ).then((response) => {
+            const data = response.data as any;
+            if (data.codigoError == '500') {
+                throw new BackendException(
+                    'Ocurrio un error al procesar la peticion'
+                );
+            }
+        });
     }
 }
