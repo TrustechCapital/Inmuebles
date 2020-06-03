@@ -195,7 +195,10 @@ public class ConsultasController extends JsonActionController {
                 }
 
                 Object procObj = pi.getTheClass().newInstance();
-                pi.getTheMethod().invoke(procObj, paramArray.toArray());
+                Method method = pi.getTheMethod();
+
+                Object result = method.invoke(procObj, paramArray.toArray());
+                return respondObject(response, result);
             }
 
             return respondObject(response, genericDataAccessService.ejecutaProcedimiento(parametros));
