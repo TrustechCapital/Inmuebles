@@ -49,17 +49,11 @@ function newDetalleBienes() {
         const state = getState();
         const currentBienModel = state.bienes.currentModel;
 
-        const nextDetalleBienId = await detalleBienesApi.getNextId(
-            currentBienModel.idFideicomiso as number,
-            currentBienModel.idSubcuenta as number,
-            currentBienModel.idTipoBien as number
-        );
-
         const newCurrentModel = new DetalleBien(
             currentBienModel.idFideicomiso,
             currentBienModel.idSubcuenta,
             currentBienModel.idTipoBien,
-            nextDetalleBienId,
+            null,
             null
         );
 
@@ -109,9 +103,18 @@ function saveModel(model: DetalleBien) {
 
         try {
             if (mode === OperacionesCatalogoDetalleBienes.Registro) {
-                await detalleBienesApi.create(model);
+                const newModelId = await detalleBienesApi.executeCrudOperation(
+                    model,
+                    mode
+                );
+                model.idDetalleBien = newModelId;
+
+                dispatch({
+                    type: 'SET_DETALLE_BIEN_MODEL',
+                    model: model,
+                });
             } else {
-                await detalleBienesApi.updateWithBussinessLogic(model, mode);
+                await detalleBienesApi.executeCrudOperation(model, mode);
             }
 
             dispatch({

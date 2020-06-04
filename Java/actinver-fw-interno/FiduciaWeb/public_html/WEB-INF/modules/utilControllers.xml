@@ -32,6 +32,7 @@
                 <prop key="/getRef.do">ejecutaConsulta</prop>
                 <prop key="/doRef.do">ejecutaQuery</prop>
                 <prop key="/executeRef.do">ejecutaProcedimiento</prop>
+                <prop key="/executeJavaRef.do">ejecutaMetodoJava</prop>
                 <prop key="/executeRefAsync.do">ejecutaProcedimientoAsync</prop>
                 <prop key="/getRefAsXLS.do">ejecutaConsultaExcel</prop>
                 <prop key="/getRefAsXLSX.do">ejecutaConsultaExcel</prop>

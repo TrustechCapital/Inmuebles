@@ -10,6 +10,8 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+import java.util.stream.Collectors;
+
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
@@ -17,7 +19,9 @@ import mx.com.inscitech.fiducia.common.ParameterInfo;
 import mx.com.inscitech.fiducia.common.ProceadureData;
 import mx.com.inscitech.fiducia.common.ProcedureInfo;
 import mx.com.inscitech.fiducia.common.services.LoggingService;
-import mx.com.inscitech.fiducia.negocio.OperacionesBienes;
+import mx.com.inscitech.fiducia.domain.base.DomainObject;
+import mx.com.inscitech.fiducia.negocio.bienes.OperacionesBienes;
+import mx.com.inscitech.fiducia.negocio.bienes.OperacionesDetalleBienes;
 import mx.com.inscitech.fiducia.util.ExecuteRefAsyncResponse;
 import mx.com.inscitech.fiducia.util.ExecuteRefAsyncRunner;
 import mx.com.inscitech.fiducia.util.XLSDataWriter;
@@ -41,7 +45,7 @@ import org.springframework.web.servlet.ModelAndView;
  */
 public class ConsultasController extends JsonActionController {
 
-    Class[] proceadureClasses = new Class[] { OperacionesBienes.class };
+    Class[] proceadureClasses = new Class[] { OperacionesBienes.class, OperacionesDetalleBienes.class };
     private static HashMap<String, ProcedureInfo> processesMapping = new HashMap<>();
 
     protected GenericDataAccessService genericDataAccessService;
@@ -117,11 +121,7 @@ public class ConsultasController extends JsonActionController {
 
         try {
             setParameterMapping(request);
-
             List consulta = genericDataAccessService.ejecutaConsulta(parametros);
-            //response.addHeader("Access-Control-Allow-Origin", "*");
-            //response.addHeader("Access-Control-Allow-Methods","GET, POST, PATCH, PUT, DELETE, OPTIONS");
-            //response.addHeader("Access-Control-Allow-Headers","Origin, Content-Type, X-Auth-Token");
             return respondObject(response, consulta);
 
         } catch (BusinessException e) {
@@ -173,7 +173,25 @@ public class ConsultasController extends JsonActionController {
 
         try {
             setParameterMapping(request);
+            return respondObject(response, genericDataAccessService.ejecutaProcedimiento(parametros));
 
+        } catch (Exception e) {
+            response.setStatus(500);
+            return respondObject(response, jsonObjectFromError(e));
+        }
+    }
+
+    /**
+     * Metodo utilizado para ejecutar metodos de java de manera dinamica
+     *
+     * @throws java.lang.Exception
+     * @return
+     * @param response
+     * @param request
+     */
+    public ModelAndView ejecutaMetodoJava(HttpServletRequest request, HttpServletResponse response) throws Exception {
+        try {
+            setParameterMapping(request);
             String parameterId = parametros.get("id").toString();
 
             if (processesMapping.containsKey(parameterId)) {
@@ -181,16 +199,24 @@ public class ConsultasController extends JsonActionController {
                 List<Object> paramArray = new ArrayList<>();
 
                 for (ParameterInfo param : pi.getParameters()) {
+
                     Object rawValue = parametros.get(param.getId());
 
                     if (rawValue == null) {
                         paramArray.add(null);
                     } else {
                         String pv = String.valueOf(rawValue);
-                        Object value = param.getType()
-                                            .getConstructor(String.class)
-                                            .newInstance(pv);
-                        paramArray.add(value);
+
+                        Class<?> type = param.getType();
+
+                        if (DomainObject.class.isAssignableFrom(type)) {
+                            Object modelObject = JSONObject.toBean(JSONObject.fromObject(pv), type);
+                            paramArray.add(modelObject);
+                        } else {
+                            Object value = type.getConstructor(String.class).newInstance(pv);
+                            paramArray.add(value);
+                        }
+
                     }
                 }
 
@@ -198,14 +224,39 @@ public class ConsultasController extends JsonActionController {
                 Method method = pi.getTheMethod();
 
                 Object result = method.invoke(procObj, paramArray.toArray());
-                return respondObject(response, result);
+
+                JSONObject responseObject = new JSONObject();
+                responseObject.put("result", result);
+
+                return respondObject(response, responseObject);
             }
 
-            return respondObject(response, genericDataAccessService.ejecutaProcedimiento(parametros));
+            throw new Exception("Nombre de funcion no encontrado");
 
-        } catch (BusinessException e) {
-            return respondObject(response, new ErrorBean(ErrorBean.ERROR, e.getErrorCode(), e.getErrorMessage()));
+        } catch (Exception e) {
+            response.setStatus(500);
+            return respondObject(response, jsonObjectFromError(e));
         }
+    }
+
+    private JSONObject jsonObjectFromError(Exception e) {
+        JSONObject responseObject = new JSONObject();
+        Integer errorCode = 500;
+        String errorMessage = e.getMessage();
+
+        if (e instanceof BusinessException) {
+            BusinessException businessException = (BusinessException) e;
+            errorCode = Integer.valueOf(businessException.getErrorCode());
+            errorMessage = businessException.getErrorMessage();
+        }
+
+        if (errorMessage == null || errorMessage == "") {
+            errorMessage = "Internal Server Error";
+        }
+
+        responseObject.put("errorCode", errorCode);
+        responseObject.put("errorMessage", errorMessage);
+        return responseObject;
     }
 
     public ModelAndView ejecutaConsultaExcel(HttpServletRequest request,

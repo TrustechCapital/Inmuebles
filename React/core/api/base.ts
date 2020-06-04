@@ -7,12 +7,7 @@ export type ModelMapper = (object: any, index: number) => any;
 enum FiduciaDynamicEndpoints {
     Get = 'getRef.do',
     Execute = 'executeRef.do',
-}
-
-class BackendException extends Error {
-    constructor(message: string) {
-        super(message);
-    }
+    ExecuteJava = 'executeJavaRef.do',
 }
 
 export class Api {
@@ -129,19 +124,17 @@ export class Api {
         });
     }
 
-    public async executeRef(refName: string, params: object) {
+    public async executeRemoteMethod(
+        refName: string,
+        data: object
+    ): Promise<any> {
         return this.sendDynamicRequest(
-            FiduciaDynamicEndpoints.Execute,
+            FiduciaDynamicEndpoints.ExecuteJava,
             refName,
-            params,
+            data,
             false
-        ).then((response) => {
-            const data = response.data as any;
-            if (data.codigoError == '500') {
-                throw new BackendException(
-                    'Ocurrio un error al procesar la peticion'
-                );
-            }
+        ).then((response: any) => {
+            return response.data.result;
         });
     }
 }

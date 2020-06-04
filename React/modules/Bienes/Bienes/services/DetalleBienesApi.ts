@@ -20,38 +20,28 @@ class DetalleBienesApi extends ModelsApi<DetalleBien> {
         );
     }
 
-    async getNextId(
-        idFideicomiso: number,
-        idSubcuenta: number,
-        idTipoBien: number
-    ): Promise<number> {
-        return this.getRef<number>(
-            'consultaSigBienesGar',
-            {
-                Fiso: idFideicomiso,
-                SubFiso: idSubcuenta,
-                CveTipoGar: idTipoBien,
-            },
-            (data) => {
-                return data.idSigBien;
-            }
-        ).then((data) => {
-            return data[0];
-        });
-    }
-
-    async updateWithBussinessLogic(
+    /*
+     * Se usa este metodo en vez de this.update() para permitir que la logica de negocio
+     * se realice en una transacción.
+     */
+    async executeCrudOperation(
         model: DetalleBien,
         mode: OperacionesCatalogoDetalleBienes
-    ) {
-        await this.update(model);
+    ): Promise<number> {
         const parameters = {
-            ...model,
+            detalleBien: JSON.stringify(
+                DetalleBienesModelMapper.toObject(model)
+            ),
             tipoOperacion: mode,
         };
 
         try {
-            await this.executeRef('funRegistroBienesGar', parameters);
+            const newDetalleBienId: number = await this.executeRemoteMethod(
+                'funEjecutaOperacionDetalleBienes',
+                parameters
+            );
+
+            return newDetalleBienId;
         } catch (error) {
             throw new Error(
                 'Los datos fueron guardados pero el proceso no fue completado. Intente nuevamente'

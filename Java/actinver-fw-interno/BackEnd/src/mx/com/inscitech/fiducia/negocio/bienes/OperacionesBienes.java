@@ -1,10 +1,9 @@
-package mx.com.inscitech.fiducia.negocio;
+package mx.com.inscitech.fiducia.negocio.bienes;
 
 import java.math.BigDecimal;
 
 import java.text.DecimalFormat;
 
-import java.util.Arrays;
 import java.util.Date;
 import java.util.List;
 
@@ -30,7 +29,7 @@ import mx.com.inscitech.fiducia.models.UnidadesCartaLiberacionBienesRow;
 import mx.com.inscitech.fiducia.negocio.exceptions.BusinessException;
 import mx.com.inscitech.fiducia.repository.AdquirienteRepository;
 import mx.com.inscitech.fiducia.repository.AnteproyectoRepository;
-import mx.com.inscitech.fiducia.repository.BienesGarantiasRepository;
+import mx.com.inscitech.fiducia.repository.DetalleBienesRepository;
 import mx.com.inscitech.fiducia.repository.BienesRepository;
 import mx.com.inscitech.fiducia.repository.ClavesRepository;
 import mx.com.inscitech.fiducia.repository.DepositosRepository;
@@ -49,113 +48,13 @@ import mx.com.inscitech.fiducia.repository.UnidadRepository;
 
 public class OperacionesBienes {
 
-    enum EstatusGarantias {
-        LIBERADO,
-        COMPROMETIDO
-    }
-
-    enum EstatusBienesGarantias {
-        ACTIVO
-    }
-
-    enum TiposOperaciones {
-        GARANTIAS(6),
-        BIENES(8),
-        BIENES_GARANTIAS(3);
-
-        private int identificadorOperacion;
-
-        TiposOperaciones(int identificadorOperacion) {
-            this.identificadorOperacion = identificadorOperacion;
-        }
-
-        int getValue() {
-            return this.identificadorOperacion;
-        }
-
-    }
-
-    enum TiposOperacionesGarantias {
-        ENTRADA_EN_GARANTIA(1),
-        MODIFICACION_DE_GARANTIA(2),
-        REVALUACION_DE_GARANTIA(3),
-        SALIDA_DE_BIEN_EN_GARANTIA(5),
-        PAGO_PARCIAL_DE_GARANTIA(6);
-
-        private int identificadorOperacion;
-
-        TiposOperacionesGarantias(int identificadorOperacion) {
-            this.identificadorOperacion = identificadorOperacion;
-        }
-
-        int getValue() {
-            return this.identificadorOperacion;
-        }
-
-    }
-
-    enum SubtiposTransaccionesGarantias {
-        ENTRADA(51),
-        REVALUACION_ALTA(53),
-        REVALUACION_BAJA(54),
-        SALIDA(52),
-        DESCONOCIDO(0);
-
-        private int identificadorTransaccion;
-
-        SubtiposTransaccionesGarantias(int identificadorTransaccion) {
-            this.identificadorTransaccion = identificadorTransaccion;
-        }
-
-        int getValue() {
-            return this.identificadorTransaccion;
-        }
-
-    }
-
-    enum OperacionesPagoBienes {
-        ALTA,
-        BAJA
-    }
-
-    enum EstadosAdquiriente {
-        ACTIVO(1, "ACTIVO"),
-        EN_PROCESO_DE_LIBERACION(2, "EN PROCESO DE LIBERACION"),
-        LIBERADO(3, "LIBERADO"),
-        DESCONOCIDO(-1, "DESCONOCIDO");
-
-        private int idEstatus;
-        private String estatus;
-
-        EstadosAdquiriente(int idEstatus, String estatus) {
-            this.idEstatus = idEstatus;
-            this.estatus = estatus;
-        }
-
-        int getValue() {
-            return this.idEstatus;
-        }
-
-        String getStringValue() {
-            return this.estatus;
-        }
-
-        static String fromId(int idStatus) {
-            return Arrays.stream(EstadosAdquiriente.values())
-                         .filter(e -> e.getValue() == idStatus)
-                         .findFirst()
-                         .orElse(EstadosAdquiriente.DESCONOCIDO)
-                         .getStringValue();
-        }
-    }
-
     private AdquirienteRepository adquirienteRepository;
     private UnidadRepository unidadRepository;
     private GarantiasRepository garantiasRepository;
     private BienesRepository bienesRepository;
     private FoliosRepository foliosRepository;
     private ClavesRepository clavesRepository;
-    private BienesGarantiasRepository bienesGarantiasRepository;
+    private DetalleBienesRepository bienesGarantiasRepository;
     private EmpresasRepository empresasRepository;
     private ProcesoLiberacionRepository procesoLiberacionRepository;
     private NotariosRepository notariosRepository;
@@ -175,7 +74,7 @@ public class OperacionesBienes {
     public OperacionesBienes(AdquirienteRepository adquirienteRepository, UnidadRepository unidadRepository,
                              GarantiasRepository garantiasRepository, BienesRepository bienesRepository,
                              FoliosRepository foliosRepository, ClavesRepository clavesRepository,
-                             BienesGarantiasRepository bienesGarantiasRepository, EmpresasRepository empresasRepository,
+                             DetalleBienesRepository bienesGarantiasRepository, EmpresasRepository empresasRepository,
                              ProcesoLiberacionRepository procesoLiberacionRepository,
                              NotariosRepository notariosRepository, AnteproyectoRepository anteproyRepository,
                              PagosBienesRepository pagosBienesRepository, MonedasRepository monedasRepository,
@@ -217,7 +116,9 @@ public class OperacionesBienes {
             adquiriente.setFadqContrato(escritura);
             adquiriente.setFadqFolio(folioReal);
             adquiriente.setFadqRegPub(registroPublico);
-            adquiriente.setFadqStatus(EstatusGarantias.LIBERADO.toString());
+            adquiriente.setFadqStatus(Constants.EstatusGarantias
+                                               .LIBERADO
+                                               .toString());
 
             adquirienteRepository.save(adquiriente);
 
@@ -228,7 +129,9 @@ public class OperacionesBienes {
             unidad.setFuniNumEscritura(escritura);
             unidad.setFuniFolioReal(folioReal);
             unidad.setFuniFechaTrasladoDominio(fechaTrasladoDominio);
-            unidad.setFuniStatus(EstatusGarantias.LIBERADO.toString());
+            unidad.setFuniStatus(Constants.EstatusGarantias
+                                          .LIBERADO
+                                          .toString());
 
             unidadRepository.update(unidad);
 
@@ -277,7 +180,7 @@ public class OperacionesBienes {
                                 new FUnidades(pIdFideicomiso, BigDecimal.valueOf(layoutCarga.getSubcuenta()),
                                               layoutCarga.getBien().toString(), layoutCarga.getDepto());
                             unidad.setFuniTipo(tipo);
-                            unidad.setFuniNiveles(toBigDecimal(layoutCarga.getNiveles()));
+                            unidad.setFuniNiveles(Utils.toBigDecimal(layoutCarga.getNiveles()));
                             unidad.setFuniCalleNum(layoutCarga.getCalle());
                             unidad.setFuniNomColonia(layoutCarga.getColonia());
                             unidad.setFuniNomPoblacion(layoutCarga.getPoblacion());
@@ -372,7 +275,7 @@ public class OperacionesBienes {
                         adquiriente.setFadqLocalidad(layoutCarga.getLocalidad());
                         adquiriente.setFadqContrato(layoutCarga.getEscritura());
                         adquiriente.setFadqFolio(layoutCarga.getNumeroOficial());
-                        adquiriente.setFadqStatus(EstadosAdquiriente.fromId(layoutCarga.getStatus()));
+                        adquiriente.setFadqStatus(Constants.EstadosAdquiriente.fromId(layoutCarga.getStatus()));
 
                         adquirienteRepository.save(adquiriente);
 
@@ -381,7 +284,7 @@ public class OperacionesBienes {
                         unidad.setFuniLocalidadNota(layoutCarga.getLocalidad());
                         unidad.setFuniNumEscritura(layoutCarga.getEscritura());
                         unidad.setFuniFolioReal(layoutCarga.getFolioReal().toString());
-                        unidad.setFuniStatus(EstadosAdquiriente.fromId(layoutCarga.getStatus()));
+                        unidad.setFuniStatus(Constants.EstadosAdquiriente.fromId(layoutCarga.getStatus()));
 
                         unidadRepository.update(unidad);
                     }
@@ -461,12 +364,14 @@ public class OperacionesBienes {
             BigDecimal clasBien =
                 clavesRepository.findClaveByNumeroYDescripcion(pIdTipoBien, pClaveBien).getCveNumSecClave();
             BigDecimal numeroOperacion =
-                creaNumeroOperacion("%d%02d%02d%02d%02d0", TiposOperaciones.BIENES.getValue(), pIdTipoBien, clasBien,
-                                    vTipoOperacion, pMoneda);
+                Utils.creaNumeroOperacion("%d%02d%02d%02d%02d0", Constants.TiposOperaciones
+                                                                                                   .BIENES
+                                                                                                   .getValue(),
+                                          pIdTipoBien, clasBien, vTipoOperacion, pMoneda);
 
             boolean contabilidadGenerada =
-                generaContabilidad(pIdFideicomiso, pIdSubcuenta, pMoneda, fechaInicio, pImporte, numeroOperacion,
-                                   folioOperacion, pIdTipoCambio, null, null);
+                Utils.generaContabilidad(pIdFideicomiso, pIdSubcuenta, pMoneda, fechaInicio, pImporte, numeroOperacion,
+                                         folioOperacion, pIdTipoCambio, null, null);
 
             if (!contabilidadGenerada) {
                 throw new BusinessException("Ocurrio un error al generar la contabilidad");
@@ -504,186 +409,6 @@ public class OperacionesBienes {
             }
 
             return 0;
-        } catch (Exception e) {
-            return 1;
-        }
-
-    }
-
-    @ProceadureData(id = "funRegistroBienesGar",
-                    fields =
-                    { "tipoOperacion", "idFideicomiso", "idSubcuenta", "idDetalleBien", "idTipoBien",
-                      "idTipoDetalleBien", "identificacion", "descripcion", "comentario", "importeDelBien", "idMoneda",
-                      "idRevaluacion", "idClavePeriodicidadRevaluacion", "importeUltimaValuacion",
-                      "fechaUltimaValuacion", "fechaVencimiento", "numeroEscritura", "numeroNotario",
-                      "importeValuacion", "fechaValuacion", "idRegimen"
-        })
-    public Integer generaGarantias(Integer pTipoOperacion, BigDecimal pIdFideicomiso, BigDecimal pIdSubcuenta,
-                                   BigDecimal pIdGarantia, BigDecimal pClaveGarantia, BigDecimal pIdTipoBien,
-                                   String pIdentificacion, String pTextoDescripcion, String pTextoComentario,
-                                   BigDecimal pImporte, BigDecimal pMoneda, BigDecimal pClaveRevalua,
-                                   String pClavePerValua, BigDecimal pImporteUltimaValuacion,
-                                   String pFechaUltimaValuacion, String pFechaVencimiento, String pNumeroEscitura,
-                                   String pNumeroNotario, BigDecimal pValuacion, String pFechaValuacion,
-                                   BigDecimal pClaveRegimen) {
-
-        try {
-
-
-            if (pTipoOperacion == TiposOperacionesGarantias.MODIFICACION_DE_GARANTIA.getValue()) {
-
-                FBienesgar bienGarantia = new FBienesgar(pIdFideicomiso, pIdSubcuenta, pIdGarantia);
-                bienGarantia.setForsIdentificacion(pIdentificacion);
-                bienGarantia.setForsTextoDescrip(pTextoDescripcion);
-                bienGarantia.setForsTexComentario(pTextoComentario);
-                bienGarantia.setForsCveRevalua(pClaveRevalua);
-                bienGarantia.setForsCvePerValua(pClavePerValua);
-                bienGarantia.setForsNumEscritura(pNumeroEscitura);
-                bienGarantia.setForsNumNotario(pNumeroNotario);
-                bienGarantia.setForsRegimen(pClaveRegimen);
-                bienGarantia.setForsImpBien(pImporte);
-
-                bienesGarantiasRepository.save(bienGarantia);
-                return 0;
-
-            }
-
-            // TODO: Encontrar un mejor nombre
-            int vTipoOperacion;
-            BigDecimal idTipoCambio = BigDecimal.valueOf(1);
-            Date fechaValuacion = DateUtils.fromString(pFechaValuacion);
-            BigDecimal folioOperacion = foliosRepository.generaFolio();
-            BigDecimal nImporte = pImporteUltimaValuacion;
-            BigDecimal valuacion = pValuacion;
-            BigDecimal diferencia = BigDecimal.valueOf(0);
-            SubtiposTransaccionesGarantias tipoTransaccion;
-            FBienesgar bienGarantia = new FBienesgar();
-
-            FGarantias garantia = garantiasRepository.findByPk(pIdFideicomiso, pIdSubcuenta, pClaveGarantia);
-
-            if (pTipoOperacion == TiposOperacionesGarantias.ENTRADA_EN_GARANTIA.getValue()) {
-                vTipoOperacion = 1;
-                tipoTransaccion = SubtiposTransaccionesGarantias.ENTRADA;
-            } else {
-                bienGarantia = bienesGarantiasRepository.findByPk(pIdFideicomiso, pIdSubcuenta, pIdGarantia);
-
-                if (pTipoOperacion == TiposOperacionesGarantias.REVALUACION_DE_GARANTIA.getValue()) {
-
-                    // TODO: Verificar si este dato se usa, de lo contrario, mover la consulta a bienGarantia mas abajo y quitar esta linea
-                    valuacion = bienGarantia.getForsImpUltValua();
-                    diferencia = pValuacion.subtract(pImporteUltimaValuacion);
-
-                    if (diferencia.intValue() > 0) {
-                        vTipoOperacion = 2;
-                        nImporte = diferencia;
-                        tipoTransaccion = SubtiposTransaccionesGarantias.REVALUACION_ALTA;
-                    } else {
-                        vTipoOperacion = 3;
-                        nImporte = diferencia.negate();
-                        tipoTransaccion = SubtiposTransaccionesGarantias.REVALUACION_BAJA;
-                    }
-
-                } else if (pTipoOperacion == TiposOperacionesGarantias.PAGO_PARCIAL_DE_GARANTIA.getValue()) {
-                    vTipoOperacion = 2;
-                    //TODO: Aplicar un tipo de transaccion valido
-                    tipoTransaccion = SubtiposTransaccionesGarantias.DESCONOCIDO;
-                } else {
-                    vTipoOperacion = 4;
-                    tipoTransaccion = SubtiposTransaccionesGarantias.SALIDA;
-                    nImporte = pImporteUltimaValuacion;
-                }
-            }
-
-            BigDecimal esGarantia =
-                garantia.getFgarEsGarantia() == null ? BigDecimal.valueOf(0) : garantia.getFgarEsGarantia();
-
-            BigDecimal numeroOperacion =
-                creaNumeroOperacion("%d%02d%01d%02d%02d%01d000", TiposOperaciones.BIENES_GARANTIAS.getValue(),
-                                    tipoTransaccion, pClaveGarantia, pIdTipoBien, pMoneda, esGarantia);
-
-            if (pTipoOperacion != TiposOperacionesGarantias.REVALUACION_DE_GARANTIA.getValue()) {
-                if (pTipoOperacion == TiposOperacionesGarantias.SALIDA_DE_BIEN_EN_GARANTIA.getValue()) {
-                    nImporte = pImporteUltimaValuacion;
-                } else {
-                    nImporte = pImporte;
-                }
-            }
-
-            boolean contabilidadGenerada =
-                generaContabilidad(pIdFideicomiso, pIdSubcuenta, pMoneda, fechaValuacion, nImporte, numeroOperacion,
-                                   folioOperacion, idTipoCambio, null, null);
-
-            if (!contabilidadGenerada) {
-                throw new BusinessException("Ocurrio un error al generar la contabilidad");
-            }
-
-            if (pTipoOperacion == TiposOperacionesGarantias.ENTRADA_EN_GARANTIA.getValue()) {
-
-                bienGarantia = new FBienesgar(pIdFideicomiso, pIdSubcuenta, pIdGarantia);
-
-                bienGarantia.setForsCveTipoGarantia(pClaveGarantia);
-                bienGarantia.setForsCveTipoBien(pIdTipoBien);
-                bienGarantia.setForsIdentificacion(pIdentificacion);
-                bienGarantia.setForsTextoDescrip(pTextoDescripcion);
-                bienGarantia.setForsTexComentario(pTextoComentario);
-                bienGarantia.setForsImpBien(pImporte);
-                bienGarantia.setForsMoneda(pMoneda);
-                bienGarantia.setForsCveRevalua(pClaveRevalua);
-                bienGarantia.setForsCvePerValua(pClavePerValua);
-                bienGarantia.setForsImpUltValua(pImporte);
-                bienGarantia.setForsFecUltValua(pFechaUltimaValuacion);
-                bienGarantia.setForsFecVencimiento(pFechaVencimiento);
-                bienGarantia.setForsNumEscritura(pNumeroEscitura);
-                bienGarantia.setForsNumNotario(pNumeroNotario);
-                bienGarantia.setForsCveStatus(EstatusBienesGarantias.ACTIVO.toString());
-                bienGarantia.setForsRegimen(pClaveRegimen);
-
-                bienesGarantiasRepository.insert(bienGarantia);
-
-                BigDecimal nuevoImporteGarantizado = garantia.getFgarImpGarantizad().add(pImporte);
-                garantia.setFgarImpGarantizad(nuevoImporteGarantizado);
-
-                garantiasRepository.save(garantia);
-                return 0;
-            }
-
-            if (pTipoOperacion == TiposOperacionesGarantias.REVALUACION_DE_GARANTIA.getValue()) {
-
-                bienGarantia.setForsImpUltValua(pValuacion);
-                bienGarantia.setForsFecUltValua(pFechaValuacion);
-
-                bienesGarantiasRepository.save(bienGarantia);
-
-                BigDecimal nuevoImporteGarantizado = garantia.getFgarImpGarantizad().add(diferencia);
-                garantia.setFgarImpGarantizad(nuevoImporteGarantizado);
-
-                garantiasRepository.save(garantia);
-                return 0;
-            }
-
-            if (pTipoOperacion == TiposOperacionesGarantias.SALIDA_DE_BIEN_EN_GARANTIA.getValue()) {
-
-                bienGarantia = new FBienesgar(pIdFideicomiso, pIdSubcuenta, pIdGarantia);
-
-                bienesGarantiasRepository.delete(bienGarantia);
-
-                BigDecimal nuevoImporteGarantizado = garantia.getFgarImpGarantizad().subtract(pImporteUltimaValuacion);
-                garantia.setFgarImpGarantizad(nuevoImporteGarantizado);
-
-                garantiasRepository.save(garantia);
-                return 0;
-            }
-
-            if (pTipoOperacion == TiposOperacionesGarantias.PAGO_PARCIAL_DE_GARANTIA.getValue()) {
-                BigDecimal nuevoImporteGarantizado = garantia.getFgarImpGarantizad().subtract(pImporte);
-                garantia.setFgarImpGarantizad(nuevoImporteGarantizado);
-
-                garantiasRepository.save(garantia);
-                return 0;
-            }
-
-            return 0;
-
         } catch (Exception e) {
             return 1;
         }
@@ -888,7 +613,9 @@ public class OperacionesBienes {
                 numMonedaFideicomiso = BigDecimal.valueOf(1);
             }
 
-            if (pOperacionFuncion == OperacionesPagoBienes.ALTA.toString()) {
+            if (pOperacionFuncion == Constants.OperacionesPagoBienes
+                                              .ALTA
+                                              .toString()) {
                 FPagosBienes pagoBien =
                     pagosBienesRepository.findByPK(pIdFideicomiso, pIdSubcuenta, pIdGarantia, pIdCobro,
                                                    pIdBienGarantia);
@@ -925,7 +652,9 @@ public class OperacionesBienes {
 
                 pagosBienesRepository.insert(pagoBien);
 
-            } else if (pOperacionFuncion == OperacionesPagoBienes.BAJA.toString()) {
+            } else if (pOperacionFuncion == Constants.OperacionesPagoBienes
+                                                     .BAJA
+                                                     .toString()) {
                 FPagosBienes pagoBien =
                     new FPagosBienes(pIdFideicomiso, pIdSubcuenta, pIdGarantia, pImporte, pIdBienGarantia);
                 pagosBienesRepository.delete(pagoBien);
@@ -936,11 +665,11 @@ public class OperacionesBienes {
 
             BigDecimal folioOperacion = foliosRepository.generaFolio();
 
-            BigDecimal numeroOperacion = toBigDecimal(stringNumeroOperacion);
+            BigDecimal numeroOperacion = Utils.toBigDecimal(stringNumeroOperacion);
 
             boolean contabilidadGenerada =
-                generaContabilidad(pIdFideicomiso, pIdSubcuenta, pNumMoneda, fecha, importeContabilidad,
-                                   numeroOperacion, folioOperacion, tipoCambio, null, null);
+                Utils.generaContabilidad(pIdFideicomiso, pIdSubcuenta, pNumMoneda, fecha, importeContabilidad,
+                                         numeroOperacion, folioOperacion, tipoCambio, null, null);
 
             if (!contabilidadGenerada) {
                 throw new BusinessException("Ocurrio un error al generar la contabilidad");
@@ -1029,8 +758,9 @@ public class OperacionesBienes {
 
     }
 
-    public void generaPagoGarantias(BigDecimal pFolioOperacion) {
+    public void generaPagoGarantias(BigDecimal pFolioOperacion) throws BusinessException {
         BigDecimal tipoCambio = BigDecimal.valueOf(1);
+        OperacionesDetalleBienes operacionesDetalleBienes = new OperacionesDetalleBienes();
 
         List<FRetirosMasivos> retiros = retirosRepository.getRetirosMasivosPorFolio(pFolioOperacion);
         Instrucc instruccion = instruccionesRepository.findInstruccionPorFolioDeOperacion(pFolioOperacion);
@@ -1081,13 +811,16 @@ public class OperacionesBienes {
 
             FBienesgar bienGarantia = bienesGarantiasRepository.findByPk(idFideicomiso, idSubcuenta, idBienGarantia);
 
-
+            /*
             if (afectaGarantia.intValue() != 2) {
-                generaGarantias(6, idFideicomiso, idSubcuenta, idBienGarantia, idGarantia,
-                                bienGarantia.getForsCveTipoBien(), "", "", "", importe, numMonedaMovimiento,
-                                BigDecimal.valueOf(0), "", BigDecimal.valueOf(0), "", "", "", "", BigDecimal.valueOf(0),
-                                DateUtils.toString(fecha), BigDecimal.valueOf(0));
-            }
+                operacionesDetalleBienes.ejecutaOperacionDetalleBienes(6, idFideicomiso, idSubcuenta, idBienGarantia,
+                                                                       idGarantia, bienGarantia.getForsCveTipoBien(),
+                                                                       "", "", "", importe, numMonedaMovimiento,
+                                                                       BigDecimal.valueOf(0), "", BigDecimal.valueOf(0),
+                                                                       "", "", "", "", BigDecimal.valueOf(0),
+                                                                       DateUtils.toString(fecha),
+                                                                       BigDecimal.valueOf(0));
+            }*/
 
             FRetiro retiro = retirosRepository.findByPK(retiroMasivo.getFrmaFolio());
 
@@ -1095,11 +828,12 @@ public class OperacionesBienes {
 
             BigDecimal folioOperacion = foliosRepository.generaFolio();
             BigDecimal numeroOperacion =
-                creaNumeroOperacion("%d%01d%02d%02d%02d60", 3, retiroMasivo.getFrmaTipoPersona(),
-                                    retiro.getFretTipoLiquidacion(), retiro.getFretConcepto(), numMonedaMovimiento);
+                Utils.creaNumeroOperacion("%d%01d%02d%02d%02d60", 3, retiroMasivo.getFrmaTipoPersona(),
+                                          retiro.getFretTipoLiquidacion(), retiro.getFretConcepto(),
+                                          numMonedaMovimiento);
 
-            generaContabilidad(idFideicomiso, idSubcuenta, numMonedaMovimiento, fecha, importe, numeroOperacion,
-                               folioOperacion, tipoCambio, tipoPersona, numeroPersona);
+            Utils.generaContabilidad(idFideicomiso, idSubcuenta, numMonedaMovimiento, fecha, importe, numeroOperacion,
+                                     folioOperacion, tipoCambio, tipoPersona, numeroPersona);
 
 
             if (contador == 1) {
@@ -1250,10 +984,12 @@ public class OperacionesBienes {
 
             // SE INCORPORA LA CONTABILIDAD CUANDO ESTA LIBERADO EL BIEN
 
-            if (pClaveEstatus == EstatusGarantias.LIBERADO.toString()) {
+            if (pClaveEstatus == Constants.EstatusGarantias
+                                          .LIBERADO
+                                          .toString()) {
 
                 // TODO: Verificar que el tipo de dato sea correcto
-                BigDecimal idBien = toBigDecimal(pIdBien);
+                BigDecimal idBien = Utils.toBigDecimal(pIdBien);
 
                 // SE RECUPERA LA MONEDA Y TIPO DE BIEN
                 FBienesgar bienGarantia = bienesGarantiasRepository.findByPk(pIdFideicomiso, pIdSubcuenta, idBien);
@@ -1269,11 +1005,11 @@ public class OperacionesBienes {
                 // SALIDA
                 Date fechaActual = DateUtils.today();
                 BigDecimal numeroOperacion =
-                    creaNumeroOperacion("%d%02d%02d02%02d0", 6, idTipoGarantia, idTipoBien, idMonedaBien);
+                    Utils.creaNumeroOperacion("%d%02d%02d02%02d0", 6, idTipoGarantia, idTipoBien, idMonedaBien);
 
                 boolean contabilidadGenerada =
-                    generaContabilidad(pIdFideicomiso, pIdSubcuenta, idMonedaBien, fechaActual, importe,
-                                       numeroOperacion, folioOperacion, BigDecimal.valueOf(1), null, null);
+                    Utils.generaContabilidad(pIdFideicomiso, pIdSubcuenta, idMonedaBien, fechaActual, importe,
+                                             numeroOperacion, folioOperacion, BigDecimal.valueOf(1), null, null);
 
                 if (!contabilidadGenerada) {
                     throw new BusinessException("Ocurrio un error al generar la contabilidad");
@@ -1293,7 +1029,9 @@ public class OperacionesBienes {
 
                 garantiasRepository.save(garantia);
 
-            } else if (pClaveEstatus == EstatusGarantias.COMPROMETIDO.toString()) {
+            } else if (pClaveEstatus == Constants.EstatusGarantias
+                                                 .COMPROMETIDO
+                                                 .toString()) {
                 procesoLiberacion =
                     new FProcesoLiberacion(pIdFideicomiso, pIdSubcuenta, pIdBien, pIdEdificio, pIdDepto);
                 procesoLiberacionRepository.delete(procesoLiberacion);
@@ -1303,24 +1041,6 @@ public class OperacionesBienes {
         } catch (Exception e) {
             return 1;
         }
-    }
-
-
-    public boolean generaContabilidad(BigDecimal pIdFideicomiso, BigDecimal pIdSubcuenta, BigDecimal pMoneda,
-                                      Date pFechaInicio, BigDecimal pImporte, BigDecimal pNumeroOperacion,
-                                      BigDecimal pFolioOperacion, BigDecimal pIdTipoCambio, BigDecimal pIdTipoPersona,
-                                      BigDecimal pIdPersona) {
-
-        // TODO: implementar metodo y recibir patametro del tipo de elemento que se esta registrando
-        return true;
-    }
-
-    private BigDecimal toBigDecimal(String numeroOperacion) {
-        return BigDecimal.valueOf(Integer.valueOf(numeroOperacion));
-    }
-
-    private BigDecimal creaNumeroOperacion(String format, Object... args) {
-        return toBigDecimal(String.format(format, args));
     }
 }
 

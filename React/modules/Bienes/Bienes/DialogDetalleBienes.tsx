@@ -53,6 +53,7 @@ const DetalleBienesFormValidator = new FormValidator<DetalleBien>({
     importeDelBien: ValidationHelpers.validateRequiredNumber(
         'Importe del bien'
     ),
+    idMoneda: ValidationHelpers.validateRequiredNumber('Moneda'),
 });
 
 type DialogDetalleBienesProps = Omit<ICatalogDialog<DetalleBien>, 'mode'> & {

@@ -15,7 +15,7 @@
             <ref bean="JdbcTemplate"/>
         </property>
     </bean>
-    <bean id="uploadControlController" class="mx.gob.nafin.fiduciario.controller.UploadControlController" />
+    <bean id="uploadControlController" class="mx.gob.nafin.fiduciario.controller.UploadControlController"/>
     <!-- Imports -->
     <import resource="../modules/fiduciario_test.xml"/>
     <import resource="../modules/catalogos.xml"/>
@@ -63,6 +63,7 @@
                 <prop key="/getRefAsXLSX.do">consultasController</prop>
                 <prop key="/DatosFiduciarios.xls">consultasController</prop>
                 <prop key="/executeRef.do">consultasController</prop>
+                <prop key="/executeJavaRef.do">consultasController</prop>
                 <prop key="/executeRefAsync.do">consultasController</prop>
                 <prop key="/consultaAdv.do">consultasCatalogController</prop>
                 <!-- URL de consultas genericas para Reportes -->
@@ -257,7 +258,7 @@
                 <prop key="/modules/Garantias/DerechosCobro/PrincipalDerechosCobro.do">htmlActionController</prop>
                 <prop key="/modules/Garantias/DerechosCobro/MantenimientoDerechosCobro.do">htmlActionController</prop>
                 <prop key="/modules/Garantias/DerechosCobro/CargaMasiva/PrincipalCargaMasiva.do">htmlActionController</prop>
-                <prop key="/modules/Garantias/DerechosCobro/CargaMasiva/FileUpload.do">htmlActionController</prop>                
+                <prop key="/modules/Garantias/DerechosCobro/CargaMasiva/FileUpload.do">htmlActionController</prop>
                 <prop key="/modules/ControlGestion/PrincipalBienesFideicomitidos.do">htmlActionController</prop>
                 <prop key="/modules/ControlGestion/MantenimientoBienesFideicomitidos.do">htmlActionController</prop>
                 <!-- Entradas y Salidas -->
@@ -520,13 +521,19 @@
                 <prop key="/modules/Formalizacion/CharolaSolicitudAdmon2/PuntosRevisionSolicitudesAdmon.do">htmlActionController</prop>
                 <prop key="/modules/Formalizacion/CharolaSolicitudAdmon3/CharolaSolicitudAdmon.do">htmlActionController</prop>
                 <prop key="/modules/Formalizacion/CharolaSolicitudAdmon3/DocumentosSolicitudesAdmon.do">htmlActionController</prop>
-                <prop key="/modules/Formalizacion/CharolaSolicitudAdmon3/PuntosRevisionSolicitudesAdmon.do">htmlActionController</prop>                
-                <prop key="/modules/Formalizacion/AsignacionCuentas/PrincipalAsignaCuentas.do">htmlActionController</prop> <!--Asginacion de Cuentas-->
-                <prop key="/modules/Formalizacion/AsignacionCuentas/MantenimientoAsignaCuentas.do">htmlActionController</prop> <!--Asginacion de Cuentas-->
-                <prop key="/modules/Formalizacion/AsignacionCuentasActinver/PrincipalAsignaCuentas.do">htmlActionController</prop> <!--Asginacion de Cuentas Actinver-->
-                <prop key="/modules/Formalizacion/AsignacionCuentasActinver/MantenimientoAsignaCuentas.do">htmlActionController</prop> <!--Asginacion de Cuentas Actinver-->
-                <prop key="/modules/Formalizacion/VigenciaDoctos/PrincipalVigenciaDoctos.do">htmlActionController</prop> <!--Vigencia de Documentos-->
-                <prop key="/modules/Formalizacion/VigenciaDoctos/MantenimientoVigenciaDoctos.do">htmlActionController</prop> <!--Vigencia de Documentos-->
+                <prop key="/modules/Formalizacion/CharolaSolicitudAdmon3/PuntosRevisionSolicitudesAdmon.do">htmlActionController</prop>
+                <prop key="/modules/Formalizacion/AsignacionCuentas/PrincipalAsignaCuentas.do">htmlActionController</prop>
+                <!--Asginacion de Cuentas-->
+                <prop key="/modules/Formalizacion/AsignacionCuentas/MantenimientoAsignaCuentas.do">htmlActionController</prop>
+                <!--Asginacion de Cuentas-->
+                <prop key="/modules/Formalizacion/AsignacionCuentasActinver/PrincipalAsignaCuentas.do">htmlActionController</prop>
+                <!--Asginacion de Cuentas Actinver-->
+                <prop key="/modules/Formalizacion/AsignacionCuentasActinver/MantenimientoAsignaCuentas.do">htmlActionController</prop>
+                <!--Asginacion de Cuentas Actinver-->
+                <prop key="/modules/Formalizacion/VigenciaDoctos/PrincipalVigenciaDoctos.do">htmlActionController</prop>
+                <!--Vigencia de Documentos-->
+                <prop key="/modules/Formalizacion/VigenciaDoctos/MantenimientoVigenciaDoctos.do">htmlActionController</prop>
+                <!--Vigencia de Documentos-->
                 <prop key="/modules/Formalizacion/PrincipalFinalidadesContrato.do">htmlActionController</prop>
                 <prop key="/modules/Formalizacion/MantenimientoFinalidadesContrato.do">htmlActionController</prop>
                 <!--MODULO DE ADMINISTRACION-->
@@ -610,11 +617,12 @@
                 <prop key="/modules/Honorarios/CargaProvisiones/PrincipalCargaMasivaProvisiones.do">htmlActionController</prop>
                 <prop key="/modules/Honorarios/CargaProvisiones/InformacionMasivaSATUpload.do">htmlActionController</prop>
                 <prop key="/modules/Honorarios/CargaProvisiones/PrincipalContactosHonorarios.do">htmlActionController</prop>
-                <prop key="/modules/Honorarios/AsignacionCuentas/PrincipalAsignaCuentas.do">htmlActionController</prop> <!--Asginacion de Contratos de Inversion-->
-                <prop key="/modules/Honorarios/AsignacionCuentas/MantenimientoAsignaCuentas.do">htmlActionController</prop> <!--Mantenimiento de Contratos de Inversion-->
+                <prop key="/modules/Honorarios/AsignacionCuentas/PrincipalAsignaCuentas.do">htmlActionController</prop>
+                <!--Asginacion de Contratos de Inversion-->
+                <prop key="/modules/Honorarios/AsignacionCuentas/MantenimientoAsignaCuentas.do">htmlActionController</prop>
+                <!--Mantenimiento de Contratos de Inversion-->
                 <!-- Ejecutor Planes Honorarios-->
                 <prop key="/modules/Honorarios/EjecutorPlanes/PrincipalEjecutorPlanes.do">htmlActionController</prop>
-                
                 <!--MODULO DE CONTROL Y GESTION-->
                 <prop key="/modules/ControlGestion/PrincipalConstitucion.do">htmlActionController</prop>
                 <prop key="/modules/ControlGestion/MantenimientoConstitucion.do">htmlActionController</prop>
