@@ -32,6 +32,8 @@ public class DateUtils {
     }
 
     public static Date fromString(String fecha) throws Exception {
+        if (fecha == null)
+            return null;
         return fromString(fecha, DateFormats.DEFAULT.toString());
     }
 
