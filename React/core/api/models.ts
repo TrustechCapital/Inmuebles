@@ -1,6 +1,5 @@
 import { Api } from './base';
 import { IModel } from '../../models/BaseModel';
-import { BatchOperationError } from './exceptions';
 
 const DEFAULT_DATE_FORMAT = 'dd/MM/yyyy';
 
@@ -97,20 +96,7 @@ export class ModelsApi<T extends IModel> extends Api implements IModelsApi<T> {
             []
         );
 
-        return Promise.allSettled(allPromises).then((results) => {
-            let failedModels: T[] = [];
-
-            results.forEach((result, index) => {
-                if (result.status === 'rejected') {
-                    failedModels.push(models[index]);
-                }
-            });
-
-            if (failedModels.length) {
-                const errorMessage = `Operacion incompleta. Ocurrio un error al eliminar ${failedModels.length} de ${models.length} registro(s).`;
-                throw new BatchOperationError(failedModels, errorMessage);
-            }
-        });
+        return this.handleBatchOperation(allPromises, models);
     }
 }
 

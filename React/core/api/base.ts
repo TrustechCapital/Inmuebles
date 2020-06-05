@@ -1,6 +1,7 @@
 import axios, { AxiosInstance, AxiosRequestConfig, AxiosResponse } from 'axios';
 import { apiConfig } from '../api.config';
 import { filterEmptyParameters as removeEemptyParameters } from './utils';
+import { BatchOperationError } from './exceptions';
 
 export type ModelMapper = (object: any, index: number) => any;
 
@@ -135,6 +136,26 @@ export class Api {
             false
         ).then((response: any) => {
             return response.data.result;
+        });
+    }
+
+    public handleBatchOperation(
+        promises: Promise<any>[],
+        models: any[]
+    ): Promise<void> {
+        return Promise.allSettled(promises).then((results) => {
+            let failedModels: any[] = [];
+
+            results.forEach((result, index) => {
+                if (result.status === 'rejected') {
+                    failedModels.push(models[index]);
+                }
+            });
+
+            if (failedModels.length) {
+                const errorMessage = `Operacion incompleta. Ocurrio un error al eliminar ${failedModels.length} de ${models.length} registro(s).`;
+                throw new BatchOperationError(failedModels, errorMessage);
+            }
         });
     }
 }
