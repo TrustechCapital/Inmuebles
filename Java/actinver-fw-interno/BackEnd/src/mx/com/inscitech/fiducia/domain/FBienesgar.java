@@ -230,34 +230,19 @@ public class FBienesgar extends DomainObject {
         String conditions = "";
         ArrayList values = new ArrayList();
 
-        if (this.getFgrsIdFideicomiso() != null && this.getFgrsIdFideicomiso().longValue() == -999) {
-            conditions += " AND FGRS_ID_FIDEICOMISO IS NULL";
-        } else if (this.getFgrsIdFideicomiso() != null) {
-            conditions += " AND FGRS_ID_FIDEICOMISO = ?";
-            values.add(this.getFgrsIdFideicomiso());
-        }
+        conditions += " AND FGRS_ID_FIDEICOMISO = ?";
+        values.add(this.getFgrsIdFideicomiso());
 
-        if (this.getFgrsIdSubcuenta() != null && this.getFgrsIdSubcuenta().longValue() == -999) {
-            conditions += " AND FGRS_ID_SUBCUENTA IS NULL";
-        } else if (this.getFgrsIdSubcuenta() != null) {
-            conditions += " AND FGRS_ID_SUBCUENTA = ?";
-            values.add(this.getFgrsIdSubcuenta());
-        }
+        conditions += " AND FGRS_ID_SUBCUENTA = ?";
+        values.add(this.getFgrsIdSubcuenta());
 
-        if (this.getForsIdGarantia() != null && this.getForsIdGarantia().longValue() == -999) {
-            conditions += " AND FORS_ID_GARANTIA IS NULL";
-        } else if (this.getForsIdGarantia() != null) {
-            conditions += " AND FORS_ID_GARANTIA = ?";
-            values.add(this.getForsIdGarantia());
-        }
+        conditions += " AND FORS_ID_GARANTIA = ?";
+        values.add(this.getForsIdGarantia());
 
-        if (!"".equals(conditions)) {
-
-            conditions = conditions.substring(4).trim();
-            sql += "WHERE " + conditions;
-            result.setSql(sql);
-            result.setParameters(values.toArray());
-        }
+        conditions = conditions.substring(4).trim();
+        sql += "WHERE " + conditions;
+        result.setSql(sql);
+        result.setParameters(values.toArray());
 
         return result;
 
@@ -636,6 +621,10 @@ public class FBienesgar extends DomainObject {
         FBienesgar result = new FBienesgar();
         DataRow objectData = null;
         objectData = selectAsDataRow();
+
+        if (!objectData.hasData()) {
+            return null;
+        }
 
         result.setFgrsIdFideicomiso((BigDecimal) objectData.getData("FGRS_ID_FIDEICOMISO"));
         result.setFgrsIdSubcuenta((BigDecimal) objectData.getData("FGRS_ID_SUBCUENTA"));

@@ -36,20 +36,10 @@ public class OperacionesDetalleBienes {
         BigDecimal pIdDetalleBien = pDetalleBien.getForsIdGarantia();
         BigDecimal pIdTipoBien = pDetalleBien.getForsCveTipoGarantia();
         BigDecimal pIdTipoDetalleBien = pDetalleBien.getForsCveTipoBien();
-        String pIdentificacion = pDetalleBien.getForsIdentificacion();
-        String pTextoDescripcion = pDetalleBien.getForsTextoDescrip();
-        String pTextoComentario = pDetalleBien.getForsTexComentario();
-        BigDecimal pImporte = pDetalleBien.getForsImpBien();
-        BigDecimal pMoneda = pDetalleBien.getForsMoneda();
-        BigDecimal pClaveRevalua = pDetalleBien.getForsCveRevalua();
-        String pClavePerValua = pDetalleBien.getForsCvePerValua();
-        BigDecimal pImporteUltimaValuacion = pDetalleBien.getForsImpUltValua();
-        String pFechaUltimaValuacion = pDetalleBien.getForsFecUltValua();
-        String pFechaVencimiento = pDetalleBien.getForsFecVencimiento();
-        String pNumeroEscitura = pDetalleBien.getForsNumEscritura();
-        String pNumeroNotario = pDetalleBien.getForsNumNotario();
-        BigDecimal pClaveRegimen = pDetalleBien.getForsRegimen();
 
+        BigDecimal importe = pDetalleBien.getForsImpBien();
+        BigDecimal moneda = pDetalleBien.getForsMoneda();
+        BigDecimal importeUltimaValuacion = pDetalleBien.getForsImpUltValua();
 
         try {
 
@@ -58,15 +48,15 @@ public class OperacionesDetalleBienes {
                                            .getValue()) {
 
                 FBienesgar detalleBien = detalleBienesRepository.findByPk(pIdFideicomiso, pIdSubcuenta, pIdDetalleBien);
-                detalleBien.setForsIdentificacion(pIdentificacion);
-                detalleBien.setForsTextoDescrip(pTextoDescripcion);
-                detalleBien.setForsTexComentario(pTextoComentario);
-                detalleBien.setForsCveRevalua(pClaveRevalua);
-                detalleBien.setForsCvePerValua(pClavePerValua);
-                detalleBien.setForsNumEscritura(pNumeroEscitura);
-                detalleBien.setForsNumNotario(pNumeroNotario);
-                detalleBien.setForsRegimen(pClaveRegimen);
-                detalleBien.setForsImpBien(pImporte);
+                detalleBien.setForsIdentificacion(pDetalleBien.getForsIdentificacion());
+                detalleBien.setForsTextoDescrip(pDetalleBien.getForsTextoDescrip());
+                detalleBien.setForsTexComentario(pDetalleBien.getForsTexComentario());
+                detalleBien.setForsCveRevalua(pDetalleBien.getForsCveRevalua());
+                detalleBien.setForsCvePerValua(pDetalleBien.getForsCvePerValua());
+                detalleBien.setForsNumEscritura(pDetalleBien.getForsNumEscritura());
+                detalleBien.setForsNumNotario(pDetalleBien.getForsNumNotario());
+                detalleBien.setForsRegimen(pDetalleBien.getForsRegimen());
+                detalleBien.setForsImpBien(pDetalleBien.getForsImpBien());
 
                 detalleBienesRepository.save(detalleBien);
                 return null;
@@ -78,7 +68,7 @@ public class OperacionesDetalleBienes {
             BigDecimal idTipoCambio = BigDecimal.valueOf(1);
             Date fechaValuacion = DateUtils.fromString(pFechaValuacion);
             BigDecimal folioOperacion = foliosRepository.generaFolio();
-            BigDecimal nImporte = pImporteUltimaValuacion;
+            BigDecimal nImporte = importeUltimaValuacion;
             BigDecimal valuacion = pValuacion;
             BigDecimal diferencia = BigDecimal.valueOf(0);
             Constants.SubtiposTransaccionesGarantias tipoTransaccion;
@@ -94,13 +84,18 @@ public class OperacionesDetalleBienes {
             } else {
                 detalleBien = detalleBienesRepository.findByPk(pIdFideicomiso, pIdSubcuenta, pIdDetalleBien);
 
+                // Se actualizan parametros que podrian venir nulos (para SALIDA solo se recibe la PK en vez del modelo completo)
+                importe = detalleBien.getForsImpBien();
+                moneda = detalleBien.getForsMoneda();
+                importeUltimaValuacion = detalleBien.getForsImpUltValua();
+
                 if (pTipoOperacion == Constants.TiposOperacionesGarantias
                                                .REVALUACION_DE_GARANTIA
                                                .getValue()) {
 
                     // TODO: Verificar si este dato se usa, de lo contrario, mover la consulta a detalleBien mas abajo y quitar esta linea
                     valuacion = detalleBien.getForsImpUltValua();
-                    diferencia = pValuacion.subtract(pImporteUltimaValuacion);
+                    diferencia = pValuacion.subtract(importeUltimaValuacion);
 
                     if (diferencia.intValue() > 0) {
                         vTipoOperacion = 2;
@@ -121,17 +116,17 @@ public class OperacionesDetalleBienes {
                 } else {
                     vTipoOperacion = 4;
                     tipoTransaccion = Constants.SubtiposTransaccionesGarantias.SALIDA;
-                    nImporte = pImporteUltimaValuacion;
+                    nImporte = importeUltimaValuacion;
                 }
             }
 
             BigDecimal esGarantia = bien.getFgarEsGarantia() == null ? BigDecimal.valueOf(0) : bien.getFgarEsGarantia();
-
+            int tipoOperacionGarantias = Constants.TiposOperaciones
+                                                  .BIENES_GARANTIAS
+                                                  .getValue();
             BigDecimal numeroOperacion =
-                Utils.creaNumeroOperacion("%d%02d%01d%02d%02d%01d000", Constants.TiposOperaciones
-                                                                                                         .BIENES_GARANTIAS
-                                                                                                         .getValue(),
-                                          tipoTransaccion.getValue(), pIdTipoBien, pIdTipoDetalleBien, pMoneda,
+                Utils.creaNumeroOperacion("%d%02d%01d%02d%02d%01d000", tipoOperacionGarantias,
+                                          tipoTransaccion.getValue(), pIdTipoBien, pIdTipoDetalleBien, moneda,
                                           esGarantia);
 
             if (pTipoOperacion != Constants.TiposOperacionesGarantias
@@ -140,14 +135,14 @@ public class OperacionesDetalleBienes {
                 if (pTipoOperacion == Constants.TiposOperacionesGarantias
                                                .SALIDA_DE_BIEN_EN_GARANTIA
                                                .getValue()) {
-                    nImporte = pImporteUltimaValuacion;
+                    nImporte = importeUltimaValuacion;
                 } else {
-                    nImporte = pImporte;
+                    nImporte = importe;
                 }
             }
 
             boolean contabilidadGenerada =
-                Utils.generaContabilidad(pIdFideicomiso, pIdSubcuenta, pMoneda, fechaValuacion, nImporte,
+                Utils.generaContabilidad(pIdFideicomiso, pIdSubcuenta, moneda, fechaValuacion, nImporte,
                                          numeroOperacion, folioOperacion, idTipoCambio, null, null);
 
             if (!contabilidadGenerada) {
@@ -157,35 +152,36 @@ public class OperacionesDetalleBienes {
             if (pTipoOperacion == Constants.TiposOperacionesGarantias
                                            .ENTRADA_EN_GARANTIA
                                            .getValue()) {
+
                 detalleBien = new FBienesgar(pIdFideicomiso, pIdSubcuenta, null);
 
                 detalleBien.setForsCveTipoGarantia(pIdTipoBien);
                 detalleBien.setForsCveTipoBien(pIdTipoDetalleBien);
-                detalleBien.setForsIdentificacion(pIdentificacion);
-                detalleBien.setForsTextoDescrip(pTextoDescripcion);
-                detalleBien.setForsTexComentario(pTextoComentario);
-                detalleBien.setForsImpBien(pImporte);
-                detalleBien.setForsMoneda(pMoneda);
-                detalleBien.setForsCveRevalua(pClaveRevalua);
-                detalleBien.setForsCvePerValua(pClavePerValua);
-                detalleBien.setForsImpUltValua(pImporte);
-                detalleBien.setForsFecUltValua(pFechaUltimaValuacion);
-                detalleBien.setForsFecVencimiento(pFechaVencimiento);
-                detalleBien.setForsNumEscritura(pNumeroEscitura);
-                detalleBien.setForsNumNotario(pNumeroNotario);
+                detalleBien.setForsIdentificacion(pDetalleBien.getForsIdentificacion());
+                detalleBien.setForsTextoDescrip(pDetalleBien.getForsTextoDescrip());
+                detalleBien.setForsTexComentario(pDetalleBien.getForsTexComentario());
+                detalleBien.setForsImpBien(pDetalleBien.getForsImpBien());
+                detalleBien.setForsMoneda(moneda);
+                detalleBien.setForsCveRevalua(pDetalleBien.getForsCveRevalua());
+                detalleBien.setForsCvePerValua(pDetalleBien.getForsCvePerValua());
+                detalleBien.setForsImpUltValua(importe);
+                detalleBien.setForsFecUltValua(pDetalleBien.getForsFecUltValua());
+                detalleBien.setForsFecVencimiento(pDetalleBien.getForsFecVencimiento());
+                detalleBien.setForsNumEscritura(pDetalleBien.getForsNumEscritura());
+                detalleBien.setForsNumNotario(pDetalleBien.getForsNumNotario());
                 detalleBien.setForsCveStatus(Constants.EstatusBienesGarantias
                                                       .ACTIVO
                                                       .toString());
-                detalleBien.setForsRegimen(pClaveRegimen);
+                detalleBien.setForsRegimen(pDetalleBien.getForsRegimen());
 
                 Integer newIdDetalleBien = detalleBienesRepository.insert(detalleBien);
 
                 BigDecimal nuevoImporteGarantizado = bien.getFgarImpGarantizad();
 
                 if (nuevoImporteGarantizado == null) {
-                    nuevoImporteGarantizado = pImporte;
+                    nuevoImporteGarantizado = importe;
                 } else {
-                    nuevoImporteGarantizado = nuevoImporteGarantizado.add(pImporte);
+                    nuevoImporteGarantizado = nuevoImporteGarantizado.add(importe);
                 }
 
                 bien.setFgarImpGarantizad(nuevoImporteGarantizado);
@@ -218,7 +214,7 @@ public class OperacionesDetalleBienes {
 
                 detalleBienesRepository.delete(detalleBien);
 
-                BigDecimal nuevoImporteGarantizado = bien.getFgarImpGarantizad().subtract(pImporteUltimaValuacion);
+                BigDecimal nuevoImporteGarantizado = bien.getFgarImpGarantizad().subtract(importeUltimaValuacion);
                 bien.setFgarImpGarantizad(nuevoImporteGarantizado);
 
                 garantiasRepository.save(bien);
@@ -228,7 +224,7 @@ public class OperacionesDetalleBienes {
             if (pTipoOperacion == Constants.TiposOperacionesGarantias
                                            .PAGO_PARCIAL_DE_GARANTIA
                                            .getValue()) {
-                BigDecimal nuevoImporteGarantizado = bien.getFgarImpGarantizad().subtract(pImporte);
+                BigDecimal nuevoImporteGarantizado = bien.getFgarImpGarantizad().subtract(importe);
                 bien.setFgarImpGarantizad(nuevoImporteGarantizado);
 
                 garantiasRepository.save(bien);

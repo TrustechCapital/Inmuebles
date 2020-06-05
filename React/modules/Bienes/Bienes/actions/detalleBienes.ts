@@ -162,7 +162,7 @@ function deleteSelectedModels() {
             );
         });
 
-        await detalleBienesApi.destroyMany(models);
+        await detalleBienesApi.executeMultipleDeleteOperation(models);
         await repeatCurrentSearch(dispatch, getState);
     };
 }

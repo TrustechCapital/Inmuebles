@@ -18,10 +18,10 @@ class DetalleBienResultRow {
             id: index,
             idFideicomiso: obj.fgrsIdFideicomiso,
             idSubcuenta: obj.fgrsIdSubcuenta,
-            idTipoBien: obj.forsCveTipoBien,
+            idTipoBien: obj.forsCveTipoGarantia,
             tipoBien: obj.descripbien,
             idDetalleBien: obj.forsIdGarantia,
-            idTipoDetalleBien: obj.forsCveTipoGarantia,
+            idTipoDetalleBien: obj.forsCveTipoBien,
 
             importeUltimaValuacionFormateado: obj.forsImpUltValuaFormatted,
             descripcion: obj.forsTextoDescrip,

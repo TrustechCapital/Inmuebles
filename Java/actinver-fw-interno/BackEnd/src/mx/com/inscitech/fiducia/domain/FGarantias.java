@@ -43,6 +43,7 @@ public class FGarantias extends DomainObject {
         this.pkColumns = 3;
         this.fgarIdFideicomiso = fgarIdFideicomiso;
         this.fgarIdSubcuenta = fgarIdSubcuenta;
+        this.fgarCveGarantia = fgarCveGarantia;
     }
 
     @FieldInfo(nullable = false, dataType = "NUMBER", precision = 10, scale = 0, javaClass = BigDecimal.class)
@@ -198,34 +199,19 @@ public class FGarantias extends DomainObject {
         String conditions = "";
         ArrayList values = new ArrayList();
 
-        if (this.getFgarIdFideicomiso() != null && this.getFgarIdFideicomiso().longValue() == -999) {
-            conditions += " AND FGAR_ID_FIDEICOMISO IS NULL";
-        } else if (this.getFgarIdFideicomiso() != null) {
-            conditions += " AND FGAR_ID_FIDEICOMISO = ?";
-            values.add(this.getFgarIdFideicomiso());
-        }
+        conditions += " AND FGAR_ID_FIDEICOMISO = ?";
+        values.add(this.getFgarIdFideicomiso());
 
-        if (this.getFgarIdSubcuenta() != null && this.getFgarIdSubcuenta().longValue() == -999) {
-            conditions += " AND FGAR_ID_SUBCUENTA IS NULL";
-        } else if (this.getFgarIdSubcuenta() != null) {
-            conditions += " AND FGAR_ID_SUBCUENTA = ?";
-            values.add(this.getFgarIdSubcuenta());
-        }
+        conditions += " AND FGAR_ID_SUBCUENTA = ?";
+        values.add(this.getFgarIdSubcuenta());
 
-        if (this.getFgarCveGarantia() != null && this.getFgarCveGarantia().longValue() == -999) {
-            conditions += " AND FGAR_CVE_GARANTIA IS NULL";
-        } else if (this.getFgarIdSubcuenta() != null) {
-            conditions += " AND FGAR_CVE_GARANTIA = ?";
-            values.add(this.getFgarCveGarantia());
-        }
+        conditions += " AND FGAR_CVE_GARANTIA = ?";
+        values.add(this.getFgarCveGarantia());
 
-        if (!"".equals(conditions)) {
-
-            conditions = conditions.substring(4).trim();
-            sql += "WHERE " + conditions;
-            result.setSql(sql);
-            result.setParameters(values.toArray());
-        }
+        conditions = conditions.substring(4).trim();
+        sql += "WHERE " + conditions;
+        result.setSql(sql);
+        result.setParameters(values.toArray());
 
         return result;
 
@@ -586,6 +572,11 @@ public class FGarantias extends DomainObject {
     }
 
     public static Object transformDataRowtoObject(DataRow objectData) {
+
+        if (!objectData.hasData()) {
+            return null;
+        }
+
         FGarantias result = new FGarantias();
 
         result.setFgarIdFideicomiso((BigDecimal) objectData.getData("FGAR_ID_FIDEICOMISO"));

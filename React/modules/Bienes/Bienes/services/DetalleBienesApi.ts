@@ -48,6 +48,24 @@ class DetalleBienesApi extends ModelsApi<DetalleBien> {
             );
         }
     }
+
+    /*
+     * Se usa este metodo en vez de this.update() para permitir que la logica de negocio
+     * se realice en una transacción.
+     */
+    async executeMultipleDeleteOperation(models: DetalleBien[]): Promise<void> {
+        const allPromises = models.reduce((promises: Promise<any>[], model) => {
+            promises.push(
+                this.executeCrudOperation(
+                    model,
+                    OperacionesCatalogoDetalleBienes.Salida
+                )
+            );
+            return promises;
+        }, []);
+
+        return this.handleBatchOperation(allPromises, models);
+    }
 }
 
 export const detalleBienesApi = new DetalleBienesApi(DetalleBienesModelMapper);
