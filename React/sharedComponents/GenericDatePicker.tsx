@@ -1,5 +1,7 @@
 import React from 'react';
 import DateFnsUtils from '@date-io/date-fns';
+import esLocale from 'date-fns/locale/es';
+
 import {
     MuiPickersUtilsProvider,
     KeyboardDatePicker,
@@ -54,7 +56,7 @@ const GenericDatePicker: React.FC<GenericDatePickerProps> = ({
 
     return (
         <div className={`generic-date-picker ${fullWidthClassName}`}>
-            <MuiPickersUtilsProvider utils={DateFnsUtils}>
+            <MuiPickersUtilsProvider utils={DateFnsUtils} locale={esLocale}>
                 <KeyboardDatePicker
                     margin="normal"
                     label={label}
