@@ -11,6 +11,11 @@ export interface ITableBienesParameters {
     idTipoBien: number | null;
 }
 
+export type RevaluacionDetalleBien = {
+    importeRevaluacion: number | null;
+    fechaRevaluacion: Date | null;
+};
+
 export type BienesState = {
     searchParameters: ITableBienesParameters;
     searchResults: BienResultRow[];

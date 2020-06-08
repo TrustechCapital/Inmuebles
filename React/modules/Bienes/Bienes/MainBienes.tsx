@@ -20,6 +20,7 @@ import { OperacionesCatalogoDetalleBienes } from './constants';
 import { requestConfirmation } from '../../../sharedComponents/ConfirmationModal';
 import { useGlobalNotification } from '../../../sharedHooks/globalMessages';
 import { useEnhancedReducer } from '../../../sharedHooks/enhancedReducer';
+import { RevaluacionDetalleBien } from './types';
 
 const initialState: MainBienesState = {
     bienes: {
@@ -90,6 +91,19 @@ const MainBienes: React.FC = () => {
     const saveDetalleBienesModel = useCallback((model: DetalleBien) => {
         dispatch(detalleBienesActions.saveModel(model));
     }, []);
+
+    const revaluaDetalleBien = useCallback(
+        (
+            model: DetalleBien,
+            revaluacionDetalleBien: RevaluacionDetalleBien
+        ) => {
+            debugger;
+            // dispatch(
+            //     detalleBienesActions.revaluaBien(model, revaluacionDetalleBien)
+            // );
+        },
+        []
+    );
 
     const BienesActionCallbacks = useMemo(() => {
         return {
@@ -207,6 +221,7 @@ const MainBienes: React.FC = () => {
                 errorMessage={state.detalleBienes.modalErrorMessage}
                 onClose={closeDetalleBienesModal}
                 onSaveRequest={saveDetalleBienesModel}
+                onRevaluacion={revaluaDetalleBien}
             />
         </React.Fragment>
     );

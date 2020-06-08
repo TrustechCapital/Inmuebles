@@ -1,8 +1,9 @@
-import React, { useState, useEffect, useCallback } from 'react';
+import React, { useState, useEffect, useMemo } from 'react';
 
 import { makeStyles } from '@material-ui/core/styles';
 import Grid from '@material-ui/core/Grid';
 import { Formik } from 'formik';
+import * as Yup from 'yup';
 
 import { ICatalogDialog } from '../../../types';
 import { OperacionesCatalogo, SavingStatus } from '../../../constants';
@@ -15,8 +16,13 @@ import FormValidator, {
 } from '../../../services/FormValidator';
 import DetalleBien from '../../../models/DetalleBien';
 import { monedasApi } from '../../../core/api/monedas';
-import GenericDatePicker from '../../../sharedComponents/GenericDatePicker';
 import { OperacionesCatalogoDetalleBienes } from './constants';
+import { RevaluacionDetalleBien } from './types';
+
+type DialogBienesForm = {
+    model: DetalleBien;
+    datosRevaluacion: RevaluacionDetalleBien;
+};
 
 const {
     FormTextField,
@@ -48,16 +54,12 @@ function castOperacionCatalogo(
     }
 }
 
-const DetalleBienesFormValidator = new FormValidator<DetalleBien>({
-    idTipoDetalleBien: ValidationHelpers.validateRequiredNumber('Tipo de bien'),
-    importeDelBien: ValidationHelpers.validateRequiredNumber(
-        'Importe del bien'
-    ),
-    idMoneda: ValidationHelpers.validateRequiredNumber('Moneda'),
-});
-
 type DialogDetalleBienesProps = Omit<ICatalogDialog<DetalleBien>, 'mode'> & {
     mode: OperacionesCatalogoDetalleBienes;
+    onRevaluacion: (
+        model: DetalleBien,
+        revaluacionDetalleBien: RevaluacionDetalleBien
+    ) => void;
 };
 
 const DialogDetalleBienes: React.FC<DialogDetalleBienesProps> = ({
@@ -68,8 +70,47 @@ const DialogDetalleBienes: React.FC<DialogDetalleBienesProps> = ({
     savingStatus,
     onClose,
     onSaveRequest,
+    onRevaluacion,
 }) => {
-    const [fechaRevaluacion, setFechaRevaluacion] = useState(new Date());
+    const esRevaluacion = mode === OperacionesCatalogoDetalleBienes.Revaluacion;
+
+    function handleSave(formData: DialogBienesForm) {
+        if (esRevaluacion) {
+            onRevaluacion(formData.model, formData.datosRevaluacion);
+            return;
+        }
+
+        onSaveRequest(formData.model);
+    }
+
+    const DetalleBienesFormValidator = useMemo(() => {
+        if (esRevaluacion) {
+            return new FormValidator({
+                datosRevaluacion: Yup.object().shape({
+                    importeRevaluacion: ValidationHelpers.validateRequiredNumber(
+                        'Importe'
+                    ),
+                    fechaRevaluacion: Yup.date().required(
+                        ValidationHelpers.requiredFieldMessage(
+                            'Fecha Revaluacion'
+                        )
+                    ),
+                }),
+            });
+        }
+
+        return new FormValidator({
+            model: Yup.object().shape({
+                idTipoDetalleBien: ValidationHelpers.validateRequiredNumber(
+                    'Tipo de bien'
+                ),
+                importeDelBien: ValidationHelpers.validateRequiredNumber(
+                    'Importe del bien'
+                ),
+                idMoneda: ValidationHelpers.validateRequiredNumber('Moneda'),
+            }),
+        });
+    }, [esRevaluacion]);
 
     const [monedas, setMonedas] = useState([]);
     const classes = useStyles();
@@ -90,14 +131,18 @@ const DialogDetalleBienes: React.FC<DialogDetalleBienesProps> = ({
         });
     }, []);
 
-    const handleChangeFechaRevaluacion = useCallback((e: any) => {
-        setFechaRevaluacion(e.target.value);
-    }, []);
+    const initialValues: DialogBienesForm = {
+        model,
+        datosRevaluacion: {
+            importeRevaluacion: null,
+            fechaRevaluacion: new Date(),
+        },
+    };
 
     return (
         <Formik
-            initialValues={model}
-            onSubmit={onSaveRequest}
+            initialValues={initialValues}
+            onSubmit={handleSave}
             enableReinitialize={true}
             validationSchema={DetalleBienesFormValidator.validationSchema}
         >
@@ -129,6 +174,7 @@ const DialogDetalleBienes: React.FC<DialogDetalleBienesProps> = ({
                         >
                             <Grid item xs={6}>
                                 <FormTextField
+                                    namespace="model"
                                     name="idFideicomiso"
                                     label="Fideicomiso"
                                     disabled={true}
@@ -136,7 +182,7 @@ const DialogDetalleBienes: React.FC<DialogDetalleBienesProps> = ({
                             </Grid>
                             <Grid item xs={6}>
                                 <FormCatalogSelectField
-                                    name="idTipoBien"
+                                    name="model.idTipoBien"
                                     catalogId={ClavesModuloBienes.TiposDeBienes}
                                     label="Tipo Bien"
                                     disabled={true}
@@ -150,14 +196,14 @@ const DialogDetalleBienes: React.FC<DialogDetalleBienesProps> = ({
                         >
                             <Grid item xs={6}>
                                 <FormTextField
-                                    name="idSubcuenta"
+                                    name="model.idSubcuenta"
                                     label="Subcuenta"
                                     disabled={true}
                                 />
                             </Grid>
                             <Grid item xs={6}>
                                 <FormTextField
-                                    name="idDetalleBien"
+                                    name="model.idDetalleBien"
                                     label="Id Detalle Bien"
                                     disabled={true}
                                 />
@@ -170,18 +216,18 @@ const DialogDetalleBienes: React.FC<DialogDetalleBienesProps> = ({
                         >
                             <Grid item xs={6}>
                                 <FormCatalogSelectField
-                                    name="idTipoDetalleBien"
+                                    name="model.idTipoDetalleBien"
                                     parentCatalogId={
                                         ClavesModuloBienes.TiposDeBienes
                                     }
-                                    parentValue={props.values.idTipoBien}
+                                    parentValue={props.values.model.idTipoBien}
                                     label="Clave de Bien"
                                     disabled={pkFieldsDisabled}
                                 />
                             </Grid>
                             <Grid item xs={6}>
                                 <FormDatePickerField
-                                    name="fechaVencimiento"
+                                    name="model.fechaVencimiento"
                                     label="Fecha Vencimiento"
                                     disabled={allFieldsDisabled}
                                 />
@@ -194,27 +240,14 @@ const DialogDetalleBienes: React.FC<DialogDetalleBienesProps> = ({
                         >
                             <Grid item xs={6}>
                                 <FormTextField
-                                    name="idRegimen"
+                                    name="model.idRegimen"
                                     label="Bajo Regimen en Condominio"
                                     disabled={allFieldsDisabled}
                                 />
                             </Grid>
                             <Grid item xs={6}>
                                 <FormTextField
-                                    name="descripcion"
-                                    label="Descripción"
-                                    disabled={allFieldsDisabled}
-                                />
-                            </Grid>
-                        </Grid>
-                        <Grid
-                            container
-                            className={classes.rowSpacing}
-                            spacing={3}
-                        >
-                            <Grid item xs={6}>
-                                <FormTextField
-                                    name="importeDelBien"
+                                    name="model.importeDelBien"
                                     label="Importe"
                                     disabled={allFieldsDisabled}
                                 />
@@ -225,16 +258,32 @@ const DialogDetalleBienes: React.FC<DialogDetalleBienesProps> = ({
                             className={classes.rowSpacing}
                             spacing={3}
                         >
+                            <Grid item xs={12}>
+                                <FormTextField
+                                    name="model.descripcion"
+                                    label="Descripción"
+                                    disabled={allFieldsDisabled}
+                                    multiline
+                                    rows={3}
+                                    rowsMax={3}
+                                />
+                            </Grid>
+                        </Grid>
+                        <Grid
+                            container
+                            className={classes.rowSpacing}
+                            spacing={3}
+                        >
                             <Grid item xs={6}>
                                 <FormTextField
-                                    name="importeUltimaValuacion"
+                                    name="model.importeUltimaValuacion"
                                     label="Importe Última Valuación"
-                                    disabled={allFieldsDisabled}
+                                    disabled={true}
                                 />
                             </Grid>
                             <Grid item xs={6}>
                                 <FormSelectField
-                                    name="idMoneda"
+                                    name="model.idMoneda"
                                     items={monedas}
                                     valueKey="idPais"
                                     labelKey="nombreMoneda"
@@ -250,7 +299,7 @@ const DialogDetalleBienes: React.FC<DialogDetalleBienesProps> = ({
                         >
                             <Grid item xs={6}>
                                 <FormDatePickerField
-                                    name="fechaUltimaValuacion"
+                                    name="model.fechaUltimaValuacion"
                                     label="Fecha Última Valuación"
                                     disabled={allFieldsDisabled}
                                 />
@@ -263,7 +312,7 @@ const DialogDetalleBienes: React.FC<DialogDetalleBienesProps> = ({
                         >
                             <Grid item xs={6}>
                                 <FormCatalogSelectField
-                                    name="idClavePeriodicidadRevaluacion"
+                                    name="model.idClavePeriodicidadRevaluacion"
                                     catalogId={
                                         ClavesModuloBienes.PeriodicidadDeRevaluacion
                                     }
@@ -273,7 +322,7 @@ const DialogDetalleBienes: React.FC<DialogDetalleBienesProps> = ({
                             </Grid>
                             <Grid item xs={6}>
                                 <FormTextField
-                                    name="numeroEscritura"
+                                    name="model.numeroEscritura"
                                     label="Escritura"
                                     disabled={allFieldsDisabled}
                                 />
@@ -286,14 +335,14 @@ const DialogDetalleBienes: React.FC<DialogDetalleBienesProps> = ({
                         >
                             <Grid item xs={6}>
                                 <FormTextField
-                                    name="comentario"
+                                    name="model.comentario"
                                     label="Comentario"
                                     disabled={allFieldsDisabled}
                                 />
                             </Grid>
                             <Grid item xs={6}>
                                 <FormTextField
-                                    name="numeroNotario"
+                                    name="model.numeroNotario"
                                     label="Notario"
                                     disabled={allFieldsDisabled}
                                 />
@@ -306,17 +355,10 @@ const DialogDetalleBienes: React.FC<DialogDetalleBienesProps> = ({
                         >
                             <Grid item xs={6}>
                                 <FormCatalogSelectField
-                                    name="claveEstatus"
+                                    name="model.claveEstatus"
                                     catalogId={ClavesModuloBienes.Estatus}
                                     useLabelAsValue={true}
                                     label="Estatus"
-                                    disabled={allFieldsDisabled}
-                                />
-                            </Grid>
-                            <Grid item xs={6}>
-                                <FormTextField
-                                    name="importeUltimaValuacion"
-                                    label="Importe Revaluación"
                                     disabled={allFieldsDisabled}
                                 />
                             </Grid>
@@ -328,7 +370,6 @@ const DialogDetalleBienes: React.FC<DialogDetalleBienesProps> = ({
                         >
                             <Grid item xs={6}>
                                 <GenericSwitch
-                                    id="forsCveRevaluaChk"
                                     label="Revalua"
                                     checked={
                                         mode ===
@@ -344,17 +385,17 @@ const DialogDetalleBienes: React.FC<DialogDetalleBienesProps> = ({
                             spacing={3}
                         >
                             <Grid item xs={6}>
-                                <FormTextField
-                                    name="importeUltimaValuacion"
+                                <FormTextField<RevaluacionDetalleBien>
+                                    namespace="datosRevaluacion"
+                                    name="importeRevaluacion"
                                     label="Importe Revaluación"
                                     disabled={revaluacionFieldsDisabled}
                                 />
                             </Grid>
                             <Grid item xs={6}>
-                                <GenericDatePicker
+                                <FormDatePickerField
+                                    name="datosRevaluacion.fechaRevaluacion"
                                     label="Fecha Revaluación"
-                                    value={fechaRevaluacion}
-                                    onChange={handleChangeFechaRevaluacion}
                                     disabled={revaluacionFieldsDisabled}
                                 />
                             </Grid>
