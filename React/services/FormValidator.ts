@@ -4,15 +4,19 @@ function emptyStringToUndefined(value: any) {
     return isNaN(value) ? undefined : value;
 }
 
+function requiredFieldMessage(field: string) {
+    return `${field} es un campo requerido`;
+}
+
 function validateRequiredNumber(field: string) {
-    const errorMessage = `${field} es un campo requerido`;
     return Yup.number()
         .transform(emptyStringToUndefined)
-        .required(errorMessage);
+        .required(requiredFieldMessage(field));
 }
 
 const ValidationHelpers = {
-    validateRequiredNumber: validateRequiredNumber,
+    requiredFieldMessage,
+    validateRequiredNumber,
     validateFideicomiso: validateRequiredNumber('El Fideicomiso'),
     validateSubcuenta: validateRequiredNumber('La Subcuenta'),
 };

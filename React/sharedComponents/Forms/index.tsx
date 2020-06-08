@@ -8,15 +8,44 @@ import GenericDatePicker, {
 } from '../GenericDatePicker';
 
 /*
- * Esta clase es un auziliar para manejar formularios. Extiende las funcionalidades
+ * Esta clase es un auxiliar para manejar formularios. Extiende las funcionalidades
  * de la libreria Formik para dar tipado fuerte en base a los modelos usados
  * en la aplicacion. Ejemplo de uso:
  *
- * const { FormTextField } = new GenericForm<CUALQUIER_MODELO>();
+ * const { FormTextField } = new GenericForm<ModeloBase>();
  *
  * y su invocacion:
  *
  * <FormTextField name="campo" label="Mi Campo" ...>
+ *
+ * Por defecto, Typescript validará que los valores utilizados en la propiedad name
+ * sea una propiedad valida de ModeloBase.
+ *
+ * -----------------------------MODELOS ANIDADOS------------------------------------
+ *
+ *
+ * Para modelos anidados se puede utilizar la propiedad namespace para indicar el "path"
+ * usando la notacion punto para acceder al modelo. Ejemplo:
+ *
+ * class ModeloBase {...};
+ * class ModeloAnidado {...};
+ *
+ * const ModeloBase = {
+ *      nivel1: {
+ *          nivel2: {
+ *              modeloAnidado
+ *          }
+ *      }
+ * }
+ *
+ * const { FormTextField } = new GenericForm<ModeloBase>();
+ *
+ * y su invocacion:
+ *
+ * <FormTextField<ModeloAnidado> namespace="nivel.nivel2" name="campo" label="Mi Campo" ...>
+ *
+ * Se especifica ModeloAnidado como tipo de dato para que Typescript nos ayude a validar
+ * que los valores de la propiedad sean propiedades validas de ModeloAnidado
  *
  *
  */
@@ -25,24 +54,32 @@ import GenericDatePicker, {
  * NOTA: Se utiliza "keyof Model" para decirle a TS que los valores validos de name
  * son propedades del objeto Model
  */
-type ValidModelName<Model> = {
+type FormFieldProperties<Model, InputComponent> = {
+    namespace?: string;
     name: Extract<keyof Model, string>;
-};
+    /*
+     * NOTA: Las propiedades value y onChange no son necesarias ya que son proporcionadas
+     * por el componente Field de Formik
+     */
+} & Omit<InputComponent, 'value' | 'onChange' | 'checked'>;
 
-/*
- * NOTA: Las propiedades value y onChange no son necesarias ya que son proporcionadas
- * por el componente Field de Formik
- */
-type OmittedProperties<Component> = Omit<
-    Component,
-    'value' | 'onChange' | 'checked'
->;
+function useNamespacedField<Model, InputType>(
+    props: FormFieldProperties<Model, InputType>
+) {
+    const newName = props.namespace
+        ? `${props.namespace}.${props.name}`
+        : props.name;
+    return useField({
+        ...props,
+        name: newName,
+    });
+}
 
-class GenericForm<Model> {
-    FormTextField(
-        props: ValidModelName<Model> & OmittedProperties<GenericInputProps>
+class GenericForm<BaseModel> {
+    FormTextField<Model = BaseModel>(
+        props: FormFieldProperties<Model, GenericInputProps>
     ) {
-        const [field, meta] = useField(props);
+        const [field, meta] = useNamespacedField(props);
         const helperText = meta.error ? meta.error : props.helperText;
 
         return (
@@ -55,10 +92,10 @@ class GenericForm<Model> {
         );
     }
 
-    FormCatalogSelectField(
-        props: ValidModelName<Model> & OmittedProperties<CatalogSelectProps>
+    FormCatalogSelectField<Model = BaseModel>(
+        props: FormFieldProperties<Model, CatalogSelectProps>
     ) {
-        const [field, meta] = useField(props);
+        const [field, meta] = useNamespacedField(props);
         const helperText = meta.error ? meta.error : props.helperText;
 
         return (
@@ -71,10 +108,10 @@ class GenericForm<Model> {
         );
     }
 
-    FormSelectField(
-        props: ValidModelName<Model> & OmittedProperties<GenericSelectProps>
+    FormSelectField<Model = BaseModel>(
+        props: FormFieldProperties<Model, GenericSelectProps>
     ) {
-        const [field, meta] = useField(props);
+        const [field, meta] = useNamespacedField(props);
         const helperText = meta.error ? meta.error : props.helperText;
 
         return (
@@ -87,14 +124,14 @@ class GenericForm<Model> {
         );
     }
 
-    FormDatePickerField(
-        props: ValidModelName<Model> & OmittedProperties<GenericDatePickerProps>
+    FormDatePickerField<Model = BaseModel>(
+        props: FormFieldProperties<Model, GenericDatePickerProps>
     ) {
         return <Field {...props} as={GenericDatePicker} />;
     }
 
-    FormSwitchField(
-        props: ValidModelName<Model> & OmittedProperties<GenericSwitchProps>
+    FormSwitchField<Model = BaseModel>(
+        props: FormFieldProperties<Model, GenericSwitchProps>
     ) {
         const [field] = useField({ ...props, type: 'checkbox' });
         return <GenericSwitch {...field} {...props} />;
