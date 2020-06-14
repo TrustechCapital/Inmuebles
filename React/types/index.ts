@@ -1,6 +1,11 @@
 import { IModel } from '../models/BaseModel';
 import { OperacionesCatalogo, SavingStatus } from '../constants';
 
+export type SimplifiedOnChangeSignature = (event: {
+    target: {};
+    name?: string;
+}) => void;
+
 export type TabsLayout = {
     label: String;
     component: React.ReactType;
