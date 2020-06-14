@@ -6,6 +6,12 @@ import GenericSwitch, { GenericSwitchProps } from '../GenericSwitch';
 import GenericDatePicker, {
     GenericDatePickerProps,
 } from '../GenericDatePicker';
+import GenericFileLoader, {
+    GenericFileLoaderProps,
+} from '../GenericFileLoader';
+import GenericRadioGroup, {
+    GenericRadioGroupProps,
+} from '../GenericRadioGroup';
 
 /*
  * Esta clase es un auxiliar para manejar formularios. Extiende las funcionalidades
@@ -135,6 +141,41 @@ class GenericForm<BaseModel> {
     ) {
         const [field] = useField({ ...props, type: 'checkbox' });
         return <GenericSwitch {...field} {...props} />;
+    }
+
+    FormFileField<Model = BaseModel>(
+        props: FormFieldProperties<Model, GenericFileLoaderProps>
+    ) {
+        const [field, meta] = useField({ ...props, type: 'checkbox' });
+        const helperText = meta.error ? meta.error : props.helperText;
+
+        return (
+            <GenericFileLoader
+                {...field}
+                {...props}
+                error={!!meta.error}
+                helperText={helperText}
+            />
+        );
+    }
+
+    FormRadioGroupField<Model = BaseModel>(
+        props: FormFieldProperties<Model, GenericRadioGroupProps>
+    ) {
+        const { children, ...rest } = props;
+        const [field, meta] = useField(rest);
+        const helperText = meta.error ? meta.error : props.helperText;
+
+        return (
+            <GenericRadioGroup
+                {...field}
+                {...rest}
+                error={!!meta.error}
+                helperText={helperText}
+            >
+                {children}
+            </GenericRadioGroup>
+        );
     }
 }
 
