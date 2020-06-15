@@ -4,7 +4,7 @@ import clsx from 'clsx';
 import { createStyles, makeStyles, Theme } from '@material-ui/core/styles';
 import CircularProgress from '@material-ui/core/CircularProgress';
 import { green } from '@material-ui/core/colors';
-import Button from '@material-ui/core/Button';
+import Button, { ButtonProps } from '@material-ui/core/Button';
 import CheckIcon from '@material-ui/icons/Check';
 import SaveIcon from '@material-ui/icons/Save';
 
@@ -31,11 +31,11 @@ const useStyles = makeStyles((theme: Theme) =>
     })
 );
 
-type SavingButtonProps = {
+type SavingButtonProps = Pick<ButtonProps, 'type' | 'startIcon'> & {
     loading: boolean;
     success: boolean;
     disabled: boolean;
-    onClick: () => void;
+    onClick?: () => void;
 };
 
 const SavingButton: React.FC<SavingButtonProps> = ({
@@ -43,6 +43,9 @@ const SavingButton: React.FC<SavingButtonProps> = ({
     success,
     disabled,
     onClick,
+    children = 'Guardar',
+    startIcon = <SaveIcon />,
+    ...other
 }) => {
     const classes = useStyles();
 
@@ -53,14 +56,15 @@ const SavingButton: React.FC<SavingButtonProps> = ({
     return (
         <div className={classes.wrapper}>
             <Button
-                startIcon={success ? <CheckIcon /> : <SaveIcon />}
+                startIcon={success ? <CheckIcon /> : startIcon}
                 variant="contained"
                 color="primary"
                 className={buttonClassname}
                 disabled={loading || disabled}
                 onClick={onClick}
+                {...other}
             >
-                Guardar
+                {children}
             </Button>
             {loading && (
                 <CircularProgress
