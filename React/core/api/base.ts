@@ -1,7 +1,7 @@
 import axios, { AxiosInstance, AxiosRequestConfig, AxiosResponse } from 'axios';
 import { apiConfig } from '../api.config';
 import { filterEmptyParameters as removeEemptyParameters } from './utils';
-import { BatchOperationError } from './exceptions';
+import { BatchOperationError, FileUploadError } from './exceptions';
 
 export type ModelMapper = (object: any, index: number) => any;
 
@@ -9,6 +9,7 @@ enum FiduciaDynamicEndpoints {
     Get = 'getRef.do',
     Execute = 'executeRef.do',
     ExecuteJava = 'executeJavaRef.do',
+    UploadFile = 'upload.do',
 }
 
 export class Api {
@@ -157,5 +158,39 @@ export class Api {
                 throw new BatchOperationError(failedModels, errorMessage);
             }
         });
+    }
+
+    public uploadFiles(url: string, files: File[] = [], params: Object = {}) {
+        var formData = new FormData();
+
+        files.forEach((file, index) => {
+            formData.append(`file_${index + 1}`, file);
+        });
+
+        Object.entries(params).forEach(([key, value]) => {
+            formData.append(key, value);
+        });
+
+        return this.api.post(url, formData, {
+            headers: {
+                'Content-Type': 'multipart/form-data',
+            },
+        });
+    }
+
+    public async uploadFilesWithProcessor(
+        files: File[] = [],
+        processorName: string,
+        otherParams: Object = {}
+    ) {
+        try {
+            debugger;
+            await this.uploadFiles(FiduciaDynamicEndpoints.UploadFile, files, {
+                ...otherParams,
+                processor: processorName,
+            });
+        } catch (error) {
+            throw new FileUploadError();
+        }
     }
 }
