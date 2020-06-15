@@ -24,15 +24,14 @@ import mx.com.inscitech.fiducia.domain.FUnidades;
 import mx.com.inscitech.fiducia.domain.Instrucc;
 import mx.com.inscitech.fiducia.domain.Notarios;
 import mx.com.inscitech.fiducia.models.CartaLiberacionBienes;
-import mx.com.inscitech.fiducia.models.LayoutCargaBienes;
 import mx.com.inscitech.fiducia.models.UnidadesCartaLiberacionBienesRow;
 import mx.com.inscitech.fiducia.negocio.exceptions.BusinessException;
 import mx.com.inscitech.fiducia.repository.AdquirienteRepository;
 import mx.com.inscitech.fiducia.repository.AnteproyectoRepository;
-import mx.com.inscitech.fiducia.repository.DetalleBienesRepository;
 import mx.com.inscitech.fiducia.repository.BienesRepository;
 import mx.com.inscitech.fiducia.repository.ClavesRepository;
 import mx.com.inscitech.fiducia.repository.DepositosRepository;
+import mx.com.inscitech.fiducia.repository.DetalleBienesRepository;
 import mx.com.inscitech.fiducia.repository.DetliquiRepository;
 import mx.com.inscitech.fiducia.repository.EmpresasRepository;
 import mx.com.inscitech.fiducia.repository.FoliosRepository;
@@ -152,171 +151,6 @@ public class OperacionesBienes {
         }
     }
 
-    public String cargaMasivaBienes(int pTipoOperacion, BigDecimal pIdFideicomiso, List<LayoutCargaBienes> datosCarga,
-
-                                    String pFecha) {
-
-        try {
-            for (LayoutCargaBienes layoutCarga : datosCarga) {
-
-                BigDecimal idSubcuenta = BigDecimal.valueOf(layoutCarga.getSubcuenta());
-                String idBien = layoutCarga.getBien().toString();
-                String idDepto = layoutCarga.getDepto();
-                BigDecimal idNotario = BigDecimal.valueOf(layoutCarga.getNotario());
-
-                // TODO: Usar enum
-                // INDIVIDUALIZACION
-                if (pTipoOperacion == 1 || pTipoOperacion == 4) {
-                    String tipo = "0";
-
-                    if (pTipoOperacion == 1) {
-
-                        FUnidades unidad = unidadRepository.findByPk(pIdFideicomiso, idSubcuenta, idBien, idDepto);
-
-                        String fechaReversion = layoutCarga.getFechaAvaluo();
-
-                        if (unidad == null) {
-                            unidad =
-                                new FUnidades(pIdFideicomiso, BigDecimal.valueOf(layoutCarga.getSubcuenta()),
-                                              layoutCarga.getBien().toString(), layoutCarga.getDepto());
-                            unidad.setFuniTipo(tipo);
-                            unidad.setFuniNiveles(Utils.toBigDecimal(layoutCarga.getNiveles()));
-                            unidad.setFuniCalleNum(layoutCarga.getCalle());
-                            unidad.setFuniNomColonia(layoutCarga.getColonia());
-                            unidad.setFuniNomPoblacion(layoutCarga.getPoblacion());
-                            unidad.setFuniCodigoPostal(layoutCarga.getCodigoPostal());
-                            // TODO: el layout recibe string pero en la DB es numero
-                            //unidad.setFuniNumEstado(layoutCarga.getEstado());
-                            // TODO: el layout recibe string pero en la DB es numero
-                            //unidad.setFuniNumPais(layoutCarga.getPais());
-                            unidad.setFuniColindancias(layoutCarga.getColindancia());
-                            unidad.setFuniMedidas(layoutCarga.getMedidas().toString());
-                            unidad.setFuniEstacionamiento1(layoutCarga.getEstacionamiento1());
-                            unidad.setFuniSuperficie1(layoutCarga.getSuperficie1());
-                            unidad.setFuniEstacionamiento2(layoutCarga.getEstacionamiento2());
-                            unidad.setFuniSuperficie2(layoutCarga.getSuperficie2());
-                            unidad.setFuniEstacionamiento3(layoutCarga.getEstacionamiento3());
-                            unidad.setFuniSuperficie3(layoutCarga.getSuperficie3());
-                            unidad.setFuniRoofGarden(layoutCarga.getRoofGarden());
-                            unidad.setFuniRoofSuperficie(layoutCarga.getRoofSuperficie());
-                            unidad.setFuniSotano(layoutCarga.getSotano());
-                            unidad.setFuniSotanoSuperficie(layoutCarga.getSotanoSuperficie());
-                            unidad.setFuniIndiviso(BigDecimal.valueOf(layoutCarga.getIndiviso()));
-                            unidad.setFuniPrecio(BigDecimal.valueOf(layoutCarga.getPrecio()));
-                            unidad.setFuniPrecioCatastro(BigDecimal.valueOf(layoutCarga.getPrecioCatastro()));
-                            unidad.setFuniUltimoAvaluo(BigDecimal.valueOf(layoutCarga.getAvaluo()));
-                            unidad.setFuniFechaUltimoAvaluo(layoutCarga.getFechaAvaluo());
-                            unidad.setFuniMoneda(BigDecimal.valueOf(layoutCarga.getMoneda()));
-                            unidad.setFuniActo1(layoutCarga.getActo1());
-                            unidad.setFuniActo2(layoutCarga.getActo2());
-                            unidad.setFuniActo3(layoutCarga.getActo3());
-                            unidad.setFuniActo4(layoutCarga.getActo4());
-                            unidad.setFuniNotario(idNotario);
-                            unidad.setFuniFechaReversion(DateUtils.fromString(layoutCarga.getFechaReversion()));
-                            unidad.setFuniLocalidadNota(layoutCarga.getLocalidad());
-                            unidad.setFuniNumEscritura(layoutCarga.getEscritura());
-                            unidad.setFuniFolioReal(layoutCarga.getFolioReal().toString());
-                            unidad.setFuniFechaTrasladoDominio(null);
-                            unidad.setFuniStatus("ACTIVO");
-                        }
-
-
-                        // ALTA ADQUIRIENTE
-
-                        String tipoVenta = "";
-                        String tipoPlazo = "";
-                        BigDecimal numPlazo = BigDecimal.valueOf(0);
-                        BigDecimal enganche = BigDecimal.valueOf(0);
-                        BigDecimal abono = BigDecimal.valueOf(0);
-                        BigDecimal saldo = BigDecimal.valueOf(0);
-                        BigDecimal pagos = BigDecimal.valueOf(0);
-                        String cv = "";
-                        String contrato = "0";
-                        String folio = "0";
-                        String libera = "0";
-                        String fechaAlta = "";
-                        String fechaModificacion = "";
-
-                        FAdquirentes adquiriente =
-                            new FAdquirentes(pIdFideicomiso, idSubcuenta, idBien, idDepto, BigDecimal.valueOf(1));
-                        adquiriente.setFadqTipoVenta("1");
-                        adquiriente.setFadqNombreComprador(layoutCarga.getAdquirente());
-                        adquiriente.setFadqValor(BigDecimal.valueOf(layoutCarga.getValor()));
-                        adquiriente.setFadqMoneda(BigDecimal.valueOf(layoutCarga.getMoneda()));
-                        adquiriente.setFadqTipoVenta(tipoVenta);
-                        adquiriente.setFadqTipoPlazo(tipoPlazo);
-                        adquiriente.setFadqNumPlazo(numPlazo);
-                        adquiriente.setFadqEnganche(enganche);
-                        adquiriente.setFadqAbono(abono);
-                        adquiriente.setFadqSaldo(saldo);
-                        adquiriente.setFadqPagos(pagos);
-                        adquiriente.setFadqNotario(idNotario);
-                        adquiriente.setFadqLocalidad(layoutCarga.getLocalidad());
-                        adquiriente.setFadqCv(cv);
-                        adquiriente.setFadqContrato(contrato);
-                        adquiriente.setFadqFolio(folio);
-                        adquiriente.setFadqRegPub(libera);
-                        adquiriente.setFadqFecAlta(fechaAlta);
-                        adquiriente.setFadqFecMod(fechaModificacion);
-                        adquiriente.setFadqStatus("ACTIVO");
-                        adquiriente.setFadqNombreComprador(layoutCarga.getDesarrollo());
-                        adquiriente.setFadqPrototipo(layoutCarga.getPrototipo());
-                        adquiriente.setFadqNumeroOficial(layoutCarga.getNumeroOficial());
-                        adquiriente.setFadqNotaria(layoutCarga.getNotaria());
-                        adquiriente.setFadqDelegadoFiduciario(layoutCarga.getDelegadosFiduciarios());
-
-                        //TODO: use enum
-                    } else {
-
-                        FAdquirentes adquiriente =
-                            adquirienteRepository.findByPk(pIdFideicomiso, idSubcuenta, idBien, idDepto,
-                                                           BigDecimal.valueOf(1));
-                        adquiriente.setFadqNotario(idNotario);
-                        adquiriente.setFadqLocalidad(layoutCarga.getLocalidad());
-                        adquiriente.setFadqContrato(layoutCarga.getEscritura());
-                        adquiriente.setFadqFolio(layoutCarga.getNumeroOficial());
-                        adquiriente.setFadqStatus(Constants.EstadosAdquiriente.fromId(layoutCarga.getStatus()));
-
-                        adquirienteRepository.save(adquiriente);
-
-                        FUnidades unidad = unidadRepository.findByPk(pIdFideicomiso, idSubcuenta, idBien, idDepto);
-                        unidad.setFuniNotario(idNotario);
-                        unidad.setFuniLocalidadNota(layoutCarga.getLocalidad());
-                        unidad.setFuniNumEscritura(layoutCarga.getEscritura());
-                        unidad.setFuniFolioReal(layoutCarga.getFolioReal().toString());
-                        unidad.setFuniStatus(Constants.EstadosAdquiriente.fromId(layoutCarga.getStatus()));
-
-                        unidadRepository.update(unidad);
-                    }
-                }
-
-            }
-
-            return "";
-        } catch (Exception e) {
-            return "-1";
-        }
-    }
-
-    private LayoutCargaBienes mapColumnsToObject(List<Object> columns) {
-        return new LayoutCargaBienes((Integer) columns.get(0), (Integer) columns.get(1), (Integer) columns.get(2),
-                                     (String) columns.get(3), (String) columns.get(4), (String) columns.get(5),
-                                     (String) columns.get(6), (String) columns.get(7), (String) columns.get(8),
-                                     (String) columns.get(9), (String) columns.get(10), (String) columns.get(11),
-                                     (String) columns.get(12), (Integer) columns.get(13), (String) columns.get(14),
-                                     (String) columns.get(15), (String) columns.get(16), (String) columns.get(17),
-                                     (String) columns.get(18), (String) columns.get(19), (Integer) columns.get(20),
-                                     (String) columns.get(21), (String) columns.get(22), (String) columns.get(23),
-                                     (String) columns.get(24), (String) columns.get(25), (Double) columns.get(26),
-                                     (Double) columns.get(27), (Double) columns.get(28), (String) columns.get(29),
-                                     (Double) columns.get(30), (String) columns.get(31), (Integer) columns.get(32),
-                                     (String) columns.get(33), (String) columns.get(34), (String) columns.get(35),
-                                     (String) columns.get(36), (String) columns.get(37), (String) columns.get(38),
-                                     (String) columns.get(39), (String) columns.get(40), (Integer) columns.get(41),
-                                     (String) columns.get(42), (Integer) columns.get(43), (String) columns.get(44),
-                                     (String) columns.get(45), (String) columns.get(46), (String) columns.get(47),
-                                     (String) columns.get(48), (Integer) columns.get(49));
-    }
 
     public int generaBienes(int pTipoOperacion, BigDecimal pIdFideicomiso, BigDecimal pIdSubcuenta,
                             BigDecimal pIdTipoBien, String pClaveBien, String pIdBien, BigDecimal pImporte,

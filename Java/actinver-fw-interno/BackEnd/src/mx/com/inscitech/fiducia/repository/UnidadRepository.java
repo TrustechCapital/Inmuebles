@@ -15,6 +15,10 @@ public class UnidadRepository {
         return (FUnidades) unidad.selectAsObject();
     }
 
+    public void insert(FUnidades unidad) {
+        unidad.doInsert();
+    }
+
     public void update(FUnidades unidad) {
         unidad.doUpdate();
     }

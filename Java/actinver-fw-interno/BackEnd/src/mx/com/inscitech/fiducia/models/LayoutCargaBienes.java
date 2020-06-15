@@ -3,9 +3,8 @@ package mx.com.inscitech.fiducia.models;
 
 public class LayoutCargaBienes {
 
-    private Integer fideicomiso;
-    private Integer subcuenta;
-    private Integer bien;
+    private Integer idfideicomiso;
+    private Integer idBien;
     private String edificio;
     private String depto;
     private String niveles;
@@ -16,63 +15,32 @@ public class LayoutCargaBienes {
     private String estado;
     private String pais;
     private String colindancia;
-    private Integer medidas;
+    private String medidas; //TODO: change type to string
     private String estacionamiento1;
-    private String estacionamiento2;
-    private String estacionamiento3;
-    private String roofGarden;
-    private String sotano;
-    private String sotanoSuperficie;
-    private Integer indiviso;
-    private String medidas2;
     private String superficie1;
-    private String superficie2;
-    private String superficie3;
-    private String roofSuperficie;
-    private Double precioCatastro;
-    private Double precio;
-    private Double valor;
+    private String numeroCatastro;
+    private Double valorCatastro;
+    private Double valorOperacion;
     private String adquirente;
     private Double avaluo;
     private String fechaAvaluo;
-    private Integer moneda;
-    private String acto1;
-    private String acto2;
-    private String acto3;
-    private String acto4;
-    private String fechaReversion;
-    private String libro;
     private String escritura;
     private String fechaEscritura;
     private Integer notario;
-    private String localidad;
-    private Integer folioReal;
-    private String desarrollo;
-    private String prototipo;
-    private String numeroOficial;
-    private String notaria;
-    private String delegadosFiduciarios;
     private Integer status;
 
     public LayoutCargaBienes() {
         super();
     }
 
-
-    public LayoutCargaBienes(Integer fideicomiso, Integer subcuenta, Integer bien, String edificio, String depto,
-                             String niveles, String calle, String colonia, String poblacion, String codigoPostal,
-                             String estado, String pais, String colindancia, Integer medidas, String estacionamiento1,
-                             String estacionamiento2, String estacionamiento3, String roofGarden, String sotano,
-                             String sotanoSuperficie, Integer indiviso, String medidas2, String superficie1,
-                             String superficie2, String superficie3, String roofSuperficie, Double precioCatastro,
-                             Double precio, Double valor, String adquirente, Double avaluo, String fechaAvaluo,
-                             Integer moneda, String acto1, String acto2, String acto3, String acto4,
-                             String fechaReversion, String libro, String escritura, String fechaEscritura,
-                             Integer notario, String localidad, Integer folioReal, String desarrollo, String prototipo,
-                             String numeroOficial, String notaria, String delegadosFiduciarios, Integer status) {
-        this.fideicomiso = fideicomiso;
-        this.subcuenta = subcuenta;
-        this.bien = bien;
+    public LayoutCargaBienes(Integer idfideicomiso, Integer idBien, String edificio, String depto, String niveles,
+                             String calle, String colonia, String poblacion, String codigoPostal, String estado,
+                             String pais, String colindancia, String medidas, String estacionamiento1,
+                             String superficie1, String numeroCatastro, Double valorCatastro, Double valorOperacion,
+                             String adquirente, Double avaluo, String fechaAvaluo, String escritura,
+                             String fechaEscritura, Integer notario, Integer status) {
+        this.idfideicomiso = idfideicomiso;
+        this.idBien = idBien;
         this.edificio = edificio;
         this.depto = depto;
         this.niveles = niveles;
@@ -85,66 +53,34 @@ public class LayoutCargaBienes {
         this.colindancia = colindancia;
         this.medidas = medidas;
         this.estacionamiento1 = estacionamiento1;
-        this.estacionamiento2 = estacionamiento2;
-        this.estacionamiento3 = estacionamiento3;
-        this.roofGarden = roofGarden;
-        this.sotano = sotano;
-        this.sotanoSuperficie = sotanoSuperficie;
-        this.indiviso = indiviso;
-        this.medidas2 = medidas2;
         this.superficie1 = superficie1;
-        this.superficie2 = superficie2;
-        this.superficie3 = superficie3;
-        this.roofSuperficie = roofSuperficie;
-        this.precioCatastro = precioCatastro;
-        this.precio = precio;
-        this.valor = valor;
+        this.numeroCatastro = numeroCatastro;
+        this.valorCatastro = valorCatastro;
+        this.valorOperacion = valorOperacion;
         this.adquirente = adquirente;
         this.avaluo = avaluo;
         this.fechaAvaluo = fechaAvaluo;
-        this.moneda = moneda;
-        this.acto1 = acto1;
-        this.acto2 = acto2;
-        this.acto3 = acto3;
-        this.acto4 = acto4;
-        this.fechaReversion = fechaReversion;
-        this.libro = libro;
         this.escritura = escritura;
         this.fechaEscritura = fechaEscritura;
         this.notario = notario;
-        this.localidad = localidad;
-        this.folioReal = folioReal;
-        this.desarrollo = desarrollo;
-        this.prototipo = prototipo;
-        this.numeroOficial = numeroOficial;
-        this.notaria = notaria;
-        this.delegadosFiduciarios = delegadosFiduciarios;
         this.status = status;
     }
 
 
-    public void setFideicomiso(Integer fideicomiso) {
-        this.fideicomiso = fideicomiso;
+    public void setIdfideicomiso(Integer idfideicomiso) {
+        this.idfideicomiso = idfideicomiso;
     }
 
-    public Integer getFideicomiso() {
-        return fideicomiso;
+    public Integer getIdfideicomiso() {
+        return idfideicomiso;
     }
 
-    public void setSubcuenta(Integer subcuenta) {
-        this.subcuenta = subcuenta;
+    public void setIdBien(Integer idBien) {
+        this.idBien = idBien;
     }
 
-    public Integer getSubcuenta() {
-        return subcuenta;
-    }
-
-    public void setBien(Integer bien) {
-        this.bien = bien;
-    }
-
-    public Integer getBien() {
-        return bien;
+    public Integer getIdBien() {
+        return idBien;
     }
 
     public void setEdificio(String edificio) {
@@ -227,11 +163,11 @@ public class LayoutCargaBienes {
         return colindancia;
     }
 
-    public void setMedidas(Integer medidas) {
+    public void setMedidas(String medidas) {
         this.medidas = medidas;
     }
 
-    public Integer getMedidas() {
+    public String getMedidas() {
         return medidas;
     }
 
@@ -243,62 +179,6 @@ public class LayoutCargaBienes {
         return estacionamiento1;
     }
 
-    public void setEstacionamiento2(String estacionamiento2) {
-        this.estacionamiento2 = estacionamiento2;
-    }
-
-    public String getEstacionamiento2() {
-        return estacionamiento2;
-    }
-
-    public void setEstacionamiento3(String estacionamiento3) {
-        this.estacionamiento3 = estacionamiento3;
-    }
-
-    public String getEstacionamiento3() {
-        return estacionamiento3;
-    }
-
-    public void setRoofGarden(String roofGarden) {
-        this.roofGarden = roofGarden;
-    }
-
-    public String getRoofGarden() {
-        return roofGarden;
-    }
-
-    public void setSotano(String sotano) {
-        this.sotano = sotano;
-    }
-
-    public String getSotano() {
-        return sotano;
-    }
-
-    public void setSotanoSuperficie(String sotanoSuperficie) {
-        this.sotanoSuperficie = sotanoSuperficie;
-    }
-
-    public String getSotanoSuperficie() {
-        return sotanoSuperficie;
-    }
-
-    public void setIndiviso(Integer indiviso) {
-        this.indiviso = indiviso;
-    }
-
-    public Integer getIndiviso() {
-        return indiviso;
-    }
-
-    public void setMedidas2(String medidas2) {
-        this.medidas2 = medidas2;
-    }
-
-    public String getMedidas2() {
-        return medidas2;
-    }
-
     public void setSuperficie1(String superficie1) {
         this.superficie1 = superficie1;
     }
@@ -307,52 +187,28 @@ public class LayoutCargaBienes {
         return superficie1;
     }
 
-    public void setSuperficie2(String superficie2) {
-        this.superficie2 = superficie2;
+    public void setNumeroCatastro(String numeroCatastro) {
+        this.numeroCatastro = numeroCatastro;
     }
 
-    public String getSuperficie2() {
-        return superficie2;
+    public String getNumeroCatastro() {
+        return numeroCatastro;
     }
 
-    public void setSuperficie3(String superficie3) {
-        this.superficie3 = superficie3;
+    public void setValorCatastro(Double valorCatastro) {
+        this.valorCatastro = valorCatastro;
     }
 
-    public String getSuperficie3() {
-        return superficie3;
+    public Double getValorCatastro() {
+        return valorCatastro;
     }
 
-    public void setRoofSuperficie(String roofSuperficie) {
-        this.roofSuperficie = roofSuperficie;
+    public void setValorOperacion(Double valorOperacion) {
+        this.valorOperacion = valorOperacion;
     }
 
-    public String getRoofSuperficie() {
-        return roofSuperficie;
-    }
-
-    public void setPrecioCatastro(Double precioCatastro) {
-        this.precioCatastro = precioCatastro;
-    }
-
-    public Double getPrecioCatastro() {
-        return precioCatastro;
-    }
-
-    public void setPrecio(Double precio) {
-        this.precio = precio;
-    }
-
-    public Double getPrecio() {
-        return precio;
-    }
-
-    public void setValor(Double valor) {
-        this.valor = valor;
-    }
-
-    public Double getValor() {
-        return valor;
+    public Double getValorOperacion() {
+        return valorOperacion;
     }
 
     public void setAdquirente(String adquirente) {
@@ -379,62 +235,6 @@ public class LayoutCargaBienes {
         return fechaAvaluo;
     }
 
-    public void setMoneda(Integer moneda) {
-        this.moneda = moneda;
-    }
-
-    public Integer getMoneda() {
-        return moneda;
-    }
-
-    public void setActo1(String acto1) {
-        this.acto1 = acto1;
-    }
-
-    public String getActo1() {
-        return acto1;
-    }
-
-    public void setActo2(String acto2) {
-        this.acto2 = acto2;
-    }
-
-    public String getActo2() {
-        return acto2;
-    }
-
-    public void setActo3(String acto3) {
-        this.acto3 = acto3;
-    }
-
-    public String getActo3() {
-        return acto3;
-    }
-
-    public void setActo4(String acto4) {
-        this.acto4 = acto4;
-    }
-
-    public String getActo4() {
-        return acto4;
-    }
-
-    public void setFechaReversion(String fechaReversion) {
-        this.fechaReversion = fechaReversion;
-    }
-
-    public String getFechaReversion() {
-        return fechaReversion;
-    }
-
-    public void setLibro(String libro) {
-        this.libro = libro;
-    }
-
-    public String getLibro() {
-        return libro;
-    }
-
     public void setEscritura(String escritura) {
         this.escritura = escritura;
     }
@@ -457,62 +257,6 @@ public class LayoutCargaBienes {
 
     public Integer getNotario() {
         return notario;
-    }
-
-    public void setLocalidad(String localidad) {
-        this.localidad = localidad;
-    }
-
-    public String getLocalidad() {
-        return localidad;
-    }
-
-    public void setFolioReal(Integer folioReal) {
-        this.folioReal = folioReal;
-    }
-
-    public Integer getFolioReal() {
-        return folioReal;
-    }
-
-    public void setDesarrollo(String desarrollo) {
-        this.desarrollo = desarrollo;
-    }
-
-    public String getDesarrollo() {
-        return desarrollo;
-    }
-
-    public void setPrototipo(String prototipo) {
-        this.prototipo = prototipo;
-    }
-
-    public String getPrototipo() {
-        return prototipo;
-    }
-
-    public void setNumeroOficial(String numeroOficial) {
-        this.numeroOficial = numeroOficial;
-    }
-
-    public String getNumeroOficial() {
-        return numeroOficial;
-    }
-
-    public void setNotaria(String notaria) {
-        this.notaria = notaria;
-    }
-
-    public String getNotaria() {
-        return notaria;
-    }
-
-    public void setDelegadosFiduciarios(String delegadosFiduciarios) {
-        this.delegadosFiduciarios = delegadosFiduciarios;
-    }
-
-    public String getDelegadosFiduciarios() {
-        return delegadosFiduciarios;
     }
 
     public void setStatus(Integer status) {
