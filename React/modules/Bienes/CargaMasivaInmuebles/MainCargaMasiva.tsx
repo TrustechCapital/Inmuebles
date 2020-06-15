@@ -1,10 +1,10 @@
-import React from 'react';
+import React, { useState } from 'react';
 
 import { makeStyles } from '@material-ui/core/styles';
 import Paper from '@material-ui/core/Paper';
 import Grid from '@material-ui/core/Grid';
 import Typography from '@material-ui/core/Typography';
-import Button from '@material-ui/core/Button';
+import BackupIcon from '@material-ui/icons/Backup';
 
 import CargaMasivasBienes from './models/CargaMasivaBienes';
 import FormValidator, {
@@ -14,6 +14,8 @@ import { Formik } from 'formik';
 import GenericForm from '../../../sharedComponents/Forms';
 import { GenericRadioGroupItem } from '../../../sharedComponents/GenericRadioGroup';
 import { TiposCargaMasivaBienes } from './constants';
+import { cargaMasivaBienesApi } from './services/CargaMasivaBienesApi';
+import SavingButton from '../../../sharedComponents/SavingButton';
 
 const { FormTextField, FormFileField, FormRadioGroupField } = new GenericForm<
     CargaMasivasBienes
@@ -40,12 +42,36 @@ const CargasMasivasFormValidator = new FormValidator({
 
 const initialValues = new CargaMasivasBienes(null, null, null);
 
+const initialOperationStatus = {
+    isSaving: false,
+    error: null,
+};
+
 export default function MainCargaMasiva() {
     const classes = useStyles();
+    const [operationStatus, setOperationStatus] = useState(
+        initialOperationStatus
+    );
 
-    function handleSubmit(datosCargaMasiva: CargaMasivasBienes) {
-        console.log(datosCargaMasiva);
-        debugger;
+    const operationSuccess = !!operationStatus.error;
+
+    async function handleSubmit(datosCargaMasiva: CargaMasivasBienes) {
+        try {
+            setOperationStatus({
+                isSaving: true,
+                error: null,
+            });
+            await cargaMasivaBienesApi.aplicaCargaMasiva(datosCargaMasiva);
+            setOperationStatus({
+                isSaving: false,
+                error: null,
+            });
+        } catch (error) {
+            setOperationStatus({
+                isSaving: false,
+                error: error,
+            });
+        }
     }
 
     return (
@@ -115,13 +141,15 @@ export default function MainCargaMasiva() {
                                 </Grid>
                             </Grid>
                             <Grid container justify="flex-end">
-                                <Button
+                                <SavingButton
                                     type="submit"
-                                    variant="contained"
-                                    color="primary"
+                                    loading={operationStatus.isSaving}
+                                    success={operationSuccess}
+                                    disabled={operationStatus.isSaving}
+                                    startIcon={<BackupIcon />}
                                 >
                                     Aplicar
-                                </Button>
+                                </SavingButton>
                             </Grid>
                         </Grid>
                     </Paper>
