@@ -21,6 +21,10 @@ public class DateUtils {
         DateFormats(String format) {
             this.format = format;
         }
+
+        public String getValue() {
+            return format;
+        }
     }
 
     public DateUtils() {
@@ -34,11 +38,11 @@ public class DateUtils {
     public static Date fromString(String fecha) throws Exception {
         if (fecha == null)
             return null;
-        return fromString(fecha, DateFormats.DEFAULT.toString());
+        return fromString(fecha, DateFormats.DEFAULT.getValue());
     }
 
     public static String toString(Date fecha) {
-        return toString(fecha, DateFormats.DEFAULT.toString());
+        return toString(fecha, DateFormats.DEFAULT.getValue());
     }
 
     public static Date fromParts(BigDecimal dia, BigDecimal mes, BigDecimal anio) {
