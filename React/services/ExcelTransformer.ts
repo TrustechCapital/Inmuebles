@@ -3,6 +3,8 @@ type TableLayout = {
     header: string;
 }[];
 
+const uri = 'data:application/vnd.ms-excel;base64,';
+
 class ExcelTransformer {
     rows: any[];
     layout: TableLayout;
@@ -32,6 +34,19 @@ class ExcelTransformer {
         const table = `<table>${tableHead}${tableBody}</table>`;
 
         return table;
+    }
+
+    toBase64(data: any) {
+        return window.btoa(unescape(encodeURIComponent(data)));
+    }
+
+    download(filename: string) {
+        const element = window.document.createElement('a');
+        element.href = uri + this.toBase64(this.toHtml());
+        element.download = filename;
+        document.body.appendChild(element);
+        element.click();
+        document.body.removeChild(element);
     }
 }
 
