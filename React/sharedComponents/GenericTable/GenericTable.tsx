@@ -14,6 +14,7 @@ import GenericTableRow from './GenericTableRow';
 import GenericTableToolbar from './GenericTableToolbar';
 import GenericTableHead from './GenericTableHead';
 import { GenericTableCallbacksContext } from './context';
+//import ExcelTransformer from '../../services/ExcelTransformer';
 
 const ROW_HEIGHT = 53;
 
@@ -99,6 +100,8 @@ function GenericTable<T extends ITableRow>(props: TableProps<T>) {
 
     useEffect(() => {
         setSelectedRows(new Set());
+        //const exportedExcel = new ExcelTransformer(data, columns).toHtml();
+        //console.log('exportedExcel', exportedExcel);
     }, [data]);
 
     function handleClick(row: any) {
