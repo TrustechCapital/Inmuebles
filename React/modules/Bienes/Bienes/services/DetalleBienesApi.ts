@@ -1,9 +1,10 @@
 import { ModelsApi } from '../../../../core/api';
-import { ITableBienesParameters } from '../types';
+import { ITableBienesParameters, RevaluacionDetalleBien } from '../types';
 import DetalleBienResultRow from '../models/DetalleBienResultRow';
 import DetalleBien from '../../../../models/DetalleBien';
 import DetalleBienesModelMapper from './DetalleBienesModelMapper';
 import { OperacionesCatalogoDetalleBienes } from '../constants';
+import DateUtils from '../../../../utils/DateUtils';
 
 class DetalleBienesApi extends ModelsApi<DetalleBien> {
     async find(
@@ -26,13 +27,25 @@ class DetalleBienesApi extends ModelsApi<DetalleBien> {
      */
     async executeCrudOperation(
         model: DetalleBien,
-        mode: OperacionesCatalogoDetalleBienes
+        mode: OperacionesCatalogoDetalleBienes,
+        revaluacionDetalleBien?: RevaluacionDetalleBien
     ): Promise<number> {
+        const esRevaluacion =
+            mode === OperacionesCatalogoDetalleBienes.Revaluacion;
+
         const parameters = {
             detalleBien: JSON.stringify(
-                DetalleBienesModelMapper.toObject(model)
+                DetalleBienesModelMapper.toObject(model, esRevaluacion)
             ),
             tipoOperacion: mode,
+            importeValuacion: revaluacionDetalleBien
+                ? revaluacionDetalleBien.importeRevaluacion
+                : null,
+            fechaValuacion: revaluacionDetalleBien
+                ? DateUtils.fromDate(
+                      revaluacionDetalleBien.fechaRevaluacion as Date
+                  )
+                : null,
         };
 
         try {

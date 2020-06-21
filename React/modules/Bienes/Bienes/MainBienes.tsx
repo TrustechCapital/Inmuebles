@@ -97,10 +97,9 @@ const MainBienes: React.FC = () => {
             model: DetalleBien,
             revaluacionDetalleBien: RevaluacionDetalleBien
         ) => {
-            debugger;
-            // dispatch(
-            //     detalleBienesActions.revaluaBien(model, revaluacionDetalleBien)
-            // );
+            dispatch(
+                detalleBienesActions.saveModel(model, revaluacionDetalleBien)
+            );
         },
         []
     );

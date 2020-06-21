@@ -312,7 +312,7 @@ const DialogDetalleBienes: React.FC<DialogDetalleBienesProps> = ({
                                     namespace="model"
                                     name="fechaUltimaValuacion"
                                     label="Fecha Última Valuación"
-                                    disabled={allFieldsDisabled}
+                                    disabled={true}
                                 />
                             </Grid>
                         </Grid>

@@ -1,4 +1,8 @@
-import { MainBienesActions, MainBienesState } from '../types';
+import {
+    MainBienesActions,
+    MainBienesState,
+    RevaluacionDetalleBien,
+} from '../types';
 import { detalleBienesApi } from '../services';
 import DetalleBienResultRow from '../models/DetalleBienResultRow';
 import DetalleBien from '../../../../models/DetalleBien';
@@ -90,7 +94,10 @@ function fetchAndDisplayModel(mode: OperacionesCatalogoDetalleBienes) {
     };
 }
 
-function saveModel(model: DetalleBien) {
+function saveModel(
+    model: DetalleBien,
+    revaluacionDetalleBien?: RevaluacionDetalleBien
+) {
     return async (
         dispatch: MainBienesDispatcher,
         getState: () => MainBienesState
@@ -114,7 +121,11 @@ function saveModel(model: DetalleBien) {
                     model: model,
                 });
             } else {
-                await detalleBienesApi.executeCrudOperation(model, mode);
+                await detalleBienesApi.executeCrudOperation(
+                    model,
+                    mode,
+                    revaluacionDetalleBien
+                );
             }
 
             dispatch({
