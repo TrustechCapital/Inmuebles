@@ -1,4 +1,4 @@
-import { Field, useField } from 'formik';
+import { useField } from 'formik';
 import GenericTextInput, { GenericInputProps } from '../GenericTextInput';
 import CatalogSelect, { CatalogSelectProps } from '../CatalogSelect';
 import GenericSelect, { GenericSelectProps } from '../GenericSelect';
@@ -61,6 +61,7 @@ import GenericRadioGroup, {
  * son propedades del objeto Model
  */
 type FormFieldProperties<Model, InputComponent> = {
+    type?: string;
     namespace?: string;
     name: Extract<keyof Model, string>;
     /*
@@ -90,8 +91,8 @@ class GenericForm<BaseModel> {
 
         return (
             <GenericTextInput
-                {...field}
                 {...props}
+                {...field}
                 error={!!meta.error}
                 helperText={helperText}
             />
@@ -106,8 +107,8 @@ class GenericForm<BaseModel> {
 
         return (
             <CatalogSelect
-                {...field}
                 {...props}
+                {...field}
                 error={!!meta.error}
                 helperText={helperText}
             />
@@ -122,8 +123,8 @@ class GenericForm<BaseModel> {
 
         return (
             <GenericSelect
-                {...field}
                 {...props}
+                {...field}
                 error={!!meta.error}
                 helperText={helperText}
             />
@@ -133,26 +134,36 @@ class GenericForm<BaseModel> {
     FormDatePickerField<Model = BaseModel>(
         props: FormFieldProperties<Model, GenericDatePickerProps>
     ) {
-        return <Field {...props} as={GenericDatePicker} />;
+        const [field, meta] = useNamespacedField(props);
+        const helperText = meta.error ? meta.error : props.helperText;
+
+        return (
+            <GenericDatePicker
+                {...props}
+                {...field}
+                error={!!meta.error}
+                helperText={helperText}
+            />
+        );
     }
 
     FormSwitchField<Model = BaseModel>(
         props: FormFieldProperties<Model, GenericSwitchProps>
     ) {
-        const [field] = useField({ ...props, type: 'checkbox' });
-        return <GenericSwitch {...field} {...props} />;
+        const [field] = useNamespacedField({ ...props, type: 'checkbox' });
+        return <GenericSwitch {...props} {...field} />;
     }
 
     FormFileField<Model = BaseModel>(
         props: FormFieldProperties<Model, GenericFileLoaderProps>
     ) {
-        const [field, meta] = useField({ ...props, type: 'checkbox' });
+        const [field, meta] = useNamespacedField(props);
         const helperText = meta.error ? meta.error : props.helperText;
 
         return (
             <GenericFileLoader
-                {...field}
                 {...props}
+                {...field}
                 error={!!meta.error}
                 helperText={helperText}
             />
@@ -168,8 +179,8 @@ class GenericForm<BaseModel> {
 
         return (
             <GenericRadioGroup
-                {...field}
                 {...rest}
+                {...field}
                 error={!!meta.error}
                 helperText={helperText}
             >

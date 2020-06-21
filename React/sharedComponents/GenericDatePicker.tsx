@@ -10,7 +10,14 @@ import {
 
 export type GenericDatePickerProps = Pick<
     KeyboardDatePickerProps,
-    'disabled' | 'disableFuture' | 'disablePast' | 'readOnly' | 'views' | 'name'
+    | 'disabled'
+    | 'disableFuture'
+    | 'disablePast'
+    | 'readOnly'
+    | 'views'
+    | 'name'
+    | 'helperText'
+    | 'error'
 > & {
     label?: string; // TODO: cambiar a requerido
     value?: string | Date | null; // TODO: cambiar a requerido
