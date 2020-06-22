@@ -2,10 +2,8 @@ import React from 'react';
 import Link from 'next/link';
 import clsx from 'clsx';
 
-import { ThemeProvider, createMuiTheme } from '@material-ui/core/styles';
 import { makeStyles } from '@material-ui/core/styles';
 import Drawer from '@material-ui/core/Drawer';
-import CssBaseline from '@material-ui/core/CssBaseline';
 import AppBar from '@material-ui/core/AppBar';
 import Toolbar from '@material-ui/core/Toolbar';
 import List from '@material-ui/core/List';
@@ -16,7 +14,6 @@ import MenuIcon from '@material-ui/icons/Menu';
 import ChevronLeftIcon from '@material-ui/icons/ChevronLeft';
 import ListItem from '@material-ui/core/ListItem';
 import ListItemText from '@material-ui/core/ListItemText';
-import deepOrange from '@material-ui/core/colors/deepOrange';
 import AccountCircle from '@material-ui/icons/AccountCircle';
 import ListItemIcon from '@material-ui/core/ListItemIcon';
 import ApartmentIcon from '@material-ui/icons/Apartment';
@@ -25,15 +22,6 @@ import ScheduleIcon from '@material-ui/icons/Schedule';
 import InputIcon from '@material-ui/icons/Input';
 import BarChartIcon from '@material-ui/icons/BarChart';
 import { SnackbarProvider } from 'notistack';
-
-export const theme = createMuiTheme({
-    palette: {
-        primary: deepOrange,
-        secondary: {
-            main: '#9575cd',
-        },
-    },
-});
 
 const drawerWidth = 240;
 
@@ -121,7 +109,6 @@ function BaseLayout(props) {
 
     return (
         <div className={classes.root}>
-            <CssBaseline />
             <AppBar
                 position="static"
                 className={clsx(classes.appBar, {
@@ -199,11 +186,9 @@ export default function Layout(props) {
     return (
         <>
             <div id="confirmation-message-placeholder"></div>
-            <ThemeProvider theme={theme}>
-                <SnackbarProvider maxSnack={3}>
-                    <BaseLayout>{props.children}</BaseLayout>
-                </SnackbarProvider>
-            </ThemeProvider>
+            <SnackbarProvider maxSnack={3}>
+                <BaseLayout>{props.children}</BaseLayout>
+            </SnackbarProvider>
         </>
     );
 }
