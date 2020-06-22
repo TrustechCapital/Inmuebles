@@ -38,12 +38,17 @@ function App({ Component, pageProps }: AppProps) {
         setSessionInfo(SessionService.get());
     }
 
+    function handleLogout() {
+        SessionService.delete();
+        setSessionInfo(null);
+    }
+
     return (
         <>
             <CssBaseline />
             <ThemeProvider theme={BaseTheme}>
                 <SessionInfoContext.Provider
-                    value={{ sessionInfo: sessionInfo }}
+                    value={{ sessionInfo: sessionInfo, onLogout: handleLogout }}
                 >
                     {sessionInfo ? (
                         <Layout>
