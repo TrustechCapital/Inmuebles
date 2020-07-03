@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState } from 'react';
 
 import { makeStyles } from '@material-ui/core/styles';
 import Paper from '@material-ui/core/Paper';
@@ -12,9 +12,7 @@ import GenericForm from '../../sharedComponents/Forms';
 import { ejecutorPlanesApi } from './services/EjecutorApi';
 import SavingButton from '../../sharedComponents/SavingButton';
 
-const { FormSelectField, FormDatePickerField } = new GenericForm<
-    EjecutorPlanes
->();
+const { FormDatePickerField } = new GenericForm<EjecutorPlanes>();
 
 const useStyles = makeStyles((theme) => ({
     root: {

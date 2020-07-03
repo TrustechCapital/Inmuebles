@@ -18,19 +18,6 @@ function ReportesReducer(
                 ...state,
                 searchResults: action.results,
             };
-        case 'SET_REPORTES_ROWS_SELECTION':
-            const selectedRow = action.selectedRow;
-            return {
-                ...state,
-                selectedRow: action.selectedRow,
-                currentModel: new Individualizacion(
-                    selectedRow.idFideicomiso,
-                    selectedRow.idSubcuenta,
-                    selectedRow.idBien,
-                    selectedRow.idEdificio,
-                    selectedRow.idDepto
-                ),
-            };
         case 'SET_REPORTES_MODEL':
             return {
                 ...state,
