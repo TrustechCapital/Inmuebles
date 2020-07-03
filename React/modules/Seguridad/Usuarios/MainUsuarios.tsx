@@ -4,15 +4,15 @@ import { ITableUsuariosParameters, MainUsuariosState } from './types';
 import UsuariosResultRow from './models/UsuariosResultRow';
 import TableUsuarios from './TableUsuarios';
 import DialogUsuarios from './DialogUsuarios';
-import { OperacionesCatalogo, SavingStatus } from '../../constants';
-import Usuarios from '../../models/Usuarios';
+import { OperacionesCatalogo, SavingStatus } from '../../../constants';
+import Usuarios from '../../../models/Usuarios';
 import { mainUsuariosReducer } from './reducers';
 import usuariosActions from './actions/usuarios';
 
-import { GenericTableCallbacksContext } from '../../sharedComponents/GenericTable';
-import { requestConfirmation } from '../../sharedComponents/ConfirmationModal';
-import { useGlobalNotification } from '../../sharedHooks/globalMessages';
-import { useEnhancedReducer } from '../../sharedHooks/enhancedReducer';
+import { GenericTableCallbacksContext } from '../../../sharedComponents/GenericTable';
+import { requestConfirmation } from '../../../sharedComponents/ConfirmationModal';
+import { useGlobalNotification } from '../../../sharedHooks/globalMessages';
+import { useEnhancedReducer } from '../../../sharedHooks/enhancedReducer';
 
 const initialState: MainUsuariosState = {
     usuarios: {

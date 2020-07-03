@@ -1,10 +1,10 @@
 import GenericTabs from '../sharedComponents/GenericTabs';
-import MainInterfases from '../modules/Interfases/PolizaContable/MainPolizaContable';
+import MainAperturaCierre from '../modules/Planes/AperturaCierre/MainAperturaCierre';
 
 const TABS = [
     {
-        label: 'Interfases',
-        component: MainInterfases,
+        label: 'Apertura/Cierre',
+        component: MainAperturaCierre,
     },
 ];
 

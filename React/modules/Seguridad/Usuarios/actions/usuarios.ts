@@ -4,9 +4,9 @@ import {
     ITableUsuariosParameters,
 } from '../types';
 import UsuariosResultRow from '../models/UsuariosResultRow';
-import Usuarios from '../../../models/Usuarios';
+import Usuarios from '../../../../models/Usuarios';
 import { usuariosApi } from '../services';
-import { OperacionesCatalogo } from '../../../constants';
+import { OperacionesCatalogo } from '../../../../constants';
 
 type MainUsuariosDispatcher = React.Dispatch<MainUsuariosActions>;
 

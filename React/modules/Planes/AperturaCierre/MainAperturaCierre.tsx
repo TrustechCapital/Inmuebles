@@ -8,9 +8,9 @@ import BackupIcon from '@material-ui/icons/Backup';
 
 import EjecutorPlanes from './models/EjecutorPlanes';
 import { Formik } from 'formik';
-import GenericForm from '../../sharedComponents/Forms';
+import GenericForm from '../../../sharedComponents/Forms';
 import { ejecutorPlanesApi } from './services/EjecutorApi';
-import SavingButton from '../../sharedComponents/SavingButton';
+import SavingButton from '../../../sharedComponents/SavingButton';
 
 const { FormDatePickerField } = new GenericForm<EjecutorPlanes>();
 

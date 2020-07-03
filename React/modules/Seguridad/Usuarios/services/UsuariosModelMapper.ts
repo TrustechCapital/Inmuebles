@@ -1,6 +1,6 @@
-import { IModelMapper } from '../../../core/api';
-import Usuarios from '../../../models/Usuarios';
-import DateUtils from '../../../utils/DateUtils';
+import { IModelMapper } from '../../../../core/api';
+import Usuarios from '../../../../models/Usuarios';
+import DateUtils from '../../../../utils/DateUtils';
 
 class UsuariosModelMapper implements IModelMapper<Usuarios> {
     fromObject(data: any) {

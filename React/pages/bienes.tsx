@@ -29,7 +29,7 @@ const TABS = [
     },
 ];
 
-export default function ModuloApertura() {
+export default function () {
     const [canView] = useModulePermissions();
 
     const tabs = TABS.filter((tab) => {

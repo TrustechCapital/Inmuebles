@@ -1,5 +1,5 @@
 import GenericTabs from '../sharedComponents/GenericTabs';
-import MainUsuarios from '../modules/Usuarios/MainUsuarios';
+import MainUsuarios from '../modules/Seguridad/Usuarios/MainUsuarios';
 
 const TABS = [
     {
@@ -8,6 +8,6 @@ const TABS = [
     },
 ];
 
-export default function ModuloApertura() {
+export default function () {
     return <GenericTabs tabs={TABS} />;
 }

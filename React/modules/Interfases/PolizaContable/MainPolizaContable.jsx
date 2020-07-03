@@ -6,8 +6,8 @@ import FormControl from '@material-ui/core/FormControl';
 import Typography from '@material-ui/core/Typography';
 import Button from '@material-ui/core/Button';
 
-import GenericDatePicker from '../../sharedComponents/GenericDatePicker';
-import GenericTextInput from '../../sharedComponents/GenericTextInput';
+import GenericDatePicker from '../../../sharedComponents/GenericDatePicker';
+import GenericTextInput from '../../../sharedComponents/GenericTextInput';
 
 const useStyles = makeStyles((theme) => ({
     root: {

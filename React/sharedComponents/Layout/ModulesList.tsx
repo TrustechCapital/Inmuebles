@@ -13,9 +13,9 @@ import BarChartIcon from '@material-ui/icons/BarChart';
 const MODULES = [
     { label: 'Bienes', url: '/bienes', icon: ApartmentIcon },
     { label: 'Interfases', url: '/interfases', icon: InputIcon },
-    { label: 'Apertura/Cierre', url: '/apertura', icon: ScheduleIcon },
+    { label: 'Planes', url: '/planes', icon: ScheduleIcon },
     { label: 'Reportes', url: '/reportes', icon: BarChartIcon },
-    { label: 'Usuarios', url: '/usuarios', icon: PeopleIcon },
+    { label: 'Seguridad', url: '/seguridad', icon: PeopleIcon },
 ];
 
 const ModulesList: React.FC = () => {

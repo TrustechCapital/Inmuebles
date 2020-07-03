@@ -1,4 +1,4 @@
-import { Api } from '../../../core/api';
+import { Api } from '../../../../core/api';
 import EjecutorPlanes from '../models/EjecutorPlanes';
 
 class EjecutorPlanesApi extends Api {

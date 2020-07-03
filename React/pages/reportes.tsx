@@ -8,6 +8,6 @@ const TABS = [
     },
 ];
 
-export default function ModuloApertura() {
+export default function () {
     return <GenericTabs tabs={TABS} />;
 }

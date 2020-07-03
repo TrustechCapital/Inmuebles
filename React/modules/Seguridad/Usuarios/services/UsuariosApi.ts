@@ -1,7 +1,7 @@
-import { ModelsApi } from '../../../core/api';
+import { ModelsApi } from '../../../../core/api';
 import { ITableUsuariosParameters } from '../types';
 import UsuariosResultRow from '../models/UsuariosResultRow';
-import Usuarios from '../../../models/Usuarios';
+import Usuarios from '../../../../models/Usuarios';
 import UsuariosModelMapper from './UsuariosModelMapper';
 
 class UsuariosApi extends ModelsApi<Usuarios> {

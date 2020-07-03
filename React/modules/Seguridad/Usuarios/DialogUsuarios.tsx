@@ -4,12 +4,12 @@ import { makeStyles } from '@material-ui/core/styles';
 import Grid from '@material-ui/core/Grid';
 import { Formik } from 'formik';
 
-import { ICatalogDialog } from '../../types';
-import { OperacionesCatalogo, SavingStatus } from '../../constants';
-import { ClavesModuloUsuarios } from '../../constants/usuarios';
-import Usuarios from '../../models/Usuarios';
-import CatalogDialog from '../../sharedComponents/CatalogDialog';
-import GenericForm from '../../sharedComponents/Forms';
+import { ICatalogDialog } from '../../../types';
+import { OperacionesCatalogo, SavingStatus } from '../../../constants';
+import { ClavesModuloUsuarios } from '../../../constants/usuarios';
+import Usuarios from '../../../models/Usuarios';
+import CatalogDialog from '../../../sharedComponents/CatalogDialog';
+import GenericForm from '../../../sharedComponents/Forms';
 //import FormValidator, { ValidationHelpers } from '../../services/FormValidator';
 
 const { FormTextField, FormCatalogSelectField } = new GenericForm<Usuarios>();

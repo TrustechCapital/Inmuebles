@@ -4,15 +4,15 @@ import { makeStyles } from '@material-ui/core/styles';
 import Grid from '@material-ui/core/Grid';
 
 import { ITableUsuariosParameters } from './types';
-import { useSearchParamsReducer } from '../../sharedHooks/tableSearch';
-import { ClavesModuloUsuarios } from '../../constants/usuarios';
+import { useSearchParamsReducer } from '../../../sharedHooks/tableSearch';
+import { ClavesModuloUsuarios } from '../../../constants/usuarios';
 import UsuariosResultRow from './models/UsuariosResultRow';
-import GenericSearchForm from '../../sharedComponents/GenericSearchForm';
+import GenericSearchForm from '../../../sharedComponents/GenericSearchForm';
 import GenericTable, {
     IGenericColumn,
-} from '../../sharedComponents/GenericTable';
-import GenericTextInput from '../../sharedComponents/GenericTextInput';
-import CatalogSelect from '../../sharedComponents/CatalogSelect';
+} from '../../../sharedComponents/GenericTable';
+import GenericTextInput from '../../../sharedComponents/GenericTextInput';
+import CatalogSelect from '../../../sharedComponents/CatalogSelect';
 
 // TODO: Usar tipado fuerte en base a generico
 const COLUMNS: IGenericColumn[] = [

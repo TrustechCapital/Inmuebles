@@ -1,6 +1,6 @@
 import UsuariosResultRow from '../models/UsuariosResultRow';
-import Usuarios from '../../../models/Usuarios';
-import { OperacionesCatalogo, SavingStatus } from '../../../constants';
+import Usuarios from '../../../../models/Usuarios';
+import { OperacionesCatalogo, SavingStatus } from '../../../../constants';
 
 export interface ITableUsuariosParameters {
     nombreUsuario: string | null;

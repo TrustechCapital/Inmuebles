@@ -1,6 +1,6 @@
 import { UsuariosState, UsuariosActions } from '../types';
-import Usuarios from '../../../models/Usuarios';
-import { OperacionesCatalogo, SavingStatus } from '../../../constants';
+import Usuarios from '../../../../models/Usuarios';
+import { OperacionesCatalogo, SavingStatus } from '../../../../constants';
 
 function usuariosReducer(
     state: UsuariosState,
