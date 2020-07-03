@@ -1,5 +1,6 @@
 import useModulePermissions from '../sharedHooks/useModulePersmissions';
 import GenericTabs from './GenericTabs';
+import { Typography } from '@material-ui/core';
 
 type ModuleTab = {
     key: string;
@@ -18,5 +19,9 @@ export default function (props: ModuleTabsProps) {
         return canView(tab.key);
     });
 
-    return <GenericTabs tabs={visibleTabs} />;
+    if (visibleTabs.length) {
+        return <GenericTabs tabs={visibleTabs} />;
+    } else {
+        return <Typography>Accesso no autorizado</Typography>;
+    }
 }

@@ -1,4 +1,5 @@
 import '../styles.css';
+import Router from 'next/router';
 import { useEffect, useState } from 'react';
 import { AppProps } from 'next/app';
 
@@ -31,24 +32,25 @@ function App({ Component, pageProps }: AppProps) {
     useEffect(() => {
         removeInjectedServerCss();
 
-        setSessionInfo(SessionService.get());
-
         catalogsApi.fetchAll().then(() => {
+            const { sessionInfo, permissionsMap } = SessionService.get();
+            setSessionInfo(sessionInfo);
+            setModulePermissionsMap(permissionsMap);
             setLoadingApp(false);
         });
     }, []);
 
     function handleSuccessfulLogin() {
-        const sessionInfo = SessionService.get();
+        const { sessionInfo, permissionsMap } = SessionService.get();
         setSessionInfo(sessionInfo);
-        setModulePermissionsMap(
-            SessionService.createPermissionsMapping(sessionInfo)
-        );
+        setModulePermissionsMap(permissionsMap);
+        Router.push('/');
     }
 
     function handleLogout() {
         SessionService.delete();
         setSessionInfo(null);
+        Router.push('/');
     }
 
     return (
@@ -71,7 +73,7 @@ function App({ Component, pageProps }: AppProps) {
                             )}
                         </Layout>
                     ) : (
-                        <Login onLogin={handleSuccessfulLogin} />
+                        !loadingApp && <Login onLogin={handleSuccessfulLogin} />
                     )}
                 </SessionInfoContext.Provider>
             </ThemeProvider>

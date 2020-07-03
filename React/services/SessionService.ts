@@ -3,11 +3,22 @@ import SessionInfo, { ModulePermission } from '../models/SessionInfo';
 const SESSION_INFO_KEY = 'sessionInfo';
 
 class SessionService {
+    sessionInfo: SessionInfo | null = null;
+    permissionsMap = new Map<string, ModulePermission>();
     constructor() {}
 
     get() {
-        const sessionInfo = sessionStorage.getItem(SESSION_INFO_KEY);
-        return sessionInfo ? JSON.parse(sessionInfo) : sessionInfo;
+        const persistedSessionInfo = sessionStorage.getItem(SESSION_INFO_KEY);
+
+        if (persistedSessionInfo) {
+            this.sessionInfo = JSON.parse(persistedSessionInfo);
+            this.createPermissionsMapping();
+        }
+
+        return {
+            sessionInfo: this.sessionInfo,
+            permissionsMap: this.permissionsMap,
+        };
     }
 
     create(sessionInfo: SessionInfo) {
@@ -18,14 +29,14 @@ class SessionService {
         sessionStorage.removeItem(SESSION_INFO_KEY);
     }
 
-    createPermissionsMapping(sessionInfo: SessionInfo) {
-        let permissionsMap = new Map<string, ModulePermission>();
+    createPermissionsMapping() {
+        this.permissionsMap = new Map<string, ModulePermission>();
 
-        sessionInfo.permissions.forEach((permission) => {
-            permissionsMap.set(permission.name, permission);
-        });
-
-        return permissionsMap;
+        if (this.sessionInfo) {
+            this.sessionInfo.permissions.forEach((permission) => {
+                this.permissionsMap.set(permission.name, permission);
+            });
+        }
     }
 }
 

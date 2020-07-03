@@ -17,7 +17,7 @@ class LoginService extends Api {
             case 'admin':
                 loginData = adminUser;
                 break;
-            case 'reports':
+            case 'audit':
                 loginData = reportsUser;
                 break;
             case 'user1':
