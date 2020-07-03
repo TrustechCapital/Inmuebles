@@ -14,7 +14,7 @@ import GenericTableRow from './GenericTableRow';
 import GenericTableToolbar from './GenericTableToolbar';
 import GenericTableHead from './GenericTableHead';
 import { GenericTableCallbacksContext } from './context';
-//import ExcelTransformer from '../../services/ExcelTransformer';
+import ExcelTransformer from '../../services/ExcelTransformer';
 
 const ROW_HEIGHT = 53;
 
@@ -55,12 +55,14 @@ interface TableProps<T> {
     showActionsHeader?: boolean;
     additionalActionsComponent?: any;
     toolbarActionsProps?: any;
+    tableId?: string;
     data: T[];
     columns: IColumn[];
     onSelect?: (selectedRows: T[]) => void;
     onNew?: () => void;
     onView?: () => void;
     multipleSelect?: boolean;
+    allowSelect?: boolean;
 }
 
 function GenericTable<T extends ITableRow>(props: TableProps<T>) {
@@ -72,6 +74,7 @@ function GenericTable<T extends ITableRow>(props: TableProps<T>) {
     const {
         title,
         data,
+        tableId,
         columns = [],
         showActionsHeader = true,
         additionalActionsComponent = null,
@@ -100,8 +103,6 @@ function GenericTable<T extends ITableRow>(props: TableProps<T>) {
 
     useEffect(() => {
         setSelectedRows(new Set());
-        //const exportedExcel = new ExcelTransformer(data, columns).toHtml();
-        //console.log('exportedExcel', exportedExcel);
     }, [data]);
 
     function handleClick(row: any) {
@@ -160,18 +161,23 @@ function GenericTable<T extends ITableRow>(props: TableProps<T>) {
         setPage(0);
     };
 
+    const downloadHandler = () => {
+        new ExcelTransformer(data, columns, title, title).download();
+        //console.log('exportedExcel', exportedExcel);
+    };
     return (
         <Paper className={classes.root} elevation={3}>
             <GenericTableToolbar
                 numSelected={selectedRows.size}
                 title={title}
                 onNew={onNew}
+                onDownload={downloadHandler}
                 showActions={showActionsHeader}
                 multipleSelect={multipleSelect}
                 actionsComponent={additionalActionsComponent}
             />
             <TableContainer className={classes.table}>
-                <Table>
+                <Table id={tableId}>
                     <GenericTableHead
                         columns={columns}
                         numSelected={selectedRows.size}

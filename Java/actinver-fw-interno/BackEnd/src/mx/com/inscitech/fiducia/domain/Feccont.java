@@ -41,6 +41,11 @@ public class Feccont extends DomainObject {
     super();
     this.pkColumns = 1;
   }
+  public Feccont(String fcoCveTipoFecha){
+      super();
+      this.pkColumns=1;
+      this.fcoCveTipoFecha= fcoCveTipoFecha;
+      }
 
   @FieldInfo(nullable = false, dataType = "VARCHAR2", javaClass = String.class )
   public void setFcoCveTipoFecha(String fcoCveTipoFecha) {

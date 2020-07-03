@@ -1,0 +1,49 @@
+SELECT 
+FUNI_ID_FIDEICOMISO,
+FUNI_NOM_FIDEICOMISO, 
+FORS_TEXTO_DESCRIP,
+FGAR_CVE_GARANTIA,
+FUNI_ULTIMO_AVALUO,
+FUNI_TIPO,
+FUNI_MONEDA,
+FUNI_FECHA_ULTIMO_AVALUO,
+FUNI_NUM_CATASTRO,
+FPL_ADQUIRENTE,
+FUNI_NUM_ESTADO,
+FUNI_NOM_POBLACION,
+FUNI_STATUS
+FROM F_UNIDADES, F_BIENESGAR, f_proceso_liberacion WHERE
+FUNI_ID_FIDEICOMISO = ? AND
+FGAR_CVE_GARANTIA = ? AND
+FUNI_NUM_CATASTRO = ? AND
+FUNI_TIPO = ? AND
+FUNI_STATUS = ? AND
+FUNI_STATUS = FORS_CVE_STATUS AND
+FUNI_STATUS = FGAR_CVE_STATUS AND
+FGRS_ID_FIDEICOMISO = FUNI_ID_FIDEICOMISO AND
+FPL_ID_FIDEICOMISO = FUNI_ID_FIDEICOMISO
+
+/*
+Para el tema de los reportes, éstos tendrán el siguiente layout:
+1) # Fideicomiso
+2) Nombre del fideicomiso --OMITIR POR AHORA (18/06/2020)
+3) Descripción del Inmueble
+4) Tipo de inmueble
+5) Valor del inmueble
+6) Tipo valor
+7) Moneda
+8) Fecha de Aportación
+9)  #Catastro
+10) Aportante (Adquiriente)
+11) Estado
+12) Municipio
+13) Estatus
+Criterios de busqueda reporte de bienes
+  Fideicomiso
+  Descripcion del Inmueble
+  Numero de Catastro
+  Tipo de Inmueble
+  Estatus
+*/
+ALTER TABLE F_UNIDADES ADD FUNI_NUM_CATASTRO VARCHAR2(255);
+ALTER TABLE F_UNIDADES ADD FUNI_NOM_FIDEICOMISO VARCHAR2(255);

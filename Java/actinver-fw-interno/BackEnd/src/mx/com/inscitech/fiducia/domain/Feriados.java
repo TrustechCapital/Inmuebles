@@ -31,6 +31,15 @@ public class Feriados extends DomainObject {
     super();
     this.pkColumns = 4;
   }
+  public Feriados(BigDecimal mes, BigDecimal dia, BigDecimal anio, BigDecimal numPais){
+    super();
+    this.pkColumns=4;
+    
+    this.ferFecMes=mes;
+    this.ferFecDia=dia;
+    this.ferFecAno=anio;
+    this.ferNumPais=numPais;
+}
 
   @FieldInfo(nullable = false, dataType = "NUMBER", precision = 10, scale = 0, javaClass = BigDecimal.class )
   public void setFerNumPais(BigDecimal ferNumPais) {
@@ -450,11 +459,19 @@ public class Feriados extends DomainObject {
     if(equalObjects && !this.getFerFecAno().equals(instance.getFerFecAno())) equalObjects = false;
     return equalObjects;
   }
+    
+    public Object selectAsObject() {
+        DataRow objectData = selectAsDataRow();
+        return transformDataRowtoObject(objectData);
+    }
+    public Object transformDataRowtoObject(DataRow objectData) {
 
-  public Object selectAsObject() {
+        if (!objectData.hasData()) {
+            return null;
+        }
+    
     Feriados result = new Feriados();
-    DataRow objectData = null;
-    objectData = selectAsDataRow();
+    
 
     result.setFerNumPais((BigDecimal)objectData.getData("FER_NUM_PAIS"));
     result.setFerFecMes((BigDecimal)objectData.getData("FER_FEC_MES"));

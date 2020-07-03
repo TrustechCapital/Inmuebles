@@ -1,5 +1,4 @@
 import GenericTabs from '../sharedComponents/GenericTabs';
-import MainAdquirientes from '../modules/Bienes/Adquirientes/MainAdquirientes';
 import MainLiberacion from '../modules/Bienes/Liberacion/MainLiberacion';
 import MainIndividualizacion from '../modules/Bienes/Individualizacion/MainIndividualizacion';
 import MainCargaMasiva from '../modules/Bienes/CargaMasivaInmuebles/MainCargaMasiva';
@@ -22,11 +21,6 @@ const TABS = [
         key: BIENES_MODULE.INDIVIDUALIZACION,
         label: 'Individualización de Bienes',
         component: MainIndividualizacion,
-    },
-    {
-        key: BIENES_MODULE.ADQUIRIENTES,
-        label: 'Adquirientes',
-        component: MainAdquirientes,
     },
     {
         key: BIENES_MODULE.ADQUIRIENTES,

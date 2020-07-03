@@ -1229,6 +1229,31 @@
                 <entry key="adquirentesPagos" value="SELECT FPAI_ID_FIDEICOMISO,FPAI_ID_SUBCUENTA,FPAI_ID_BIEN,FPAI_ID_DEPTO,FPAI_ID_PERIODO,FPAI_FEC_PAGO,FPAI_ABONO,FPAI_SALDO FROM F_IMUPAGOS"/>
                 <!-- FIN INMUEBLES -->
                 <!-- FIN BIENES EN GARANTIA -->
+                <!--REPORTE BIENES-->
+                <entry key="reporteLibera" value="SELECT 
+FUNI_ID_FIDEICOMISO,
+FUNI_NOM_FIDEICOMISO, 
+FORS_TEXTO_DESCRIP,
+FGAR_CVE_GARANTIA,
+FUNI_ULTIMO_AVALUO,
+FUNI_TIPO,
+FUNI_MONEDA,
+FUNI_FECHA_ULTIMO_AVALUO,
+FUNI_NUM_CATASTRO,
+FPL_ADQUIRENTE,
+FUNI_NUM_ESTADO,
+FUNI_NOM_POBLACION,
+FUNI_STATUS
+FROM F_UNIDADES, F_BIENESGAR, f_proceso_liberacion WHERE
+FUNI_ID_FIDEICOMISO = ? AND
+FGAR_CVE_GARANTIA = ? AND
+FUNI_NUM_CATASTRO = ? AND
+FUNI_TIPO = ? AND
+FUNI_STATUS = ? AND
+FUNI_STATUS = FORS_CVE_STATUS AND
+FUNI_STATUS = FGAR_CVE_STATUS AND
+FGRS_ID_FIDEICOMISO = FUNI_ID_FIDEICOMISO AND
+FPL_ID_FIDEICOMISO = FUNI_ID_FIDEICOMISO"/>
                 <!-- UNIDADES LIBERACION -->
                 <entry key="prinLiberacion" value="SELECT FUNI_ID_FIDEICOMISO,FUNI_ID_SUBCUENTA,FUNI_ID_BIEN,FUNI_ID_EDIFICIO,FUNI_ID_DEPTO,funi_Precio,funi_Moneda,            FUNI_NOTARIO,FUNI_LOCALIDAD_NOTA,FUNI_NUM_ESCRITURA,FUNI_FOLIO_REAL,FUNI_FECHA_TRASLADO_DOMINIO,NVL(FPL_CVE_STATUS,FUNI_STATUS) FUNI_STATUS             ,NVL(FPL_NOTARIO,-1) FPL_NOTARIO,FPL_ADQUIRENTE,FPL_TERCERO,FPL_OBSERVACION,FPL_ESCRITURA,TO_CHAR(NVL(FPL_FEC_ESCRITURA,SYSDATE),'DD/MM/YYYY') FPL_FEC_ESCRITURA            ,FPL_FIDEICOM_BENEFICI,FPL_NOM_PERSONA,FPL_NUM_LUGAR,FPL_NOM_PERSONA1,FPL_NOM_PERSONA1,FPL_NUM_LUGAR1            ,FPL_FID_BEN_SANEAMIENTO,FPL_NOM_SANEAMIENTO,FPL_NUM_LUGAR_SANEAMIENTO,FPL_NOM_SANEAMIENTO1,FPL_NUM_LUGAR_SANEAMIENTO1            ,FPL_FID_BEN_RESPONSABILIDAD,FPL_NOM_RESPONSABILIDAD,FPL_NUM_LUGAR_RESPONSABILIDAD,FPL_NOM_RESPONSABILIDAD1,FPL_NUM_LUGAR_RESPONSABILIDAD1            ,FPL_FID_BEN_OTORGAMIENTO,FPL_NOM_OTORGAMIENTO,FPL_NUM_LUGAR_OTORGAMIENTO,FPL_NOM_OTORGAMIENTO1,FPL_NUM_LUGAR_OTORGAMIENTO1            ,FPL_TRANSMISION_REVERSION,FPL_PARCIAL_TOTAL,NVL(FPL_SUJETO_REGIMEN,0) FPL_SUJETO_REGIMEN,FPL_TIPO_INMUEBLE,FPL_NOM_ENVIO,FPL_EMAIL_ENVIO            ,TO_CHAR(NVL(FPL_FEC_FIRMA,SYSDATE),'DD/MM/YYYY') FPL_FEC_FIRMA,FPL_DELEGADO             FROM F_UNIDADES, F_PROCESO_LIBERACION ,DUAL             WHERE FUNI_ID_FIDEICOMISO = FPL_ID_FIDEICOMISO (+) AND FUNI_ID_SUBCUENTA = FPL_ID_SUBCUENTA (+) AND FUNI_ID_BIEN = FPL_ID_BIEN (+) AND FUNI_ID_DEPTO = FPL_ID_DEPTO (+)               AND FUNI_STATUS IN ('COMPROMETIDO','GENERAR CARTA','CARTA GENERADA','LIBERAR','LIBERADO')"/>
                 <entry key="prinNomPersonaLiberacion" value="SELECT CONTRATO,NOMBRE,TIPO FROM            (SELECT FID_NUM_CONTRATO CONTRATO, FID_NOM_FIDEICOM NOMBRE,'FIDEICOMITENTE' TIPO FROM FIDEICOM              UNION           SELECT BEN_NUM_CONTRATO CONTRATO, BEN_NOM_BENEF NOMBRE,'FIDEICOMISARIO' TIPO FROM BENEFICI             UNION           SELECT CON_NUM_CONTRATO CONTRATO, CON_NOM_COMITE NOMBRE,'COMITE TECNICO' FROM COMITENO)"/>
@@ -1236,7 +1261,7 @@
                 <!-- Ejecuta la Carga de Bienes en garantia -->
                 <entry key="garantias.ejeFunProcesoLib" value="{? = call GARINMUEBLES.F_PROCESO_LIBERACION(?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)}"/>
                 <!-- Ejecuta la Carga de Bienes en garantia -->
-                <entry key="prinUnidades" value="SELECT FUNI_ID_FIDEICOMISO,FUNI_ID_SUBCUENTA,FORS_CVE_TIPO_GARANTIA FUNI_ID_GARANTIA,FUNI_ID_BIEN,FUNI_ID_EDIFICIO,FUNI_ID_DEPTO,FUNI_PRECIO,FUNI_MONEDA,FUNI_STATUS              FROM F_UNIDADES, F_BIENESGAR               WHERE FUNI_ID_FIDEICOMISO=FGRS_ID_FIDEICOMISO AND FUNI_ID_BIEN = FORS_ID_GARANTIA (+)"/>
+                <entry key="prinUnidades" value="SELECT FUNI_ID_FIDEICOMISO,FUNI_ID_SUBCUENTA,FORS_CVE_TIPO_GARANTIA, FORS_ID_GARANTIA,FUNI_ID_BIEN,FUNI_ID_EDIFICIO,FUNI_ID_DEPTO,FUNI_PRECIO,FUNI_MONEDA,FUNI_STATUS              FROM F_UNIDADES, F_BIENESGAR               WHERE FUNI_ID_FIDEICOMISO=FGRS_ID_FIDEICOMISO AND FUNI_ID_BIEN = FORS_ID_GARANTIA (+)"/>
                 <!-- FIN UNIDADES LIBERACION -->
                 <!--CONCILIACION VALORES-->
                 <entry key="consultaConciliaVal" value="SELECT FCVA_FIDEICOMISO,FCVA_SUBCUENTA,FCVA_CTO_INVER,TRIM(TO_CHAR(FCVA_SALDO_TOTAL_P,'$999,999,999,999,999,999,999.99')) AS FCVA_SALDO_TOTAL_P,TRIM(TO_CHAR(FCVA_SALDO_TOTAL_F,'$999,999,999,999,999,999,999.99')) AS FCVA_SALDO_TOTAL_F,TRIM(TO_CHAR(FCVA_SALDO_TOTAL_C,'$999,999,999,999,999,999,999.99')) AS FCVA_SALDO_TOTAL_C,     TRIM(TO_CHAR(FCVA_DIFERENCIA,'$999,999,999,999,999,999,999.99')) AS FCVA_DIFERENCIA,FCVA_COMENTARIO,FCVA_CVE_STATUS FROM F_CONCILIA_VALORES"/>
@@ -38619,6 +38644,81 @@
                 </entry>
                 <!-- FIN ADQUIRENTES-->
                 <!--FIN BIENES EN GARANTIA-->
+                <!--Reporte Bienes-->
+                <entry key="reporteLibera">
+                <list>
+                        <bean class="mx.gob.nafin.fiduciario.common.beans.ParametroQueryBean">
+                            <property name="name">
+                                <value>numFiso</value>
+                            </property>
+                            <property name="sqlName">
+                                <value>funi_Id_Fideicomiso</value>
+                            </property>
+                            <property name="clauseType">
+                                <value>AND</value>
+                            </property>
+                            <property name="conditionType">
+                                <value>=</value>
+                            </property>
+                        </bean>
+                        <bean class="mx.gob.nafin.fiduciario.common.beans.ParametroQueryBean">
+                            <property name="name">
+                                <value>cveGarantia</value>
+                            </property>
+                            <property name="sqlName">
+                                <value>FGAR_CVE_GARANTIA</value>
+                            </property>
+                            <property name="clauseType">
+                                <value>AND</value>
+                            </property>
+                            <property name="conditionType">
+                                <value>LIKE</value>
+                            </property>
+                        </bean>
+                        <bean class="mx.gob.nafin.fiduciario.common.beans.ParametroQueryBean">
+                            <property name="name">
+                                <value>numCatastro</value>
+                            </property>
+                            <property name="sqlName">
+                                <value>FUNI_NUM_CATASTRO</value>
+                            </property>
+                            <property name="clauseType">
+                                <value>AND</value>
+                            </property>
+                            <property name="conditionType">
+                                <value>=</value>
+                            </property>
+                        </bean>
+                        <bean class="mx.gob.nafin.fiduciario.common.beans.ParametroQueryBean">
+                            <property name="name">
+                                <value>tipo</value>
+                            </property>
+                            <property name="sqlName">
+                                <value>FUNI_TIPO</value>
+                            </property>
+                            <property name="clauseType">
+                                <value>AND</value>
+                            </property>
+                            <property name="conditionType">
+                                <value>=</value>
+                            </property>
+                        </bean>
+                        <bean class="mx.gob.nafin.fiduciario.common.beans.ParametroQueryBean">
+                            <property name="name">
+                                <value>cveStatus</value>
+                            </property>
+                            <property name="sqlName">
+                                <value>funi_Status</value>
+                            </property>
+                            <property name="clauseType">
+                                <value>AND</value>
+                            </property>
+                            <property name="conditionType">
+                                <value>=</value>
+                            </property>
+                        </bean>
+                    </list>
+                </entry>
                 <!-- UNIDADES LIBERACION -->
                 <entry key="prinLiberacion">
                     <list>

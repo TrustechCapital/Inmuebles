@@ -10,6 +10,7 @@ import DeleteIcon from '@material-ui/icons/Delete';
 import EditIcon from '@material-ui/icons/Edit';
 import AddIcon from '@material-ui/icons/Add';
 import FindInPageIcon from '@material-ui/icons/FindInPage';
+import GetAppIcon from '@material-ui/icons/GetApp';
 import { GenericTableCallbacksContext } from './context';
 
 const useStyles = makeStyles((theme) => ({
@@ -30,6 +31,7 @@ export type ToolbarActionsProps = {
     multipleSelect: boolean;
     numSelected: number;
     onNew?: () => void;
+    onDownload?: () => void;
 };
 
 const EnhancedTableToolbarActions: React.FC<ToolbarActionsProps> = ({
@@ -42,6 +44,7 @@ const EnhancedTableToolbarActions: React.FC<ToolbarActionsProps> = ({
     );
 
     const onNewHandler = props.onNew || onNew;
+    const downloadHandler = props.onDownload;
 
     return (
         <React.Fragment>
@@ -80,6 +83,15 @@ const EnhancedTableToolbarActions: React.FC<ToolbarActionsProps> = ({
                     </IconButton>
                 </Tooltip>
             ) : null}
+            <Tooltip title="Descargar como XLS">
+                <IconButton
+                    aria-label="descargar"
+                    color="primary"
+                    onClick={downloadHandler}
+                >
+                    <GetAppIcon />
+                </IconButton>
+            </Tooltip>
         </React.Fragment>
     );
 };
@@ -91,6 +103,7 @@ type TableToolbarProps = {
     showActions: boolean;
     actionsComponent: any;
     onNew?: () => void;
+    onDownload?: () => void;
 };
 
 const EnhancedTableToolbar: React.FC<TableToolbarProps> = ({
@@ -100,6 +113,7 @@ const EnhancedTableToolbar: React.FC<TableToolbarProps> = ({
     showActions = true,
     actionsComponent,
     onNew,
+    onDownload,
 }) => {
     const classes = useStyles();
     const ToolbarActions = actionsComponent || EnhancedTableToolbarActions;
@@ -135,6 +149,7 @@ const EnhancedTableToolbar: React.FC<TableToolbarProps> = ({
                     multipleSelect={multipleSelect}
                     numSelected={numSelected}
                     onNew={onNew}
+                    onDownload={onDownload}
                 />
             ) : null}
         </Toolbar>

@@ -7,9 +7,11 @@ export type ModelMapper = (object: any, index: number) => any;
 
 enum FiduciaDynamicEndpoints {
     Get = 'getRef.do',
+    Do = 'doRef.do',
     Execute = 'executeRef.do',
     ExecuteJava = 'executeJavaRef.do',
     UploadFile = 'upload.do',
+    ImprimirReporte = 'imprimirReporte.do',
 }
 
 export class Api {
@@ -110,6 +112,32 @@ export class Api {
             }
         });
     }
+    private async sendDynamicRequestPrinter(
+        endpoint: FiduciaDynamicEndpoints,
+        refName: string,
+        params: object,
+        filterEmptyParameters: boolean = true
+    ) {
+        let filteredParams = filterEmptyParameters
+            ? removeEemptyParameters(params)
+            : params;
+
+        Object.assign(filteredParams, {
+            id: refName,
+        });
+
+        return this.get(endpoint, {
+            params: {
+                json: JSON.stringify(filteredParams),
+            },
+        }).then((response) => {
+            if (response === null) {
+                throw new Error('Ocurrio un error al procesar el request');
+            } else {
+                return response;
+            }
+        });
+    }
 
     public async getRef<T>(
         refName: string,
@@ -123,6 +151,38 @@ export class Api {
         ).then((response) => {
             const data = response.data as object[];
             return data.map(transformer);
+        });
+    }
+
+    public async executeRef(refName: string, data: object): Promise<any> {
+        return this.sendDynamicRequest(
+            FiduciaDynamicEndpoints.Execute,
+            refName,
+            data,
+            false
+        ).then((response: any) => {
+            return response.data.result;
+        });
+    }
+    public async doRef(refName: string, data: object): Promise<any> {
+        return this.sendDynamicRequest(
+            FiduciaDynamicEndpoints.Execute,
+            refName,
+            data,
+            false
+        ).then((response: any) => {
+            return response.data.result;
+        });
+    }
+
+    public async imprimir(refName: string, data: object): Promise<any> {
+        return this.sendDynamicRequestPrinter(
+            FiduciaDynamicEndpoints.ImprimirReporte,
+            refName,
+            data,
+            false
+        ).then((response: any) => {
+            return response.data.result;
         });
     }
 

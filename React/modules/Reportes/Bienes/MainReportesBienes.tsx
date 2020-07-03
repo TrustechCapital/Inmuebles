@@ -1,66 +1,108 @@
-import React from 'react';
+import React, { useMemo, useCallback } from 'react';
 
-import { makeStyles } from '@material-ui/core/styles';
-import Paper from '@material-ui/core/Paper';
-import Grid from '@material-ui/core/Grid';
+import { ITableReportesParameters, MainReportesState } from './types';
+import ReportesResultRow from './models/ReportesResultRow';
+import TableReporte from './TableReporteBienes';
+import { OperacionesCatalogo, SavingStatus } from '../../../constants';
+import Individualizacion from '../../../models/Individualizacion';
+import { mainReportesReducer } from './reducers';
+import ReportesActions from './actions/reporte';
 
-import Typography from '@material-ui/core/Typography';
-import Button from '@material-ui/core/Button';
-import GenericSelect from '../../../sharedComponents/GenericSelect';
-import GenericDatePicker from '../../../sharedComponents/GenericDatePicker';
+import { GenericTableCallbacksContext } from '../../../sharedComponents/GenericTable';
+import { requestConfirmation } from '../../../sharedComponents/ConfirmationModal';
+import { useGlobalNotification } from '../../../sharedHooks/globalMessages';
+import { useEnhancedReducer } from '../../../sharedHooks/enhancedReducer';
 
-const useStyles = makeStyles((theme) => ({
-    root: {
-        width: '70%',
-        margin: '0 auto',
+const initialState: MainReportesState = {
+    Individualizacion: {
+        searchParameters: {
+            idFideicomiso: null,
+            cveGarantia: '',
+            numCatastro: null,
+            tipoInmueble: '',
+            status: '',
+        },
+        searchResults: [],
+        selectedRow: null,
+        currentModel: new Individualizacion(null, null, null, null, null),
+        modalMode: OperacionesCatalogo.Alta,
+        modalOpen: false,
+        isLoadingModel: false,
+        savingStatus: SavingStatus.Initial,
+        modalErrorMessage: null,
     },
-    rowSpacing: {
-        marginBottom: theme.spacing(2),
-    },
-    paper: {
-        padding: theme.spacing(2),
-    },
-}));
+};
 
-export default function MainCargaMasiva() {
-    const classes = useStyles();
+const MainIndividualizacion: React.FC = () => {
+    const [state, dispatch, promiseDispatch] = useEnhancedReducer(
+        mainReportesReducer,
+        initialState
+    );
+    const { alertSuccess, alertError } = useGlobalNotification();
+
+    const searchReportes = useCallback(
+        (parameters: ITableReportesParameters) => {
+            dispatch(ReportesActions.newSearchReportes(parameters));
+        },
+        []
+    );
+    const exportReportes = useCallback(() => {
+        ReportesActions.exportPDF();
+    }, []);
+
+    const ReportesActionCallbacks = useMemo(() => {
+        return {
+            onSelect: (selectedRows: ReportesResultRow[]) => {
+                dispatch(ReportesActions.selectReportesRow(selectedRows[0]));
+            },
+            onNew: () => {
+                dispatch({
+                    type: 'OPEN_REPORTES_MODAL',
+                    mode: OperacionesCatalogo.Alta,
+                });
+            },
+            onView: () => {
+                dispatch(
+                    ReportesActions.fetchAndDisplayModel(
+                        OperacionesCatalogo.Consulta
+                    )
+                );
+            },
+            onModify: () => {
+                dispatch(
+                    ReportesActions.fetchAndDisplayModel(
+                        OperacionesCatalogo.Modificacion
+                    )
+                );
+            },
+            onDelete: async () => {
+                const confirmed = await requestConfirmation();
+                if (confirmed) {
+                    promiseDispatch(ReportesActions.deleteSelectedModel())
+                        .then(() => {
+                            alertSuccess('Registros eliminados exitosamente');
+                        })
+                        .catch((e: Error) => {
+                            alertError(e.message);
+                        });
+                }
+            },
+        };
+    }, []);
 
     return (
-        <div className={classes.root}>
-            <Paper elevation={3} className={classes.paper}>
-                <Grid container spacing={1} direction="column">
-                    <Grid container className={classes.rowSpacing} spacing={4}>
-                        <Grid item xs={12}>
-                            <Typography variant="h6" component="div">
-                                Reporte de Bienes
-                            </Typography>
-                        </Grid>
-                    </Grid>
-                    <Grid container className={classes.rowSpacing} spacing={4}>
-                        <Grid item xs={2} />
-                        <Grid item xs={4}>
-                            <GenericDatePicker
-                                label="Fecha"
-                                onChange={() => {}}
-                            />
-                        </Grid>
-
-                        <Grid item xs={4}>
-                            <GenericSelect
-                                label="Tipo de Reporte"
-                                onChange={() => {}}
-                                value=""
-                                items={[]}
-                            />
-                        </Grid>
-                    </Grid>
-                    <Grid container justify="flex-end">
-                        <Button variant="contained" color="primary">
-                            Generar
-                        </Button>
-                    </Grid>
-                </Grid>
-            </Paper>
-        </div>
+        <React.Fragment>
+            <GenericTableCallbacksContext.Provider
+                value={ReportesActionCallbacks}
+            >
+                <TableReporte
+                    data={state.Individualizacion.searchResults}
+                    onSearch={searchReportes}
+                    onPDF={exportReportes}
+                />
+            </GenericTableCallbacksContext.Provider>
+        </React.Fragment>
     );
-}
+};
+
+export default MainIndividualizacion;
