@@ -1,10 +1,9 @@
-import GenericTabs from '../sharedComponents/GenericTabs';
 import MainLiberacion from '../modules/Bienes/Liberacion/MainLiberacion';
 import MainIndividualizacion from '../modules/Bienes/Individualizacion/MainIndividualizacion';
 import MainCargaMasiva from '../modules/Bienes/CargaMasivaInmuebles/MainCargaMasiva';
 import MainBienes from '../modules/Bienes/Bienes/MainBienes';
-import useModulePermissions from '../sharedHooks/useModulePersmissions';
 import { BIENES_MODULE } from '../constants/moduleMappings';
+import ModuleTabs from '../sharedComponents/ModuleTabs';
 
 const TABS = [
     {
@@ -30,11 +29,5 @@ const TABS = [
 ];
 
 export default function () {
-    const [canView] = useModulePermissions();
-
-    const tabs = TABS.filter((tab) => {
-        return canView(tab.key);
-    });
-
-    return <GenericTabs tabs={tabs} />;
+    return <ModuleTabs tabs={TABS} />;
 }

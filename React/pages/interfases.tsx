@@ -1,13 +1,15 @@
-import GenericTabs from '../sharedComponents/GenericTabs';
-import MainInterfases from '../modules/Interfases/PolizaContable/MainPolizaContable';
+import MainPolizaContable from '../modules/Interfases/PolizaContable/MainPolizaContable';
+import { INTERFASES_MODULE } from '../constants/moduleMappings';
+import ModuleTabs from '../sharedComponents/ModuleTabs';
 
 const TABS = [
     {
-        label: 'Interfases',
-        component: MainInterfases,
+        key: INTERFASES_MODULE.INTERFASES,
+        label: 'Poliza Contable',
+        component: MainPolizaContable,
     },
 ];
 
 export default function () {
-    return <GenericTabs tabs={TABS} />;
+    return <ModuleTabs tabs={TABS} />;
 }

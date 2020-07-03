@@ -1,13 +1,15 @@
-import GenericTabs from '../sharedComponents/GenericTabs';
 import MainUsuarios from '../modules/Seguridad/Usuarios/MainUsuarios';
+import ModuleTabs from '../sharedComponents/ModuleTabs';
+import { SEGURIDAD_MODULE } from '../constants/moduleMappings';
 
 const TABS = [
     {
+        key: SEGURIDAD_MODULE.USUARIOS,
         label: 'Usuarios',
         component: MainUsuarios,
     },
 ];
 
 export default function () {
-    return <GenericTabs tabs={TABS} />;
+    return <ModuleTabs tabs={TABS} />;
 }
