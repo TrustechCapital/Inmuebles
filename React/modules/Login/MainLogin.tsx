@@ -46,9 +46,9 @@ const loginInfo = {
 const Login = (props: { onLogin: () => void }) => {
     const classes = useStyles();
 
-    async function handleLogin() {
+    async function handleLogin(loginData: typeof loginInfo) {
         try {
-            const sessionInfo = await LoginService.login();
+            const sessionInfo = await LoginService.login(loginData.username);
             SessionService.create(sessionInfo);
             props.onLogin();
         } catch (error) {}

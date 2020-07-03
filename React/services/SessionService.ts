@@ -1,4 +1,4 @@
-import SessionInfo from '../models/SessionInfo';
+import SessionInfo, { ModulePermission } from '../models/SessionInfo';
 
 const SESSION_INFO_KEY = 'sessionInfo';
 
@@ -16,6 +16,16 @@ class SessionService {
 
     delete() {
         sessionStorage.removeItem(SESSION_INFO_KEY);
+    }
+
+    createPermissionsMapping(sessionInfo: SessionInfo) {
+        let permissionsMap = new Map<string, ModulePermission>();
+
+        sessionInfo.permissions.forEach((permission) => {
+            permissionsMap.set(permission.name, permission);
+        });
+
+        return permissionsMap;
     }
 }
 

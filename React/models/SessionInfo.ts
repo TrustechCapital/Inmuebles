@@ -1,19 +1,17 @@
 import User from './User';
 
-type Permissions = {
-    menu: {
-        name: string;
-        canView: boolean;
-        canEdit: boolean;
-    };
+export type ModulePermission = {
+    name: string;
+    canView: boolean;
+    canEdit: boolean;
 };
 
 class SessionInfo {
     systemDate: Date;
     user: User;
-    permissions: Permissions[];
+    permissions: ModulePermission[];
 
-    constructor(systemDate: Date, user: User, permissions: Permissions[]) {
+    constructor(systemDate: Date, user: User, permissions: ModulePermission[]) {
         this.systemDate = systemDate;
         this.user = user;
         this.permissions = permissions;

@@ -8,7 +8,7 @@ import Layout from '../sharedComponents/Layout';
 import { catalogsApi } from '../core/api';
 import SessionService from '../services/SessionService';
 import Login from '../modules/Login/MainLogin';
-import SessionInfo from '../models/SessionInfo';
+import SessionInfo, { ModulePermission } from '../models/SessionInfo';
 import BaseTheme from '../sharedComponents/BaseTheme';
 import { SessionInfoContext } from '../core/LoginContext';
 
@@ -22,6 +22,10 @@ function removeInjectedServerCss() {
 
 function App({ Component, pageProps }: AppProps) {
     const [loadingApp, setLoadingApp] = useState(true);
+    const [modulePermissionsMap, setModulePermissionsMap] = useState<Map<
+        string,
+        ModulePermission
+    > | null>(null);
     const [sessionInfo, setSessionInfo] = useState<SessionInfo | null>(null);
 
     useEffect(() => {
@@ -35,7 +39,11 @@ function App({ Component, pageProps }: AppProps) {
     }, []);
 
     function handleSuccessfulLogin() {
-        setSessionInfo(SessionService.get());
+        const sessionInfo = SessionService.get();
+        setSessionInfo(sessionInfo);
+        setModulePermissionsMap(
+            SessionService.createPermissionsMapping(sessionInfo)
+        );
     }
 
     function handleLogout() {
@@ -48,7 +56,11 @@ function App({ Component, pageProps }: AppProps) {
             <CssBaseline />
             <ThemeProvider theme={BaseTheme}>
                 <SessionInfoContext.Provider
-                    value={{ sessionInfo: sessionInfo, onLogout: handleLogout }}
+                    value={{
+                        sessionInfo: sessionInfo,
+                        onLogout: handleLogout,
+                        modulePermissionsMap: modulePermissionsMap,
+                    }}
                 >
                     {sessionInfo ? (
                         <Layout>
