@@ -31,9 +31,12 @@ import mx.gob.nafin.fiduciario.BusinessException;
 import mx.gob.nafin.fiduciario.business.services.GenericDataAccessService;
 import mx.gob.nafin.fiduciario.common.beans.ErrorBean;
 
+import net.sf.json.JSONNull;
 import net.sf.json.JSONObject;
 
 import org.springframework.web.servlet.ModelAndView;
+
+import weblogic.sqlserver.externals.com.google.gson.JsonElement;
 
 /**
  * Clase que se encarga de ejecutar las consultas generiacas del sistema, definidas en el archivo
@@ -202,7 +205,7 @@ public class ConsultasController extends JsonActionController {
 
                     Object rawValue = parametros.get(param.getId());
 
-                    if (rawValue == null) {
+                    if (rawValue == null || rawValue instanceof JSONNull) {
                         paramArray.add(null);
                     } else {
                         String pv = String.valueOf(rawValue);

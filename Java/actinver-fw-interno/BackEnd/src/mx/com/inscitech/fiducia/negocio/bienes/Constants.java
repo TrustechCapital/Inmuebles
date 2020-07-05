@@ -30,16 +30,15 @@ public class Constants {
 
     }
 
-    enum TiposOperacionesGarantias {
-        ENTRADA_EN_GARANTIA(1),
-        MODIFICACION_DE_GARANTIA(2),
-        REVALUACION_DE_GARANTIA(3),
-        SALIDA_DE_BIEN_EN_GARANTIA(5),
-        PAGO_PARCIAL_DE_GARANTIA(6);
+    enum TiposOperacionesDetalleBien {
+        ENTRADA(1),
+        MODIFICACION(2),
+        REVALUACION(3),
+        SALIDA(5);
 
         private int identificadorOperacion;
 
-        TiposOperacionesGarantias(int identificadorOperacion) {
+        TiposOperacionesDetalleBien(int identificadorOperacion) {
             this.identificadorOperacion = identificadorOperacion;
         }
 
@@ -49,21 +48,31 @@ public class Constants {
 
     }
 
-    enum SubtiposTransaccionesGarantias {
-        ENTRADA(51),
-        REVALUACION_ALTA(53),
-        REVALUACION_BAJA(54),
-        SALIDA(52),
-        DESCONOCIDO(0);
+    // Descripcion: estas claves se utilizan unicamente para llevar un registro de la transaccion realizada en el
+    // en relacion a todo el ciclo de vida de un bien, desde su alta hasta su liberacion.
 
-        private int identificadorTransaccion;
+    enum TiposTransaccionesBienes {
+        ENTRADA(1, "Entrada de Bien"),
+        REVALUACION_BAJA(2, "Revaluacion de Bien a la Baja"),
+        REVALUACION_ALTA(3, "Revaluacion de Bien a la Alza"),
+        SALIDA(4, "Salida de un Bien"),
+        INDIVIDUALIZACION(5, "Individualizacion de Bienes"),
+        LIBERACION(6, "Liberacion de Bienes Individualizados");
 
-        SubtiposTransaccionesGarantias(int identificadorTransaccion) {
-            this.identificadorTransaccion = identificadorTransaccion;
+        private int identificador;
+        private String descripcion;
+
+        TiposTransaccionesBienes(int identificadorTransaccion, String descripcion) {
+            this.identificador = identificadorTransaccion;
+            this.descripcion = descripcion;
         }
 
         int getValue() {
-            return this.identificadorTransaccion;
+            return this.identificador;
+        }
+
+        String getDescription() {
+            return this.descripcion;
         }
 
     }

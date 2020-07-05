@@ -203,13 +203,8 @@ public class OperacionesBienes {
                                                                                                    .getValue(),
                                           pIdTipoBien, clasBien, vTipoOperacion, pMoneda);
 
-            boolean contabilidadGenerada =
-                Utils.generaContabilidad(pIdFideicomiso, pIdSubcuenta, pMoneda, fechaInicio, pImporte, numeroOperacion,
-                                         folioOperacion, pIdTipoCambio, null, null);
-
-            if (!contabilidadGenerada) {
-                throw new BusinessException("Ocurrio un error al generar la contabilidad");
-            }
+            Utils.generaContabilidad(pIdFideicomiso, pIdSubcuenta, pMoneda, fechaInicio, pImporte, numeroOperacion,
+                                     folioOperacion, null, pIdTipoCambio);
 
             if (pTipoOperacion == 1) {
 
@@ -501,13 +496,8 @@ public class OperacionesBienes {
 
             BigDecimal numeroOperacion = Utils.toBigDecimal(stringNumeroOperacion);
 
-            boolean contabilidadGenerada =
-                Utils.generaContabilidad(pIdFideicomiso, pIdSubcuenta, pNumMoneda, fecha, importeContabilidad,
-                                         numeroOperacion, folioOperacion, tipoCambio, null, null);
-
-            if (!contabilidadGenerada) {
-                throw new BusinessException("Ocurrio un error al generar la contabilidad");
-            }
+            Utils.generaContabilidad(pIdFideicomiso, pIdSubcuenta, pNumMoneda, fecha, importeContabilidad,
+                                     numeroOperacion, folioOperacion, null, tipoCambio);
 
             return 0;
 
@@ -667,7 +657,7 @@ public class OperacionesBienes {
                                           numMonedaMovimiento);
 
             Utils.generaContabilidad(idFideicomiso, idSubcuenta, numMonedaMovimiento, fecha, importe, numeroOperacion,
-                                     folioOperacion, tipoCambio, tipoPersona, numeroPersona);
+                                     folioOperacion, null, tipoCambio);
 
 
             if (contador == 1) {
@@ -841,13 +831,8 @@ public class OperacionesBienes {
                 BigDecimal numeroOperacion =
                     Utils.creaNumeroOperacion("%d%02d%02d02%02d0", 6, idTipoGarantia, idTipoBien, idMonedaBien);
 
-                boolean contabilidadGenerada =
-                    Utils.generaContabilidad(pIdFideicomiso, pIdSubcuenta, idMonedaBien, fechaActual, importe,
-                                             numeroOperacion, folioOperacion, BigDecimal.valueOf(1), null, null);
-
-                if (!contabilidadGenerada) {
-                    throw new BusinessException("Ocurrio un error al generar la contabilidad");
-                }
+                Utils.generaContabilidad(pIdFideicomiso, pIdSubcuenta, idMonedaBien, fechaActual, importe,
+                                         numeroOperacion, folioOperacion, null, BigDecimal.valueOf(1));
 
                 // SE REALIZA LA DISMINUCION DEL BIEN
 

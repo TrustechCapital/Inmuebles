@@ -45,6 +45,12 @@ public class DateUtils {
         return toString(fecha, DateFormats.DEFAULT.getValue());
     }
 
+    public static LocalDate toLocalDate(Date dateToConvert) {
+        return dateToConvert.toInstant()
+                            .atZone(ZoneId.systemDefault())
+                            .toLocalDate();
+    }
+
     public static Date fromParts(BigDecimal dia, BigDecimal mes, BigDecimal anio) {
         //default time zone
         ZoneId defaultZoneId = ZoneId.systemDefault();
