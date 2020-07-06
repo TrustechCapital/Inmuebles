@@ -565,6 +565,7 @@
                 <!-- FIN REGIMEN FISCAL UTILIDAD / PREDIDA FISCAL SAT -->
                 <!-- INICIO REGIMEN FISCAL ARCHIVO SAT -->
                 <entry key="conEjeArcSAT" value="SELECT DISTINCT MOV_ANO_MOVTO FROM MOVIMIEN"/>
+                <entry key="conPolizaContable" value="Select CONCAT(CONCAT(CONCAT(CONCAT(MOV_DIA_MOVTO,'/'),MOV_MES_MOVTO),'/'),MOV_ANO_MOVTO) AS MOV_FECHA, GUI_NUM_GUIA, GUI_NUM_CTAM, GUI_NUM_SCTA, GUI_NUM_SSCTA, GUI_NUM_SSSCTA, GUI_NUM_SSSSCTA, GUI_NUM_SSSSSCTA, MOV_IMP_MOVTO, DECODE(GUI_CVE_CAR_ABO, 'C','CARGO','A','ABONO') AS CLAVE_CA FROM MOVIMIEN, GUIACONT WHERE GUI_NUM_GUIA = MOV_NUM_TRANSAC"/>
                 <!-- FIN REGIMEN FISCAL ARCHIVO SAT -->
                 <!-- INICIO BITACORA -->
                 <entry key="conBitacora" value="SELECT FBDE_EJERCICIO_DECLARA,TO_CHAR(FBDE_PERIODO_DECLARA, 'DD/MM/YYYY') FBDE_PERIODO_DECLARA, FBDE_TIPO_DECLARA, TO_CHAR(FBDE_FECHA_DECLARA, 'DD/MM/YYYY') FECHA, FBDE_FOLIO_DECLARA FROM F_BITACORA_DECLARA"/>
@@ -17036,6 +17037,52 @@ FPL_ID_FIDEICOMISO = FUNI_ID_FIDEICOMISO"/>
                             </property>
                             <property name="order">
                                 <value>true</value>
+                            </property>
+                        </bean>
+                    </list>
+                </entry>
+                <entry key="conPolizaContable">
+                    <list>
+                        <bean class="mx.gob.nafin.fiduciario.common.beans.ParametroQueryBean">
+                            <property name="name">
+                                <value>Anio</value>
+                            </property>
+                            <property name="sqlName">
+                                <value>MOV_ANO_MOVTO</value>
+                            </property>
+                            <property name="clauseType">
+                                <value>AND</value>
+                            </property>
+                            <property name="conditionType">
+                                <value>=</value>
+                            </property>
+                        </bean>
+                        <bean class="mx.gob.nafin.fiduciario.common.beans.ParametroQueryBean">
+                            <property name="name">
+                                <value>Mes</value>
+                            </property>
+                            <property name="sqlName">
+                                <value>MOV_MES_MOVTO</value>
+                            </property>
+                            <property name="clauseType">
+                                <value>AND</value>
+                            </property>
+                            <property name="conditionType">
+                                <value>=</value>
+                            </property>
+                        </bean>
+                        <bean class="mx.gob.nafin.fiduciario.common.beans.ParametroQueryBean">
+                            <property name="name">
+                                <value>Dia</value>
+                            </property>
+                            <property name="sqlName">
+                                <value>MOV_DIA_MOVTO</value>
+                            </property>
+                            <property name="clauseType">
+                                <value>AND</value>
+                            </property>
+                            <property name="conditionType">
+                                <value>=</value>
                             </property>
                         </bean>
                     </list>

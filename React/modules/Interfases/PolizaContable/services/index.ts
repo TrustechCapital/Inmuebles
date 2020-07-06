@@ -1,0 +1,1 @@
+export { polizaApi } from './PolizaApi';

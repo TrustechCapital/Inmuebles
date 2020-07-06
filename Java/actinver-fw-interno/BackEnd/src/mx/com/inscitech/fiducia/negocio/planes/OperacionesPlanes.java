@@ -43,6 +43,7 @@ public class OperacionesPlanes {
                     Date nFecha=new SimpleDateFormat("dd/MM/yyyy").parse(fecha);
                     Calendar cal = Calendar.getInstance();
                     cal.setTime(nFecha);
+                    cal.add(Calendar.DATE, 1);//Obtiene el siguiente dia inmediato
                     
                     Date apliFecha=new SimpleDateFormat("dd/MM/yyyy").parse(fechaAplica);
                     Calendar cal2 = Calendar.getInstance();
@@ -52,6 +53,7 @@ public class OperacionesPlanes {
                     BigDecimal aAno = BigDecimal.valueOf(cal2.get(Calendar.YEAR));
                     
                     do{
+                        
                         BigDecimal nMes = BigDecimal.valueOf(cal.get(Calendar.MONTH));
                         BigDecimal nDia = BigDecimal.valueOf(cal.get(Calendar.DAY_OF_MONTH));
                         BigDecimal nAno = BigDecimal.valueOf(cal.get(Calendar.YEAR));
