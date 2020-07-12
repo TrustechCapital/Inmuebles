@@ -44,10 +44,10 @@ export default abstract class CrudActions<
         >,
         parameters: SearchModel
     ) {
-        const Individualizaciones = await this.api.find(parameters);
+        const results = await this.api.find(parameters);
         dispatch({
             type: 'SET_SEARCH_RESULTS',
-            results: Individualizaciones,
+            results: results,
         });
     }
 

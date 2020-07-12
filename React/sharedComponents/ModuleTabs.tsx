@@ -2,7 +2,7 @@ import useModulePermissions from '../sharedHooks/useModulePersmissions';
 import GenericTabs from './GenericTabs';
 import { Typography } from '@material-ui/core';
 
-type ModuleTab = {
+export type ModuleTab = {
     key: string;
     label: string;
     component: React.ReactType;

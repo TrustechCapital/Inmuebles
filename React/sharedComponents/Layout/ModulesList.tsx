@@ -9,8 +9,10 @@ import PeopleIcon from '@material-ui/icons/People';
 import ScheduleIcon from '@material-ui/icons/Schedule';
 import InputIcon from '@material-ui/icons/Input';
 import BarChartIcon from '@material-ui/icons/BarChart';
+import WorkIcon from '@material-ui/icons/Work';
 
 const MODULES = [
+    { label: 'Administración', url: '/administracion', icon: WorkIcon },
     { label: 'Bienes', url: '/bienes', icon: ApartmentIcon },
     { label: 'Interfases', url: '/interfases', icon: InputIcon },
     { label: 'Planes', url: '/planes', icon: ScheduleIcon },

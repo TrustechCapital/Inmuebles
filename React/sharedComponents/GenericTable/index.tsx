@@ -1,5 +1,6 @@
 export type {
     IColumn as IGenericColumn,
+    IGenericTableColumn,
     ITableRow as IGenericTableRow,
 } from './types';
 import GenericTable from './GenericTable';

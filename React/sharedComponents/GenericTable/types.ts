@@ -5,6 +5,13 @@ export interface IColumn {
     numeric?: boolean;
 }
 
+export interface IGenericTableColumn<RowModel> {
+    field: keyof RowModel;
+    header: string;
+    isKey?: boolean;
+    numeric?: boolean;
+}
+
 export interface ITableRow {
     id: number;
 }

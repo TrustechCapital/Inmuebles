@@ -19,7 +19,7 @@ import useThunkReducer, { Thunk } from 'react-hook-thunk-reducer';
 
 */
 
-type ActionPromiseSignature<S, A> = (
+export type ActionPromiseSignature<S, A> = (
     dispatch: React.Dispatch<A>,
     getState: () => S
 ) => Promise<any>;

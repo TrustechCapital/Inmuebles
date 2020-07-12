@@ -6,6 +6,11 @@ export const adminUser = {
     systemDate: '01/06/2020',
     permissions: [
         {
+            name: 'ADMINISTRACION.FIDEICOMISOS',
+            canView: true,
+            canEdit: true,
+        },
+        {
             name: 'BIENES.BIENES',
             canView: true,
             canEdit: true,
