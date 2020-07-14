@@ -3,6 +3,7 @@ import {
     CrudModuleActions,
     ICrudModuleApi,
     ICrudActionsCreators,
+    ICrudeModuleState,
 } from './types';
 
 export default abstract class CrudActions<
@@ -12,7 +13,13 @@ export default abstract class CrudActions<
     ApiService extends ICrudModuleApi<MainModel, SearchModel, RowModel>
 >
     implements
-        ICrudActionsCreators<MainModel, SearchModel, RowModel, ApiService> {
+        ICrudActionsCreators<
+            MainModel,
+            SearchModel,
+            RowModel,
+            ApiService,
+            ICrudeModuleState<MainModel, SearchModel, RowModel>
+        > {
     api: ApiService;
 
     constructor(api: ApiService) {
@@ -68,7 +75,7 @@ export default abstract class CrudActions<
         dispatch: React.Dispatch<
             CrudModuleActions<MainModel, SearchModel, RowModel>
         >,
-        getState: () => any
+        getState: () => ICrudeModuleState<MainModel, SearchModel, RowModel>
     ) {
         const state = getState();
         return await this.searchAndSetResults(dispatch, state.searchParameters);
@@ -79,7 +86,7 @@ export default abstract class CrudActions<
             dispatch: React.Dispatch<
                 CrudModuleActions<MainModel, SearchModel, RowModel>
             >,
-            getState: () => any
+            getState: () => ICrudeModuleState<MainModel, SearchModel, RowModel>
         ) => {
             const state = getState();
             const loadedModel = await this.fetchFullModel(state.selectedRow);
@@ -103,7 +110,7 @@ export default abstract class CrudActions<
             dispatch: React.Dispatch<
                 CrudModuleActions<MainModel, SearchModel, RowModel>
             >,
-            getState: () => any
+            getState: () => ICrudeModuleState<MainModel, SearchModel, RowModel>
         ) => {
             const state = getState();
             dispatch({
@@ -111,10 +118,7 @@ export default abstract class CrudActions<
             });
 
             try {
-                if (
-                    state.Individualizaciones.modalMode ===
-                    OperacionesCatalogo.Alta
-                ) {
+                if (state.modalMode === OperacionesCatalogo.Alta) {
                     await this.api.create(model);
                 } else {
                     await this.api.update(model);
@@ -139,17 +143,15 @@ export default abstract class CrudActions<
             dispatch: React.Dispatch<
                 CrudModuleActions<MainModel, SearchModel, RowModel>
             >,
-            getState: () => any
+            getState: () => ICrudeModuleState<MainModel, SearchModel, RowModel>
         ) => {
             const state = getState();
 
-            if (!state.Individualizaciones.selectedRow) {
+            if (!state.selectedRow) {
                 return;
             }
 
-            const model = this.api.getModelFromResultRow(
-                state.Individualizaciones.selectedRow
-            );
+            const model = this.api.getModelFromResultRow(state.selectedRow);
             await this.api.destroy(model);
             await this.repeatCurrentSearch(dispatch, getState);
         };

@@ -65,29 +65,35 @@ export interface ICrudActionsCreators<
     MainModel,
     SearchModel,
     RowModel,
-    ApiService extends ICrudModuleApi<MainModel, SearchModel, RowModel>
+    ApiService extends ICrudModuleApi<MainModel, SearchModel, RowModel>,
+    State extends ICrudeModuleState<MainModel, SearchModel, RowModel>
 > {
     api: ApiService;
     fetchFullModel(selectedRow: RowModel | null): Promise<MainModel | null>;
     selectRow(
         selectedRow: RowModel
     ): (dispatch: CrudModuleDispatch<MainModel, SearchModel, RowModel>) => void;
-    search(parameters: SearchModel): (dispatch: any) => void;
-    searchAndSetResults(dispatch: any, parameters: SearchModel): void;
+    search(
+        parameters: SearchModel
+    ): (dispatch: CrudModuleDispatch<MainModel, SearchModel, RowModel>) => void;
+    searchAndSetResults(
+        dispatch: CrudModuleDispatch<MainModel, SearchModel, RowModel>,
+        parameters: SearchModel
+    ): void;
     fetchAndDisplayModel(
         mode: OperacionesCatalogo
     ): (
         dispatch: CrudModuleDispatch<MainModel, SearchModel, RowModel>,
-        getState: () => any
+        getState: () => State
     ) => void;
     saveModel(
         model: MainModel
     ): (
         dispatch: CrudModuleDispatch<MainModel, SearchModel, RowModel>,
-        getState: () => any
+        getState: () => State
     ) => void;
     deleteSelectedModel(): (
         dispatch: CrudModuleDispatch<MainModel, SearchModel, RowModel>,
-        getState: () => any
+        getState: () => State
     ) => Promise<void>;
 }
