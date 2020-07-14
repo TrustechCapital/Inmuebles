@@ -31,7 +31,7 @@ function PolizasReducer(
             const esAlta = action.mode === OperacionesCatalogo.Alta;
 
             if (esAlta) {
-                currentModel = new Movimientos(null, null, null, null, null);
+                currentModel = new Movimientos(null, null, null, null, null, null, null, null);
             }
 
             const shouldOpenModal =

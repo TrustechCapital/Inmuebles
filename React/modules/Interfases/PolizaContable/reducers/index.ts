@@ -1,6 +1,6 @@
 import { MainPolizaState, MainPolizaActions, PolizaActions } from '../types';
 
-import { PolizaReducer } from './reportes';
+import { PolizasReducer } from './polizas';
 
 function mainPolizaReducer(
     state: MainPolizaState,
@@ -9,22 +9,22 @@ function mainPolizaReducer(
     switch (action.type) {
         case 'SET_POLIZA_SEARCH_RESULTS':
             return {
-                Individualizacion: PolizaReducer(
-                    state.Individualizacion,
+                Movimientos: PolizasReducer(
+                    state.Movimientos,
                     action
                 ),
             };
         case 'SELECT_POLIZA_RESULT_ROW':
             return {
-                Individualizacion: PolizaReducer(state.Individualizacion, {
+                Movimientos: PolizasReducer(state.Movimientos, {
                     ...action,
                     type: 'SET_POLIZA_ROWS_SELECTION',
                 }),
             };
         default:
             return {
-                Individualizacion: PolizaReducer(
-                    state.Individualizacion,
+                Movimientos: PolizasReducer(
+                    state.Movimientos,
                     action as PolizaActions
                 ),
             };

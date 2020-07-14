@@ -34,7 +34,7 @@ const initialOperationStatus = {
     error: null,
 };
 
-export default function MainCargaMasiva() {
+export default function MainEjecutorPlanes() {
     const classes = useStyles();
     const [operationStatus, setOperationStatus] = useState(
         initialOperationStatus

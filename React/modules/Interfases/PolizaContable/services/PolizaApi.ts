@@ -22,4 +22,4 @@ class PolizaApi extends ModelsApi<Movimientos> {
     }
 }
 
-export const reportesApi = new PolizaApi(PolizaModelMapper);
+export const polizaApi = new PolizaApi(PolizaModelMapper);
