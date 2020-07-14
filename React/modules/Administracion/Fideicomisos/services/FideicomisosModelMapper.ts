@@ -8,7 +8,9 @@ class FideicomisoModelMapper implements IModelMapper<Fideicomiso> {
             data.ctoNomContrato
         );
 
-        Object.assign(fideicomiso, {});
+        Object.assign(fideicomiso, {
+            claveEstatus: data.ctoCveStContrat,
+        });
         return fideicomiso;
     }
 
@@ -22,6 +24,7 @@ class FideicomisoModelMapper implements IModelMapper<Fideicomiso> {
         return {
             ctoNumContrato: fideicomiso.id,
             ctoNomContrato: fideicomiso.nombre,
+            ctoCveStContrat: fideicomiso.claveEstatus,
         };
     }
 }

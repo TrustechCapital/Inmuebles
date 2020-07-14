@@ -11,6 +11,7 @@ import {
 } from '../../../sharedComponents/CrudModule';
 import { MainFideicomisosState } from './types';
 import Fideicomiso from '../../../models/Fideicomiso';
+import DialogFideicomisos from './DialogFideicomisos';
 
 const initialState: MainFideicomisosState = {
     ...crudModuleInitialState,
@@ -38,6 +39,16 @@ const MainIndividualizaciones: React.FC = () => {
                     onSearch={callbacks.onSearch}
                 />
             </GenericTableCallbacksContext.Provider>
+            <DialogFideicomisos
+                mode={state.modalMode}
+                open={state.modalOpen}
+                model={state.currentModel}
+                isLoading={state.isLoadingModel}
+                savingStatus={state.savingStatus}
+                errorMessage={state.modalErrorMessage}
+                onClose={callbacks.onCloseModal}
+                onSaveRequest={callbacks.onSave}
+            />
         </React.Fragment>
     );
 };
