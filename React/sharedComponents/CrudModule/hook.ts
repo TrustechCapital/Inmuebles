@@ -59,7 +59,7 @@ function useCrudModule<
     >,
 
     initialState: State,
-    actions: ICrudActionsCreators<MainModel, SearchModel, RowModel, ApiService>
+    actions: ICrudActionsCreators<MainModel, SearchModel, RowModel, ApiService, State>,
 ): [
     State & ICrudeModuleState<MainModel, SearchModel, RowModel>,
     ExportedCallbacks<MainModel, SearchModel, RowModel>,
