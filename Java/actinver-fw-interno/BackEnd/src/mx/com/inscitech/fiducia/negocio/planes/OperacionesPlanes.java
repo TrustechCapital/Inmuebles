@@ -35,7 +35,7 @@ public class OperacionesPlanes {
         Feccont fechaContable = fechaContableRepository.getFecha("CONTABLE");
         //Feriados diaFeriado = feriadosRepository.findFeriado(feriado);
         
-        if(fechaContable.getFcoAnoApliConta().intValue() != 0){ //Validar Año
+        if(fechaContable.getFcoAnoApliConta().intValue() != 0){ //Validar Aï¿½o
             if(fechaContable.getFcoMesApliConta().intValue() != 0){ //Validar mes
                 if(fechaContable.getFcoDiaApliConta().intValue() != 0){//Validar Dia con dia feriado
                     
@@ -63,7 +63,7 @@ public class OperacionesPlanes {
                         BigDecimal mFeriado = diaFeriado.getFerFecMes();
                         
                         if(nMes == mFeriado && nDia == dFeriado){
-                            //Saltar un día al ser feriado contar dia +1
+                            //Saltar un dï¿½a al ser feriado contar dia +1
                             cal.add(Calendar.DATE, 1);
                         }else if((cal.get(Calendar.DAY_OF_WEEK)==Calendar.SATURDAY)||(cal.get(Calendar.DAY_OF_WEEK)==Calendar.SUNDAY)){
                             //No es feriado pero es fin de semana
