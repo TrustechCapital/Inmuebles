@@ -12,6 +12,10 @@ function required(field: string) {
     return Yup.mixed().required(requiredFieldMessage(field));
 }
 
+function validateRequiredString(field: string) {
+    return Yup.string().ensure().required(requiredFieldMessage(field));
+}
+
 function validateRequiredNumber(field: string) {
     return Yup.number()
         .transform(emptyStringToUndefined)
@@ -51,6 +55,7 @@ const ValidationHelpers = {
     required,
     requiredFieldMessage,
     validateRequiredNumber,
+    validateRequiredString,
     validateFile,
     validateFideicomiso: validateRequiredNumber('El Fideicomiso'),
     validateSubcuenta: validateRequiredNumber('La Subcuenta'),
