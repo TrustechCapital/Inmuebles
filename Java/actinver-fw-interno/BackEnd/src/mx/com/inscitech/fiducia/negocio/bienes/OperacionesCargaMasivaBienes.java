@@ -7,6 +7,7 @@ import java.util.List;
 import mx.com.inscitech.fiducia.common.util.DateUtils;
 import mx.com.inscitech.fiducia.domain.FUnidades;
 import mx.com.inscitech.fiducia.models.LayoutCargaBienes;
+import mx.com.inscitech.fiducia.negocio.bienes.Constants.EstatusIndividualizacionBienes;
 import mx.com.inscitech.fiducia.negocio.bienes.Constants.TiposCargaMasiva;
 import mx.com.inscitech.fiducia.repository.UnidadRepository;
 
@@ -44,33 +45,29 @@ public class OperacionesCargaMasivaBienes {
                             new FUnidades(idFideicomiso, idSubcuenta, layoutCarga.getIdBien().toString(),
                                           layoutCarga.getDepto());
                         unidad.setFuniTipo(tipo);
-                        // TODO: el layout recibe string pero en la DB es numero
-                        //unidad.setFuniNiveles(Utils.toBigDecimal(layoutCarga.getNiveles()));
+
+                        unidad.setFuniNiveles(layoutCarga.getNiveles());
                         unidad.setFuniCalleNum(layoutCarga.getCalle());
                         unidad.setFuniNomColonia(layoutCarga.getColonia());
                         unidad.setFuniNomPoblacion(layoutCarga.getPoblacion());
                         unidad.setFuniCodigoPostal(layoutCarga.getCodigoPostal());
-                        // TODO: el layout recibe string pero en la DB es numero
-                        //unidad.setFuniNumEstado(layoutCarga.getEstado());
-                        // TODO: el layout recibe string pero en la DB es numero
-                        //unidad.setFuniNumPais(layoutCarga.getPais());
+                        unidad.setFuniClaveEstado(layoutCarga.getEstado());
+                        unidad.setFuniClavePais(layoutCarga.getPais());
                         unidad.setFuniColindancias(layoutCarga.getColindancia());
                         unidad.setFuniMedidas(layoutCarga.getMedidas().toString());
                         unidad.setFuniEstacionamiento1(layoutCarga.getEstacionamiento1());
                         unidad.setFuniSuperficie1(layoutCarga.getSuperficie1());
-                        // TODO: agregar campo a modelo Unidades para "numero catastro"
+                        unidad.setFuniNumeroCatastro(new BigDecimal(layoutCarga.getNumeroCatastro()));
                         unidad.setFuniPrecioCatastro(BigDecimal.valueOf(layoutCarga.getValorCatastro()));
                         unidad.setFuniPrecio(BigDecimal.valueOf(layoutCarga.getValorOperacion()));
                         unidad.setFuniUltimoAvaluo(BigDecimal.valueOf(layoutCarga.getAvaluo()));
                         unidad.setFuniFechaUltimoAvaluo(layoutCarga.getFechaAvaluo());
                         unidad.setFuniNumEscritura(layoutCarga.getEscritura());
                         // TODO: es esta la fecha de escrituracion?
-                        unidad.setFuniFechaTrasladoDominio(fechaReversion);
+                        unidad.setFuniFechaTrasladoDominio(layoutCarga.getFechaEscritura());
                         unidad.setFuniFechaReversion(DateUtils.fromString(fechaReversion));
                         unidad.setFuniNotario(idNotario);
-                        // TODO:cambiar tipo de dato a int
-                        // Valores posibles: 1 - ACTIVO, 2 - EN PROCESO LIBERACION, 3 - LIBERADO
-                        unidad.setFuniStatus("ACTIVO");
+                        unidad.setFuniStatus(EstatusIndividualizacionBienes.getText(layoutCarga.getStatus()));
 
                         unidadRepository.insert(unidad);
                     }
@@ -81,9 +78,7 @@ public class OperacionesCargaMasivaBienes {
                     FUnidades unidad = unidadRepository.findByPk(idFideicomiso, idSubcuenta, idBien, idDepto);
                     unidad.setFuniNotario(idNotario);
                     unidad.setFuniNumEscritura(layoutCarga.getEscritura());
-                    // TODO:cambiar tipo de dato a int
-                    // Valores posibles: 1 - ACTIVO, 2 - EN PROCESO LIBERACION, 3 - LIBERADO
-                    unidad.setFuniStatus("LIBERADO");
+                    unidad.setFuniStatus(EstatusIndividualizacionBienes.ACTIVO.getText());
 
                     unidadRepository.update(unidad);
 

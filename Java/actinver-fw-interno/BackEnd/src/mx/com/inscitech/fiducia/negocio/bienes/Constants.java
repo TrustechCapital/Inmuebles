@@ -1,6 +1,7 @@
 package mx.com.inscitech.fiducia.negocio.bienes;
 
 import java.util.Arrays;
+import java.util.stream.Stream;
 
 public class Constants {
 
@@ -129,6 +130,38 @@ public class Constants {
 
         int getValue() {
             return this.tipoOperacion;
+        }
+
+    }
+
+    enum EstatusIndividualizacionBienes {
+        ACTIVO(1, "ACTIVO"),
+        EN_PROCESO_LIBERACION(2, "EN PROCESO LIBERACION"),
+        LIBERADO(3, "LIBERADO");
+
+        private int identificador;
+        private String texto;
+
+        EstatusIndividualizacionBienes(int ideintificador, String texto) {
+            this.identificador = ideintificador;
+            this.texto = texto;
+
+        }
+
+        int getValue() {
+            return this.identificador;
+        }
+
+        String getText() {
+            return this.texto;
+        }
+
+        public static String getText(int identificador) {
+            return Stream.of(values())
+                         .filter((t) -> t.identificador == identificador)
+                         .map((t) -> t.getText())
+                         .findFirst()
+                         .orElse(ACTIVO.getText());
         }
 
     }

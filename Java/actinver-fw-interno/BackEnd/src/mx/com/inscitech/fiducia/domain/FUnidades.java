@@ -24,13 +24,13 @@ public class FUnidades extends DomainObject {
     private String funiIdBien = null;
     private String funiIdDepto = null;
     private String funiTipo = null;
-    private BigDecimal funiNiveles = null;
+    private String funiNiveles = null;
     private String funiCalleNum = null;
     private String funiNomColonia = null;
     private String funiNomPoblacion = null;
     private String funiCodigoPostal = null;
-    private BigDecimal funiNumEstado = null;
-    private BigDecimal funiNumPais = null;
+    private String funiClaveEstado = null;
+    private String funiClavePais = null;
     private String funiColindancias = null;
     private String funiMedidas = null;
     private BigDecimal funiPrecio = null;
@@ -54,6 +54,7 @@ public class FUnidades extends DomainObject {
     private String funiSotano = null;
     private String funiSotanoSuperficie = null;
     private BigDecimal funiIndiviso = null;
+    private BigDecimal funiNumeroCatastro = null;
     private BigDecimal funiPrecioCatastro = null;
     private String funiActo1 = null;
     private String funiActo2 = null;
@@ -122,12 +123,12 @@ public class FUnidades extends DomainObject {
         return this.funiTipo;
     }
 
-    @FieldInfo(nullable = true, dataType = "NUMBER", precision = 10, scale = 0, javaClass = BigDecimal.class)
-    public void setFuniNiveles(BigDecimal funiNiveles) {
+    @FieldInfo(nullable = true, dataType = "VARCHAR2", javaClass = String.class)
+    public void setFuniNiveles(String funiNiveles) {
         this.funiNiveles = funiNiveles;
     }
 
-    public BigDecimal getFuniNiveles() {
+    public String getFuniNiveles() {
         return this.funiNiveles;
     }
 
@@ -167,22 +168,22 @@ public class FUnidades extends DomainObject {
         return this.funiCodigoPostal;
     }
 
-    @FieldInfo(nullable = true, dataType = "NUMBER", precision = 10, scale = 0, javaClass = BigDecimal.class)
-    public void setFuniNumEstado(BigDecimal funiNumEstado) {
-        this.funiNumEstado = funiNumEstado;
+    @FieldInfo(nullable = true, dataType = "VARCHAR2", javaClass = String.class)
+    public void setFuniClaveEstado(String funiNumEstado) {
+        this.funiClaveEstado = funiNumEstado;
     }
 
-    public BigDecimal getFuniNumEstado() {
-        return this.funiNumEstado;
+    public String getFuniClaveEstado() {
+        return this.funiClaveEstado;
     }
 
-    @FieldInfo(nullable = true, dataType = "NUMBER", precision = 10, scale = 0, javaClass = BigDecimal.class)
-    public void setFuniNumPais(BigDecimal funiNumPais) {
-        this.funiNumPais = funiNumPais;
+    @FieldInfo(nullable = true, dataType = "VARCHAR2", javaClass = String.class)
+    public void setFuniClavePais(String funiNumPais) {
+        this.funiClavePais = funiNumPais;
     }
 
-    public BigDecimal getFuniNumPais() {
-        return this.funiNumPais;
+    public String getFuniClavePais() {
+        return this.funiClavePais;
     }
 
     @FieldInfo(nullable = true, dataType = "VARCHAR2", javaClass = String.class)
@@ -386,7 +387,7 @@ public class FUnidades extends DomainObject {
             values.add(this.getFuniTipo());
         }
 
-        if (this.getFuniNiveles() != null && this.getFuniNiveles().longValue() == -999) {
+        if (this.getFuniNiveles() != null && "null".equals(this.getFuniNiveles())) {
             conditions += " AND FUNI_NIVELES IS NULL";
         } else if (this.getFuniNiveles() != null) {
             conditions += " AND FUNI_NIVELES = ?";
@@ -421,18 +422,18 @@ public class FUnidades extends DomainObject {
             values.add(this.getFuniCodigoPostal());
         }
 
-        if (this.getFuniNumEstado() != null && this.getFuniNumEstado().longValue() == -999) {
+        if (this.getFuniClaveEstado() != null && "null".equals(this.getFuniClaveEstado())) {
             conditions += " AND FUNI_NUM_ESTADO IS NULL";
-        } else if (this.getFuniNumEstado() != null) {
+        } else if (this.getFuniClaveEstado() != null) {
             conditions += " AND FUNI_NUM_ESTADO = ?";
-            values.add(this.getFuniNumEstado());
+            values.add(this.getFuniClaveEstado());
         }
 
-        if (this.getFuniNumPais() != null && this.getFuniNumPais().longValue() == -999) {
+        if (this.getFuniClavePais() != null && "null".equals(this.getFuniClavePais())) {
             conditions += " AND FUNI_NUM_PAIS IS NULL";
-        } else if (this.getFuniNumPais() != null) {
+        } else if (this.getFuniClavePais() != null) {
             conditions += " AND FUNI_NUM_PAIS = ?";
-            values.add(this.getFuniNumPais());
+            values.add(this.getFuniClavePais());
         }
 
         if (this.getFuniColindancias() != null && "null".equals(this.getFuniColindancias())) {
@@ -563,9 +564,9 @@ public class FUnidades extends DomainObject {
         fields += " FUNI_CODIGO_POSTAL = ?, ";
         values.add(this.getFuniCodigoPostal());
         fields += " FUNI_NUM_ESTADO = ?, ";
-        values.add(this.getFuniNumEstado());
+        values.add(this.getFuniClaveEstado());
         fields += " FUNI_NUM_PAIS = ?, ";
-        values.add(this.getFuniNumPais());
+        values.add(this.getFuniClavePais());
         fields += " FUNI_COLINDANCIAS = ?, ";
         values.add(this.getFuniColindancias());
         fields += " FUNI_MEDIDAS = ?, ";
@@ -656,11 +657,11 @@ public class FUnidades extends DomainObject {
 
         fields += ", FUNI_NUM_ESTADO";
         fieldValues += ", ?";
-        values.add(this.getFuniNumEstado());
+        values.add(this.getFuniClaveEstado());
 
         fields += ", FUNI_NUM_PAIS";
         fieldValues += ", ?";
-        values.add(this.getFuniNumPais());
+        values.add(this.getFuniClavePais());
 
         fields += ", FUNI_COLINDANCIAS";
         fieldValues += ", ?";
@@ -749,6 +750,10 @@ public class FUnidades extends DomainObject {
         fields += ", FUNI_INDIVISO";
         fieldValues += ", ?";
         values.add(this.getFuniIndiviso());
+
+        fields += ", FUNI_NUMERO_CATASTRO";
+        fieldValues += ", ?";
+        values.add(this.getFuniNumeroCatastro());
 
         fields += ", FUNI_PRECIO_CATASTRO";
         fieldValues += ", ?";
@@ -849,9 +854,9 @@ public class FUnidades extends DomainObject {
             equalObjects = false;
         if (equalObjects && !this.getFuniCodigoPostal().equals(instance.getFuniCodigoPostal()))
             equalObjects = false;
-        if (equalObjects && !this.getFuniNumEstado().equals(instance.getFuniNumEstado()))
+        if (equalObjects && !this.getFuniClaveEstado().equals(instance.getFuniClaveEstado()))
             equalObjects = false;
-        if (equalObjects && !this.getFuniNumPais().equals(instance.getFuniNumPais()))
+        if (equalObjects && !this.getFuniClavePais().equals(instance.getFuniClavePais()))
             equalObjects = false;
         if (equalObjects && !this.getFuniColindancias().equals(instance.getFuniColindancias()))
             equalObjects = false;
@@ -894,13 +899,13 @@ public class FUnidades extends DomainObject {
         result.setFuniIdBien((String) objectData.getData("FUNI_ID_BIEN"));
         result.setFuniIdDepto((String) objectData.getData("FUNI_ID_DEPTO"));
         result.setFuniTipo((String) objectData.getData("FUNI_TIPO"));
-        result.setFuniNiveles((BigDecimal) objectData.getData("FUNI_NIVELES"));
+        result.setFuniNiveles((String) objectData.getData("FUNI_NIVELES"));
         result.setFuniCalleNum((String) objectData.getData("FUNI_CALLE_NUM"));
         result.setFuniNomColonia((String) objectData.getData("FUNI_NOM_COLONIA"));
         result.setFuniNomPoblacion((String) objectData.getData("FUNI_NOM_POBLACION"));
         result.setFuniCodigoPostal((String) objectData.getData("FUNI_CODIGO_POSTAL"));
-        result.setFuniNumEstado((BigDecimal) objectData.getData("FUNI_NUM_ESTADO"));
-        result.setFuniNumPais((BigDecimal) objectData.getData("FUNI_NUM_PAIS"));
+        result.setFuniClaveEstado((String) objectData.getData("FUNI_NUM_ESTADO"));
+        result.setFuniClavePais((String) objectData.getData("FUNI_NUM_PAIS"));
         result.setFuniColindancias((String) objectData.getData("FUNI_COLINDANCIAS"));
         result.setFuniMedidas((String) objectData.getData("FUNI_MEDIDAS"));
         result.setFuniPrecio((BigDecimal) objectData.getData("FUNI_PRECIO"));
@@ -924,6 +929,7 @@ public class FUnidades extends DomainObject {
         result.setFuniSotano((String) objectData.getData("FUNI_SOTANO"));
         result.setFuniSotanoSuperficie((String) objectData.getData("FUNI_SOTANO_SUPERFICIE"));
         result.setFuniIndiviso((BigDecimal) objectData.getData("FUNI_INDIVISO"));
+        result.setFuniNumeroCatastro((BigDecimal) objectData.getData("FUNI_NUMERO_CATASTRO"));
         result.setFuniPrecioCatastro((BigDecimal) objectData.getData("FUNI_PRECIO_CATASTRO"));
         result.setFuniActo1((String) objectData.getData("FUNI_ACTO1"));
         result.setFuniActo2((String) objectData.getData("FUNI_ACTO2"));
@@ -1025,6 +1031,15 @@ public class FUnidades extends DomainObject {
 
     public BigDecimal getFuniIndiviso() {
         return funiIndiviso;
+    }
+
+
+    public void setFuniNumeroCatastro(BigDecimal funiNumeroCatastro) {
+        this.funiNumeroCatastro = funiNumeroCatastro;
+    }
+
+    public BigDecimal getFuniNumeroCatastro() {
+        return funiNumeroCatastro;
     }
 
     public void setFuniPrecioCatastro(BigDecimal funiPrecioCatastro) {
