@@ -19,29 +19,9 @@
         <filter-name>SignOffFilter</filter-name>
         <filter-class>mx.com.inscitech.fiducia.web.filters.SignOffFilter</filter-class>
     </filter>
-    <filter>
-        <filter-name>JavascriptNoCacheFilter</filter-name>
-        <filter-class>mx.com.inscitech.fiducia.web.filters.JavascriptNoCacheFilter</filter-class>
-    </filter>
     <filter-mapping>
         <filter-name>SecurityFilter</filter-name>
         <url-pattern>*.do</url-pattern>
-    </filter-mapping>
-    <filter-mapping>
-        <filter-name>SignOffFilter</filter-name>
-        <url-pattern>/principal.jsp</url-pattern>
-    </filter-mapping>
-    <filter-mapping>
-        <filter-name>SecurityFilter</filter-name>
-        <url-pattern>/modules/*.jsp</url-pattern>
-    </filter-mapping>
-    <filter-mapping>
-        <filter-name>SignOffFilter</filter-name>
-        <url-pattern>/ssologoff.jsp</url-pattern>
-    </filter-mapping>
-    <filter-mapping>
-        <filter-name>JavascriptNoCacheFilter</filter-name>
-        <url-pattern>*.js</url-pattern>
     </filter-mapping>
     <listener>
         <listener-class>mx.com.inscitech.fiducia.listeners.ApplicationStartUp</listener-class>
@@ -49,10 +29,6 @@
     <listener>
         <listener-class>org.springframework.web.context.ContextLoaderListener</listener-class>
     </listener>
-    <servlet>
-        <servlet-name>MenuDispatcherServlet</servlet-name>
-        <servlet-class>mx.com.inscitech.fiducia.web.servlets.MenuDispatcherServlet</servlet-class>
-    </servlet>
     <servlet>
         <servlet-name>Fiduciario</servlet-name>
         <servlet-class>org.springframework.web.servlet.DispatcherServlet</servlet-class>
@@ -66,16 +42,6 @@
         </init-param>
         <load-on-startup>1</load-on-startup>
     </servlet>
-    <!--<servlet>
-        <servlet-name>ws_egresosSoapPort</servlet-name>
-        <servlet-class>mx.com.inscitech.fiducia.web.services.spei.SPEIConfirmationService</servlet-class>
-        <load-on-startup>1</load-on-startup>
-    </servlet>
-    <servlet-mapping>
-        <servlet-name>ws_egresosSoapPort</servlet-name>
-        <url-pattern>/ws_egresosSoapPort</url-pattern>
-    </servlet-mapping>
-    -->
     <servlet-mapping>
         <servlet-name>Fiduciario</servlet-name>
         <url-pattern>*.do</url-pattern>
@@ -94,10 +60,6 @@
     <welcome-file-list>
         <welcome-file>/index.jsp</welcome-file>
     </welcome-file-list>
-    <error-page>
-        <error-code>404</error-code>
-        <location>/jsp/error404.jsp</location>
-    </error-page>
     <mime-mapping>
         <extension>html</extension>
         <mime-type>text/html</mime-type>
