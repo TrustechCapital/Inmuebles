@@ -50,10 +50,6 @@
         <servlet-name>Fiduciario</servlet-name>
         <url-pattern>/DatosFiduciarios.xls</url-pattern>
     </servlet-mapping>
-    <servlet-mapping>
-        <servlet-name>MenuDispatcherServlet</servlet-name>
-        <url-pattern>/xml/*</url-pattern>
-    </servlet-mapping>
     <session-config>
         <session-timeout>36</session-timeout>
     </session-config>
