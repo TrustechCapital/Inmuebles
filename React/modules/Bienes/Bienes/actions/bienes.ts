@@ -6,6 +6,7 @@ import {
 import BienResultRow from '../models/BienResultRow';
 import Bien from '../../../../models/Bien';
 import { bienesApi, detalleBienesApi } from '../services';
+import { fideicomisosApi } from '../../../../core/api/fideicomisos';
 import { OperacionesCatalogo } from '../../../../constants';
 
 type MainBienesDispatcher = React.Dispatch<MainBienesActions>;
@@ -104,6 +105,17 @@ function saveModel(model: Bien) {
 
         try {
             if (state.bienes.modalMode === OperacionesCatalogo.Alta) {
+                const numFideicomiso = model.idFideicomiso || -1;
+                const fideicomisoExists = await fideicomisosApi.exists(numFideicomiso);
+
+                if (!fideicomisoExists) {
+                    dispatch({
+                        type: 'SET_MODEL_SAVE_ERROR',
+                        error: `El fideicomiso ${numFideicomiso} no existe`,
+                    });
+                    return;
+                }
+
                 await bienesApi.create(model);
             } else {
                 await bienesApi.update(model);
