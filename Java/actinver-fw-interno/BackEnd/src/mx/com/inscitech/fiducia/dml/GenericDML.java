@@ -61,7 +61,8 @@ public class GenericDML {
 
         logger.log(this, Thread.currentThread(), LoggingService.LEVEL.DEBUG, "Have values: " + (values != null), null);
         if (values != null) {
-            logger.log(this, Thread.currentThread(), LoggingService.LEVEL.DEBUG, "Total Values: " + values.length, null);
+            logger.log(this, Thread.currentThread(), LoggingService.LEVEL.DEBUG, "Total Values: " + values.length,
+                       null);
         }
 
         try {
@@ -78,36 +79,43 @@ public class GenericDML {
 
                     int k = i - 1;
 
-                    logger.log(this, Thread.currentThread(), LoggingService.LEVEL.DEBUG, "VALUES(" + k + ") = \"" + values[k] + "\"", null);
+                    logger.log(this, Thread.currentThread(), LoggingService.LEVEL.DEBUG,
+                               "VALUES(" + k + ") = \"" + values[k] + "\"", null);
 
                     if (values[k] == null) {
 
-                        logger.log(this, Thread.currentThread(), LoggingService.LEVEL.DEBUG, "Setting parameter " + i + " to null.", null);
-                        ps.setNull(i, Types.VARCHAR);
+                        logger.log(this, Thread.currentThread(), LoggingService.LEVEL.DEBUG,
+                                   "Setting parameter " + i + " to null.", null);
+                        ps.setNull(i, Types.NULL);
 
                     } else if (values[k] instanceof BigDecimal) {
 
-                        logger.log(this, Thread.currentThread(), LoggingService.LEVEL.DEBUG, "Setting parameter " + i + " to " + values[k] + " as BigDecimal.", null);
+                        logger.log(this, Thread.currentThread(), LoggingService.LEVEL.DEBUG,
+                                   "Setting parameter " + i + " to " + values[k] + " as BigDecimal.", null);
                         ps.setBigDecimal(i, (BigDecimal) values[k]);
 
                     } else if (values[k] instanceof Long) {
 
-                        logger.log(this, Thread.currentThread(), LoggingService.LEVEL.DEBUG, "Setting parameter " + i + " to " + values[k] + " as Long.", null);
+                        logger.log(this, Thread.currentThread(), LoggingService.LEVEL.DEBUG,
+                                   "Setting parameter " + i + " to " + values[k] + " as Long.", null);
                         ps.setLong(i, ((Long) values[k]).longValue());
 
                     } else if (values[k] instanceof Integer) {
 
-                        logger.log(this, Thread.currentThread(), LoggingService.LEVEL.DEBUG, "Setting parameter " + i + " to " + values[k] + " as Integer.", null);
+                        logger.log(this, Thread.currentThread(), LoggingService.LEVEL.DEBUG,
+                                   "Setting parameter " + i + " to " + values[k] + " as Integer.", null);
                         ps.setInt(i, ((Integer) values[k]).intValue());
 
                     } else if (values[k] instanceof byte[]) {
 
-                        logger.log(this, Thread.currentThread(), LoggingService.LEVEL.DEBUG, "Setting parameter " + i + " as byte[].", null);
+                        logger.log(this, Thread.currentThread(), LoggingService.LEVEL.DEBUG,
+                                   "Setting parameter " + i + " as byte[].", null);
                         ps.setBytes(i, (byte[]) values[k]);
 
                     } else {
 
-                        logger.log(this, Thread.currentThread(), LoggingService.LEVEL.DEBUG, "Setting parameter " + i + " to \"" + values[k] + "\" as String.", null);
+                        logger.log(this, Thread.currentThread(), LoggingService.LEVEL.DEBUG,
+                                   "Setting parameter " + i + " to \"" + values[k] + "\" as String.", null);
                         ps.setString(i, (String) values[k]);
 
                     }
@@ -120,22 +128,26 @@ public class GenericDML {
 
                     if (outParameters[i] instanceof BigDecimal) {
 
-                        logger.log(this, Thread.currentThread(), LoggingService.LEVEL.DEBUG, "Setting out parameter " + (values.length + i + 1) + " as NUMERIC.", null);
+                        logger.log(this, Thread.currentThread(), LoggingService.LEVEL.DEBUG,
+                                   "Setting out parameter " + (values.length + i + 1) + " as NUMERIC.", null);
                         ps.registerOutParameter(values.length + i + 1, Types.NUMERIC);
 
                     } else if (outParameters[i] instanceof Long) {
 
-                        logger.log(this, Thread.currentThread(), LoggingService.LEVEL.DEBUG, "Setting out parameter " + (values.length + i + 1) + " as BIGINT.", null);
+                        logger.log(this, Thread.currentThread(), LoggingService.LEVEL.DEBUG,
+                                   "Setting out parameter " + (values.length + i + 1) + " as BIGINT.", null);
                         ps.registerOutParameter(values.length + i + 1, Types.BIGINT);
 
                     } else if (outParameters[i] instanceof Integer) {
 
-                        logger.log(this, Thread.currentThread(), LoggingService.LEVEL.DEBUG, "Setting out parameter " + (values.length + i + 1) + " as INTEGER.", null);
+                        logger.log(this, Thread.currentThread(), LoggingService.LEVEL.DEBUG,
+                                   "Setting out parameter " + (values.length + i + 1) + " as INTEGER.", null);
                         ps.registerOutParameter(values.length + i + 1, Types.INTEGER);
 
                     } else {
 
-                        logger.log(this, Thread.currentThread(), LoggingService.LEVEL.DEBUG, "Setting out parameter " + (values.length + i + 1) + " as VARCHAR.", null);
+                        logger.log(this, Thread.currentThread(), LoggingService.LEVEL.DEBUG,
+                                   "Setting out parameter " + (values.length + i + 1) + " as VARCHAR.", null);
                         ps.registerOutParameter(values.length + i + 1, Types.VARCHAR);
 
                     }
@@ -152,7 +164,8 @@ public class GenericDML {
                 logger.log(this, Thread.currentThread(), LoggingService.LEVEL.DEBUG, "retunValue: " + retunValue, null);
             } else {
                 executeResult = ps.execute();
-                logger.log(this, Thread.currentThread(), LoggingService.LEVEL.DEBUG, "executeResult: " + executeResult, null);
+                logger.log(this, Thread.currentThread(), LoggingService.LEVEL.DEBUG, "executeResult: " + executeResult,
+                           null);
             }
 
             result = true;
@@ -296,26 +309,31 @@ public class GenericDML {
 
                     if (values[k] == null) {
 
-                        logger.log(this, Thread.currentThread(), LoggingService.LEVEL.DEBUG, "Setting parameter " + i + " to null.", null);
+                        logger.log(this, Thread.currentThread(), LoggingService.LEVEL.DEBUG,
+                                   "Setting parameter " + i + " to null.", null);
                         ps.setNull(i, Types.VARCHAR);
 
                     } else if (values[k] instanceof BigDecimal) {
 
-                        logger.log(this, Thread.currentThread(), LoggingService.LEVEL.DEBUG, "Setting parameter " + i + " to " + values[k] + " as BigDecimal.", null);
+                        logger.log(this, Thread.currentThread(), LoggingService.LEVEL.DEBUG,
+                                   "Setting parameter " + i + " to " + values[k] + " as BigDecimal.", null);
                         ps.setBigDecimal(i, (BigDecimal) values[k]);
 
                     } else if (values[k] instanceof Integer) {
 
-                        logger.log(this, Thread.currentThread(), LoggingService.LEVEL.DEBUG, "Setting parameter " + i + " to " + values[k] + " as BigDecimal.", null);
+                        logger.log(this, Thread.currentThread(), LoggingService.LEVEL.DEBUG,
+                                   "Setting parameter " + i + " to " + values[k] + " as BigDecimal.", null);
                         ps.setInt(i, ((Integer) values[k]).intValue());
 
                     } else if (values[k] instanceof Long) {
 
-                        logger.log(this, Thread.currentThread(), LoggingService.LEVEL.DEBUG, "Setting parameter " + i + " to " + values[k] + " as BigDecimal.", null);
+                        logger.log(this, Thread.currentThread(), LoggingService.LEVEL.DEBUG,
+                                   "Setting parameter " + i + " to " + values[k] + " as BigDecimal.", null);
                         ps.setLong(i, ((Long) values[k]).longValue());
 
                     } else {
-                        logger.log(this, Thread.currentThread(), LoggingService.LEVEL.DEBUG, "Setting parameter " + i + " to \"" + values[k] + "\" as String.", null);
+                        logger.log(this, Thread.currentThread(), LoggingService.LEVEL.DEBUG,
+                                   "Setting parameter " + i + " to \"" + values[k] + "\" as String.", null);
                         ps.setString(i, (String) values[k]);
                     }
                 }
@@ -324,9 +342,9 @@ public class GenericDML {
             return getDataRow(ps);
 
         } catch (SQLException e) {
-            
+
             logger.log(this, Thread.currentThread(), LoggingService.LEVEL.ERROR, "Error excecuting sql: " + strSQL, e);
-            
+
             if (cn != null)
                 try {
                     cn.rollback();
@@ -389,12 +407,12 @@ public class GenericDML {
                 }
             }
 
-            if(cn.getAutoCommit()) {
+            if (cn.getAutoCommit()) {
                 logger.log(this, Thread.currentThread(), LoggingService.LEVEL.DEBUG, "AutoCommit is true");
             } else {
                 cn.commit();
             }
-            
+
         } catch (SQLException e) {
 
             e.printStackTrace();
@@ -450,17 +468,20 @@ public class GenericDML {
 
                     if (values[k] == null) {
 
-                        logger.log(this, Thread.currentThread(), LoggingService.LEVEL.DEBUG, "Setting parameter " + i + " to null.", null);
+                        logger.log(this, Thread.currentThread(), LoggingService.LEVEL.DEBUG,
+                                   "Setting parameter " + i + " to null.", null);
                         ps.setNull(i, Types.VARCHAR);
 
                     } else if (values[k] instanceof BigDecimal) {
 
-                        logger.log(this, Thread.currentThread(), LoggingService.LEVEL.DEBUG, "Setting parameter " + i + " to " + values[k] + " as BigDecimal.", null);
+                        logger.log(this, Thread.currentThread(), LoggingService.LEVEL.DEBUG,
+                                   "Setting parameter " + i + " to " + values[k] + " as BigDecimal.", null);
                         ps.setBigDecimal(i, (BigDecimal) values[k]);
 
                     } else {
 
-                        logger.log(this, Thread.currentThread(), LoggingService.LEVEL.DEBUG, "Setting parameter " + i + " to \"" + values[k] + "\" as String.", null);
+                        logger.log(this, Thread.currentThread(), LoggingService.LEVEL.DEBUG,
+                                   "Setting parameter " + i + " to \"" + values[k] + "\" as String.", null);
                         ps.setString(i, (String) values[k]);
 
                     }
@@ -630,40 +651,51 @@ public class GenericDML {
                     if (outKeys.containsKey(new Long(i))) {
                         if (outKeys.get(new Long(i)) instanceof BigDecimal) {
                             call.registerOutParameter(i, Types.NUMERIC);
-                            logger.log(this, Thread.currentThread(), LoggingService.LEVEL.DEBUG, "Registering output parameter " + i + " as numeric (BigDecimal).", null);
+                            logger.log(this, Thread.currentThread(), LoggingService.LEVEL.DEBUG,
+                                       "Registering output parameter " + i + " as numeric (BigDecimal).", null);
                         } else if (outKeys.get(new Long(i)) instanceof Long) {
                             call.registerOutParameter(i, Types.NUMERIC);
-                            logger.log(this, Thread.currentThread(), LoggingService.LEVEL.DEBUG, "Registering output parameter " + i + " as numeric. (Long)", null);
+                            logger.log(this, Thread.currentThread(), LoggingService.LEVEL.DEBUG,
+                                       "Registering output parameter " + i + " as numeric. (Long)", null);
                         } else if (outKeys.get(new Long(i)) instanceof Integer) {
                             call.registerOutParameter(i, Types.NUMERIC);
-                            logger.log(this, Thread.currentThread(), LoggingService.LEVEL.DEBUG, "Registering output parameter " + i + " as numeric. (Integer)", null);
+                            logger.log(this, Thread.currentThread(), LoggingService.LEVEL.DEBUG,
+                                       "Registering output parameter " + i + " as numeric. (Integer)", null);
                         } else if (outKeys.get(new Long(i)) instanceof Date) {
                             call.registerOutParameter(i, Types.DATE);
-                            logger.log(this, Thread.currentThread(), LoggingService.LEVEL.DEBUG, "Registering output parameter " + i + " as date.", null);
+                            logger.log(this, Thread.currentThread(), LoggingService.LEVEL.DEBUG,
+                                       "Registering output parameter " + i + " as date.", null);
                         } else {
                             call.registerOutParameter(i, Types.VARCHAR);
-                            logger.log(this, Thread.currentThread(), LoggingService.LEVEL.DEBUG, "Registering output parameter " + i + " as String.", null);
+                            logger.log(this, Thread.currentThread(), LoggingService.LEVEL.DEBUG,
+                                       "Registering output parameter " + i + " as String.", null);
                         }
                     } else {
                         if (values[k] == null) {
                             call.setNull(i, Types.VARCHAR);
-                            logger.log(this, Thread.currentThread(), LoggingService.LEVEL.DEBUG, "Setting parameter " + i + " to null.");
+                            logger.log(this, Thread.currentThread(), LoggingService.LEVEL.DEBUG,
+                                       "Setting parameter " + i + " to null.");
                         } else if (values[k] instanceof BigDecimal) {
-                            logger.log(this, Thread.currentThread(), LoggingService.LEVEL.DEBUG, "Setting parameter " + i + " to " + values[k] + " as BigDecimal.", null);
+                            logger.log(this, Thread.currentThread(), LoggingService.LEVEL.DEBUG,
+                                       "Setting parameter " + i + " to " + values[k] + " as BigDecimal.", null);
                             call.setBigDecimal(i, (BigDecimal) values[k]);
                         } else if (values[k] instanceof Long) {
-                            logger.log(this, Thread.currentThread(), LoggingService.LEVEL.DEBUG, "Setting parameter " + i + " to " + values[k] + " as Long.", null);
+                            logger.log(this, Thread.currentThread(), LoggingService.LEVEL.DEBUG,
+                                       "Setting parameter " + i + " to " + values[k] + " as Long.", null);
                             call.setLong(i, ((Long) values[k]).longValue());
                         } else if (values[k] instanceof Integer) {
-                            logger.log(this, Thread.currentThread(), LoggingService.LEVEL.DEBUG, "Setting parameter " + i + " to " + values[k] + " as Integer.", null);
+                            logger.log(this, Thread.currentThread(), LoggingService.LEVEL.DEBUG,
+                                       "Setting parameter " + i + " to " + values[k] + " as Integer.", null);
                             call.setInt(i, ((Integer) values[k]).intValue());
                         } else if (values[k] instanceof Date) {
-                            logger.log(this, Thread.currentThread(), LoggingService.LEVEL.DEBUG, "Setting parameter " + i + " to " + values[k] + " as Date.", null);
+                            logger.log(this, Thread.currentThread(), LoggingService.LEVEL.DEBUG,
+                                       "Setting parameter " + i + " to " + values[k] + " as Date.", null);
                             call.setDate(i, new java.sql.Date(((Date) values[k]).getTime()));
                         } else if (values[k] instanceof byte[]) {
                             call.setBytes(i, (byte[]) values[k]);
                         } else {
-                            logger.log(this, Thread.currentThread(), LoggingService.LEVEL.DEBUG, "Setting parameter " + i + " to \"" + values[k] + "\" as String.", null);
+                            logger.log(this, Thread.currentThread(), LoggingService.LEVEL.DEBUG,
+                                       "Setting parameter " + i + " to \"" + values[k] + "\" as String.", null);
                             call.setString(i, (String) values[k]);
                         }
                     }
