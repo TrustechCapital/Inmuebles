@@ -57,8 +57,6 @@ const AppBar: React.FC<AppBarProps> = ({ menuOpened, onMenuOpen }) => {
     const sessionInfoContext = useContext(SessionInfoContext);
     const classes = useStyles();
 
-    console.log(typeof sessionInfoContext.sessionInfo?.systemDate);
-
     const userName = sessionInfoContext.sessionInfo
         ? sessionInfoContext.sessionInfo.user.name
         : '';
