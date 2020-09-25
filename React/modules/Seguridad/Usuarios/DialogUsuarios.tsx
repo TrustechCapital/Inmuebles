@@ -10,7 +10,6 @@ import { ClavesModuloUsuarios } from '../../../constants/usuarios';
 import Usuarios from '../../../models/Usuarios';
 import CatalogDialog from '../../../sharedComponents/CatalogDialog';
 import GenericForm from '../../../sharedComponents/Forms';
-//import FormValidator, { ValidationHelpers } from '../../services/FormValidator';
 
 const { FormTextField, FormCatalogSelectField } = new GenericForm<Usuarios>();
 
@@ -19,16 +18,7 @@ const useStyles = makeStyles((theme) => ({
     rowSpacing: {
         marginBottom: theme.spacing(2),
     },
-}));
-
-/*const UsuariosFormValidator = new FormValidator<Usuarios>({
-    idFideicomiso: ValidationHelpers.validateFideicomiso,
-    idSubcuenta: ValidationHelpers.validateSubcuenta,
-    idTipoUsuarios: ValidationHelpers.validateRequiredNumber(
-        'El tipo de bien es un campo requerido'
-    ),
-});
-*/
+}))
 
 const DialogUsuarios: React.FC<ICatalogDialog<Usuarios>> = ({
     mode,
@@ -50,7 +40,6 @@ const DialogUsuarios: React.FC<ICatalogDialog<Usuarios>> = ({
             initialValues={model}
             onSubmit={onSaveRequest}
             enableReinitialize={true}
-            //validationSchema={UsuariosFormValidator.validationSchema}
         >
             {(props) => (
                 <CatalogDialog
@@ -86,11 +75,11 @@ const DialogUsuarios: React.FC<ICatalogDialog<Usuarios>> = ({
                                     dataType="text"
                                 />
                             </Grid>
-                            <Grid item xs={6}>
+                            <Grid item xs={3}>
                                 <FormTextField
                                     name="numeroUsuario"
                                     label="Numero"
-                                    disabled={pkFieldsDisabled}
+                                    disabled={true}
                                     dataType="number"
                                 />
                             </Grid>
@@ -106,37 +95,20 @@ const DialogUsuarios: React.FC<ICatalogDialog<Usuarios>> = ({
                                     catalogId={
                                         ClavesModuloUsuarios.TiposDeUsuario
                                     }
-                                    label="Tipo de Usuarios"
+                                    label="Tipo"
                                     disabled={pkFieldsDisabled}
                                 />
                             </Grid>
-                            <Grid item xs={6}>
-                                <FormCatalogSelectField
-                                    name="numeroPuesto"
-                                    catalogId={
-                                        ClavesModuloUsuarios.TiposDeUsuario //TODO: PUESTOS SE CARGAN DE UN CATALOGO
-                                    }
-                                    label="Tipo de Usuarios"
-                                    disabled={pkFieldsDisabled}
-                                />
-                            </Grid>
-                        </Grid>
-                        <Grid
-                            container
-                            className={classes.rowSpacing}
-                            spacing={3}
-                        >
                             <Grid item xs={6}>
                                 <FormCatalogSelectField
                                     name="claveStatus"
                                     catalogId={
-                                        ClavesModuloUsuarios.TiposDeUsuario //TODO: PUESTOS SE CARGAN DE UN CATALOGO
+                                        ClavesModuloUsuarios.StatusDeUsuario
                                     }
-                                    label="Status"
+                                    label="Estatus"
                                     disabled={pkFieldsDisabled}
                                 />
                             </Grid>
-                            <Grid item xs={6}></Grid>
                         </Grid>
                     </Grid>
                 </CatalogDialog>
