@@ -1209,7 +1209,24 @@
                 <!-- FIN BIENES FIDEICOMITIDOS-->
                 <entry key="funRegistroGarantias" value="SELECT FGAR_ID_FIDEICOMISO,FGAR_ID_SUBCUENTA,CVE_DESC_CLAVE FGAR_CVE_GARANTIA2,FGAR_CVE_GARANTIA, FGAR_IMP_GARANTIA,FGAR_IMP_GARANTIZAD,FGAR_CVE_STATUS, CTO_NUM_ESCRITURA,                   TO_CHAR(FGAR_IMP_GARANTIA,'999,999,999,999,990.00') FGAR_IMP_GARANTIA_FORMATTED,                   TO_CHAR(FGAR_IMP_GARANTIZAD,'999,999,999,999,990.00') FGAR_IMP_GARANTIZAD_FORMATTED,                   TO_CHAR(                   FGAR_IMP_GARANTIA -                    (SELECT COALESCE(SUM(FLB_IMPORTE_EXT),0) FROM F_LIQUIDACIONES_BIENES                        WHERE FLB_ID_FIDEICOMISO = FGAR_ID_FIDEICOMISO                         AND FLB_ID_SUBCUENTA = FGAR_ID_SUBCUENTA                         AND FLB_AFECTA=1                          AND FLB_ID_GARANTIA = FGAR_CVE_GARANTIA),'999,999,999,999,990.00') DISPONIBLE_BIEN,                   TO_CHAR(                   (SELECT COALESCE(SUM(FLB_IMPORTE_EXT),0) FROM F_LIQUIDACIONES_BIENES                        WHERE FLB_ID_FIDEICOMISO = FGAR_ID_FIDEICOMISO                         AND FLB_ID_SUBCUENTA = FGAR_ID_SUBCUENTA                         AND FLB_AFECTA=1                          AND FLB_ID_GARANTIA = FGAR_CVE_GARANTIA),'999,999,999,999,990.00') PAGOS_BIEN                 FROM F_GARANTIAS, CONTRATO,CLAVES WHERE FGAR_ID_FIDEICOMISO = CTO_NUM_CONTRATO AND CVE_NUM_CLAVE=38 AND FGAR_CVE_GARANTIA=CVE_NUM_SEC_CLAVE"/>
                 <!-- BIENES EN GARANTIA -->
-                <entry key="consultarBienesGar" value="SELECT FGRS_ID_FIDEICOMISO,FGRS_ID_SUBCUENTA,FORS_ID_GARANTIA,FORS_CVE_TIPO_GARANTIA,FORS_CVE_TIPO_BIEN,FORS_IMP_ULT_VALUA,FORS_CVE_STATUS,FORS_TEXTO_DESCRIP,                       TO_CHAR(FORS_IMP_ULT_VALUA,'999,999,999,999,990.00') FORS_IMP_ULT_VALUA_FORMATTED,C1.CVE_DESC_CLAVE DESCRIPBIEN                       FROM F_BIENESGAR,CLAVES C1,CLAVES C2  WHERE C2.CVE_NUM_CLAVE=38 AND                        C2.CVE_NUM_SEC_CLAVE=FORS_CVE_TIPO_GARANTIA                       AND C2.CVE_FORMA_EMP_CVE=C1.CVE_NUM_CLAVE                       AND FORS_CVE_TIPO_BIEN=C1.CVE_NUM_SEC_CLAVE"/>
+                <entry key="consultarBienesGar" value="SELECT fgrs_id_fideicomiso, 
+                        fgrs_id_subcuenta, 
+                        fors_id_garantia, 
+                        fors_cve_tipo_garantia, 
+                        fors_cve_tipo_bien, 
+                        fors_imp_ult_valua, 
+                        fors_cve_status, 
+                        fors_texto_descrip, 
+                        To_char(fors_imp_ult_valua, '999,999,999,999,990.00') 
+                                            FORS_IMP_ULT_VALUA_FORMATTED, 
+                        C1.cve_desc_clave DESCRIPBIEN 
+                    FROM   f_bienesgar, 
+                        claves C1, 
+                        claves C2 
+                    WHERE  C2.cve_num_clave = 38 
+                        AND C2.cve_num_sec_clave = fors_cve_tipo_garantia 
+                        AND C2.cve_forma_emp_cve = CAST(C1.cve_num_clave AS VARCHAR) 
+                    AND fors_cve_tipo_bien = C1.cve_num_sec_clave"/>
                 <entry key="consultarBienesGarSaldoTotal" value="SELECT DISTINCT FGRS_ID_FIDEICOMISO,FGRS_ID_SUBCUENTA,FORS_CVE_TIPO_GARANTIA,                       TO_CHAR(                           (SELECT NVL(SUM(FPB_IMPORTE_EXT),0) FROM F_PAGOS_BIENES                                WHERE FPB_ID_FIDEICOMISO = FGRS_ID_FIDEICOMISO                                 AND FPB_ID_SUBCUENTA = FGRS_ID_SUBCUENTA                                 AND FPB_ID_GARANTIA = FORS_CVE_TIPO_GARANTIA)-                           (SELECT NVL(SUM(FLB_IMPORTE_EXT),0) FROM F_LIQUIDACIONES_BIENES                                WHERE FLB_ID_FIDEICOMISO = FGRS_ID_FIDEICOMISO                                 AND FLB_ID_SUBCUENTA = FGRS_ID_SUBCUENTA                                 AND FLB_ID_GARANTIA = FORS_CVE_TIPO_GARANTIA)                           ,'999,999,999,999,990.00') SALDO_BIEN                 FROM F_BIENESGAR WHERE 1=1"/>
                 <entry key="consultaSigBienesGar" value="SELECT NVL(MAX(FORS_ID_GARANTIA),0)+1 ID_SIG_BIEN FROM F_BIENESGAR"/>
                 <entry key="consultarBienesGarPagos" value="SELECT FPB_ID_FIDEICOMISO,FPB_ID_SUBCUENTA,FPB_ID_GARANTIA,FPB_ID_BIEN_GARANTIA,FPB_ID_COBRO,                   FPB_IMPORTE, TO_CHAR(FPB_IMPORTE,'999,999,999,999,990.00') FPB_IMPORTE_FORMATTED,                   FPB_CVE_MONEDA,MON_NOM_MONEDA FPB_TXT_MONEDA,                   FPB_TIPO_CAMBIO,                   TO_CHAR(FPB_TIPO_CAMBIO,'999,999,999,999,990.009999') FPB_TIPO_CAMBIO_FORMATTED,                   FPB_IMPORTE_EXT,                   TO_CHAR(FPB_IMPORTE_EXT,'999,999,999,999,990.00') FPB_IMPORTE_EXT_FORMATTED,                   TO_CHAR(FPB_FECHA,'DD/MM/YYYY') FPB_FECHA,                   FPB_COMENTARIO               FROM F_PAGOS_BIENES, MONEDAS                 WHERE FPB_CVE_MONEDA = MON_NUM_PAIS"/>
