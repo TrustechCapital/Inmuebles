@@ -1,4 +1,5 @@
 import { ModelsApi } from '../../../../core/api';
+import { fideicomisosApi as commonFideicomisosApi } from '../../../../core/api/fideicomisos';
 import { ITableFideicomisosParameters } from '../types';
 import FideicomisoResultRow from '../models/FideicomisoResultRow';
 import FideicomisosModelMapper from './FideicomisosModelMapper';
@@ -17,6 +18,15 @@ class FideicomisosApi extends ModelsApi<Fideicomiso>
             resultRow.idFideicomiso,
             resultRow.nombreFideicomiso
         );
+    }
+
+    async exists(model: Fideicomiso): Promise<boolean> {
+
+        if (!model.id) {
+            return false;
+        }
+
+        return await commonFideicomisosApi.exists(model.id);
     }
 
     async find(

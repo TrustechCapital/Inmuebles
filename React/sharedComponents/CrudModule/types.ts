@@ -49,6 +49,7 @@ export interface ICrudeModuleState<MainModel, SearchModel, RowModel> {
 
 export interface ICrudModuleApi<MainModel, SearchModel, RowModel> {
     find(parameters: SearchModel): Promise<RowModel[]>;
+    exists(model: MainModel): Promise<boolean>;
     create(model: MainModel): Promise<MainModel>;
     update(model: MainModel): Promise<MainModel>;
     getModelFromResultRow(resultRow: RowModel): MainModel;

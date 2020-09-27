@@ -119,6 +119,12 @@ export default abstract class CrudActions<
 
             try {
                 if (state.modalMode === OperacionesCatalogo.Alta) {
+                    const modelAlreadyExists = await this.api.exists(model);
+
+                    if (modelAlreadyExists){
+                        throw new Error('El modelo ya existe');
+                    }
+
                     await this.api.create(model);
                 } else {
                     await this.api.update(model);
