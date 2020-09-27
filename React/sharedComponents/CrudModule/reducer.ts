@@ -64,6 +64,7 @@ export default function CrudModuleReducer<MainModel, SearchModel, RowModel>(
             return {
                 ...state,
                 modalOpen: false,
+                modalErrorMessage: null,
             };
         case 'SAVE_MODEL':
             return {
