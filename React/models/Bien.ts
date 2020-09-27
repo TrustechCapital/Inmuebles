@@ -9,10 +9,10 @@ class Bien extends BaseModel {
     descripcion: string = '';
     comentario: string = '';
     idClaveRevaluacion: number | null = null;
-    importeDeGarantia: number | null = null;
-    importeDelBien: number | null = null;
+    importeDeGarantia: number | null = 0;
+    importeDelBien: number | null = 0;
     picnorado: number | null = null;
-    importeUltimaValuacion: number | null = null;
+    importeUltimaValuacion: number | null = 0;
     idClavePeriodicidadRevaluacion: number | null = null;
     fechaUltimaValuacion: Date | null = null;
     fechaInicio: Date | null = null;
