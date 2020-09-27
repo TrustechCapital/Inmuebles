@@ -18,6 +18,21 @@ class FideicomisosApi extends Api {
             return data[0].ctoNumContrato === 1;
         });
     }
+
+    async getName(numFideicomiso: number): Promise<string> {
+        return await this.getRef(
+            'conNomFid',
+            {
+                numFideicomiso: numFideicomiso
+            },
+            (data) => {
+                return data;
+            }
+            
+        ).then((data: any) => {
+            return (data === null || data.length !== 1) ? '' : data[0].nombre;
+        });
+    }
 }
 
 export const fideicomisosApi = new FideicomisosApi();
