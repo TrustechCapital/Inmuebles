@@ -22,7 +22,6 @@ const useStyles = makeStyles({
 // TODO: agregar descriptiones de cada propiedad
 export type GenericSelectProps = Pick<
     SelectProps,
-    | 'defaultValue'
     | 'id'
     | 'multiple'
     | 'disabled'
@@ -33,6 +32,7 @@ export type GenericSelectProps = Pick<
 > & {
     label: string;
     value: string | number | null;
+    defaultValue?: string | number | null;
     items?: Object[]; // TODO: Quitar valor opcional
     valueKey?: string;
     labelKey?: string;
@@ -50,6 +50,7 @@ const GenericSelect: FunctionComponent<GenericSelectProps> = ({
     fullWidth = true,
     error,
     helperText,
+    defaultValue,
     ...selectProps
 }) => {
     const classes = useStyles();
@@ -63,6 +64,12 @@ const GenericSelect: FunctionComponent<GenericSelectProps> = ({
         setOpen(true);
     };
 
+    let valueWithDefault = value;
+
+    if ((value === null || value == undefined)) {
+        valueWithDefault = defaultValue || '';
+    }
+
     return (
         <FormControl
             variant="outlined"
@@ -75,7 +82,7 @@ const GenericSelect: FunctionComponent<GenericSelectProps> = ({
             </InputLabel>
             <Select
                 classes={{ outlined: classes.outlinedSelect }}
-                value={value === null ? '' : value}
+                value={valueWithDefault}
                 open={open}
                 onClose={handleClose}
                 onOpen={handleOpen}
