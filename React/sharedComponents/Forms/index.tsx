@@ -60,7 +60,7 @@ import GenericRadioGroup, {
  * NOTA: Se utiliza "keyof Model" para decirle a TS que los valores validos de name
  * son propedades del objeto Model
  */
-type FormFieldProperties<Model, InputComponent> = {
+export type FormFieldProperties<Model, InputComponent> = {
     type?: string;
     namespace?: string;
     name: Extract<keyof Model, string>;
