@@ -2,19 +2,21 @@ import React from 'react';
 
 import { makeStyles } from '@material-ui/core/styles';
 import Grid from '@material-ui/core/Grid';
-import { Formik } from 'formik';
+import { Formik, useFormikContext } from 'formik';
 
 import { ICatalogDialog } from '../../../types';
 import { OperacionesCatalogo, SavingStatus } from '../../../constants';
 import { ClavesModuloBienes } from '../../../constants/bienes';
 import Bien from '../../../models/Bien';
 import CatalogDialog from '../../../sharedComponents/CatalogDialog';
-import GenericTextInput from '../../../sharedComponents/GenericTextInput';
+import { GenericInputProps } from '../../../sharedComponents/GenericTextInput';
 import GenericSwitch from '../../../sharedComponents/GenericSwitch';
-import GenericForm from '../../../sharedComponents/Forms';
+import GenericForm, { FormFieldProperties } from '../../../sharedComponents/Forms';
 import FormValidator, {
     ValidationHelpers,
 } from '../../../services/FormValidator';
+import useNombreFideicomiso from '../../../sharedHooks/useNombreFideicomiso';
+import { Typography } from '@material-ui/core';
 
 const {
     FormTextField,
@@ -38,6 +40,34 @@ const BienesFormValidator = new FormValidator<Bien>({
     ),
 });
 
+
+type IdFideicomisoFieldType = 
+    FormFieldProperties<Bien, GenericInputProps> & {
+        onChangeFideicomiso: (idFideicomiso: number) => {}
+    }
+
+const IdFideicomisoField = (props: IdFideicomisoFieldType) => {
+    const { onChangeFideicomiso, ...other } = props;
+    const {
+        values: { idFideicomiso }
+      } = useFormikContext<Bien>();
+    
+      React.useEffect(() => {
+        
+        if (idFideicomiso) {
+            onChangeFideicomiso(idFideicomiso);
+        }
+
+      }, [idFideicomiso]);
+
+    return (
+        <FormTextField
+            {...other}
+        />
+    )
+}
+
+
 const DialogBienes: React.FC<ICatalogDialog<Bien>> = ({
     mode,
     model,
@@ -48,11 +78,12 @@ const DialogBienes: React.FC<ICatalogDialog<Bien>> = ({
     onSaveRequest,
 }) => {
     const classes = useStyles();
+    const [nombreFideicomiso, findNombreFideicomiso] = useNombreFideicomiso([open]);
 
     const allFieldsDisabled = mode === OperacionesCatalogo.Consulta;
     const pkFieldsDisabled =
         allFieldsDisabled || mode === OperacionesCatalogo.Modificacion;
-
+        
     return (
         <Formik
             initialValues={model}
@@ -87,21 +118,17 @@ const DialogBienes: React.FC<ICatalogDialog<Bien>> = ({
                             spacing={3}
                         >
                             <Grid item xs={6}>
-                                <FormTextField
+                                <IdFideicomisoField
                                     name="idFideicomiso"
-                                    label="Fideicomiso"
+                                    label="Numero Fideicomiso"
                                     helperText="Fideicomiso a asignar bienes"
                                     disabled={pkFieldsDisabled}
                                     dataType="number"
+                                    onChangeFideicomiso={findNombreFideicomiso}
                                 />
                             </Grid>
                             <Grid item xs={6}>
-                                <GenericTextInput
-                                    label="Nombre de Fideicomiso"
-                                    readOnly={true}
-                                    value=""
-                                    onChange={() => {}}
-                                />
+                                <Typography color="textSecondary" variant="body2">Nombre del Fideicomiso:<br/> {nombreFideicomiso}</Typography>
                             </Grid>
                         </Grid>
                         <Grid
@@ -268,6 +295,7 @@ const DialogBienes: React.FC<ICatalogDialog<Bien>> = ({
                                     useLabelAsValue={true}
                                     label="Estatus"
                                     disabled={allFieldsDisabled}
+                                    defaultValue="ACTIVO"
                                 />
                             </Grid>
                         </Grid>
