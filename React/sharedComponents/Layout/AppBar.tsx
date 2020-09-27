@@ -99,8 +99,8 @@ const AppBar: React.FC<AppBarProps> = ({ menuOpened, onMenuOpen }) => {
                         {userName}
                         <small>Fecha sistema: {systemDate}</small>
                     </Typography>
-                    <IconButton color="inherit">
-                        <ExitToAppIcon onClick={sessionInfoContext.onLogout} />
+                    <IconButton color="inherit" onClick={sessionInfoContext.onLogout}>
+                        <ExitToAppIcon/>
                     </IconButton>
                 </div>
             </Toolbar>
