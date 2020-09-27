@@ -7,9 +7,7 @@ class BienResultRow {
     claveEstatus: string = '';
     bienDisponible: string = '';
     importeBien: number | null = null;
-    importeBienFormateado: string = '';
     importeBienGarantizado: number | null = null;
-    importeBienGarantizadoYFormateado: string = '';
     importePagosBien: number | null = null;
     numeroEscritura: string = '';
 
@@ -23,13 +21,11 @@ class BienResultRow {
             idFideicomiso: obj.fgarIdFideicomiso,
             idSubcuenta: obj.fgarIdSubcuenta,
             idTipoBien: obj.fgarCveGarantia,
-            tipoBien: obj.fgarCveGarantia2,
+            tipoBien: obj.descripcionTipoBien,
             claveEstatus: obj.fgarCveStatus,
-            bienDisponible: obj.disponibleBien,
+            bienDisponible: obj.importeBienDisponible,
             importeBien: obj.fgarImpGarantia,
-            importeBienFormateado: obj.fgarImpGarantiaFormatted,
             importeBienGarantizado: obj.fgarImpGarantizad,
-            importeBienGarantizadoYFormateado: obj.fgarImpGarantizadFormatted,
             importePagosBien: obj.pagosBien,
             numeroEscritura: obj.ctoNumEscritura,
         };

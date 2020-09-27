@@ -28,7 +28,7 @@ const COLUMNS_DETALLE_BIENES: IGenericColumn[] = [
     { field: 'idFideicomiso', header: 'Fideicomiso' },
     { field: 'tipoBien', header: 'Clasificacion' },
     {
-        field: 'importeUltimaValuacionFormateado',
+        field: 'importeUltimaValuacion',
         header: 'Importe Ult. Valuación',
         numeric: true,
     },

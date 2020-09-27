@@ -13,6 +13,27 @@ class BienesApi extends ModelsApi<Bien> {
         );
     }
 
+    async exists(model: Bien): Promise<boolean> {
+
+        if (!model.idFideicomiso || model.idSubcuenta === null || model.idSubcuenta === undefined || !model.idTipoBien) {
+            return false;
+        }
+
+        return await this.getRef(
+            'qryExisteBien',
+            {
+                idFideicomiso: model.idFideicomiso,
+                idSubcuenta: model.idSubcuenta,
+                idTipoBien: model.idTipoBien,
+            },
+            (data) => {
+                return data;
+            }
+        ).then((data: any) => {
+            return data[0].numRegistros >= 1;
+        });
+    }
+
     async find(parameters: ITableBienesParameters): Promise<BienResultRow[]> {
         return await this.getRef(
             'funRegistroGarantias',

@@ -6,7 +6,7 @@ class DetalleBienResultRow {
     tipoBien: string = '';
     idDetalleBien: number | null = null;
     idTipoDetalleBien: number | null = null;
-    importeUltimaValuacionFormateado: string = '';
+    importeUltimaValuacion: number | null = null;
     descripcion: string = '';
 
     constructor(id: number) {
@@ -22,8 +22,7 @@ class DetalleBienResultRow {
             tipoBien: obj.descripbien,
             idDetalleBien: obj.forsIdGarantia,
             idTipoDetalleBien: obj.forsCveTipoBien,
-
-            importeUltimaValuacionFormateado: obj.forsImpUltValuaFormatted,
+            importeUltimaValuacion: obj.forsImpUltValua,
             descripcion: obj.forsTextoDescrip,
         };
     }

@@ -19,9 +19,9 @@ const COLUMNS: IGenericColumn[] = [
     { field: 'id', header: 'Id', isKey: true },
     { field: 'idFideicomiso', header: 'Fideicomiso' },
     { field: 'tipoBien', header: 'Tipo de Bien' },
-    { field: 'importeBienFormateado', header: 'Importe', numeric: true },
+    { field: 'importeBien', header: 'Importe', numeric: true },
     {
-        field: 'importeBienGarantizadoYFormateado',
+        field: 'importeBienGarantizado',
         header: 'Importe Actualizado',
         numeric: true,
     },

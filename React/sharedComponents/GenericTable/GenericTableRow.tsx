@@ -7,6 +7,7 @@ import Checkbox from '@material-ui/core/Checkbox';
 import Radio from '@material-ui/core/Radio';
 
 import { IColumn } from './types';
+import { formatMoney } from '../../utils/NumberUtils';
 
 type TableRowProps = {
     row: any;
@@ -28,12 +29,13 @@ const GenericTableRow: React.FC<TableRowProps> = React.memo(
                     )}
                 </TableCell>
                 {columns.map((col) => {
+                    const cellValue = col.numeric ? formatMoney(row[col.field]) : row[col.field];
                     return (
                         <GenericTableCell
                             key={col.field}
                             align={col.numeric ? 'right' : 'left'}
                         >
-                            {row[col.field]}
+                            {cellValue}
                         </GenericTableCell>
                     );
                 })}

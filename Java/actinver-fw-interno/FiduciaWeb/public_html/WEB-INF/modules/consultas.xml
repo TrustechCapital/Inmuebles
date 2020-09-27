@@ -1207,18 +1207,39 @@
                 <entry key="prinBienesFideicomitidos" value="SELECT FBIF_ID_FIDEICOMISO,FBIF_ID_SUB_CUENTA,FBIF_ID_TIPO_BIEN,FBIF_ID_CVE_BIEN,FBIF_ID_BIEN,FBIF_DESC_BIEN,FBIF_IMP_ULT_VALUA,FBIF_PER_VALUACION,FBIF_ST_BIEN FROM F_BIENES"/>
                 <entry key="funRegistroBienes" value="{? = call GARINMUEBLES.GENERA_BIENES(?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)}"/>
                 <!-- FIN BIENES FIDEICOMITIDOS-->
-                <entry key="funRegistroGarantias" value="SELECT FGAR_ID_FIDEICOMISO,FGAR_ID_SUBCUENTA,CVE_DESC_CLAVE FGAR_CVE_GARANTIA2,FGAR_CVE_GARANTIA, FGAR_IMP_GARANTIA,FGAR_IMP_GARANTIZAD,FGAR_CVE_STATUS, CTO_NUM_ESCRITURA,                   TO_CHAR(FGAR_IMP_GARANTIA,'999,999,999,999,990.00') FGAR_IMP_GARANTIA_FORMATTED,                   TO_CHAR(FGAR_IMP_GARANTIZAD,'999,999,999,999,990.00') FGAR_IMP_GARANTIZAD_FORMATTED,                   TO_CHAR(                   FGAR_IMP_GARANTIA -                    (SELECT COALESCE(SUM(FLB_IMPORTE_EXT),0) FROM F_LIQUIDACIONES_BIENES                        WHERE FLB_ID_FIDEICOMISO = FGAR_ID_FIDEICOMISO                         AND FLB_ID_SUBCUENTA = FGAR_ID_SUBCUENTA                         AND FLB_AFECTA=1                          AND FLB_ID_GARANTIA = FGAR_CVE_GARANTIA),'999,999,999,999,990.00') DISPONIBLE_BIEN,                   TO_CHAR(                   (SELECT COALESCE(SUM(FLB_IMPORTE_EXT),0) FROM F_LIQUIDACIONES_BIENES                        WHERE FLB_ID_FIDEICOMISO = FGAR_ID_FIDEICOMISO                         AND FLB_ID_SUBCUENTA = FGAR_ID_SUBCUENTA                         AND FLB_AFECTA=1                          AND FLB_ID_GARANTIA = FGAR_CVE_GARANTIA),'999,999,999,999,990.00') PAGOS_BIEN                 FROM F_GARANTIAS, CONTRATO,CLAVES WHERE FGAR_ID_FIDEICOMISO = CTO_NUM_CONTRATO AND CVE_NUM_CLAVE=38 AND FGAR_CVE_GARANTIA=CVE_NUM_SEC_CLAVE"/>
+                <entry key="funRegistroGarantias" value="SELECT fgar_id_fideicomiso, 
+                        fgar_id_subcuenta, 
+                        cve_desc_clave 
+                        AS descripcion_tipo_bien, 
+                        fgar_cve_garantia, 
+                        fgar_imp_garantia, 
+                        fgar_imp_garantizad, 
+                        fgar_cve_status, 
+                        cto_num_escritura, 
+                        ( fgar_imp_garantia - (SELECT COALESCE(Sum(flb_importe_ext), 0) 
+                                                FROM   f_liquidaciones_bienes 
+                                                WHERE  flb_id_fideicomiso = fgar_id_fideicomiso 
+                                                        AND flb_id_subcuenta = fgar_id_subcuenta 
+                                                        AND flb_afecta = 1 
+                                                        AND flb_id_garantia = fgar_cve_garantia) ) 
+                        AS 
+                        importe_bien_disponible
+                    FROM   f_garantias, 
+                        contrato, 
+                        claves 
+                    WHERE  fgar_id_fideicomiso = cto_num_contrato 
+                        AND cve_num_clave = 38 
+                        AND fgar_cve_garantia = cve_num_sec_clave"/>
+                <entry key="qryExisteGarantia" value="SELECT COUNT(0) FROM f_garantias WHERE fgar_id_fideicomiso = ? AND fgar_id_subcuenta = ? AND fgar_cve_garantia = ?"/>
                 <!-- BIENES EN GARANTIA -->
                 <entry key="consultarBienesGar" value="SELECT fgrs_id_fideicomiso, 
                         fgrs_id_subcuenta, 
-                        fors_id_garantia, 
+                        fors_id_garantia,
                         fors_cve_tipo_garantia, 
                         fors_cve_tipo_bien, 
                         fors_imp_ult_valua, 
                         fors_cve_status, 
-                        fors_texto_descrip, 
-                        To_char(fors_imp_ult_valua, '999,999,999,999,990.00') 
-                                            FORS_IMP_ULT_VALUA_FORMATTED, 
+                        fors_texto_descrip,
                         C1.cve_desc_clave DESCRIPBIEN 
                     FROM   f_bienesgar, 
                         claves C1, 
@@ -37922,6 +37943,34 @@
                             </property>
                             <property name="order">
                                 <value>true</value>
+                            </property>
+                        </bean>
+                    </list>
+                </entry>
+                <entry key="qryExisteBien">
+                    <list>
+                        <bean class="mx.gob.nafin.fiduciario.common.beans.ParametroQueryBean">
+                            <property name="name">
+                                <value>idFideicomiso</value>
+                            </property>
+                            <property name="sqlName">
+                                <value>FGAR_ID_FIDEICOMISO</value>
+                            </property>
+                        </bean>
+                        <bean class="mx.gob.nafin.fiduciario.common.beans.ParametroQueryBean">
+                            <property name="name">
+                                <value>idSubcuenta</value>
+                            </property>
+                            <property name="sqlName">
+                                <value>FGAR_ID_SUBCUENTA</value>
+                            </property>
+                        </bean>
+                        <bean class="mx.gob.nafin.fiduciario.common.beans.ParametroQueryBean">
+                            <property name="name">
+                                <value>idTipoBien</value>
+                            </property>
+                            <property name="sqlName">
+                                <value>CVE_NUM_SEC_CLAVE</value>
                             </property>
                         </bean>
                     </list>

@@ -5,3 +5,9 @@ export function humanFileSize(size: number) {
         humanReadableSize.toFixed(2) + ' ' + ['B', 'kB', 'MB', 'GB', 'TB'][i]
     );
 }
+
+const numberFormatter = new Intl.NumberFormat('es-MX', {minimumFractionDigits: 2});
+
+export function formatMoney(value: number |  null): string {
+    return !value ? '0' : numberFormatter.format(value);
+}
