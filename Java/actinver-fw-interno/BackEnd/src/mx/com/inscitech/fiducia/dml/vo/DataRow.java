@@ -11,6 +11,8 @@ public class DataRow implements Serializable {
 
     @SuppressWarnings("compatibility:1235470106920307740")
     private static final long serialVersionUID = 2490982374418435141L;
+    static final boolean IS_POSTGRES_DB = true;
+
 
     private Map dataRow;
     private ArrayList fields;
@@ -30,12 +32,18 @@ public class DataRow implements Serializable {
         fields.remove(key);
     }
 
+    public String getNormalizedKey(String key) {
+        return IS_POSTGRES_DB ? key.toLowerCase() : key;
+    }
+
     public Object getData(String key) {
-        return dataRow.get(key);
+        String normalizedKey = getNormalizedKey(key);
+        return dataRow.get(normalizedKey);
     }
 
     public String getString(String key) {
-        return dataRow.get(key) == null ? null : "" + dataRow.get(key);
+        String normalizedKey = getNormalizedKey(key);
+        return dataRow.get(normalizedKey) == null ? null : "" + dataRow.get(normalizedKey);
     }
 
     public int getFieldCount() {
