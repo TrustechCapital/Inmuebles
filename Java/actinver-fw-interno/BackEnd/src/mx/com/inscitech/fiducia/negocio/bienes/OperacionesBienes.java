@@ -100,9 +100,9 @@ public class OperacionesBienes {
         this.liquidacionesBienesRepository = liquidacionesBienesRepository;
     }
 
-    public void liberaBienes(BigDecimal idFideicomiso, BigDecimal idSubcuenta, String idBien, String depto,
-                             BigDecimal idNotario, String localidad, String escritura, String registroPublico,
-                             String folioReal, String fechaTrasladoDominio) {
+    public void liberaBienes(BigDecimal idFideicomiso, BigDecimal idSubcuenta, String idBien, String edificio,
+                             String depto, BigDecimal idNotario, String localidad, String escritura,
+                             String registroPublico, String folioReal, String fechaTrasladoDominio) {
 
         FAdquirentes adquiriente =
             adquirienteRepository.findByPk(idFideicomiso, idSubcuenta, idBien, depto, BigDecimal.valueOf(1));
@@ -121,7 +121,7 @@ public class OperacionesBienes {
 
             adquirienteRepository.save(adquiriente);
 
-            FUnidades unidad = unidadRepository.findByPk(idFideicomiso, idSubcuenta, idBien, depto);
+            FUnidades unidad = unidadRepository.findByPk(idFideicomiso, idSubcuenta, idBien, edificio, depto);
 
             unidad.setFuniNotario(idNotario);
             unidad.setFuniLocalidadNota(localidad);
@@ -801,7 +801,7 @@ public class OperacionesBienes {
                 procesoLiberacionRepository.insert(procesoLiberacion);
             }
 
-            FUnidades unidad = unidadRepository.findByPk(pIdFideicomiso, pIdSubcuenta, pIdBien, pIdDepto);
+            FUnidades unidad = unidadRepository.findByPk(pIdFideicomiso, pIdSubcuenta, pIdBien, pIdEdificio, pIdDepto);
             unidad.setFuniStatus(pClaveEstatus);
 
             unidadRepository.update(unidad);

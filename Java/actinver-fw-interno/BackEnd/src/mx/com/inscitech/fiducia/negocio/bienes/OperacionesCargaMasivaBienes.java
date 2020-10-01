@@ -29,6 +29,7 @@ public class OperacionesCargaMasivaBienes {
 
                 BigDecimal idSubcuenta = BigDecimal.valueOf(0);
                 String idBien = layoutCarga.getIdBien().toString();
+                String idEdificio = layoutCarga.getEdificio();
                 String idDepto = layoutCarga.getDepto();
                 BigDecimal idNotario = BigDecimal.valueOf(layoutCarga.getNotario());
 
@@ -36,14 +37,13 @@ public class OperacionesCargaMasivaBienes {
 
                 if (pTipoOperacion == TiposCargaMasiva.INDIVIDUALIZACION.getValue()) {
 
-                    FUnidades unidad = unidadRepository.findByPk(idFideicomiso, idSubcuenta, idBien, idDepto);
+                    FUnidades unidad =
+                        unidadRepository.findByPk(idFideicomiso, idSubcuenta, idBien, idEdificio, idDepto);
 
                     String fechaReversion = layoutCarga.getFechaAvaluo();
 
                     if (unidad == null) {
-                        unidad =
-                            new FUnidades(idFideicomiso, idSubcuenta, layoutCarga.getIdBien().toString(),
-                                          layoutCarga.getDepto());
+                        unidad = new FUnidades(idFideicomiso, idSubcuenta, idBien, idEdificio, idDepto);
                         unidad.setFuniTipo(tipo);
 
                         unidad.setFuniNiveles(layoutCarga.getNiveles());
@@ -65,7 +65,7 @@ public class OperacionesCargaMasivaBienes {
                         unidad.setFuniNumEscritura(layoutCarga.getEscritura());
                         // TODO: es esta la fecha de escrituracion?
                         unidad.setFuniFechaTrasladoDominio(layoutCarga.getFechaEscritura());
-                        unidad.setFuniFechaReversion(DateUtils.fromString(fechaReversion));
+                        unidad.setFuniFechaReversion(fechaReversion);
                         unidad.setFuniNotario(idNotario);
                         unidad.setFuniStatus(EstatusIndividualizacionBienes.getText(layoutCarga.getStatus()));
 
@@ -75,7 +75,8 @@ public class OperacionesCargaMasivaBienes {
                 } else if (pTipoOperacion == TiposCargaMasiva.LIBERACION.getValue()) {
 
 
-                    FUnidades unidad = unidadRepository.findByPk(idFideicomiso, idSubcuenta, idBien, idDepto);
+                    FUnidades unidad =
+                        unidadRepository.findByPk(idFideicomiso, idSubcuenta, idBien, idEdificio, idDepto);
                     unidad.setFuniNotario(idNotario);
                     unidad.setFuniNumEscritura(layoutCarga.getEscritura());
                     unidad.setFuniStatus(EstatusIndividualizacionBienes.ACTIVO.getText());

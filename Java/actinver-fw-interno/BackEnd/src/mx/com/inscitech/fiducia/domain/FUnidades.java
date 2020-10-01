@@ -15,13 +15,14 @@ import mx.com.inscitech.fiducia.domain.base.DMLObject;
 import mx.com.inscitech.fiducia.dml.vo.DataRow;
 
 @PrimaryKey(constraintName = "F_UNIDADES_PK",
-            columns = { "FUNI_ID_FIDEICOMISO", "FUNI_ID_SUBCUENTA", "FUNI_ID_BIEN", "FUNI_ID_DEPTO" },
-            sequences = { "MANUAL" })
+            columns = { "FUNI_ID_FIDEICOMISO", "FUNI_ID_SUBCUENTA", "FUNI_ID_BIEN", "FUNI_ID_EDIFICIO", "FUNI_ID_DEPTO"
+    }, sequences = { "MANUAL" })
 public class FUnidades extends DomainObject {
 
     private BigDecimal funiIdFideicomiso = null;
     private BigDecimal funiIdSubcuenta = null;
     private String funiIdBien = null;
+    private String funiIdEdificio = null;
     private String funiIdDepto = null;
     private String funiTipo = null;
     private String funiNiveles = null;
@@ -60,7 +61,7 @@ public class FUnidades extends DomainObject {
     private String funiActo2 = null;
     private String funiActo3 = null;
     private String funiActo4 = null;
-    private Date funiFechaReversion = null;
+    private String funiFechaReversion = null;
     private BigDecimal funiCveGrahipo = null;
     private String funiNumHipoteca = null;
     private String funiAFavor = null;
@@ -70,11 +71,13 @@ public class FUnidades extends DomainObject {
         this.pkColumns = 4;
     }
 
-    public FUnidades(BigDecimal funiIdFideicomiso, BigDecimal funiIdSubcuenta, String funiIdBien, String funiIdDepto) {
+    public FUnidades(BigDecimal funiIdFideicomiso, BigDecimal funiIdSubcuenta, String funiIdBien, String funiIdEdificio,
+                     String funiIdDepto) {
         super();
         this.funiIdFideicomiso = funiIdFideicomiso;
         this.funiIdSubcuenta = funiIdSubcuenta;
         this.funiIdBien = funiIdBien;
+        this.funiIdEdificio = funiIdEdificio;
         this.funiIdDepto = funiIdDepto;
     }
 
@@ -103,6 +106,15 @@ public class FUnidades extends DomainObject {
 
     public String getFuniIdBien() {
         return this.funiIdBien;
+    }
+
+    @FieldInfo(nullable = false, dataType = "VARCHAR2", javaClass = String.class)
+    public void setFuniIdEdificio(String funiIdEdificio) {
+        this.funiIdEdificio = funiIdEdificio;
+    }
+
+    public String getFuniIdEdificio() {
+        return this.funiIdEdificio;
     }
 
     @FieldInfo(nullable = false, dataType = "VARCHAR2", javaClass = String.class)
@@ -549,8 +561,11 @@ public class FUnidades extends DomainObject {
         pkValues.add(this.getFuniIdSubcuenta());
         conditions += " AND FUNI_ID_BIEN = ?";
         pkValues.add(this.getFuniIdBien());
+        conditions += " AND FUNI_ID_EDIFICIO = ?";
+        pkValues.add(this.getFuniIdEdificio());
         conditions += " AND FUNI_ID_DEPTO = ?";
         pkValues.add(this.getFuniIdDepto());
+
         fields += " FUNI_TIPO = ?, ";
         values.add(this.getFuniTipo());
         fields += " FUNI_NIVELES = ?, ";
@@ -626,6 +641,10 @@ public class FUnidades extends DomainObject {
         fields += ", FUNI_ID_BIEN";
         fieldValues += ", ?";
         values.add(this.getFuniIdBien());
+
+        fields += ", FUNI_ID_EDIFICIO";
+        fieldValues += ", ?";
+        values.add(this.getFuniIdEdificio());
 
         fields += ", FUNI_ID_DEPTO";
         fieldValues += ", ?";
@@ -776,7 +795,7 @@ public class FUnidades extends DomainObject {
         values.add(this.getFuniActo4());
 
         fields += ", FUNI_FECHA_REVERSION";
-        fieldValues += ", ?";
+        fieldValues += ", TO_DATE(?, 'dd/MM/yyyy') ";
         values.add(this.getFuniFechaReversion());
 
         fields += ", FUNI_CVE_GRAHIPO";
@@ -818,8 +837,11 @@ public class FUnidades extends DomainObject {
         values.add(this.getFuniIdSubcuenta());
         conditions += " AND FUNI_ID_BIEN = ?";
         values.add(this.getFuniIdBien());
+        conditions += " AND FUNI_ID_EDIFICIO = ?";
+        values.add(this.getFuniIdEdificio());
         conditions += " AND FUNI_ID_DEPTO = ?";
         values.add(this.getFuniIdDepto());
+
         conditions = conditions.substring(4).trim();
         result.setSql(sql + conditions);
         result.setParameters(values.toArray());
@@ -897,6 +919,7 @@ public class FUnidades extends DomainObject {
         result.setFuniIdFideicomiso((BigDecimal) objectData.getData("FUNI_ID_FIDEICOMISO"));
         result.setFuniIdSubcuenta((BigDecimal) objectData.getData("FUNI_ID_SUBCUENTA"));
         result.setFuniIdBien((String) objectData.getData("FUNI_ID_BIEN"));
+        result.setFuniIdEdificio((String) objectData.getData("FUNI_ID_EDIFICIO"));
         result.setFuniIdDepto((String) objectData.getData("FUNI_ID_DEPTO"));
         result.setFuniTipo((String) objectData.getData("FUNI_TIPO"));
         result.setFuniNiveles((String) objectData.getData("FUNI_NIVELES"));
@@ -935,7 +958,7 @@ public class FUnidades extends DomainObject {
         result.setFuniActo2((String) objectData.getData("FUNI_ACTO2"));
         result.setFuniActo3((String) objectData.getData("FUNI_ACTO3"));
         result.setFuniActo4((String) objectData.getData("FUNI_ACTO4"));
-        result.setFuniFechaReversion((Date) objectData.getData("FUNI_FECHA_REVERSION"));
+        result.setFuniFechaReversion((String) objectData.getData("FUNI_FECHA_REVERSION"));
         result.setFuniCveGrahipo((BigDecimal) objectData.getData("FUNI_CVE_GRAHIPO"));
         result.setFuniNumHipoteca((String) objectData.getData("FUNI_NUM_HIPOTECA"));
         result.setFuniAFavor((String) objectData.getData("FUNI_A_FAVOR"));
@@ -1082,11 +1105,12 @@ public class FUnidades extends DomainObject {
         return funiActo4;
     }
 
-    public void setFuniFechaReversion(Date funiFechaReversion) {
+    @FieldInfo(nullable = true, dataType = "DATE", javaClass = String.class)
+    public void setFuniFechaReversion(String funiFechaReversion) {
         this.funiFechaReversion = funiFechaReversion;
     }
 
-    public Date getFuniFechaReversion() {
+    public String getFuniFechaReversion() {
         return funiFechaReversion;
     }
 
