@@ -32,7 +32,10 @@ class ExcelTransformer {
 
         const rows = this.rows.map((row) => {
             const rowColumns = this.layout.map(
-                (column) => `<td>${row[column.field]}</td>`
+                (column) => {
+                    const cellValue = row[column.field];
+                    return `<td>${cellValue == null ? '' : cellValue}</td>`
+                }
             );
 
             return `<tr>${rowColumns.join('')}</tr>`;
@@ -41,7 +44,6 @@ class ExcelTransformer {
         const tableBody = `<tbody>${rows.join('')}</tbody>`;
 
         const table = `<table>${tableHead}${tableBody}</table>`;
-        //console.log('STRING', table);
         return table;
     }
 
@@ -69,8 +71,6 @@ class ExcelTransformer {
     }
 
     download() {
-        //download(filename: string) {
-        //debugger;
         const element = window.document.createElement('a');
         element.href = uri + this.toBase64(this.toXls());
         element.download = this.filename;
