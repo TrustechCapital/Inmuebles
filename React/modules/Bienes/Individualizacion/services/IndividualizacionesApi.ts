@@ -19,7 +19,7 @@ class IndividualizacionesApi extends ModelsApi<Individualizacion> {
         parameters: ITableIndividualizacionesParameters
     ): Promise<IndividualizacionResultRow[]> {
         return await this.getRef(
-            'prinUnidades',
+            'qryConsultaUnidades',
             {
                 NumFideicomiso: parameters.idFideicomiso,
                 NumUnidad: parameters.idDepto,

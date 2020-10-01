@@ -19,13 +19,12 @@ const COLUMNS: IGenericColumn[] = [
     { field: 'id', header: 'Id', isKey: true },
     { field: 'idFideicomiso', header: 'Fideicomiso' },
     { field: 'idSubcuenta', header: 'SubCuenta' },
-    { field: 'cveGarantia', header: 'Id Garantía' },
-    { field: 'idBien', header: 'Id Bien' },
+    { field: 'cveGarantia', header: 'Id Bien' },
+    { field: 'idBien', header: 'Id Detalle Bien' },
     { field: 'idEdificio', header: 'Edificio' },
     { field: 'idDepto', header: 'Num. Unidad' },
-    { field: 'precio', header: 'Registro Contable' },
-    { field: 'moneda', header: 'Moneda' },
-    { field: 'status', header: 'Status' },
+    { field: 'precio', header: 'Valor' },
+    { field: 'status', header: 'Estatus' },
 ];
 
 const useStyles = makeStyles((theme) => ({
