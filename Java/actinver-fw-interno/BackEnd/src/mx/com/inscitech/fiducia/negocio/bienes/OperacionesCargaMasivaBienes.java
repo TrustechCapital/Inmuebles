@@ -77,11 +77,15 @@ public class OperacionesCargaMasivaBienes {
 
                     FUnidades unidad =
                         unidadRepository.findByPk(idFideicomiso, idSubcuenta, idBien, idEdificio, idDepto);
-                    unidad.setFuniNotario(idNotario);
-                    unidad.setFuniNumEscritura(layoutCarga.getEscritura());
-                    unidad.setFuniStatus(EstatusIndividualizacionBienes.ACTIVO.getText());
 
-                    unidadRepository.update(unidad);
+                    if (unidad != null) {
+                        unidad.setFuniNotario(idNotario);
+                        unidad.setFuniNumEscritura(layoutCarga.getEscritura());
+                        unidad.setFuniStatus(EstatusIndividualizacionBienes.LIBERADO.getText());
+
+                        unidadRepository.update(unidad);
+                    }
+
 
                     //TODO: insertar en f_fiberaciones o F_PROCESO_LIBERACION ?
                 }
