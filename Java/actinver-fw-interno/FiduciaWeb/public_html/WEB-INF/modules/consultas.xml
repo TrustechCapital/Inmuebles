@@ -1271,13 +1271,81 @@
                 <!--REPORTE BIENES-->
                 <entry key="reporteLibera" value="SELECT  FUNI_ID_FIDEICOMISO, FUNI_NOM_FIDEICOMISO,  FORS_TEXTO_DESCRIP, FGAR_CVE_GARANTIA, FUNI_ULTIMO_AVALUO, FUNI_TIPO, FUNI_MONEDA, FUNI_FECHA_ULTIMO_AVALUO, FUNI_NUM_CATASTRO, FPL_ADQUIRENTE, FUNI_NUM_ESTADO, FUNI_NOM_POBLACION, FUNI_STATUS FROM F_UNIDADES, F_BIENESGAR, f_proceso_liberacion WHERE FUNI_ID_FIDEICOMISO = ? AND FGAR_CVE_GARANTIA = ? AND FUNI_NUM_CATASTRO = ? AND FUNI_TIPO = ? AND FUNI_STATUS = ? AND FUNI_STATUS = FORS_CVE_STATUS AND FUNI_STATUS = FGAR_CVE_STATUS AND FGRS_ID_FIDEICOMISO = FUNI_ID_FIDEICOMISO AND FPL_ID_FIDEICOMISO = FUNI_ID_FIDEICOMISO"/>
                 <!-- UNIDADES LIBERACION -->
-                <entry key="prinLiberacion" value="SELECT FUNI_ID_FIDEICOMISO,FUNI_ID_SUBCUENTA,FUNI_ID_BIEN,FUNI_ID_EDIFICIO,FUNI_ID_DEPTO,funi_Precio,funi_Moneda,            FUNI_NOTARIO,FUNI_LOCALIDAD_NOTA,FUNI_NUM_ESCRITURA,FUNI_FOLIO_REAL,FUNI_FECHA_TRASLADO_DOMINIO,NVL(FPL_CVE_STATUS,FUNI_STATUS) FUNI_STATUS             ,NVL(FPL_NOTARIO,-1) FPL_NOTARIO,FPL_ADQUIRENTE,FPL_TERCERO,FPL_OBSERVACION,FPL_ESCRITURA,TO_CHAR(NVL(FPL_FEC_ESCRITURA,SYSDATE),'DD/MM/YYYY') FPL_FEC_ESCRITURA            ,FPL_FIDEICOM_BENEFICI,FPL_NOM_PERSONA,FPL_NUM_LUGAR,FPL_NOM_PERSONA1,FPL_NOM_PERSONA1,FPL_NUM_LUGAR1            ,FPL_FID_BEN_SANEAMIENTO,FPL_NOM_SANEAMIENTO,FPL_NUM_LUGAR_SANEAMIENTO,FPL_NOM_SANEAMIENTO1,FPL_NUM_LUGAR_SANEAMIENTO1            ,FPL_FID_BEN_RESPONSABILIDAD,FPL_NOM_RESPONSABILIDAD,FPL_NUM_LUGAR_RESPONSABILIDAD,FPL_NOM_RESPONSABILIDAD1,FPL_NUM_LUGAR_RESPONSABILIDAD1            ,FPL_FID_BEN_OTORGAMIENTO,FPL_NOM_OTORGAMIENTO,FPL_NUM_LUGAR_OTORGAMIENTO,FPL_NOM_OTORGAMIENTO1,FPL_NUM_LUGAR_OTORGAMIENTO1            ,FPL_TRANSMISION_REVERSION,FPL_PARCIAL_TOTAL,NVL(FPL_SUJETO_REGIMEN,0) FPL_SUJETO_REGIMEN,FPL_TIPO_INMUEBLE,FPL_NOM_ENVIO,FPL_EMAIL_ENVIO            ,TO_CHAR(NVL(FPL_FEC_FIRMA,SYSDATE),'DD/MM/YYYY') FPL_FEC_FIRMA,FPL_DELEGADO             FROM F_UNIDADES, F_PROCESO_LIBERACION ,DUAL             WHERE FUNI_ID_FIDEICOMISO = FPL_ID_FIDEICOMISO (+) AND FUNI_ID_SUBCUENTA = FPL_ID_SUBCUENTA (+) AND FUNI_ID_BIEN = FPL_ID_BIEN (+) AND FUNI_ID_DEPTO = FPL_ID_DEPTO (+)               AND FUNI_STATUS IN ('COMPROMETIDO','GENERAR CARTA','CARTA GENERADA','LIBERAR','LIBERADO')"/>
+                <entry key="qryConsultaLiberacionesBienes" value="SELECT funi_id_fideicomiso, 
+                        funi_id_subcuenta, 
+                        funi_id_bien, 
+                        funi_id_edificio, 
+                        funi_id_depto, 
+                        funi_precio, 
+                        funi_moneda, 
+                        funi_notario, 
+                        funi_localidad_nota, 
+                        funi_num_escritura, 
+                        funi_folio_real, 
+                        funi_fecha_traslado_dominio, 
+                        COALESCE(fpl_cve_status, funi_status) FUNI_STATUS, 
+                        COALESCE(fpl_notario, -1) FPL_NOTARIO, 
+                        fpl_adquirente, 
+                        fpl_tercero, 
+                        fpl_observacion, 
+                        fpl_escritura, 
+                        TO_CHAR(fpl_fec_escritura, 'DD/MM/YYYY') FPL_FEC_ESCRITURA, 
+                        fpl_fideicom_benefici, 
+                        fpl_nom_persona, 
+                        fpl_num_lugar, 
+                        fpl_nom_persona1, 
+                        fpl_nom_persona1, 
+                        fpl_num_lugar1, 
+                        fpl_fid_ben_saneamiento, 
+                        fpl_nom_saneamiento, 
+                        fpl_num_lugar_saneamiento, 
+                        fpl_nom_saneamiento1, 
+                        fpl_num_lugar_saneamiento1, 
+                        fpl_fid_ben_responsabilidad, 
+                        fpl_nom_responsabilidad, 
+                        fpl_num_lugar_responsabilidad, 
+                        fpl_nom_responsabilidad1, 
+                        fpl_num_lugar_responsabilidad1, 
+                        fpl_fid_ben_otorgamiento, 
+                        fpl_nom_otorgamiento, 
+                        fpl_num_lugar_otorgamiento, 
+                        fpl_nom_otorgamiento1, 
+                        fpl_num_lugar_otorgamiento1, 
+                        fpl_transmision_reversion, 
+                        fpl_parcial_total, 
+                        COALESCE(fpl_sujeto_regimen, 0) FPL_SUJETO_REGIMEN, 
+                        fpl_tipo_inmueble, 
+                        fpl_nom_envio, 
+                        fpl_email_envio,
+                        fpl_delegado 
+                    FROM   f_unidades
+                    LEFT JOIN f_proceso_liberacion
+                    ON  fpl_id_fideicomiso = funi_id_fideicomiso
+                        AND fpl_id_subcuenta = funi_id_subcuenta
+                        AND fpl_id_bien = funi_id_bien
+                        AND fpl_id_depto = funi_id_depto
+                    WHERE funi_status IN ( 'COMPROMETIDO', 'GENERAR CARTA', 'CARTA GENERADA', 
+                                                'LIBERAR', 
+                                                'LIBERADO' ) "/>
                 <entry key="prinNomPersonaLiberacion" value="SELECT CONTRATO,NOMBRE,TIPO FROM            (SELECT FID_NUM_CONTRATO CONTRATO, FID_NOM_FIDEICOM NOMBRE,'FIDEICOMITENTE' TIPO FROM FIDEICOM              UNION           SELECT BEN_NUM_CONTRATO CONTRATO, BEN_NOM_BENEF NOMBRE,'FIDEICOMISARIO' TIPO FROM BENEFICI             UNION           SELECT CON_NUM_CONTRATO CONTRATO, CON_NOM_COMITE NOMBRE,'COMITE TECNICO' FROM COMITENO)"/>
                 <entry key="garantias.ejeFunCartaLib" value="{? = call GARINMUEBLES.F_GENERA_CARTA_LIB(?,?,?,?,?,?)}"/>
                 <!-- Ejecuta la Carga de Bienes en garantia -->
                 <entry key="garantias.ejeFunProcesoLib" value="{? = call GARINMUEBLES.F_PROCESO_LIBERACION(?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)}"/>
                 <!-- Ejecuta la Carga de Bienes en garantia -->
-                <entry key="prinUnidades" value="SELECT FUNI_ID_FIDEICOMISO,FUNI_ID_SUBCUENTA,FORS_CVE_TIPO_GARANTIA, FORS_ID_GARANTIA,FUNI_ID_BIEN,FUNI_ID_EDIFICIO,FUNI_ID_DEPTO,FUNI_PRECIO,FUNI_MONEDA,FUNI_STATUS              FROM F_UNIDADES, F_BIENESGAR               WHERE FUNI_ID_FIDEICOMISO=FGRS_ID_FIDEICOMISO AND FUNI_ID_BIEN = FORS_ID_GARANTIA (+)"/>
+                <entry key="qryConsultaUnidades" value="SELECT funi_id_fideicomiso, 
+                        funi_id_subcuenta, 
+                        fors_cve_tipo_garantia, 
+                        fors_id_garantia, 
+                        funi_id_bien, 
+                        funi_id_edificio, 
+                        funi_id_depto, 
+                        funi_precio, 
+                        funi_moneda, 
+                        funi_status 
+                    FROM   f_unidades 
+                    LEFT JOIN f_bienesgar
+                        ON fgrs_id_fideicomiso = funi_id_fideicomiso
+                        AND TO_CHAR(fors_id_garantia, '9999999') = funi_id_bien"/>
                 <!-- FIN UNIDADES LIBERACION -->
                 <!--CONCILIACION VALORES-->
                 <entry key="consultaConciliaVal" value="SELECT FCVA_FIDEICOMISO,FCVA_SUBCUENTA,FCVA_CTO_INVER,TRIM(TO_CHAR(FCVA_SALDO_TOTAL_P,'$999,999,999,999,999,999,999.99')) AS FCVA_SALDO_TOTAL_P,TRIM(TO_CHAR(FCVA_SALDO_TOTAL_F,'$999,999,999,999,999,999,999.99')) AS FCVA_SALDO_TOTAL_F,TRIM(TO_CHAR(FCVA_SALDO_TOTAL_C,'$999,999,999,999,999,999,999.99')) AS FCVA_SALDO_TOTAL_C,     TRIM(TO_CHAR(FCVA_DIFERENCIA,'$999,999,999,999,999,999,999.99')) AS FCVA_DIFERENCIA,FCVA_COMENTARIO,FCVA_CVE_STATUS FROM F_CONCILIA_VALORES"/>
@@ -38810,7 +38878,7 @@
                     </list>
                 </entry>
                 <!-- UNIDADES LIBERACION -->
-                <entry key="prinLiberacion">
+                <entry key="qryConsultaLiberacionesBienes">
                     <list>
                         <bean class="mx.gob.nafin.fiduciario.common.beans.ParametroQueryBean">
                             <property name="name">
@@ -38910,7 +38978,7 @@
                         </bean>
                     </list>
                 </entry>
-                <entry key="prinUnidades">
+                <entry key="qryConsultaUnidades">
                     <list>
                         <bean class="mx.gob.nafin.fiduciario.common.beans.ParametroQueryBean">
                             <property name="name">

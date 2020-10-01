@@ -19,7 +19,7 @@ class LiberacionesApi extends ModelsApi<Liberacion> {
         parameters: ITableLiberacionesParameters
     ): Promise<LiberacionResultRow[]> {
         return await this.getRef(
-            'prinLiberacion',
+            'qryConsultaLiberacionesBienes',
             {
                 NumFideicomiso: parameters.idFideicomiso,
                 NumUnidad: parameters.idDepto,
