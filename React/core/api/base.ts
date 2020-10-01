@@ -244,7 +244,6 @@ export class Api {
         otherParams: Object = {}
     ) {
         try {
-            debugger;
             await this.uploadFiles(FiduciaDynamicEndpoints.UploadFile, files, {
                 ...otherParams,
                 processor: processorName,
