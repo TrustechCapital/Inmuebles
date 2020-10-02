@@ -249,6 +249,7 @@ export class Api {
                 processor: processorName,
             });
         } catch (error) {
+            console.log('error', error);
             throw new FileUploadError();
         }
     }
