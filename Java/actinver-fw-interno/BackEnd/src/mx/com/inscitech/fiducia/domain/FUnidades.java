@@ -65,10 +65,12 @@ public class FUnidades extends DomainObject {
     private BigDecimal funiCveGrahipo = null;
     private String funiNumHipoteca = null;
     private String funiAFavor = null;
+    private String funiNombreAdquiriente = null;
+    private String funiNombreNotario = null;
 
     public FUnidades() {
         super();
-        this.pkColumns = 4;
+        this.pkColumns = 5;
     }
 
     public FUnidades(BigDecimal funiIdFideicomiso, BigDecimal funiIdSubcuenta, String funiIdBien, String funiIdEdificio,
@@ -306,6 +308,24 @@ public class FUnidades extends DomainObject {
         return this.funiStatus;
     }
 
+    @FieldInfo(nullable = true, dataType = "VARCHAR2", javaClass = String.class)
+    public void setFuniNombreAdquiriente(String funiNombreAdquiriente) {
+        this.funiNombreAdquiriente = funiNombreAdquiriente;
+    }
+
+    public String getFuniNombreAdquiriente() {
+        return funiNombreAdquiriente;
+    }
+
+    @FieldInfo(nullable = true, dataType = "VARCHAR2", javaClass = String.class)
+    public void setFuniNombreNotario(String funiNombreNotario) {
+        this.funiNombreNotario = funiNombreNotario;
+    }
+
+    public String getFuniNombreNotario() {
+        return funiNombreNotario;
+    }
+
     public DMLObject getSelectByPK() {
         if (!retrieveSQL)
             return null;
@@ -315,41 +335,26 @@ public class FUnidades extends DomainObject {
         String conditions = "";
         ArrayList values = new ArrayList();
 
-        if (this.getFuniIdFideicomiso() != null && this.getFuniIdFideicomiso().longValue() == -999) {
-            conditions += " AND FUNI_ID_FIDEICOMISO IS NULL";
-        } else if (this.getFuniIdFideicomiso() != null) {
-            conditions += " AND FUNI_ID_FIDEICOMISO = ?";
-            values.add(this.getFuniIdFideicomiso());
-        }
+        conditions += " AND FUNI_ID_FIDEICOMISO = ?";
+        values.add(this.getFuniIdFideicomiso());
 
-        if (this.getFuniIdSubcuenta() != null && this.getFuniIdSubcuenta().longValue() == -999) {
-            conditions += " AND FUNI_ID_SUBCUENTA IS NULL";
-        } else if (this.getFuniIdSubcuenta() != null) {
-            conditions += " AND FUNI_ID_SUBCUENTA = ?";
-            values.add(this.getFuniIdSubcuenta());
-        }
+        conditions += " AND FUNI_ID_SUBCUENTA = ?";
+        values.add(this.getFuniIdSubcuenta());
 
-        if (this.getFuniIdBien() != null && "null".equals(this.getFuniIdBien())) {
-            conditions += " AND FUNI_ID_BIEN IS NULL";
-        } else if (this.getFuniIdBien() != null) {
-            conditions += " AND FUNI_ID_BIEN = ?";
-            values.add(this.getFuniIdBien());
-        }
+        conditions += " AND FUNI_ID_BIEN = ?";
+        values.add(this.getFuniIdBien());
 
-        if (this.getFuniIdDepto() != null && "null".equals(this.getFuniIdDepto())) {
-            conditions += " AND FUNI_ID_DEPTO IS NULL";
-        } else if (this.getFuniIdDepto() != null) {
-            conditions += " AND FUNI_ID_DEPTO = ?";
-            values.add(this.getFuniIdDepto());
-        }
+        conditions += " AND FUNI_ID_EDIFICIO = ?";
+        values.add(this.getFuniIdEdificio());
 
-        if (!"".equals(conditions)) {
+        conditions += " AND FUNI_ID_DEPTO = ?";
+        values.add(this.getFuniIdDepto());
 
-            conditions = conditions.substring(4).trim();
-            sql += "WHERE " + conditions;
-            result.setSql(sql);
-            result.setParameters(values.toArray());
-        }
+
+        conditions = conditions.substring(4).trim();
+        sql += "WHERE " + conditions;
+        result.setSql(sql);
+        result.setParameters(values.toArray());
 
         return result;
 
@@ -606,10 +611,14 @@ public class FUnidades extends DomainObject {
         values.add(this.getFuniFechaTrasladoDominio());
         fields += " FUNI_STATUS = ?, ";
         values.add(this.getFuniStatus());
+        fields += " FUNI_NOMBRE_ADQUIRIENTE = ?, ";
+        values.add(this.getFuniNombreAdquiriente());
+        fields += " FUNI_NOMBRE_NOTARIO = ?, ";
+        values.add(this.getFuniNombreNotario());
+
         for (int i = 0; i < pkValues.size(); i++) {
             values.add(pkValues.get(i));
         }
-        ;
 
         fields = fields.substring(0, fields.length() - 2).trim();
         conditions = conditions.substring(4).trim();
@@ -810,6 +819,14 @@ public class FUnidades extends DomainObject {
         fieldValues += ", ?";
         values.add(this.getFuniAFavor());
 
+        fields += ", FUNI_NOMBRE_ADQUIRIENTE";
+        fieldValues += ", ?";
+        values.add(this.getFuniNombreAdquiriente());
+
+        fields += ", FUNI_NOMBRE_NOTARIO";
+        fieldValues += ", ?";
+        values.add(this.getFuniNombreNotario());
+
 
         fields = fields.substring(1).trim();
         fieldValues = fieldValues.substring(1).trim();
@@ -962,6 +979,8 @@ public class FUnidades extends DomainObject {
         result.setFuniCveGrahipo((BigDecimal) objectData.getData("FUNI_CVE_GRAHIPO"));
         result.setFuniNumHipoteca((String) objectData.getData("FUNI_NUM_HIPOTECA"));
         result.setFuniAFavor((String) objectData.getData("FUNI_A_FAVOR"));
+        result.setFuniNombreAdquiriente((String) objectData.getData("FUNI_NOMBRE_ADQUIRIENTE"));
+        result.setFuniNombreNotario((String) objectData.getData("FUNI_NOMBRE_NOTARIO"));
 
         return result;
 

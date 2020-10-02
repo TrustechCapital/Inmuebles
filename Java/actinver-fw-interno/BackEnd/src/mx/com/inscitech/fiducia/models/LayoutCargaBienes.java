@@ -15,18 +15,17 @@ public class LayoutCargaBienes {
     private String estado;
     private String pais;
     private String colindancia;
-    private String medidas; //TODO: change type to string
+    private String medidas;
     private String estacionamiento1;
     private String superficie1;
     private String numeroCatastro;
-    private Double valorCatastro;
-    private Double valorOperacion;
-    private String adquirente;
-    private Double avaluo;
-    private String fechaAvaluo;
+    private Double valorBien;
+    private Integer tipoValorBien;
+    private String nombreAdquiriente;
     private String escritura;
     private String fechaEscritura;
-    private Integer notario;
+    private String nombreNotario;
+    private Integer numeroNotario;
     private Integer status;
 
     public LayoutCargaBienes() {
@@ -36,9 +35,9 @@ public class LayoutCargaBienes {
     public LayoutCargaBienes(Integer idfideicomiso, Integer idBien, String edificio, String depto, String niveles,
                              String calle, String colonia, String poblacion, String codigoPostal, String estado,
                              String pais, String colindancia, String medidas, String estacionamiento1,
-                             String superficie1, String numeroCatastro, Double valorCatastro, Double valorOperacion,
-                             String adquirente, Double avaluo, String fechaAvaluo, String escritura,
-                             String fechaEscritura, Integer notario, Integer status) {
+                             String superficie1, String numeroCatastro, Double valorBien, Integer tipoValorBien,
+                             String nombreAdquirente, String escritura, String fechaEscritura, String nombreNotario,
+                             Integer notario, Integer status) {
         this.idfideicomiso = idfideicomiso;
         this.idBien = idBien;
         this.edificio = edificio;
@@ -55,14 +54,13 @@ public class LayoutCargaBienes {
         this.estacionamiento1 = estacionamiento1;
         this.superficie1 = superficie1;
         this.numeroCatastro = numeroCatastro;
-        this.valorCatastro = valorCatastro;
-        this.valorOperacion = valorOperacion;
-        this.adquirente = adquirente;
-        this.avaluo = avaluo;
-        this.fechaAvaluo = fechaAvaluo;
+        this.valorBien = valorBien;
+        this.tipoValorBien = tipoValorBien;
+        this.nombreAdquiriente = nombreAdquirente;
         this.escritura = escritura;
         this.fechaEscritura = fechaEscritura;
-        this.notario = notario;
+        this.nombreNotario = nombreNotario;
+        this.numeroNotario = notario;
         this.status = status;
     }
 
@@ -195,44 +193,38 @@ public class LayoutCargaBienes {
         return numeroCatastro;
     }
 
-    public void setValorCatastro(Double valorCatastro) {
-        this.valorCatastro = valorCatastro;
+
+    public void setTipoValorBien(Integer tipoValorBien) {
+        this.tipoValorBien = tipoValorBien;
     }
 
-    public Double getValorCatastro() {
-        return valorCatastro;
+    public Integer getTipoValorBien() {
+        return tipoValorBien;
     }
 
-    public void setValorOperacion(Double valorOperacion) {
-        this.valorOperacion = valorOperacion;
+    public void setValorBien(Double valorBien) {
+        this.valorBien = valorBien;
     }
 
-    public Double getValorOperacion() {
-        return valorOperacion;
+    public Double getValorBien() {
+        return valorBien;
     }
 
-    public void setAdquirente(String adquirente) {
-        this.adquirente = adquirente;
+    public void setNombreAdquiriente(String adquirente) {
+        this.nombreAdquiriente = adquirente;
     }
 
-    public String getAdquirente() {
-        return adquirente;
+    public String getNombreAdquiriente() {
+        return nombreAdquiriente;
     }
 
-    public void setAvaluo(Double avaluo) {
-        this.avaluo = avaluo;
+
+    public void setFechaEscritura(String fechaEscritura) {
+        this.fechaEscritura = fechaEscritura;
     }
 
-    public Double getAvaluo() {
-        return avaluo;
-    }
-
-    public void setFechaAvaluo(String fechaAvaluo) {
-        this.fechaAvaluo = fechaAvaluo;
-    }
-
-    public String getFechaAvaluo() {
-        return fechaAvaluo;
+    public String getFechaEscritura() {
+        return fechaEscritura;
     }
 
     public void setEscritura(String escritura) {
@@ -243,20 +235,21 @@ public class LayoutCargaBienes {
         return escritura;
     }
 
-    public void setFechaEscritura(String fechaEscritura) {
-        this.fechaEscritura = fechaEscritura;
+
+    public void setNombreNotario(String nombreNotario) {
+        this.nombreNotario = nombreNotario;
     }
 
-    public String getFechaEscritura() {
-        return fechaEscritura;
+    public String getNombreNotario() {
+        return nombreNotario;
     }
 
     public void setNotario(Integer notario) {
-        this.notario = notario;
+        this.numeroNotario = notario;
     }
 
     public Integer getNotario() {
-        return notario;
+        return numeroNotario;
     }
 
     public void setStatus(Integer status) {

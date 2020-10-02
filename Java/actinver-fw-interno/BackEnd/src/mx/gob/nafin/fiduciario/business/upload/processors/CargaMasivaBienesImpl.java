@@ -81,7 +81,19 @@ public class CargaMasivaBienesImpl extends UploadProcessor {
                     excelReader.setCurrentCell(i, j);
                     logger.log(this, Thread.currentThread(), LoggingService.LEVEL.DEBUG,
                                "Processing cell: row " + i + ", col" + j);
-                    valoresFila.add(excelReader.getStringCellValue(false, ""));
+
+                    Object valor = null;
+
+                    //valores date
+                    if (j == 20) {
+                        valor = DateUtils.toString(excelReader.getDateCellValue(false, null));
+                    }
+                    //valores string
+                    else {
+                        valor = excelReader.getStringCellValue(false, null);
+                    }
+
+                    valoresFila.add(valor);
                 }
 
                 LayoutCargaBienes layoutCargaBienes = cargaMasivaBienes.mapColumnsToObject(valoresFila);

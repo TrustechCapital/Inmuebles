@@ -13,6 +13,23 @@ import mx.com.inscitech.fiducia.repository.UnidadRepository;
 
 public class OperacionesCargaMasivaBienes {
 
+    enum TipoValorBien {
+        AVALUO(1),
+        COMERCIAL(2),
+        CATASTRAL(3);
+
+        private int tipoValor;
+
+        TipoValorBien(int tipoOperacion) {
+            this.tipoValor = tipoOperacion;
+        }
+
+        int getValue() {
+            return this.tipoValor;
+        }
+
+    }
+
     private UnidadRepository unidadRepository;
 
     public OperacionesCargaMasivaBienes() {
@@ -32,6 +49,8 @@ public class OperacionesCargaMasivaBienes {
                 String idEdificio = layoutCarga.getEdificio();
                 String idDepto = layoutCarga.getDepto();
                 BigDecimal idNotario = BigDecimal.valueOf(layoutCarga.getNotario());
+                Integer tipoValorBien = layoutCarga.getTipoValorBien();
+                BigDecimal valorBien = BigDecimal.valueOf(layoutCarga.getValorBien());
 
                 String tipo = "0";
 
@@ -39,8 +58,6 @@ public class OperacionesCargaMasivaBienes {
 
                     FUnidades unidad =
                         unidadRepository.findByPk(idFideicomiso, idSubcuenta, idBien, idEdificio, idDepto);
-
-                    String fechaReversion = layoutCarga.getFechaAvaluo();
 
                     if (unidad == null) {
                         unidad = new FUnidades(idFideicomiso, idSubcuenta, idBien, idEdificio, idDepto);
@@ -58,16 +75,30 @@ public class OperacionesCargaMasivaBienes {
                         unidad.setFuniEstacionamiento1(layoutCarga.getEstacionamiento1());
                         unidad.setFuniSuperficie1(layoutCarga.getSuperficie1());
                         unidad.setFuniNumeroCatastro(new BigDecimal(layoutCarga.getNumeroCatastro()));
-                        unidad.setFuniPrecioCatastro(BigDecimal.valueOf(layoutCarga.getValorCatastro()));
-                        unidad.setFuniPrecio(BigDecimal.valueOf(layoutCarga.getValorOperacion()));
-                        unidad.setFuniUltimoAvaluo(BigDecimal.valueOf(layoutCarga.getAvaluo()));
-                        unidad.setFuniFechaUltimoAvaluo(layoutCarga.getFechaAvaluo());
+
+                        if (tipoValorBien == TipoValorBien.COMERCIAL.getValue()) {
+                            unidad.setFuniPrecio(valorBien);
+                        } else if (tipoValorBien == TipoValorBien.CATASTRAL.getValue()) {
+                            unidad.setFuniPrecioCatastro(valorBien);
+                        } else if (tipoValorBien == TipoValorBien.AVALUO.getValue()) {
+                            unidad.setFuniUltimoAvaluo(valorBien);
+                        }
+
+                        unidad.setFuniNombreAdquiriente(layoutCarga.getNombreAdquiriente());
+
+                        // NOTA: no se esta recibiendo esta fecha desde la carga masiva
+                        //unidad.setFuniFechaUltimoAvaluo(layoutCarga.getFechaAvaluo());
+                        //unidad.setFuniFechaReversion(layoutCarga.getFechaAvaluo());
+
                         unidad.setFuniNumEscritura(layoutCarga.getEscritura());
-                        // TODO: es esta la fecha de escrituracion?
+
                         unidad.setFuniFechaTrasladoDominio(layoutCarga.getFechaEscritura());
-                        unidad.setFuniFechaReversion(fechaReversion);
+
                         unidad.setFuniNotario(idNotario);
+                        unidad.setFuniNombreNotario(layoutCarga.getNombreNotario());
+
                         unidad.setFuniStatus(EstatusIndividualizacionBienes.getText(layoutCarga.getStatus()));
+                        unidad.setFuniMoneda(BigDecimal.valueOf(1));
 
                         unidadRepository.insert(unidad);
                     }
@@ -100,18 +131,94 @@ public class OperacionesCargaMasivaBienes {
 
 
     public LayoutCargaBienes mapColumnsToObject(List<Object> columns) {
-        return new LayoutCargaBienes(Double.valueOf(columns.get(0).toString()).intValue(),
-                                     Double.valueOf(columns.get(1).toString()).intValue(), (String) columns.get(2),
-                                     (String) columns.get(3), (String) columns.get(4), (String) columns.get(5),
-                                     (String) columns.get(6), (String) columns.get(7), (String) columns.get(8),
-                                     (String) columns.get(9), (String) columns.get(10), (String) columns.get(11),
-                                     (String) columns.get(12), (String) columns.get(13), (String) columns.get(14),
-                                     (String) columns.get(15), Double.valueOf(columns.get(16).toString()),
-                                     Double.valueOf(columns.get(17).toString()), (String) columns.get(18),
-                                     Double.valueOf(columns.get(19).toString()), (String) columns.get(20),
-                                     (String) columns.get(21), (String) columns.get(22),
-                                     Double.valueOf(columns.get(23).toString()).intValue(),
-                                     Double.valueOf(columns.get(24).toString()).intValue());
+
+        // No. fideicomiso
+        Integer numFideicomiso = Double.valueOf(columns.get(0).toString()).intValue();
+
+        // Subcuenta
+        Integer numSubcuenta = 0;
+
+        // Id bien (id garantia)
+        Integer idDetalleBien = Double.valueOf(columns.get(1).toString()).intValue();
+
+        // Edificio
+        String edificio = (String) columns.get(2);
+
+        // Departamento
+        String departamento = columns.get(3).toString();
+
+        // Niveles
+        String niveles = columns.get(4)
+                                .toString()
+                                .trim();
+
+        if (niveles == "") {
+            niveles = "0";
+        } else {
+            niveles = "" + Double.valueOf(columns.get(1).toString()).intValue();
+        }
+
+        // Calle
+        String calle = (String) columns.get(5);
+
+        // Colonia
+        String colonia = (String) columns.get(6);
+
+        // Poblacion
+        String poblacion = (String) columns.get(7);
+
+        // Cp
+        String cp = (String) columns.get(8);
+
+        // Estado
+        String estado = (String) columns.get(9);
+
+        // Pais
+        String pais = (String) columns.get(10);
+
+        // Colindancia
+        String colindancia = (String) columns.get(11);
+
+        // Medidas
+        String medidas = (String) columns.get(12);
+
+        // Estacionamiento
+        String estacionamiento = (String) columns.get(13);
+
+        // Superficie
+        String superficie = columns.get(14).toString();
+
+        // Numero Catastral
+        String numeroCatastral = columns.get(15).toString();
+
+        // Valor inmueble
+        Double valorInmueble = Double.valueOf(columns.get(16).toString());
+
+        // Tipo valor inmueble
+        Integer tipoValorInmueble = Double.valueOf(columns.get(17).toString()).intValue();
+
+        // Nombre adquiriente
+        String nombreAdquiriente = (String) columns.get(18);
+
+        // Nombre numeroEscritura
+        String numeroEscritura = columns.get(19).toString();
+
+        // Nombre fechaEscritura
+        String fechaEscritura = (String) columns.get(20);
+
+        // Nombre nombreNotario
+        String nombreNotario = (String) columns.get(21);
+
+        // Numero notario
+        Integer numeroNotario = Double.valueOf(columns.get(22).toString()).intValue();
+
+        // Estatus
+        Integer estatus = Double.valueOf(columns.get(22).toString()).intValue();
+
+        return new LayoutCargaBienes(numFideicomiso, idDetalleBien, edificio, departamento, niveles, calle, colonia,
+                                     poblacion, cp, estado, pais, colindancia, medidas, estacionamiento, superficie,
+                                     numeroCatastral, valorInmueble, tipoValorInmueble, nombreAdquiriente,
+                                     numeroEscritura, fechaEscritura, nombreNotario, numeroNotario, estatus);
     }
 }
 
