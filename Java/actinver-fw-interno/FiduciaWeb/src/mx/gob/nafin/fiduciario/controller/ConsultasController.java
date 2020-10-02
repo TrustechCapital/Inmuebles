@@ -242,26 +242,6 @@ public class ConsultasController extends JsonActionController {
         }
     }
 
-    private JSONObject jsonObjectFromError(Exception e) {
-        JSONObject responseObject = new JSONObject();
-        Integer errorCode = 500;
-        String errorMessage = e.getMessage();
-
-        if (e instanceof BusinessException) {
-            BusinessException businessException = (BusinessException) e;
-            errorCode = Integer.valueOf(businessException.getErrorCode());
-            errorMessage = businessException.getErrorMessage();
-        }
-
-        if (errorMessage == null || errorMessage == "") {
-            errorMessage = "Internal Server Error";
-        }
-
-        responseObject.put("errorCode", errorCode);
-        responseObject.put("errorMessage", errorMessage);
-        return responseObject;
-    }
-
     public ModelAndView ejecutaConsultaExcel(HttpServletRequest request,
                                              HttpServletResponse response) throws Exception {
         logger.log(Thread.currentThread().getClass(), Thread.currentThread(), LoggingService.LEVEL.DEBUG,

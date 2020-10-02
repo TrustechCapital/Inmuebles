@@ -16,6 +16,8 @@ import mx.com.inscitech.fiducia.common.ConfigurationException;
 import mx.com.inscitech.fiducia.common.services.ConfigurationService;
 import mx.com.inscitech.fiducia.common.services.LoggingService;
 
+import mx.gob.nafin.fiduciario.BusinessException;
+
 import net.sf.json.JSONArray;
 import net.sf.json.JSONObject;
 
@@ -121,6 +123,26 @@ public class JsonActionController extends MultiActionController {
             String name = (String) names.nextElement();
             parametros.put(name, session.getAttribute(name));
         }
+    }
+
+    JSONObject jsonObjectFromError(Exception e) {
+        JSONObject responseObject = new JSONObject();
+        Integer errorCode = 500;
+        String errorMessage = e.getMessage();
+
+        if (e instanceof BusinessException) {
+            BusinessException businessException = (BusinessException) e;
+            errorCode = Integer.valueOf(businessException.getErrorCode());
+            errorMessage = businessException.getErrorMessage();
+        }
+
+        if (errorMessage == null || errorMessage == "") {
+            errorMessage = "Internal Server Error";
+        }
+
+        responseObject.put("errorCode", errorCode);
+        responseObject.put("errorMessage", errorMessage);
+        return responseObject;
     }
 
 }
