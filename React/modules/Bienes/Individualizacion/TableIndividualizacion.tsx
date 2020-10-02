@@ -23,7 +23,7 @@ const COLUMNS: IGenericColumn[] = [
     { field: 'idBien', header: 'Id Detalle Bien' },
     { field: 'idEdificio', header: 'Edificio' },
     { field: 'idDepto', header: 'Num. Unidad' },
-    { field: 'precio', header: 'Valor' },
+    { field: 'precio', header: 'Valor', numeric: true },
     { field: 'status', header: 'Estatus' },
 ];
 
