@@ -55,6 +55,9 @@ export class ModelsApi<T extends IModel> extends Api implements IModelsApi<T> {
             'obtenerCatalogo.do',
             this.createBackendParameters(model, transformer, true)
         ).then((response) => {
+            if(!response.data){
+                throw new Error('Occurrio un error al consular el modelo');
+            }
             return transformer.fromObject(response.data as object);
         });
     }
