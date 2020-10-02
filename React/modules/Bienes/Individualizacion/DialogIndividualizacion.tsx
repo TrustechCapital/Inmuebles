@@ -12,8 +12,6 @@ import CatalogDialog from '../../../sharedComponents/CatalogDialog';
 import GenericTextInput from '../../../sharedComponents/GenericTextInput';
 import GenericForm from '../../../sharedComponents/Forms';
 import { monedasApi } from '../../../core/api/monedas';
-import { paisesApi } from '../../../core/api/paises';
-import { estadosApi } from '../../../core/api/estados';
 import FormValidator, {
     ValidationHelpers,
 } from '../../../services/FormValidator';
@@ -50,8 +48,6 @@ const DialogIndividualizacion: React.FC<ICatalogDialog<Individualizacion>> = ({
     onSaveRequest,
 }) => {
     const [monedas, setMonedas] = useState([]);
-    const [paises, setPaises] = useState([]);
-    const [estados, setEstados] = useState([]);
 
     const classes = useStyles();
 
@@ -62,16 +58,6 @@ const DialogIndividualizacion: React.FC<ICatalogDialog<Individualizacion>> = ({
     useEffect(() => {
         monedasApi.fetchAll().then((monedas) => {
             setMonedas(monedas);
-        });
-    }, []);
-    useEffect(() => {
-        estadosApi.fetchAll().then((estados) => {
-            setEstados(estados);
-        });
-    }, []);
-    useEffect(() => {
-        paisesApi.fetchAll().then((paises) => {
-            setPaises(paises);
         });
     }, []);
 
@@ -158,7 +144,6 @@ const DialogIndividualizacion: React.FC<ICatalogDialog<Individualizacion>> = ({
                                     name="idEdificio"
                                     label="Edificio"
                                     disabled={pkFieldsDisabled}
-                                    dataType="number"
                                 />
                             </Grid>
                             <Grid item xs={6}>
@@ -166,7 +151,6 @@ const DialogIndividualizacion: React.FC<ICatalogDialog<Individualizacion>> = ({
                                     name="idDepto"
                                     label="Unidad Condominal"
                                     disabled={pkFieldsDisabled}
-                                    dataType="number"
                                 />
                             </Grid>
                         </Grid>
@@ -180,6 +164,7 @@ const DialogIndividualizacion: React.FC<ICatalogDialog<Individualizacion>> = ({
                                     name="niveles"
                                     label="Niveles"
                                     dataType="number"
+                                    disabled={allFieldsDisabled}
                                 />
                             </Grid>
                             <Grid item xs={6}>
@@ -187,6 +172,7 @@ const DialogIndividualizacion: React.FC<ICatalogDialog<Individualizacion>> = ({
                                     name="calleYNumero"
                                     label="Calle"
                                     dataType="text"
+                                    disabled={allFieldsDisabled}
                                 />
                             </Grid>
                         </Grid>
@@ -200,6 +186,7 @@ const DialogIndividualizacion: React.FC<ICatalogDialog<Individualizacion>> = ({
                                     name="nombreColonia"
                                     label="Colonia"
                                     dataType="text"
+                                    disabled={allFieldsDisabled}
                                 />
                             </Grid>
                             <Grid item xs={6}>
@@ -207,6 +194,7 @@ const DialogIndividualizacion: React.FC<ICatalogDialog<Individualizacion>> = ({
                                     name="nombrePoblacion"
                                     label="Poblacion"
                                     dataType="text"
+                                    disabled={allFieldsDisabled}
                                 />
                             </Grid>
                         </Grid>
@@ -220,14 +208,12 @@ const DialogIndividualizacion: React.FC<ICatalogDialog<Individualizacion>> = ({
                                     name="codigoPostal"
                                     label="Código Postal"
                                     dataType="text"
+                                    disabled={allFieldsDisabled}
                                 />
                             </Grid>
                             <Grid item xs={6}>
-                                <FormSelectField
+                                <FormTextField
                                     name="numeroPais"
-                                    items={paises}
-                                    valueKey="idPais"
-                                    labelKey="numeroPais"
                                     label="Pais"
                                     disabled={allFieldsDisabled}
                                 />
@@ -239,11 +225,8 @@ const DialogIndividualizacion: React.FC<ICatalogDialog<Individualizacion>> = ({
                             spacing={3}
                         >
                             <Grid item xs={6}>
-                                <FormSelectField
+                                <FormTextField
                                     name="numeroEstado"
-                                    items={estados}
-                                    valueKey="idEstado"
-                                    labelKey="nombreEstado"
                                     label="Estado"
                                     disabled={allFieldsDisabled}
                                 />
@@ -253,6 +236,7 @@ const DialogIndividualizacion: React.FC<ICatalogDialog<Individualizacion>> = ({
                                     name="estacionamiento1"
                                     label="Estacionamiento 1"
                                     dataType="text"
+                                    disabled={allFieldsDisabled}
                                 />
                             </Grid>
                         </Grid>
@@ -266,6 +250,7 @@ const DialogIndividualizacion: React.FC<ICatalogDialog<Individualizacion>> = ({
                                     name="estacionamiento2"
                                     label="Estacionamiento 2"
                                     dataType="text"
+                                    disabled={allFieldsDisabled}
                                 />
                             </Grid>
                             <Grid item xs={6}>
@@ -273,6 +258,7 @@ const DialogIndividualizacion: React.FC<ICatalogDialog<Individualizacion>> = ({
                                     name="estacionamiento3"
                                     label="Estacionamiento 3"
                                     dataType="text"
+                                    disabled={allFieldsDisabled}
                                 />
                             </Grid>
                         </Grid>
@@ -286,6 +272,7 @@ const DialogIndividualizacion: React.FC<ICatalogDialog<Individualizacion>> = ({
                                     name="roofGarden"
                                     label="Otro"
                                     dataType="text"
+                                    disabled={allFieldsDisabled}
                                 />
                             </Grid>
                             <Grid item xs={6}>
@@ -293,6 +280,7 @@ const DialogIndividualizacion: React.FC<ICatalogDialog<Individualizacion>> = ({
                                     name="sotano"
                                     label="Otro 2"
                                     dataType="text"
+                                    disabled={allFieldsDisabled}
                                 />
                             </Grid>
                         </Grid>
@@ -306,6 +294,7 @@ const DialogIndividualizacion: React.FC<ICatalogDialog<Individualizacion>> = ({
                                     name="indiviso"
                                     label="Indiviso"
                                     dataType="text"
+                                    disabled={allFieldsDisabled}
                                 />
                             </Grid>
                             <Grid item xs={6}>
@@ -313,6 +302,7 @@ const DialogIndividualizacion: React.FC<ICatalogDialog<Individualizacion>> = ({
                                     name="precio"
                                     label="Registro Contable"
                                     dataType="text"
+                                    disabled={allFieldsDisabled}
                                 />
                             </Grid>
                         </Grid>
@@ -326,6 +316,7 @@ const DialogIndividualizacion: React.FC<ICatalogDialog<Individualizacion>> = ({
                                     name="precioCatastro"
                                     label="Precio Catastro"
                                     dataType="text"
+                                    disabled={allFieldsDisabled}
                                 />
                             </Grid>
                             <Grid item xs={6}>
@@ -348,7 +339,10 @@ const DialogIndividualizacion: React.FC<ICatalogDialog<Individualizacion>> = ({
                                 <FormCatalogSelectField
                                     name="status"
                                     catalogId={ClavesModuloBienes.Estatus}
+                                    useLabelAsValue={true}
+                                    defaultValue="LIBERADO"
                                     label="Estatus"
+                                    disabled={allFieldsDisabled}
                                 />
                             </Grid>
                             <Grid item xs={6}>
@@ -356,6 +350,7 @@ const DialogIndividualizacion: React.FC<ICatalogDialog<Individualizacion>> = ({
                                     name="acto1"
                                     label="Acto1"
                                     dataType="text"
+                                    disabled={allFieldsDisabled}
                                 />
                             </Grid>
                         </Grid>
@@ -369,6 +364,7 @@ const DialogIndividualizacion: React.FC<ICatalogDialog<Individualizacion>> = ({
                                     name="acto2"
                                     label="Acto 2"
                                     dataType="text"
+                                    disabled={allFieldsDisabled}
                                 />
                             </Grid>
                             <Grid item xs={6}>
@@ -376,6 +372,7 @@ const DialogIndividualizacion: React.FC<ICatalogDialog<Individualizacion>> = ({
                                     name="acto3"
                                     label="Acto 3"
                                     dataType="text"
+                                    disabled={allFieldsDisabled}
                                 />
                             </Grid>
                         </Grid>
@@ -389,6 +386,7 @@ const DialogIndividualizacion: React.FC<ICatalogDialog<Individualizacion>> = ({
                                     name="acto4"
                                     label="Acto 4"
                                     dataType="text"
+                                    disabled={allFieldsDisabled}
                                 />
                             </Grid>
                             <Grid item xs={6}>
@@ -396,6 +394,7 @@ const DialogIndividualizacion: React.FC<ICatalogDialog<Individualizacion>> = ({
                                     name="notario"
                                     label="Notario"
                                     dataType="text"
+                                    disabled={allFieldsDisabled}
                                 />
                             </Grid>
                         </Grid>
@@ -409,6 +408,7 @@ const DialogIndividualizacion: React.FC<ICatalogDialog<Individualizacion>> = ({
                                     name="numeroEscritura"
                                     label="Escritura"
                                     dataType="text"
+                                    disabled={allFieldsDisabled}
                                 />
                             </Grid>
                             <Grid item xs={6}>
@@ -416,6 +416,7 @@ const DialogIndividualizacion: React.FC<ICatalogDialog<Individualizacion>> = ({
                                     name="folioReal"
                                     label="Folio"
                                     dataType="text"
+                                    disabled={allFieldsDisabled}
                                 />
                             </Grid>
                         </Grid>
