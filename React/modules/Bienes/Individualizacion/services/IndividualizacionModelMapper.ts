@@ -28,8 +28,8 @@ class IndividualizacionModelMapper implements IModelMapper<Individualizacion> {
             nombreColonia: data.funiNomColonia,
             nombrePoblacion: data.funiNomPoblacion,
             codigoPostal: data.funiCodigoPostal,
-            numeroEstado: data.funiNumEstado,
-            numeroPais: data.funiNumPais,
+            numeroEstado: data.funiClaveEstado,
+            numeroPais: data.funiClavePais,
             colindancias: data.funiColindancias,
             medidas: data.funiMedidas,
             precio: data.funiPrecio,
@@ -73,7 +73,7 @@ class IndividualizacionModelMapper implements IModelMapper<Individualizacion> {
                 funiIdSubcuenta: individualizacion.idSubcuenta,
                 funiIdBien: individualizacion.idBien,
                 funiIdEdificio: individualizacion.idEdificio,
-                funiIdDept: individualizacion.idDepto,
+                funiIdDepto: individualizacion.idDepto,
             };
         }
 
@@ -98,8 +98,8 @@ class IndividualizacionModelMapper implements IModelMapper<Individualizacion> {
             funiNomColonia: individualizacion.nombreColonia,
             funiNomPoblacion: individualizacion.nombrePoblacion,
             funiCodigoPostal: individualizacion.codigoPostal,
-            funiNumEstado: individualizacion.numeroEstado,
-            funiNumPais: individualizacion.numeroPais,
+            funiClaveEstado: individualizacion.numeroEstado,
+            funiClavePais: individualizacion.numeroPais,
             funiColindancias: individualizacion.colindancias,
             funiMedidas: individualizacion.medidas,
             funiPrecio: individualizacion.precio,
