@@ -128,6 +128,7 @@ public class ConsultasController extends JsonActionController {
             return respondObject(response, consulta);
 
         } catch (BusinessException e) {
+            response.setStatus(500);
             return respondObject(response, new ErrorBean(ErrorBean.ERROR, e.getErrorCode(), e.getErrorMessage()));
         }
     }
