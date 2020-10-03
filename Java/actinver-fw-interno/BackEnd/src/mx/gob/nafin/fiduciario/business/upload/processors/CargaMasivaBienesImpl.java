@@ -6,6 +6,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import mx.com.inscitech.fiducia.common.services.LoggingService;
+import mx.com.inscitech.fiducia.common.util.DateUtils;
 import mx.com.inscitech.fiducia.models.LayoutCargaBienes;
 import mx.com.inscitech.fiducia.negocio.bienes.OperacionesCargaMasivaBienes;
 import mx.com.inscitech.fiducia.util.ExcelDataReader;
