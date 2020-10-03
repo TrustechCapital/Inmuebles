@@ -3,8 +3,14 @@ import { ITableIndividualizacionesParameters } from '../types';
 import IndividualizacionResultRow from '../models/IndividualizacionesResultRow';
 import Individualizacion from '../../../../models/Individualizacion';
 import IndividualizacionModelMapper from './IndividualizacionModelMapper';
+import { ICrudModuleApi } from '../../../../sharedComponents/CrudModule/types';
 
-class IndividualizacionesApi extends ModelsApi<Individualizacion> {
+class IndividualizacionesApi extends ModelsApi<Individualizacion> implements
+ICrudModuleApi<
+    Individualizacion,
+    ITableIndividualizacionesParameters,
+    IndividualizacionResultRow
+>{
     getModelFromResultRow(resultRow: IndividualizacionResultRow) {
         return new Individualizacion(
             resultRow.idFideicomiso,
@@ -13,6 +19,11 @@ class IndividualizacionesApi extends ModelsApi<Individualizacion> {
             resultRow.idEdificio,
             resultRow.idDepto
         );
+    }
+
+    async exists(model: Individualizacion): Promise<boolean> {
+        // TODO: Validar si la unidad ya existe
+        return false;
     }
 
     async find(

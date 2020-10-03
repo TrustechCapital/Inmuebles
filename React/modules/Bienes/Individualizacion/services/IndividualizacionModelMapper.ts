@@ -91,6 +91,7 @@ class IndividualizacionModelMapper implements IModelMapper<Individualizacion> {
             funiIdFideicomiso: individualizacion.idFideicomiso,
             funiIdSubcuenta: individualizacion.idSubcuenta,
             funiIdBien: individualizacion.idBien,
+            funiIdEdificio: individualizacion.idEdificio,
             funiIdDepto: individualizacion.idDepto,
             funiTipo: individualizacion.tipo,
             funiNiveles: individualizacion.niveles,

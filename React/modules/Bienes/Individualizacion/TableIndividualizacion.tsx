@@ -131,6 +131,7 @@ const TableBien: React.FC<TableBienProps> = ({ data, onSearch }) => {
                                 <CatalogSelect
                                     label="Status"
                                     catalogId={ClavesModuloBienes.Estatus}
+                                    useLabelAsValue={true}
                                     value={state.status}
                                     fullWidth
                                     onChange={(e) =>

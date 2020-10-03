@@ -164,6 +164,7 @@ export class Api {
             return response.data.result;
         });
     }
+
     public async doRef(refName: string, data: object): Promise<any> {
         return this.sendDynamicRequest(
             FiduciaDynamicEndpoints.Execute,

@@ -1,40 +1,31 @@
-import {
-    MainIndividualizacionesState,
-    MainIndividualizacionesActions,
-    IndividualizacionesActions,
-} from '../types';
+import { MainIndividualizacionesState, ITableIndividualizacionesParameters, MainIndividualizacionesActions } from '../types';
+import Individualizacion from '../../../../models/Individualizacion';
+import IndividualizacionesResultRow from '../models/IndividualizacionesResultRow';
+import { CrudModuleReducer } from '../../../../sharedComponents/CrudModule';
 
-import { IndividualizacionesReducer } from './individualizaciones';
+const reducerHelper = {
+    mainModelFromRow: (selectedRow: IndividualizacionesResultRow) =>
+        new Individualizacion(
+            selectedRow.idFideicomiso,
+            selectedRow.idSubcuenta,
+            selectedRow.idBien,
+            selectedRow.idEdificio,
+            selectedRow.idDepto
+        ),
+    newModel: () => new Individualizacion(null, null, null, null, null),
+};
 
 function mainIndividualizacionesReducer(
     state: MainIndividualizacionesState,
     action: MainIndividualizacionesActions
 ): MainIndividualizacionesState {
     switch (action.type) {
-        case 'SET_INDIVIDUALIZACIONES_SEARCH_RESULTS':
-            return {
-                Individualizaciones: IndividualizacionesReducer(
-                    state.Individualizaciones,
-                    action
-                ),
-            };
-        case 'SELECT_INDIVIDUALIZACIONES_RESULT_ROW':
-            return {
-                Individualizaciones: IndividualizacionesReducer(
-                    state.Individualizaciones,
-                    {
-                        ...action,
-                        type: 'SET_INDIVIDUALIZACIONES_ROWS_SELECTION',
-                    }
-                ),
-            };
         default:
-            return {
-                Individualizaciones: IndividualizacionesReducer(
-                    state.Individualizaciones,
-                    action as IndividualizacionesActions
-                ),
-            };
+            return CrudModuleReducer<
+                Individualizacion,
+                ITableIndividualizacionesParameters,
+                IndividualizacionesResultRow
+            >(state, action, reducerHelper);
     }
 }
 
