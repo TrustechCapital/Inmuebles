@@ -43,11 +43,6 @@ function validateFile(
             'fileSize',
             'El archivo es demasiado grande',
             (value: File) => !!value && value.size <= fileSize * 1024 * 1024
-        )
-        .test(
-            'fileType',
-            'Formato no soportado',
-            (value: File) => !!value && acceptedFormats.includes(value.type)
         );
 }
 
