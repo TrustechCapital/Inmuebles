@@ -18,7 +18,6 @@ import CatalogSelect from '../../../sharedComponents/CatalogSelect';
 const COLUMNS: IGenericColumn[] = [
     { field: 'id', header: 'Id', isKey: true },
     { field: 'idFideicomiso', header: 'Fideicomiso' },
-    { field: 'idSubcuenta', header: 'SubCuenta' },
     { field: 'cveGarantia', header: 'Id Bien' },
     { field: 'idBien', header: 'Id Detalle Bien' },
     { field: 'idEdificio', header: 'Edificio' },
@@ -103,7 +102,6 @@ const TableBien: React.FC<TableBienProps> = ({ data, onSearch }) => {
                                 <GenericTextInput
                                     label="Num Unidad"
                                     value={state.idDepto}
-                                    dataType="number"
                                     onChange={(e) =>
                                         dispatch({
                                             type: 'field',

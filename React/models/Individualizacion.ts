@@ -5,7 +5,7 @@ class Individualizacion extends BaseModel {
 
     idFideicomiso: number | null = null;
     idSubcuenta: number | null = null;
-    idBien: string | null = null;
+    idBien: number | null = null;
     idEdificio: string | null = null;
     idDepto: string | null = null;
     tipo: string | null = null;
@@ -52,7 +52,7 @@ class Individualizacion extends BaseModel {
     constructor(
         idFideicomiso: number | null,
         idSubcuenta: number | null,
-        idBien: string | null,
+        idBien: number | null,
         idEdificio: string | null,
         idDepto: string | null
     ) {

@@ -2,7 +2,7 @@ class IndividualizacionesResultRow {
     id: number;
     idFideicomiso: number | null = null;
     idSubcuenta: number | null = null;
-    idBien = '';
+    idBien: number | null = null;
     cveGarantia = '';
     idGarantia = '';
     idEdificio = '';

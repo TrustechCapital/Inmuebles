@@ -2,7 +2,7 @@ class LiberacionResultRow {
     id: number;
     idFideicomiso: number | null = null;
     idSubcuenta: number | null = null;
-    idBien = '';
+    idBien: number | null = null;
     idEdificio = '';
     idDepto = '';
     precio: number | null = null;

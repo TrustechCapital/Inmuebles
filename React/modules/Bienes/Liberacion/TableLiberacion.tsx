@@ -18,13 +18,11 @@ import CatalogSelect from '../../../sharedComponents/CatalogSelect';
 const COLUMNS: IGenericColumn[] = [
     { field: 'id', header: 'Id', isKey: true },
     { field: 'idFideicomiso', header: 'Fideicomiso' },
-    { field: 'idSubcuenta', header: 'Sub Fideicomiso' },
-    { field: 'idBien', header: 'Num Inmueble' },
+    { field: 'idBien', header: 'Id Detalle Bien' },
     { field: 'idEdificio', header: 'Edificio' },
     { field: 'idDepto', header: 'Num. Unidad' },
-    { field: 'precio', header: 'Registro Contable' },
-    { field: 'moneda', header: 'Moneda' },
-    { field: 'status', header: 'Status' },
+    { field: 'precio', header: 'Valor', numeric: true },
+    { field: 'status', header: 'Estatus' },
 ];
 
 const useStyles = makeStyles((theme) => ({
@@ -102,7 +100,6 @@ const TableBienes: React.FC<TableBienesProps> = ({ data, onSearch }) => {
                                 <GenericTextInput
                                     label="Num Unidad"
                                     value={state.idDepto}
-                                    dataType="number"
                                     onChange={(e) =>
                                         dispatch({
                                             type: 'field',
@@ -114,8 +111,9 @@ const TableBienes: React.FC<TableBienesProps> = ({ data, onSearch }) => {
                             </Grid>
                             <Grid item xs={3}>
                                 <CatalogSelect
-                                    label="Status"
+                                    label="Estatus"
                                     catalogId={ClavesModuloBienes.Estatus}
+                                    useLabelAsValue={true}
                                     value={state.status}
                                     fullWidth
                                     onChange={(e) =>
