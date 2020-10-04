@@ -10,9 +10,9 @@ public class UnidadRepository {
         super();
     }
 
-    public FUnidades findByPk(BigDecimal fideicomiso, BigDecimal subcuenta, String bien, String edificio,
+    public FUnidades findByPk(BigDecimal fideicomiso, BigDecimal subcuenta, BigDecimal idBien, String edificio,
                               String depto) {
-        FUnidades unidad = new FUnidades(fideicomiso, subcuenta, bien, edificio, depto);
+        FUnidades unidad = new FUnidades(fideicomiso, subcuenta, idBien, edificio, depto);
         return (FUnidades) unidad.selectAsObject();
     }
 

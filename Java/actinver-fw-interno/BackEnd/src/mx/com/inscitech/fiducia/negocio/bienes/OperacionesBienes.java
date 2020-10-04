@@ -100,12 +100,12 @@ public class OperacionesBienes {
         this.liquidacionesBienesRepository = liquidacionesBienesRepository;
     }
 
-    public void liberaBienes(BigDecimal idFideicomiso, BigDecimal idSubcuenta, String idBien, String edificio,
+    public void liberaBienes(BigDecimal idFideicomiso, BigDecimal idSubcuenta, BigDecimal idBien, String edificio,
                              String depto, BigDecimal idNotario, String localidad, String escritura,
                              String registroPublico, String folioReal, String fechaTrasladoDominio) {
 
         FAdquirentes adquiriente =
-            adquirienteRepository.findByPk(idFideicomiso, idSubcuenta, idBien, depto, BigDecimal.valueOf(1));
+            adquirienteRepository.findByPk(idFideicomiso, idSubcuenta, idBien.toString(), depto, BigDecimal.valueOf(1));
 
         // TODO: Enviar error cuando el saldo no es cero
         if (adquiriente.getFadqSaldo().intValue() == 0) {
@@ -245,7 +245,7 @@ public class OperacionesBienes {
     }
 
     public CartaLiberacionBienes generaCartaLiberacion(BigDecimal pIdFideicomiso, BigDecimal pIdSubcuenta,
-                                                       String pIdBien, String pIdDepto, String pIdEdificio,
+                                                       BigDecimal pIdBien, String pIdDepto, String pIdEdificio,
                                                        String pFirma) {
 
         // HEADER
@@ -260,7 +260,7 @@ public class OperacionesBienes {
             procesoLiberacionRepository.getUnidadeParaCartaDeLiberacion(pIdFideicomiso, pIdSubcuenta, pIdBien,
                                                                         pIdEdificio, pIdDepto);
 
-        BigDecimal idBien = BigDecimal.valueOf(Double.valueOf(pIdBien));
+        BigDecimal idBien = pIdBien;
         FBienesgar bienGarantia = bienesGarantiasRepository.findByPk(pIdFideicomiso, pIdSubcuenta, idBien);
         Claves claveTipoInmueble =
             clavesRepository.findByPK(bienGarantia.getForsCveTipoGarantia(), bienGarantia.getForsCveTipoBien());
@@ -691,19 +691,20 @@ public class OperacionesBienes {
 
     }
 
-    public int procesoLiberacion(BigDecimal pIdFideicomiso, BigDecimal pIdSubcuenta, String pIdBien, String pIdEdificio,
-                                 String pIdDepto, BigDecimal pIdNotario, String pAdquiriente, String pTercero,
-                                 String pBeneficiarioFideicomiso, String pNombrePersona, String pNombreLugar,
-                                 String pNombrePersona1, String pNombreLugar1, String pBeneficiarioSaneamiento,
-                                 String pNombreSaneamiento, String pLugarSaneamiento, String pNombreSaneamiento1,
-                                 String pLugarSaneamiento1, String pBeneficiarioResponsabilidad,
-                                 String pNombreResponsabilidad, String pLugarResponsabilidad,
-                                 String pNombreResponsabilidad1, String pLugarResponsabilidad1,
-                                 String pBeneficiarioOtorgamiento, String pNombreOtorgamiento,
-                                 String pLugarOtorgamiento, String pNombreOtorgamiento1, String pLugarOtorgamiento1,
-                                 String pTransmisionReversion, String pParcialTotal, BigDecimal pSujetoRegimen,
-                                 String pTipoInmueble, String nombreEnvio, String emailEnvio, String pObservacion,
-                                 String pEscritura, String pFechaEscritura, String pDelegado, String pFechaFirma, String pClaveEstatus)
+    public int procesoLiberacion(BigDecimal pIdFideicomiso, BigDecimal pIdSubcuenta, BigDecimal pIdBien,
+                                 String pIdEdificio, String pIdDepto, BigDecimal pIdNotario, String pAdquiriente,
+                                 String pTercero, String pBeneficiarioFideicomiso, String pNombrePersona,
+                                 String pNombreLugar, String pNombrePersona1, String pNombreLugar1,
+                                 String pBeneficiarioSaneamiento, String pNombreSaneamiento, String pLugarSaneamiento,
+                                 String pNombreSaneamiento1, String pLugarSaneamiento1,
+                                 String pBeneficiarioResponsabilidad, String pNombreResponsabilidad,
+                                 String pLugarResponsabilidad, String pNombreResponsabilidad1,
+                                 String pLugarResponsabilidad1, String pBeneficiarioOtorgamiento,
+                                 String pNombreOtorgamiento, String pLugarOtorgamiento, String pNombreOtorgamiento1,
+                                 String pLugarOtorgamiento1, String pTransmisionReversion, String pParcialTotal,
+                                 BigDecimal pSujetoRegimen, String pTipoInmueble, String nombreEnvio, String emailEnvio,
+                                 String pObservacion, String pEscritura, String pFechaEscritura, String pDelegado,
+                                 String pFechaFirma, String pClaveEstatus)
 
         {
 
@@ -812,8 +813,7 @@ public class OperacionesBienes {
                                           .LIBERADO
                                           .toString()) {
 
-                // TODO: Verificar que el tipo de dato sea correcto
-                BigDecimal idBien = Utils.toBigDecimal(pIdBien);
+                BigDecimal idBien = pIdBien;
 
                 // SE RECUPERA LA MONEDA Y TIPO DE BIEN
                 FBienesgar bienGarantia = bienesGarantiasRepository.findByPk(pIdFideicomiso, pIdSubcuenta, idBien);

@@ -45,7 +45,7 @@ public class OperacionesCargaMasivaBienes {
             for (LayoutCargaBienes layoutCarga : datosCarga) {
 
                 BigDecimal idSubcuenta = BigDecimal.valueOf(0);
-                String idBien = layoutCarga.getIdBien().toString();
+                BigDecimal idBien = new BigDecimal(layoutCarga.getIdBien());
                 String idEdificio = layoutCarga.getEdificio();
                 String idDepto = layoutCarga.getDepto();
                 BigDecimal idNotario = BigDecimal.valueOf(layoutCarga.getNotario());
@@ -155,7 +155,7 @@ public class OperacionesCargaMasivaBienes {
         if (niveles == "") {
             niveles = "0";
         } else {
-            niveles = "" + Double.valueOf(columns.get(1).toString()).intValue();
+            niveles = "" + Double.valueOf(niveles).intValue();
         }
 
         // Calle
@@ -213,7 +213,7 @@ public class OperacionesCargaMasivaBienes {
         Integer numeroNotario = Double.valueOf(columns.get(22).toString()).intValue();
 
         // Estatus
-        Integer estatus = Double.valueOf(columns.get(22).toString()).intValue();
+        Integer estatus = Double.valueOf(columns.get(23).toString()).intValue();
 
         return new LayoutCargaBienes(numFideicomiso, idDetalleBien, edificio, departamento, niveles, calle, colonia,
                                      poblacion, cp, estado, pais, colindancia, medidas, estacionamiento, superficie,

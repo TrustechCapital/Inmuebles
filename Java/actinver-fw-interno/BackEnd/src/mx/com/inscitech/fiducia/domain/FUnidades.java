@@ -21,7 +21,7 @@ public class FUnidades extends DomainObject {
 
     private BigDecimal funiIdFideicomiso = null;
     private BigDecimal funiIdSubcuenta = null;
-    private String funiIdBien = null;
+    private BigDecimal funiIdBien = null;
     private String funiIdEdificio = null;
     private String funiIdDepto = null;
     private String funiTipo = null;
@@ -73,8 +73,8 @@ public class FUnidades extends DomainObject {
         this.pkColumns = 5;
     }
 
-    public FUnidades(BigDecimal funiIdFideicomiso, BigDecimal funiIdSubcuenta, String funiIdBien, String funiIdEdificio,
-                     String funiIdDepto) {
+    public FUnidades(BigDecimal funiIdFideicomiso, BigDecimal funiIdSubcuenta, BigDecimal funiIdBien,
+                     String funiIdEdificio, String funiIdDepto) {
         super();
         this.funiIdFideicomiso = funiIdFideicomiso;
         this.funiIdSubcuenta = funiIdSubcuenta;
@@ -102,11 +102,11 @@ public class FUnidades extends DomainObject {
     }
 
     @FieldInfo(nullable = false, dataType = "VARCHAR2", javaClass = String.class)
-    public void setFuniIdBien(String funiIdBien) {
+    public void setFuniIdBien(BigDecimal funiIdBien) {
         this.funiIdBien = funiIdBien;
     }
 
-    public String getFuniIdBien() {
+    public BigDecimal getFuniIdBien() {
         return this.funiIdBien;
     }
 
@@ -935,7 +935,7 @@ public class FUnidades extends DomainObject {
 
         result.setFuniIdFideicomiso((BigDecimal) objectData.getData("FUNI_ID_FIDEICOMISO"));
         result.setFuniIdSubcuenta((BigDecimal) objectData.getData("FUNI_ID_SUBCUENTA"));
-        result.setFuniIdBien((String) objectData.getData("FUNI_ID_BIEN"));
+        result.setFuniIdBien((BigDecimal) objectData.getData("FUNI_ID_BIEN"));
         result.setFuniIdEdificio((String) objectData.getData("FUNI_ID_EDIFICIO"));
         result.setFuniIdDepto((String) objectData.getData("FUNI_ID_DEPTO"));
         result.setFuniTipo((String) objectData.getData("FUNI_TIPO"));

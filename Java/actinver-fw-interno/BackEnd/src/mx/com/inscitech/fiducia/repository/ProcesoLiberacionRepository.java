@@ -14,7 +14,7 @@ public class ProcesoLiberacionRepository {
         super();
     }
 
-    public FProcesoLiberacion findByPK(BigDecimal idFideicomiso, BigDecimal idSubcuenta, String idBien,
+    public FProcesoLiberacion findByPK(BigDecimal idFideicomiso, BigDecimal idSubcuenta, BigDecimal idBien,
                                        String idEdificio, String idDepto) {
         FProcesoLiberacion procesoLiberacion =
             new FProcesoLiberacion(idFideicomiso, idSubcuenta, idBien, idEdificio, idDepto);
@@ -22,7 +22,7 @@ public class ProcesoLiberacionRepository {
     }
 
     public UnidadesCartaLiberacionBienesRow getUnidadeParaCartaDeLiberacion(BigDecimal idFideicomiso,
-                                                                            BigDecimal idSubcuenta, String idBien,
+                                                                            BigDecimal idSubcuenta, BigDecimal idBien,
                                                                             String edificio, String depto) {
 
         String selectClause = String.join("SELECT \n", //

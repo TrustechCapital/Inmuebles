@@ -8,7 +8,7 @@ public class CartaLiberacionBienes {
 
     private BigDecimal idFideicomiso;
     private BigDecimal idSubcuenta;
-    private String idBien;
+    private BigDecimal idBien;
     private String idEdificio;
     private String idDepto;
     private String nomEmpresa;
@@ -50,7 +50,7 @@ public class CartaLiberacionBienes {
     }
 
 
-    public CartaLiberacionBienes(BigDecimal idFideicomiso, BigDecimal idSubcuenta, String idBien, String idEdificio,
+    public CartaLiberacionBienes(BigDecimal idFideicomiso, BigDecimal idSubcuenta, BigDecimal idBien, String idEdificio,
                                  String idDepto, String nomEmpresa, String nomArea, String direccion, String sitio,
                                  Date fecha, String nomNotario, String nomPuesto, String descFidBen,
                                  String descSaneamiento, String descResponsabilidad, String descOtorgamiento,
@@ -116,11 +116,11 @@ public class CartaLiberacionBienes {
         return idSubcuenta;
     }
 
-    public void setIdBien(String idBien) {
+    public void setIdBien(BigDecimal idBien) {
         this.idBien = idBien;
     }
 
-    public String getIdBien() {
+    public BigDecimal getIdBien() {
         return idBien;
     }
 

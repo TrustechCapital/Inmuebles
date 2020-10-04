@@ -1342,10 +1342,10 @@
                         funi_precio, 
                         funi_moneda, 
                         funi_status 
-                    FROM   f_unidades 
+                    FROM  f_unidades 
                     LEFT JOIN f_bienesgar
                         ON fgrs_id_fideicomiso = funi_id_fideicomiso
-                        AND TO_CHAR(fors_id_garantia, '9999999') = funi_id_bien"/>
+                        AND fors_id_garantia = funi_id_bien"/>
                 <!-- FIN UNIDADES LIBERACION -->
                 <!--CONCILIACION VALORES-->
                 <entry key="consultaConciliaVal" value="SELECT FCVA_FIDEICOMISO,FCVA_SUBCUENTA,FCVA_CTO_INVER,TRIM(TO_CHAR(FCVA_SALDO_TOTAL_P,'$999,999,999,999,999,999,999.99')) AS FCVA_SALDO_TOTAL_P,TRIM(TO_CHAR(FCVA_SALDO_TOTAL_F,'$999,999,999,999,999,999,999.99')) AS FCVA_SALDO_TOTAL_F,TRIM(TO_CHAR(FCVA_SALDO_TOTAL_C,'$999,999,999,999,999,999,999.99')) AS FCVA_SALDO_TOTAL_C,     TRIM(TO_CHAR(FCVA_DIFERENCIA,'$999,999,999,999,999,999,999.99')) AS FCVA_DIFERENCIA,FCVA_COMENTARIO,FCVA_CVE_STATUS FROM F_CONCILIA_VALORES"/>

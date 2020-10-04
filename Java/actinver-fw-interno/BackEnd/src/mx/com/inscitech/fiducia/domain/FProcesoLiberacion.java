@@ -20,7 +20,7 @@ public class FProcesoLiberacion extends DomainObject {
 
     private BigDecimal fplIdFideicomiso;
     private BigDecimal fplIdSubcuenta;
-    private String fplIdBien;
+    private BigDecimal fplIdBien;
     private String fplIdEdificio;
     private String fplIdDepto;
     private BigDecimal fplNotario;
@@ -65,7 +65,7 @@ public class FProcesoLiberacion extends DomainObject {
     }
 
 
-    public FProcesoLiberacion(BigDecimal fplIdFideicomiso, BigDecimal fplIdSubcuenta, String fplIdBien,
+    public FProcesoLiberacion(BigDecimal fplIdFideicomiso, BigDecimal fplIdSubcuenta, BigDecimal fplIdBien,
                               String fplIdEdificio, String fplIdDepto) {
         super();
         this.pkColumns = 5;
@@ -92,7 +92,7 @@ public class FProcesoLiberacion extends DomainObject {
 
         result.setFplIdFideicomiso((BigDecimal) dataRow.getData("FPL_ID_FIDEICOMISO"));
         result.setFplIdSubcuenta((BigDecimal) dataRow.getData("FPL_ID_SUBCUENTA"));
-        result.setFplIdBien((String) dataRow.getData("FPL_ID_BIEN"));
+        result.setFplIdBien((BigDecimal) dataRow.getData("FPL_ID_BIEN"));
         result.setFplIdEdificio((String) dataRow.getData("FPL_ID_EDIFICIO"));
         result.setFplIdDepto((String) dataRow.getData("FPL_ID_DEPTO"));
         result.setFplNotario((BigDecimal) dataRow.getData("FPL_NOTARIO"));
@@ -206,11 +206,11 @@ public class FProcesoLiberacion extends DomainObject {
         return fplIdSubcuenta;
     }
 
-    public void setFplIdBien(String fplIdBien) {
+    public void setFplIdBien(BigDecimal fplIdBien) {
         this.fplIdBien = fplIdBien;
     }
 
-    public String getFplIdBien() {
+    public BigDecimal getFplIdBien() {
         return fplIdBien;
     }
 
