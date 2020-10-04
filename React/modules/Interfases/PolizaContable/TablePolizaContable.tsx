@@ -16,15 +16,10 @@ import GenericTextInput from '../../../sharedComponents/GenericTextInput';
 const COLUMNS: IGenericColumn[] = [
     { field: 'id', header: 'Id', isKey: true },
     { field: 'fecha', header: 'Fecha' },
-    { field: 'numTransaccion', header: 'Num. Transacción' },
-    { field: 'cuentaMayor', header: 'Cuenta de Mayor' },
-    { field: 'subcuental1', header: 'Subcuenta L1' },
-    { field: 'subcuental2', header: 'Subcuenta L2' },
-    { field: 'subcuental3', header: 'Subcuenta L3' },
-    { field: 'subcuental4', header: 'Subcuenta L4' },
-    { field: 'subcuental5', header: 'Subcuenta L5' },
-    { field: 'importe', header: 'Importe' },
-    { field: 'claveCarAbo', header: 'Tipo' },
+    { field: 'idFideicomiso', header: 'Num. Fideicomiso' },
+    { field: 'nombreFideicomiso', header: 'Nom. Fideicomiso' },
+    { field: 'descripcionMovimiento', header: 'Descripcion' },
+    { field: 'numeroTransaccion', header: 'Num. transaccion' }
 ];
 const useStyles = makeStyles((theme) => ({
     rowSpacing: {

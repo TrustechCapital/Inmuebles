@@ -565,7 +565,18 @@
                 <!-- FIN REGIMEN FISCAL UTILIDAD / PREDIDA FISCAL SAT -->
                 <!-- INICIO REGIMEN FISCAL ARCHIVO SAT -->
                 <entry key="conEjeArcSAT" value="SELECT DISTINCT MOV_ANO_MOVTO FROM MOVIMIEN"/>
-                <entry key="conPolizaContable" value="Select CONCAT(CONCAT(CONCAT(CONCAT(MOV_DIA_MOVTO,'/'),MOV_MES_MOVTO),'/'),MOV_ANO_MOVTO) AS MOV_FECHA, GUI_NUM_GUIA, GUI_NUM_CTAM, GUI_NUM_SCTA, GUI_NUM_SSCTA, GUI_NUM_SSSCTA, GUI_NUM_SSSSCTA, GUI_NUM_SSSSSCTA, MOV_IMP_MOVTO, DECODE(GUI_CVE_CAR_ABO, 'C','CARGO','A','ABONO') AS CLAVE_CA FROM MOVIMIEN, GUIACONT WHERE GUI_NUM_GUIA = MOV_NUM_TRANSAC"/>
+                <entry key="conPolizaContable" value="SELECT Trim(To_char(mov_dia_movto, '00')) 
+                        || '/' 
+                        || Trim(To_char(mov_mes_movto, '00')) 
+                        || '/' 
+                        || mov_ano_movto AS MOV_FECHA, 
+                        mov_num_contrato, 
+                        cto_nom_contrato, 
+                        mov_desc_movto, 
+                        mov_num_transac 
+                    FROM   movimien, 
+                        contrato 
+                    WHERE  cto_num_contrato = mov_num_contrato"/>
                 <!-- FIN REGIMEN FISCAL ARCHIVO SAT -->
                 <!-- INICIO BITACORA -->
                 <entry key="conBitacora" value="SELECT FBDE_EJERCICIO_DECLARA,TO_CHAR(FBDE_PERIODO_DECLARA, 'DD/MM/YYYY') FBDE_PERIODO_DECLARA, FBDE_TIPO_DECLARA, TO_CHAR(FBDE_FECHA_DECLARA, 'DD/MM/YYYY') FECHA, FBDE_FOLIO_DECLARA FROM F_BITACORA_DECLARA"/>
