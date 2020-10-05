@@ -83,7 +83,7 @@ async function searchReportes(
     });
 }
 async function exportPDF() {
-    await reportesApi.findPDF();
+    reportesApi.downloadReport();
 }
 
 async function repeatCurrentSearch(

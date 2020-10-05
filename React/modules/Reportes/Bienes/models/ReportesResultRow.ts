@@ -3,7 +3,8 @@ class ReportesResultRow {
     idFideicomiso: number | null = null;
     nomFiso: number | null = null;
     descripInmueble = '';
-    cveGarantia = '';
+    idTipoBien: number | null = null;
+    descripcionTipoBien = '';
     ultimoAvaluo = '';
     tipoValor = '';
     moneda = '';
@@ -22,15 +23,16 @@ class ReportesResultRow {
         return {
             id: index,
             idFideicomiso: obj.funiIdFideicomiso,
-            nomFiso: obj.funiNomFideicomiso,
+            nomFiso: obj.ctoNomContrato,
             descripInmueble: obj.forsTextoDescrip,
-            cveGarantia: obj.fgarCveGarantia,
+            idTipoBien: obj.forsCveTipoGarantia,
+            descripcionTipoBien: obj.descripcionClaveTipoBien,
             ultimoAvaluo: obj.funiUltimoAvaluo,
             tipoValor: obj.funiTipo,
             moneda: obj.funiMoneda,
             fechaAportacion: obj.funifechaUltimoAvaluo,
             numCatastro: obj.funiNumCatastro,
-            adquiriente: obj.fplAdquiriente,
+            adquiriente: obj.funiNombreAdquiriente,
             estado: obj.funiNumEstado,
             municipio: obj.funiNomPoblacion,
             status: obj.funiStatus,

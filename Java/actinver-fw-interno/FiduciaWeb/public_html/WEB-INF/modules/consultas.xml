@@ -1280,7 +1280,32 @@
                 <!-- FIN INMUEBLES -->
                 <!-- FIN BIENES EN GARANTIA -->
                 <!--REPORTE BIENES-->
-                <entry key="reporteLibera" value="SELECT  FUNI_ID_FIDEICOMISO, FUNI_NOM_FIDEICOMISO,  FORS_TEXTO_DESCRIP, FGAR_CVE_GARANTIA, FUNI_ULTIMO_AVALUO, FUNI_TIPO, FUNI_MONEDA, FUNI_FECHA_ULTIMO_AVALUO, FUNI_NUM_CATASTRO, FPL_ADQUIRENTE, FUNI_NUM_ESTADO, FUNI_NOM_POBLACION, FUNI_STATUS FROM F_UNIDADES, F_BIENESGAR, f_proceso_liberacion WHERE FUNI_ID_FIDEICOMISO = ? AND FGAR_CVE_GARANTIA = ? AND FUNI_NUM_CATASTRO = ? AND FUNI_TIPO = ? AND FUNI_STATUS = ? AND FUNI_STATUS = FORS_CVE_STATUS AND FUNI_STATUS = FGAR_CVE_STATUS AND FGRS_ID_FIDEICOMISO = FUNI_ID_FIDEICOMISO AND FPL_ID_FIDEICOMISO = FUNI_ID_FIDEICOMISO"/>
+                <entry key="reporteLibera" value="SELECT funi_id_fideicomiso, 
+                        cto_nom_contrato, 
+                        cve_desc_clave                                                   AS 
+                        descripcion_clave_tipo_bien, 
+                        fors_texto_descrip, 
+                        fors_cve_tipo_garantia, 
+                        Coalesce(funi_ultimo_avaluo, 0)                                  AS 
+                        funi_ultimo_avaluo, 
+                        funi_tipo, 
+                        funi_moneda, 
+                        Coalesce(To_char(funi_fecha_ultimo_avaluo, 'DD/MM/YYYY'), 'N/A') AS 
+                        funi_fecha_ultimo_avaluo,
+                        funi_numero_catastro, 
+                        funi_nombre_adquiriente, 
+                        funi_num_estado, 
+                        funi_nom_poblacion, 
+                        funi_status 
+                    FROM   f_unidades, 
+                        f_bienesgar, 
+                        contrato, 
+                        claves 
+                    WHERE  cto_num_contrato = fgrs_id_fideicomiso 
+                        AND fgrs_id_fideicomiso = funi_id_fideicomiso 
+                        AND fors_id_garantia = funi_id_bien 
+                        AND cve_num_clave = 38 
+                        AND fors_cve_tipo_garantia = cve_num_sec_clave "/>
                 <!-- UNIDADES LIBERACION -->
                 <entry key="qryConsultaLiberacionesBienes" value="SELECT funi_id_fideicomiso, 
                         funi_id_subcuenta, 
@@ -38821,7 +38846,7 @@
                                 <value>numFiso</value>
                             </property>
                             <property name="sqlName">
-                                <value>funi_Id_Fideicomiso</value>
+                                <value>FUNI_ID_FIDEICOMISO</value>
                             </property>
                             <property name="clauseType">
                                 <value>AND</value>
@@ -38832,16 +38857,16 @@
                         </bean>
                         <bean class="mx.gob.nafin.fiduciario.common.beans.ParametroQueryBean">
                             <property name="name">
-                                <value>cveGarantia</value>
+                                <value>tipoBien</value>
                             </property>
                             <property name="sqlName">
-                                <value>FGAR_CVE_GARANTIA</value>
+                                <value>FORS_CVE_TIPO_GARANTIA</value>
                             </property>
                             <property name="clauseType">
                                 <value>AND</value>
                             </property>
                             <property name="conditionType">
-                                <value>LIKE</value>
+                                <value>=</value>
                             </property>
                         </bean>
                         <bean class="mx.gob.nafin.fiduciario.common.beans.ParametroQueryBean">
@@ -38849,21 +38874,7 @@
                                 <value>numCatastro</value>
                             </property>
                             <property name="sqlName">
-                                <value>FUNI_NUM_CATASTRO</value>
-                            </property>
-                            <property name="clauseType">
-                                <value>AND</value>
-                            </property>
-                            <property name="conditionType">
-                                <value>=</value>
-                            </property>
-                        </bean>
-                        <bean class="mx.gob.nafin.fiduciario.common.beans.ParametroQueryBean">
-                            <property name="name">
-                                <value>tipo</value>
-                            </property>
-                            <property name="sqlName">
-                                <value>FUNI_TIPO</value>
+                                <value>FUNI_NUMERO_CATASTRO</value>
                             </property>
                             <property name="clauseType">
                                 <value>AND</value>
@@ -38877,7 +38888,7 @@
                                 <value>cveStatus</value>
                             </property>
                             <property name="sqlName">
-                                <value>funi_Status</value>
+                                <value>FUNI_STATUS</value>
                             </property>
                             <property name="clauseType">
                                 <value>AND</value>

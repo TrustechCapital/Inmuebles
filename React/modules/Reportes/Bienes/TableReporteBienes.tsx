@@ -11,7 +11,6 @@ import { ClavesModuloBienes } from '../../../constants/bienes';
 import GenericTable, {
     IGenericColumn,
 } from '../../../sharedComponents/GenericTable';
-import GenericSelect from '../../../sharedComponents/GenericSelect';
 import { Button } from '@material-ui/core';
 import GetAppIcon from '@material-ui/icons/GetApp';
 import GenericTextInput from '../../../sharedComponents/GenericTextInput';
@@ -23,16 +22,14 @@ const COLUMNS: IGenericColumn[] = [
     { field: 'idFideicomiso', header: 'Fideicomiso' },
     { field: 'nomFiso', header: 'Nombre Fideicomiso' },
     { field: 'descripInmueble', header: 'Descripcion' },
-    { field: 'cveGarantia', header: 'Tipo' },
-    { field: 'ultimoAvaluo', header: 'Valor' },
-    { field: 'tipoValor', header: 'Tipo de Valor' },
-    { field: 'moneda', header: 'Moneda' },
-    { field: 'fechaAportacion', header: 'Fecha de Aportacion' },
+    { field: 'descripcionTipoBien', header: 'Tipo' },
+    { field: 'ultimoAvaluo', header: 'Valor', numeric: true },
+    { field: 'fechaAportacion', header: 'Fecha de Aportación' },
     { field: 'numCatastro', header: '# Catastro' },
     { field: 'adquiriente', header: 'Aportante' },
     { field: 'estado', header: 'Estado' },
     { field: 'municipio', header: 'Municipio' },
-    { field: 'status', header: 'Status' },
+    { field: 'status', header: 'Estatus' },
 ];
 const useStyles = makeStyles((theme) => ({
     rowSpacing: {
@@ -42,9 +39,8 @@ const useStyles = makeStyles((theme) => ({
 
 const initialState: ITableReportesParameters = {
     idFideicomiso: null,
-    cveGarantia: '',
+    idTipoBien: null,
     numCatastro: null,
-    tipoInmueble: '',
     status: '',
 };
 
@@ -110,14 +106,14 @@ const TebleReporteBienes: React.FC<TableBienProps> = ({
                             </Grid>
                             <Grid item xs={3}>
                                 <CatalogSelect
-                                    label="Descripcion del Bien"
+                                    label="Tipo del bien"
                                     catalogId={ClavesModuloBienes.TiposDeBienes}
-                                    value={state.cveGarantia}
+                                    value={state.idTipoBien}
                                     fullWidth
                                     onChange={(e) =>
                                         dispatch({
                                             type: 'field',
-                                            fieldName: 'cveGarantia',
+                                            fieldName: 'idTipoBien',
                                             value: e.target.value,
                                         })
                                     }
@@ -141,24 +137,7 @@ const TebleReporteBienes: React.FC<TableBienProps> = ({
                             </Grid>
                             <Grid item xs={3}>
                                 <CatalogSelect
-                                    label="Tipo de bien"
-                                    catalogId={ClavesModuloBienes.TiposDeBienes}
-                                    value={state.tipoInmueble}
-                                    fullWidth
-                                    onChange={(e) =>
-                                        dispatch({
-                                            type: 'field',
-                                            fieldName: 'tipoInmueble',
-                                            value: e.target.value,
-                                        })
-                                    }
-                                />
-                            </Grid>
-                        </Grid>
-                        <Grid container spacing={4}>
-                            <Grid item xs={3}>
-                                <CatalogSelect
-                                    label="Status"
+                                    label="Estatus"
                                     catalogId={ClavesModuloBienes.Estatus}
                                     value={state.status}
                                     fullWidth
@@ -169,16 +148,6 @@ const TebleReporteBienes: React.FC<TableBienProps> = ({
                                             value: e.target.value,
                                         })
                                     }
-                                />
-                            </Grid>
-                        </Grid>
-                        <Grid container spacing={4}>
-                            <Grid item xs={3}>
-                                <GenericSelect
-                                    label="Tipo de Reporte"
-                                    onChange={() => {}}
-                                    value=""
-                                    items={['Reporte de Bienes']}
                                 />
                             </Grid>
                         </Grid>

@@ -17,9 +17,8 @@ const initialState: MainReportesState = {
     Individualizacion: {
         searchParameters: {
             idFideicomiso: null,
-            cveGarantia: '',
+            idTipoBien: null,
             numCatastro: null,
-            tipoInmueble: '',
             status: '',
         },
         searchResults: [],

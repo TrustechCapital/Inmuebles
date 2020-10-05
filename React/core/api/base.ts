@@ -112,7 +112,9 @@ export class Api {
             }
         });
     }
-    private async sendDynamicRequestPrinter(
+
+    async downloadDynamicFile(
+        filename: string,
         endpoint: FiduciaDynamicEndpoints,
         refName: string,
         params: object,
@@ -130,13 +132,29 @@ export class Api {
             params: {
                 json: JSON.stringify(filteredParams),
             },
+            responseType: 'blob',
         }).then((response) => {
             if (response === null) {
                 throw new Error('Ocurrio un error al procesar el request');
             } else {
-                return response;
+                this.downloadFile(response.data as Blob, filename);
             }
         });
+    }
+
+    downloadFile(file: Blob, filename: string) {
+        const anchor = window.document.createElement('a');
+        anchor.href = URL.createObjectURL(file);
+        anchor.download = filename;
+        document.body.appendChild(anchor);
+
+        anchor.click();
+        document.body.removeChild(anchor);
+        
+        // Removes browser reference to the file
+        setTimeout(function () {
+            URL.revokeObjectURL(anchor.href);
+        }, 250);
     }
 
     public async getRef<T>(
@@ -176,15 +194,14 @@ export class Api {
         });
     }
 
-    public async imprimir(refName: string, data: object): Promise<any> {
-        return this.sendDynamicRequestPrinter(
+    public async downloadDynamicReport(filename: string, refName: string, data: object){
+        this.downloadDynamicFile(
+            filename,
             FiduciaDynamicEndpoints.ImprimirReporte,
             refName,
             data,
             false
-        ).then((response: any) => {
-            return response.data.result;
-        });
+        );
     }
 
     public async executeRemoteMethod(

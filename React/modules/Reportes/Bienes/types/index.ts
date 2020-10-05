@@ -4,9 +4,8 @@ import { OperacionesCatalogo, SavingStatus } from '../../../../constants';
 
 export interface ITableReportesParameters {
     idFideicomiso: number | null;
-    cveGarantia: string | '';
+    idTipoBien: number | null;
     numCatastro: number | null;
-    tipoInmueble: string | '';
     status: string | '';
 }
 

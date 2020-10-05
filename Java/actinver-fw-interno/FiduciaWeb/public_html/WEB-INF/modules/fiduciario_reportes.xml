@@ -66,7 +66,7 @@
         AND CTO_NUM_CONTRATO=FTC_NUM_FIDEICOMISO AND FTC_TIPO_PERSONA=REP_TIPO_PERSONA AND FTC_NUM_PERSONA=REP_NUM_PERSONA
         ORDER BY REP_NOM_CONTRATO ASC,REP_NUM_CONTRATO ASC, FECHA_REGISTRO ASC"/>
 
-        <!-- Control y Gestión -->
+        <!-- Control y Gestiï¿½n -->
         <entry key="repCtasClabe" value="{? = call OPERATIVAS.F_REP_CTA_CLABE(?,?,?,?,?,?)}"/>
         <entry key="getDatCuentasClabe" value="SELECT RCB_REPORTE,RCB_TITULO_1A_COLUMNA,RCB_TITULAR,
         RCB_BANCO,RCB_CLABE,RCB_TITULO_ULT_COLUMNA,RCB_VAL_1A_COLUMNA,RCB_VAL_ULT_COLUMNA FROM REP_CTAS_CLABE ORDER BY RCB_SECUENCIAL "/>
@@ -482,7 +482,7 @@ FCH_FOLIO_OPERA ORDER BY FCH_FECHA_OPERA ASC"/>
         <entry key="getResumenMandatos" value="SELECT DISTINCT RBA_TIPO_FISO,RBA_TIPO_NEGOCIO,RBA_NUM_CONTRATO,RBA_NOM_CONTRATO,RBA_ENC_CREDITOS,RBA_ENC_VALORES,RBA_ENC_INMUEBLES,RBA_ENC_EFECTIVO,RBA_ENC_OTROS,RBA_ENC_FIEICOMITENTES,RBA_IMP_CREDITOS,RBA_IMP_VALORES,RBA_IMP_INMUEBLES,RBA_IMP_EFECTIVO,RBA_IMP_OTROS,RBA_IMP_FIDEICOMITENTES FROM REPORTE_BALANCE ORDER BY RBA_TIPO_FISO,
         DECODE(RBA_TIPO_NEGOCIO,'GARANTIA',1,'ADMINISTRACION',2,'INVERSION',3,'TRANSLATIVO DE DOMINIO',4),RBA_NUM_CONTRATO ASC"/>
         
-        <!-- Concentración de Movimiento de Mandatos y Fideicomisos -->
+        <!-- Concentraciï¿½n de Movimiento de Mandatos y Fideicomisos -->
         <entry key="repConcentracionMovtos" value="begin REPORTES_CONTA.CONCENTRA_MOVTOS(?,?,?,?,?); end;"/>
         <entry key="getConcentracionMovtos" value="SELECT CTO_TIPO_ADMON,CTO_CVE_TIPO_NEG,RCM_TIPO_NEGOCIO,RCM_NUM_CONTRATO,RCM_NOM_CONTRATO,RCM_ENC_CTAM,RCM_ENC_SCTA,RCM_ENC_SSCTA,RCM_ENC_CUENTA,DECODE(CTO_TIPO_ADMON,'SI',RCM_SINI_CA,'NO',RCM_SINI_SA) AS RCM_SINI,DECODE(CTO_TIPO_ADMON,'SI',RCM_CARGOS_CA,'NO',RCM_CARGOS_SA) AS RCM_CARGOS,DECODE(CTO_TIPO_ADMON,'SI',RCM_ABONOS_CA,'NO',RCM_ABONOS_SA) AS RCM_ABONOS,DECODE(CTO_TIPO_ADMON,'SI',RCM_SACT_CA,'NO',RCM_SACT_SA) AS RCM_SACT 
         FROM REPORTE_CONC_MOV,CONTRATO WHERE RCM_NUM_CONTRATO=CTO_NUM_CONTRATO AND RCM_USUARIO=? ORDER BY RCM_ENC_CTAM,RCM_ENC_SCTA,RCM_ENC_SSCTA,RCM_NUM_CONTRATO"/>
@@ -519,7 +519,7 @@ FCH_FOLIO_OPERA ORDER BY FCH_FECHA_OPERA ASC"/>
            RPO_SAL_INI,
            RPO_CTO_NOM_CONTRATO,RPO_CTO_NOM_CONTRATO,to_char(RPO_FECHA,'yyyymmdd') AS RPO_FECHA2,RPO_SEC_AUXILIAR FROM  REPORTE_AUX_CTA WHERE RPO_USUARIO=? ORDER BY RPO_FECHA2,RPO_SEC_AUXILIAR ASC"/>
         
-         <!-- Conversiòn de Cuenta -->
+         <!-- Conversiï¿½n de Cuenta -->
          <entry key="getConversionCuenta" value="SELECT CTAM_CTA_CLIEN, 
          CTAM_SCTA_CLIEN, 
          CTAM_SSCTA_CLIEN, 
@@ -730,7 +730,7 @@ AND T.FTSP_ID_TRASPASO(+)=INS_NUM_FOLIO_INST AND INS_NUM_FOLIO_INST=?"/>
         
         <!--AGENDA-->
         
-        <entry key="getDatCalculoIntereses" value="SELECT EAVI_ID_PROGRAMA,EAVI_ID_FIDEICOMISO,NVL(EFSO_COMENTARIO,'XXXXX') EAVI_NOM_FIDEICOMISO, EMP_NOM_EMPRESA||', '||EMP_NOM_AREA EAVI_NOM_INSTITUCION,'México, D.F. a '||TO_CHAR(SYSDATE,'DD')||' de '||DECODE(TO_NUMBER(TO_CHAR(SYSDATE,'MM')),1,'ENERO',2,'FEBRERO',3,'MARZO',4,'ABRIL',5,'MAYO',6,'JUNIO',7,'JULIO',8,'AGOSTO',9,'SEPTIEMBRE',10,'OCTUBRE',11,'NOVIEMBRE',12,'DICIEMBRE',TO_CHAR(SYSDATE,'DD'),'XXXX')||' de '||TO_CHAR(SYSDATE,'YYYY') EAVI_FECHA,
+        <entry key="getDatCalculoIntereses" value="SELECT EAVI_ID_PROGRAMA,EAVI_ID_FIDEICOMISO,NVL(EFSO_COMENTARIO,'XXXXX') EAVI_NOM_FIDEICOMISO, EMP_NOM_EMPRESA||', '||EMP_NOM_AREA EAVI_NOM_INSTITUCION,'Mï¿½xico, D.F. a '||TO_CHAR(SYSDATE,'DD')||' de '||DECODE(TO_NUMBER(TO_CHAR(SYSDATE,'MM')),1,'ENERO',2,'FEBRERO',3,'MARZO',4,'ABRIL',5,'MAYO',6,'JUNIO',7,'JULIO',8,'AGOSTO',9,'SEPTIEMBRE',10,'OCTUBRE',11,'NOVIEMBRE',12,'DICIEMBRE',TO_CHAR(SYSDATE,'DD'),'XXXX')||' de '||TO_CHAR(SYSDATE,'YYYY') EAVI_FECHA,
         EAVI_ID_EMISION,EAVI_ID_SEC_CALC,EAVI_ID_SEC_CALC+1 EAVI_ID_SEC_CALC_MAS_UNO,EAVI_ID_REPORTE,EAVI_CVE_PIZARRA,EAVI_NUM_SERIE,EAVI_NOM_EMISOR,EAVI_FEC_INICIO,EAVI_FEC_CNBV,EAVI_FEC_VENCIMIENTO,EAVI_NOM_AUTORIDAD1,EAVI_DIR_AUTORIDAD1,EAVI_NOM_RESPONSABLE1,EAVI_NOM_PUEST_RESPO1,EAVI_NOM_AUTORIDAD2,EAVI_DIR_AUTORIDAD2,EAVI_NOM_RESPONSABLE2,EAVI_NOM_PUEST_RESPO2,EAVI_NOM_AUTORIDAD3,EAVI_DIR_AUTORIDAD3,EAVI_NOM_RESPONSABLE3,
         EAVI_NOM_PUEST_RESPO3,EAVI_TIPO_CALCULO,EAVI_FEC_INI_PERIODO,EAVI_FEC_FIN_PERIODO,EAVI_FEC_AVISO,EAVI_FEC_AVISO1,EAVI_FEC_PAGO_SIG,EAVI_FEC_INI_PROX,EAVI_FEC_FIN_PROX,TO_CHAR(EAVI_IMP_PROX, '999,999,999,999,999,999.99') EAVI_IMP_PROX,EAVI_PLAZO_PROX,TO_CHAR(EAVI_TASA_ACTUAL, '999.999999') EAVI_TASA_ACTUAL,EAVI_ID_SEC_CALC EAVI_NUM_AMORT,EAVI_ID_SEC_CALC+1 EAVI_NUM_AMORT_MAS_UNO,TO_CHAR(EAVI_IMP_AMORT, '999,999,999,999,999,999.99') EAVI_IMP_AMORT,EAVI_FEC_REAL_PERIODO,EAVI_INSTRUMENTO,
         TO_CHAR(EAVI_TASA_APLICADA, '999.999999') EAVI_TASA_APLICADA,TO_CHAR(EAVI_TASA_SOBRETASA, '999.999999') EAVI_TASA_SOBRETASA,TO_CHAR(EAVI_TASA_BRUTA, '999.999999') EAVI_TASA_BRUTA,TO_CHAR(EAVI_TASA_NETA, '999.999999') EAVI_TASA_NETA,EAVI_PERIODICIDAD_DIAS,TO_CHAR(EAVI_IMP_VAL_NOMINAL, '999,999,999,999,999,999.99') EAVI_IMP_VAL_NOMINAL,TO_CHAR(EAVI_IMP_VAL_NOM_TOT, '999,999,999,999,999,999.99') EAVI_IMP_VAL_NOM_TOT,
@@ -926,7 +926,7 @@ AND T.FTSP_ID_TRASPASO(+)=INS_NUM_FOLIO_INST AND INS_NUM_FOLIO_INST=?"/>
         PRS_HONORARIOS HONORARIOS,NVL(PRS_ADICIONALES,'') ADICIONALES,PRS_REQ_OPERA REQUERIMIENTOS
         FROM FECCONT,PROSPECT,EJECUTIV
         WHERE PRS_EJEC_ASIG=EJE_NUM_EJEC_ATENC AND
-        EJE_CVE_BANCA='Promoción' AND EJE_CVE_ST_EJECUTI='ACTIVO'  AND PRS_NUM_PROSPECTO=?"/> 
+        EJE_CVE_BANCA='Promociï¿½n' AND EJE_CVE_ST_EJECUTI='ACTIVO'  AND PRS_NUM_PROSPECTO=?"/> 
         
         <!--Correo de Rechazo en Dictaminacion-->
         <entry key="mandaCorreoRechazo" value="SELECT ANT_NUM_PROSPECTO AS proyecto ,ANT_NOM_NEGOCIO AS nomnegocio ,ANT_NUM_CONTRATO as numContrato FROM ANTEPROY WHERE ANT_NUM_PROSPECTO = ?"/>
@@ -1147,7 +1147,7 @@ AND T.FTSP_ID_TRASPASO(+)=INS_NUM_FOLIO_INST AND INS_NUM_FOLIO_INST=?"/>
         
         <!--REPOSICION DE FICHAS-->
         
-        <entry key="repReposicionFichaDeposito" value="SELECT 'DEPÓSITO' AS FICHA,
+        <entry key="repReposicionFichaDeposito" value="SELECT 'DEPï¿½SITO' AS FICHA,
                                                                                                                       FDPO_ID_DEPOSITO AS FOLIO,
                                                                                                                      (SELECT TO_CHAR(SYSDATE,'DD/MM/YYYY HH:MI') FROM DUAL) AS FECHA_HR,
                                                                                                                       TO_CHAR(FDEP_FECHA,'DD/MM/YYYY') AS FECHA,
@@ -1298,7 +1298,33 @@ AND T.FTSP_ID_TRASPASO(+)=INS_NUM_FOLIO_INST AND INS_NUM_FOLIO_INST=?"/>
                     AND FSP_NUM_USUARIO = PER_NUM_USUARIO 
                     AND FSP_NUM_PROSPECTO = ? ORDER BY FSP_FECHA"/>  
             <!-- Reporte Seguimiento Proyecto -->
-               
+            <!--REPORTE BIENES-->
+            <entry key="reporteLibera" value="SELECT funi_id_fideicomiso, 
+                    cto_nom_contrato, 
+                    cve_desc_clave                                                   AS 
+                    descripcion_clave_tipo_bien, 
+                    fors_texto_descrip, 
+                    fors_cve_tipo_garantia, 
+                    Coalesce(funi_ultimo_avaluo, 0)                                  AS 
+                    funi_ultimo_avaluo, 
+                    funi_tipo, 
+                    funi_moneda, 
+                    Coalesce(To_char(funi_fecha_ultimo_avaluo, 'DD/MM/YYYY'), 'N/A') AS 
+                    funi_fecha_ultimo_avaluo,
+                    funi_numero_catastro, 
+                    funi_nombre_adquiriente, 
+                    funi_num_estado, 
+                    funi_nom_poblacion, 
+                    funi_status 
+              FROM   f_unidades, 
+                    f_bienesgar, 
+                    contrato, 
+                    claves 
+              WHERE  cto_num_contrato = fgrs_id_fideicomiso 
+                    AND fgrs_id_fideicomiso = funi_id_fideicomiso 
+                    AND fors_id_garantia = funi_id_bien 
+                    AND cve_num_clave = 38 
+                    AND fors_cve_tipo_garantia = cve_num_sec_clave "/>
       </map>      
     </property>
     <property name="parametros">
@@ -2087,7 +2113,7 @@ AND T.FTSP_ID_TRASPASO(+)=INS_NUM_FOLIO_INST AND INS_NUM_FOLIO_INST=?"/>
           </list>
         </entry>
          <!--ReporteAgenda-->
-        <!-- Conversiòn de Cuentas -->
+        <!-- Conversiï¿½n de Cuentas -->
         <entry key="getConversionCuenta">
           <list>
             <bean class="mx.gob.nafin.fiduciario.common.beans.ParametroQueryBean">
@@ -2768,7 +2794,67 @@ AND T.FTSP_ID_TRASPASO(+)=INS_NUM_FOLIO_INST AND INS_NUM_FOLIO_INST=?"/>
           </list>
         </entry>
         <!-- Reporte Seguimiento Proyecto -->
-        
+        <!-- Reporte Bienes -->
+        <entry key="reporteLibera">
+          <list>
+              <bean class="mx.gob.nafin.fiduciario.common.beans.ParametroQueryBean">
+                  <property name="name">
+                      <value>numFiso</value>
+                  </property>
+                  <property name="sqlName">
+                      <value>FUNI_ID_FIDEICOMISO</value>
+                  </property>
+                  <property name="clauseType">
+                      <value>AND</value>
+                  </property>
+                  <property name="conditionType">
+                      <value>=</value>
+                  </property>
+              </bean>
+              <bean class="mx.gob.nafin.fiduciario.common.beans.ParametroQueryBean">
+                  <property name="name">
+                      <value>tipoBien</value>
+                  </property>
+                  <property name="sqlName">
+                      <value>FORS_CVE_TIPO_GARANTIA</value>
+                  </property>
+                  <property name="clauseType">
+                      <value>AND</value>
+                  </property>
+                  <property name="conditionType">
+                      <value>=</value>
+                  </property>
+              </bean>
+              <bean class="mx.gob.nafin.fiduciario.common.beans.ParametroQueryBean">
+                  <property name="name">
+                      <value>numCatastro</value>
+                  </property>
+                  <property name="sqlName">
+                      <value>FUNI_NUMERO_CATASTRO</value>
+                  </property>
+                  <property name="clauseType">
+                      <value>AND</value>
+                  </property>
+                  <property name="conditionType">
+                      <value>=</value>
+                  </property>
+              </bean>
+              <bean class="mx.gob.nafin.fiduciario.common.beans.ParametroQueryBean">
+                  <property name="name">
+                      <value>cveStatus</value>
+                  </property>
+                  <property name="sqlName">
+                      <value>funi_Status</value>
+                  </property>
+                  <property name="clauseType">
+                      <value>AND</value>
+                  </property>
+                  <property name="conditionType">
+                      <value>=</value>
+                  </property>
+              </bean>
+          </list>
+      </entry>
       </map>
     </property>
   </bean>

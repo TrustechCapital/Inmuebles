@@ -2,7 +2,7 @@ import { ModelsApi } from '../../../../core/api';
 import { ITableReportesParameters } from '../types';
 import ReportesResultRow from '../models/ReportesResultRow';
 import Individualizacion from '../../../../models/Individualizacion';
-import ReportesModelMapper from './ReportesModelMapper';
+import { IModelMapper } from '../../../../core/api';
 
 class ReportesApi extends ModelsApi<Individualizacion> {
     getModelFromResultRow(resultRow: ReportesResultRow) {
@@ -22,20 +22,29 @@ class ReportesApi extends ModelsApi<Individualizacion> {
             'reporteLibera',
             {
                 numFiso: parameters.idFideicomiso,
-                cveGarantia: parameters.cveGarantia,
+                tipoBien: parameters.idTipoBien,
                 numCatastro: parameters.numCatastro,
-                tipo: parameters.tipoInmueble,
                 cveStatus: parameters.status,
             },
             ReportesResultRow.fromObject
         );
     }
-    //TODO: ESTRUCTURAR URL PARA INVOCAR EL PRINT DEL PDF
-    async findPDF() {
-        return await this.imprimir('reporteLibera', {
+
+    async downloadReport() {
+        this.downloadDynamicReport('Reporte de liberación de bienes.pdf', 'reporteLibera', {
             template: '/xml/Reportes/Honorarios/ReporteBienes.xsl',
         });
     }
 }
 
-export const reportesApi = new ReportesApi(ReportesModelMapper);
+class ReportesModelMapper implements IModelMapper<Individualizacion> {
+    fromObject(data: any) {
+        return new Individualizacion(null, null, null, null, null);
+    }
+
+    toObject(individualizacion: Individualizacion, pkOnly: boolean = false) {
+        return {};
+    }
+}
+
+export const reportesApi = new ReportesApi(new ReportesModelMapper());
