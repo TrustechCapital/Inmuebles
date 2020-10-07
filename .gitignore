@@ -48,3 +48,4 @@ Java/fw-interno/FiduciaWeb/deploy
 React/.next
 React/out
 React/node_modules/
+REact/.env*.local

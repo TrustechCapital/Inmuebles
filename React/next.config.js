@@ -7,5 +7,5 @@ module.exports = {
             '/': { page: '/' },
         };
     },
-    assetPrefix: '/FiduciaWeb'
+    assetPrefix: process.env.NEXT_PUBLIC_ASSET_PREFIX || ''
 };
