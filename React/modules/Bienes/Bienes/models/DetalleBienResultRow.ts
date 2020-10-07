@@ -1,5 +1,6 @@
-class DetalleBienResultRow {
-    id: number;
+import ResultRowModel from '../../../../models/ResultRowModel';
+
+class DetalleBienResultRow extends ResultRowModel {
     idFideicomiso: number | null = null;
     idSubcuenta: number | null = null;
     idTipoBien: number | null = null;
@@ -9,13 +10,8 @@ class DetalleBienResultRow {
     importeUltimaValuacion: number | null = null;
     descripcion: string = '';
 
-    constructor(id: number) {
-        this.id = id;
-    }
-
     public static fromObject(obj: any, index: number): DetalleBienResultRow {
-        return {
-            id: index,
+        const mappedObject = {
             idFideicomiso: obj.fgrsIdFideicomiso,
             idSubcuenta: obj.fgrsIdSubcuenta,
             idTipoBien: obj.forsCveTipoGarantia,
@@ -25,6 +21,16 @@ class DetalleBienResultRow {
             importeUltimaValuacion: obj.forsImpUltValua,
             descripcion: obj.forsTextoDescrip,
         };
+
+        const id = [
+            mappedObject.idFideicomiso,
+            mappedObject.idSubcuenta,
+            mappedObject.idTipoBien,
+            mappedObject.tipoBien,
+            mappedObject.idDetalleBien,
+        ].join('-');
+
+        return Object.assign(new DetalleBienResultRow(id), mappedObject);
     }
 }
 export default DetalleBienResultRow;

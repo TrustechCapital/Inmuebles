@@ -9,14 +9,12 @@ import { ClavesModuloBienes } from '../../../constants/bienes';
 import BienResultRow from './models/BienResultRow';
 import GenericSearchForm from '../../../sharedComponents/GenericSearchForm';
 import GenericTable, {
-    IGenericColumn,
+    IGenericTableColumn,
 } from '../../../sharedComponents/GenericTable';
 import GenericTextInput from '../../../sharedComponents/GenericTextInput';
 import CatalogSelect from '../../../sharedComponents/CatalogSelect';
 
-// TODO: Usar tipado fuerte en base a generico
-const COLUMNS: IGenericColumn[] = [
-    { field: 'id', header: 'Id', isKey: true },
+const COLUMNS: IGenericTableColumn<BienResultRow>[] = [
     { field: 'idFideicomiso', header: 'Fideicomiso' },
     { field: 'tipoBien', header: 'Tipo de Bien' },
     { field: 'importeBien', header: 'Importe', numeric: true },

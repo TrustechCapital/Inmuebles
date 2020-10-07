@@ -10,7 +10,7 @@ import Tooltip from '@material-ui/core/Tooltip';
 import MonetizationOnIcon from '@material-ui/icons/MonetizationOn';
 
 import GenericTable, {
-    IGenericColumn,
+    IGenericTableColumn,
     GenericToolbarActionsProps,
 } from '../../../sharedComponents/GenericTable';
 import DetalleBienResultRow from './models/DetalleBienResultRow';
@@ -22,10 +22,9 @@ const useStyles = makeStyles((theme) => ({
     },
 }));
 
-// TODO: Usar tipado fuerte en base a generico
-const COLUMNS_DETALLE_BIENES: IGenericColumn[] = [
-    { field: 'id', header: 'Id', isKey: true },
+const COLUMNS_DETALLE_BIENES: IGenericTableColumn<DetalleBienResultRow>[] = [
     { field: 'idFideicomiso', header: 'Fideicomiso' },
+    { field: 'idDetalleBien', header: 'Id Detalle Bien' },
     { field: 'tipoBien', header: 'Clasificacion' },
     {
         field: 'importeUltimaValuacion',
