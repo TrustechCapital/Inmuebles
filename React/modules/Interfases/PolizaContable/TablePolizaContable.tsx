@@ -8,13 +8,12 @@ import { useSearchParamsReducer } from '../../../sharedHooks/tableSearch';
 import PolizaResultRow from './models/PolizaResultRow';
 import GenericSearchForm from '../../../sharedComponents/GenericSearchForm';
 import GenericTable, {
-    IGenericColumn,
+    IGenericTableColumn,
 } from '../../../sharedComponents/GenericTable';
 import GenericTextInput from '../../../sharedComponents/GenericTextInput';
 
 // TODO: Usar tipado fuerte en base a generico
-const COLUMNS: IGenericColumn[] = [
-    { field: 'id', header: 'Id', isKey: true },
+const COLUMNS: IGenericTableColumn<PolizaResultRow>[] = [
     { field: 'fecha', header: 'Fecha' },
     { field: 'idFideicomiso', header: 'Num. Fideicomiso' },
     { field: 'nombreFideicomiso', header: 'Nom. Fideicomiso' },

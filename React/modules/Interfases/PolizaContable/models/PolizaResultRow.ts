@@ -1,24 +1,28 @@
-class PolizaResultRow {
-    id: number;
+import ResultRowModel from '../../../../models/ResultRowModel';
+
+class PolizaResultRow extends ResultRowModel {
     fecha = '';
     idFideicomiso: number | null = null;
     nombreFideicomiso = '';
     descripcionMovimiento = '';
     numeroTransaccion: number | null = null;
 
-    constructor(id: number) {
-        this.id = id;
-    }
-
     public static fromObject(obj: any, index: number): PolizaResultRow {
-        return {
-            id: index,
+        const mappedObject = {
             fecha: obj.movFecha,
             idFideicomiso: obj.movNumContrato,
             nombreFideicomiso: obj.ctoNomContrato,
             descripcionMovimiento: obj.movDescMovto,
-            numeroTransaccion: obj.movNumTransac
+            numeroTransaccion: obj.movNumTransac,
         };
+
+        const id = [
+            mappedObject.fecha,
+            mappedObject.idFideicomiso,
+            mappedObject.numeroTransaccion,
+        ].join('-');
+
+        return Object.assign(new PolizaResultRow(id), mappedObject);
     }
 }
 export default PolizaResultRow;
