@@ -10,7 +10,7 @@ import { IColumn } from './types';
 import { formatMoney } from '../../utils/NumberUtils';
 
 type TableRowProps = {
-    key: string,
+    uniqueKey: string,
     row: any;
     columns: IColumn[];
     isSelected: boolean;
@@ -19,10 +19,10 @@ type TableRowProps = {
 };
 
 const GenericTableRow: React.FC<TableRowProps> = React.memo(
-    ({ key, row, columns, isSelected, onClick, useCheckbox }) => {
+    ({uniqueKey, row, columns, isSelected, onClick, useCheckbox }) => {
         return (
             <TableRow 
-            key={key} onClick={(e: any) => onClick(row)}>
+            key={row.uniqueKey} onClick={(e: any) => onClick(row)}>
                 <TableCell padding="checkbox">
                     {useCheckbox ? (
                         <Checkbox checked={isSelected} />
@@ -30,10 +30,10 @@ const GenericTableRow: React.FC<TableRowProps> = React.memo(
                         <Radio checked={isSelected} />
                     )}
                 </TableCell>
-                {columns.map((col) => {
+                {columns.map((col, index) => {
                     const cellValue = col.numeric ? formatMoney(row[col.field]) : row[col.field];
                     return (
-                        <GenericTableCell
+                        <GenericTableCell key={index}
                             align={col.numeric ? 'right' : 'left'}
                         >
                             {cellValue}

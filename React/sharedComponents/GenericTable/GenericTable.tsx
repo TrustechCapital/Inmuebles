@@ -113,17 +113,18 @@ function GenericTable<T extends ResultRowModel>(props: TableProps<T>) {
             onSelectHandler([row] as T[]);
         }
     }
-
-    const rows = currentRows.map((row) => (
-        <GenericTableRow
+    
+    const rows = currentRows.map((row) => {
+        return <GenericTableRow
             key={row.uniqueKey}
+            uniqueKey={row.uniqueKey}
             row={row}
             isSelected={isSelected(row)}
             onClick={handleClick}
             columns={columns}
             useCheckbox={multipleSelect}
         />
-    ));
+    });
 
     const emptyRowsCount = rowsPerPage - currentRows.length;
     let emptyRowsPlaceholder = null;
