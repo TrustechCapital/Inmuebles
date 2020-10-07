@@ -1,19 +1,12 @@
-export interface IColumn {
-    field: string;
+import ResultRowModel from "../../models/ResultRowModel";
+
+export type IColumn = IGenericTableColumn<any>;
+
+export interface IGenericTableColumn<T extends ResultRowModel> {
+    field: Extract<keyof T, string>;
     header: string;
     isKey?: boolean;
     numeric?: boolean;
-}
-
-export interface IGenericTableColumn<RowModel> {
-    field: keyof RowModel;
-    header: string;
-    isKey?: boolean;
-    numeric?: boolean;
-}
-
-export interface ITableRow {
-    id: number;
 }
 
 export enum SortTypes {

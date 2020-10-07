@@ -9,12 +9,13 @@ import TableContainer from '@material-ui/core/TableContainer';
 import TableRow from '@material-ui/core/TableRow';
 import Paper from '@material-ui/core/Paper';
 
-import { IColumn, ITableRow, SortTypes } from './types';
+import { IColumn, SortTypes } from './types';
 import GenericTableRow from './GenericTableRow';
 import GenericTableToolbar from './GenericTableToolbar';
 import GenericTableHead from './GenericTableHead';
 import { GenericTableCallbacksContext } from './context';
 import ExcelTransformer from '../../services/ExcelTransformer';
+import ResultRowModel from '../../models/ResultRowModel';
 
 const ROW_HEIGHT = 53;
 
@@ -65,7 +66,7 @@ interface TableProps<T> {
     allowSelect?: boolean;
 }
 
-function GenericTable<T extends ITableRow>(props: TableProps<T>) {
+function GenericTable<T extends ResultRowModel>(props: TableProps<T>) {
     const { onNew, multipleSelect = true } = props;
     const { onSelect } = useContext(GenericTableCallbacksContext);
 
@@ -80,10 +81,7 @@ function GenericTable<T extends ITableRow>(props: TableProps<T>) {
         additionalActionsComponent = null,
     } = props;
 
-    const keyColumAvailable = columns.find((col) => col.isKey);
-    const keyColum: string = keyColumAvailable
-        ? keyColumAvailable.field
-        : 'key';
+    const keyColum: string = columns[0].field;
 
     const [order, setOrder] = React.useState<SortTypes>(SortTypes.Asc);
     const [orderBy, setOrderBy] = React.useState(keyColum);
@@ -118,7 +116,7 @@ function GenericTable<T extends ITableRow>(props: TableProps<T>) {
 
     const rows = currentRows.map((row) => (
         <GenericTableRow
-            key={row.id}
+            key={row.uniqueKey}
             row={row}
             isSelected={isSelected(row)}
             onClick={handleClick}
