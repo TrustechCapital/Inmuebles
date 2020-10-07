@@ -9,14 +9,12 @@ import { ClavesModuloUsuarios } from '../../../constants/usuarios';
 import UsuariosResultRow from './models/UsuariosResultRow';
 import GenericSearchForm from '../../../sharedComponents/GenericSearchForm';
 import GenericTable, {
-    IGenericColumn,
+    IGenericTableColumn,
 } from '../../../sharedComponents/GenericTable';
 import GenericTextInput from '../../../sharedComponents/GenericTextInput';
 import CatalogSelect from '../../../sharedComponents/CatalogSelect';
 
-// TODO: Usar tipado fuerte en base a generico
-const COLUMNS: IGenericColumn[] = [
-    { field: 'id', header: 'Id', isKey: true },
+const COLUMNS: IGenericTableColumn<UsuariosResultRow>[] = [
     { field: 'numeroUsuario', header: 'No.' },
     { field: 'nombrePersonalUsuario', header: 'Nombre' },
     { field: 'nombreUsuariosUsuario', header: 'OID' },

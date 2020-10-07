@@ -1,5 +1,6 @@
-class UsuariosResultRow {
-    id: number;
+import ResultRowModel from "../../../../models/ResultRowModel";
+
+class UsuariosResultRow extends ResultRowModel {
     nombrePersonalUsuario: string = '';
     nombreUsuariosUsuario: string = '';
     tipoUsuario: string = '';
@@ -8,13 +9,9 @@ class UsuariosResultRow {
     nombrePerfil: string = '';
     claveStatusUsuario: string = '';
 
-    constructor(id: number) {
-        this.id = id;
-    }
-
-    public static fromObject(obj: any, index: number): UsuariosResultRow {
+    public static fromObject(obj: any): UsuariosResultRow {
         return {
-            id: index,
+            uniqueKey: obj.usuNumUsuario,
             nombrePersonalUsuario: obj.perNomUsuario,
             nombreUsuariosUsuario: obj.usuNomUsuario,
             tipoUsuario: obj.usuTipoUsuario,
