@@ -10,6 +10,6 @@ const TABS = [
     },
 ];
 
-export default function () {
+export default function ModuleInterfases() {
     return <ModuleTabs tabs={TABS} />;
 }

@@ -11,6 +11,6 @@ const TABS = [
     },
 ];
 
-export default function () {
+export default function ModuleAdministracion() {
     return <ModuleTabs tabs={TABS} />;
 }

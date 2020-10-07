@@ -12,7 +12,7 @@ type ModuleTabsProps = {
     tabs: ModuleTab[];
 };
 
-export default function (props: ModuleTabsProps) {
+export default function ModuleTabs(props: ModuleTabsProps) {
     const [canView] = useModulePermissions();
 
     const visibleTabs = props.tabs.filter((tab) => {
