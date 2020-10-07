@@ -1,5 +1,6 @@
-class LiberacionResultRow {
-    id: number;
+import ResultRowModel from '../../../../models/ResultRowModel';
+
+class LiberacionResultRow extends ResultRowModel {
     idFideicomiso: number | null = null;
     idSubcuenta: number | null = null;
     idBien: number | null = null;
@@ -9,13 +10,8 @@ class LiberacionResultRow {
     moneda = '';
     status = '';
 
-    constructor(id: number) {
-        this.id = id;
-    }
-
-    public static fromObject(obj: any, index: number): LiberacionResultRow {
-        return {
-            id: index,
+    public static fromObject(obj: any): LiberacionResultRow {
+        const mappedObject = {
             idFideicomiso: obj.funiIdFideicomiso,
             idSubcuenta: obj.funiIdSubcuenta,
             idBien: obj.funiIdBien,
@@ -25,6 +21,16 @@ class LiberacionResultRow {
             moneda: obj.funiMoneda,
             status: obj.funiStatus,
         };
+
+        const id = [
+            mappedObject.idFideicomiso,
+            mappedObject.idSubcuenta,
+            mappedObject.idBien,
+            mappedObject.idEdificio,
+            mappedObject.idDepto,
+        ].join('-');
+
+        return Object.assign(new LiberacionResultRow(id), mappedObject);
     }
 }
 export default LiberacionResultRow;
