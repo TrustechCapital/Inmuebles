@@ -1,1 +1,0 @@
-export { usuariosApi } from './UsuariosApi';
