@@ -1,5 +1,6 @@
-class IndividualizacionesResultRow {
-    id: number;
+import ResultRowModel from '../../../../models/ResultRowModel';
+
+class IndividualizacionesResultRow extends ResultRowModel {
     idFideicomiso: number | null = null;
     idSubcuenta: number | null = null;
     idBien: number | null = null;
@@ -12,16 +13,11 @@ class IndividualizacionesResultRow {
     moneda = '';
     status = '';
 
-    constructor(id: number) {
-        this.id = id;
-    }
-
     public static fromObject(
         obj: any,
         index: number
     ): IndividualizacionesResultRow {
-        return {
-            id: index,
+        const mappedObject = {
             idFideicomiso: obj.funiIdFideicomiso,
             idSubcuenta: obj.funiIdSubcuenta,
             idBien: obj.funiIdBien,
@@ -34,6 +30,19 @@ class IndividualizacionesResultRow {
             moneda: obj.funiMoneda,
             status: obj.funiStatus,
         };
+
+        const id = [
+            mappedObject.idFideicomiso,
+            mappedObject.idSubcuenta,
+            mappedObject.idBien,
+            mappedObject.idEdificio,
+            mappedObject.idDepto,
+        ].join('-');
+
+        return Object.assign(
+            new IndividualizacionesResultRow(id),
+            mappedObject
+        );
     }
 }
 export default IndividualizacionesResultRow;

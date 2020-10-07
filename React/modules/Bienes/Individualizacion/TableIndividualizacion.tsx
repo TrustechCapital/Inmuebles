@@ -9,14 +9,12 @@ import { ClavesModuloBienes } from '../../../constants/bienes';
 import IndividualizacionesResultRow from './models/IndividualizacionesResultRow';
 import GenericSearchForm from '../../../sharedComponents/GenericSearchForm';
 import GenericTable, {
-    IGenericColumn,
+    IGenericTableColumn,
 } from '../../../sharedComponents/GenericTable';
 import GenericTextInput from '../../../sharedComponents/GenericTextInput';
 import CatalogSelect from '../../../sharedComponents/CatalogSelect';
 
-// TODO: Usar tipado fuerte en base a generico
-const COLUMNS: IGenericColumn[] = [
-    { field: 'id', header: 'Id', isKey: true },
+const COLUMNS: IGenericTableColumn<IndividualizacionesResultRow>[] = [
     { field: 'idFideicomiso', header: 'Fideicomiso' },
     { field: 'cveGarantia', header: 'Id Bien' },
     { field: 'idBien', header: 'Id Detalle Bien' },
