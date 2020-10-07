@@ -9,16 +9,15 @@ import IndividualizacionesResultRow from './models/ReportesResultRow';
 import GenericSearchForm from '../../../sharedComponents/GenericSearchForm';
 import { ClavesModuloBienes } from '../../../constants/bienes';
 import GenericTable, {
-    IGenericColumn,
+    IGenericTableColumn,
 } from '../../../sharedComponents/GenericTable';
 import { Button } from '@material-ui/core';
 import GetAppIcon from '@material-ui/icons/GetApp';
 import GenericTextInput from '../../../sharedComponents/GenericTextInput';
 import CatalogSelect from '../../../sharedComponents/CatalogSelect';
+import ReportesResultRow from './models/ReportesResultRow';
 
-// TODO: Usar tipado fuerte en base a generico
-const COLUMNS: IGenericColumn[] = [
-    { field: 'id', header: 'Id', isKey: true },
+const COLUMNS: IGenericTableColumn<ReportesResultRow>[] = [
     { field: 'idFideicomiso', header: 'Fideicomiso' },
     { field: 'nomFiso', header: 'Nombre Fideicomiso' },
     { field: 'descripInmueble', header: 'Descripcion' },

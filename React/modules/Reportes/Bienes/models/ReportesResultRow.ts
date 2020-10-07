@@ -1,5 +1,6 @@
-class ReportesResultRow {
-    id: number;
+import ResultRowModel from "../../../../models/ResultRowModel";
+
+class ReportesResultRow extends ResultRowModel{
     idFideicomiso: number | null = null;
     nomFiso: number | null = null;
     descripInmueble = '';
@@ -15,13 +16,8 @@ class ReportesResultRow {
     municipio = '';
     status = '';
 
-    constructor(id: number) {
-        this.id = id;
-    }
-
     public static fromObject(obj: any, index: number): ReportesResultRow {
-        return {
-            id: index,
+        const mappedObject = {
             idFideicomiso: obj.funiIdFideicomiso,
             nomFiso: obj.ctoNomContrato,
             descripInmueble: obj.forsTextoDescrip,
@@ -37,6 +33,14 @@ class ReportesResultRow {
             municipio: obj.funiNomPoblacion,
             status: obj.funiStatus,
         };
+
+        const id = [
+            mappedObject.idFideicomiso,
+            mappedObject.idTipoBien,
+            mappedObject.numCatastro,
+        ].join('-');
+
+        return Object.assign(new ReportesResultRow(id), mappedObject);
     }
 }
 export default ReportesResultRow;
