@@ -1,17 +1,18 @@
-class FideicomisoResultRow {
-    id: number;
+import ResultRowModel from '../../../../models/ResultRowModel';
+
+class FideicomisoResultRow extends ResultRowModel {
     idFideicomiso: number;
     nombreFideicomiso: string;
 
-    constructor(id: number, idFideicomiso: number, nombre: string) {
-        this.id = id;
+    constructor(id: string, idFideicomiso: number, nombre: string) {
+        super(id);
         this.idFideicomiso = idFideicomiso;
         this.nombreFideicomiso = nombre;
     }
 
     public static fromObject(obj: any, index: number): FideicomisoResultRow {
         return {
-            id: obj.ctoNumContrato,
+            uniqueKey: obj.ctoNumContrato,
             idFideicomiso: obj.ctoNumContrato,
             nombreFideicomiso: obj.ctoNomContrato,
         };
