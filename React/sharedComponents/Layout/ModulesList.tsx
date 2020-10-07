@@ -6,7 +6,6 @@ import ListItemText from '@material-ui/core/ListItemText';
 import ListItemIcon from '@material-ui/core/ListItemIcon';
 import ApartmentIcon from '@material-ui/icons/Apartment';
 import PeopleIcon from '@material-ui/icons/People';
-import ScheduleIcon from '@material-ui/icons/Schedule';
 import InputIcon from '@material-ui/icons/Input';
 import BarChartIcon from '@material-ui/icons/BarChart';
 import WorkIcon from '@material-ui/icons/Work';
@@ -15,7 +14,6 @@ const MODULES = [
     { label: 'Administración', url: '/administracion', icon: WorkIcon },
     { label: 'Bienes', url: '/bienes', icon: ApartmentIcon },
     { label: 'Interfases', url: '/interfases', icon: InputIcon },
-    { label: 'Planes', url: '/planes', icon: ScheduleIcon },
     { label: 'Reportes', url: '/reportes', icon: BarChartIcon },
     { label: 'Seguridad', url: '/seguridad', icon: PeopleIcon },
 ];
