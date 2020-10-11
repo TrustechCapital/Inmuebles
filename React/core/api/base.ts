@@ -238,6 +238,33 @@ export class Api {
         });
     }
 
+    public async getAsyncOperationStatus(
+        transactionId: string
+    ): Promise<void> {
+        return this.sendDynamicRequest(
+            FiduciaDynamicEndpoints.Get,
+            'consultaEstatusTransaccionAsync',
+            {
+                transactionId : transactionId
+            }
+        ).then((response) => {
+            const data = response.data as any[];
+
+            if (!data || !data.length){
+                throw new Error('Ocurrio un error inesperado');
+            }
+
+            const result = data[0];
+
+            const transactionCompleted = Boolean(result.transactionCompleted);
+            const transactionError = result.transactionError;
+            
+            if (!transactionCompleted){    
+                throw new Error(transactionError);
+            }
+        });
+    }
+
     public uploadFiles(url: string, files: File[] = [], params: Object = {}) {
         var formData = new FormData();
 
@@ -261,14 +288,22 @@ export class Api {
         processorName: string,
         otherParams: Object = {}
     ) {
+
+        // TODO: Cambiar por UUID
+        const transactionId = `${Math.floor(Math.random() * 1000000)}`;
+
         try {
             await this.uploadFiles(FiduciaDynamicEndpoints.UploadFile, files, {
                 ...otherParams,
+                numTransaccion: transactionId,
                 processor: processorName,
             });
         } catch (error) {
-            console.log('error', error);
+            console.log('error al subir archivo', error);
             throw new FileUploadError();
+
+        } finally {
+            await this.getAsyncOperationStatus(transactionId);
         }
     }
 }

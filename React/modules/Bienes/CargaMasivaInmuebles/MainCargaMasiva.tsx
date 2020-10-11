@@ -44,6 +44,7 @@ const CargasMasivasFormValidator = new FormValidator({
 const initialValues = new CargaMasivasBienes(null, null, null);
 
 const initialOperationStatus = {
+    isInitialState: true,
     isSaving: false,
     error: null,
 };
@@ -54,11 +55,12 @@ export default function MainCargaMasiva() {
         initialOperationStatus
     );
 
-    const operationSuccess = operationStatus.error === null;
+    const operationSuccess = !operationStatus.isInitialState && operationStatus.error === null;
 
     async function handleSubmit(datosCargaMasiva: CargaMasivasBienes) {
         try {
             setOperationStatus({
+                isInitialState: false,
                 isSaving: true,
                 error: null,
             });
@@ -66,11 +68,14 @@ export default function MainCargaMasiva() {
             await cargaMasivaBienesApi.aplicaCargaMasiva(datosCargaMasiva);
             
             setOperationStatus({
+                isInitialState: false,
                 isSaving: false,
                 error: null,
             });
+
         } catch (error) {
             setOperationStatus({
+                isInitialState: false,
                 isSaving: false,
                 error: error.message,
             });

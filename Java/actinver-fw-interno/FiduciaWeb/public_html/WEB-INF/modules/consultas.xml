@@ -1562,6 +1562,8 @@
                 <entry key="muestraMonedaCredito" value="SELECT IMONEDA_CRED FROM CREDITO"/>
                 <entry key="muestraProductoCredito" value="SELECT P.VDESCRIPCION DESCRIPCION FROM CREDITO C,PRODUCTOS P WHERE         C.ID_PRODUCTO=P.ID_PRODUCTO"/>
                 <entry key="verificaCredito" value="SELECT COUNT(1) AS ID_CREDITO FROM CREDITO"/>
+                <!--INICIO TRANSACCIONES ASINCRONAS-->
+                <entry key="consultaEstatusTransaccionAsync" value="SELECT transaction_completed, transaction_error FROM async_transactions"/>
             </map>
         </property>
         <property name="parametros">
@@ -45314,6 +45316,24 @@
                             </property>
                             <property name="sqlName">
                                 <value>C.ANUMERO_CREDITO</value>
+                            </property>
+                            <property name="clauseType">
+                                <value>AND</value>
+                            </property>
+                            <property name="conditionType">
+                                <value>=</value>
+                            </property>
+                        </bean>
+                    </list>
+                </entry>
+                <entry key="consultaEstatusTransaccionAsync">
+                    <list>
+                    <bean class="mx.gob.nafin.fiduciario.common.beans.ParametroQueryBean">
+                            <property name="name">
+                                <value>transactionId</value>
+                            </property>
+                            <property name="sqlName">
+                                <value>TRANSACTION_ID</value>
                             </property>
                             <property name="clauseType">
                                 <value>AND</value>
