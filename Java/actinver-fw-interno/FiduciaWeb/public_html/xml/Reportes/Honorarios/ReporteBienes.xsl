@@ -105,7 +105,7 @@
                                                 <xsl:value-of select="funiIdFideicomiso"/>
                                             </fo:block>
                                         </fo:table-cell>
-                                        <fo:table-cell text-align="left">
+                                        <fo:table-cell text-align="center">
                                             <fo:block font-size="7px">
                                                 <xsl:value-of select="ctoNomContrato"/>
                                             </fo:block>
