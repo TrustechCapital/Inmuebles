@@ -4,12 +4,21 @@ import java.math.BigDecimal;
 
 import java.util.List;
 
+import java.util.Map;
+
+import mx.com.inscitech.fiducia.common.services.LoggingService;
 import mx.com.inscitech.fiducia.common.util.DateUtils;
+import mx.com.inscitech.fiducia.domain.FBienesgar;
+import mx.com.inscitech.fiducia.domain.FGarantias;
 import mx.com.inscitech.fiducia.domain.FUnidades;
 import mx.com.inscitech.fiducia.models.LayoutCargaBienes;
 import mx.com.inscitech.fiducia.negocio.bienes.Constants.EstatusIndividualizacionBienes;
 import mx.com.inscitech.fiducia.negocio.bienes.Constants.TiposCargaMasiva;
+import mx.com.inscitech.fiducia.repository.BienesRepository;
+import mx.com.inscitech.fiducia.repository.DetalleBienesRepository;
 import mx.com.inscitech.fiducia.repository.UnidadRepository;
+
+import mx.gob.nafin.fiduciario.BusinessException;
 
 public class OperacionesCargaMasivaBienes {
 
@@ -31,6 +40,7 @@ public class OperacionesCargaMasivaBienes {
     }
 
     private UnidadRepository unidadRepository;
+    private DetalleBienesRepository detalleBienesRepository;
 
     public OperacionesCargaMasivaBienes() {
         this.unidadRepository = new UnidadRepository();
@@ -55,6 +65,14 @@ public class OperacionesCargaMasivaBienes {
                 String tipo = "0";
 
                 if (pTipoOperacion == TiposCargaMasiva.INDIVIDUALIZACION.getValue()) {
+
+                    FBienesgar detalleBien = detalleBienesRepository.findByPk(idFideicomiso, idSubcuenta, idBien);
+
+                    if (detalleBien == null) {
+                        throw new BusinessException("400",
+                                                    String.format("El detalle de bien con id %s no existe en el fideicomiso %s, subcuenta",
+                                                                  idBien, idFideicomiso, idSubcuenta));
+                    }
 
                     FUnidades unidad =
                         unidadRepository.findByPk(idFideicomiso, idSubcuenta, idBien, idEdificio, idDepto);

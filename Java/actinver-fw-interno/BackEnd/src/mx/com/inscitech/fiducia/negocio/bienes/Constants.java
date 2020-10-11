@@ -118,7 +118,7 @@ public class Constants {
         super();
     }
 
-    enum TiposCargaMasiva {
+    public enum TiposCargaMasiva {
         INDIVIDUALIZACION(1),
         LIBERACION(2);
 
@@ -128,7 +128,7 @@ public class Constants {
             this.tipoOperacion = tipoOperacion;
         }
 
-        int getValue() {
+        public int getValue() {
             return this.tipoOperacion;
         }
 

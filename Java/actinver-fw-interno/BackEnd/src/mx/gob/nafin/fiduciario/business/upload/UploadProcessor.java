@@ -18,7 +18,9 @@ import java.util.Map;
 
 import mx.gob.nafin.fiduciario.BusinessException;
 import mx.gob.nafin.fiduciario.common.beans.ParametroQueryBean;
+
 import mx.com.inscitech.fiducia.common.util.DateTimeUtils;
+
 import mx.gob.nafin.fiduciario.dao.util.GenericRowMapper;
 
 import mx.com.inscitech.fiducia.common.services.LoggingService;
@@ -27,14 +29,14 @@ import org.springframework.jdbc.core.JdbcTemplate;
 
 /**
  * Clase que deben de extender los procesadores de archivos que son cargados al servidor.
- * @author Inscitech México inscitech@inscitechmexico.com
+ * @author Inscitech Mï¿½xico inscitech@inscitechmexico.com
  */
 public abstract class UploadProcessor implements Runnable {
 
     protected LoggingService logger = null;
 
     protected int processID = 0;
-    
+
     /**
      * Variable en la que se almacenan los archivos que se van a procesar.
      */
@@ -62,7 +64,7 @@ public abstract class UploadProcessor implements Runnable {
 
     protected boolean filesFromFS = false;
     protected boolean asThread = false;
-    
+
     public UploadProcessor() {
         super();
         logger = LoggingService.getNewInstance();
@@ -199,7 +201,8 @@ public abstract class UploadProcessor implements Runnable {
                             cs.registerOutParameter(paramIndex, Types.VARCHAR);
 
                         logger.log(this, Thread.currentThread(), LoggingService.LEVEL.DEBUG,
-                                   "Parameter " + paramBean.getName() + " registered as OUT parameter. Index: " + paramIndex);
+                                   "Parameter " + paramBean.getName() + " registered as OUT parameter. Index: " +
+                                   paramIndex);
 
                         paramIndex++;
 
@@ -209,7 +212,8 @@ public abstract class UploadProcessor implements Runnable {
                             cs.setString(paramIndex++, String.valueOf(parameterValue));
                         else if (parameterType.equals("NUMBER"))
                             cs.setInt(paramIndex++, ((Integer) parameterValue).intValue());
-                        else if (parameterValue instanceof Long || parameterValue instanceof Integer || parameterValue instanceof Double) {
+                        else if (parameterValue instanceof Long || parameterValue instanceof Integer ||
+                                 parameterValue instanceof Double) {
                             if (parameterValue instanceof String)
                                 cs.setLong(paramIndex++, Long.parseLong((String) parameterValue));
                             else if (parameterValue instanceof Long)
@@ -219,7 +223,9 @@ public abstract class UploadProcessor implements Runnable {
                             else if (parameterValue instanceof Double)
                                 cs.setDouble(paramIndex++, ((Double) parameterValue).doubleValue());
                         } else if (parameterType.equals("DATE")) {
-                            Date theDate = new Date(DateTimeUtils.parseDateTimeFromPattern(paramBean.getPattern(), (String) parameterValue).getTime());
+                            Date theDate =
+                                new Date(DateTimeUtils.parseDateTimeFromPattern(paramBean.getPattern(),
+                                                                                (String) parameterValue).getTime());
                             cs.setDate(paramIndex++, theDate);
                         } else if (parameterType.equals("DOUBLE"))
                             cs.setBigDecimal(paramIndex++, new BigDecimal(Double.parseDouble((String) parameterValue)));
@@ -229,18 +235,20 @@ public abstract class UploadProcessor implements Runnable {
                             cs.setString(paramIndex++, (String) parameterValue);
 
                         logger.log(this, Thread.currentThread(), LoggingService.LEVEL.DEBUG,
-                                   "Parameter " + paramBean.getName() + " registered as IN parameter type: " + parameterValue.getClass() + " value: " + parameterValue +
-                                   " Index: " + paramIndex);
+                                   "Parameter " + paramBean.getName() + " registered as IN parameter type: " +
+                                   parameterValue.getClass() + " value: " + parameterValue + " Index: " + paramIndex);
 
                     }
                 } else {
                     cs.setNull(paramIndex, Types.NULL);
-                    logger.log(this, Thread.currentThread(), LoggingService.LEVEL.DEBUG, "Parameter " + paramBean.getName() + " registered as NULL. Index: " + paramIndex);
+                    logger.log(this, Thread.currentThread(), LoggingService.LEVEL.DEBUG,
+                               "Parameter " + paramBean.getName() + " registered as NULL. Index: " + paramIndex);
                     paramIndex++;
                 }
             }
 
-            logger.log(this, Thread.currentThread(), LoggingService.LEVEL.DEBUG, "Parameters Registered: " + paramIndex);
+            logger.log(this, Thread.currentThread(), LoggingService.LEVEL.DEBUG,
+                       "Parameters Registered: " + paramIndex);
 
             cs.execute();
 
@@ -275,6 +283,37 @@ public abstract class UploadProcessor implements Runnable {
         return result;
     }
 
+
+    public void limpiaRegistrosTransaccion(Integer numTransaccion, String nombreTransaccion) {
+        try {
+            this.ejecutaQuery("DELETE FROM async_transactions WHERE transaction_id = ? AND transaction_name = ?",
+                              new Object[] { numTransaccion, nombreTransaccion });
+        } catch (Exception e) {
+
+        }
+
+    }
+
+    public void grabaErrorTransaccion(Integer numTransaccion, String nombreTransaccion, String error) {
+        try {
+            this.ejecutaQuery("INSERT INTO async_transactions VALUES(?,?,?,?)",
+                              new Object[] { numTransaccion, nombreTransaccion, 0, error });
+        } catch (Exception e) {
+
+        }
+
+    }
+
+    public void grabaTransaccionCompleta(Integer numTransaccion, String nombreTransaccion) {
+        try {
+            this.ejecutaQuery("INSERT INTO async_transactions VALUES(?,?,?,?)",
+                              new Object[] { numTransaccion, nombreTransaccion, 1, null });
+        } catch (Exception e) {
+
+        }
+
+    }
+
     public void setStarted(boolean started) {
         this.started = started;
         stateMonitor.setStarted(started); //Esto es para no cambiar el codigo que ya esta
@@ -291,7 +330,7 @@ public abstract class UploadProcessor implements Runnable {
         stateMonitor.setFinished(started);
         stateMonitor.setEndedAt(DateTimeUtils.formatThisTime());
         Duration duration = Duration.between(startedAt, LocalDateTime.now());
-        stateMonitor.setElapsedTime(""+duration.getSeconds()+"s");
+        stateMonitor.setElapsedTime("" + duration.getSeconds() + "s");
     }
 
     public boolean isFinished() {
@@ -322,11 +361,11 @@ public abstract class UploadProcessor implements Runnable {
     public UploadStateMonitorBean getStateMonitor() {
         return stateMonitor;
     }
-    
+
     public boolean getFilesFromFS() {
         return filesFromFS;
     }
-    
+
     public boolean doAsThreadThread() {
         return asThread;
     }
