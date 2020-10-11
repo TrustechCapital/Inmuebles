@@ -166,7 +166,7 @@ public class CargaMasivaBienesImpl extends UploadProcessor {
             logger.log(this, Thread.currentThread(), LoggingService.LEVEL.ERROR,
                        "Error inesperado en carga masiva de bienes", e);
             this.grabaErrorTransaccion(numTransaccion, NOMBRE_TRANSACCION,
-                                       "Ocurrio un error en esperado al realizar la carga");
+                                       "Ocurrio un error inesperado al realizar la carga");
 
         } finally {
             if (excelReader != null)

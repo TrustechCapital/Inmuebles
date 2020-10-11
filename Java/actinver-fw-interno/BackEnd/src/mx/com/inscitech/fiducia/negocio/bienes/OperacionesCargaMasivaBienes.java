@@ -44,106 +44,100 @@ public class OperacionesCargaMasivaBienes {
 
     public OperacionesCargaMasivaBienes() {
         this.unidadRepository = new UnidadRepository();
+        this.detalleBienesRepository = new DetalleBienesRepository();
     }
 
 
-    public String ejecutaCarga(Integer pTipoOperacion, Integer pIdFideicomiso, List<LayoutCargaBienes> datosCarga) {
+    public void ejecutaCarga(Integer pTipoOperacion, Integer pIdFideicomiso,
+                             List<LayoutCargaBienes> datosCarga) throws BusinessException {
 
-        try {
-            BigDecimal idFideicomiso = new BigDecimal(pIdFideicomiso);
+        BigDecimal idFideicomiso = new BigDecimal(pIdFideicomiso);
 
-            for (LayoutCargaBienes layoutCarga : datosCarga) {
+        for (LayoutCargaBienes layoutCarga : datosCarga) {
 
-                BigDecimal idSubcuenta = BigDecimal.valueOf(0);
-                BigDecimal idBien = new BigDecimal(layoutCarga.getIdBien());
-                String idEdificio = layoutCarga.getEdificio();
-                String idDepto = layoutCarga.getDepto();
-                BigDecimal idNotario = BigDecimal.valueOf(layoutCarga.getNotario());
-                Integer tipoValorBien = layoutCarga.getTipoValorBien();
-                BigDecimal valorBien = BigDecimal.valueOf(layoutCarga.getValorBien());
+            BigDecimal idSubcuenta = BigDecimal.valueOf(0);
+            BigDecimal idBien = new BigDecimal(layoutCarga.getIdBien());
+            String idEdificio = layoutCarga.getEdificio();
+            String idDepto = layoutCarga.getDepto();
+            BigDecimal idNotario = BigDecimal.valueOf(layoutCarga.getNotario());
+            Integer tipoValorBien = layoutCarga.getTipoValorBien();
+            BigDecimal valorBien = BigDecimal.valueOf(layoutCarga.getValorBien());
 
-                String tipo = "0";
+            String tipo = "0";
 
-                if (pTipoOperacion == TiposCargaMasiva.INDIVIDUALIZACION.getValue()) {
+            if (pTipoOperacion == TiposCargaMasiva.INDIVIDUALIZACION.getValue()) {
 
-                    FBienesgar detalleBien = detalleBienesRepository.findByPk(idFideicomiso, idSubcuenta, idBien);
+                FBienesgar detalleBien = detalleBienesRepository.findByPk(idFideicomiso, idSubcuenta, idBien);
 
-                    if (detalleBien == null) {
-                        throw new BusinessException("400",
-                                                    String.format("El detalle de bien con id %s no existe en el fideicomiso %s, subcuenta",
-                                                                  idBien, idFideicomiso, idSubcuenta));
-                    }
-
-                    FUnidades unidad =
-                        unidadRepository.findByPk(idFideicomiso, idSubcuenta, idBien, idEdificio, idDepto);
-
-                    if (unidad == null) {
-                        unidad = new FUnidades(idFideicomiso, idSubcuenta, idBien, idEdificio, idDepto);
-                        unidad.setFuniTipo(tipo);
-
-                        unidad.setFuniNiveles(layoutCarga.getNiveles());
-                        unidad.setFuniCalleNum(layoutCarga.getCalle());
-                        unidad.setFuniNomColonia(layoutCarga.getColonia());
-                        unidad.setFuniNomPoblacion(layoutCarga.getPoblacion());
-                        unidad.setFuniCodigoPostal(layoutCarga.getCodigoPostal());
-                        unidad.setFuniClaveEstado(layoutCarga.getEstado());
-                        unidad.setFuniClavePais(layoutCarga.getPais());
-                        unidad.setFuniColindancias(layoutCarga.getColindancia());
-                        unidad.setFuniMedidas(layoutCarga.getMedidas().toString());
-                        unidad.setFuniEstacionamiento1(layoutCarga.getEstacionamiento1());
-                        unidad.setFuniSuperficie1(layoutCarga.getSuperficie1());
-                        unidad.setFuniNumeroCatastro(new BigDecimal(layoutCarga.getNumeroCatastro()));
-
-                        if (tipoValorBien == TipoValorBien.COMERCIAL.getValue()) {
-                            unidad.setFuniPrecio(valorBien);
-                        } else if (tipoValorBien == TipoValorBien.CATASTRAL.getValue()) {
-                            unidad.setFuniPrecioCatastro(valorBien);
-                        } else if (tipoValorBien == TipoValorBien.AVALUO.getValue()) {
-                            unidad.setFuniUltimoAvaluo(valorBien);
-                        }
-
-                        unidad.setFuniNombreAdquiriente(layoutCarga.getNombreAdquiriente());
-
-                        // NOTA: no se esta recibiendo esta fecha desde la carga masiva
-                        //unidad.setFuniFechaUltimoAvaluo(layoutCarga.getFechaAvaluo());
-                        //unidad.setFuniFechaReversion(layoutCarga.getFechaAvaluo());
-
-                        unidad.setFuniNumEscritura(layoutCarga.getEscritura());
-
-                        unidad.setFuniFechaTrasladoDominio(layoutCarga.getFechaEscritura());
-
-                        unidad.setFuniNotario(idNotario);
-                        unidad.setFuniNombreNotario(layoutCarga.getNombreNotario());
-
-                        unidad.setFuniStatus(EstatusIndividualizacionBienes.getText(layoutCarga.getStatus()));
-                        unidad.setFuniMoneda(BigDecimal.valueOf(1));
-
-                        unidadRepository.insert(unidad);
-                    }
-
-                } else if (pTipoOperacion == TiposCargaMasiva.LIBERACION.getValue()) {
-
-
-                    FUnidades unidad =
-                        unidadRepository.findByPk(idFideicomiso, idSubcuenta, idBien, idEdificio, idDepto);
-
-                    if (unidad != null) {
-                        unidad.setFuniNotario(idNotario);
-                        unidad.setFuniNumEscritura(layoutCarga.getEscritura());
-                        unidad.setFuniStatus(EstatusIndividualizacionBienes.LIBERADO.getText());
-
-                        unidadRepository.update(unidad);
-                    }
-
-
-                    //TODO: insertar en f_fiberaciones o F_PROCESO_LIBERACION ?
+                if (detalleBien == null) {
+                    throw new BusinessException("400",
+                                                String.format("El detalle de bien con id %s no existe en el fideicomiso: %s, subcuenta: %s",
+                                                              idBien, idFideicomiso, idSubcuenta));
                 }
 
+                FUnidades unidad = unidadRepository.findByPk(idFideicomiso, idSubcuenta, idBien, idEdificio, idDepto);
+
+                if (unidad == null) {
+                    unidad = new FUnidades(idFideicomiso, idSubcuenta, idBien, idEdificio, idDepto);
+                    unidad.setFuniTipo(tipo);
+
+                    unidad.setFuniNiveles(layoutCarga.getNiveles());
+                    unidad.setFuniCalleNum(layoutCarga.getCalle());
+                    unidad.setFuniNomColonia(layoutCarga.getColonia());
+                    unidad.setFuniNomPoblacion(layoutCarga.getPoblacion());
+                    unidad.setFuniCodigoPostal(layoutCarga.getCodigoPostal());
+                    unidad.setFuniClaveEstado(layoutCarga.getEstado());
+                    unidad.setFuniClavePais(layoutCarga.getPais());
+                    unidad.setFuniColindancias(layoutCarga.getColindancia());
+                    unidad.setFuniMedidas(layoutCarga.getMedidas().toString());
+                    unidad.setFuniEstacionamiento1(layoutCarga.getEstacionamiento1());
+                    unidad.setFuniSuperficie1(layoutCarga.getSuperficie1());
+                    unidad.setFuniNumeroCatastro(new BigDecimal(layoutCarga.getNumeroCatastro()));
+
+                    if (tipoValorBien == TipoValorBien.COMERCIAL.getValue()) {
+                        unidad.setFuniPrecio(valorBien);
+                    } else if (tipoValorBien == TipoValorBien.CATASTRAL.getValue()) {
+                        unidad.setFuniPrecioCatastro(valorBien);
+                    } else if (tipoValorBien == TipoValorBien.AVALUO.getValue()) {
+                        unidad.setFuniUltimoAvaluo(valorBien);
+                    }
+
+                    unidad.setFuniNombreAdquiriente(layoutCarga.getNombreAdquiriente());
+
+                    // NOTA: no se esta recibiendo esta fecha desde la carga masiva
+                    //unidad.setFuniFechaUltimoAvaluo(layoutCarga.getFechaAvaluo());
+                    //unidad.setFuniFechaReversion(layoutCarga.getFechaAvaluo());
+
+                    unidad.setFuniNumEscritura(layoutCarga.getEscritura());
+
+                    unidad.setFuniFechaTrasladoDominio(layoutCarga.getFechaEscritura());
+
+                    unidad.setFuniNotario(idNotario);
+                    unidad.setFuniNombreNotario(layoutCarga.getNombreNotario());
+
+                    unidad.setFuniStatus(EstatusIndividualizacionBienes.getText(layoutCarga.getStatus()));
+                    unidad.setFuniMoneda(BigDecimal.valueOf(1));
+
+                    unidadRepository.insert(unidad);
+                }
+
+            } else if (pTipoOperacion == TiposCargaMasiva.LIBERACION.getValue()) {
+
+
+                FUnidades unidad = unidadRepository.findByPk(idFideicomiso, idSubcuenta, idBien, idEdificio, idDepto);
+
+                if (unidad != null) {
+                    unidad.setFuniNotario(idNotario);
+                    unidad.setFuniNumEscritura(layoutCarga.getEscritura());
+                    unidad.setFuniStatus(EstatusIndividualizacionBienes.LIBERADO.getText());
+
+                    unidadRepository.update(unidad);
+                }
+
+
+                //TODO: insertar en f_fiberaciones o F_PROCESO_LIBERACION ?
             }
 
-            return "";
-        } catch (Exception e) {
-            return "-1";
         }
     }
 
