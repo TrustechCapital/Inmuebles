@@ -9,25 +9,16 @@ import DialogContentText from '@material-ui/core/DialogContentText';
 import DialogTitle from '@material-ui/core/DialogTitle';
 import Slide from '@material-ui/core/Slide';
 import { TransitionProps } from '@material-ui/core/transitions';
-import ErrorOutlineIcon from '@material-ui/icons/ErrorOutline';
 
 import { OperacionesCatalogo } from '../constants';
 import SavingButton from './SavingButton';
+import ErrorMessage from './ErrorMessage';
 
 const useStyles = makeStyles((theme) => ({
     root: {
         width: '100%',
         backgroundColor: theme.palette.background.paper,
-    },
-    errorMessage: {
-        display: 'flex',
-        alignItems: 'center',
-        color: theme.palette.error.main,
-        padding: theme.spacing(1.5),
-    },
-    errorMessageIcon: {
-        marginRight: theme.spacing(0.5),
-    },
+    }
 }));
 
 const Transition = React.forwardRef(function Transition(
@@ -103,14 +94,7 @@ const CatalogDialog: React.FC<CatalogDialogProps> = ({
                 </form>
             </DialogContent>
             <DialogActions>
-                {errorMessage && (
-                    <div className={classes.errorMessage}>
-                        <ErrorOutlineIcon
-                            className={classes.errorMessageIcon}
-                        />
-                        {errorMessage}
-                    </div>
-                )}
+                <ErrorMessage message={errorMessage}/>
                 <Button onClick={onCancel} variant="contained">
                     Cancelar
                 </Button>

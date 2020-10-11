@@ -16,6 +16,7 @@ import { GenericRadioGroupItem } from '../../../sharedComponents/GenericRadioGro
 import { TiposCargaMasivaBienes } from './constants';
 import { cargaMasivaBienesApi } from './services/CargaMasivaBienesApi';
 import SavingButton from '../../../sharedComponents/SavingButton';
+import ErrorMessage from '../../../sharedComponents/ErrorMessage';
 
 const { FormTextField, FormFileField, FormRadioGroupField } = new GenericForm<
     CargaMasivasBienes
@@ -53,7 +54,7 @@ export default function MainCargaMasiva() {
         initialOperationStatus
     );
 
-    const operationSuccess = !!operationStatus.error;
+    const operationSuccess = operationStatus.error === null;
 
     async function handleSubmit(datosCargaMasiva: CargaMasivasBienes) {
         try {
@@ -61,7 +62,9 @@ export default function MainCargaMasiva() {
                 isSaving: true,
                 error: null,
             });
+
             await cargaMasivaBienesApi.aplicaCargaMasiva(datosCargaMasiva);
+            
             setOperationStatus({
                 isSaving: false,
                 error: null,
@@ -69,7 +72,7 @@ export default function MainCargaMasiva() {
         } catch (error) {
             setOperationStatus({
                 isSaving: false,
-                error: error,
+                error: error.message,
             });
         }
     }
@@ -141,6 +144,7 @@ export default function MainCargaMasiva() {
                                 </Grid>
                             </Grid>
                             <Grid container justify="flex-end">
+                                <ErrorMessage message={operationStatus.error}/>
                                 <SavingButton
                                     type="submit"
                                     loading={operationStatus.isSaving}
