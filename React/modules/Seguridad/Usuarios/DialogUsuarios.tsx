@@ -69,18 +69,17 @@ const DialogUsuarios: React.FC<ICatalogDialog<Usuarios>> = ({
                         >
                             <Grid item xs={6}>
                                 <FormTextField
-                                    name="nombreUsuario"
+                                    name="nombre"
                                     label="Nombre"
-                                    disabled={pkFieldsDisabled}
+                                    disabled={allFieldsDisabled}
                                     dataType="text"
                                 />
                             </Grid>
                             <Grid item xs={3}>
                                 <FormTextField
-                                    name="numeroUsuario"
-                                    label="Numero"
-                                    disabled={true}
-                                    dataType="number"
+                                    name="idUsuario"
+                                    label="Usuario OID"
+                                    disabled={pkFieldsDisabled}
                                 />
                             </Grid>
                         </Grid>
@@ -90,23 +89,30 @@ const DialogUsuarios: React.FC<ICatalogDialog<Usuarios>> = ({
                             spacing={3}
                         >
                             <Grid item xs={6}>
+                                <FormTextField
+                                    name="email"
+                                    label="E-mail"
+                                    disabled={allFieldsDisabled}
+                                />
+                            </Grid>
+                            <Grid item xs={3}>
                                 <FormCatalogSelectField
-                                    name="tipoUsuario"
+                                    name="idPerfil"
                                     catalogId={
                                         ClavesModuloUsuarios.TiposDeUsuario
                                     }
                                     label="Tipo"
-                                    disabled={pkFieldsDisabled}
+                                    disabled={allFieldsDisabled}
                                 />
                             </Grid>
-                            <Grid item xs={6}>
+                            <Grid item xs={3}>
                                 <FormCatalogSelectField
-                                    name="claveStatus"
+                                    name="estatus"
                                     catalogId={
                                         ClavesModuloUsuarios.StatusDeUsuario
                                     }
                                     label="Estatus"
-                                    disabled={pkFieldsDisabled}
+                                    disabled={allFieldsDisabled}
                                 />
                             </Grid>
                         </Grid>

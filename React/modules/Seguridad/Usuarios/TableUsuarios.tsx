@@ -15,11 +15,9 @@ import GenericTextInput from '../../../sharedComponents/GenericTextInput';
 import CatalogSelect from '../../../sharedComponents/CatalogSelect';
 
 const COLUMNS: IGenericTableColumn<UsuariosResultRow>[] = [
-    { field: 'numeroUsuario', header: 'No.' },
-    { field: 'nombrePersonalUsuario', header: 'Nombre' },
-    { field: 'nombreUsuariosUsuario', header: 'OID' },
-    { field: 'nombrePuesto', header: 'Perfil Cliente' },
-    { field: 'claveStatusUsuario', header: 'Estatus' },
+    { field: 'idUsuario', header: 'Id' },
+    { field: 'nombre', header: 'Nombre' },
+    { field: 'email', header: 'Correo' }
 ];
 
 const useStyles = makeStyles((theme) => ({
@@ -30,8 +28,8 @@ const useStyles = makeStyles((theme) => ({
 
 const initialState: ITableUsuariosParameters = {
     nombreUsuario: null,
-    numeroUsuario: null,
-    perfilCliente: null,
+    idUsuario: null,
+    idPerfil: null,
     status: null,
 };
 
@@ -73,33 +71,9 @@ const TableUsuarios: React.FC<TableUsuariosProps> = ({ data, onSearch }) => {
                             className={classes.rowSpacing}
                             spacing={4}
                         >
-                            <Grid item xs={3}>
-                                <CatalogSelect
-                                    label="Nombre"
-                                    catalogId={
-                                        ClavesModuloUsuarios.TiposDeUsuario //TODO: LOS NOMBRES SE CARGAN DE BD
-                                    }
-                                    value={state.numeroUsuario}
-                                    fullWidth
-                                    onChange={(e) =>
-                                        dispatch({
-                                            type: 'field',
-                                            fieldName: 'numeroUsuario',
-                                            value: e.target.value,
-                                        })
-                                    }
-                                />
-                            </Grid>
-                            <Grid item xs={9}>
-                                <Grid container alignItems="center">
-                                    <span></span>
-                                </Grid>
-                            </Grid>
-                        </Grid>
-                        <Grid container spacing={4}>
-                            <Grid item xs={3}>
+                            <Grid item xs={6}>
                                 <GenericTextInput
-                                    label="Usuario OID"
+                                    label="Nombre"
                                     value={state.nombreUsuario}
                                     dataType="text"
                                     onChange={(e) =>
@@ -111,28 +85,42 @@ const TableUsuarios: React.FC<TableUsuariosProps> = ({ data, onSearch }) => {
                                     }
                                 />
                             </Grid>
-                            <Grid item xs={3}>
-                                <CatalogSelect
-                                    label="Perfil"
-                                    catalogId={
-                                        ClavesModuloUsuarios.TiposDeUsuario //TODO: LOS PERFILES SE CARGAN DE BD
-                                    }
-                                    value={state.perfilCliente}
-                                    fullWidth
+                            <Grid item xs={4}>
+                                <GenericTextInput
+                                    label="Usuario OID"
+                                    value={state.idUsuario}
+                                    dataType="text"
                                     onChange={(e) =>
                                         dispatch({
                                             type: 'field',
-                                            fieldName: 'perfilCliente',
+                                            fieldName: 'idUsuario',
                                             value: e.target.value,
                                         })
                                     }
                                 />
                             </Grid>
                         </Grid>
-                        <Grid container spacing={4}>
+                        <Grid container spacing={4}>  
                             <Grid item xs={3}>
                                 <CatalogSelect
-                                    label="Status"
+                                    label="Perfil"
+                                    catalogId={
+                                        ClavesModuloUsuarios.TiposDeUsuario //TODO: LOS PERFILES SE CARGAN DE BD
+                                    }
+                                    value={state.idPerfil}
+                                    fullWidth
+                                    onChange={(e) =>
+                                        dispatch({
+                                            type: 'field',
+                                            fieldName: 'idPerfil',
+                                            value: e.target.value,
+                                        })
+                                    }
+                                />
+                            </Grid>
+                            <Grid item xs={3}>
+                                <CatalogSelect
+                                    label="Estatus"
                                     catalogId={
                                         ClavesModuloUsuarios.StatusDeUsuario
                                     }

@@ -274,7 +274,8 @@
                 <entry key="cambiaOrdenFuncionesNul" value="UPDATE F_FUNCION SET FFUN_ORDEN=? WHERE FFUN_ID_PADRE IS NULL AND FFUN_ORDEN=?"/>
                 <entry key="cambiaOrdenFunciones" value="UPDATE F_FUNCION SET FFUN_ORDEN=? WHERE FFUN_ID_PADRE=? AND FFUN_ORDEN=?"/>
                 <entry key="conCGIncIdPer" value="SELECT NVL(MAX(FPER_ID_PERFIL),0)+1 AS FPER_ID_PERFIL FROM F_PERFIL WHERE FPER_INTERNO=1"/>
-                <entry key="muestraDatosUsuarios" value="SELECT PER_NOM_USUARIO,USU_NOM_USUARIO,USU_TIPO_USUARIO,USU_NUM_USUARIO,USU_NOM_PUESTO,FPER_NOMBRE_PERFIL,USU_CVE_ST_USUARIO FROM USUARIOS,PERSONAL,F_PERFIL WHERE USU_NUM_USUARIO=PER_NUM_USUARIO AND  FPER_ID_PERFIL(+)=USU_NUM_PUESTO"/>
+                <entry key="qryConsultaUsuarios" value="SELECT * FROM F_USUARIO"/>
+                <entry key="verificaExistenciaUsuario" value="SELECT COUNT(1) AS NUM_REGISTROS FROM F_USUARIO"/>
                 <entry key="muestraDatosUsuariosInternet1" value="SELECT USU_NUM_USUARIO,PUE_NOM_PUESTO,USU_NOM_USUARIO,USU_NOM_PUESTO,USU_CVE_ST_USUARIO FROM USUARIOS,PUESTOS WHERE USU_TIPO_USUARIO='INTERNET' AND USU_NUM_PUESTO=PUE_NUM_PUESTO"/>
                 <entry key="cargaNombreUsuarios" value="SELECT PER_NUM_USUARIO,PER_NOM_USUARIO FROM PERSONAL WHERE PER_NUM_NIVEL1 &lt;> 2000 AND PER_NUM_USUARIO NOT IN (SELECT USU_NUM_USUARIO FROM USUARIOS WHERE USU_NUM_NIVEL1 &lt;> 2000) ORDER BY PER_NOM_USUARIO ASC"/>
                 <entry key="claveEstructuraPuestos" value="SELECT (EST_NUM_NIVEL1||','||EST_NUM_NIVEL2||','||EST_NUM_NIVEL3||','||EST_NUM_NIVEL4||','||EST_NUM_NIVEL5) AS NIVELES,EST_DESC_NIVEL FROM ESTRUCTU ORDER BY EST_DESC_NIVEL ASC"/>
@@ -9204,14 +9205,14 @@
                         </bean>
                     </list>
                 </entry>
-                <entry key="muestraDatosUsuarios">
+                <entry key="qryConsultaUsuarios">
                     <list>
                         <bean class="mx.gob.nafin.fiduciario.common.beans.ParametroQueryBean">
                             <property name="name">
-                                <value>NoUsuario</value>
+                                <value>idUsuario</value>
                             </property>
                             <property name="sqlName">
-                                <value>USU_NUM_USUARIO</value>
+                                <value>FUSU_ID_USUARIO</value>
                             </property>
                             <property name="clauseType">
                                 <value>AND</value>
@@ -9222,10 +9223,10 @@
                         </bean>
                         <bean class="mx.gob.nafin.fiduciario.common.beans.ParametroQueryBean">
                             <property name="name">
-                                <value>NomUsuario</value>
+                                <value>nombreUsuario</value>
                             </property>
                             <property name="sqlName">
-                                <value>UPPER(USU_NOM_USUARIO)</value>
+                                <value>UPPER(FUSU_NOMBRE_USUARIO)</value>
                             </property>
                             <property name="clauseType">
                                 <value>AND</value>
@@ -9236,10 +9237,10 @@
                         </bean>
                         <bean class="mx.gob.nafin.fiduciario.common.beans.ParametroQueryBean">
                             <property name="name">
-                                <value>PerfilInterno</value>
+                                <value>idPerfil</value>
                             </property>
                             <property name="sqlName">
-                                <value>USU_PERFIL_INTERNO</value>
+                                <value>FPER_ID_PERFIL</value>
                             </property>
                             <property name="clauseType">
                                 <value>AND</value>
@@ -9250,24 +9251,10 @@
                         </bean>
                         <bean class="mx.gob.nafin.fiduciario.common.beans.ParametroQueryBean">
                             <property name="name">
-                                <value>PerfilCliente</value>
+                                <value>status</value>
                             </property>
                             <property name="sqlName">
-                                <value>USU_NUM_PUESTO</value>
-                            </property>
-                            <property name="clauseType">
-                                <value>AND</value>
-                            </property>
-                            <property name="conditionType">
-                                <value>=</value>
-                            </property>
-                        </bean>
-                        <bean class="mx.gob.nafin.fiduciario.common.beans.ParametroQueryBean">
-                            <property name="name">
-                                <value>Status</value>
-                            </property>
-                            <property name="sqlName">
-                                <value>USU_CVE_ST_USUARIO</value>
+                                <value>FUSU_STATUS</value>
                             </property>
                             <property name="clauseType">
                                 <value>AND</value>
@@ -9281,10 +9268,28 @@
                                 <value>order</value>
                             </property>
                             <property name="orderClause">
-                                <value>USU_NUM_USUARIO</value>
+                                <value>FUSU_ID_USUARIO</value>
                             </property>
                             <property name="order">
                                 <value>true</value>
+                            </property>
+                        </bean>
+                    </list>
+                </entry>
+                <entry key="verificaExistenciaUsuario">
+                    <list>
+                        <bean class="mx.gob.nafin.fiduciario.common.beans.ParametroQueryBean">
+                            <property name="name">
+                                <value>idUsuario</value>
+                            </property>
+                            <property name="sqlName">
+                                <value>FUSU_ID_USUARIO</value>
+                            </property>
+                            <property name="clauseType">
+                                <value>AND</value>
+                            </property>
+                            <property name="conditionType">
+                                <value>=</value>
                             </property>
                         </bean>
                     </list>

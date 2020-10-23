@@ -1,25 +1,22 @@
 import ResultRowModel from "../../../../models/ResultRowModel";
 
-class UsuariosResultRow extends ResultRowModel {
-    nombrePersonalUsuario: string = '';
-    nombreUsuariosUsuario: string = '';
-    tipoUsuario: string = '';
-    numeroUsuario: number | null = null;
-    nombrePuesto: string = '';
-    nombrePerfil: string = '';
-    claveStatusUsuario: string = '';
+class UsuariosResultRow  extends ResultRowModel {
+    idUsuario = '';
+    nombre = '';
+    estatus = '';
+    email = '';
+    idPerfil: number | null = null;
 
     public static fromObject(obj: any): UsuariosResultRow {
-        return {
-            uniqueKey: obj.usuNumUsuario,
-            nombrePersonalUsuario: obj.perNomUsuario,
-            nombreUsuariosUsuario: obj.usuNomUsuario,
-            tipoUsuario: obj.usuTipoUsuario,
-            numeroUsuario: obj.usuNumUsuario,
-            nombrePuesto: obj.usuNomPuesto,
-            nombrePerfil: obj.fperNombrePerfil,
-            claveStatusUsuario: obj.usuCveStUsuario,
+        const mappedObject = {
+            idUsuario: obj.fusuIdUsuario,
+            nombre: obj.fusuNombreUsuario,
+            estatus: obj.fusuStatus,
+            email: obj.fusuEmail,
+            idPerfil: obj.fperIdPerfil,
         };
+
+        return Object.assign(new UsuariosResultRow(mappedObject.idUsuario), mappedObject);
     }
 }
 export default UsuariosResultRow;

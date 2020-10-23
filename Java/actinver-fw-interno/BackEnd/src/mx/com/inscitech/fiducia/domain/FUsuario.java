@@ -1,6 +1,7 @@
 package mx.com.inscitech.fiducia.domain;
 
 import java.math.BigDecimal;
+
 import java.util.ArrayList;
 
 import mx.com.inscitech.fiducia.domain.base.DomainObject;
@@ -11,414 +12,432 @@ import mx.com.inscitech.fiducia.domain.base.DMLObject;
 
 import mx.com.inscitech.fiducia.dml.vo.DataRow;
 
-@PrimaryKey(constraintName = "F_USUARIO_PK", columns = {"FUSU_ID_USUARIO"}, sequences = { "MAX" })
+@PrimaryKey(constraintName = "F_USUARIO_PK", columns = { "FUSU_ID_USUARIO" }, sequences = { "MAX" })
 public class FUsuario extends DomainObject {
 
-  String fusuIdUsuario = null;
-  String fusuContrasena = null;
-  String fusuNombreUsuario = null;
-  BigDecimal fusuPreguntaSecreta = null;
-  String fusuRespuestaSecreta = null;
-  String fusuStatus = null;
-  String fusuEmail = null;
-  BigDecimal fperIdPerfil = null;
-  BigDecimal fusuImpMaximo = null;
-  String fusuUltAcceso = null;
-  BigDecimal fusuMteo = null;
+    String fusuIdUsuario = null;
+    String fusuContrasena = null;
+    String fusuNombreUsuario = null;
+    BigDecimal fusuPreguntaSecreta = null;
+    String fusuRespuestaSecreta = null;
+    String fusuStatus = null;
+    String fusuEmail = null;
+    BigDecimal fperIdPerfil = null;
+    BigDecimal fusuImpMaximo = null;
+    String fusuUltAcceso = null;
+    BigDecimal fusuMteo = null;
 
-  public FUsuario() {
-    super();
-    this.pkColumns = 1;
-  }
-
-  @FieldInfo(nullable = false, dataType = "VARCHAR2", javaClass = String.class )
-  public void setFusuIdUsuario(String fusuIdUsuario) {
-    this.fusuIdUsuario = fusuIdUsuario;
-  }
-
-  public String getFusuIdUsuario() {
-    return this.fusuIdUsuario;
-  }
-
-  @FieldInfo(nullable = true, dataType = "VARCHAR2", javaClass = String.class )
-  public void setFusuContrasena(String fusuContrasena) {
-    this.fusuContrasena = fusuContrasena;
-  }
-
-  public String getFusuContrasena() {
-    return this.fusuContrasena;
-  }
-
-  @FieldInfo(nullable = true, dataType = "VARCHAR2", javaClass = String.class )
-  public void setFusuNombreUsuario(String fusuNombreUsuario) {
-    this.fusuNombreUsuario = fusuNombreUsuario;
-  }
-
-  public String getFusuNombreUsuario() {
-    return this.fusuNombreUsuario;
-  }
-
-  @FieldInfo(nullable = true, dataType = "NUMBER", precision = 0, scale = 0, javaClass = BigDecimal.class )
-  public void setFusuPreguntaSecreta(BigDecimal fusuPreguntaSecreta) {
-    this.fusuPreguntaSecreta = fusuPreguntaSecreta;
-  }
-
-  public BigDecimal getFusuPreguntaSecreta() {
-    return this.fusuPreguntaSecreta;
-  }
-
-  @FieldInfo(nullable = true, dataType = "VARCHAR2", javaClass = String.class )
-  public void setFusuRespuestaSecreta(String fusuRespuestaSecreta) {
-    this.fusuRespuestaSecreta = fusuRespuestaSecreta;
-  }
-
-  public String getFusuRespuestaSecreta() {
-    return this.fusuRespuestaSecreta;
-  }
-
-  @FieldInfo(nullable = true, dataType = "VARCHAR2", javaClass = String.class )
-  public void setFusuStatus(String fusuStatus) {
-    this.fusuStatus = fusuStatus;
-  }
-
-  public String getFusuStatus() {
-    return this.fusuStatus;
-  }
-
-  @FieldInfo(nullable = true, dataType = "VARCHAR2", javaClass = String.class )
-  public void setFusuEmail(String fusuEmail) {
-    this.fusuEmail = fusuEmail;
-  }
-
-  public String getFusuEmail() {
-    return this.fusuEmail;
-  }
-
-  @FieldInfo(nullable = true, dataType = "NUMBER", precision = 10, scale = 0, javaClass = BigDecimal.class )
-  public void setFperIdPerfil(BigDecimal fperIdPerfil) {
-    this.fperIdPerfil = fperIdPerfil;
-  }
-
-  public BigDecimal getFperIdPerfil() {
-    return this.fperIdPerfil;
-  }
-
-  @FieldInfo(nullable = true, dataType = "NUMBER", precision = 0, scale = 0, javaClass = BigDecimal.class )
-  public void setFusuImpMaximo(BigDecimal fusuImpMaximo) {
-    this.fusuImpMaximo = fusuImpMaximo;
-  }
-
-  public BigDecimal getFusuImpMaximo() {
-    return this.fusuImpMaximo;
-  }
-
-  @FieldInfo(nullable = true, dataType = "DATE", javaClass = String.class )
-  public void setFusuUltAcceso(String fusuUltAcceso) {
-    this.fusuUltAcceso = fusuUltAcceso;
-  }
-
-  public String getFusuUltAcceso() {
-    return this.fusuUltAcceso;
-  }
-
-  @FieldInfo(nullable = true, dataType = "NUMBER", precision = 1, scale = 0, javaClass = BigDecimal.class )
-  public void setFusuMteo(BigDecimal fusuMteo) {
-    this.fusuMteo = fusuMteo;
-  }
-
-  public BigDecimal getFusuMteo() {
-    return this.fusuMteo;
-  }
-
-  public DMLObject getSelectByPK() {
-    if(!retrieveSQL) return null;
-    DMLObject result = new DMLObject();
-    String sql = "SELECT * FROM F_USUARIO ";
-
-    String conditions = "";
-    ArrayList values = new ArrayList();
-
-    if(this.getFusuIdUsuario() != null && "null".equals(this.getFusuIdUsuario())) {
-      conditions += " AND FUSU_ID_USUARIO IS NULL";
-    } else if(this.getFusuIdUsuario() != null) {
-      conditions += " AND FUSU_ID_USUARIO = ?";
-      values.add(this.getFusuIdUsuario());
+    public FUsuario() {
+        super();
+        this.pkColumns = 1;
     }
 
-    if(!"".equals(conditions)) {
-
-      conditions = conditions.substring(4).trim();
-      sql += "WHERE " + conditions;
-      result.setSql(sql);
-      result.setParameters(values.toArray());
+    @FieldInfo(nullable = false, dataType = "VARCHAR2", javaClass = String.class)
+    public void setFusuIdUsuario(String fusuIdUsuario) {
+        this.fusuIdUsuario = fusuIdUsuario;
     }
 
-    return result;
-
-  }
-
-  public DMLObject getSelect() {
-    if(!retrieveSQL) return null;
-    DMLObject result = new DMLObject();
-    String sql = "SELECT * FROM F_USUARIO ";
-
-    String conditions = "";
-    ArrayList values = new ArrayList();
-
-    if(this.getFusuIdUsuario() != null && "null".equals(this.getFusuIdUsuario())) {
-      conditions += " AND FUSU_ID_USUARIO IS NULL";
-    } else if(this.getFusuIdUsuario() != null) {
-      conditions += " AND FUSU_ID_USUARIO = ?";
-      values.add(this.getFusuIdUsuario());
+    public String getFusuIdUsuario() {
+        return this.fusuIdUsuario;
     }
 
-    if(this.getFusuContrasena() != null && "null".equals(this.getFusuContrasena())) {
-      conditions += " AND FUSU_CONTRASENA IS NULL";
-    } else if(this.getFusuContrasena() != null) {
-      conditions += " AND FUSU_CONTRASENA = ?";
-      values.add(this.getFusuContrasena());
+    @FieldInfo(nullable = true, dataType = "VARCHAR2", javaClass = String.class)
+    public void setFusuContrasena(String fusuContrasena) {
+        this.fusuContrasena = fusuContrasena;
     }
 
-    if(this.getFusuNombreUsuario() != null && "null".equals(this.getFusuNombreUsuario())) {
-      conditions += " AND FUSU_NOMBRE_USUARIO IS NULL";
-    } else if(this.getFusuNombreUsuario() != null) {
-      conditions += " AND FUSU_NOMBRE_USUARIO = ?";
-      values.add(this.getFusuNombreUsuario());
+    public String getFusuContrasena() {
+        return this.fusuContrasena;
     }
 
-    if(this.getFusuPreguntaSecreta() != null && this.getFusuPreguntaSecreta().longValue() == -999) {
-      conditions += " AND FUSU_PREGUNTA_SECRETA IS NULL";
-    } else if(this.getFusuPreguntaSecreta() != null) {
-      conditions += " AND FUSU_PREGUNTA_SECRETA = ?";
-      values.add(this.getFusuPreguntaSecreta());
+    @FieldInfo(nullable = true, dataType = "VARCHAR2", javaClass = String.class)
+    public void setFusuNombreUsuario(String fusuNombreUsuario) {
+        this.fusuNombreUsuario = fusuNombreUsuario;
     }
 
-    if(this.getFusuRespuestaSecreta() != null && "null".equals(this.getFusuRespuestaSecreta())) {
-      conditions += " AND FUSU_RESPUESTA_SECRETA IS NULL";
-    } else if(this.getFusuRespuestaSecreta() != null) {
-      conditions += " AND FUSU_RESPUESTA_SECRETA = ?";
-      values.add(this.getFusuRespuestaSecreta());
+    public String getFusuNombreUsuario() {
+        return this.fusuNombreUsuario;
     }
 
-    if(this.getFusuStatus() != null && "null".equals(this.getFusuStatus())) {
-      conditions += " AND FUSU_STATUS IS NULL";
-    } else if(this.getFusuStatus() != null) {
-      conditions += " AND FUSU_STATUS = ?";
-      values.add(this.getFusuStatus());
+    @FieldInfo(nullable = true, dataType = "NUMBER", precision = 0, scale = 0, javaClass = BigDecimal.class)
+    public void setFusuPreguntaSecreta(BigDecimal fusuPreguntaSecreta) {
+        this.fusuPreguntaSecreta = fusuPreguntaSecreta;
     }
 
-    if(this.getFusuEmail() != null && "null".equals(this.getFusuEmail())) {
-      conditions += " AND FUSU_EMAIL IS NULL";
-    } else if(this.getFusuEmail() != null) {
-      conditions += " AND FUSU_EMAIL = ?";
-      values.add(this.getFusuEmail());
+    public BigDecimal getFusuPreguntaSecreta() {
+        return this.fusuPreguntaSecreta;
     }
 
-    if(this.getFperIdPerfil() != null && this.getFperIdPerfil().longValue() == -999) {
-      conditions += " AND FPER_ID_PERFIL IS NULL";
-    } else if(this.getFperIdPerfil() != null) {
-      conditions += " AND FPER_ID_PERFIL = ?";
-      values.add(this.getFperIdPerfil());
+    @FieldInfo(nullable = true, dataType = "VARCHAR2", javaClass = String.class)
+    public void setFusuRespuestaSecreta(String fusuRespuestaSecreta) {
+        this.fusuRespuestaSecreta = fusuRespuestaSecreta;
     }
 
-    if(this.getFusuImpMaximo() != null && this.getFusuImpMaximo().longValue() == -999) {
-      conditions += " AND FUSU_IMP_MAXIMO IS NULL";
-    } else if(this.getFusuImpMaximo() != null) {
-      conditions += " AND FUSU_IMP_MAXIMO = ?";
-      values.add(this.getFusuImpMaximo());
+    public String getFusuRespuestaSecreta() {
+        return this.fusuRespuestaSecreta;
     }
 
-    if(this.getFusuUltAcceso() != null && "null".equals(this.getFusuUltAcceso())) {
-      conditions += " AND FUSU_ULT_ACCESO IS NULL";
-    } else if(this.getFusuUltAcceso() != null) {
-      conditions += " AND FUSU_ULT_ACCESO = TO_DATE(?,'dd/MM/yyyy')";
-      values.add(this.getFusuUltAcceso());
+    @FieldInfo(nullable = true, dataType = "VARCHAR2", javaClass = String.class)
+    public void setFusuStatus(String fusuStatus) {
+        this.fusuStatus = fusuStatus;
     }
 
-    if(this.getFusuMteo() != null && this.getFusuMteo().longValue() == -999) {
-      conditions += " AND FUSU_MTEO IS NULL";
-    } else if(this.getFusuMteo() != null) {
-      conditions += " AND FUSU_MTEO = ?";
-      values.add(this.getFusuMteo());
+    public String getFusuStatus() {
+        return this.fusuStatus;
     }
 
-    if(!"".equals(conditions)) {
-
-      conditions = conditions.substring(4).trim();
-      sql += "WHERE " + conditions;
-      result.setSql(sql);
-      result.setParameters(values.toArray());
+    @FieldInfo(nullable = true, dataType = "VARCHAR2", javaClass = String.class)
+    public void setFusuEmail(String fusuEmail) {
+        this.fusuEmail = fusuEmail;
     }
 
-    return result;
+    public String getFusuEmail() {
+        return this.fusuEmail;
+    }
 
-  }
+    @FieldInfo(nullable = true, dataType = "NUMBER", precision = 10, scale = 0, javaClass = BigDecimal.class)
+    public void setFperIdPerfil(BigDecimal fperIdPerfil) {
+        this.fperIdPerfil = fperIdPerfil;
+    }
 
-  public DMLObject getUpdate() {
-    if(!retrieveSQL) return null;
-    DMLObject result = new DMLObject();
-    String sql = "UPDATE F_USUARIO SET ";
+    public BigDecimal getFperIdPerfil() {
+        return this.fperIdPerfil;
+    }
 
-    String fields = "";
-    String conditions = "";
-    ArrayList pkValues = new ArrayList();
-    ArrayList values = new ArrayList();
+    @FieldInfo(nullable = true, dataType = "NUMBER", precision = 0, scale = 0, javaClass = BigDecimal.class)
+    public void setFusuImpMaximo(BigDecimal fusuImpMaximo) {
+        this.fusuImpMaximo = fusuImpMaximo;
+    }
 
-    conditions += " AND FUSU_ID_USUARIO = ?";
-    pkValues.add(this.getFusuIdUsuario());
-    fields += " FUSU_CONTRASENA = ?, ";
-    values.add(this.getFusuContrasena());
-    fields += " FUSU_NOMBRE_USUARIO = ?, ";
-    values.add(this.getFusuNombreUsuario());
-    fields += " FUSU_PREGUNTA_SECRETA = ?, ";
-    values.add(this.getFusuPreguntaSecreta());
-    fields += " FUSU_RESPUESTA_SECRETA = ?, ";
-    values.add(this.getFusuRespuestaSecreta());
-    fields += " FUSU_STATUS = ?, ";
-    values.add(this.getFusuStatus());
-    fields += " FUSU_EMAIL = ?, ";
-    values.add(this.getFusuEmail());
-    fields += " FPER_ID_PERFIL = ?, ";
-    values.add(this.getFperIdPerfil());
-    fields += " FUSU_IMP_MAXIMO = ?, ";
-    values.add(this.getFusuImpMaximo());
-    fields += " FUSU_ULT_ACCESO = TO_DATE(?, 'dd/MM/yyyy'), ";
-    values.add(this.getFusuUltAcceso());
-    fields += " FUSU_MTEO = ?, ";
-    values.add(this.getFusuMteo());
-    for(int i = 0; i < pkValues.size(); i++) {
-      values.add(pkValues.get(i));
-    };
+    public BigDecimal getFusuImpMaximo() {
+        return this.fusuImpMaximo;
+    }
 
-    fields = fields.substring(0, fields.length() - 2).trim();
-    conditions = conditions.substring(4).trim();
-    sql += fields + " WHERE " + conditions;
-    result.setSql(sql);
-    result.setParameters(values.toArray());
+    @FieldInfo(nullable = true, dataType = "DATE", javaClass = String.class)
+    public void setFusuUltAcceso(String fusuUltAcceso) {
+        this.fusuUltAcceso = fusuUltAcceso;
+    }
 
-    return result;
-  }
+    public String getFusuUltAcceso() {
+        return this.fusuUltAcceso;
+    }
 
-  public DMLObject getInsert() {
-    if(!retrieveSQL) return null;
-    DMLObject result = new DMLObject();
-    String sql = "INSERT INTO F_USUARIO ( ";
+    @FieldInfo(nullable = true, dataType = "NUMBER", precision = 1, scale = 0, javaClass = BigDecimal.class)
+    public void setFusuMteo(BigDecimal fusuMteo) {
+        this.fusuMteo = fusuMteo;
+    }
 
-    String fields = "";
-    String fieldValues = "";
-    ArrayList values = new ArrayList();
+    public BigDecimal getFusuMteo() {
+        return this.fusuMteo;
+    }
 
-    fields += ", FUSU_ID_USUARIO";
-    fieldValues += ", ?";
-    values.add(this.getFusuIdUsuario());
+    public DMLObject getSelectByPK() {
+        if (!retrieveSQL)
+            return null;
+        DMLObject result = new DMLObject();
+        String sql = "SELECT * FROM F_USUARIO ";
 
-    fields += ", FUSU_CONTRASENA";
-    fieldValues += ", ?";
-    values.add(this.getFusuContrasena());
+        String conditions = "";
+        ArrayList values = new ArrayList();
 
-    fields += ", FUSU_NOMBRE_USUARIO";
-    fieldValues += ", ?";
-    values.add(this.getFusuNombreUsuario());
+        conditions += " AND FUSU_ID_USUARIO = ?";
+        values.add(this.getFusuIdUsuario());
 
-    fields += ", FUSU_PREGUNTA_SECRETA";
-    fieldValues += ", ?";
-    values.add(this.getFusuPreguntaSecreta());
+        if (!"".equals(conditions)) {
 
-    fields += ", FUSU_RESPUESTA_SECRETA";
-    fieldValues += ", ?";
-    values.add(this.getFusuRespuestaSecreta());
+            conditions = conditions.substring(4).trim();
+            sql += "WHERE " + conditions;
+            result.setSql(sql);
+            result.setParameters(values.toArray());
+        }
 
-    fields += ", FUSU_STATUS";
-    fieldValues += ", ?";
-    values.add(this.getFusuStatus());
+        return result;
 
-    fields += ", FUSU_EMAIL";
-    fieldValues += ", ?";
-    values.add(this.getFusuEmail());
+    }
 
-    fields += ", FPER_ID_PERFIL";
-    fieldValues += ", ?";
-    values.add(this.getFperIdPerfil());
+    public DMLObject getSelect() {
+        if (!retrieveSQL)
+            return null;
+        DMLObject result = new DMLObject();
+        String sql = "SELECT * FROM F_USUARIO ";
 
-    fields += ", FUSU_IMP_MAXIMO";
-    fieldValues += ", ?";
-    values.add(this.getFusuImpMaximo());
+        String conditions = "";
+        ArrayList values = new ArrayList();
 
-    fields += ", FUSU_ULT_ACCESO";
-    fieldValues += ", TO_DATE(?, 'dd/MM/yyyy') ";
-    values.add(this.getFusuUltAcceso());
+        if (this.getFusuIdUsuario() != null && "null".equals(this.getFusuIdUsuario())) {
+            conditions += " AND FUSU_ID_USUARIO IS NULL";
+        } else if (this.getFusuIdUsuario() != null) {
+            conditions += " AND FUSU_ID_USUARIO = ?";
+            values.add(this.getFusuIdUsuario());
+        }
 
-    fields += ", FUSU_MTEO";
-    fieldValues += ", ?";
-    values.add(this.getFusuMteo());
+        if (this.getFusuContrasena() != null && "null".equals(this.getFusuContrasena())) {
+            conditions += " AND FUSU_CONTRASENA IS NULL";
+        } else if (this.getFusuContrasena() != null) {
+            conditions += " AND FUSU_CONTRASENA = ?";
+            values.add(this.getFusuContrasena());
+        }
 
-    fields = fields.substring(1).trim();
-    fieldValues = fieldValues.substring(1).trim();
+        if (this.getFusuNombreUsuario() != null && "null".equals(this.getFusuNombreUsuario())) {
+            conditions += " AND FUSU_NOMBRE_USUARIO IS NULL";
+        } else if (this.getFusuNombreUsuario() != null) {
+            conditions += " AND FUSU_NOMBRE_USUARIO = ?";
+            values.add(this.getFusuNombreUsuario());
+        }
 
-    sql += fields + " ) VALUES (" + fieldValues + ")";
+        if (this.getFusuPreguntaSecreta() != null && this.getFusuPreguntaSecreta().longValue() == -999) {
+            conditions += " AND FUSU_PREGUNTA_SECRETA IS NULL";
+        } else if (this.getFusuPreguntaSecreta() != null) {
+            conditions += " AND FUSU_PREGUNTA_SECRETA = ?";
+            values.add(this.getFusuPreguntaSecreta());
+        }
 
-    result.setSql(sql);
-    result.setParameters(values.toArray());
+        if (this.getFusuRespuestaSecreta() != null && "null".equals(this.getFusuRespuestaSecreta())) {
+            conditions += " AND FUSU_RESPUESTA_SECRETA IS NULL";
+        } else if (this.getFusuRespuestaSecreta() != null) {
+            conditions += " AND FUSU_RESPUESTA_SECRETA = ?";
+            values.add(this.getFusuRespuestaSecreta());
+        }
 
-    return result;
-  }
+        if (this.getFusuStatus() != null && "null".equals(this.getFusuStatus())) {
+            conditions += " AND FUSU_STATUS IS NULL";
+        } else if (this.getFusuStatus() != null) {
+            conditions += " AND FUSU_STATUS = ?";
+            values.add(this.getFusuStatus());
+        }
 
-  public DMLObject getDelete() {
-    if(!retrieveSQL) return null;
-    DMLObject result = new DMLObject();
-    String sql = "DELETE FROM F_USUARIO WHERE ";
+        if (this.getFusuEmail() != null && "null".equals(this.getFusuEmail())) {
+            conditions += " AND FUSU_EMAIL IS NULL";
+        } else if (this.getFusuEmail() != null) {
+            conditions += " AND FUSU_EMAIL = ?";
+            values.add(this.getFusuEmail());
+        }
 
-    String conditions = "";
-    ArrayList values = new ArrayList();
+        if (this.getFperIdPerfil() != null && this.getFperIdPerfil().longValue() == -999) {
+            conditions += " AND FPER_ID_PERFIL IS NULL";
+        } else if (this.getFperIdPerfil() != null) {
+            conditions += " AND FPER_ID_PERFIL = ?";
+            values.add(this.getFperIdPerfil());
+        }
 
-    conditions += " AND FUSU_ID_USUARIO = ?";
-    values.add(this.getFusuIdUsuario());
-    conditions = conditions.substring(4).trim();
-    result.setSql(sql + conditions);
-    result.setParameters(values.toArray());
-    return result;
+        if (this.getFusuImpMaximo() != null && this.getFusuImpMaximo().longValue() == -999) {
+            conditions += " AND FUSU_IMP_MAXIMO IS NULL";
+        } else if (this.getFusuImpMaximo() != null) {
+            conditions += " AND FUSU_IMP_MAXIMO = ?";
+            values.add(this.getFusuImpMaximo());
+        }
 
-  }
+        if (this.getFusuUltAcceso() != null && "null".equals(this.getFusuUltAcceso())) {
+            conditions += " AND FUSU_ULT_ACCESO IS NULL";
+        } else if (this.getFusuUltAcceso() != null) {
+            conditions += " AND FUSU_ULT_ACCESO = TO_DATE(?,'dd/MM/yyyy')";
+            values.add(this.getFusuUltAcceso());
+        }
 
-  public boolean validate() {
-    return true;  }
+        if (this.getFusuMteo() != null && this.getFusuMteo().longValue() == -999) {
+            conditions += " AND FUSU_MTEO IS NULL";
+        } else if (this.getFusuMteo() != null) {
+            conditions += " AND FUSU_MTEO = ?";
+            values.add(this.getFusuMteo());
+        }
 
-  public boolean doCompare(Object compareWith) {
-    FUsuario instance = (FUsuario)compareWith;
-    boolean equalObjects = true;
-    if(equalObjects && !this.getFusuIdUsuario().equals(instance.getFusuIdUsuario())) equalObjects = false;
-    if(equalObjects && !this.getFusuContrasena().equals(instance.getFusuContrasena())) equalObjects = false;
-    if(equalObjects && !this.getFusuNombreUsuario().equals(instance.getFusuNombreUsuario())) equalObjects = false;
-    if(equalObjects && !this.getFusuPreguntaSecreta().equals(instance.getFusuPreguntaSecreta())) equalObjects = false;
-    if(equalObjects && !this.getFusuRespuestaSecreta().equals(instance.getFusuRespuestaSecreta())) equalObjects = false;
-    if(equalObjects && !this.getFusuStatus().equals(instance.getFusuStatus())) equalObjects = false;
-    if(equalObjects && !this.getFusuEmail().equals(instance.getFusuEmail())) equalObjects = false;
-    if(equalObjects && !this.getFperIdPerfil().equals(instance.getFperIdPerfil())) equalObjects = false;
-    if(equalObjects && !this.getFusuImpMaximo().equals(instance.getFusuImpMaximo())) equalObjects = false;
-    if(equalObjects && !this.getFusuUltAcceso().equals(instance.getFusuUltAcceso())) equalObjects = false;
-    if(equalObjects && !this.getFusuMteo().equals(instance.getFusuMteo())) equalObjects = false;
-    return equalObjects;
-  }
+        if (!"".equals(conditions)) {
 
-  public Object selectAsObject() {
-    FUsuario result = new FUsuario();
-    DataRow objectData = null;
-    objectData = selectAsDataRow();
+            conditions = conditions.substring(4).trim();
+            sql += "WHERE " + conditions;
+            result.setSql(sql);
+            result.setParameters(values.toArray());
+        }
 
-    result.setFusuIdUsuario((String)objectData.getData("FUSU_ID_USUARIO"));
-    result.setFusuContrasena((String)objectData.getData("FUSU_CONTRASENA"));
-    result.setFusuNombreUsuario((String)objectData.getData("FUSU_NOMBRE_USUARIO"));
-    result.setFusuPreguntaSecreta((BigDecimal)objectData.getData("FUSU_PREGUNTA_SECRETA"));
-    result.setFusuRespuestaSecreta((String)objectData.getData("FUSU_RESPUESTA_SECRETA"));
-    result.setFusuStatus((String)objectData.getData("FUSU_STATUS"));
-    result.setFusuEmail((String)objectData.getData("FUSU_EMAIL"));
-    result.setFperIdPerfil((BigDecimal)objectData.getData("FPER_ID_PERFIL"));
-    result.setFusuImpMaximo((BigDecimal)objectData.getData("FUSU_IMP_MAXIMO"));
-    result.setFusuUltAcceso((String)objectData.getData("FUSU_ULT_ACCESO"));
-    result.setFusuMteo((BigDecimal)objectData.getData("FUSU_MTEO"));
+        return result;
 
-    return result;
+    }
 
-  }
+    public DMLObject getUpdate() {
+        if (!retrieveSQL)
+            return null;
+        DMLObject result = new DMLObject();
+        String sql = "UPDATE F_USUARIO SET ";
+
+        String fields = "";
+        String conditions = "";
+        ArrayList pkValues = new ArrayList();
+        ArrayList values = new ArrayList();
+
+        conditions += " AND FUSU_ID_USUARIO = ?";
+        pkValues.add(this.getFusuIdUsuario());
+        fields += " FUSU_CONTRASENA = ?, ";
+        values.add(this.getFusuContrasena());
+        fields += " FUSU_NOMBRE_USUARIO = ?, ";
+        values.add(this.getFusuNombreUsuario());
+        fields += " FUSU_PREGUNTA_SECRETA = ?, ";
+        values.add(this.getFusuPreguntaSecreta());
+        fields += " FUSU_RESPUESTA_SECRETA = ?, ";
+        values.add(this.getFusuRespuestaSecreta());
+        fields += " FUSU_STATUS = ?, ";
+        values.add(this.getFusuStatus());
+        fields += " FUSU_EMAIL = ?, ";
+        values.add(this.getFusuEmail());
+        fields += " FPER_ID_PERFIL = ?, ";
+        values.add(this.getFperIdPerfil());
+        fields += " FUSU_IMP_MAXIMO = ?, ";
+        values.add(this.getFusuImpMaximo());
+        fields += " FUSU_ULT_ACCESO = TO_DATE(?, 'dd/MM/yyyy'), ";
+        values.add(this.getFusuUltAcceso());
+        fields += " FUSU_MTEO = ?, ";
+        values.add(this.getFusuMteo());
+        for (int i = 0; i < pkValues.size(); i++) {
+            values.add(pkValues.get(i));
+        }
+        ;
+
+        fields = fields.substring(0, fields.length() - 2).trim();
+        conditions = conditions.substring(4).trim();
+        sql += fields + " WHERE " + conditions;
+        result.setSql(sql);
+        result.setParameters(values.toArray());
+
+        return result;
+    }
+
+    public DMLObject getInsert() {
+        if (!retrieveSQL)
+            return null;
+        DMLObject result = new DMLObject();
+        String sql = "INSERT INTO F_USUARIO ( ";
+
+        String fields = "";
+        String fieldValues = "";
+        ArrayList values = new ArrayList();
+
+        fields += ", FUSU_ID_USUARIO";
+        fieldValues += ", ?";
+        values.add(this.getFusuIdUsuario());
+
+        fields += ", FUSU_CONTRASENA";
+        fieldValues += ", ?";
+        values.add(this.getFusuContrasena());
+
+        fields += ", FUSU_NOMBRE_USUARIO";
+        fieldValues += ", ?";
+        values.add(this.getFusuNombreUsuario());
+
+        fields += ", FUSU_PREGUNTA_SECRETA";
+        fieldValues += ", ?";
+        values.add(this.getFusuPreguntaSecreta());
+
+        fields += ", FUSU_RESPUESTA_SECRETA";
+        fieldValues += ", ?";
+        values.add(this.getFusuRespuestaSecreta());
+
+        fields += ", FUSU_STATUS";
+        fieldValues += ", ?";
+        values.add(this.getFusuStatus());
+
+        fields += ", FUSU_EMAIL";
+        fieldValues += ", ?";
+        values.add(this.getFusuEmail());
+
+        fields += ", FPER_ID_PERFIL";
+        fieldValues += ", ?";
+        values.add(this.getFperIdPerfil());
+
+        fields += ", FUSU_IMP_MAXIMO";
+        fieldValues += ", ?";
+        values.add(this.getFusuImpMaximo());
+
+        fields += ", FUSU_ULT_ACCESO";
+        fieldValues += ", TO_DATE(?, 'dd/MM/yyyy') ";
+        values.add(this.getFusuUltAcceso());
+
+        fields += ", FUSU_MTEO";
+        fieldValues += ", ?";
+        values.add(this.getFusuMteo());
+
+        fields = fields.substring(1).trim();
+        fieldValues = fieldValues.substring(1).trim();
+
+        sql += fields + " ) VALUES (" + fieldValues + ")";
+
+        result.setSql(sql);
+        result.setParameters(values.toArray());
+
+        return result;
+    }
+
+    public DMLObject getDelete() {
+        if (!retrieveSQL)
+            return null;
+        DMLObject result = new DMLObject();
+        String sql = "DELETE FROM F_USUARIO WHERE ";
+
+        String conditions = "";
+        ArrayList values = new ArrayList();
+
+        conditions += " AND FUSU_ID_USUARIO = ?";
+        values.add(this.getFusuIdUsuario());
+        conditions = conditions.substring(4).trim();
+        result.setSql(sql + conditions);
+        result.setParameters(values.toArray());
+        return result;
+
+    }
+
+    public boolean validate() {
+        return true;
+    }
+
+    public boolean doCompare(Object compareWith) {
+        FUsuario instance = (FUsuario) compareWith;
+        boolean equalObjects = true;
+        if (equalObjects && !this.getFusuIdUsuario().equals(instance.getFusuIdUsuario()))
+            equalObjects = false;
+        if (equalObjects && !this.getFusuContrasena().equals(instance.getFusuContrasena()))
+            equalObjects = false;
+        if (equalObjects && !this.getFusuNombreUsuario().equals(instance.getFusuNombreUsuario()))
+            equalObjects = false;
+        if (equalObjects && !this.getFusuPreguntaSecreta().equals(instance.getFusuPreguntaSecreta()))
+            equalObjects = false;
+        if (equalObjects && !this.getFusuRespuestaSecreta().equals(instance.getFusuRespuestaSecreta()))
+            equalObjects = false;
+        if (equalObjects && !this.getFusuStatus().equals(instance.getFusuStatus()))
+            equalObjects = false;
+        if (equalObjects && !this.getFusuEmail().equals(instance.getFusuEmail()))
+            equalObjects = false;
+        if (equalObjects && !this.getFperIdPerfil().equals(instance.getFperIdPerfil()))
+            equalObjects = false;
+        if (equalObjects && !this.getFusuImpMaximo().equals(instance.getFusuImpMaximo()))
+            equalObjects = false;
+        if (equalObjects && !this.getFusuUltAcceso().equals(instance.getFusuUltAcceso()))
+            equalObjects = false;
+        if (equalObjects && !this.getFusuMteo().equals(instance.getFusuMteo()))
+            equalObjects = false;
+        return equalObjects;
+    }
+
+    public Object selectAsObject() {
+        FUsuario result = new FUsuario();
+        DataRow objectData = null;
+        objectData = selectAsDataRow();
+
+        if (!objectData.hasData()) {
+            return null;
+        }
+
+        result.setFusuIdUsuario((String) objectData.getData("FUSU_ID_USUARIO"));
+        result.setFusuContrasena((String) objectData.getData("FUSU_CONTRASENA"));
+        result.setFusuNombreUsuario((String) objectData.getData("FUSU_NOMBRE_USUARIO"));
+        result.setFusuPreguntaSecreta((BigDecimal) objectData.getData("FUSU_PREGUNTA_SECRETA"));
+        result.setFusuRespuestaSecreta((String) objectData.getData("FUSU_RESPUESTA_SECRETA"));
+        result.setFusuStatus((String) objectData.getData("FUSU_STATUS"));
+        result.setFusuEmail((String) objectData.getData("FUSU_EMAIL"));
+        result.setFperIdPerfil((BigDecimal) objectData.getData("FPER_ID_PERFIL"));
+        result.setFusuImpMaximo((BigDecimal) objectData.getData("FUSU_IMP_MAXIMO"));
+        result.setFusuUltAcceso((String) objectData.getData("FUSU_ULT_ACCESO"));
+        result.setFusuMteo((BigDecimal) objectData.getData("FUSU_MTEO"));
+
+        return result;
+
+    }
 
 }

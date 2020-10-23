@@ -1,34 +1,27 @@
-import {
-    MainUsuariosState,
-    MainUsuariosActions,
-    UsuariosActions,
-} from '../types';
+import { MainUsuariosState, ITableUsuariosParameters, MainUsuariosActions } from '../types';
+import Usuario from '../../../../models/Usuarios';
+import UsuariosResultRow from '../models/UsuariosResultRow';
+import { CrudModuleReducer } from '../../../../sharedComponents/CrudModule';
 
-import { usuariosReducer } from './usuarios';
+const reducerHelper = {
+    mainModelFromRow: (selectedRow: UsuariosResultRow) =>
+        new Usuario(
+            selectedRow.idUsuario
+        ),
+    newModel: () => new Usuario(null),
+};
 
 function mainUsuariosReducer(
     state: MainUsuariosState,
     action: MainUsuariosActions
 ): MainUsuariosState {
     switch (action.type) {
-        case 'SET_USUARIOS_SEARCH_RESULTS':
-            return {
-                usuarios: usuariosReducer(state.usuarios, action),
-            };
-        case 'SELECT_USUARIOS_RESULT_ROW':
-            return {
-                usuarios: usuariosReducer(state.usuarios, {
-                    ...action,
-                    type: 'SET_USUARIOS_ROWS_SELECTION',
-                }),
-            };
         default:
-            return {
-                usuarios: usuariosReducer(
-                    state.usuarios,
-                    action as UsuariosActions
-                ),
-            };
+            return CrudModuleReducer<
+                Usuario,
+                ITableUsuariosParameters,
+                UsuariosResultRow
+            >(state, action, reducerHelper);
     }
 }
 
