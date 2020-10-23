@@ -3,6 +3,7 @@ package mx.gob.nafin.fiduciario.business.upload.processors;
 import java.io.File;
 
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 
 import java.util.Map;
@@ -92,12 +93,16 @@ public class CargaMasivaBienesImpl extends UploadProcessor {
             OperacionesCargaMasivaBienes cargaMasivaBienes = new OperacionesCargaMasivaBienes();
             List datosCarga = new ArrayList<LayoutCargaBienes>();
 
-            for (int i = 1; i < rowsCount; i++) {
-                List valoresFila = new ArrayList<Object>();
 
-                int j = 0;
+            List valoresFila = new ArrayList<Object>();
 
-                try {
+            int i = 1;
+            int j = 0;
+
+            try {
+
+                while (i < rowsCount) {
+
                     for (j = 0; j < colsCount; j++) {
                         excelReader.setCurrentCell(i, j);
                         logger.log(this, Thread.currentThread(), LoggingService.LEVEL.DEBUG,
@@ -107,11 +112,21 @@ public class CargaMasivaBienesImpl extends UploadProcessor {
 
                         //valores date
                         if (j == 20) {
-                            valor = DateUtils.toString(excelReader.getDateCellValue(false, null));
+                            valor = excelReader.getDateCellValue(false, null);
+
+                            if (valor != null) {
+                                valor = DateUtils.toString((Date) valor);
+                            }
                         }
                         //valores string
                         else {
                             valor = excelReader.getStringCellValue(false, null);
+                        }
+
+                        if (valor == null) {
+                            throw new BusinessException("400",
+                                                        String.format("El archivo contiene valores nulos en la fila %s, columna %s",
+                                                                      i, j));
                         }
 
                         // Valida que el id del fideicomiso sea igual
@@ -134,17 +149,21 @@ public class CargaMasivaBienesImpl extends UploadProcessor {
                     LayoutCargaBienes layoutCargaBienes = cargaMasivaBienes.mapColumnsToObject(valoresFila);
                     datosCarga.add(layoutCargaBienes);
 
-                } catch (BusinessException e) {
-                    logger.log(this, Thread.currentThread(), LoggingService.LEVEL.ERROR,
-                               "Error al procesar el layout de carga de bienes", e);
-                    throw e;
-                } catch (Exception e) {
-                    logger.log(this, Thread.currentThread(), LoggingService.LEVEL.ERROR,
-                               "Error al procesar el layout de carga de bienes", e);
-                    throw new BusinessException("400",
-                                                String.format("Ocurrio un error al procesar la linea %s en la columna %s ",
-                                                              i, j + 1));
+                    i++;
+
                 }
+
+
+            } catch (BusinessException e) {
+                logger.log(this, Thread.currentThread(), LoggingService.LEVEL.ERROR,
+                           "Error al procesar el layout de carga de bienes", e);
+                throw e;
+            } catch (Exception e) {
+                logger.log(this, Thread.currentThread(), LoggingService.LEVEL.ERROR,
+                           "Error al procesar el layout de carga de bienes", e);
+                throw new BusinessException("400",
+                                            String.format("Ocurrio un error al procesar la linea %s en la columna %s ",
+                                                          i, j + 1));
             }
 
             int registrosCargados = datosCarga.size();

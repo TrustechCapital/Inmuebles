@@ -145,13 +145,13 @@ public class OperacionesCargaMasivaBienes {
     public LayoutCargaBienes mapColumnsToObject(List<Object> columns) {
 
         // No. fideicomiso
-        Integer numFideicomiso = Double.valueOf(columns.get(0).toString()).intValue();
+        Integer numFideicomiso = getColumnWithDefaultValue(columns.get(0)).intValue();
 
         // Subcuenta
         Integer numSubcuenta = 0;
 
         // Id bien (id garantia)
-        Integer idDetalleBien = Double.valueOf(columns.get(1).toString()).intValue();
+        Integer idDetalleBien = getColumnWithDefaultValue(columns.get(1)).intValue();
 
         // Edificio
         String edificio = (String) columns.get(2);
@@ -160,15 +160,7 @@ public class OperacionesCargaMasivaBienes {
         String departamento = columns.get(3).toString();
 
         // Niveles
-        String niveles = columns.get(4)
-                                .toString()
-                                .trim();
-
-        if (niveles == "") {
-            niveles = "0";
-        } else {
-            niveles = "" + Double.valueOf(niveles).intValue();
-        }
+        String niveles = getColumnWithDefaultValue(columns.get(4)).toString();
 
         // Calle
         String calle = (String) columns.get(5);
@@ -204,10 +196,10 @@ public class OperacionesCargaMasivaBienes {
         String numeroCatastral = columns.get(15).toString();
 
         // Valor inmueble
-        Double valorInmueble = Double.valueOf(columns.get(16).toString());
+        Double valorInmueble = getColumnWithDefaultValue(columns.get(16));
 
         // Tipo valor inmueble
-        Integer tipoValorInmueble = Double.valueOf(columns.get(17).toString()).intValue();
+        Integer tipoValorInmueble = getColumnWithDefaultValue(columns.get(17)).intValue();
 
         // Nombre adquiriente
         String nombreAdquiriente = (String) columns.get(18);
@@ -222,15 +214,20 @@ public class OperacionesCargaMasivaBienes {
         String nombreNotario = (String) columns.get(21);
 
         // Numero notario
-        Integer numeroNotario = Double.valueOf(columns.get(22).toString()).intValue();
+        Integer numeroNotario = getColumnWithDefaultValue(columns.get(22)).intValue();
 
         // Estatus
-        Integer estatus = Double.valueOf(columns.get(23).toString()).intValue();
+        Integer estatus = getColumnWithDefaultValue(columns.get(23)).intValue();
 
         return new LayoutCargaBienes(numFideicomiso, idDetalleBien, edificio, departamento, niveles, calle, colonia,
                                      poblacion, cp, estado, pais, colindancia, medidas, estacionamiento, superficie,
                                      numeroCatastral, valorInmueble, tipoValorInmueble, nombreAdquiriente,
                                      numeroEscritura, fechaEscritura, nombreNotario, numeroNotario, estatus);
+    }
+
+    Double getColumnWithDefaultValue(Object column) {
+        String columnValue = column == null ? "" : column.toString().trim();
+        return columnValue.isEmpty() ? 0 : Double.valueOf(columnValue);
     }
 }
 

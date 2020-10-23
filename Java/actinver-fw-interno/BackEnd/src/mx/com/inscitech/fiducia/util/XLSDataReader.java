@@ -204,6 +204,11 @@ public class XLSDataReader implements ExcelDataReader {
 
     public String getStringCellValue(boolean transform, String defaultValue) {
         validateState(READER_STATE.WORKBOOK_SHEET_ROW_AND_CELL);
+
+        if (currentCell == null) {
+            return null;
+        }
+
         switch (currentCell.getCellType()) {
         case Cell.CELL_TYPE_NUMERIC:
 
@@ -228,6 +233,11 @@ public class XLSDataReader implements ExcelDataReader {
 
     public Date getDateCellValue(boolean transform, String defaultValue) {
         validateState(READER_STATE.WORKBOOK_SHEET_ROW_AND_CELL);
+
+        if (currentCell == null) {
+            return null;
+        }
+
         return currentCell.getDateCellValue();
     }
 
