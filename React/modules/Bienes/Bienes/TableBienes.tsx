@@ -17,10 +17,10 @@ import CatalogSelect from '../../../sharedComponents/CatalogSelect';
 const COLUMNS: IGenericTableColumn<BienResultRow>[] = [
     { field: 'idFideicomiso', header: 'Fideicomiso' },
     { field: 'tipoBien', header: 'Tipo de Bien' },
-    { field: 'importeBien', header: 'Importe', numeric: true },
+    { field: 'importeBien', header: 'Importe Actualizado', numeric: true },
     {
         field: 'importeBienGarantizado',
-        header: 'Importe Actualizado',
+        header: 'Importe',
         numeric: true,
     },
     { field: 'claveEstatus', header: 'Estatus' },
