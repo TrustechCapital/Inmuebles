@@ -57,6 +57,7 @@ public class OperacionesDetalleBienes {
                 detalleBien.setForsNumNotario(pDetalleBien.getForsNumNotario());
                 detalleBien.setForsRegimen(pDetalleBien.getForsRegimen());
                 detalleBien.setForsImpBien(pDetalleBien.getForsImpBien());
+                detalleBien.setForsCveStatus(pDetalleBien.getForsCveStatus());
 
                 detalleBienesRepository.save(detalleBien);
                 return null;
