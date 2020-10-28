@@ -39,6 +39,7 @@ class Individualizacion extends BaseModel {
     sotano: string | null = null;
     sotanoSuperficie: string | null = null;
     indiviso: number | null = null;
+    numeroCatastro: number | null = null;
     precioCatastro: number | null = null;
     acto1: string | null = null;
     acto2: string | null = null;

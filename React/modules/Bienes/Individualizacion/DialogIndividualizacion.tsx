@@ -313,9 +313,17 @@ const DialogIndividualizacion: React.FC<ICatalogDialog<Individualizacion>> = ({
                         >
                             <Grid item xs={6}>
                                 <FormTextField
+                                    name="numeroCatastro"
+                                    label="Numero Catastro"
+                                    dataType="number"
+                                    disabled={allFieldsDisabled}
+                                />
+                            </Grid>
+                            <Grid item xs={6}>
+                                <FormTextField
                                     name="precioCatastro"
                                     label="Precio Catastro"
-                                    dataType="text"
+                                    dataType="number"
                                     disabled={allFieldsDisabled}
                                 />
                             </Grid>
