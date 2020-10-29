@@ -162,7 +162,7 @@ const DialogBienes: React.FC<ICatalogDialog<Bien>> = ({
                             <Grid item xs={6}>
                                 <FormTextField
                                     name="importeDelBien"
-                                    label="Importe de Bien"
+                                    label="Importe Actualizado"
                                     disabled={allFieldsDisabled}
                                     dataType="number"
                                 />
@@ -237,7 +237,7 @@ const DialogBienes: React.FC<ICatalogDialog<Bien>> = ({
                             <Grid item xs={6}>
                                 <FormTextField
                                     name="importeDeGarantia"
-                                    label="Importe Actualizado"
+                                    label="Importe"
                                     disabled={allFieldsDisabled}
                                     dataType="number"
                                     adornment="$"
