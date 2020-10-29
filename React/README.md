@@ -38,3 +38,12 @@ Para su funcionamiento se han integrado diversas dependencias de React, cada una
 ### Todos
  - Separar llamados y funciones 
 
+### Generar War
+
+Este comando solo jala en Linux o en Mac:
+
+```sh
+>npm run publish
+```
+
+El archivo generado es FrontendFiduciaWeb-v2.war
