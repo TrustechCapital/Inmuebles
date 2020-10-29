@@ -22,7 +22,9 @@ class Individualizacion extends BaseModel {
     ultimoAvaluo: number | null = null;
     fechaUltimoAvaluo: Date | null = null;
     moneda: number | null = null;
-    notario: number | null = null;
+    numeroNotario: number | null = null;
+    nombreNotario: string | null = null;
+    nombreAdquiriente: string | null = null;
     localidadNotaria: string | null = null;
     numeroEscritura: string | null = null;
     folioReal: string | null = null;

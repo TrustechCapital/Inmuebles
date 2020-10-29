@@ -247,16 +247,16 @@ const DialogIndividualizacion: React.FC<ICatalogDialog<Individualizacion>> = ({
                         >
                             <Grid item xs={6}>
                                 <FormTextField
-                                    name="estacionamiento2"
-                                    label="Estacionamiento 2"
+                                    name="colindancias"
+                                    label="Colindancias"
                                     dataType="text"
                                     disabled={allFieldsDisabled}
                                 />
                             </Grid>
                             <Grid item xs={6}>
                                 <FormTextField
-                                    name="estacionamiento3"
-                                    label="Estacionamiento 3"
+                                    name="medidas"
+                                    label="Medidas"
                                     dataType="text"
                                     disabled={allFieldsDisabled}
                                 />
@@ -344,19 +344,9 @@ const DialogIndividualizacion: React.FC<ICatalogDialog<Individualizacion>> = ({
                             spacing={3}
                         >
                             <Grid item xs={6}>
-                                <FormCatalogSelectField
-                                    name="status"
-                                    catalogId={ClavesModuloBienes.Estatus}
-                                    useLabelAsValue={true}
-                                    defaultValue="LIBERADO"
-                                    label="Estatus"
-                                    disabled={allFieldsDisabled}
-                                />
-                            </Grid>
-                            <Grid item xs={6}>
                                 <FormTextField
-                                    name="acto1"
-                                    label="Acto1"
+                                    name="nombreAdquiriente"
+                                    label="Nombre adquiriente"
                                     dataType="text"
                                     disabled={allFieldsDisabled}
                                 />
@@ -368,39 +358,17 @@ const DialogIndividualizacion: React.FC<ICatalogDialog<Individualizacion>> = ({
                             spacing={3}
                         >
                             <Grid item xs={6}>
-                                <FormTextField
-                                    name="acto2"
-                                    label="Acto 2"
+                            <FormTextField
+                                    name="numeroNotario"
+                                    label="Numero Notario"
                                     dataType="text"
                                     disabled={allFieldsDisabled}
                                 />
                             </Grid>
                             <Grid item xs={6}>
                                 <FormTextField
-                                    name="acto3"
-                                    label="Acto 3"
-                                    dataType="text"
-                                    disabled={allFieldsDisabled}
-                                />
-                            </Grid>
-                        </Grid>
-                        <Grid
-                            container
-                            className={classes.rowSpacing}
-                            spacing={3}
-                        >
-                            <Grid item xs={6}>
-                                <FormTextField
-                                    name="acto4"
-                                    label="Acto 4"
-                                    dataType="text"
-                                    disabled={allFieldsDisabled}
-                                />
-                            </Grid>
-                            <Grid item xs={6}>
-                                <FormTextField
-                                    name="notario"
-                                    label="Notario"
+                                    name="nombreNotario"
+                                    label="Nombre Notario"
                                     dataType="text"
                                     disabled={allFieldsDisabled}
                                 />
@@ -436,7 +404,7 @@ const DialogIndividualizacion: React.FC<ICatalogDialog<Individualizacion>> = ({
                             <Grid item xs={6}>
                                 <FormDatePickerField
                                     name="fechaTrasladoDominio"
-                                    label="Fecha Traslativo"
+                                    label="Fecha Escritura"
                                     disabled={allFieldsDisabled}
                                 />
                             </Grid>
@@ -444,6 +412,22 @@ const DialogIndividualizacion: React.FC<ICatalogDialog<Individualizacion>> = ({
                                 <FormDatePickerField
                                     name="fechaReversion"
                                     label="Fecha Revesrion"
+                                    disabled={allFieldsDisabled}
+                                />
+                            </Grid>
+                        </Grid>
+                        <Grid
+                            container
+                            className={classes.rowSpacing}
+                            spacing={3}
+                        >
+                            <Grid item xs={6}>
+                                <FormCatalogSelectField
+                                    name="status"
+                                    catalogId={ClavesModuloBienes.Estatus}
+                                    useLabelAsValue={true}
+                                    defaultValue="LIBERADO"
+                                    label="Estatus"
                                     disabled={allFieldsDisabled}
                                 />
                             </Grid>
