@@ -106,7 +106,7 @@ class LiberacionModelMapper implements IModelMapper<Liberacion> {
             funiUltimoAvaluo: liberacion.ultimoAvaluo,
             funiFechaUltimoAvaluo: fechaUltimoAvaluo,
             funiMoneda: liberacion.moneda,
-            funiNotario: liberacion.notario,
+            funiNotario: liberacion.numeroNotario,
             funiLocalidadNota: liberacion.localidadNotaria,
             funiNumEscritura: liberacion.numeroEscritura,
             funiFolioReal: liberacion.folioReal,

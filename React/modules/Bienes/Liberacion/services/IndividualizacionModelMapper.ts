@@ -107,7 +107,7 @@ class IndividualizacionModelMapper implements IModelMapper<Individualizacion> {
             funiUltimoAvaluo: individualizacion.ultimoAvaluo,
             funiFechaUltimoAvaluo: fechaUltimoAvaluo,
             funiMoneda: individualizacion.moneda,
-            funiNotario: individualizacion.notario,
+            funiNotario: individualizacion.numeroNotario,
             funiLocalidadNota: individualizacion.localidadNotaria,
             funiNumEscritura: individualizacion.numeroEscritura,
             funiFolioReal: individualizacion.folioReal,
