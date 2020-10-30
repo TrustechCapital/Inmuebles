@@ -94,14 +94,14 @@ public class CargaMasivaBienesImpl extends UploadProcessor {
             List datosCarga = new ArrayList<LayoutCargaBienes>();
 
 
-            List valoresFila = new ArrayList<Object>();
-
             int i = 1;
             int j = 0;
 
             try {
 
                 while (i < rowsCount) {
+
+                    List valoresFila = new ArrayList<Object>();
 
                     for (j = 0; j < colsCount; j++) {
                         excelReader.setCurrentCell(i, j);
