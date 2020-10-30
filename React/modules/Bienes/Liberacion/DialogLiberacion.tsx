@@ -125,17 +125,15 @@ const DialogLiberacion: React.FC<ICatalogDialog<Liberacion>> = ({
                             <Grid item xs={6}>
                                 <FormTextField
                                     name="idEdificio"
-                                    label="Nombre del Adquiriente"
+                                    label="Edificio"
                                     disabled={pkFieldsDisabled}
-                                    dataType="number"
                                 />
                             </Grid>
                             <Grid item xs={6}>
                                 <FormTextField
                                     name="idDepto"
-                                    label="Nombre del Notario"
+                                    label="Unidad Condominal"
                                     disabled={pkFieldsDisabled}
-                                    dataType="number"
                                 />
                             </Grid>
                         </Grid>
@@ -146,7 +144,29 @@ const DialogLiberacion: React.FC<ICatalogDialog<Liberacion>> = ({
                         >
                             <Grid item xs={6}>
                                 <FormTextField
-                                    name="niveles"
+                                    name="nombreAdquiriente"
+                                    label="Nombre adquiriente"
+                                    dataType="text"
+                                    disabled={allFieldsDisabled}
+                                />
+                            </Grid>
+                            <Grid item xs={6}>
+                                <FormTextField
+                                    name="nombreNotario"
+                                    label="Nombre Notario"
+                                    dataType="text"
+                                    disabled={allFieldsDisabled}
+                                />
+                            </Grid>
+                        </Grid>
+                        <Grid
+                            container
+                            className={classes.rowSpacing}
+                            spacing={3}
+                        >
+                            <Grid item xs={6}>
+                                <FormTextField
+                                    name="precio"
                                     label="Valor de la Operacion"
                                     dataType="number"
                                 />
