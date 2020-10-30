@@ -32,10 +32,13 @@ ICrudModuleApi<
         return await this.getRef(
             'qryConsultaUnidades',
             {
-                NumFideicomiso: parameters.idFideicomiso,
-                NumUnidad: parameters.idDepto,
-                Calle: parameters.calleYNumero,
-                CveStatus: parameters.status,
+                numFideicomiso: parameters.idFideicomiso,
+                idDepto: parameters.idDepto,
+                calle: parameters.calleYNumero,
+                estatus: parameters.status,
+                numCatasttro: parameters.numeroCatastro,
+                estado: parameters.estado,
+                municipio: parameters.municipio,
             },
             IndividualizacionResultRow.fromObject
         );

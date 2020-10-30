@@ -35,6 +35,9 @@ const initialState: ITableIndividualizacionesParameters = {
     idDepto: '',
     calleYNumero: '',
     status: '',
+    numeroCatastro: null,
+    estado: '',
+    municipio: ''
 };
 
 type TableBienProps = {
@@ -125,7 +128,7 @@ const TableBien: React.FC<TableBienProps> = ({ data, onSearch }) => {
                             </Grid>
                             <Grid item xs={3}>
                                 <CatalogSelect
-                                    label="Status"
+                                    label="Estatus"
                                     catalogId={ClavesModuloBienes.Estatus}
                                     useLabelAsValue={true}
                                     value={state.status}
@@ -134,6 +137,50 @@ const TableBien: React.FC<TableBienProps> = ({ data, onSearch }) => {
                                         dispatch({
                                             type: 'field',
                                             fieldName: 'status',
+                                            value: e.target.value,
+                                        })
+                                    }
+                                />
+                            </Grid>
+                        </Grid>
+                        <Grid container spacing={4}>
+                            <Grid item xs={3}>
+                                <GenericTextInput
+                                    label="Numero catastral"
+                                    dataType="number"
+                                    value={state.numeroCatastro}
+                                    onChange={(e) =>
+                                        dispatch({
+                                            type: 'field',
+                                            fieldName: 'numeroCatastro',
+                                            value: e.target.value,
+                                        })
+                                    }
+                                />
+                            </Grid>
+                            <Grid item xs={3}>
+                                <GenericTextInput
+                                    label="Estado"
+                                    value={state.estado}
+                                    dataType="text"
+                                    onChange={(e) =>
+                                        dispatch({
+                                            type: 'field',
+                                            fieldName: 'estado',
+                                            value: e.target.value,
+                                        })
+                                    }
+                                />
+                            </Grid>
+                            <Grid item xs={3}>
+                                <GenericTextInput
+                                    label="Municipio"
+                                    value={state.municipio}
+                                    dataType="text"
+                                    onChange={(e) =>
+                                        dispatch({
+                                            type: 'field',
+                                            fieldName: 'municipio',
                                             value: e.target.value,
                                         })
                                     }

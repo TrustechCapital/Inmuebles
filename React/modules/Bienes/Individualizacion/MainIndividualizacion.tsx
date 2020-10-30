@@ -19,6 +19,9 @@ const initialState: MainIndividualizacionesState = {
         idDepto: '',
         calleYNumero: '',
         status: '',
+        numeroCatastro: null,
+        estado: '',
+        municipio: ''
     },
     searchResults: [],
     selectedRow: null,

@@ -8,9 +8,12 @@ import {
 
 export interface ITableIndividualizacionesParameters {
     idFideicomiso: number | null;
-    idDepto: string | '';
-    calleYNumero: string | '';
-    status: string | '';
+    idDepto: string;
+    calleYNumero: string;
+    status: string;
+    numeroCatastro: number | null;
+    estado: string;
+    municipio: string;
 }
 
 export type IndividualizacionesState = {

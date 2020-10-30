@@ -39011,10 +39011,10 @@
                     <list>
                         <bean class="mx.gob.nafin.fiduciario.common.beans.ParametroQueryBean">
                             <property name="name">
-                                <value>NumFideicomiso</value>
+                                <value>numFideicomiso</value>
                             </property>
                             <property name="sqlName">
-                                <value>funi_Id_Fideicomiso</value>
+                                <value>funi_id_fideicomiso</value>
                             </property>
                             <property name="clauseType">
                                 <value>AND</value>
@@ -39025,10 +39025,10 @@
                         </bean>
                         <bean class="mx.gob.nafin.fiduciario.common.beans.ParametroQueryBean">
                             <property name="name">
-                                <value>NumUnidad</value>
+                                <value>idDepto</value>
                             </property>
                             <property name="sqlName">
-                                <value>funi_Id_Depto</value>
+                                <value>funi_id_depto</value>
                             </property>
                             <property name="clauseType">
                                 <value>AND</value>
@@ -39039,7 +39039,7 @@
                         </bean>
                         <bean class="mx.gob.nafin.fiduciario.common.beans.ParametroQueryBean">
                             <property name="name">
-                                <value>Calle</value>
+                                <value>calle</value>
                             </property>
                             <property name="sqlName">
                                 <value>FUNI_CALLE_NUM</value>
@@ -39053,10 +39053,52 @@
                         </bean>
                         <bean class="mx.gob.nafin.fiduciario.common.beans.ParametroQueryBean">
                             <property name="name">
-                                <value>CveStatus</value>
+                                <value>estatus</value>
                             </property>
                             <property name="sqlName">
                                 <value>funi_Status</value>
+                            </property>
+                            <property name="clauseType">
+                                <value>AND</value>
+                            </property>
+                            <property name="conditionType">
+                                <value>=</value>
+                            </property>
+                        </bean>
+                        <bean class="mx.gob.nafin.fiduciario.common.beans.ParametroQueryBean">
+                            <property name="name">
+                                <value>numCatasttro</value>
+                            </property>
+                            <property name="sqlName">
+                                <value>funi_numero_catastro</value>
+                            </property>
+                            <property name="clauseType">
+                                <value>AND</value>
+                            </property>
+                            <property name="conditionType">
+                                <value>=</value>
+                            </property>
+                        </bean>
+                        <bean class="mx.gob.nafin.fiduciario.common.beans.ParametroQueryBean">
+                            <property name="name">
+                                <value>estado</value>
+                            </property>
+                            <property name="sqlName">
+                                <value>funi_num_estado</value>
+                            </property>
+                            <property name="clauseType">
+                                <value>AND</value>
+                            </property>
+                            <property name="conditionType">
+                                <value>=</value>
+                            </property>
+                        </bean>
+                        <bean class="mx.gob.nafin.fiduciario.common.beans.ParametroQueryBean">
+                            <property name="name">
+                                <value>municipio</value>
+                            </property>
+                            <property name="sqlName">
+                                <value>funi_nom_poblacion</value>
                             </property>
                             <property name="clauseType">
                                 <value>AND</value>
