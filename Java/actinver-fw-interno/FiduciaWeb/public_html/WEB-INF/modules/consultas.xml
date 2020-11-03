@@ -1369,20 +1369,26 @@
                 <!-- Ejecuta la Carga de Bienes en garantia -->
                 <entry key="garantias.ejeFunProcesoLib" value="{? = call GARINMUEBLES.F_PROCESO_LIBERACION(?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)}"/>
                 <!-- Ejecuta la Carga de Bienes en garantia -->
-                <entry key="qryConsultaUnidades" value="SELECT funi_id_fideicomiso, 
-                        funi_id_subcuenta, 
-                        fors_cve_tipo_garantia, 
-                        fors_id_garantia, 
-                        funi_id_bien, 
-                        funi_id_edificio, 
-                        funi_id_depto, 
-                        funi_precio, 
-                        funi_moneda, 
-                        funi_status 
-                    FROM  f_unidades 
-                    LEFT JOIN f_bienesgar
-                        ON fgrs_id_fideicomiso = funi_id_fideicomiso
-                        AND fors_id_garantia = funi_id_bien"/>
+                <entry key="qryConsultaUnidades" value="SELECT * FROM (SELECT funi_id_fideicomiso, 
+                    funi_id_subcuenta, 
+                    fors_cve_tipo_garantia, 
+                    fors_id_garantia, 
+                    funi_id_bien, 
+                    funi_id_edificio, 
+                    funi_id_depto,
+                    funi_calle_num, 
+                    funi_precio, 
+                    funi_moneda, 
+                    funi_status,
+                    funi_num_estado,
+                    funi_nom_poblacion,
+                    funi_numero_catastro,
+                    TO_CHAR(funi_fecha_traslado_dominio, 'DD/MM/YYYY') AS funi_fecha_traslado_dominio,
+                    CASE WHEN funi_fecha_traslado_dominio IS NULL THEN 'NO' ELSE 'SI' END AS escriturado
+                FROM  f_unidades 
+                LEFT JOIN f_bienesgar
+                    ON fgrs_id_fideicomiso = funi_id_fideicomiso
+                    AND fors_id_garantia = funi_id_bien) unidades"/>
                 <!-- FIN UNIDADES LIBERACION -->
                 <!--CONCILIACION VALORES-->
                 <entry key="consultaConciliaVal" value="SELECT FCVA_FIDEICOMISO,FCVA_SUBCUENTA,FCVA_CTO_INVER,TRIM(TO_CHAR(FCVA_SALDO_TOTAL_P,'$999,999,999,999,999,999,999.99')) AS FCVA_SALDO_TOTAL_P,TRIM(TO_CHAR(FCVA_SALDO_TOTAL_F,'$999,999,999,999,999,999,999.99')) AS FCVA_SALDO_TOTAL_F,TRIM(TO_CHAR(FCVA_SALDO_TOTAL_C,'$999,999,999,999,999,999,999.99')) AS FCVA_SALDO_TOTAL_C,     TRIM(TO_CHAR(FCVA_DIFERENCIA,'$999,999,999,999,999,999,999.99')) AS FCVA_DIFERENCIA,FCVA_COMENTARIO,FCVA_CVE_STATUS FROM F_CONCILIA_VALORES"/>
@@ -39099,6 +39105,34 @@
                             </property>
                             <property name="sqlName">
                                 <value>funi_nom_poblacion</value>
+                            </property>
+                            <property name="clauseType">
+                                <value>AND</value>
+                            </property>
+                            <property name="conditionType">
+                                <value>=</value>
+                            </property>
+                        </bean>
+                        <bean class="mx.gob.nafin.fiduciario.common.beans.ParametroQueryBean">
+                            <property name="name">
+                                <value>escriturado</value>
+                            </property>
+                            <property name="sqlName">
+                                <value>escriturado</value>
+                            </property>
+                            <property name="clauseType">
+                                <value>AND</value>
+                            </property>
+                            <property name="conditionType">
+                                <value>=</value>
+                            </property>
+                        </bean>
+                        <bean class="mx.gob.nafin.fiduciario.common.beans.ParametroQueryBean">
+                            <property name="name">
+                                <value>fechaEscritura</value>
+                            </property>
+                            <property name="sqlName">
+                                <value>funi_fecha_traslado_dominio</value>
                             </property>
                             <property name="clauseType">
                                 <value>AND</value>
