@@ -14,6 +14,8 @@ export interface ITableIndividualizacionesParameters {
     numeroCatastro: number | null;
     estado: string;
     municipio: string;
+    escriturado: boolean;
+    fechaEscritura: Date | null;
 }
 
 export type IndividualizacionesState = {

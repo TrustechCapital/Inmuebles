@@ -4,6 +4,7 @@ import IndividualizacionResultRow from '../models/IndividualizacionesResultRow';
 import Individualizacion from '../../../../models/Individualizacion';
 import IndividualizacionModelMapper from './IndividualizacionModelMapper';
 import { ICrudModuleApi } from '../../../../sharedComponents/CrudModule/types';
+import DateUtils from '../../../../utils/DateUtils';
 
 class IndividualizacionesApi extends ModelsApi<Individualizacion> implements
 ICrudModuleApi<
@@ -39,6 +40,8 @@ ICrudModuleApi<
                 numCatasttro: parameters.numeroCatastro,
                 estado: parameters.estado,
                 municipio: parameters.municipio,
+                escriturado: parameters.escriturado ? 'SI' : 'NO',
+                fechaEscritura: parameters.fechaEscritura ? DateUtils.fromDate(parameters.fechaEscritura) : null
             },
             IndividualizacionResultRow.fromObject
         );

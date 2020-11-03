@@ -21,7 +21,9 @@ const initialState: MainIndividualizacionesState = {
         status: '',
         numeroCatastro: null,
         estado: '',
-        municipio: ''
+        municipio: '',
+        escriturado: false,
+        fechaEscritura: null
     },
     searchResults: [],
     selectedRow: null,

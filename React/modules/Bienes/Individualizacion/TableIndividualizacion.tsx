@@ -13,6 +13,8 @@ import GenericTable, {
 } from '../../../sharedComponents/GenericTable';
 import GenericTextInput from '../../../sharedComponents/GenericTextInput';
 import CatalogSelect from '../../../sharedComponents/CatalogSelect';
+import GenericSwitch from '../../../sharedComponents/GenericSwitch';
+import GenericDatePicker from '../../../sharedComponents/GenericDatePicker';
 
 const COLUMNS: IGenericTableColumn<IndividualizacionesResultRow>[] = [
     { field: 'idFideicomiso', header: 'Fideicomiso' },
@@ -37,7 +39,9 @@ const initialState: ITableIndividualizacionesParameters = {
     status: '',
     numeroCatastro: null,
     estado: '',
-    municipio: ''
+    municipio: '',
+    escriturado: false,
+    fechaEscritura: null
 };
 
 type TableBienProps = {
@@ -181,6 +185,34 @@ const TableBien: React.FC<TableBienProps> = ({ data, onSearch }) => {
                                         dispatch({
                                             type: 'field',
                                             fieldName: 'municipio',
+                                            value: e.target.value,
+                                        })
+                                    }
+                                />
+                            </Grid>
+                        </Grid>
+                        <Grid container spacing={4}>
+                            <Grid item xs={3}>
+                                <GenericSwitch
+                                    label="Transmitido?"
+                                    checked={state.escriturado}
+                                    onChange={(e, checked) => 
+                                        dispatch({
+                                            type: 'field',
+                                            fieldName: 'escriturado',
+                                            value: checked,
+                                        })
+                                    }
+                                />
+                            </Grid>
+                            <Grid item xs={3}>
+                                <GenericDatePicker
+                                    label="Fecha Transmisión"
+                                    value={state.fechaEscritura}
+                                    onChange={(e) =>
+                                        dispatch({
+                                            type: 'field',
+                                            fieldName: 'fechaEscritura',
                                             value: e.target.value,
                                         })
                                     }
