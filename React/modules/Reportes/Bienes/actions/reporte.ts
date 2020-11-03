@@ -82,8 +82,12 @@ async function searchReportes(
         results: Reportes,
     });
 }
-async function exportPDF() {
-    reportesApi.downloadReport();
+function exportPDF(
+    parameters: ITableReportesParameters
+) {
+    return async (dispatch: MainReportesDispatcher) => {
+        reportesApi.downloadReport(parameters);
+    }
 }
 
 async function repeatCurrentSearch(

@@ -45,8 +45,8 @@ const MainIndividualizacion: React.FC = () => {
         },
         []
     );
-    const exportReportes = useCallback(() => {
-        ReportesActions.exportPDF();
+    const exportReportes = useCallback((parameters: ITableReportesParameters) => {
+        dispatch(ReportesActions.exportPDF(parameters));
     }, []);
 
     const ReportesActionCallbacks = useMemo(() => {

@@ -30,9 +30,14 @@ class ReportesApi extends ModelsApi<Individualizacion> {
         );
     }
 
-    async downloadReport() {
+    async downloadReport(parameters: ITableReportesParameters) {
         this.downloadDynamicReport('Reporte de liberación de bienes.pdf', 'reporteLibera', {
             template: '/xml/Reportes/Honorarios/ReporteBienes.xsl',
+            takeParameters: 'false',
+            numFiso: parameters.idFideicomiso,
+            tipoBien: parameters.idTipoBien,
+            numCatastro: parameters.numCatastro,
+            cveStatus: parameters.status,
         });
     }
 }

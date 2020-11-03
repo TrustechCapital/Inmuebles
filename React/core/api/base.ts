@@ -200,7 +200,7 @@ export class Api {
             FiduciaDynamicEndpoints.ImprimirReporte,
             refName,
             data,
-            false
+            true
         );
     }
 

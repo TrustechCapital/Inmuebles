@@ -27,7 +27,7 @@ class ReportesResultRow extends ResultRowModel{
             tipoValor: obj.funiTipo,
             moneda: obj.funiMoneda,
             fechaAportacion: obj.funifechaUltimoAvaluo,
-            numCatastro: obj.funiNumCatastro,
+            numCatastro: obj.funiNumeroCatastro,
             adquiriente: obj.funiNombreAdquiriente,
             estado: obj.funiNumEstado,
             municipio: obj.funiNomPoblacion,
