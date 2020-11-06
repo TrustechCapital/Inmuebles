@@ -25,7 +25,7 @@ const COLUMNS: IGenericTableColumn<ReportesResultRow>[] = [
     { field: 'ultimoAvaluo', header: 'Valor', numeric: true },
     { field: 'fechaAportacion', header: 'Fecha de Aportación' },
     { field: 'numCatastro', header: '# Catastro' },
-    { field: 'adquiriente', header: 'Aportante' },
+    { field: 'adquiriente', header: 'Adquiriente' },
     { field: 'estado', header: 'Estado' },
     { field: 'municipio', header: 'Municipio' },
     { field: 'status', header: 'Estatus' },
@@ -104,23 +104,6 @@ const TebleReporteBienes: React.FC<TableBienProps> = ({
                                 />
                             </Grid>
                             <Grid item xs={3}>
-                                <CatalogSelect
-                                    label="Tipo del bien"
-                                    catalogId={ClavesModuloBienes.TiposDeBienes}
-                                    value={state.idTipoBien}
-                                    fullWidth
-                                    onChange={(e) =>
-                                        dispatch({
-                                            type: 'field',
-                                            fieldName: 'idTipoBien',
-                                            value: e.target.value,
-                                        })
-                                    }
-                                />
-                            </Grid>
-                        </Grid>
-                        <Grid container spacing={4}>
-                            <Grid item xs={3}>
                                 <GenericTextInput
                                     label="Numero de Catastro"
                                     value={state.numCatastro}
@@ -153,10 +136,11 @@ const TebleReporteBienes: React.FC<TableBienProps> = ({
                         <Grid container justify="flex-end">
                             <Button
                                 variant="contained"
+                                color="secondary"
                                 startIcon={<GetAppIcon />}
                                 onClick={handlePDF}
                             >
-                                Descargar todos los resultados en formato PDF
+                                Descargar en PDF
                             </Button>
                         </Grid>
                     </Grid>
