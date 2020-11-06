@@ -34,8 +34,8 @@ const IndividualizacionesFormValidator = new FormValidator<Individualizacion>({
     idFideicomiso: ValidationHelpers.validateFideicomiso,
     idSubcuenta: ValidationHelpers.validateSubcuenta,
     idBien: ValidationHelpers.validateInmueble,
-    idEdificio: ValidationHelpers.validateEdificio,
-    idDepto: ValidationHelpers.validateDepto,
+    idEdificio: ValidationHelpers.validateRequiredString('El edificio'),
+    idDepto: ValidationHelpers.validateRequiredString('La unidad/departamento'),
 });
 
 const DialogIndividualizacion: React.FC<ICatalogDialog<Individualizacion>> = ({
@@ -120,7 +120,7 @@ const DialogIndividualizacion: React.FC<ICatalogDialog<Individualizacion>> = ({
                             <Grid item xs={6}>
                                 <FormTextField
                                     name="idBien"
-                                    label="Número de Inmueble"
+                                    label="Número de Detalle de Bien"
                                     disabled={pkFieldsDisabled}
                                     dataType="number"
                                 />
@@ -149,7 +149,7 @@ const DialogIndividualizacion: React.FC<ICatalogDialog<Individualizacion>> = ({
                             <Grid item xs={6}>
                                 <FormTextField
                                     name="idDepto"
-                                    label="Unidad Condominal"
+                                    label="Unidad Condominal/Departamento"
                                     disabled={pkFieldsDisabled}
                                 />
                             </Grid>
@@ -192,7 +192,7 @@ const DialogIndividualizacion: React.FC<ICatalogDialog<Individualizacion>> = ({
                             <Grid item xs={6}>
                                 <FormTextField
                                     name="nombrePoblacion"
-                                    label="Poblacion"
+                                    label="Municipio/Poblacion"
                                     dataType="text"
                                     disabled={allFieldsDisabled}
                                 />

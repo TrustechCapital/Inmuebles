@@ -54,9 +54,7 @@ const ValidationHelpers = {
     validateFile,
     validateFideicomiso: validateRequiredNumber('El Fideicomiso'),
     validateSubcuenta: validateRequiredNumber('La Subcuenta'),
-    validateInmueble: emptyStringToUndefined('El Inmueble'),
-    validateEdificio: emptyStringToUndefined('El Edificio'),
-    validateDepto: emptyStringToUndefined('El Departamento'),
+    validateInmueble: validateRequiredNumber('El Detalle de Bien')
 };
 
 class FormValidator<Model> {

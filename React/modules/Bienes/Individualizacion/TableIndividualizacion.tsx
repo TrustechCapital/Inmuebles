@@ -105,7 +105,7 @@ const TableBien: React.FC<TableBienProps> = ({ data, onSearch }) => {
                         <Grid container spacing={4}>
                             <Grid item xs={3}>
                                 <GenericTextInput
-                                    label="Num Unidad"
+                                    label="Unidad/Departamento"
                                     value={state.idDepto}
                                     onChange={(e) =>
                                         dispatch({
@@ -178,7 +178,7 @@ const TableBien: React.FC<TableBienProps> = ({ data, onSearch }) => {
                             </Grid>
                             <Grid item xs={3}>
                                 <GenericTextInput
-                                    label="Municipio"
+                                    label="Municipio/Poblacion"
                                     value={state.municipio}
                                     dataType="text"
                                     onChange={(e) =>
