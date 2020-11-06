@@ -25,8 +25,8 @@ const LiberacionesFormValidator = new FormValidator<Liberacion>({
     idFideicomiso: ValidationHelpers.validateFideicomiso,
     idSubcuenta: ValidationHelpers.validateSubcuenta,
     idBien: ValidationHelpers.validateInmueble,
-    idEdificio: ValidationHelpers.validateEdificio,
-    idDepto: ValidationHelpers.validateDepto,
+    idEdificio: ValidationHelpers.validateRequiredString('El edificio'),
+    idDepto: ValidationHelpers.validateRequiredString('La unidad/departamento'),
 });
 
 const DialogLiberacion: React.FC<ICatalogDialog<Liberacion>> = ({
@@ -103,7 +103,7 @@ const DialogLiberacion: React.FC<ICatalogDialog<Liberacion>> = ({
                             <Grid item xs={6}>
                                 <FormTextField
                                     name="idBien"
-                                    label="Número de Bien"
+                                    label="Número de Detalle de Bien"
                                     disabled={pkFieldsDisabled}
                                     dataType="number"
                                 />
@@ -132,7 +132,7 @@ const DialogLiberacion: React.FC<ICatalogDialog<Liberacion>> = ({
                             <Grid item xs={6}>
                                 <FormTextField
                                     name="idDepto"
-                                    label="Unidad Condominal"
+                                    label="Unidad Condominal/Departamento"
                                     disabled={pkFieldsDisabled}
                                 />
                             </Grid>
