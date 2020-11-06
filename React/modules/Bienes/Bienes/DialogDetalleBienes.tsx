@@ -229,14 +229,6 @@ const DialogDetalleBienes: React.FC<DialogDetalleBienesProps> = ({
                                     disabled={pkFieldsDisabled}
                                 />
                             </Grid>
-                            <Grid item xs={6}>
-                                <FormDatePickerField
-                                    namespace="model"
-                                    name="fechaVencimiento"
-                                    label="Fecha Vencimiento"
-                                    disabled={allFieldsDisabled}
-                                />
-                            </Grid>
                         </Grid>
                         <Grid
                             container
@@ -321,17 +313,6 @@ const DialogDetalleBienes: React.FC<DialogDetalleBienesProps> = ({
                             className={classes.rowSpacing}
                             spacing={3}
                         >
-                            <Grid item xs={6}>
-                                <FormCatalogSelectField
-                                    namespace="model"
-                                    name="idClavePeriodicidadRevaluacion"
-                                    catalogId={
-                                        ClavesModuloBienes.PeriodicidadDeRevaluacion
-                                    }
-                                    label="Periodicidad"
-                                    disabled={allFieldsDisabled}
-                                />
-                            </Grid>
                             <Grid item xs={6}>
                                 <FormTextField
                                     namespace="model"
