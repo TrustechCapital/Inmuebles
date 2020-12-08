@@ -49,3 +49,6 @@ React/.next
 React/out
 React/node_modules/
 REact/.env*.local
+lib
+.vs
+/Temp

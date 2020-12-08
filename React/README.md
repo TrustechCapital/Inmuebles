@@ -46,4 +46,10 @@ Este comando solo jala en Linux o en Mac:
 >npm run publish
 ```
 
+En windows usar:
+
+```power shell
+>npm run publishw
+```
+
 El archivo generado es FrontendFiduciaWeb-v2.war

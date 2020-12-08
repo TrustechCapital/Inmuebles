@@ -47,6 +47,8 @@
                 <!-- Pagina Principal -->
                 <!-- URL que devuelve el xml de menu -->
                 <prop key="/menu_general.do">menuController</prop>
+                <!-- URL que devuelve la informacion de sesion -->
+                <prop key="/session.do">sessionInfoController</prop>
                 <!-- URLs que sirven para obtener o mandar objetos JavaScript -->
                 <!-- URLs Utilitarias -->
                 <prop key="/getObject.do">objectController</prop>

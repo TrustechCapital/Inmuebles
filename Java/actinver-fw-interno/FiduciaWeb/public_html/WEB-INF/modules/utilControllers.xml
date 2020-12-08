@@ -80,6 +80,21 @@
             <ref bean="genericDataAccessServiceBeanMenu"/>
         </property>
     </bean>
+    <bean id="sessionInfoResolver" class="org.springframework.web.servlet.mvc.multiaction.PropertiesMethodNameResolver">
+        <property name="mappings">
+            <props>
+                <prop key="/session.do">getSessionInfo</prop>
+            </props>
+        </property>
+    </bean>
+    <bean id="sessionInfoController" class="mx.com.inscitech.fiducia.web.controllers.SessionInfoController">
+        <property name="methodNameResolver">
+            <ref bean="sessionInfoResolver"/>
+        </property>
+        <property name="genericDataAccessService">
+            <ref bean="genericDataAccessServiceBean"/>
+        </property>
+    </bean>
     <bean id="interfacesController" class="mx.com.inscitech.fiducia.interfaces.InterfacesController">
         <property name="methodNameResolver">
             <ref bean="interfacesResolver"/>

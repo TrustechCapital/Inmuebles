@@ -10,8 +10,6 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-import java.util.stream.Collectors;
-
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
@@ -36,15 +34,13 @@ import net.sf.json.JSONObject;
 
 import org.springframework.web.servlet.ModelAndView;
 
-import weblogic.sqlserver.externals.com.google.gson.JsonElement;
-
 /**
  * Clase que se encarga de ejecutar las consultas generiacas del sistema, definidas en el archivo
  * WEB-INF/modules/consultas.xml; cada consulta puede o no tener parametros, los cuales son procesados
  * por el servicio de acceso a datos @see mx.gob.nafin.fiduciario.business.services.GenericDataAccessService
  * Tambien son enviados como parametros los atributos que se encuentran en session, los cuales sobreescriben a
  * los de request.
- * @author Inscitech M�xico inscitech@inscitechmexico.com
+ * @author Inscitech Mexico inscitech@inscitechmexico.com
  */
 public class ConsultasController extends JsonActionController {
 
