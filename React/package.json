@@ -11,7 +11,9 @@
         "start": "next start",
         "zip": "node scripts/zip.js",
         "zipnix": "cd out && cp -r ../WEB-INF . && zip -r ../FrontendFiduciaWeb-v2.war *",
-        "publish": "npm run build && npm run export && npm run zipnix"
+        "zipnixw": "cd out; cp -r ../WEB-INF . ; zip -r ../FrontendFiduciaWeb-v2.war *",
+        "publish": "npm run build && npm run export && npm run zipnix",
+        "publishw": "npm run build ; npm run export ; npm run zipnix"
     },
     "keywords": [],
     "author": "",
