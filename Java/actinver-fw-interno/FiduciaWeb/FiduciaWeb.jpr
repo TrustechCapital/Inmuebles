@@ -200,8 +200,8 @@
       </list>
    </hash>
    <hash n="oracle.jdeveloper.model.J2eeSettings">
-      <value n="j2eeWebAppName" v="FiduciaWeb"/>
-      <value n="j2eeWebContextRoot" v="FiduciaWeb"/>
+      <value n="j2eeWebAppName" v="FiduciaBackend"/>
+      <value n="j2eeWebContextRoot" v="FiduciaBackend"/>
    </hash>
    <hash n="oracle.jdeveloper.runner.RunConfigurations">
       <hash n="runConfigurationDefinitions">

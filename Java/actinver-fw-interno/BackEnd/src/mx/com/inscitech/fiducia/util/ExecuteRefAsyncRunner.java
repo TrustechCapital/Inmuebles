@@ -3,11 +3,10 @@ package mx.com.inscitech.fiducia.util;
 import java.util.HashMap;
 import java.util.Map;
 
+import mx.com.inscitech.fiducia.BusinessException;
+import mx.com.inscitech.fiducia.business.services.GenericDataAccessService;
 import mx.com.inscitech.fiducia.common.services.LoggingService;
-
-import mx.gob.nafin.fiduciario.BusinessException;
-import mx.gob.nafin.fiduciario.business.services.GenericDataAccessService;
-import mx.gob.nafin.fiduciario.common.beans.ErrorBean;
+import mx.com.inscitech.fiducia.beans.ErrorBean;
 
 import org.springframework.jdbc.core.JdbcTemplate;
 

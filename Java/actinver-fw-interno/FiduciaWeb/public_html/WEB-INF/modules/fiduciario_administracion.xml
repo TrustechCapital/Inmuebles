@@ -2,7 +2,7 @@
 <!DOCTYPE beans PUBLIC "-//SPRING//DTD BEAN//EN" "http://www.springframework.org/dtd/spring-beans.dtd">
 <beans>
   <bean id="consultasGeneralesController"
-        class="mx.gob.nafin.fiduciario.controller.ConsultasGeneralesController">
+        class="mx.com.inscitech.fiducia.web.controllers.ConsultasGeneralesController">
     <property name="methodNameResolver">
       <ref bean="consultasGeneralesResolver"/>
     </property>
@@ -24,7 +24,7 @@
     </property>
   </bean>
   <bean id="consultasGenerales"
-        class="mx.gob.nafin.fiduciario.common.business.ConsultasGenerales">
+        class="mx.com.inscitech.fiducia.common.business.ConsultasGenerales">
     <property name="jdbcTemplate" ref="JdbcTemplate"/>
     <property name="consultasCombos">
       <map>
@@ -93,7 +93,7 @@
     </property>
   </bean>
   <bean id="consultaCombosFideicomisosController"
-        class="mx.gob.nafin.fiduciario.administracion.ConsultaCombosFideicomisosController">
+        class="mx.com.inscitech.fiducia.administracion.ConsultaCombosFideicomisosController">
     <property name="methodNameResolver">
       <ref bean="consultaCombosFideicomisosResolver"/>
     </property>
@@ -113,7 +113,7 @@
     </property>
   </bean>
   <bean id="consultaCombosFideicomisos"
-        class="mx.gob.nafin.fiduciario.business.administracion.ConsultaCombosFideicomisos">
+        class="mx.com.inscitech.fiducia.business.administracion.ConsultaCombosFideicomisos">
     <property name="jdbcTemplate" ref="JdbcTemplate"/>
     <property name="consultasCombos">
       <map>

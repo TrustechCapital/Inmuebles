@@ -2,20 +2,20 @@
 <!DOCTYPE beans PUBLIC "-//SPRING//DTD BEAN//EN" "http://www.springframework.org/dtd/spring-beans.dtd">
 <beans>
     <!-- Bean de Spring que se encarga de procesar las peticiones que solicitaran contenido HTML -->
-    <bean id="htmlActionController" class="mx.gob.nafin.fiduciario.controller.HtmlActionController"/>
+    <bean id="htmlActionController" class="mx.com.inscitech.fiducia.web.controllers.HtmlActionController"/>
     <!-- Controller para la exportacion de archivos planos -->
-    <bean id="exportFileController" class="mx.gob.nafin.fiduciario.controller.ExportFileController">
+    <bean id="exportFileController" class="mx.com.inscitech.fiducia.web.controllers.ExportFileController">
         <property name="genericDataAccessService">
             <ref bean="genericDataAccessServiceBean"/>
         </property>
     </bean>
     <!-- Controller para subir y procesar archivos -->
-    <bean id="uploadFileController" class="mx.gob.nafin.fiduciario.controller.UploadFileController">
+    <bean id="uploadFileController" class="mx.com.inscitech.fiducia.web.controllers.UploadFileController">
         <property name="jdbcTemplate">
             <ref bean="JdbcTemplate"/>
         </property>
     </bean>
-    <bean id="uploadControlController" class="mx.gob.nafin.fiduciario.controller.UploadControlController"/>
+    <bean id="uploadControlController" class="mx.com.inscitech.fiducia.web.controllers.UploadControlController"/>
     <!-- Imports -->
     <import resource="../modules/fiduciario_test.xml"/>
     <import resource="../modules/catalogos.xml"/>
@@ -49,6 +49,9 @@
                 <prop key="/menu_general.do">menuController</prop>
                 <!-- URL que devuelve la informacion de sesion -->
                 <prop key="/session.do">sessionInfoController</prop>
+                <prop key="/appToken.do">googleController</prop>
+                <prop key="/google-signin">googleController</prop>
+                <prop key="/sso/idp">googleController</prop>
                 <!-- URLs que sirven para obtener o mandar objetos JavaScript -->
                 <!-- URLs Utilitarias -->
                 <prop key="/getObject.do">objectController</prop>

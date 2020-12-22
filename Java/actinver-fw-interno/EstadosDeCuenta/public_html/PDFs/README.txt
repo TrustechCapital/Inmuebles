@@ -1,1 +1,0 @@
-Carpeta donde se almacenan los PDFs generados por el servicio de OperacionesEdoCta

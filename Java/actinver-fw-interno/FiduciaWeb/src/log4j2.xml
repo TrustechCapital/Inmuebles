@@ -16,11 +16,7 @@
         </RollingFile>
     </Appenders>
     <Loggers>
-        <Logger name="mx.com.inscitech" level="DEBUG" additivity="true">
-            <AppenderRef ref="Console"/>
-            <AppenderRef ref="RollingFile"/>
-        </Logger>
-        <Logger name="mx.gob.nafin" level="DEBUG" additivity="true">
+        <Logger name="mx.com.inscitech.fiducia" level="DEBUG" additivity="true">
             <AppenderRef ref="Console"/>
             <AppenderRef ref="RollingFile"/>
         </Logger>

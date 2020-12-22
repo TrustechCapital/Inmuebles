@@ -3,9 +3,12 @@
    <hash n="adrs-workspace-properties">
       <value n="adrs-instance-binding" v="DefaultServer"/>
       <value n="deploy-timeout" v="0"/>
-      <value n="runtime-application-name" v="FiduciaWebActinver"/>
+      <value n="runtime-application-name" v="FiduciaBackend"/>
    </hash>
-   <value n="application-package-prefix" v="com.inscitech.fiduciaweb"/>
+   <hash n="adrs-workspace-weblogic-properties">
+      <value n="hot-class-reload" v="ide-default"/>
+   </hash>
+   <value n="application-package-prefix" v="mx.com.inscitech.fiduciaweb"/>
    <value n="appTemplateId" v="#genericApplicationTemplate"/>
    <hash n="appWebServicePolicy">
       <value n="location"/>
@@ -37,7 +40,6 @@
    </list>
    <list n="listOfChildren">
       <hash><url n="URL" path="BackEnd/BackEnd.jpr"/></hash>
-      <hash><url n="URL" path="EstadosDeCuenta/EstadosDeCuenta.jpr"/></hash>
       <hash><url n="URL" path="FiduciaWeb/FiduciaWeb.jpr"/></hash>
    </list>
    <hash n="oracle.jdeveloper.deploy.dt.DeploymentProfiles">
@@ -114,48 +116,49 @@
          <list n="libraryDefinitions">
             <hash>
                <list n="classPath">
-                  <url path="../../../actinver-fw-interno/lib/antlr-3.4-complete.jar" jar-entry=""/>
-                  <url path="../../../actinver-fw-interno/lib/aopalliance-1.0.jar" jar-entry=""/>
-                  <url path="../../../actinver-fw-interno/lib/avalon-framework-4.2.0.jar" jar-entry=""/>
-                  <url path="../../../actinver-fw-interno/lib/axis.jar" jar-entry=""/>
-                  <url path="../../../actinver-fw-interno/lib/batik-util.jar" jar-entry=""/>
-                  <url path="../../../actinver-fw-interno/lib/commons-beanutils-1.8.3.jar" jar-entry=""/>
-                  <url path="../../../actinver-fw-interno/lib/commons-beanutils-bean-collections-1.8.3.jar" jar-entry=""/>
-                  <url path="../../../actinver-fw-interno/lib/commons-beanutils-core-1.8.3.jar" jar-entry=""/>
-                  <url path="../../../actinver-fw-interno/lib/commons-collections-3.2.1.jar" jar-entry=""/>
-                  <url path="../../../actinver-fw-interno/lib/commons-configuration-1.9.jar" jar-entry=""/>
-                  <url path="../../../actinver-fw-interno/lib/commons-digester-2.1.jar" jar-entry=""/>
-                  <url path="../../../actinver-fw-interno/lib/commons-discovery-0.2.jar" jar-entry=""/>
-                  <url path="../../../actinver-fw-interno/lib/commons-fileupload-1.2.2.jar" jar-entry=""/>
-                  <url path="../../../actinver-fw-interno/lib/commons-io-2.4.jar" jar-entry=""/>
-                  <url path="../../../actinver-fw-interno/lib/commons-lang-2.6.jar" jar-entry=""/>
-                  <url path="../../../actinver-fw-interno/lib/crimson.jar" jar-entry=""/>
-                  <url path="../../../actinver-fw-interno/lib/ezmorph-1.0.6.jar" jar-entry=""/>
-                  <url path="../../../actinver-fw-interno/lib/fop.jar" jar-entry=""/>
-                  <url path="../../../actinver-fw-interno/lib/javax.wsdl_1.6.2.v201012040545.jar" jar-entry=""/>
-                  <url path="../../../actinver-fw-interno/lib/jaxrpc.jar" jar-entry=""/>
-                  <url path="../../../actinver-fw-interno/lib/json-lib-2.4-jdk15.jar" jar-entry=""/>
-                  <url path="../../../actinver-fw-interno/lib/json-lib-ext-spring-1.0.2.jar" jar-entry=""/>
-                  <url path="../../../actinver-fw-interno/lib/log4j-api-2.11.1.jar" jar-entry=""/>
-                  <url path="../../../actinver-fw-interno/lib/log4j-core-2.11.1.jar" jar-entry=""/>
-                  <url path="../../../actinver-fw-interno/lib/ojdbc6.jar" jar-entry=""/>
-                  <url path="../../../actinver-fw-interno/lib/ojdbc6dms.jar" jar-entry=""/>
-                  <url path="../../../actinver-fw-interno/lib/org.apache.commons.logging_1.1.1.v201101211721.jar" jar-entry=""/>
-                  <url path="../../../actinver-fw-interno/lib/QuienEsQuien.jar" jar-entry=""/>
-                  <url path="../../../actinver-fw-interno/lib/saaj.jar" jar-entry=""/>
-                  <url path="../../../actinver-fw-interno/lib/ServiciosBridger-Client.jar" jar-entry=""/>
-                  <url path="../../../actinver-fw-interno/lib/spring-aop-3.2.0.M2.jar" jar-entry=""/>
-                  <url path="../../../actinver-fw-interno/lib/spring-beans-3.2.0.M2.jar" jar-entry=""/>
-                  <url path="../../../actinver-fw-interno/lib/spring-context-3.2.0.M2.jar" jar-entry=""/>
-                  <url path="../../../actinver-fw-interno/lib/spring-core-3.2.0.M2.jar" jar-entry=""/>
-                  <url path="../../../actinver-fw-interno/lib/spring-expression-3.2.0.M2.jar" jar-entry=""/>
-                  <url path="../../../actinver-fw-interno/lib/spring-jdbc-3.2.0.M2.jar" jar-entry=""/>
-                  <url path="../../../actinver-fw-interno/lib/spring-tx-3.2.0.M2.jar" jar-entry=""/>
-                  <url path="../../../actinver-fw-interno/lib/spring-web-3.2.0.M2.jar" jar-entry=""/>
-                  <url path="../../../actinver-fw-interno/lib/spring-webmvc-3.2.0.M2.jar" jar-entry=""/>
-                  <url path="../../../actinver-fw-interno/lib/xalan-2.6.0.jar" jar-entry=""/>
-                  <url path="../../../actinver-fw-interno/lib/xmlgraphics-commons-1.4.jar" jar-entry=""/>
-                  <url path="../../../actinver-fw-interno/lib/xmlparserv2.jar" jar-entry=""/>
+                  <url path="lib/antlr-3.4-complete.jar" jar-entry=""/>
+                  <url path="lib/aopalliance-1.0.jar" jar-entry=""/>
+                  <url path="lib/avalon-framework-4.2.0.jar" jar-entry=""/>
+                  <url path="lib/axis.jar" jar-entry=""/>
+                  <url path="lib/batik-util.jar" jar-entry=""/>
+                  <url path="lib/commons-beanutils-1.8.3.jar" jar-entry=""/>
+                  <url path="lib/commons-beanutils-bean-collections-1.8.3.jar" jar-entry=""/>
+                  <url path="lib/commons-beanutils-core-1.8.3.jar" jar-entry=""/>
+                  <url path="lib/commons-collections-3.2.1.jar" jar-entry=""/>
+                  <url path="lib/commons-configuration-1.9.jar" jar-entry=""/>
+                  <url path="lib/commons-digester-2.1.jar" jar-entry=""/>
+                  <url path="lib/commons-discovery-0.2.jar" jar-entry=""/>
+                  <url path="lib/commons-fileupload-1.2.2.jar" jar-entry=""/>
+                  <url path="lib/commons-io-2.4.jar" jar-entry=""/>
+                  <url path="lib/commons-lang-2.6.jar" jar-entry=""/>
+                  <url path="lib/crimson.jar" jar-entry=""/>
+                  <url path="lib/ezmorph-1.0.6.jar" jar-entry=""/>
+                  <url path="lib/fop.jar" jar-entry=""/>
+                  <url path="lib/google-api-client-1.31.1.jar" jar-entry=""/>
+                  <url path="lib/javax.wsdl_1.6.2.v201012040545.jar" jar-entry=""/>
+                  <url path="lib/jaxrpc.jar" jar-entry=""/>
+                  <url path="lib/json-lib-2.4-jdk15.jar" jar-entry=""/>
+                  <url path="lib/json-lib-ext-spring-1.0.2.jar" jar-entry=""/>
+                  <url path="lib/log4j-api-2.11.1.jar" jar-entry=""/>
+                  <url path="lib/log4j-core-2.11.1.jar" jar-entry=""/>
+                  <url path="lib/ojdbc6.jar" jar-entry=""/>
+                  <url path="lib/ojdbc6dms.jar" jar-entry=""/>
+                  <url path="lib/org.apache.commons.logging_1.1.1.v201101211721.jar" jar-entry=""/>
+                  <url path="lib/QuienEsQuien.jar" jar-entry=""/>
+                  <url path="lib/saaj.jar" jar-entry=""/>
+                  <url path="lib/ServiciosBridger-Client.jar" jar-entry=""/>
+                  <url path="lib/spring-aop-3.2.0.M2.jar" jar-entry=""/>
+                  <url path="lib/spring-beans-3.2.0.M2.jar" jar-entry=""/>
+                  <url path="lib/spring-context-3.2.0.M2.jar" jar-entry=""/>
+                  <url path="lib/spring-core-3.2.0.M2.jar" jar-entry=""/>
+                  <url path="lib/spring-expression-3.2.0.M2.jar" jar-entry=""/>
+                  <url path="lib/spring-jdbc-3.2.0.M2.jar" jar-entry=""/>
+                  <url path="lib/spring-tx-3.2.0.M2.jar" jar-entry=""/>
+                  <url path="lib/spring-web-3.2.0.M2.jar" jar-entry=""/>
+                  <url path="lib/spring-webmvc-3.2.0.M2.jar" jar-entry=""/>
+                  <url path="lib/xalan-2.6.0.jar" jar-entry=""/>
+                  <url path="lib/xmlgraphics-commons-1.4.jar" jar-entry=""/>
+                  <url path="lib/xmlparserv2.jar" jar-entry=""/>
                </list>
                <value n="deployedByDefault" v="true"/>
                <value n="description" v="ApplicationDependencies"/>

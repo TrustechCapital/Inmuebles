@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE beans PUBLIC "-//SPRING//DTD BEAN//EN" "http://www.springframework.org/dtd/spring-beans.dtd">
 <beans>
-    <bean id="objectController" class="mx.gob.nafin.fiduciario.controller.ObjectDefinitionActionController">
+    <bean id="objectController" class="mx.com.inscitech.fiducia.web.controllers.ObjectDefinitionActionController">
         <property name="methodNameResolver">
             <ref bean="objectControllerResolver"/>
         </property>
@@ -13,12 +13,12 @@
             </props>
         </property>
     </bean>
-    <bean id="transactionController" class="mx.gob.nafin.fiduciario.controller.TransactionController">
+    <bean id="transactionController" class="mx.com.inscitech.fiducia.web.controllers.TransactionController">
         <property name="methodNameResolver">
             <ref bean="trControllerResolver"/>
         </property>
     </bean>
-    <bean id="consultasController" class="mx.gob.nafin.fiduciario.controller.ConsultasController">
+    <bean id="consultasController" class="mx.com.inscitech.fiducia.web.controllers.ConsultasController">
         <property name="methodNameResolver">
             <ref bean="consultasControllerResolver"/>
         </property>
@@ -47,7 +47,7 @@
             </props>
         </property>
     </bean>
-    <bean id="genericDataAccessServiceBeanMenu" class="mx.gob.nafin.fiduciario.business.services.GenericDataAccessService">
+    <bean id="genericDataAccessServiceBeanMenu" class="mx.com.inscitech.fiducia.business.services.GenericDataAccessService">
         <property name="jdbcTemplate" ref="JdbcTemplate"/>
         <property name="consultas">
             <map>
@@ -59,7 +59,7 @@
                 <!-- Ejemplo -->
                 <entry key="store">
                     <list>
-                        <bean class="mx.gob.nafin.fiduciario.common.beans.ParametroQueryBean">
+                        <bean class="mx.com.inscitech.fiducia.beans.ParametroQueryBean">
                             <property name="name">
                                 <value>sfechai</value>
                             </property>
@@ -75,7 +75,7 @@
             <ref bean="accesoResolver"/>
         </property>
     </bean>
-    <bean id="menuController" class="mx.gob.nafin.fiduciario.controller.MenuController">
+    <bean id="menuController" class="mx.com.inscitech.fiducia.web.controllers.MenuController">
         <property name="genericDataAccessService">
             <ref bean="genericDataAccessServiceBeanMenu"/>
         </property>
@@ -91,8 +91,19 @@
         <property name="methodNameResolver">
             <ref bean="sessionInfoResolver"/>
         </property>
-        <property name="genericDataAccessService">
-            <ref bean="genericDataAccessServiceBean"/>
+    </bean>
+    <bean id="googleResolver" class="org.springframework.web.servlet.mvc.multiaction.PropertiesMethodNameResolver">
+        <property name="mappings">
+            <props>
+                <prop key="/appToken.do">getAppToken</prop>
+                <prop key="/google-signin">doSignIn</prop>
+                <prop key="/sso/idp">ssoIdp</prop>
+            </props>
+        </property>
+    </bean>
+    <bean id="googleController" class="mx.com.inscitech.fiducia.web.controllers.GoogleController">
+        <property name="methodNameResolver">
+            <ref bean="googleResolver"/>
         </property>
     </bean>
     <bean id="interfacesController" class="mx.com.inscitech.fiducia.interfaces.InterfacesController">

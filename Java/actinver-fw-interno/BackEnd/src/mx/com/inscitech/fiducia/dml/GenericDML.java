@@ -250,6 +250,10 @@ public class GenericDML {
         return getDataSet(strSQL, new Object[] { });
     }
 
+    public DataSet getDataSetX(String strSQL, Object... values) {
+        return getDataSet(strSQL, values);
+    }
+
     public DataSet getDataSet(String strSQL, Object[] values) {
         String dataSource = ConfigurationService.getInstance().getProperty("systemDataSource");
         return getDataSet(dataSource, strSQL, values);
