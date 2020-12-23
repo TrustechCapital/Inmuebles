@@ -5,13 +5,13 @@ import { AppProps } from 'next/app';
 
 import { ThemeProvider } from '@material-ui/core/styles';
 import CssBaseline from '@material-ui/core/CssBaseline';
-import Layout from '../sharedComponents/Layout';
 import { catalogsApi } from '../core/api';
 import SessionService from '../services/SessionService';
 import Login from '../modules/Login/MainLogin';
 import SessionInfo, { ModulePermission } from '../models/SessionInfo';
 import BaseTheme from '../sharedComponents/BaseTheme';
 import { SessionInfoContext } from '../core/LoginContext';
+import LoginService from '../services/LoginService';
 
 function removeInjectedServerCss() {
     // Remove the server-side injected CSS.
@@ -31,26 +31,43 @@ function App({ Component, pageProps }: AppProps) {
 
     useEffect(() => {
         removeInjectedServerCss();
+    
+        LoginService.ssoLogin().then((ssoSessionInfo) => {
+            if (!ssoSessionInfo) {
+                return handleLogout(false);
+            }
+            
+            SessionService.create(ssoSessionInfo);
+            handleSuccessfulLogin(false);
+        });
 
-        catalogsApi.fetchAll().then(() => {
-            const { sessionInfo, permissionsMap } = SessionService.get();
-            setSessionInfo(sessionInfo);
-            setModulePermissionsMap(permissionsMap);
+        catalogsApi.fetchAll().catch(() => {
+            console.log('Catalogos incompletos')
+        }).finally(() => {
             setLoadingApp(false);
         });
+
     }, []);
 
-    function handleSuccessfulLogin() {
+    function handleSuccessfulLogin(redirect = true) {
         const { sessionInfo, permissionsMap } = SessionService.get();
         setSessionInfo(sessionInfo);
         setModulePermissionsMap(permissionsMap);
-        Router.push('/');
+
+        if (redirect) {
+            Router.push('/');
+        }
     }
 
-    function handleLogout() {
+    function handleLogout(redirect = true) {
         SessionService.delete();
         setSessionInfo(null);
-        Router.push('/');
+        // Clear cookies
+        //document.cookie = '';
+        
+        if (redirect) {
+            Router.push('/');
+        }
     }
 
     return (
@@ -64,16 +81,10 @@ function App({ Component, pageProps }: AppProps) {
                         modulePermissionsMap: modulePermissionsMap,
                     }}
                 >
-                    {sessionInfo ? (
-                        <Layout>
-                            {loadingApp ? (
-                                'Cargando...'
-                            ) : (
-                                <Component {...pageProps} />
-                            )}
-                        </Layout>
+                    {loadingApp ? (
+                        'Cargando...'
                     ) : (
-                        !loadingApp && <Login onLogin={handleSuccessfulLogin} />
+                        sessionInfo ? <Component {...pageProps} /> : <Login onLogin={handleSuccessfulLogin} />
                     )}
                 </SessionInfoContext.Provider>
             </ThemeProvider>

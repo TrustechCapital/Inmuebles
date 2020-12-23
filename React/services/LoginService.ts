@@ -8,13 +8,14 @@ class LoginService extends Api {
         super({});
     }
 
-    login(username: string, password: string = ''): Promise<SessionInfo> {
+    async login(username: string, password: string = ''): Promise<SessionInfo> {
 
         if (!username.trim() || !password.trim()) {
             throw new Error('El usuario o password es incorrecto');
         }
 
-        const loginData = await this.get('/session');
+        const loginDataResponse = await this.post('/session') as any;
+        const loginData = loginDataResponse.data;
 
         return new SessionInfo(
             DateUtils.toDate(loginData.systemDate),
@@ -22,4 +23,20 @@ class LoginService extends Api {
             loginData.permissions
         );
     }
+
+    async ssoLogin(): Promise<SessionInfo | null> {
+        try {
+            const ssoLoginResponse = await this.post<any>('http://localhost:8000/accessData');
+            const sessionData = ssoLoginResponse.data.responseObj;
+            return new SessionInfo(
+                new Date(),
+                new User(sessionData.userName, sessionData.nombre),
+                sessionData.permissions || []
+            );    
+        } catch (error) {
+            return null;    
+        } 
+    }
 }
+
+export default new LoginService();
