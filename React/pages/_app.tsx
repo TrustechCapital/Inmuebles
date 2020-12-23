@@ -62,8 +62,9 @@ function App({ Component, pageProps }: AppProps) {
     function handleLogout(redirect = true) {
         SessionService.delete();
         setSessionInfo(null);
+        
         // Clear cookies
-        //document.cookie = '';
+        document.cookie = 'accessData=;expires=Thu, 01 Jan 1970 00:00:00 GMT';
         
         if (redirect) {
             Router.push('/');
