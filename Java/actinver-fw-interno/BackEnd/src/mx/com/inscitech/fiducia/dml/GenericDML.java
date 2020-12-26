@@ -241,6 +241,11 @@ public class GenericDML {
         return getDataRow(strSQL, new Object[] { });
     }
 
+    public DataRow getDataRowX(String strSQL, Object... values) {
+        String dataSource = ConfigurationService.getInstance().getProperty("systemDataSource");
+        return getDataRow(dataSource, strSQL, values);
+    }
+
     public DataRow getDataRow(String strSQL, Object[] values) {
         String dataSource = ConfigurationService.getInstance().getProperty("systemDataSource");
         return getDataRow(dataSource, strSQL, values);

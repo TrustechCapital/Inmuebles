@@ -11,6 +11,17 @@ public class ErrorData {
         super();
     }
 
+    public ErrorData(String errorCode, String message) {
+        this.errorCode = errorCode;
+        this.message = message;
+    }
+
+    public ErrorData(String errorCode, String message, String stackTrace) {
+        this.errorCode = errorCode;
+        this.message = message;
+        this.stackTrace = stackTrace;
+    }
+
     public void setErrorCode(String errorCode) {
         this.errorCode = errorCode;
     }

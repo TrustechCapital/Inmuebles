@@ -11,7 +11,7 @@ public class DataRow implements Serializable {
 
     @SuppressWarnings("compatibility:1235470106920307740")
     private static final long serialVersionUID = 2490982374418435141L;
-    static final boolean IS_POSTGRES_DB = true;
+    static final boolean IS_POSTGRES_DB = false;
 
 
     private Map dataRow;

@@ -84,6 +84,7 @@
         <property name="mappings">
             <props>
                 <prop key="/session.do">getSessionInfo</prop>
+                <prop key="/accessData">getAuthData</prop>
             </props>
         </property>
     </bean>
@@ -97,6 +98,7 @@
             <props>
                 <prop key="/appToken.do">getAppToken</prop>
                 <prop key="/google-signin">doSignIn</prop>
+                <prop key="/google-signout">doSignOut</prop>
                 <prop key="/sso/idp">ssoIdp</prop>
             </props>
         </property>

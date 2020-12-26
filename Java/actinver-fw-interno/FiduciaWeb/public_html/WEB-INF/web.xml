@@ -56,6 +56,10 @@
     </servlet-mapping>
     <servlet-mapping>
         <servlet-name>Fiduciario</servlet-name>
+        <url-pattern>/accessData</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>Fiduciario</servlet-name>
         <url-pattern>/DatosFiduciarios.xls</url-pattern>
     </servlet-mapping>
     <session-config>

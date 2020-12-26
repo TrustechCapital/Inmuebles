@@ -55,15 +55,20 @@ public class JsonActionController extends MultiActionController {
         return new ModelAndView("json.jsp", "json", jresponse.toString());
     }
 
+    protected ModelAndView respondObject(HttpServletResponse response, Object object) {
+        return respondObject(200, response, object);
+    }
+    
     /**
      * Metodo ulitlizado para responder los ojbetos JavaScript
      * @return Este metodo siempre retorna null, con el proposito de que Spring solo de la respuesta de la cadena donde se define el objeto JavaScript
      * @param object El objeto a responder
      * @param response El objeto HttpServletResponse en donde se escribira el objeto JavaScript
      */
-    protected ModelAndView respondObject(HttpServletResponse response, Object object) {
+    protected ModelAndView respondObject(Integer responseCode, HttpServletResponse response, Object object) {
         response.setHeader("Cache-Control", "no-cache");
         response.setHeader("Access-Control-Allow-Origin", "*");
+        response.setStatus(responseCode);
 
         if (DEFAULT_CONTENT_TYPE == null) {
             logger.log(Thread.currentThread().getClass(), Thread.currentThread(), LoggingService.LEVEL.DEBUG,

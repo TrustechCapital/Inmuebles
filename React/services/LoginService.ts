@@ -26,7 +26,8 @@ class LoginService extends Api {
 
     async ssoLogin(): Promise<SessionInfo | null> {
         try {
-            const ssoLoginResponse = await this.post<any>('http://localhost:8000/accessData');
+            const ssoLoginResponse = await this.post<any>('/accessData', '', { withCredentials: true });
+            debugger;
             const sessionData = ssoLoginResponse.data.responseObj;
             return new SessionInfo(
                 new Date(),

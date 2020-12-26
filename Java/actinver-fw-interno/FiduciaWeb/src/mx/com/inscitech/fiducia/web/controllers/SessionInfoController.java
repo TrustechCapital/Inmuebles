@@ -1,5 +1,8 @@
 package mx.com.inscitech.fiducia.web.controllers;
 
+import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
+
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
@@ -7,14 +10,19 @@ import java.util.Map;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
+import mx.com.inscitech.fiducia.InvalidUserException;
+import mx.com.inscitech.fiducia.common.beans.UserInfoBean;
 import mx.com.inscitech.fiducia.common.services.LoggingService;
+import mx.com.inscitech.fiducia.common.services.UserInformationService;
 import mx.com.inscitech.fiducia.dml.GenericDML;
 import mx.com.inscitech.fiducia.dml.vo.DataRow;
 import mx.com.inscitech.fiducia.dml.vo.DataSet;
 import mx.com.inscitech.fiducia.dtos.SessionInfo;
 import mx.com.inscitech.fiducia.dtos.SessionUser;
 import mx.com.inscitech.fiducia.dtos.SessionUserPermisions;
+import mx.com.inscitech.fiducia.services.GenericServiceResponse;
 
 import org.springframework.web.servlet.ModelAndView;
 
@@ -37,25 +45,73 @@ public class SessionInfoController extends JsonActionController {
     public ModelAndView getSessionInfo(HttpServletRequest request, HttpServletResponse response) throws Exception {
         logger.log(Thread.currentThread().getClass(), Thread.currentThread(), LoggingService.LEVEL.DEBUG, "Session info for user: " + request.getParameter("userId"));
         
-        String userId = "admin";
-        String name = "Administrador";
-        String roleId = getUserRole(userId);
+        HttpSession session = request.getSession();
         
+        if(session.getAttribute("userInfo") == null) {
+            GenericServiceResponse responseData = new GenericServiceResponse();
+            responseData.setExitCode("FWAUTH-ERROR-002");
+            return respondObject(response, responseData);
+        }
+        
+        UserInfoBean userInfo = (UserInfoBean)session.getAttribute("userInfo");
+               
         SessionInfo sessionInfo = new SessionInfo(
-            new SessionUser(userId, name), 
+            new SessionUser(userInfo.getUserName(), userInfo.getNombre()), 
             getSystemDate(), 
-            getUserPermisions(roleId)
+            getUserPermisions(userInfo.getPuestoId().toString())
         );
 
         return respondObject(response, sessionInfo);
     }
- 
-    private String getSystemDate() {
-        return "10/12/2020";
+    
+    public ModelAndView getAuthData(HttpServletRequest request, HttpServletResponse response) throws Exception {
+        logger.log(Thread.currentThread().getClass(), Thread.currentThread(), LoggingService.LEVEL.DEBUG, "Session info for user: " + request.getParameter("userId"));
+        
+        HttpSession session = request.getSession();
+        
+        GenericServiceResponse responseData = new GenericServiceResponse();
+        responseData.setRequestedOperation("FWAUTH-GET-DATA");
+        responseData.setResponseCategory("SECURITY");
+        
+        String userName = ""+session.getAttribute(GoogleController.USERID);
+        
+        if(session.getAttribute("userInfo") != null) {
+            responseData = getServiceResponse("FWAUTH-OK-001", session.getAttribute("userInfo"));
+        } else if(!"".equals(userName) && !"null".equals(userName)){
+            try {
+                UserInfoBean userInfo = UserInformationService.getInstance().getUserInfo(userName, null, 1);
+                setSessionAttributes(session, userInfo, new Object[]{});
+                responseData = getServiceResponse("FWAUTH-OK-002", userInfo);
+            } catch (InvalidUserException e) {
+                responseData.setExitCode("FWAUTH-ERROR-001");
+                responseData.setExitMessage("Unable to get user information! Error: " + e.getMessage());
+            }
+        } else {
+            responseData.setExitCode("FWAUTH-001");
+            responseData.setExitMessage("User information not available!");
+        }
+        
+        return respondObject(response, responseData);
     }
     
-    private String getUserRole(String userId) {
-        return "1";
+    private GenericServiceResponse getServiceResponse(String exitCode, Object responseObj) {
+        GenericServiceResponse responseData = new GenericServiceResponse();
+        responseData.setRequestedOperation("FWAUTH-GET-DATA");
+        responseData.setResponseCategory("SECURITY");
+
+        responseData.setSucceded(true);
+        responseData.setResponseObj(responseObj);        
+        responseData.setExitCode(exitCode);
+        responseData.setExitMessage("");
+        responseData.setResponseType("INFO");
+        responseData.setErrorDetail(null);
+        responseData.setResponseMessage("Operation compleated successfully!");
+        
+        return responseData;
+    }
+    
+    private String getSystemDate() {
+        return LocalDate.now().format(DateTimeFormatter.ofPattern("yyyy/MM/dd"));
     }
     
     private List<SessionUserPermisions> getUserPermisions(String roleId) {
@@ -80,4 +136,23 @@ public class SessionInfoController extends JsonActionController {
         MENU_CACHE.put(roleId, up);
         return up;
     }
+    
+    //TODO: Remove code, same method @SecurityFilter
+    private void setSessionAttributes(HttpSession session, UserInfoBean userInfo, Object empresas[]) {
+                
+        session.setAttribute("userInfo", userInfo);
+        session.setAttribute("fechaContable", userInfo.getFechaContable());
+        session.setAttribute("strFechaContable", userInfo.getStrFechaContable());
+        session.setAttribute("userid", userInfo.getUserId());
+        session.setAttribute("puestoId", userInfo.getPuestoId());
+        session.setAttribute("puesto", userInfo.getPuesto());
+        session.setAttribute("mesAbiertoLbl", userInfo.getMesAbiertoStr());
+        session.setAttribute("mesAbierto", userInfo.getMesAbierto());        
+        
+        for (int s = 0; s < empresas.length; s++) {
+            session.setAttribute("empresa_" + s, String.valueOf(empresas[s]));
+        }
+        
+    }
+    
 }
