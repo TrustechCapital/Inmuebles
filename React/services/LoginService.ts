@@ -14,7 +14,7 @@ class LoginService extends Api {
             throw new Error('El usuario o password es incorrecto');
         }
 
-        const loginDataResponse = await this.post('/session') as any;
+        const loginDataResponse = await this.post('/session', { username, password }) as any;
         const loginData = loginDataResponse.data;
 
         return new SessionInfo(
@@ -26,7 +26,7 @@ class LoginService extends Api {
 
     async ssoLogin(): Promise<SessionInfo | null> {
         try {
-            const ssoLoginResponse = await this.post<any>('/accessData', '', { withCredentials: true });
+            const ssoLoginResponse = await this.post<any>('/accessData');
             const sessionData = ssoLoginResponse.data.responseObj;
             return new SessionInfo(
                 new Date(),

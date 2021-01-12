@@ -48,7 +48,7 @@ const Login = (props: { onLogin: () => void }) => {
 
     async function handleLogin(loginData: typeof loginInfo) {
         try {
-            const sessionInfo = await LoginService.login(loginData.username);
+            const sessionInfo = await LoginService.login(loginData.username, loginData.password);
             SessionService.create(sessionInfo);
             props.onLogin();
         } catch (error) {}
