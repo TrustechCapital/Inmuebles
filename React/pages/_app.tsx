@@ -21,6 +21,19 @@ function removeInjectedServerCss() {
     }
 }
 
+async function tryLogin (){
+    try {
+        const ssoSessionInfo = await LoginService.ssoLogin();
+        if (!ssoSessionInfo) {
+            return null;
+        }
+        return LoginService.login(ssoSessionInfo.user.username, '', true);
+    } catch (err) {
+        console.log('Login Error', err);
+        return null;
+    }
+}
+
 function App({ Component, pageProps }: AppProps) {
     const [loadingApp, setLoadingApp] = useState(true);
     const [modulePermissionsMap, setModulePermissionsMap] = useState<Map<
@@ -32,7 +45,7 @@ function App({ Component, pageProps }: AppProps) {
     useEffect(() => {
         removeInjectedServerCss();
     
-        LoginService.ssoLogin().then((ssoSessionInfo) => {
+        tryLogin().then((ssoSessionInfo) => {
             if (!ssoSessionInfo) {
                 return handleLogout(false);
             }
