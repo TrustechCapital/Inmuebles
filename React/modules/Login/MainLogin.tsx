@@ -8,7 +8,6 @@ import { Typography, Button } from '@material-ui/core';
 import GenericForm from '../../sharedComponents/Forms';
 import LoginService from '../../services/LoginService';
 import SessionService from '../../services/SessionService';
-import GoogleLogin from 'react-google-login';
 
 const useStyles = makeStyles((theme) => ({
     root: {
@@ -46,28 +45,13 @@ const loginInfo = {
 
 const Login = (props: { onLogin: () => void }) => {
     const classes = useStyles();
-    const appToken = Promise.resolve(LoginService.getAppId()).then(function(value){ return value;});
 
     async function handleLogin(loginData: typeof loginInfo) {
-        try { 
+        try {
             const sessionInfo = await LoginService.login(loginData.username, loginData.password);
             SessionService.create(sessionInfo);
             props.onLogin();
         } catch (error) {}
-    }
-
-    async function googleOk(response: any) {
-        if(response.tokenId) {
-            const sessionInfo = await LoginService.googleLogin(response);
-            SessionService.create(sessionInfo);
-            props.onLogin();
-        }
-    }
-
-    async function googleFailure(response: any) {
-        if(response.error) {
-
-        }
     }
 
     return (
@@ -80,7 +64,7 @@ const Login = (props: { onLogin: () => void }) => {
                         </Typography>
                         <div className={classes.body}>
                             <FormTextField name="username" label="Usuario" />
-                            <FormTextField name="password" label="Contraseña" type="password" />
+                            <FormTextField name="password" label="Contraseña" />
                             <Button
                                 type="submit"
                                 color="primary"
@@ -89,15 +73,6 @@ const Login = (props: { onLogin: () => void }) => {
                             >
                                 Entrar
                             </Button>
-                        </div>
-                        <div className="banregio-google">
-                            <GoogleLogin 
-                                className="google-banregio"
-                                clientId={appToken}
-                                buttonText="banregio"
-                                onSuccess={googleOk}
-                                onFailure={googleFailure}
-                            />
                         </div>
                     </Paper>
                 </form>

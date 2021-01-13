@@ -1,5 +1,7 @@
 package mx.com.inscitech.fiducia.common.beans;
 
+import java.io.Serializable;
+
 import java.util.Date;
 import java.util.List;
 
@@ -9,8 +11,10 @@ import mx.com.inscitech.fiducia.common.util.DateUtils;
  * Bean que contiene la informacion basica del usuario en sesion.
  * @author Inscitech México inscitech@inscitechmexico.com
  */
-public class UserInfoBean {
-    
+public class UserInfoBean implements Serializable {
+    @SuppressWarnings("compatibility:4170270650653543800")
+    private static final long serialVersionUID = -7306437369531913832L;
+
     /**
      * El usuario con el que se firmo a la aplicacion
      */

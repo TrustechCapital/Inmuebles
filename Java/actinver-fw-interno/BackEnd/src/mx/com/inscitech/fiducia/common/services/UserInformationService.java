@@ -25,8 +25,6 @@ public class UserInformationService {
     
     private static final String GET_EMPRESAS_SQL = "SELECT EMP_NUM_EMPRESA, EMP_NOM_EMPRESA, EMP_NOM_AREA, EMP_DIRECCION, EMP_NOM_AUTORIZA, EMP_NOM_FIRMA,EMP_IDIOMA, EMP_ESTILO, EMP_FEC_CAMBIO, EMP_LLAVE_EMPRESA FROM F_EMPRESA WHERE EMP_NUM_EMPRESA = 0";
 
-    private static final String GOOGLE_LOGIN_FLAG = "GOOGLE_FLAG";
-    
     private LoggingService logger;
     private int resultadoFuncion = -1;
 

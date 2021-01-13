@@ -64,7 +64,7 @@ export class Api {
 
     public post<T, R = AxiosResponse<T>>(
         url: string,
-        data?: string,
+        data?: any,
         config?: AxiosRequestConfig
     ): Promise<R> {
         return this.api.post(url, data, config);

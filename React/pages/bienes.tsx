@@ -29,6 +29,5 @@ const TABS = [
 ];
 
 export default function ModuleBienes() {
-    console.log('variable:', process.env.NEXT_PUBLIC_API_BASE_URL)
     return <ModuleTabs tabs={TABS} />;
 }

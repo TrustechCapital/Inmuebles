@@ -14,7 +14,6 @@ import javax.servlet.http.HttpSession;
 
 import mx.com.inscitech.fiducia.InvalidUserException;
 import mx.com.inscitech.fiducia.common.beans.SessionUserPermisions;
-import mx.com.inscitech.fiducia.common.beans.UserData;
 import mx.com.inscitech.fiducia.common.beans.UserInfoBean;
 import mx.com.inscitech.fiducia.common.services.LoggingService;
 import mx.com.inscitech.fiducia.common.services.UserInformationService;
@@ -81,15 +80,9 @@ public class SessionInfoController extends JsonActionController {
         } else if(!"".equals(userName) && !"null".equals(userName)){
             try {
                 UserInfoBean userInfo = UserInformationService.getInstance().getUserInfo(userName, null, 1);
+                userInfo.setPermissions(getUserPermisions(userInfo.getPuestoId().toString()));
                 setSessionAttributes(session, userInfo, new Object[]{});
-                
-                //responseData = getServiceResponse("FWAUTH-OK-002", userInfo);
-                
-                //PATCH no permissions in userInfo
-                UserData userData = toUserData(userInfo);
-                userData.setPermissions(getUserPermisions(userInfo.getPuestoId().toString()));                
-                responseData = getServiceResponse("FWAUTH-OK-002", userData);
-                
+                responseData = getServiceResponse("FWAUTH-OK-002", userInfo);
             } catch (InvalidUserException e) {
                 responseData.setExitCode("FWAUTH-ERROR-001");
                 responseData.setExitMessage("Unable to get user information! Error: " + e.getMessage());
@@ -100,10 +93,6 @@ public class SessionInfoController extends JsonActionController {
         }
         
         return respondObject(response, responseData);
-    }
-    
-    public UserData toUserData(UserInfoBean info) throws InvalidUserException {
-        return new UserData(info.getUserName(), info.getLogin(), info.getUserId(), info.getNombre(), info.getPuesto(), info.getPuestoId(), info.getFechaContable(), info.getMesAbierto(), null);
     }
     
     private GenericServiceResponse getServiceResponse(String exitCode, Object responseObj) {
