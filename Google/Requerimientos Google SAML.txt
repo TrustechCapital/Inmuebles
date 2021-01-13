@@ -1,0 +1,32 @@
+Nombre requerimientos de conexion SAML para Google Workspace
+
+Nombre 
+Logo
+URL de ACS
+ID de entidad
+
+Detalles de conexion
+https://support.google.com/a/answer/6087519?hl=es
+
+https://bro2dafidweb1.banregio.com:8443/FiduciaWeb/index.html
+
+victor.castaneda@pruebasbanregio.dev
+
+Siguiente manera:
+
+URL ACL
+https://bro2dafidweb1.banregio.com:8443/FiduciaBackend/google-signin
+
+Identidad
+https://bro2dafidweb1.banregio.com:8443/FiduciaBackend/sso/idp
+
+Fingerprint: 65:75:F4:E3:DA:62:E2:13:97:5B:5D:48:8C:3C:58:B9:E9:DC:CC:EE:88:73:C1:74:3D:80:1E:6A:C8:C7:D2:F9
+
+gerente.banregio@pruebasbanregio.dev
+Banregio.21
+
+
+{"requestedOperation":"FW-WSOP-000","responseType":"ERROR","succeded":false,"errorDetail":{"errorCode":"FW-WS-ERR-000","stackTrace":"","message":"Error al ejecutar la operacion solicitada"},"exitCode":"FWAUTH-001","messages":[],"responseObj":null,"exitMessage":"User information not available!","responseMessage":"Operation Failed!","transactionID":"FW-WSOP-TR-000","responseCategory":"SERVICES"}
+
+{"requestedOperation":"FWAUTH-GET-DATA","responseType":"INFO","succeded":true,"errorDetail":null,"exitCode":"FWAUTH-OK-001","messages":[],"responseObj":{"puesto":"ADMINISTRADOR","strFechaContable":"21 de Febrero de 2020","mesAbierto":0,"mesAbiertoStr":"SI","puestoId":100,"login":0,"userName":"gerardo.hernandez@rec-it.mx","nombre":"USUARIO ADMINISTRADOR","userId":603,"fechaContable":"21/02/2020"},"exitMessage":"","responseMessage":"Operation compleated successfully!","transactionID":"FW-WSOP-TR-000","responseCategory":"SECURITY"}
+

@@ -17,7 +17,7 @@ public class ResponseBean  {
   private Object object;
   
   /**
-   * La clase del objeto a regresar. Ej. mx.gob.nafin.fiduciario.common.beans.ResponseBean
+   * La clase del objeto a regresar. Ej. mx.com.inscitech.fiducia.beans.ResponseBean
    */
   private String objectClass;
   

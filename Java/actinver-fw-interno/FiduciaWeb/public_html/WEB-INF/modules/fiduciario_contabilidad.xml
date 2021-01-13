@@ -2,7 +2,7 @@
 <!DOCTYPE beans PUBLIC "-//SPRING//DTD BEAN//EN" "http://www.springframework.org/dtd/spring-beans.dtd">
 <beans>
   <bean id="consultasGeneralesContabilidadController"
-        class="mx.gob.nafin.fiduciario.contabilidad.ConsultasGeneralesContabilidadController">
+        class="mx.com.inscitech.fiducia.contabilidad.ConsultasGeneralesContabilidadController">
     <property name="methodNameResolver">
       <ref bean="consultasGeneralesContabilidadResolver"/>
     </property>
@@ -27,7 +27,7 @@
     </property>
   </bean>
   <bean id="consultasGeneralesContabilidad"
-        class="mx.gob.nafin.fiduciario.business.contabilidad.ConsultasGeneralesContabilidad">
+        class="mx.com.inscitech.fiducia.business.contabilidad.ConsultasGeneralesContabilidad">
     <property name="jdbcTemplate" ref="JdbcTemplate"/>
     <property name="queryConsultarPrincipalCatalogoCuentas">
       <value>

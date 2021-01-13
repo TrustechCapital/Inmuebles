@@ -12,10 +12,11 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
-import mx.com.inscitech.fiducia.business.services.BitacoraService;
+import mx.com.inscitech.fiducia.InvalidUserException;
 import mx.com.inscitech.fiducia.common.beans.UserInfoBean;
 import mx.com.inscitech.fiducia.common.services.LoggingService;
 import mx.com.inscitech.fiducia.common.services.UserInformationService;
+import mx.com.inscitech.fiducia.web.controllers.GoogleController;
 
 
 public class SecurityFilter implements Filter {
@@ -42,82 +43,41 @@ public class SecurityFilter implements Filter {
 
         HttpSession session = httpRequest.getSession();
 
-        String uri = httpRequest.getRequestURI();
-        String userName = null;
-
-        logSrv.log(this, Thread.currentThread(), LoggingService.LEVEL.DEBUG, "RequestURI: " + uri);
-
         UserInfoBean userInfo = null;
         
-        /*if (uri.indexOf("login") != -1 || uri.indexOf("ssologoff") != -1 || uri.indexOf("error.jsp") != -1) {
-            chain.doFilter(request, response);
+        String uri = httpRequest.getRequestURI();
+        String userName = ""+session.getAttribute(GoogleController.USERID);
+        
+        logSrv.log(this, Thread.currentThread(), LoggingService.LEVEL.DEBUG, String.format("User: %s RequestURI: %s", userName, uri));
+
+        if ("".equals(userName) || "null".equals(userName)) {
+            httpResponse.setStatus(403);
             return;
-        } else {*/
-
-            userName = "fiducia";// + session.getAttribute("username");
-            logSrv.log(this, Thread.currentThread(), LoggingService.LEVEL.DEBUG, "User: " + userName);
-
-            /*if ("".equals(userName) || "null".equals(userName)) {
-
-
-                logSrv.log(this, Thread.currentThread(), LoggingService.LEVEL.DEBUG, "Usuario no autenticado");
-
-                //TODO: Si llama algo json regresar algo json {}
-                request.setAttribute("error", "InvalidUserException");
-                httpRequest.getRequestDispatcher("/login.jsp").forward(request, response);
-                //httpResponse.sendRedirect("login.jsp");
-                chain.doFilter(request, response);
+        }
+        
+        if (uri.indexOf("jsp") != -1) {
+            httpResponse.sendRedirect("/FiduciaWeb/");
+            return;
+        }        
+        
+        if(session.getAttribute("userInfo") == null) {
+            logSrv.log(this, Thread.currentThread(), LoggingService.LEVEL.ERROR, "Error! La informacion del usuario no se ha encontrado en sesion");
+            try {
+                userInfo = UserInformationService.getInstance().getUserInfo(userName, null, 1);
+                setSessionAttributes(session, userInfo, new Object[]{});
+            } catch (InvalidUserException e) {
+                httpResponse.setStatus(403);
                 return;
-
-            } else {*/
-
-                if(session.getAttribute("userInfo") == null) {
-                    logSrv.log(this, Thread.currentThread(), LoggingService.LEVEL.ERROR, "Error! La informacion del usuario no se ha encontrado en sesion");
-                    //httpResponse.sendRedirect(httpRequest.getContextPath() + "/error.jsp");
-                } else {
-
-                    logSrv.log(this, Thread.currentThread(), LoggingService.LEVEL.DEBUG, "Else de usuario en SecurityFilter: " + uri);        
-                    //TODO: Que hacer en el caso que userInfo sea null
-                    userInfo = (UserInfoBean)session.getAttribute("userInfo");
-                    int userId = userInfo.getUserId().intValue();
-                    logSrv.log(this, Thread.currentThread(), LoggingService.LEVEL.DEBUG, "Userid para Principal.jsp "+String.valueOf(userId));
-                    session.setAttribute("userid", ""+userId);
-                    logSrv.log(this, Thread.currentThread(), LoggingService.LEVEL.DEBUG, "PuestoId para Principal.jsp "+100);
-                    int puestoId = userInfo.getPuestoId().intValue();
-                    session.setAttribute("puestoId", ""+ puestoId);
-
-                    logSrv.log(this, Thread.currentThread(), LoggingService.LEVEL.DEBUG, "Nombre para Principal.jsp "+"");
-                    session.setAttribute("Nombre", "");
-                    
-                    /*if (uri.indexOf("jsp") != -1) {
-                        httpResponse.sendRedirect(httpRequest.getContextPath() + "/principal.do");
-                    } else {
-    
-                        if (uri.indexOf("altaCatalogo") != -1)
-                            BitacoraService.getInstance().registraBitacora(BitacoraService.ALTA, uri, "0", userName, userId);
-                        else if (uri.indexOf("bajaCatalogo") != -1)
-                            BitacoraService.getInstance().registraBitacora(BitacoraService.BAJA, uri, "0", userName, userId);
-                        else if (uri.indexOf("modificaCatalogo") != -1)
-                            BitacoraService.getInstance().registraBitacora(BitacoraService.MODIFICACION, uri, "0", userName, userId);
-                        else if (uri.indexOf("Ref") != -1)
-                            BitacoraService.getInstance().registraBitacora(BitacoraService.CONSULTA, uri, "0", userName, userId);
-    
-                        logSrv.log(this, Thread.currentThread(), LoggingService.LEVEL.DEBUG, "Chain to: " + uri);
-                        chain.doFilter(request, response);
-    
-                    }*/
-                }
-                
-                //return;
-            //}
-        //}
+            }
+        }
+        
         httpResponse.addHeader("Access-Control-Allow-Origin", "*");
         chain.doFilter(request, response);
     }
     
     private void setSessionAttributes(HttpSession session, UserInfoBean userInfo, Object empresas[]) {
                 
-        //logger.log(this, Thread.currentThread(), LoggingService.LEVEL.DEBUG, "setSessionAttributes userInfo: " + userInfo + " userid: " + userInfo.getUserId() + " puestoId: " + userInfo.getPuestoId() + " nompuesto:"+ userInfo.getPuesto());
+        logSrv.log(this, Thread.currentThread(), LoggingService.LEVEL.DEBUG, "setSessionAttributes userInfo: " + userInfo + " userid: " + userInfo.getUserId() + " puestoId: " + userInfo.getPuestoId() + " nompuesto:"+ userInfo.getPuesto());
         
         session.setAttribute("userInfo", userInfo);
         session.setAttribute("fechaContable", userInfo.getFechaContable());

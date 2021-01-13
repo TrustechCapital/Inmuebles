@@ -241,6 +241,11 @@ public class GenericDML {
         return getDataRow(strSQL, new Object[] { });
     }
 
+    public DataRow getDataRowX(String strSQL, Object... values) {
+        String dataSource = ConfigurationService.getInstance().getProperty("systemDataSource");
+        return getDataRow(dataSource, strSQL, values);
+    }
+
     public DataRow getDataRow(String strSQL, Object[] values) {
         String dataSource = ConfigurationService.getInstance().getProperty("systemDataSource");
         return getDataRow(dataSource, strSQL, values);
@@ -248,6 +253,10 @@ public class GenericDML {
 
     public DataSet getDataSet(String strSQL) {
         return getDataSet(strSQL, new Object[] { });
+    }
+
+    public DataSet getDataSetX(String strSQL, Object... values) {
+        return getDataSet(strSQL, values);
     }
 
     public DataSet getDataSet(String strSQL, Object[] values) {

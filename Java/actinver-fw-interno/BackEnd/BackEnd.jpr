@@ -136,23 +136,48 @@
                   <url path="../lib/antlr-3.4-complete.jar" jar-entry=""/>
                   <url path="../lib/aopalliance-1.0.jar" jar-entry=""/>
                   <url path="../lib/avalon-framework-4.2.0.jar" jar-entry=""/>
+                  <url path="../lib/axis.jar" jar-entry=""/>
                   <url path="../lib/batik-util.jar" jar-entry=""/>
                   <url path="../lib/commons-beanutils-1.8.3.jar" jar-entry=""/>
                   <url path="../lib/commons-beanutils-bean-collections-1.8.3.jar" jar-entry=""/>
                   <url path="../lib/commons-beanutils-core-1.8.3.jar" jar-entry=""/>
-                  <url path="../lib/commons-collections-3.2.1.jar" jar-entry=""/>
+                  <url path="../lib/commons-codec-1.15.jar" jar-entry=""/>
+                  <url path="../lib/commons-collections-3.2.2.jar" jar-entry=""/>
+                  <url path="../lib/commons-collections4-4.1.jar" jar-entry=""/>
                   <url path="../lib/commons-configuration-1.9.jar" jar-entry=""/>
                   <url path="../lib/commons-digester-2.1.jar" jar-entry=""/>
+                  <url path="../lib/commons-discovery-0.2.jar" jar-entry=""/>
                   <url path="../lib/commons-fileupload-1.2.2.jar" jar-entry=""/>
                   <url path="../lib/commons-io-2.4.jar" jar-entry=""/>
                   <url path="../lib/commons-lang-2.6.jar" jar-entry=""/>
+                  <url path="../lib/commons-lang3-3.11.jar" jar-entry=""/>
+                  <url path="../lib/commons-logging-1.2.jar" jar-entry=""/>
                   <url path="../lib/crimson.jar" jar-entry=""/>
+                  <url path="../lib/curvesapi-1.04.jar" jar-entry=""/>
                   <url path="../lib/ezmorph-1.0.6.jar" jar-entry=""/>
+                  <url path="../lib/fiduciawebbackend.jar" jar-entry=""/>
                   <url path="../lib/fop.jar" jar-entry=""/>
+                  <url path="../lib/google-api-client-1.31.1.jar" jar-entry=""/>
+                  <url path="../lib/java-saml-2.6.1-SNAPSHOT.jar" jar-entry=""/>
+                  <url path="../lib/java-saml-core-2.6.1-SNAPSHOT.jar" jar-entry=""/>
+                  <url path="../lib/javax.wsdl_1.6.2.v201012040545.jar" jar-entry=""/>
+                  <url path="../lib/jaxrpc.jar" jar-entry=""/>
+                  <url path="../lib/joda-time-2.10.6.jar" jar-entry=""/>
                   <url path="../lib/json-lib-2.4-jdk15.jar" jar-entry=""/>
                   <url path="../lib/json-lib-ext-spring-1.0.2.jar" jar-entry=""/>
+                  <url path="../lib/junit-4.12.jar" jar-entry=""/>
                   <url path="../lib/log4j-api-2.11.1.jar" jar-entry=""/>
                   <url path="../lib/log4j-core-2.11.1.jar" jar-entry=""/>
+                  <url path="../lib/ojdbc6.jar" jar-entry=""/>
+                  <url path="../lib/ojdbc6dms.jar" jar-entry=""/>
+                  <url path="../lib/org.apache.commons.logging_1.1.1.v201101211721.jar" jar-entry=""/>
+                  <url path="../lib/poi-3.17.jar" jar-entry=""/>
+                  <url path="../lib/poi-excelant-3.17.jar" jar-entry=""/>
+                  <url path="../lib/poi-ooxml-3.17.jar" jar-entry=""/>
+                  <url path="../lib/poi-ooxml-schemas-3.17.jar" jar-entry=""/>
+                  <url path="../lib/poi-scratchpad-3.17.jar" jar-entry=""/>
+                  <url path="../lib/saaj.jar" jar-entry=""/>
+                  <url path="../lib/slf4j-api-1.7.30.jar" jar-entry=""/>
                   <url path="../lib/spring-aop-3.2.0.M2.jar" jar-entry=""/>
                   <url path="../lib/spring-beans-3.2.0.M2.jar" jar-entry=""/>
                   <url path="../lib/spring-context-3.2.0.M2.jar" jar-entry=""/>
@@ -162,23 +187,13 @@
                   <url path="../lib/spring-tx-3.2.0.M2.jar" jar-entry=""/>
                   <url path="../lib/spring-web-3.2.0.M2.jar" jar-entry=""/>
                   <url path="../lib/spring-webmvc-3.2.0.M2.jar" jar-entry=""/>
+                  <url path="../lib/stax2-api-4.2.jar" jar-entry=""/>
+                  <url path="../lib/woodstox-core-5.2.1.jar" jar-entry=""/>
                   <url path="../lib/xalan-2.6.0.jar" jar-entry=""/>
+                  <url path="../lib/xmlbeans-2.6.0.jar" jar-entry=""/>
                   <url path="../lib/xmlgraphics-commons-1.4.jar" jar-entry=""/>
                   <url path="../lib/xmlparserv2.jar" jar-entry=""/>
-                  <url path="../lib/POI/commons-codec-1.10.jar" jar-entry=""/>
-                  <url path="../lib/POI/commons-collections4-4.1.jar" jar-entry=""/>
-                  <url path="../lib/POI/commons-logging-1.2.jar" jar-entry=""/>
-                  <url path="../lib/POI/curvesapi-1.04.jar" jar-entry=""/>
-                  <url path="../lib/POI/junit-4.12.jar" jar-entry=""/>
-                  <url path="../lib/POI/log4j-1.2.17.jar" jar-entry=""/>
-                  <url path="../lib/POI/poi-3.17.jar" jar-entry=""/>
-                  <url path="../lib/POI/poi-excelant-3.17.jar" jar-entry=""/>
-                  <url path="../lib/POI/poi-ooxml-3.17.jar" jar-entry=""/>
-                  <url path="../lib/POI/poi-ooxml-schemas-3.17.jar" jar-entry=""/>
-                  <url path="../lib/POI/poi-scratchpad-3.17.jar" jar-entry=""/>
-                  <url path="../lib/POI/xmlbeans-2.6.0.jar" jar-entry=""/>
-                  <url path="../lib/ServiciosBridger-Client.jar" jar-entry=""/>
-                  <url path="../lib/ojdbc6.jar" jar-entry=""/>
+                  <url path="../lib/xmlsec-2.2.0.jar" jar-entry=""/>
                </list>
                <value n="description" v="Dependencias"/>
                <value n="id" v="Dependencias"/>
@@ -194,5 +209,8 @@
    </hash>
    <hash n="oracle.jdevimpl.config.JProjectPaths">
       <url n="outputDirectory" path="classes/"/>
+   </hash>
+   <hash n="ResourceBundleOptions">
+      <list n="RegisteredResourceBundles"/>
    </hash>
 </jpr:project>
