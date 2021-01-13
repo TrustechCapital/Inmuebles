@@ -11,15 +11,14 @@ public class DataRow implements Serializable {
 
     @SuppressWarnings("compatibility:1235470106920307740")
     private static final long serialVersionUID = 2490982374418435141L;
-    static final boolean IS_POSTGRES_DB = false;
+    static final boolean IS_POSTGRES_DB = true;
 
-
-    private Map dataRow;
-    private ArrayList fields;
+    private transient Map<String, Object> dataRow;
+    private ArrayList<String> fields;
 
     public DataRow() {
         dataRow = Collections.synchronizedMap(new HashMap<String, Object>());
-        fields = new ArrayList();
+        fields = new ArrayList<>();
     }
 
     public void addData(String key, Object value) {
@@ -43,7 +42,7 @@ public class DataRow implements Serializable {
 
     public String getString(String key) {
         String normalizedKey = getNormalizedKey(key);
-        return dataRow.get(normalizedKey) == null ? null : "" + dataRow.get(normalizedKey);
+        return dataRow.get(normalizedKey) == null ? (dataRow.get(key) == null ? null : ""+dataRow.get(key)) : "" + dataRow.get(normalizedKey);
     }
 
     public int getFieldCount() {
@@ -54,7 +53,7 @@ public class DataRow implements Serializable {
         return fields.size() > 0;
     }
 
-    public ArrayList getFieldNames() {
+    public ArrayList<String> getFieldNames() {
         return fields;
     }
 

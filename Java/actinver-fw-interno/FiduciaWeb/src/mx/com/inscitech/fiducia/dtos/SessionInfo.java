@@ -1,5 +1,7 @@
 package mx.com.inscitech.fiducia.dtos;
 
+import mx.com.inscitech.fiducia.common.beans.SessionUserPermisions;
+
 import java.util.List;
 
 public class SessionInfo {

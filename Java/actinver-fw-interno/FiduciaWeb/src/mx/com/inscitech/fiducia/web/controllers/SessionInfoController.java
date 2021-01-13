@@ -13,6 +13,7 @@ import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
 import mx.com.inscitech.fiducia.InvalidUserException;
+import mx.com.inscitech.fiducia.common.beans.SessionUserPermisions;
 import mx.com.inscitech.fiducia.common.beans.UserInfoBean;
 import mx.com.inscitech.fiducia.common.services.LoggingService;
 import mx.com.inscitech.fiducia.common.services.UserInformationService;
@@ -21,7 +22,6 @@ import mx.com.inscitech.fiducia.dml.vo.DataRow;
 import mx.com.inscitech.fiducia.dml.vo.DataSet;
 import mx.com.inscitech.fiducia.dtos.SessionInfo;
 import mx.com.inscitech.fiducia.dtos.SessionUser;
-import mx.com.inscitech.fiducia.dtos.SessionUserPermisions;
 import mx.com.inscitech.fiducia.services.GenericServiceResponse;
 
 import org.springframework.web.servlet.ModelAndView;
@@ -80,6 +80,7 @@ public class SessionInfoController extends JsonActionController {
         } else if(!"".equals(userName) && !"null".equals(userName)){
             try {
                 UserInfoBean userInfo = UserInformationService.getInstance().getUserInfo(userName, null, 1);
+                userInfo.setPermissions(getUserPermisions(userInfo.getPuestoId().toString()));
                 setSessionAttributes(session, userInfo, new Object[]{});
                 responseData = getServiceResponse("FWAUTH-OK-002", userInfo);
             } catch (InvalidUserException e) {

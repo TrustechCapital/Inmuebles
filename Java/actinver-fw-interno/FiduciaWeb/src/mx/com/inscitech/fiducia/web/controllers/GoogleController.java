@@ -1,18 +1,13 @@
 package mx.com.inscitech.fiducia.web.controllers;
 
-import com.onelogin.saml2.Auth;
-
-import java.io.InputStream;
-
-import java.util.List;
-import java.util.Map;
-
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import mx.com.inscitech.fiducia.common.services.LoggingService;
 import mx.com.inscitech.fiducia.dtos.AppGoogleInfo;
 import mx.com.inscitech.fiducia.services.ErrorData;
+import mx.com.inscitech.fiducia.web.services.saml.AuthData;
+import mx.com.inscitech.fiducia.web.services.saml.SAMLServiceClient;
 
 import org.springframework.web.servlet.ModelAndView;
 
@@ -45,42 +40,20 @@ public class GoogleController extends JsonActionController {
     public ModelAndView doSignIn(HttpServletRequest request, HttpServletResponse response) throws Exception {
         logger.log(Thread.currentThread().getClass(), Thread.currentThread(), LoggingService.LEVEL.DEBUG, "doSignIn");
         
-        ClassLoader classLoader = getClass().getClassLoader();
-        try(InputStream inputStream = classLoader.getResourceAsStream(ONELOGIN_CONFIG_FILE)) {
-            if(inputStream != null) {
-                Auth auth = new Auth(inputStream, request, response);
-
-                auth.processResponse();
-                if (auth.isAuthenticated()) {
-
-                    Map<String, List<String>> attrs = auth.getAttributes();
-                    logger.log(Thread.currentThread().getClass(), Thread.currentThread(), LoggingService.LEVEL.DEBUG, 
-                        "user-name:" + attrs.get(GOOGLE_NAME_ATTRIBUTE) + " user-lastname: " + attrs.get(GOOGLE_lAST_NAME_ATTRIBUTE) + " user-email: " + attrs.get(GOOGLE_EMAIL_ATTRIBUTE)
-                    );
-                    
-                    request.getSession().setAttribute(USERID, auth.getNameId());
-                    request.getSession().setAttribute(USER_NAME, attrs.get(GOOGLE_NAME_ATTRIBUTE).get(0));
-                    request.getSession().setAttribute(USER_LAST_NAME, attrs.get(GOOGLE_lAST_NAME_ATTRIBUTE).get(0));
-                    request.getSession().setAttribute(USER_EMAIL, attrs.get(GOOGLE_EMAIL_ATTRIBUTE).get(0));
-                    
-                    response.sendRedirect("/FiduciaWeb/");
-                    return null;
-                        
-                } else {
-                    logger.log(Thread.currentThread().getClass(), Thread.currentThread(), LoggingService.LEVEL.DEBUG, "The user is not authenticated!");
-                    //TODO: manage scenario
-                }
-                
-            } else {
-                //TODO: Throw exception & manage error
-                logger.log(Thread.currentThread().getClass(), Thread.currentThread(), LoggingService.LEVEL.ERROR, "Unable to load sso settings!");
-            }
-        } catch(Exception e) {
-            logger.log(Thread.currentThread().getClass(), Thread.currentThread(), LoggingService.LEVEL.ERROR, e);
+        SAMLServiceClient samlClient = new SAMLServiceClient();
+        AuthData authData = samlClient.authenticateUser(request.getParameter(SAMLServiceClient.SAML_PARAMETER_NAME));
+        
+        //if(authData == null) respondObject(403, response, new ErrorData("FWBK-SECURITY-SAML01", "Invalid user!"));
+        
+        if(authData != null) {
+            request.getSession().setAttribute(USERID, authData.getId());
+            request.getSession().setAttribute(USER_EMAIL, authData.getEmail());
+            request.getSession().setAttribute(USER_NAME, authData.getFirstName());
+            request.getSession().setAttribute(USER_LAST_NAME, authData.getLastName());            
         }
 
-        response.sendRedirect("/FiduciaWeb/");
-        return null; //respondObject(403, response, new ErrorData("FWBK-SECURITY-SAML01", "Invalid user!"));
+        response.sendRedirect("/FiduciaWeb/");                    
+        return null;
     }
     
     public ModelAndView doSignOut(HttpServletRequest request, HttpServletResponse response) throws Exception {
