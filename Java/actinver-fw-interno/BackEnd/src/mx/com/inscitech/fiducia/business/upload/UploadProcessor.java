@@ -17,7 +17,7 @@ import java.util.List;
 import java.util.Map;
 
 import mx.com.inscitech.fiducia.BusinessException;
-import mx.com.inscitech.fiducia.beans.ParametroQueryBean;
+import mx.com.inscitech.fiducia.common.beans.ParametroQueryBean;
 import mx.com.inscitech.fiducia.common.services.LoggingService;
 import mx.com.inscitech.fiducia.common.util.DateTimeUtils;
 import mx.com.inscitech.fiducia.dao.util.GenericRowMapper;

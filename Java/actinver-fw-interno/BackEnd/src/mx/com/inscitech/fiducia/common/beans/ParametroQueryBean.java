@@ -5,266 +5,309 @@ package mx.com.inscitech.fiducia.common.beans;
  * Clase que permite describir parametros que se le pasaran a los querys a ejecutar
  * @author Inscitech México inscitech@inscitechmexico.com
  */
-public class ParametroQueryBean  {
-  
-  // TODO: Agregar una propiedad para especificar el formato
-  
-  /**
-   * Variable para almacenar el nombre con el cual se hara la busqueda en el request
-   * para obtener el valor
-   */
-  private String name;
-  
-  /**
-   * Nombre de la variable en el SQL
-   */
-  private String sqlName;
-  
-  /**
-   * Tipo de clausula a usar
-   */
-  private String clauseType; // AND, OR
-  
-  /**
-   * Condicion que se usara
-   */
-  private String conditionType; // =, <, >, <>, like, not like, in, not in
-  
-  /**
-   * En dado caso de que el parametro sea para ordenamiento, se tomara el valor de esta propiedad
-   */
-  private String orderClause;
-  
-  /**
-   * Indica si el parametro es para ordenamiento
-   */
-  private boolean order = false;
+public class ParametroQueryBean {
 
-  /**
-   * Indica si el parametro es de salida
-   */
-  private boolean out = false;
-  
-  /**
-   * En dado caso de que el parametro sea para agrupamiento, se tomara el valor de esta propiedad
-   */
-  private String groupClause;
-  
-  /**
-   * Indica si el parametro es para ordenamiento
-   */
-  private boolean group;
-  
-  /**
-   * Indica el tipo de parametro, usado para parametros de salida
-   */
-  private String type;
-  
-  /**
-   * Variable en la que se almacena el indice de un parametro en caso de ser de salida.
-   * Esta variable es de uso interno
-   */
-  private int index;
-  
-  /**
-   * Variable para almacenar el patron de conversion en caso de ser necesario.
-   */
-  private String pattern;
-  
-  
-  /**
-   * Variable en la que se almacena el valor del parametro.
-   */
-  private Object value;
-  
-  /**
-   * Constructor por default, todos los parametros son nulos order es false al igual que out
-   */
-  public ParametroQueryBean() {
-  }
+    // TODO: Agregar una propiedad para especificar el formato
 
-  /**
-   * Constructor que permite hacer set a todos los parametros
-   * @param pattern
-   * @param index
-   * @param type
-   * @param group
-   * @param groupClause
-   * @param out
-   * @param order
-   * @param orderClause
-   * @param conditionType
-   * @param clauseType
-   * @param sqlName
-   * @param name
-   */
-  public ParametroQueryBean(String name, String sqlName, String clauseType, String conditionType, String orderClause, 
-                            boolean order, boolean out, String groupClause, boolean group, String type, int index, String pattern, Object value) {
-    this.name = name;
-    this.sqlName = sqlName;
-    this.clauseType = clauseType;
-    this.conditionType = conditionType;
-    this.orderClause = orderClause;
-    this.order = order;
-    this.out = out;
-    this.groupClause = groupClause;
-    this.group = group;
-    this.type = type;
-    this.index = index;
-    this.pattern = pattern;
-    this.value = value;
-  }
+    /**
+     * Variable para almacenar el nombre con el cual se hara la busqueda en el request
+     * para obtener el valor
+     */
+    private String name;
 
+    /**
+     * Nombre de la variable en el SQL
+     */
+    private String sqlName;
 
-  public ParametroQueryBean(String name, String type, Object value) {
-    this.name = name;
-    this.type = type;
-    this.value = value;
-  }
+    /**
+     * Tipo de clausula a usar
+     */
+    private String clauseType; // AND, OR
 
-  public ParametroQueryBean(String name, String type, Object value, boolean out) {
-    this.name = name;
-    this.type = type;
-    this.value = value;
-    this.out = out;
-  }
+    /**
+     * Condicion que se usara
+     */
+    private String conditionType; // =, <, >, <>, like, not like, in, not in
 
-  public ParametroQueryBean(String name, String type, Object value, boolean out, String pattern) {
-    this.name = name;
-    this.type = type;
-    this.value = value;
-    this.out = out;
-    this.pattern = pattern;
-  }
+    /**
+     * En dado caso de que el parametro sea para ordenamiento, se tomara el valor de esta propiedad
+     */
+    private String orderClause;
 
-  public void setName(String name) {
-    this.name = name;
-  }
+    /**
+     * Indica si el parametro es para ordenamiento
+     */
+    private boolean order = false;
 
+    /**
+     * Indica si el parametro es de salida
+     */
+    private boolean out = false;
 
-  public String getName() {
-    return name;
-  }
+    /**
+     * En dado caso de que el parametro sea para agrupamiento, se tomara el valor de esta propiedad
+     */
+    private String groupClause;
 
+    /**
+     * Indica si el parametro es para ordenamiento
+     */
+    private boolean group;
 
-  public void setSqlName(String sqlName) {
-    this.sqlName = sqlName;
-  }
+    /**
+     * Indica el tipo de parametro, usado para parametros de salida
+     */
+    private String type;
 
+    /**
+     * Variable en la que se almacena el indice de un parametro en caso de ser de salida.
+     * Esta variable es de uso interno
+     */
+    private int index;
 
-  public String getSqlName() {
-    return sqlName;
-  }
+    /**
+     * Variable para almacenar el patron de conversion en caso de ser necesario.
+     */
+    private String pattern;
 
+    /**
+     * Variable en la que se almacena el valor del parametro.
+     */
+    private Object value;
 
-  public void setClauseType(String clauseType) {
-    this.clauseType = clauseType;
-  }
+    /**
+     * Variable en la que se almacena el valor del parametro.
+     */
+    private String format;
 
+    /**
+     * Variable en la que se almacena el valor del parametro.
+     */
+    private boolean buildSQL = true;
 
-  public String getClauseType() {
-    return clauseType;
-  }
+    /**
+     * Constructor por default, todos los parametros son nulos order es false al igual que out
+     */
+    public ParametroQueryBean() {
+        super();
+    }
+
+    public void setFormat(String format) {
+        this.format = format;
+    }
+
+    public String getFormat() {
+        return format;
+    }
+
+    public void setBuildSQL(boolean buildSQL) {
+        this.buildSQL = buildSQL;
+    }
+
+    public boolean isBuildSQL() {
+        return buildSQL;
+    }
+
+    public ParametroQueryBean(String name, String sqlName, String clauseType, String conditionType, String orderClause, boolean order, boolean out, String groupClause,
+                              boolean group, String type, int index, String pattern, Object value, String format, boolean buildSQL) {
+        this.name = name;
+        this.sqlName = sqlName;
+        this.clauseType = clauseType;
+        this.conditionType = conditionType;
+        this.orderClause = orderClause;
+        this.order = order;
+        this.out = out;
+        this.groupClause = groupClause;
+        this.group = group;
+        this.type = type;
+        this.index = index;
+        this.pattern = pattern;
+        this.value = value;
+        this.format = format;
+        this.buildSQL = buildSQL;
+    }
+
+    /**
+     * Constructor que permite hacer set a todos los parametros
+     * @param pattern
+     * @param index
+     * @param type
+     * @param group
+     * @param groupClause
+     * @param out
+     * @param order
+     * @param orderClause
+     * @param conditionType
+     * @param clauseType
+     * @param sqlName
+     * @param name
+     */
+    public ParametroQueryBean(String name, String sqlName, String clauseType, String conditionType, String orderClause, boolean order, boolean out, String groupClause,
+                              boolean group, String type, int index, String pattern, Object value) {
+        this.name = name;
+        this.sqlName = sqlName;
+        this.clauseType = clauseType;
+        this.conditionType = conditionType;
+        this.orderClause = orderClause;
+        this.order = order;
+        this.out = out;
+        this.groupClause = groupClause;
+        this.group = group;
+        this.type = type;
+        this.index = index;
+        this.pattern = pattern;
+        this.value = value;
+    }
 
 
-  public void setConditionType(String conditionType) {
-    this.conditionType = conditionType;
-  }
+    public ParametroQueryBean(String name, String type, Object value) {
+        this.name = name;
+        this.type = type;
+        this.value = value;
+    }
+
+    public ParametroQueryBean(String name, String type, Object value, boolean out) {
+        this.name = name;
+        this.type = type;
+        this.value = value;
+        this.out = out;
+    }
+
+    public ParametroQueryBean(String name, String type, Object value, boolean out, String pattern) {
+        this.name = name;
+        this.type = type;
+        this.value = value;
+        this.out = out;
+        this.pattern = pattern;
+    }
+
+    public void setName(String name) {
+        this.name = name;
+    }
 
 
-  public String getConditionType() {
-    return conditionType;
-  }
+    public String getName() {
+        return name;
+    }
 
 
-  public void setOrderClause(String orderClause) {
-    this.orderClause = orderClause;
-  }
+    public void setSqlName(String sqlName) {
+        this.sqlName = sqlName;
+    }
 
 
-  public String getOrderClause() {
-    return orderClause;
-  }
+    public String getSqlName() {
+        return sqlName;
+    }
 
 
-  public void setOrder(boolean order) {
-    this.order = order;
-  }
+    public void setClauseType(String clauseType) {
+        this.clauseType = clauseType;
+    }
 
 
-  public boolean isOrder() {
-    return order;
-  }
-    
-    
-  public void setGroupClause(String groupClause) {
-    this.groupClause = groupClause;
-  }
-  
-  
-  public void setOut(boolean out)
-  {
-    this.out = out;
-  }
+    public String getClauseType() {
+        return clauseType;
+    }
 
 
-  public boolean isOut()
-  {
-    return out;
-  }
+    public void setConditionType(String conditionType) {
+        this.conditionType = conditionType;
+    }
 
 
-  public String getGroupClause() {
-    return groupClause;
-  }
+    public String getConditionType() {
+        return conditionType;
+    }
 
 
-  public void setGroup(boolean group) {
-    this.group = group;
-  }
+    public void setOrderClause(String orderClause) {
+        this.orderClause = orderClause;
+    }
 
 
-  public boolean isGroup() {
-    return group;
-  }
-  
-  
-  public void setType(String type) {
-    this.type = type;
-  }
+    public String getOrderClause() {
+        return orderClause;
+    }
 
 
-  public String getType() {
-    return type;
-  }
+    public void setOrder(boolean order) {
+        this.order = order;
+    }
 
 
-  public void setIndex(int index) {
-    this.index = index;
-  }
+    public boolean isOrder() {
+        return order;
+    }
 
 
-  public int getIndex() {
-    return index;
-  }
+    public void setGroupClause(String groupClause) {
+        this.groupClause = groupClause;
+    }
 
 
-  public void setPattern(String pattern) {
-    this.pattern = pattern;
-  }
+    public void setOut(boolean out) {
+        this.out = out;
+    }
 
 
-  public String getPattern() {
-    return pattern;
-  }
+    public boolean isOut() {
+        return out;
+    }
 
 
-  public void setValue(Object value) {
-    this.value = value;
-  }
+    public String getGroupClause() {
+        return groupClause;
+    }
 
 
-  public Object getValue() {
-    return value;
-  }
+    public void setGroup(boolean group) {
+        this.group = group;
+    }
+
+
+    public boolean isGroup() {
+        return group;
+    }
+
+
+    public void setType(String type) {
+        this.type = type;
+    }
+
+
+    public String getType() {
+        return type;
+    }
+
+
+    public void setIndex(int index) {
+        this.index = index;
+    }
+
+
+    public int getIndex() {
+        return index;
+    }
+
+
+    public void setPattern(String pattern) {
+        this.pattern = pattern;
+    }
+
+
+    public String getPattern() {
+        return pattern;
+    }
+
+
+    public void setValue(Object value) {
+        this.value = value;
+    }
+
+
+    public Object getValue() {
+        return value;
+    }
 }

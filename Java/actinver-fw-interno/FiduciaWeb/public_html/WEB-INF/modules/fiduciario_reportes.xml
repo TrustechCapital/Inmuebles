@@ -203,12 +203,12 @@
                 <!-- Control Gestion -->
                 <entry key="getCuentasRechazadas">
                     <list>
-                        <bean class="mx.com.inscitech.fiducia.beans.ParametroQueryBean">
+                        <bean class="mx.com.inscitech.fiducia.common.beans.ParametroQueryBean">
                             <property name="name">
                                 <value>Clave</value>
                             </property>
                         </bean>
-                        <bean class="mx.com.inscitech.fiducia.beans.ParametroQueryBean">
+                        <bean class="mx.com.inscitech.fiducia.common.beans.ParametroQueryBean">
                             <property name="name">
                                 <value>Fideicomiso</value>
                             </property>
@@ -217,7 +217,7 @@
                 </entry>
                 <entry key="repCtasClabe">
                     <list>
-                        <bean class="mx.com.inscitech.fiducia.beans.ParametroQueryBean">
+                        <bean class="mx.com.inscitech.fiducia.common.beans.ParametroQueryBean">
                             <property name="out">
                                 <value>true</value>
                             </property>
@@ -228,32 +228,32 @@
                                 <value>NUMBER</value>
                             </property>
                         </bean>
-                        <bean class="mx.com.inscitech.fiducia.beans.ParametroQueryBean">
+                        <bean class="mx.com.inscitech.fiducia.common.beans.ParametroQueryBean">
                             <property name="name">
                                 <value>Tipo</value>
                             </property>
                         </bean>
-                        <bean class="mx.com.inscitech.fiducia.beans.ParametroQueryBean">
+                        <bean class="mx.com.inscitech.fiducia.common.beans.ParametroQueryBean">
                             <property name="name">
                                 <value>Status</value>
                             </property>
                         </bean>
-                        <bean class="mx.com.inscitech.fiducia.beans.ParametroQueryBean">
+                        <bean class="mx.com.inscitech.fiducia.common.beans.ParametroQueryBean">
                             <property name="name">
                                 <value>Banco</value>
                             </property>
                         </bean>
-                        <bean class="mx.com.inscitech.fiducia.beans.ParametroQueryBean">
+                        <bean class="mx.com.inscitech.fiducia.common.beans.ParametroQueryBean">
                             <property name="name">
                                 <value>Fideicomiso</value>
                             </property>
                         </bean>
-                        <bean class="mx.com.inscitech.fiducia.beans.ParametroQueryBean">
+                        <bean class="mx.com.inscitech.fiducia.common.beans.ParametroQueryBean">
                             <property name="name">
                                 <value>Cuenta</value>
                             </property>
                         </bean>
-                        <bean class="mx.com.inscitech.fiducia.beans.ParametroQueryBean">
+                        <bean class="mx.com.inscitech.fiducia.common.beans.ParametroQueryBean">
                             <property name="name">
                                 <value>GeneraArchivo</value>
                             </property>
@@ -263,7 +263,7 @@
                 <!-- Administracion -->
                 <entry key="repAvanceProyectosNegociosFiduciarios">
                     <list>
-                        <bean class="mx.com.inscitech.fiducia.beans.ParametroQueryBean">
+                        <bean class="mx.com.inscitech.fiducia.common.beans.ParametroQueryBean">
                             <property name="out">
                                 <value>true</value>
                             </property>
@@ -274,12 +274,12 @@
                                 <value>NUMBER</value>
                             </property>
                         </bean>
-                        <bean class="mx.com.inscitech.fiducia.beans.ParametroQueryBean">
+                        <bean class="mx.com.inscitech.fiducia.common.beans.ParametroQueryBean">
                             <property name="name">
                                 <value>Ano</value>
                             </property>
                         </bean>
-                        <bean class="mx.com.inscitech.fiducia.beans.ParametroQueryBean">
+                        <bean class="mx.com.inscitech.fiducia.common.beans.ParametroQueryBean">
                             <property name="name">
                                 <value>Mes</value>
                             </property>
@@ -288,22 +288,22 @@
                 </entry>
                 <entry key="getAltasBajasFisos">
                     <list>
-                        <bean class="mx.com.inscitech.fiducia.beans.ParametroQueryBean">
+                        <bean class="mx.com.inscitech.fiducia.common.beans.ParametroQueryBean">
                             <property name="name">
                                 <value>Ano</value>
                             </property>
                         </bean>
-                        <bean class="mx.com.inscitech.fiducia.beans.ParametroQueryBean">
+                        <bean class="mx.com.inscitech.fiducia.common.beans.ParametroQueryBean">
                             <property name="name">
                                 <value>Mes</value>
                             </property>
                         </bean>
-                        <bean class="mx.com.inscitech.fiducia.beans.ParametroQueryBean">
+                        <bean class="mx.com.inscitech.fiducia.common.beans.ParametroQueryBean">
                             <property name="name">
                                 <value>Ano</value>
                             </property>
                         </bean>
-                        <bean class="mx.com.inscitech.fiducia.beans.ParametroQueryBean">
+                        <bean class="mx.com.inscitech.fiducia.common.beans.ParametroQueryBean">
                             <property name="name">
                                 <value>Mes</value>
                             </property>
@@ -312,12 +312,12 @@
                 </entry>
                 <entry key="getAltasBajasFisosPorAnio">
                     <list>
-                        <bean class="mx.com.inscitech.fiducia.beans.ParametroQueryBean">
+                        <bean class="mx.com.inscitech.fiducia.common.beans.ParametroQueryBean">
                             <property name="name">
                                 <value>Ano</value>
                             </property>
                         </bean>
-                        <bean class="mx.com.inscitech.fiducia.beans.ParametroQueryBean">
+                        <bean class="mx.com.inscitech.fiducia.common.beans.ParametroQueryBean">
                             <property name="name">
                                 <value>Ano</value>
                             </property>
@@ -326,7 +326,7 @@
                 </entry>
                 <entry key="repInventarioNegocios">
                     <list>
-                        <bean class="mx.com.inscitech.fiducia.beans.ParametroQueryBean">
+                        <bean class="mx.com.inscitech.fiducia.common.beans.ParametroQueryBean">
                             <property name="out">
                                 <value>true</value>
                             </property>
@@ -337,12 +337,12 @@
                                 <value>NUMBER</value>
                             </property>
                         </bean>
-                        <bean class="mx.com.inscitech.fiducia.beans.ParametroQueryBean">
+                        <bean class="mx.com.inscitech.fiducia.common.beans.ParametroQueryBean">
                             <property name="name">
                                 <value>Ano</value>
                             </property>
                         </bean>
-                        <bean class="mx.com.inscitech.fiducia.beans.ParametroQueryBean">
+                        <bean class="mx.com.inscitech.fiducia.common.beans.ParametroQueryBean">
                             <property name="name">
                                 <value>Mes</value>
                             </property>
@@ -352,7 +352,7 @@
                 <!-- Honorarios -->
                 <entry key="repIngFid">
                     <list>
-                        <bean class="mx.com.inscitech.fiducia.beans.ParametroQueryBean">
+                        <bean class="mx.com.inscitech.fiducia.common.beans.ParametroQueryBean">
                             <property name="out">
                                 <value>true</value>
                             </property>
@@ -363,17 +363,17 @@
                                 <value>NUMBER</value>
                             </property>
                         </bean>
-                        <bean class="mx.com.inscitech.fiducia.beans.ParametroQueryBean">
+                        <bean class="mx.com.inscitech.fiducia.common.beans.ParametroQueryBean">
                             <property name="name">
                                 <value>Ano</value>
                             </property>
                         </bean>
-                        <bean class="mx.com.inscitech.fiducia.beans.ParametroQueryBean">
+                        <bean class="mx.com.inscitech.fiducia.common.beans.ParametroQueryBean">
                             <property name="name">
                                 <value>Mes</value>
                             </property>
                         </bean>
-                        <bean class="mx.com.inscitech.fiducia.beans.ParametroQueryBean">
+                        <bean class="mx.com.inscitech.fiducia.common.beans.ParametroQueryBean">
                             <property name="name">
                                 <value>MesAbierto</value>
                             </property>
@@ -382,12 +382,12 @@
                 </entry>
                 <entry key="getIngPres">
                     <list>
-                        <bean class="mx.com.inscitech.fiducia.beans.ParametroQueryBean">
+                        <bean class="mx.com.inscitech.fiducia.common.beans.ParametroQueryBean">
                             <property name="name">
                                 <value>Mes</value>
                             </property>
                         </bean>
-                        <bean class="mx.com.inscitech.fiducia.beans.ParametroQueryBean">
+                        <bean class="mx.com.inscitech.fiducia.common.beans.ParametroQueryBean">
                             <property name="name">
                                 <value>Ano</value>
                             </property>
@@ -396,7 +396,7 @@
                 </entry>
                 <entry key="repDevengados">
                     <list>
-                        <bean class="mx.com.inscitech.fiducia.beans.ParametroQueryBean">
+                        <bean class="mx.com.inscitech.fiducia.common.beans.ParametroQueryBean">
                             <property name="out">
                                 <value>true</value>
                             </property>
@@ -407,12 +407,12 @@
                                 <value>NUMBER</value>
                             </property>
                         </bean>
-                        <bean class="mx.com.inscitech.fiducia.beans.ParametroQueryBean">
+                        <bean class="mx.com.inscitech.fiducia.common.beans.ParametroQueryBean">
                             <property name="name">
                                 <value>Ano</value>
                             </property>
                         </bean>
-                        <bean class="mx.com.inscitech.fiducia.beans.ParametroQueryBean">
+                        <bean class="mx.com.inscitech.fiducia.common.beans.ParametroQueryBean">
                             <property name="name">
                                 <value>Mes</value>
                             </property>
@@ -421,12 +421,12 @@
                 </entry>
                 <entry key="getDevengados">
                     <list>
-                        <bean class="mx.com.inscitech.fiducia.beans.ParametroQueryBean">
+                        <bean class="mx.com.inscitech.fiducia.common.beans.ParametroQueryBean">
                             <property name="name">
                                 <value>Ano</value>
                             </property>
                         </bean>
-                        <bean class="mx.com.inscitech.fiducia.beans.ParametroQueryBean">
+                        <bean class="mx.com.inscitech.fiducia.common.beans.ParametroQueryBean">
                             <property name="name">
                                 <value>Mes</value>
                             </property>
@@ -435,7 +435,7 @@
                 </entry>
                 <entry key="repAviso">
                     <list>
-                        <bean class="mx.com.inscitech.fiducia.beans.ParametroQueryBean">
+                        <bean class="mx.com.inscitech.fiducia.common.beans.ParametroQueryBean">
                             <property name="out">
                                 <value>true</value>
                             </property>
@@ -446,17 +446,17 @@
                                 <value>NUMBER</value>
                             </property>
                         </bean>
-                        <bean class="mx.com.inscitech.fiducia.beans.ParametroQueryBean">
+                        <bean class="mx.com.inscitech.fiducia.common.beans.ParametroQueryBean">
                             <property name="name">
                                 <value>Periodicidad</value>
                             </property>
                         </bean>
-                        <bean class="mx.com.inscitech.fiducia.beans.ParametroQueryBean">
+                        <bean class="mx.com.inscitech.fiducia.common.beans.ParametroQueryBean">
                             <property name="name">
                                 <value>TipoAviso</value>
                             </property>
                         </bean>
-                        <bean class="mx.com.inscitech.fiducia.beans.ParametroQueryBean">
+                        <bean class="mx.com.inscitech.fiducia.common.beans.ParametroQueryBean">
                             <property name="name">
                                 <value>Fideicomiso</value>
                             </property>
@@ -465,7 +465,7 @@
                 </entry>
                 <entry key="repEjercicios">
                     <list>
-                        <bean class="mx.com.inscitech.fiducia.beans.ParametroQueryBean">
+                        <bean class="mx.com.inscitech.fiducia.common.beans.ParametroQueryBean">
                             <property name="out">
                                 <value>true</value>
                             </property>
@@ -480,12 +480,12 @@
                 </entry>
                 <entry key="getBalanceGral">
                     <list>
-                        <bean class="mx.com.inscitech.fiducia.beans.ParametroQueryBean">
+                        <bean class="mx.com.inscitech.fiducia.common.beans.ParametroQueryBean">
                             <property name="name">
                                 <value>Fiso</value>
                             </property>
                         </bean>
-                        <bean class="mx.com.inscitech.fiducia.beans.ParametroQueryBean">
+                        <bean class="mx.com.inscitech.fiducia.common.beans.ParametroQueryBean">
                             <property name="name">
                                 <value>Mes</value>
                             </property>
@@ -493,7 +493,7 @@
                                 <value>NUMBER</value>
                             </property>
                         </bean>
-                        <bean class="mx.com.inscitech.fiducia.beans.ParametroQueryBean">
+                        <bean class="mx.com.inscitech.fiducia.common.beans.ParametroQueryBean">
                             <property name="name">
                                 <value>Ano</value>
                             </property>
@@ -505,7 +505,7 @@
                 </entry>
                 <entry key="repIngresosServicio">
                     <list>
-                        <bean class="mx.com.inscitech.fiducia.beans.ParametroQueryBean">
+                        <bean class="mx.com.inscitech.fiducia.common.beans.ParametroQueryBean">
                             <property name="out">
                                 <value>true</value>
                             </property>
@@ -516,12 +516,12 @@
                                 <value>NUMBER</value>
                             </property>
                         </bean>
-                        <bean class="mx.com.inscitech.fiducia.beans.ParametroQueryBean">
+                        <bean class="mx.com.inscitech.fiducia.common.beans.ParametroQueryBean">
                             <property name="name">
                                 <value>Ano</value>
                             </property>
                         </bean>
-                        <bean class="mx.com.inscitech.fiducia.beans.ParametroQueryBean">
+                        <bean class="mx.com.inscitech.fiducia.common.beans.ParametroQueryBean">
                             <property name="name">
                                 <value>Mes</value>
                             </property>
@@ -530,12 +530,12 @@
                 </entry>
                 <entry key="getIngresosServicio">
                     <list>
-                        <bean class="mx.com.inscitech.fiducia.beans.ParametroQueryBean">
+                        <bean class="mx.com.inscitech.fiducia.common.beans.ParametroQueryBean">
                             <property name="name">
                                 <value>Ano</value>
                             </property>
                         </bean>
-                        <bean class="mx.com.inscitech.fiducia.beans.ParametroQueryBean">
+                        <bean class="mx.com.inscitech.fiducia.common.beans.ParametroQueryBean">
                             <property name="name">
                                 <value>Mes</value>
                             </property>
@@ -544,7 +544,7 @@
                 </entry>
                 <entry key="repIngresosNoPresupuestados">
                     <list>
-                        <bean class="mx.com.inscitech.fiducia.beans.ParametroQueryBean">
+                        <bean class="mx.com.inscitech.fiducia.common.beans.ParametroQueryBean">
                             <property name="out">
                                 <value>true</value>
                             </property>
@@ -555,17 +555,17 @@
                                 <value>NUMBER</value>
                             </property>
                         </bean>
-                        <bean class="mx.com.inscitech.fiducia.beans.ParametroQueryBean">
+                        <bean class="mx.com.inscitech.fiducia.common.beans.ParametroQueryBean">
                             <property name="name">
                                 <value>Ano</value>
                             </property>
                         </bean>
-                        <bean class="mx.com.inscitech.fiducia.beans.ParametroQueryBean">
+                        <bean class="mx.com.inscitech.fiducia.common.beans.ParametroQueryBean">
                             <property name="name">
                                 <value>Mes</value>
                             </property>
                         </bean>
-                        <bean class="mx.com.inscitech.fiducia.beans.ParametroQueryBean">
+                        <bean class="mx.com.inscitech.fiducia.common.beans.ParametroQueryBean">
                             <property name="name">
                                 <value>MesAbierto</value>
                             </property>
@@ -574,7 +574,7 @@
                 </entry>
                 <entry key="repFechasRevisonINPC">
                     <list>
-                        <bean class="mx.com.inscitech.fiducia.beans.ParametroQueryBean">
+                        <bean class="mx.com.inscitech.fiducia.common.beans.ParametroQueryBean">
                             <property name="out">
                                 <value>true</value>
                             </property>
@@ -585,12 +585,12 @@
                                 <value>NUMBER</value>
                             </property>
                         </bean>
-                        <bean class="mx.com.inscitech.fiducia.beans.ParametroQueryBean">
+                        <bean class="mx.com.inscitech.fiducia.common.beans.ParametroQueryBean">
                             <property name="name">
                                 <value>Ano</value>
                             </property>
                         </bean>
-                        <bean class="mx.com.inscitech.fiducia.beans.ParametroQueryBean">
+                        <bean class="mx.com.inscitech.fiducia.common.beans.ParametroQueryBean">
                             <property name="name">
                                 <value>Mes</value>
                             </property>
@@ -599,7 +599,7 @@
                 </entry>
                 <entry key="repProyeccionFecProv">
                     <list>
-                        <bean class="mx.com.inscitech.fiducia.beans.ParametroQueryBean">
+                        <bean class="mx.com.inscitech.fiducia.common.beans.ParametroQueryBean">
                             <property name="out">
                                 <value>true</value>
                             </property>
@@ -610,22 +610,22 @@
                                 <value>NUMBER</value>
                             </property>
                         </bean>
-                        <bean class="mx.com.inscitech.fiducia.beans.ParametroQueryBean">
+                        <bean class="mx.com.inscitech.fiducia.common.beans.ParametroQueryBean">
                             <property name="name">
                                 <value>Ano</value>
                             </property>
                         </bean>
-                        <bean class="mx.com.inscitech.fiducia.beans.ParametroQueryBean">
+                        <bean class="mx.com.inscitech.fiducia.common.beans.ParametroQueryBean">
                             <property name="name">
                                 <value>Mes</value>
                             </property>
                         </bean>
-                        <bean class="mx.com.inscitech.fiducia.beans.ParametroQueryBean">
+                        <bean class="mx.com.inscitech.fiducia.common.beans.ParametroQueryBean">
                             <property name="name">
                                 <value>Fechas</value>
                             </property>
                         </bean>
-                        <bean class="mx.com.inscitech.fiducia.beans.ParametroQueryBean">
+                        <bean class="mx.com.inscitech.fiducia.common.beans.ParametroQueryBean">
                             <property name="name">
                                 <value>Proceso</value>
                             </property>
@@ -634,17 +634,17 @@
                 </entry>
                 <entry key="getFactura">
                     <list>
-                        <bean class="mx.com.inscitech.fiducia.beans.ParametroQueryBean">
+                        <bean class="mx.com.inscitech.fiducia.common.beans.ParametroQueryBean">
                             <property name="name">
                                 <value>Fideicomiso</value>
                             </property>
                         </bean>
-                        <bean class="mx.com.inscitech.fiducia.beans.ParametroQueryBean">
+                        <bean class="mx.com.inscitech.fiducia.common.beans.ParametroQueryBean">
                             <property name="name">
                                 <value>Secuencial</value>
                             </property>
                         </bean>
-                        <bean class="mx.com.inscitech.fiducia.beans.ParametroQueryBean">
+                        <bean class="mx.com.inscitech.fiducia.common.beans.ParametroQueryBean">
                             <property name="name">
                                 <value>NumFactura</value>
                             </property>
@@ -654,7 +654,7 @@
                 <!-- Modulo Tesoreria -->
                 <entry key="ejeFunFichaUnica">
                     <list>
-                        <bean class="mx.com.inscitech.fiducia.beans.ParametroQueryBean">
+                        <bean class="mx.com.inscitech.fiducia.common.beans.ParametroQueryBean">
                             <property name="out">
                                 <value>true</value>
                             </property>
@@ -665,27 +665,27 @@
                                 <value>resultado</value>
                             </property>
                         </bean>
-                        <bean class="mx.com.inscitech.fiducia.beans.ParametroQueryBean">
+                        <bean class="mx.com.inscitech.fiducia.common.beans.ParametroQueryBean">
                             <property name="name">
                                 <value>TipoFicha</value>
                             </property>
                         </bean>
-                        <bean class="mx.com.inscitech.fiducia.beans.ParametroQueryBean">
+                        <bean class="mx.com.inscitech.fiducia.common.beans.ParametroQueryBean">
                             <property name="name">
                                 <value>Folio</value>
                             </property>
                         </bean>
-                        <bean class="mx.com.inscitech.fiducia.beans.ParametroQueryBean">
+                        <bean class="mx.com.inscitech.fiducia.common.beans.ParametroQueryBean">
                             <property name="name">
                                 <value>Fecha</value>
                             </property>
                         </bean>
-                        <bean class="mx.com.inscitech.fiducia.beans.ParametroQueryBean">
+                        <bean class="mx.com.inscitech.fiducia.common.beans.ParametroQueryBean">
                             <property name="name">
                                 <value>Status</value>
                             </property>
                         </bean>
-                        <bean class="mx.com.inscitech.fiducia.beans.ParametroQueryBean">
+                        <bean class="mx.com.inscitech.fiducia.common.beans.ParametroQueryBean">
                             <property name="name">
                                 <value>FOSEG</value>
                             </property>
@@ -694,27 +694,27 @@
                 </entry>
                 <entry key="ejeStoBalCueOrd">
                     <list>
-                        <bean class="mx.com.inscitech.fiducia.beans.ParametroQueryBean">
+                        <bean class="mx.com.inscitech.fiducia.common.beans.ParametroQueryBean">
                             <property name="name">
                                 <value>Fiso</value>
                             </property>
                         </bean>
-                        <bean class="mx.com.inscitech.fiducia.beans.ParametroQueryBean">
+                        <bean class="mx.com.inscitech.fiducia.common.beans.ParametroQueryBean">
                             <property name="name">
                                 <value>Ano</value>
                             </property>
                         </bean>
-                        <bean class="mx.com.inscitech.fiducia.beans.ParametroQueryBean">
+                        <bean class="mx.com.inscitech.fiducia.common.beans.ParametroQueryBean">
                             <property name="name">
                                 <value>Mes</value>
                             </property>
                         </bean>
-                        <bean class="mx.com.inscitech.fiducia.beans.ParametroQueryBean">
+                        <bean class="mx.com.inscitech.fiducia.common.beans.ParametroQueryBean">
                             <property name="name">
                                 <value>Estructura</value>
                             </property>
                         </bean>
-                        <bean class="mx.com.inscitech.fiducia.beans.ParametroQueryBean">
+                        <bean class="mx.com.inscitech.fiducia.common.beans.ParametroQueryBean">
                             <property name="name">
                                 <value>Usuario</value>
                             </property>
@@ -723,22 +723,22 @@
                 </entry>
                 <entry key="ejeActFideicomisoRep">
                     <list>
-                        <bean class="mx.com.inscitech.fiducia.beans.ParametroQueryBean">
+                        <bean class="mx.com.inscitech.fiducia.common.beans.ParametroQueryBean">
                             <property name="name">
                                 <value>Fiso</value>
                             </property>
                         </bean>
-                        <bean class="mx.com.inscitech.fiducia.beans.ParametroQueryBean">
+                        <bean class="mx.com.inscitech.fiducia.common.beans.ParametroQueryBean">
                             <property name="name">
                                 <value>Ano</value>
                             </property>
                         </bean>
-                        <bean class="mx.com.inscitech.fiducia.beans.ParametroQueryBean">
+                        <bean class="mx.com.inscitech.fiducia.common.beans.ParametroQueryBean">
                             <property name="name">
                                 <value>Mes</value>
                             </property>
                         </bean>
-                        <bean class="mx.com.inscitech.fiducia.beans.ParametroQueryBean">
+                        <bean class="mx.com.inscitech.fiducia.common.beans.ParametroQueryBean">
                             <property name="name">
                                 <value>Estructura</value>
                             </property>
@@ -747,7 +747,7 @@
                 </entry>
                 <entry key="getBalComEje">
                     <list>
-                        <bean class="mx.com.inscitech.fiducia.beans.ParametroQueryBean">
+                        <bean class="mx.com.inscitech.fiducia.common.beans.ParametroQueryBean">
                             <property name="name">
                                 <value>Fiso</value>
                             </property>
@@ -756,7 +756,7 @@
                 </entry>
                 <entry key="getConcentracionMovtos">
                     <list>
-                        <bean class="mx.com.inscitech.fiducia.beans.ParametroQueryBean">
+                        <bean class="mx.com.inscitech.fiducia.common.beans.ParametroQueryBean">
                             <property name="name">
                                 <value>Usuario</value>
                             </property>
@@ -765,12 +765,12 @@
                 </entry>
                 <entry key="getBalCueOrd">
                     <list>
-                        <bean class="mx.com.inscitech.fiducia.beans.ParametroQueryBean">
+                        <bean class="mx.com.inscitech.fiducia.common.beans.ParametroQueryBean">
                             <property name="name">
                                 <value>Fiso</value>
                             </property>
                         </bean>
-                        <bean class="mx.com.inscitech.fiducia.beans.ParametroQueryBean">
+                        <bean class="mx.com.inscitech.fiducia.common.beans.ParametroQueryBean">
                             <property name="name">
                                 <value>Usuario</value>
                             </property>
@@ -779,27 +779,27 @@
                 </entry>
                 <entry key="ejeStoBalFid">
                     <list>
-                        <bean class="mx.com.inscitech.fiducia.beans.ParametroQueryBean">
+                        <bean class="mx.com.inscitech.fiducia.common.beans.ParametroQueryBean">
                             <property name="name">
                                 <value>Fiso</value>
                             </property>
                         </bean>
-                        <bean class="mx.com.inscitech.fiducia.beans.ParametroQueryBean">
+                        <bean class="mx.com.inscitech.fiducia.common.beans.ParametroQueryBean">
                             <property name="name">
                                 <value>Ano</value>
                             </property>
                         </bean>
-                        <bean class="mx.com.inscitech.fiducia.beans.ParametroQueryBean">
+                        <bean class="mx.com.inscitech.fiducia.common.beans.ParametroQueryBean">
                             <property name="name">
                                 <value>Mes</value>
                             </property>
                         </bean>
-                        <bean class="mx.com.inscitech.fiducia.beans.ParametroQueryBean">
+                        <bean class="mx.com.inscitech.fiducia.common.beans.ParametroQueryBean">
                             <property name="name">
                                 <value>Estructura</value>
                             </property>
                         </bean>
-                        <bean class="mx.com.inscitech.fiducia.beans.ParametroQueryBean">
+                        <bean class="mx.com.inscitech.fiducia.common.beans.ParametroQueryBean">
                             <property name="name">
                                 <value>Usuario</value>
                             </property>
@@ -808,27 +808,27 @@
                 </entry>
                 <entry key="repMandatosComisiones">
                     <list>
-                        <bean class="mx.com.inscitech.fiducia.beans.ParametroQueryBean">
+                        <bean class="mx.com.inscitech.fiducia.common.beans.ParametroQueryBean">
                             <property name="name">
                                 <value>Fiso</value>
                             </property>
                         </bean>
-                        <bean class="mx.com.inscitech.fiducia.beans.ParametroQueryBean">
+                        <bean class="mx.com.inscitech.fiducia.common.beans.ParametroQueryBean">
                             <property name="name">
                                 <value>Ano</value>
                             </property>
                         </bean>
-                        <bean class="mx.com.inscitech.fiducia.beans.ParametroQueryBean">
+                        <bean class="mx.com.inscitech.fiducia.common.beans.ParametroQueryBean">
                             <property name="name">
                                 <value>Mes</value>
                             </property>
                         </bean>
-                        <bean class="mx.com.inscitech.fiducia.beans.ParametroQueryBean">
+                        <bean class="mx.com.inscitech.fiducia.common.beans.ParametroQueryBean">
                             <property name="name">
                                 <value>Estructura</value>
                             </property>
                         </bean>
-                        <bean class="mx.com.inscitech.fiducia.beans.ParametroQueryBean">
+                        <bean class="mx.com.inscitech.fiducia.common.beans.ParametroQueryBean">
                             <property name="name">
                                 <value>Usuario</value>
                             </property>
@@ -837,32 +837,32 @@
                 </entry>
                 <entry key="repEdosFinanDinamic">
                     <list>
-                        <bean class="mx.com.inscitech.fiducia.beans.ParametroQueryBean">
+                        <bean class="mx.com.inscitech.fiducia.common.beans.ParametroQueryBean">
                             <property name="name">
                                 <value>EdoFinan</value>
                             </property>
                         </bean>
-                        <bean class="mx.com.inscitech.fiducia.beans.ParametroQueryBean">
+                        <bean class="mx.com.inscitech.fiducia.common.beans.ParametroQueryBean">
                             <property name="name">
                                 <value>Ano</value>
                             </property>
                         </bean>
-                        <bean class="mx.com.inscitech.fiducia.beans.ParametroQueryBean">
+                        <bean class="mx.com.inscitech.fiducia.common.beans.ParametroQueryBean">
                             <property name="name">
                                 <value>Mes</value>
                             </property>
                         </bean>
-                        <bean class="mx.com.inscitech.fiducia.beans.ParametroQueryBean">
+                        <bean class="mx.com.inscitech.fiducia.common.beans.ParametroQueryBean">
                             <property name="name">
                                 <value>Estructura</value>
                             </property>
                         </bean>
-                        <bean class="mx.com.inscitech.fiducia.beans.ParametroQueryBean">
+                        <bean class="mx.com.inscitech.fiducia.common.beans.ParametroQueryBean">
                             <property name="name">
                                 <value>Usuario</value>
                             </property>
                         </bean>
-                        <bean class="mx.com.inscitech.fiducia.beans.ParametroQueryBean">
+                        <bean class="mx.com.inscitech.fiducia.common.beans.ParametroQueryBean">
                             <property name="name">
                                 <value>Fiso</value>
                             </property>
@@ -871,17 +871,17 @@
                 </entry>
                 <entry key="repEdosVariaciones">
                     <list>
-                        <bean class="mx.com.inscitech.fiducia.beans.ParametroQueryBean">
+                        <bean class="mx.com.inscitech.fiducia.common.beans.ParametroQueryBean">
                             <property name="name">
                                 <value>Fiso</value>
                             </property>
                         </bean>
-                        <bean class="mx.com.inscitech.fiducia.beans.ParametroQueryBean">
+                        <bean class="mx.com.inscitech.fiducia.common.beans.ParametroQueryBean">
                             <property name="name">
                                 <value>Estructura</value>
                             </property>
                         </bean>
-                        <bean class="mx.com.inscitech.fiducia.beans.ParametroQueryBean">
+                        <bean class="mx.com.inscitech.fiducia.common.beans.ParametroQueryBean">
                             <property name="name">
                                 <value>Fecha</value>
                             </property>
@@ -890,17 +890,17 @@
                 </entry>
                 <entry key="repEdosVariacionesNvo">
                     <list>
-                        <bean class="mx.com.inscitech.fiducia.beans.ParametroQueryBean">
+                        <bean class="mx.com.inscitech.fiducia.common.beans.ParametroQueryBean">
                             <property name="name">
                                 <value>Fiso</value>
                             </property>
                         </bean>
-                        <bean class="mx.com.inscitech.fiducia.beans.ParametroQueryBean">
+                        <bean class="mx.com.inscitech.fiducia.common.beans.ParametroQueryBean">
                             <property name="name">
                                 <value>Estructura</value>
                             </property>
                         </bean>
-                        <bean class="mx.com.inscitech.fiducia.beans.ParametroQueryBean">
+                        <bean class="mx.com.inscitech.fiducia.common.beans.ParametroQueryBean">
                             <property name="name">
                                 <value>Fecha</value>
                             </property>
@@ -909,7 +909,7 @@
                 </entry>
                 <entry key="repRepPosicion">
                     <list>
-                        <bean class="mx.com.inscitech.fiducia.beans.ParametroQueryBean">
+                        <bean class="mx.com.inscitech.fiducia.common.beans.ParametroQueryBean">
                             <property name="name">
                                 <value>Fiso</value>
                             </property>
@@ -919,7 +919,7 @@
                 <!--REPORTES CONCILIA-->
                 <entry key="repRepConcilia">
                     <list>
-                        <bean class="mx.com.inscitech.fiducia.beans.ParametroQueryBean">
+                        <bean class="mx.com.inscitech.fiducia.common.beans.ParametroQueryBean">
                             <property name="name">
                                 <value>Fecha</value>
                             </property>
@@ -928,22 +928,22 @@
                 </entry>
                 <entry key="repRepContratosInv">
                     <list>
-                        <bean class="mx.com.inscitech.fiducia.beans.ParametroQueryBean">
+                        <bean class="mx.com.inscitech.fiducia.common.beans.ParametroQueryBean">
                             <property name="name">
                                 <value>Fideicomiso</value>
                             </property>
                         </bean>
-                        <bean class="mx.com.inscitech.fiducia.beans.ParametroQueryBean">
+                        <bean class="mx.com.inscitech.fiducia.common.beans.ParametroQueryBean">
                             <property name="name">
                                 <value>FechaUnica</value>
                             </property>
                         </bean>
-                        <bean class="mx.com.inscitech.fiducia.beans.ParametroQueryBean">
+                        <bean class="mx.com.inscitech.fiducia.common.beans.ParametroQueryBean">
                             <property name="name">
                                 <value>Subcuenta</value>
                             </property>
                         </bean>
-                        <bean class="mx.com.inscitech.fiducia.beans.ParametroQueryBean">
+                        <bean class="mx.com.inscitech.fiducia.common.beans.ParametroQueryBean">
                             <property name="name">
                                 <value>SinContrato</value>
                             </property>
@@ -952,7 +952,7 @@
                 </entry>
                 <entry key="getRepConciliaValores">
                     <list>
-                        <bean class="mx.com.inscitech.fiducia.beans.ParametroQueryBean">
+                        <bean class="mx.com.inscitech.fiducia.common.beans.ParametroQueryBean">
                             <property name="name">
                                 <value>Fecha</value>
                             </property>
@@ -962,12 +962,12 @@
                 <!--REPORTES CONCILIA-->
                 <entry key="repRepEdoCuenta">
                     <list>
-                        <bean class="mx.com.inscitech.fiducia.beans.ParametroQueryBean">
+                        <bean class="mx.com.inscitech.fiducia.common.beans.ParametroQueryBean">
                             <property name="name">
                                 <value>Fideicomiso</value>
                             </property>
                         </bean>
-                        <bean class="mx.com.inscitech.fiducia.beans.ParametroQueryBean">
+                        <bean class="mx.com.inscitech.fiducia.common.beans.ParametroQueryBean">
                             <property name="name">
                                 <value>FechaUnica</value>
                             </property>
@@ -976,27 +976,27 @@
                 </entry>
                 <entry key="repConcentracionMovtos">
                     <list>
-                        <bean class="mx.com.inscitech.fiducia.beans.ParametroQueryBean">
+                        <bean class="mx.com.inscitech.fiducia.common.beans.ParametroQueryBean">
                             <property name="name">
                                 <value>Fiso</value>
                             </property>
                         </bean>
-                        <bean class="mx.com.inscitech.fiducia.beans.ParametroQueryBean">
+                        <bean class="mx.com.inscitech.fiducia.common.beans.ParametroQueryBean">
                             <property name="name">
                                 <value>Ano</value>
                             </property>
                         </bean>
-                        <bean class="mx.com.inscitech.fiducia.beans.ParametroQueryBean">
+                        <bean class="mx.com.inscitech.fiducia.common.beans.ParametroQueryBean">
                             <property name="name">
                                 <value>Mes</value>
                             </property>
                         </bean>
-                        <bean class="mx.com.inscitech.fiducia.beans.ParametroQueryBean">
+                        <bean class="mx.com.inscitech.fiducia.common.beans.ParametroQueryBean">
                             <property name="name">
                                 <value>Estructura</value>
                             </property>
                         </bean>
-                        <bean class="mx.com.inscitech.fiducia.beans.ParametroQueryBean">
+                        <bean class="mx.com.inscitech.fiducia.common.beans.ParametroQueryBean">
                             <property name="name">
                                 <value>Usuario</value>
                             </property>
@@ -1005,27 +1005,27 @@
                 </entry>
                 <entry key="repPolizaConta">
                     <list>
-                        <bean class="mx.com.inscitech.fiducia.beans.ParametroQueryBean">
+                        <bean class="mx.com.inscitech.fiducia.common.beans.ParametroQueryBean">
                             <property name="name">
                                 <value>Fiso</value>
                             </property>
                         </bean>
-                        <bean class="mx.com.inscitech.fiducia.beans.ParametroQueryBean">
+                        <bean class="mx.com.inscitech.fiducia.common.beans.ParametroQueryBean">
                             <property name="name">
                                 <value>Ano</value>
                             </property>
                         </bean>
-                        <bean class="mx.com.inscitech.fiducia.beans.ParametroQueryBean">
+                        <bean class="mx.com.inscitech.fiducia.common.beans.ParametroQueryBean">
                             <property name="name">
                                 <value>Mes</value>
                             </property>
                         </bean>
-                        <bean class="mx.com.inscitech.fiducia.beans.ParametroQueryBean">
+                        <bean class="mx.com.inscitech.fiducia.common.beans.ParametroQueryBean">
                             <property name="name">
                                 <value>Dia</value>
                             </property>
                         </bean>
-                        <bean class="mx.com.inscitech.fiducia.beans.ParametroQueryBean">
+                        <bean class="mx.com.inscitech.fiducia.common.beans.ParametroQueryBean">
                             <property name="name">
                                 <value>Usuario</value>
                             </property>
@@ -1035,22 +1035,22 @@
                 <!-- Balanza Desglosada -->
                 <entry key="repBalanzaDesglosada">
                     <list>
-                        <bean class="mx.com.inscitech.fiducia.beans.ParametroQueryBean">
+                        <bean class="mx.com.inscitech.fiducia.common.beans.ParametroQueryBean">
                             <property name="name">
                                 <value>Fiso</value>
                             </property>
                         </bean>
-                        <bean class="mx.com.inscitech.fiducia.beans.ParametroQueryBean">
+                        <bean class="mx.com.inscitech.fiducia.common.beans.ParametroQueryBean">
                             <property name="name">
                                 <value>FechaDel</value>
                             </property>
                         </bean>
-                        <bean class="mx.com.inscitech.fiducia.beans.ParametroQueryBean">
+                        <bean class="mx.com.inscitech.fiducia.common.beans.ParametroQueryBean">
                             <property name="name">
                                 <value>FechaAl</value>
                             </property>
                         </bean>
-                        <bean class="mx.com.inscitech.fiducia.beans.ParametroQueryBean">
+                        <bean class="mx.com.inscitech.fiducia.common.beans.ParametroQueryBean">
                             <property name="name">
                                 <value>Estructura</value>
                             </property>
@@ -1059,67 +1059,67 @@
                 </entry>
                 <entry key="repAuxiliarporCuenta">
                     <list>
-                        <bean class="mx.com.inscitech.fiducia.beans.ParametroQueryBean">
+                        <bean class="mx.com.inscitech.fiducia.common.beans.ParametroQueryBean">
                             <property name="name">
                                 <value>Fiso</value>
                             </property>
                         </bean>
-                        <bean class="mx.com.inscitech.fiducia.beans.ParametroQueryBean">
+                        <bean class="mx.com.inscitech.fiducia.common.beans.ParametroQueryBean">
                             <property name="name">
                                 <value>FechaDel</value>
                             </property>
                         </bean>
-                        <bean class="mx.com.inscitech.fiducia.beans.ParametroQueryBean">
+                        <bean class="mx.com.inscitech.fiducia.common.beans.ParametroQueryBean">
                             <property name="name">
                                 <value>FechaAl</value>
                             </property>
                         </bean>
-                        <bean class="mx.com.inscitech.fiducia.beans.ParametroQueryBean">
+                        <bean class="mx.com.inscitech.fiducia.common.beans.ParametroQueryBean">
                             <property name="name">
                                 <value>NumCtam</value>
                             </property>
                         </bean>
-                        <bean class="mx.com.inscitech.fiducia.beans.ParametroQueryBean">
+                        <bean class="mx.com.inscitech.fiducia.common.beans.ParametroQueryBean">
                             <property name="name">
                                 <value>NumScta</value>
                             </property>
                         </bean>
-                        <bean class="mx.com.inscitech.fiducia.beans.ParametroQueryBean">
+                        <bean class="mx.com.inscitech.fiducia.common.beans.ParametroQueryBean">
                             <property name="name">
                                 <value>NumSscta</value>
                             </property>
                         </bean>
-                        <bean class="mx.com.inscitech.fiducia.beans.ParametroQueryBean">
+                        <bean class="mx.com.inscitech.fiducia.common.beans.ParametroQueryBean">
                             <property name="name">
                                 <value>NumSsscta</value>
                             </property>
                         </bean>
-                        <bean class="mx.com.inscitech.fiducia.beans.ParametroQueryBean">
+                        <bean class="mx.com.inscitech.fiducia.common.beans.ParametroQueryBean">
                             <property name="name">
                                 <value>NumSssscta</value>
                             </property>
                         </bean>
-                        <bean class="mx.com.inscitech.fiducia.beans.ParametroQueryBean">
+                        <bean class="mx.com.inscitech.fiducia.common.beans.ParametroQueryBean">
                             <property name="name">
                                 <value>NumSsssscta</value>
                             </property>
                         </bean>
-                        <bean class="mx.com.inscitech.fiducia.beans.ParametroQueryBean">
+                        <bean class="mx.com.inscitech.fiducia.common.beans.ParametroQueryBean">
                             <property name="name">
                                 <value>NumAux2</value>
                             </property>
                         </bean>
-                        <bean class="mx.com.inscitech.fiducia.beans.ParametroQueryBean">
+                        <bean class="mx.com.inscitech.fiducia.common.beans.ParametroQueryBean">
                             <property name="name">
                                 <value>NumAux3</value>
                             </property>
                         </bean>
-                        <bean class="mx.com.inscitech.fiducia.beans.ParametroQueryBean">
+                        <bean class="mx.com.inscitech.fiducia.common.beans.ParametroQueryBean">
                             <property name="name">
                                 <value>Estructura</value>
                             </property>
                         </bean>
-                        <bean class="mx.com.inscitech.fiducia.beans.ParametroQueryBean">
+                        <bean class="mx.com.inscitech.fiducia.common.beans.ParametroQueryBean">
                             <property name="name">
                                 <value>Usuario</value>
                             </property>
@@ -1128,7 +1128,7 @@
                 </entry>
                 <entry key="ejeStoBalFid">
                     <list>
-                        <bean class="mx.com.inscitech.fiducia.beans.ParametroQueryBean">
+                        <bean class="mx.com.inscitech.fiducia.common.beans.ParametroQueryBean">
                             <property name="name">
                                 <value>Usuario</value>
                             </property>
@@ -1137,7 +1137,7 @@
                 </entry>
                 <entry key="getMandatosComisiones">
                     <list>
-                        <bean class="mx.com.inscitech.fiducia.beans.ParametroQueryBean">
+                        <bean class="mx.com.inscitech.fiducia.common.beans.ParametroQueryBean">
                             <property name="name">
                                 <value>Usuario</value>
                             </property>
@@ -1146,7 +1146,7 @@
                 </entry>
                 <entry key="getEdosFinanDinamic">
                     <list>
-                        <bean class="mx.com.inscitech.fiducia.beans.ParametroQueryBean">
+                        <bean class="mx.com.inscitech.fiducia.common.beans.ParametroQueryBean">
                             <property name="name">
                                 <value>Usuario</value>
                             </property>
@@ -1160,7 +1160,7 @@
                                 <value>=</value>
                             </property>
                         </bean>
-                        <bean class="mx.com.inscitech.fiducia.beans.ParametroQueryBean">
+                        <bean class="mx.com.inscitech.fiducia.common.beans.ParametroQueryBean">
                             <property name="name">
                                 <value>Fiso</value>
                             </property>
@@ -1174,7 +1174,7 @@
                                 <value>=</value>
                             </property>
                         </bean>
-                        <bean class="mx.com.inscitech.fiducia.beans.ParametroQueryBean">
+                        <bean class="mx.com.inscitech.fiducia.common.beans.ParametroQueryBean">
                             <property name="name">
                                 <value>EdoFinan</value>
                             </property>
@@ -1188,13 +1188,13 @@
                                 <value>=</value>
                             </property>
                         </bean>
-                        <!--<bean class="mx.com.inscitech.fiducia.beans.ParametroQueryBean">
+                        <!--<bean class="mx.com.inscitech.fiducia.common.beans.ParametroQueryBean">
               <property name="name"><value>OrdenDato</value></property>
               <property name="sqlName"><value>E.REF_ORDEN_DATO</value></property>
               <property name="clauseType"><value>AND</value></property>
               <property name="conditionType"><value>=</value></property>
             </bean>-->
-                        <bean class="mx.com.inscitech.fiducia.beans.ParametroQueryBean">
+                        <bean class="mx.com.inscitech.fiducia.common.beans.ParametroQueryBean">
                             <property name="name">
                                 <value>Order</value>
                             </property>
@@ -1209,7 +1209,7 @@
                 </entry>
                 <entry key="getPolizaConta">
                     <list>
-                        <bean class="mx.com.inscitech.fiducia.beans.ParametroQueryBean">
+                        <bean class="mx.com.inscitech.fiducia.common.beans.ParametroQueryBean">
                             <property name="name">
                                 <value>Usuario</value>
                             </property>
@@ -1218,7 +1218,7 @@
                 </entry>
                 <entry key="getAuxiliarporCuenta">
                     <list>
-                        <bean class="mx.com.inscitech.fiducia.beans.ParametroQueryBean">
+                        <bean class="mx.com.inscitech.fiducia.common.beans.ParametroQueryBean">
                             <property name="name">
                                 <value>Usuario</value>
                             </property>
@@ -1228,7 +1228,7 @@
                 <!--AGENDA-->
                 <!--entry key="muestraTextosAgenda">
           <list>
-            <bean class="mx.com.inscitech.fiducia.beans.ParametroQueryBean">
+            <bean class="mx.com.inscitech.fiducia.common.beans.ParametroQueryBean">
               <property name="name"><value>numFolio</value></property>
               <property name="sqlName"><value>EAGE_ID_FOLIO</value></property>
               <property name="clauseType"><value>AND</value></property>
@@ -1238,7 +1238,7 @@
         </entry-->
                 <entry key="muestraTextosAgenda">
                     <list>
-                        <bean class="mx.com.inscitech.fiducia.beans.ParametroQueryBean">
+                        <bean class="mx.com.inscitech.fiducia.common.beans.ParametroQueryBean">
                             <property name="name">
                                 <value>numFolio</value>
                             </property>
@@ -1251,17 +1251,17 @@
                 <!--ReporteAgenda-->
                 <entry key="getRepAgenda">
                     <list>
-                        <bean class="mx.com.inscitech.fiducia.beans.ParametroQueryBean">
+                        <bean class="mx.com.inscitech.fiducia.common.beans.ParametroQueryBean">
                             <property name="name">
                                 <value>usuMod</value>
                             </property>
                         </bean>
-                        <bean class="mx.com.inscitech.fiducia.beans.ParametroQueryBean">
+                        <bean class="mx.com.inscitech.fiducia.common.beans.ParametroQueryBean">
                             <property name="name">
                                 <value>numUsu</value>
                             </property>
                         </bean>
-                        <bean class="mx.com.inscitech.fiducia.beans.ParametroQueryBean">
+                        <bean class="mx.com.inscitech.fiducia.common.beans.ParametroQueryBean">
                             <property name="name">
                                 <value>fecEvento</value>
                             </property>
@@ -1270,7 +1270,7 @@
                 </entry>
                 <entry key="getRepAgendaFecha">
                     <list>
-                        <bean class="mx.com.inscitech.fiducia.beans.ParametroQueryBean">
+                        <bean class="mx.com.inscitech.fiducia.common.beans.ParametroQueryBean">
                             <property name="name">
                                 <value>fecEvento</value>
                             </property>
@@ -1279,12 +1279,12 @@
                 </entry>
                 <entry key="getRepAgendaUsuario">
                     <list>
-                        <bean class="mx.com.inscitech.fiducia.beans.ParametroQueryBean">
+                        <bean class="mx.com.inscitech.fiducia.common.beans.ParametroQueryBean">
                             <property name="name">
                                 <value>usuMod</value>
                             </property>
                         </bean>
-                        <bean class="mx.com.inscitech.fiducia.beans.ParametroQueryBean">
+                        <bean class="mx.com.inscitech.fiducia.common.beans.ParametroQueryBean">
                             <property name="name">
                                 <value>numUsu</value>
                             </property>
@@ -1293,22 +1293,22 @@
                 </entry>
                 <entry key="getRepAgendaStatus">
                     <list>
-                        <bean class="mx.com.inscitech.fiducia.beans.ParametroQueryBean">
+                        <bean class="mx.com.inscitech.fiducia.common.beans.ParametroQueryBean">
                             <property name="name">
                                 <value>usuMod</value>
                             </property>
                         </bean>
-                        <bean class="mx.com.inscitech.fiducia.beans.ParametroQueryBean">
+                        <bean class="mx.com.inscitech.fiducia.common.beans.ParametroQueryBean">
                             <property name="name">
                                 <value>numUsu</value>
                             </property>
                         </bean>
-                        <bean class="mx.com.inscitech.fiducia.beans.ParametroQueryBean">
+                        <bean class="mx.com.inscitech.fiducia.common.beans.ParametroQueryBean">
                             <property name="name">
                                 <value>fecEvento</value>
                             </property>
                         </bean>
-                        <bean class="mx.com.inscitech.fiducia.beans.ParametroQueryBean">
+                        <bean class="mx.com.inscitech.fiducia.common.beans.ParametroQueryBean">
                             <property name="name">
                                 <value>Status</value>
                             </property>
@@ -1317,12 +1317,12 @@
                 </entry>
                 <entry key="getRepAgendaFechaStatus">
                     <list>
-                        <bean class="mx.com.inscitech.fiducia.beans.ParametroQueryBean">
+                        <bean class="mx.com.inscitech.fiducia.common.beans.ParametroQueryBean">
                             <property name="name">
                                 <value>fecEvento</value>
                             </property>
                         </bean>
-                        <bean class="mx.com.inscitech.fiducia.beans.ParametroQueryBean">
+                        <bean class="mx.com.inscitech.fiducia.common.beans.ParametroQueryBean">
                             <property name="name">
                                 <value>Status</value>
                             </property>
@@ -1331,17 +1331,17 @@
                 </entry>
                 <entry key="getRepAgendaUsuarioStatus">
                     <list>
-                        <bean class="mx.com.inscitech.fiducia.beans.ParametroQueryBean">
+                        <bean class="mx.com.inscitech.fiducia.common.beans.ParametroQueryBean">
                             <property name="name">
                                 <value>usuMod</value>
                             </property>
                         </bean>
-                        <bean class="mx.com.inscitech.fiducia.beans.ParametroQueryBean">
+                        <bean class="mx.com.inscitech.fiducia.common.beans.ParametroQueryBean">
                             <property name="name">
                                 <value>numUsu</value>
                             </property>
                         </bean>
-                        <bean class="mx.com.inscitech.fiducia.beans.ParametroQueryBean">
+                        <bean class="mx.com.inscitech.fiducia.common.beans.ParametroQueryBean">
                             <property name="name">
                                 <value>Status</value>
                             </property>
@@ -1350,7 +1350,7 @@
                 </entry>
                 <entry key="getRepAgendaTodoStatus">
                     <list>
-                        <bean class="mx.com.inscitech.fiducia.beans.ParametroQueryBean">
+                        <bean class="mx.com.inscitech.fiducia.common.beans.ParametroQueryBean">
                             <property name="name">
                                 <value>Status</value>
                             </property>
@@ -1361,7 +1361,7 @@
                 <!-- Conversi�n de Cuentas -->
                 <entry key="getConversionCuenta">
                     <list>
-                        <bean class="mx.com.inscitech.fiducia.beans.ParametroQueryBean">
+                        <bean class="mx.com.inscitech.fiducia.common.beans.ParametroQueryBean">
                             <property name="name">
                                 <value>NumCtam</value>
                             </property>
@@ -1375,7 +1375,7 @@
                                 <value>=</value>
                             </property>
                         </bean>
-                        <bean class="mx.com.inscitech.fiducia.beans.ParametroQueryBean">
+                        <bean class="mx.com.inscitech.fiducia.common.beans.ParametroQueryBean">
                             <property name="name">
                                 <value>NumScta</value>
                             </property>
@@ -1389,7 +1389,7 @@
                                 <value>=</value>
                             </property>
                         </bean>
-                        <bean class="mx.com.inscitech.fiducia.beans.ParametroQueryBean">
+                        <bean class="mx.com.inscitech.fiducia.common.beans.ParametroQueryBean">
                             <property name="name">
                                 <value>NumSscta</value>
                             </property>
@@ -1403,7 +1403,7 @@
                                 <value>=</value>
                             </property>
                         </bean>
-                        <bean class="mx.com.inscitech.fiducia.beans.ParametroQueryBean">
+                        <bean class="mx.com.inscitech.fiducia.common.beans.ParametroQueryBean">
                             <property name="name">
                                 <value>NumSsscta</value>
                             </property>
@@ -1417,7 +1417,7 @@
                                 <value>=</value>
                             </property>
                         </bean>
-                        <bean class="mx.com.inscitech.fiducia.beans.ParametroQueryBean">
+                        <bean class="mx.com.inscitech.fiducia.common.beans.ParametroQueryBean">
                             <property name="name">
                                 <value>NumSssscta</value>
                             </property>
@@ -1431,7 +1431,7 @@
                                 <value>=</value>
                             </property>
                         </bean>
-                        <bean class="mx.com.inscitech.fiducia.beans.ParametroQueryBean">
+                        <bean class="mx.com.inscitech.fiducia.common.beans.ParametroQueryBean">
                             <property name="name">
                                 <value>NumSsssscta</value>
                             </property>
@@ -1445,7 +1445,7 @@
                                 <value>=</value>
                             </property>
                         </bean>
-                        <bean class="mx.com.inscitech.fiducia.beans.ParametroQueryBean">
+                        <bean class="mx.com.inscitech.fiducia.common.beans.ParametroQueryBean">
                             <property name="name">
                                 <value>NumCtamOrd</value>
                             </property>
@@ -1459,7 +1459,7 @@
                                 <value>=</value>
                             </property>
                         </bean>
-                        <bean class="mx.com.inscitech.fiducia.beans.ParametroQueryBean">
+                        <bean class="mx.com.inscitech.fiducia.common.beans.ParametroQueryBean">
                             <property name="name">
                                 <value>NumSctaOrd</value>
                             </property>
@@ -1473,7 +1473,7 @@
                                 <value>=</value>
                             </property>
                         </bean>
-                        <bean class="mx.com.inscitech.fiducia.beans.ParametroQueryBean">
+                        <bean class="mx.com.inscitech.fiducia.common.beans.ParametroQueryBean">
                             <property name="name">
                                 <value>NumSsctaOrd</value>
                             </property>
@@ -1487,7 +1487,7 @@
                                 <value>=</value>
                             </property>
                         </bean>
-                        <bean class="mx.com.inscitech.fiducia.beans.ParametroQueryBean">
+                        <bean class="mx.com.inscitech.fiducia.common.beans.ParametroQueryBean">
                             <property name="name">
                                 <value>NumSssctaOrd</value>
                             </property>
@@ -1501,7 +1501,7 @@
                                 <value>=</value>
                             </property>
                         </bean>
-                        <bean class="mx.com.inscitech.fiducia.beans.ParametroQueryBean">
+                        <bean class="mx.com.inscitech.fiducia.common.beans.ParametroQueryBean">
                             <property name="name">
                                 <value>NumSsssctaOrd</value>
                             </property>
@@ -1515,7 +1515,7 @@
                                 <value>=</value>
                             </property>
                         </bean>
-                        <bean class="mx.com.inscitech.fiducia.beans.ParametroQueryBean">
+                        <bean class="mx.com.inscitech.fiducia.common.beans.ParametroQueryBean">
                             <property name="name">
                                 <value>NumSssssctaOrd</value>
                             </property>
@@ -1529,7 +1529,7 @@
                                 <value>=</value>
                             </property>
                         </bean>
-                        <bean class="mx.com.inscitech.fiducia.beans.ParametroQueryBean">
+                        <bean class="mx.com.inscitech.fiducia.common.beans.ParametroQueryBean">
                             <property name="name">
                                 <value>order</value>
                             </property>
@@ -1544,7 +1544,7 @@
                 </entry>
                 <entry key="getEstadoCambios">
                     <list>
-                        <bean class="mx.com.inscitech.fiducia.beans.ParametroQueryBean">
+                        <bean class="mx.com.inscitech.fiducia.common.beans.ParametroQueryBean">
                             <property name="name">
                                 <value>Fiso</value>
                             </property>
@@ -1558,7 +1558,7 @@
                                 <value>=</value>
                             </property>
                         </bean>
-                        <bean class="mx.com.inscitech.fiducia.beans.ParametroQueryBean">
+                        <bean class="mx.com.inscitech.fiducia.common.beans.ParametroQueryBean">
                             <property name="name">
                                 <value>Ano</value>
                             </property>
@@ -1572,7 +1572,7 @@
                                 <value>=</value>
                             </property>
                         </bean>
-                        <bean class="mx.com.inscitech.fiducia.beans.ParametroQueryBean">
+                        <bean class="mx.com.inscitech.fiducia.common.beans.ParametroQueryBean">
                             <property name="name">
                                 <value>Mes</value>
                             </property>
@@ -1586,7 +1586,7 @@
                                 <value>=</value>
                             </property>
                         </bean>
-                        <bean class="mx.com.inscitech.fiducia.beans.ParametroQueryBean">
+                        <bean class="mx.com.inscitech.fiducia.common.beans.ParametroQueryBean">
                             <property name="name">
                                 <value>NoCuenta</value>
                             </property>
@@ -1600,7 +1600,7 @@
                                 <value>=</value>
                             </property>
                         </bean>
-                        <bean class="mx.com.inscitech.fiducia.beans.ParametroQueryBean">
+                        <bean class="mx.com.inscitech.fiducia.common.beans.ParametroQueryBean">
                             <property name="name">
                                 <value>Usuario</value>
                             </property>
@@ -1614,7 +1614,7 @@
                                 <value>=</value>
                             </property>
                         </bean>
-                        <bean class="mx.com.inscitech.fiducia.beans.ParametroQueryBean">
+                        <bean class="mx.com.inscitech.fiducia.common.beans.ParametroQueryBean">
                             <property name="name">
                                 <value>order</value>
                             </property>
@@ -1630,7 +1630,7 @@
                 <!-- Cuentas Individuales -->
                 <entry key="repCtasIndividuales">
                     <list>
-                        <bean class="mx.com.inscitech.fiducia.beans.ParametroQueryBean">
+                        <bean class="mx.com.inscitech.fiducia.common.beans.ParametroQueryBean">
                             <property name="out">
                                 <value>true</value>
                             </property>
@@ -1641,57 +1641,57 @@
                                 <value>RESULTADO</value>
                             </property>
                         </bean>
-                        <bean class="mx.com.inscitech.fiducia.beans.ParametroQueryBean">
+                        <bean class="mx.com.inscitech.fiducia.common.beans.ParametroQueryBean">
                             <property name="name">
                                 <value>Tipo</value>
                             </property>
                         </bean>
-                        <bean class="mx.com.inscitech.fiducia.beans.ParametroQueryBean">
+                        <bean class="mx.com.inscitech.fiducia.common.beans.ParametroQueryBean">
                             <property name="name">
                                 <value>Fideicomiso</value>
                             </property>
                         </bean>
-                        <bean class="mx.com.inscitech.fiducia.beans.ParametroQueryBean">
+                        <bean class="mx.com.inscitech.fiducia.common.beans.ParametroQueryBean">
                             <property name="name">
                                 <value>FechaInicial</value>
                             </property>
                         </bean>
-                        <bean class="mx.com.inscitech.fiducia.beans.ParametroQueryBean">
+                        <bean class="mx.com.inscitech.fiducia.common.beans.ParametroQueryBean">
                             <property name="name">
                                 <value>FechaFinal</value>
                             </property>
                         </bean>
-                        <bean class="mx.com.inscitech.fiducia.beans.ParametroQueryBean">
+                        <bean class="mx.com.inscitech.fiducia.common.beans.ParametroQueryBean">
                             <property name="name">
                                 <value>CveNiv1</value>
                             </property>
                         </bean>
-                        <bean class="mx.com.inscitech.fiducia.beans.ParametroQueryBean">
+                        <bean class="mx.com.inscitech.fiducia.common.beans.ParametroQueryBean">
                             <property name="name">
                                 <value>CveNiv2</value>
                             </property>
                         </bean>
-                        <bean class="mx.com.inscitech.fiducia.beans.ParametroQueryBean">
+                        <bean class="mx.com.inscitech.fiducia.common.beans.ParametroQueryBean">
                             <property name="name">
                                 <value>CveNiv3</value>
                             </property>
                         </bean>
-                        <bean class="mx.com.inscitech.fiducia.beans.ParametroQueryBean">
+                        <bean class="mx.com.inscitech.fiducia.common.beans.ParametroQueryBean">
                             <property name="name">
                                 <value>NomNiv1</value>
                             </property>
                         </bean>
-                        <bean class="mx.com.inscitech.fiducia.beans.ParametroQueryBean">
+                        <bean class="mx.com.inscitech.fiducia.common.beans.ParametroQueryBean">
                             <property name="name">
                                 <value>NomNiv2</value>
                             </property>
                         </bean>
-                        <bean class="mx.com.inscitech.fiducia.beans.ParametroQueryBean">
+                        <bean class="mx.com.inscitech.fiducia.common.beans.ParametroQueryBean">
                             <property name="name">
                                 <value>NomNiv3</value>
                             </property>
                         </bean>
-                        <bean class="mx.com.inscitech.fiducia.beans.ParametroQueryBean">
+                        <bean class="mx.com.inscitech.fiducia.common.beans.ParametroQueryBean">
                             <property name="name">
                                 <value>NumNiveles</value>
                             </property>
@@ -1701,7 +1701,7 @@
                 <!-- Emision de Titulos -->
                 <entry key="getDatCalculoIntereses">
                     <list>
-                        <bean class="mx.com.inscitech.fiducia.beans.ParametroQueryBean">
+                        <bean class="mx.com.inscitech.fiducia.common.beans.ParametroQueryBean">
                             <property name="name">
                                 <value>Programa</value>
                             </property>
@@ -1715,7 +1715,7 @@
                                 <value>=</value>
                             </property>
                         </bean>
-                        <bean class="mx.com.inscitech.fiducia.beans.ParametroQueryBean">
+                        <bean class="mx.com.inscitech.fiducia.common.beans.ParametroQueryBean">
                             <property name="name">
                                 <value>Emision</value>
                             </property>
@@ -1729,7 +1729,7 @@
                                 <value>=</value>
                             </property>
                         </bean>
-                        <bean class="mx.com.inscitech.fiducia.beans.ParametroQueryBean">
+                        <bean class="mx.com.inscitech.fiducia.common.beans.ParametroQueryBean">
                             <property name="name">
                                 <value>Fideicomiso</value>
                             </property>
@@ -1743,7 +1743,7 @@
                                 <value>=</value>
                             </property>
                         </bean>
-                        <bean class="mx.com.inscitech.fiducia.beans.ParametroQueryBean">
+                        <bean class="mx.com.inscitech.fiducia.common.beans.ParametroQueryBean">
                             <property name="name">
                                 <value>Periodo</value>
                             </property>
@@ -1757,7 +1757,7 @@
                                 <value>=</value>
                             </property>
                         </bean>
-                        <bean class="mx.com.inscitech.fiducia.beans.ParametroQueryBean">
+                        <bean class="mx.com.inscitech.fiducia.common.beans.ParametroQueryBean">
                             <property name="name">
                                 <value>NameReporte</value>
                             </property>
@@ -1775,7 +1775,7 @@
                 </entry>
                 <entry key="emision.conETArcPla">
                     <list>
-                        <bean class="mx.com.inscitech.fiducia.beans.ParametroQueryBean">
+                        <bean class="mx.com.inscitech.fiducia.common.beans.ParametroQueryBean">
                             <property name="name">
                                 <value>Fecha</value>
                             </property>
@@ -1789,7 +1789,7 @@
                                 <value>=</value>
                             </property>
                         </bean>
-                        <bean class="mx.com.inscitech.fiducia.beans.ParametroQueryBean">
+                        <bean class="mx.com.inscitech.fiducia.common.beans.ParametroQueryBean">
                             <property name="name">
                                 <value>Archivo</value>
                             </property>
@@ -1803,7 +1803,7 @@
                                 <value>=</value>
                             </property>
                         </bean>
-                        <bean class="mx.com.inscitech.fiducia.beans.ParametroQueryBean">
+                        <bean class="mx.com.inscitech.fiducia.common.beans.ParametroQueryBean">
                             <property name="name">
                                 <value>order</value>
                             </property>
@@ -1818,7 +1818,7 @@
                 </entry>
                 <entry key="emision.repFunRepDistribucion">
                     <list>
-                        <bean class="mx.com.inscitech.fiducia.beans.ParametroQueryBean">
+                        <bean class="mx.com.inscitech.fiducia.common.beans.ParametroQueryBean">
                             <property name="out">
                                 <value>true</value>
                             </property>
@@ -1829,22 +1829,22 @@
                                 <value>NUMBER</value>
                             </property>
                         </bean>
-                        <bean class="mx.com.inscitech.fiducia.beans.ParametroQueryBean">
+                        <bean class="mx.com.inscitech.fiducia.common.beans.ParametroQueryBean">
                             <property name="name">
                                 <value>Programa</value>
                             </property>
                         </bean>
-                        <bean class="mx.com.inscitech.fiducia.beans.ParametroQueryBean">
+                        <bean class="mx.com.inscitech.fiducia.common.beans.ParametroQueryBean">
                             <property name="name">
                                 <value>Fideicomiso</value>
                             </property>
                         </bean>
-                        <bean class="mx.com.inscitech.fiducia.beans.ParametroQueryBean">
+                        <bean class="mx.com.inscitech.fiducia.common.beans.ParametroQueryBean">
                             <property name="name">
                                 <value>Emision</value>
                             </property>
                         </bean>
-                        <bean class="mx.com.inscitech.fiducia.beans.ParametroQueryBean">
+                        <bean class="mx.com.inscitech.fiducia.common.beans.ParametroQueryBean">
                             <property name="name">
                                 <value>Secuencial</value>
                             </property>
@@ -1853,22 +1853,22 @@
                 </entry>
                 <entry key="getRepAgendaEmision">
                     <list>
-                        <bean class="mx.com.inscitech.fiducia.beans.ParametroQueryBean">
+                        <bean class="mx.com.inscitech.fiducia.common.beans.ParametroQueryBean">
                             <property name="name">
                                 <value>usuMod</value>
                             </property>
                         </bean>
-                        <bean class="mx.com.inscitech.fiducia.beans.ParametroQueryBean">
+                        <bean class="mx.com.inscitech.fiducia.common.beans.ParametroQueryBean">
                             <property name="name">
                                 <value>numUsu</value>
                             </property>
                         </bean>
-                        <bean class="mx.com.inscitech.fiducia.beans.ParametroQueryBean">
+                        <bean class="mx.com.inscitech.fiducia.common.beans.ParametroQueryBean">
                             <property name="name">
                                 <value>fecEvento</value>
                             </property>
                         </bean>
-                        <bean class="mx.com.inscitech.fiducia.beans.ParametroQueryBean">
+                        <bean class="mx.com.inscitech.fiducia.common.beans.ParametroQueryBean">
                             <property name="name">
                                 <value>fecfinEvento</value>
                             </property>
@@ -1878,12 +1878,12 @@
                 <!--VECTOR-->
                 <entry key="emision.qryVectorDiferente">
                     <list>
-                        <bean class="mx.com.inscitech.fiducia.beans.ParametroQueryBean">
+                        <bean class="mx.com.inscitech.fiducia.common.beans.ParametroQueryBean">
                             <property name="name">
                                 <value>nomArchivo</value>
                             </property>
                         </bean>
-                        <bean class="mx.com.inscitech.fiducia.beans.ParametroQueryBean">
+                        <bean class="mx.com.inscitech.fiducia.common.beans.ParametroQueryBean">
                             <property name="name">
                                 <value>fechaArchivo</value>
                             </property>
@@ -1895,7 +1895,7 @@
                 <!-- Estado de Cuenta-->
                 <entry key="qryEdoCta">
                     <list>
-                        <bean class="mx.com.inscitech.fiducia.beans.ParametroQueryBean">
+                        <bean class="mx.com.inscitech.fiducia.common.beans.ParametroQueryBean">
                             <property name="name">
                                 <value>Usuario</value>
                             </property>
@@ -1909,7 +1909,7 @@
                                 <value>=</value>
                             </property>
                         </bean>
-                        <bean class="mx.com.inscitech.fiducia.beans.ParametroQueryBean">
+                        <bean class="mx.com.inscitech.fiducia.common.beans.ParametroQueryBean">
                             <property name="name">
                                 <value>Order</value>
                             </property>
@@ -1924,27 +1924,27 @@
                 </entry>
                 <entry key="spEdoCta">
                     <list>
-                        <bean class="mx.com.inscitech.fiducia.beans.ParametroQueryBean">
+                        <bean class="mx.com.inscitech.fiducia.common.beans.ParametroQueryBean">
                             <property name="name">
                                 <value>Fiso</value>
                             </property>
                         </bean>
-                        <bean class="mx.com.inscitech.fiducia.beans.ParametroQueryBean">
+                        <bean class="mx.com.inscitech.fiducia.common.beans.ParametroQueryBean">
                             <property name="name">
                                 <value>FechaInicial</value>
                             </property>
                         </bean>
-                        <bean class="mx.com.inscitech.fiducia.beans.ParametroQueryBean">
+                        <bean class="mx.com.inscitech.fiducia.common.beans.ParametroQueryBean">
                             <property name="name">
                                 <value>FechaFinal</value>
                             </property>
                         </bean>
-                        <bean class="mx.com.inscitech.fiducia.beans.ParametroQueryBean">
+                        <bean class="mx.com.inscitech.fiducia.common.beans.ParametroQueryBean">
                             <property name="name">
                                 <value>CtaCheques</value>
                             </property>
                         </bean>
-                        <bean class="mx.com.inscitech.fiducia.beans.ParametroQueryBean">
+                        <bean class="mx.com.inscitech.fiducia.common.beans.ParametroQueryBean">
                             <property name="name">
                                 <value>Usuario</value>
                             </property>
@@ -1954,7 +1954,7 @@
                 <!-- Movimientos diarios-->
                 <entry key="qryMovDia">
                     <list>
-                        <bean class="mx.com.inscitech.fiducia.beans.ParametroQueryBean">
+                        <bean class="mx.com.inscitech.fiducia.common.beans.ParametroQueryBean">
                             <property name="name">
                                 <value>Usuario</value>
                             </property>
@@ -1968,7 +1968,7 @@
                                 <value>=</value>
                             </property>
                         </bean>
-                        <bean class="mx.com.inscitech.fiducia.beans.ParametroQueryBean">
+                        <bean class="mx.com.inscitech.fiducia.common.beans.ParametroQueryBean">
                             <property name="name">
                                 <value>Order</value>
                             </property>
@@ -1983,27 +1983,27 @@
                 </entry>
                 <entry key="spMovDia">
                     <list>
-                        <bean class="mx.com.inscitech.fiducia.beans.ParametroQueryBean">
+                        <bean class="mx.com.inscitech.fiducia.common.beans.ParametroQueryBean">
                             <property name="name">
                                 <value>Fiso</value>
                             </property>
                         </bean>
-                        <bean class="mx.com.inscitech.fiducia.beans.ParametroQueryBean">
+                        <bean class="mx.com.inscitech.fiducia.common.beans.ParametroQueryBean">
                             <property name="name">
                                 <value>FechaInicial</value>
                             </property>
                         </bean>
-                        <bean class="mx.com.inscitech.fiducia.beans.ParametroQueryBean">
+                        <bean class="mx.com.inscitech.fiducia.common.beans.ParametroQueryBean">
                             <property name="name">
                                 <value>FechaFinal</value>
                             </property>
                         </bean>
-                        <bean class="mx.com.inscitech.fiducia.beans.ParametroQueryBean">
+                        <bean class="mx.com.inscitech.fiducia.common.beans.ParametroQueryBean">
                             <property name="name">
                                 <value>CtaCheques</value>
                             </property>
                         </bean>
-                        <bean class="mx.com.inscitech.fiducia.beans.ParametroQueryBean">
+                        <bean class="mx.com.inscitech.fiducia.common.beans.ParametroQueryBean">
                             <property name="name">
                                 <value>Usuario</value>
                             </property>
@@ -2012,7 +2012,7 @@
                 </entry>
                 <entry key="spEnvioInfo">
                     <list>
-                        <bean class="mx.com.inscitech.fiducia.beans.ParametroQueryBean">
+                        <bean class="mx.com.inscitech.fiducia.common.beans.ParametroQueryBean">
                             <property name="name">
                                 <value>Fiso</value>
                             </property>
@@ -2022,22 +2022,22 @@
                 <!--Reportes TRACs-->
                 <entry key="spGeneraCartera">
                     <list>
-                        <bean class="mx.com.inscitech.fiducia.beans.ParametroQueryBean">
+                        <bean class="mx.com.inscitech.fiducia.common.beans.ParametroQueryBean">
                             <property name="name">
                                 <value>nomArchivo</value>
                             </property>
                         </bean>
-                        <bean class="mx.com.inscitech.fiducia.beans.ParametroQueryBean">
+                        <bean class="mx.com.inscitech.fiducia.common.beans.ParametroQueryBean">
                             <property name="name">
                                 <value>fecha</value>
                             </property>
                         </bean>
-                        <bean class="mx.com.inscitech.fiducia.beans.ParametroQueryBean">
+                        <bean class="mx.com.inscitech.fiducia.common.beans.ParametroQueryBean">
                             <property name="name">
                                 <value>numUsuario</value>
                             </property>
                         </bean>
-                        <bean class="mx.com.inscitech.fiducia.beans.ParametroQueryBean">
+                        <bean class="mx.com.inscitech.fiducia.common.beans.ParametroQueryBean">
                             <property name="name">
                                 <value>numOpcion</value>
                             </property>
@@ -2047,7 +2047,7 @@
                 <entry key="funGeneraReporteNafin">
                     <!--reporte nafin-->
                     <list>
-                        <bean class="mx.com.inscitech.fiducia.beans.ParametroQueryBean">
+                        <bean class="mx.com.inscitech.fiducia.common.beans.ParametroQueryBean">
                             <property name="out">
                                 <value>true</value>
                             </property>
@@ -2058,22 +2058,22 @@
                                 <value>NUMBER</value>
                             </property>
                         </bean>
-                        <bean class="mx.com.inscitech.fiducia.beans.ParametroQueryBean">
+                        <bean class="mx.com.inscitech.fiducia.common.beans.ParametroQueryBean">
                             <property name="name">
                                 <value>nomArchivo</value>
                             </property>
                         </bean>
-                        <bean class="mx.com.inscitech.fiducia.beans.ParametroQueryBean">
+                        <bean class="mx.com.inscitech.fiducia.common.beans.ParametroQueryBean">
                             <property name="name">
                                 <value>fecha</value>
                             </property>
                         </bean>
-                        <bean class="mx.com.inscitech.fiducia.beans.ParametroQueryBean">
+                        <bean class="mx.com.inscitech.fiducia.common.beans.ParametroQueryBean">
                             <property name="name">
                                 <value>usuario</value>
                             </property>
                         </bean>
-                        <bean class="mx.com.inscitech.fiducia.beans.ParametroQueryBean">
+                        <bean class="mx.com.inscitech.fiducia.common.beans.ParametroQueryBean">
                             <property name="name">
                                 <value>opcion</value>
                             </property>
@@ -2083,12 +2083,12 @@
                 <!--GARANTIAS LIQUIDAS-->
                 <entry key="qryReporteBeneficiarioIndividualGarliq">
                     <list>
-                        <bean class="mx.com.inscitech.fiducia.beans.ParametroQueryBean">
+                        <bean class="mx.com.inscitech.fiducia.common.beans.ParametroQueryBean">
                             <property name="name">
                                 <value>fiso</value>
                             </property>
                         </bean>
-                        <bean class="mx.com.inscitech.fiducia.beans.ParametroQueryBean">
+                        <bean class="mx.com.inscitech.fiducia.common.beans.ParametroQueryBean">
                             <property name="name">
                                 <value>beneficiario</value>
                             </property>
@@ -2097,22 +2097,22 @@
                 </entry>
                 <entry key="qryReporteBeneficiarioGarliq">
                     <list>
-                        <bean class="mx.com.inscitech.fiducia.beans.ParametroQueryBean">
+                        <bean class="mx.com.inscitech.fiducia.common.beans.ParametroQueryBean">
                             <property name="name">
                                 <value>fiso</value>
                             </property>
                         </bean>
-                        <bean class="mx.com.inscitech.fiducia.beans.ParametroQueryBean">
+                        <bean class="mx.com.inscitech.fiducia.common.beans.ParametroQueryBean">
                             <property name="name">
                                 <value>credito</value>
                             </property>
                         </bean>
-                        <bean class="mx.com.inscitech.fiducia.beans.ParametroQueryBean">
+                        <bean class="mx.com.inscitech.fiducia.common.beans.ParametroQueryBean">
                             <property name="name">
                                 <value>tipoCredito</value>
                             </property>
                         </bean>
-                        <bean class="mx.com.inscitech.fiducia.beans.ParametroQueryBean">
+                        <bean class="mx.com.inscitech.fiducia.common.beans.ParametroQueryBean">
                             <property name="name">
                                 <value>disposicion</value>
                             </property>
@@ -2122,7 +2122,7 @@
                 <!--TRACs-->
                 <entry key="consultaCarteraTRACs">
                     <list>
-                        <bean class="mx.com.inscitech.fiducia.beans.ParametroQueryBean">
+                        <bean class="mx.com.inscitech.fiducia.common.beans.ParametroQueryBean">
                             <property name="name">
                                 <value>fiso</value>
                             </property>
@@ -2136,7 +2136,7 @@
                                 <value>=</value>
                             </property>
                         </bean>
-                        <bean class="mx.com.inscitech.fiducia.beans.ParametroQueryBean">
+                        <bean class="mx.com.inscitech.fiducia.common.beans.ParametroQueryBean">
                             <property name="name">
                                 <value>fecha</value>
                             </property>
@@ -2150,7 +2150,7 @@
                                 <value>=</value>
                             </property>
                         </bean>
-                        <bean class="mx.com.inscitech.fiducia.beans.ParametroQueryBean">
+                        <bean class="mx.com.inscitech.fiducia.common.beans.ParametroQueryBean">
                             <property name="name">
                                 <value>order</value>
                             </property>
@@ -2166,42 +2166,42 @@
                 <!-- POSICION POR PERIODO -->
                 <entry key="repPosicionporPeriodo">
                     <list>
-                        <bean class="mx.com.inscitech.fiducia.beans.ParametroQueryBean">
+                        <bean class="mx.com.inscitech.fiducia.common.beans.ParametroQueryBean">
                             <property name="name">
                                 <value>Fideicomiso</value>
                             </property>
                         </bean>
-                        <bean class="mx.com.inscitech.fiducia.beans.ParametroQueryBean">
+                        <bean class="mx.com.inscitech.fiducia.common.beans.ParametroQueryBean">
                             <property name="name">
                                 <value>Subcuenta</value>
                             </property>
                         </bean>
-                        <bean class="mx.com.inscitech.fiducia.beans.ParametroQueryBean">
+                        <bean class="mx.com.inscitech.fiducia.common.beans.ParametroQueryBean">
                             <property name="name">
                                 <value>CtoInver</value>
                             </property>
                         </bean>
-                        <bean class="mx.com.inscitech.fiducia.beans.ParametroQueryBean">
+                        <bean class="mx.com.inscitech.fiducia.common.beans.ParametroQueryBean">
                             <property name="name">
                                 <value>Pizarra</value>
                             </property>
                         </bean>
-                        <bean class="mx.com.inscitech.fiducia.beans.ParametroQueryBean">
+                        <bean class="mx.com.inscitech.fiducia.common.beans.ParametroQueryBean">
                             <property name="name">
                                 <value>Serie</value>
                             </property>
                         </bean>
-                        <bean class="mx.com.inscitech.fiducia.beans.ParametroQueryBean">
+                        <bean class="mx.com.inscitech.fiducia.common.beans.ParametroQueryBean">
                             <property name="name">
                                 <value>Cupon</value>
                             </property>
                         </bean>
-                        <bean class="mx.com.inscitech.fiducia.beans.ParametroQueryBean">
+                        <bean class="mx.com.inscitech.fiducia.common.beans.ParametroQueryBean">
                             <property name="name">
                                 <value>FechaIni</value>
                             </property>
                         </bean>
-                        <bean class="mx.com.inscitech.fiducia.beans.ParametroQueryBean">
+                        <bean class="mx.com.inscitech.fiducia.common.beans.ParametroQueryBean">
                             <property name="name">
                                 <value>FechaFin</value>
                             </property>
@@ -2211,7 +2211,7 @@
                 <!--REPOSICION DE FICHAS-->
                 <entry key="repReposicionFichaDeposito">
                     <list>
-                        <bean class="mx.com.inscitech.fiducia.beans.ParametroQueryBean">
+                        <bean class="mx.com.inscitech.fiducia.common.beans.ParametroQueryBean">
                             <property name="name">
                                 <value>folio</value>
                             </property>
@@ -2220,7 +2220,7 @@
                 </entry>
                 <entry key="repReposicionFichaRetiro">
                     <list>
-                        <bean class="mx.com.inscitech.fiducia.beans.ParametroQueryBean">
+                        <bean class="mx.com.inscitech.fiducia.common.beans.ParametroQueryBean">
                             <property name="name">
                                 <value>folio</value>
                             </property>
@@ -2229,7 +2229,7 @@
                 </entry>
                 <entry key="repReposicionFichaTraspaso">
                     <list>
-                        <bean class="mx.com.inscitech.fiducia.beans.ParametroQueryBean">
+                        <bean class="mx.com.inscitech.fiducia.common.beans.ParametroQueryBean">
                             <property name="name">
                                 <value>folio</value>
                             </property>
@@ -2238,7 +2238,7 @@
                 </entry>
                 <entry key="repReposicionFichaCuenta">
                     <list>
-                        <bean class="mx.com.inscitech.fiducia.beans.ParametroQueryBean">
+                        <bean class="mx.com.inscitech.fiducia.common.beans.ParametroQueryBean">
                             <property name="name">
                                 <value>clabe</value>
                             </property>
@@ -2249,7 +2249,7 @@
                 <!--MESA DE CONTROL-->
                 <entry key="repFinalidadesMesaControl">
                     <list>
-                        <bean class="mx.com.inscitech.fiducia.beans.ParametroQueryBean">
+                        <bean class="mx.com.inscitech.fiducia.common.beans.ParametroQueryBean">
                             <property name="name">
                                 <value>FISO</value>
                             </property>
@@ -2267,7 +2267,7 @@
                 </entry>
                 <entry key="getRepFReglaOp">
                     <list>
-                        <bean class="mx.com.inscitech.fiducia.beans.ParametroQueryBean">
+                        <bean class="mx.com.inscitech.fiducia.common.beans.ParametroQueryBean">
                             <property name="name">
                                 <value>numfideico</value>
                             </property>
@@ -2276,7 +2276,7 @@
                 </entry>
                 <entry key="getRepCedAnfis">
                     <list>
-                        <bean class="mx.com.inscitech.fiducia.beans.ParametroQueryBean">
+                        <bean class="mx.com.inscitech.fiducia.common.beans.ParametroQueryBean">
                             <property name="name">
                                 <value>numfideico</value>
                             </property>
@@ -2285,7 +2285,7 @@
                 </entry>
                 <entry key="repFinalidadesProy">
                     <list>
-                        <bean class="mx.com.inscitech.fiducia.beans.ParametroQueryBean">
+                        <bean class="mx.com.inscitech.fiducia.common.beans.ParametroQueryBean">
                             <property name="name">
                                 <value>proyecto</value>
                             </property>
@@ -2294,7 +2294,7 @@
                 </entry>
                 <entry key="repCartaAceptacion">
                     <list>
-                        <bean class="mx.com.inscitech.fiducia.beans.ParametroQueryBean">
+                        <bean class="mx.com.inscitech.fiducia.common.beans.ParametroQueryBean">
                             <property name="name">
                                 <value>proyecto</value>
                             </property>
@@ -2303,7 +2303,7 @@
                 </entry>
                 <entry key="mandaCorreoRechazo">
                     <list>
-                        <bean class="mx.com.inscitech.fiducia.beans.ParametroQueryBean">
+                        <bean class="mx.com.inscitech.fiducia.common.beans.ParametroQueryBean">
                             <property name="name">
                                 <value>proyecto</value>
                             </property>
@@ -2312,7 +2312,7 @@
                 </entry>
                 <entry key="mandaCorreoAcepta">
                     <list>
-                        <bean class="mx.com.inscitech.fiducia.beans.ParametroQueryBean">
+                        <bean class="mx.com.inscitech.fiducia.common.beans.ParametroQueryBean">
                             <property name="name">
                                 <value>proyecto</value>
                             </property>
@@ -2321,7 +2321,7 @@
                 </entry>
                 <entry key="mandaCorreoDocs">
                     <list>
-                        <bean class="mx.com.inscitech.fiducia.beans.ParametroQueryBean">
+                        <bean class="mx.com.inscitech.fiducia.common.beans.ParametroQueryBean">
                             <property name="name">
                                 <value>proyecto</value>
                             </property>
@@ -2330,7 +2330,7 @@
                 </entry>
                 <entry key="mandaCorreoAut6">
                     <list>
-                        <bean class="mx.com.inscitech.fiducia.beans.ParametroQueryBean">
+                        <bean class="mx.com.inscitech.fiducia.common.beans.ParametroQueryBean">
                             <property name="name">
                                 <value>prospecto</value>
                             </property>
@@ -2339,7 +2339,7 @@
                 </entry>
                 <entry key="mandaCorreoFiscal">
                     <list>
-                        <bean class="mx.com.inscitech.fiducia.beans.ParametroQueryBean">
+                        <bean class="mx.com.inscitech.fiducia.common.beans.ParametroQueryBean">
                             <property name="name">
                                 <value>fideico</value>
                             </property>
@@ -2348,17 +2348,17 @@
                 </entry>
                 <entry key="mandaCorreoPLD">
                     <list>
-                        <bean class="mx.com.inscitech.fiducia.beans.ParametroQueryBean">
+                        <bean class="mx.com.inscitech.fiducia.common.beans.ParametroQueryBean">
                             <property name="name">
                                 <value>numProspecto</value>
                             </property>
                         </bean>
-                        <bean class="mx.com.inscitech.fiducia.beans.ParametroQueryBean">
+                        <bean class="mx.com.inscitech.fiducia.common.beans.ParametroQueryBean">
                             <property name="name">
                                 <value>cvePersona</value>
                             </property>
                         </bean>
-                        <bean class="mx.com.inscitech.fiducia.beans.ParametroQueryBean">
+                        <bean class="mx.com.inscitech.fiducia.common.beans.ParametroQueryBean">
                             <property name="name">
                                 <value>numFidben</value>
                             </property>
@@ -2367,17 +2367,17 @@
                 </entry>
                 <entry key="mandaCorreoPLD2">
                     <list>
-                        <bean class="mx.com.inscitech.fiducia.beans.ParametroQueryBean">
+                        <bean class="mx.com.inscitech.fiducia.common.beans.ParametroQueryBean">
                             <property name="name">
                                 <value>numProspecto</value>
                             </property>
                         </bean>
-                        <bean class="mx.com.inscitech.fiducia.beans.ParametroQueryBean">
+                        <bean class="mx.com.inscitech.fiducia.common.beans.ParametroQueryBean">
                             <property name="name">
                                 <value>cvePersona</value>
                             </property>
                         </bean>
-                        <bean class="mx.com.inscitech.fiducia.beans.ParametroQueryBean">
+                        <bean class="mx.com.inscitech.fiducia.common.beans.ParametroQueryBean">
                             <property name="name">
                                 <value>numFidben</value>
                             </property>
@@ -2386,22 +2386,22 @@
                 </entry>
                 <entry key="mandaCorreoInstrucBursatil">
                     <list>
-                        <bean class="mx.com.inscitech.fiducia.beans.ParametroQueryBean">
+                        <bean class="mx.com.inscitech.fiducia.common.beans.ParametroQueryBean">
                             <property name="name">
                                 <value>proyecto</value>
                             </property>
                         </bean>
-                        <bean class="mx.com.inscitech.fiducia.beans.ParametroQueryBean">
+                        <bean class="mx.com.inscitech.fiducia.common.beans.ParametroQueryBean">
                             <property name="name">
                                 <value>proyecto1</value>
                             </property>
                         </bean>
-                        <bean class="mx.com.inscitech.fiducia.beans.ParametroQueryBean">
+                        <bean class="mx.com.inscitech.fiducia.common.beans.ParametroQueryBean">
                             <property name="name">
                                 <value>proyecto2</value>
                             </property>
                         </bean>
-                        <bean class="mx.com.inscitech.fiducia.beans.ParametroQueryBean">
+                        <bean class="mx.com.inscitech.fiducia.common.beans.ParametroQueryBean">
                             <property name="name">
                                 <value>proyecto3</value>
                             </property>
@@ -2410,22 +2410,22 @@
                 </entry>
                 <entry key="mandaCorreoInstrucExpInc">
                     <list>
-                        <bean class="mx.com.inscitech.fiducia.beans.ParametroQueryBean">
+                        <bean class="mx.com.inscitech.fiducia.common.beans.ParametroQueryBean">
                             <property name="name">
                                 <value>proyecto</value>
                             </property>
                         </bean>
-                        <bean class="mx.com.inscitech.fiducia.beans.ParametroQueryBean">
+                        <bean class="mx.com.inscitech.fiducia.common.beans.ParametroQueryBean">
                             <property name="name">
                                 <value>folio</value>
                             </property>
                         </bean>
-                        <bean class="mx.com.inscitech.fiducia.beans.ParametroQueryBean">
+                        <bean class="mx.com.inscitech.fiducia.common.beans.ParametroQueryBean">
                             <property name="name">
                                 <value>etapa</value>
                             </property>
                         </bean>
-                        <bean class="mx.com.inscitech.fiducia.beans.ParametroQueryBean">
+                        <bean class="mx.com.inscitech.fiducia.common.beans.ParametroQueryBean">
                             <property name="name">
                                 <value>operacion</value>
                             </property>
@@ -2434,7 +2434,7 @@
                 </entry>
                 <entry key="mandaCorreoInstrucc">
                     <list>
-                        <bean class="mx.com.inscitech.fiducia.beans.ParametroQueryBean">
+                        <bean class="mx.com.inscitech.fiducia.common.beans.ParametroQueryBean">
                             <property name="name">
                                 <value>folio</value>
                             </property>
@@ -2443,7 +2443,7 @@
                 </entry>
                 <entry key="mandaCorreoInstruccMon">
                     <list>
-                        <bean class="mx.com.inscitech.fiducia.beans.ParametroQueryBean">
+                        <bean class="mx.com.inscitech.fiducia.common.beans.ParametroQueryBean">
                             <property name="name">
                                 <value>folio</value>
                             </property>
@@ -2453,27 +2453,27 @@
                 <!-- GARANTIAS -->
                 <entry key="garantias.getCartaLib">
                     <list>
-                        <bean class="mx.com.inscitech.fiducia.beans.ParametroQueryBean">
+                        <bean class="mx.com.inscitech.fiducia.common.beans.ParametroQueryBean">
                             <property name="name">
                                 <value>numFiso</value>
                             </property>
                         </bean>
-                        <bean class="mx.com.inscitech.fiducia.beans.ParametroQueryBean">
+                        <bean class="mx.com.inscitech.fiducia.common.beans.ParametroQueryBean">
                             <property name="name">
                                 <value>numSubcta</value>
                             </property>
                         </bean>
-                        <bean class="mx.com.inscitech.fiducia.beans.ParametroQueryBean">
+                        <bean class="mx.com.inscitech.fiducia.common.beans.ParametroQueryBean">
                             <property name="name">
                                 <value>varBien</value>
                             </property>
                         </bean>
-                        <bean class="mx.com.inscitech.fiducia.beans.ParametroQueryBean">
+                        <bean class="mx.com.inscitech.fiducia.common.beans.ParametroQueryBean">
                             <property name="name">
                                 <value>varEdificio</value>
                             </property>
                         </bean>
-                        <bean class="mx.com.inscitech.fiducia.beans.ParametroQueryBean">
+                        <bean class="mx.com.inscitech.fiducia.common.beans.ParametroQueryBean">
                             <property name="name">
                                 <value>varDepto</value>
                             </property>
@@ -2484,7 +2484,7 @@
                 <!-- Reporte Seguimiento Proyecto -->
                 <entry key="getRepSeguimientoProy">
                     <list>
-                        <bean class="mx.com.inscitech.fiducia.beans.ParametroQueryBean">
+                        <bean class="mx.com.inscitech.fiducia.common.beans.ParametroQueryBean">
                             <property name="name">
                                 <value>numProspecto</value>
                             </property>
@@ -2495,7 +2495,7 @@
                 <!-- Reporte Bienes -->
                 <entry key="reporteLibera">
                     <list>
-                        <bean class="mx.com.inscitech.fiducia.beans.ParametroQueryBean">
+                        <bean class="mx.com.inscitech.fiducia.common.beans.ParametroQueryBean">
                             <property name="name">
                                 <value>numFiso</value>
                             </property>
@@ -2509,7 +2509,7 @@
                                 <value>=</value>
                             </property>
                         </bean>
-                        <bean class="mx.com.inscitech.fiducia.beans.ParametroQueryBean">
+                        <bean class="mx.com.inscitech.fiducia.common.beans.ParametroQueryBean">
                             <property name="name">
                                 <value>tipoBien</value>
                             </property>
@@ -2523,7 +2523,7 @@
                                 <value>=</value>
                             </property>
                         </bean>
-                        <bean class="mx.com.inscitech.fiducia.beans.ParametroQueryBean">
+                        <bean class="mx.com.inscitech.fiducia.common.beans.ParametroQueryBean">
                             <property name="name">
                                 <value>numCatastro</value>
                             </property>
@@ -2537,7 +2537,7 @@
                                 <value>=</value>
                             </property>
                         </bean>
-                        <bean class="mx.com.inscitech.fiducia.beans.ParametroQueryBean">
+                        <bean class="mx.com.inscitech.fiducia.common.beans.ParametroQueryBean">
                             <property name="name">
                                 <value>cveStatus</value>
                             </property>

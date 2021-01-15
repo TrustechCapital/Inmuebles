@@ -59,7 +59,7 @@
                 <!-- Ejemplo -->
                 <entry key="store">
                     <list>
-                        <bean class="mx.com.inscitech.fiducia.beans.ParametroQueryBean">
+                        <bean class="mx.com.inscitech.fiducia.common.beans.ParametroQueryBean">
                             <property name="name">
                                 <value>sfechai</value>
                             </property>
