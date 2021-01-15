@@ -10,17 +10,24 @@ class LoginService extends Api {
 
     async login(username: string, password: string = '', fromSso = false): Promise<SessionInfo> {
 
-        if (!fromSso && !username.trim() || !password.trim()) {
-            throw new Error('El usuario o password es incorrecto');
+        if (!fromSso) {
+            if(!username.trim() || !password.trim()) {
+                throw new Error('El usuario o password es incorrecto');
+            } else {
+                const loginDataResponse = await this.post('/login.do', { username, password }) as any;
+                const loginData = loginDataResponse.data;
+                if(!loginData.data.valid) { //use response to validate what to do
+                    throw new Error('El usuario o password es incorrecto');
+                }                 
+            }
         }
 
-        const loginDataResponse = await this.post('/session', { username, password }) as any;
-        const loginData = loginDataResponse.data;
-
+        const sessionData = await this.post('/session.do', {}) as any;        
+        
         return new SessionInfo(
-            DateUtils.toDate(loginData.systemDate),
-            new User(loginData.user.username, loginData.user.name),
-            loginData.permissions
+            DateUtils.toDate(sessionData.data.systemDate),
+            new User(sessionData.data.user.username, sessionData.data.user.name),
+            sessionData.data.permissions
         );
     }
 

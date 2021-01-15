@@ -1,22 +1,31 @@
-import { useSnackbar } from 'notistack';
+//import { useSnackbar } from 'notistack';
 
 function useGlobalNotification() {
-    const { enqueueSnackbar, closeSnackbar } = useSnackbar();
+    //const { enqueueSnackbar, closeSnackbar } = useSnackbar();
 
-    const alertSuccess = (messaje: string) => {
-        enqueueSnackbar(messaje, { variant: 'success' });
+    const alertSuccess = (message: string) => {
+        //enqueueSnackbar(message, { variant: 'success' });
+        console.log('alertSuccess: '+message);
     };
 
-    const alertWarning = (messaje: string) => {
-        enqueueSnackbar(messaje, { variant: 'warning' });
+    const alertWarning = (message: string) => {
+        //enqueueSnackbar(message, { variant: 'warning' });
+        console.log('alertWarning: '+message);
     };
 
-    const alertError = (messaje: string) => {
-        enqueueSnackbar(messaje, { variant: 'error' });
+    const alertError = (message: string) => {
+        //enqueueSnackbar(message, { variant: 'error' });
+        console.log('alertError: '+message);
     };
 
-    const alertInfo = (messaje: string) => {
-        enqueueSnackbar(messaje, { variant: 'info' });
+    const alertInfo = (message: string) => {
+        //enqueueSnackbar(message, { variant: 'info' });
+        console.log('alertInfo: '+message);
+    };
+
+    const closeTray = (message: string) => {
+        //enqueueSnackbar(message, { variant: 'info' });
+        console.log('closeTray: '+message);
     };
 
     return {
@@ -24,7 +33,8 @@ function useGlobalNotification() {
         alertWarning,
         alertError,
         alertInfo,
-        closeTray: closeSnackbar,
+        closeTray,
+        //closeTray: closeSnackbar,
     };
 }
 

@@ -487,11 +487,23 @@ public class GenericDML {
                                    "Setting parameter " + i + " to " + values[k] + " as BigDecimal.", null);
                         ps.setBigDecimal(i, (BigDecimal) values[k]);
 
+                    } else if (values[k] instanceof Integer) {
+
+                        logger.log(this, Thread.currentThread(), LoggingService.LEVEL.DEBUG,
+                                   "Setting parameter " + i + " to " + values[k] + " as BigDecimal.", null);
+                        ps.setInt(i, ((Integer) values[k]).intValue());
+
+                    } else if (values[k] instanceof Long) {
+
+                        logger.log(this, Thread.currentThread(), LoggingService.LEVEL.DEBUG,
+                                   "Setting parameter " + i + " to " + values[k] + " as BigDecimal.", null);
+                        ps.setLong(i, ((Long) values[k]).longValue());
+
                     } else {
 
                         logger.log(this, Thread.currentThread(), LoggingService.LEVEL.DEBUG,
                                    "Setting parameter " + i + " to \"" + values[k] + "\" as String.", null);
-                        ps.setString(i, (String) values[k]);
+                        ps.setString(i, ""+values[k]);
 
                     }
                 }

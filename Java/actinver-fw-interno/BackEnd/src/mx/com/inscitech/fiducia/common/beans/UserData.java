@@ -54,6 +54,19 @@ public class UserData {
         super();
     }
 
+    public UserData(UserInfoBean userInfo, List<SessionUserPermisions> permissions) {
+        super();
+        this.userName = userInfo.getUserName();
+        this.login = userInfo.getLogin();
+        this.userId = userInfo.getUserId();
+        this.nombre = userInfo.getNombre();
+        this.puesto = userInfo.getPuesto();
+        this.puestoId = userInfo.getPuestoId();
+        this.fechaContable = userInfo.getFechaContable();
+        this.mesAbierto = userInfo.getMesAbierto();
+        this.permissions = permissions;
+    }
+
     public UserData(String userName, Integer login, Integer userId, String nombre, String puesto, Integer puestoId, String fechaContable, Integer mesAbierto,
                     List<SessionUserPermisions> permissions) {
         this.userName = userName;

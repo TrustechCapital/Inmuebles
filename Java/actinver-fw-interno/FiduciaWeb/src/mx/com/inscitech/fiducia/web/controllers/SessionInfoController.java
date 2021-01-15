@@ -14,6 +14,7 @@ import javax.servlet.http.HttpSession;
 
 import mx.com.inscitech.fiducia.InvalidUserException;
 import mx.com.inscitech.fiducia.common.beans.SessionUserPermisions;
+import mx.com.inscitech.fiducia.common.beans.UserData;
 import mx.com.inscitech.fiducia.common.beans.UserInfoBean;
 import mx.com.inscitech.fiducia.common.services.LoggingService;
 import mx.com.inscitech.fiducia.common.services.UserInformationService;
@@ -79,10 +80,9 @@ public class SessionInfoController extends JsonActionController {
             responseData = getServiceResponse("FWAUTH-OK-001", session.getAttribute("userInfo"));
         } else if(!"".equals(userName) && !"null".equals(userName)){
             try {
-                UserInfoBean userInfo = UserInformationService.getInstance().getUserInfo(userName, null, 1);
-                userInfo.setPermissions(getUserPermisions(userInfo.getPuestoId().toString()));
+                UserInfoBean userInfo = UserInformationService.getInstance().getUserInfo(userName, null, 1);                
                 setSessionAttributes(session, userInfo, new Object[]{});
-                responseData = getServiceResponse("FWAUTH-OK-002", userInfo);
+                responseData = getServiceResponse("FWAUTH-OK-002", new UserData(userInfo, getUserPermisions(userInfo.getPuestoId().toString())));
             } catch (InvalidUserException e) {
                 responseData.setExitCode("FWAUTH-ERROR-001");
                 responseData.setExitMessage("Unable to get user information! Error: " + e.getMessage());
@@ -112,7 +112,7 @@ public class SessionInfoController extends JsonActionController {
     }
     
     private String getSystemDate() {
-        return LocalDate.now().format(DateTimeFormatter.ofPattern("yyyy/MM/dd"));
+        return LocalDate.now().format(DateTimeFormatter.ofPattern("dd/MM/yyyy"));
     }
     
     private List<SessionUserPermisions> getUserPermisions(String roleId) {
