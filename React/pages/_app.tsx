@@ -12,6 +12,7 @@ import SessionInfo, { ModulePermission } from '../models/SessionInfo';
 import BaseTheme from '../sharedComponents/BaseTheme';
 import { SessionInfoContext } from '../core/LoginContext';
 import LoginService from '../services/LoginService';
+import { SnackbarProvider } from 'notistack';
 
 function removeInjectedServerCss() {
     // Remove the server-side injected CSS.
@@ -88,19 +89,21 @@ function App({ Component, pageProps }: AppProps) {
         <>
             <CssBaseline />
             <ThemeProvider theme={BaseTheme}>
-                <SessionInfoContext.Provider
-                    value={{
-                        sessionInfo: sessionInfo,
-                        onLogout: handleLogout,
-                        modulePermissionsMap: modulePermissionsMap,
-                    }}
-                >
-                    {loadingApp ? (
-                        'Cargando...'
-                    ) : (
-                        sessionInfo ? <Component {...pageProps} /> : <Login onLogin={handleSuccessfulLogin} />
-                    )}
-                </SessionInfoContext.Provider>
+                <SnackbarProvider maxSnack={3}>
+                    <SessionInfoContext.Provider
+                        value={{
+                            sessionInfo: sessionInfo,
+                            onLogout: handleLogout,
+                            modulePermissionsMap: modulePermissionsMap,
+                        }}
+                    >
+                        {loadingApp ? (
+                            'Cargando...'
+                        ) : (
+                            sessionInfo ? <Component {...pageProps} /> : <Login onLogin={handleSuccessfulLogin} />
+                        )}
+                    </SessionInfoContext.Provider>
+                </SnackbarProvider>
             </ThemeProvider>
         </>
     );
