@@ -43,14 +43,18 @@ const loginInfo = {
     password: '',
 };
 
-const Login = (props: { onLogin: () => void }) => {
+type LoginProps = {
+    onLogin: () => void
+}
+
+const Login: React.FC<LoginProps> = function ({ onLogin }){
     const classes = useStyles();
 
     async function handleLogin(loginData: typeof loginInfo) {
         try {
             const sessionInfo = await LoginService.login(loginData.username, loginData.password);
             SessionService.create(sessionInfo);
-            props.onLogin();
+            onLogin();
         } catch (error) {}
     }
 

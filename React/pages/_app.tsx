@@ -28,7 +28,11 @@ async function tryLogin (){
         if (!ssoSessionInfo) {
             return null;
         }
-        return LoginService.login(ssoSessionInfo.user.username, '', true);
+        
+        const userInfo = LoginService.login(ssoSessionInfo.user.username, '', true);
+        await catalogsApi.fetchAll();
+
+        return userInfo;
     } catch (err) {
         console.log('Login Error', err);
         return null;
@@ -36,7 +40,6 @@ async function tryLogin (){
 }
 
 function App({ Component, pageProps }: AppProps) {
-    const [loadingApp, setLoadingApp] = useState(true);
     const [modulePermissionsMap, setModulePermissionsMap] = useState<Map<
         string,
         ModulePermission
@@ -54,13 +57,6 @@ function App({ Component, pageProps }: AppProps) {
             SessionService.create(ssoSessionInfo);
             handleSuccessfulLogin(false);
         });
-
-        catalogsApi.fetchAll().catch(() => {
-            console.log('Catalogos incompletos')
-        }).finally(() => {
-            setLoadingApp(false);
-        });
-
     }, []);
 
     function handleSuccessfulLogin(redirect = true) {
@@ -97,11 +93,7 @@ function App({ Component, pageProps }: AppProps) {
                             modulePermissionsMap: modulePermissionsMap,
                         }}
                     >
-                        {loadingApp ? (
-                            'Cargando...'
-                        ) : (
-                            sessionInfo ? <Component {...pageProps} /> : <Login onLogin={handleSuccessfulLogin} />
-                        )}
+                        sessionInfo ? <Component {...pageProps} /> : <Login onLogin={handleSuccessfulLogin} />
                     </SessionInfoContext.Provider>
                 </SnackbarProvider>
             </ThemeProvider>
