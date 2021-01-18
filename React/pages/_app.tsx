@@ -13,6 +13,7 @@ import BaseTheme from '../sharedComponents/BaseTheme';
 import { SessionInfoContext } from '../core/LoginContext';
 import LoginService from '../services/LoginService';
 import { SnackbarProvider } from 'notistack';
+import Layout from '../sharedComponents/Layout';
 
 function removeInjectedServerCss() {
     // Remove the server-side injected CSS.
@@ -93,7 +94,7 @@ function App({ Component, pageProps }: AppProps) {
                             modulePermissionsMap: modulePermissionsMap,
                         }}
                     >
-                        sessionInfo ? <Component {...pageProps} /> : <Login onLogin={handleSuccessfulLogin} />
+                    { sessionInfo ? <Layout><Component {...pageProps} /></Layout> : <Login onLogin={handleSuccessfulLogin} /> }
                     </SessionInfoContext.Provider>
                 </SnackbarProvider>
             </ThemeProvider>

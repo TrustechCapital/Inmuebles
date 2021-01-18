@@ -13,6 +13,7 @@ import javax.servlet.http.HttpSession;
 import mx.com.inscitech.fiducia.BusinessException;
 import mx.com.inscitech.fiducia.common.services.ConfigurationService;
 import mx.com.inscitech.fiducia.common.services.LoggingService;
+import mx.com.inscitech.fiducia.common.util.SecurityUtils;
 
 import net.sf.json.JSONArray;
 import net.sf.json.JSONObject;
@@ -27,10 +28,14 @@ import org.springframework.web.servlet.mvc.multiaction.MultiActionController;
  */
 public class JsonActionController extends MultiActionController {
 
+    private static final String FIDUCIAWEB_JSON_SECRET_KEY = "FiduciaWebSecureData369";
+    
     protected static String DEFAULT_CONTENT_TYPE = "application/json";
 
     protected LoggingService logger = LoggingService.getInstance();
 
+    protected boolean useEncryption = false;
+    
     /**
      * Metodo para obtener el objeto JavaScript (JSON) del request
      * @return Un objeto JSON con la informacion del request
@@ -67,7 +72,8 @@ public class JsonActionController extends MultiActionController {
      */
     protected ModelAndView respondObject(Integer responseCode, HttpServletResponse response, Object object) {
         response.setHeader("Cache-Control", "no-cache");
-        response.setHeader("Access-Control-Allow-Origin", "*");
+        //response.setHeader("Access-Control-Allow-Origin", "*");
+        
         response.setStatus(responseCode);
 
         if (DEFAULT_CONTENT_TYPE == null) {
@@ -76,12 +82,16 @@ public class JsonActionController extends MultiActionController {
             DEFAULT_CONTENT_TYPE = ConfigurationService.getInstance().getProperty("defalutContentType");
         }
 
-        if (DEFAULT_CONTENT_TYPE != null) {
-            response.setContentType(DEFAULT_CONTENT_TYPE);
+        if(!useEncryption) {
+            if (DEFAULT_CONTENT_TYPE != null) {
+                response.setContentType(DEFAULT_CONTENT_TYPE);
+            } else {
+                response.setContentType("text/html;charset=ISO-8859-1");
+            }
         } else {
-            response.setContentType("text/html;charset=ISO-8859-1");
+            response.setContentType("text/plain;charset=UTF-8");
         }
-
+        
         try {
 
             String cadenaJSON = "{}";
@@ -91,10 +101,13 @@ public class JsonActionController extends MultiActionController {
             else
                 cadenaJSON = JSONObject.fromObject(object).toString();
 
+            if(useEncryption) {
+                cadenaJSON = SecurityUtils.build(FIDUCIAWEB_JSON_SECRET_KEY).encrypt(cadenaJSON);
+            }
+
             object = null;
 
-            logger.log(Thread.currentThread().getClass(), Thread.currentThread(), LoggingService.LEVEL.DEBUG,
-                       "Cadena JSON: " + cadenaJSON);
+            logger.log(Thread.currentThread().getClass(), Thread.currentThread(), LoggingService.LEVEL.DEBUG, "Cadena JSON: " + cadenaJSON);
             response.getWriter().write(cadenaJSON);
 
         } catch (IOException e) {
@@ -126,7 +139,7 @@ public class JsonActionController extends MultiActionController {
         }
     }
 
-    JSONObject jsonObjectFromError(Exception e) {
+    protected JSONObject jsonObjectFromError(Exception e) {
         JSONObject responseObject = new JSONObject();
         Integer errorCode = 500;
         String errorMessage = e.getMessage();

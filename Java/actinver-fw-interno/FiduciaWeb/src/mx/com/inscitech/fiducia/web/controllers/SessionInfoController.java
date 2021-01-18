@@ -61,7 +61,8 @@ public class SessionInfoController extends JsonActionController {
             getSystemDate(), 
             getUserPermisions(userInfo.getPuestoId().toString())
         );
-
+        
+        this.useEncryption = false;
         return respondObject(response, sessionInfo);
     }
     
@@ -92,6 +93,7 @@ public class SessionInfoController extends JsonActionController {
             responseData.setExitMessage("User information not available!");
         }
         
+        this.useEncryption = false;
         return respondObject(response, responseData);
     }
     
