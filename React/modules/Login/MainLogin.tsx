@@ -15,6 +15,7 @@ const useStyles = makeStyles((theme) => ({
         display: 'flex',
         justifyContent: 'flex-start',
         alignItems: 'center',
+        marginTop: '5rem'
     },
     paper: {
         width: '400px',
@@ -68,7 +69,7 @@ const Login: React.FC<LoginProps> = function ({ onLogin }){
                         </Typography>
                         <div className={classes.body}>
                             <FormTextField name="username" label="Usuario" />
-                            <FormTextField name="password" label="Contraseña" />
+                            <FormTextField type="password" name="password" label="Contraseña" />
                             <Button
                                 type="submit"
                                 color="primary"

@@ -5,6 +5,9 @@ import { AppProps } from 'next/app';
 
 import { ThemeProvider } from '@material-ui/core/styles';
 import CssBaseline from '@material-ui/core/CssBaseline';
+import Typography from '@material-ui/core/Typography';
+import { makeStyles } from '@material-ui/core/styles';
+import CircularProgress from '@material-ui/core/CircularProgress';
 import { catalogsApi } from '../core/api';
 import SessionService from '../services/SessionService';
 import Login from '../modules/Login/MainLogin';
@@ -40,24 +43,41 @@ async function tryLogin (){
     }
 }
 
+const useStyles = makeStyles({
+    loadingMessage: {
+        display: 'flex',
+        justifyContent: 'center',
+        height: '100vh',
+        alignItems: 'center',
+    },
+    loadingIcon: {
+        marginRight: '1rem'
+    }
+});
+
 function App({ Component, pageProps }: AppProps) {
+    const classes = useStyles();
     const [modulePermissionsMap, setModulePermissionsMap] = useState<Map<
         string,
         ModulePermission
     > | null>(null);
     const [sessionInfo, setSessionInfo] = useState<SessionInfo | null>(null);
+    const [loadingApp, setLoadingApp] = useState(true);
 
     useEffect(() => {
         removeInjectedServerCss();
     
         tryLogin().then((ssoSessionInfo) => {
             if (!ssoSessionInfo) {
+                setLoadingApp(false);
                 return handleLogout(false);
             }
             
             SessionService.create(ssoSessionInfo);
+            setLoadingApp(false);
             handleSuccessfulLogin(false);
         });
+
     }, []);
 
     function handleSuccessfulLogin(redirect = true) {
@@ -82,6 +102,17 @@ function App({ Component, pageProps }: AppProps) {
         }
     }
 
+    let component = (
+        <Typography className={classes.loadingMessage} variant="subtitle1">
+            <CircularProgress className={classes.loadingIcon} />
+            Cargando, por favor espere...
+        </Typography>
+    );
+
+    if (!loadingApp) {
+        component = sessionInfo ? <Layout><Component {...pageProps} /></Layout> : <Login onLogin={handleSuccessfulLogin} />;
+    }
+
     return (
         <>
             <CssBaseline />
@@ -94,7 +125,7 @@ function App({ Component, pageProps }: AppProps) {
                             modulePermissionsMap: modulePermissionsMap,
                         }}
                     >
-                    { sessionInfo ? <Layout><Component {...pageProps} /></Layout> : <Login onLogin={handleSuccessfulLogin} /> }
+                        {component}
                     </SessionInfoContext.Provider>
                 </SnackbarProvider>
             </ThemeProvider>
