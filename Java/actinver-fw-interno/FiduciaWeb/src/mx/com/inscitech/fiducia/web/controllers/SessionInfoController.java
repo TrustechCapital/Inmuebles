@@ -30,9 +30,10 @@ import org.springframework.web.servlet.ModelAndView;
 public class SessionInfoController extends JsonActionController {
 
     private static final String USER_MENU_SQL = "SELECT B.FFUN_ID_FUNCION, B.FFUN_ID_PADRE, B.FFUN_NOM_MENU, B.FFUN_NOMBRE_FUNCION, C.FFUN_LECTURA CAN_VIEW, " +
-                                                "C.FFUN_LECTURA CAN_EDIT FROM F_PERFIL A, F_FUNCION B, F_PER_FUN C WHERE A.FPER_ID_PERFIL = ? AND " + 
+                                                "C.FFUN_ESCRITURA CAN_EDIT FROM F_PERFIL A, F_FUNCION B, F_PER_FUN C WHERE A.FPER_ID_PERFIL = ? AND " + 
                                                 "A.FPER_ID_PERFIL = C.FPER_ID_PERFIL AND B.FFUN_ID_FUNCION = C.FFUN_ID_FUNCION ORDER BY B.FFUN_ORDEN";
         
+    private static final boolean USE_CACHE = false;
     private static Map<String, List<SessionUserPermisions>> MENU_CACHE;
     
     static {
@@ -62,7 +63,7 @@ public class SessionInfoController extends JsonActionController {
             getUserPermisions(userInfo.getPuestoId().toString())
         );
         
-        this.useEncryption = false;
+        this.useEncryption = true;
         return respondObject(response, sessionInfo);
     }
     
@@ -93,7 +94,7 @@ public class SessionInfoController extends JsonActionController {
             responseData.setExitMessage("User information not available!");
         }
         
-        this.useEncryption = false;
+        this.useEncryption = true;
         return respondObject(response, responseData);
     }
     
@@ -119,7 +120,7 @@ public class SessionInfoController extends JsonActionController {
     
     private List<SessionUserPermisions> getUserPermisions(String roleId) {
 
-        if(MENU_CACHE.containsKey(roleId)) {
+        if(USE_CACHE && MENU_CACHE.containsKey(roleId)) {
             return MENU_CACHE.get(roleId);          
         }
 
@@ -136,7 +137,7 @@ public class SessionInfoController extends JsonActionController {
                 "1".equals(row.getString("CAN_EDIT"))));               
         }
         
-        MENU_CACHE.put(roleId, up);
+        if(USE_CACHE) MENU_CACHE.put(roleId, up);
         return up;
     }
     

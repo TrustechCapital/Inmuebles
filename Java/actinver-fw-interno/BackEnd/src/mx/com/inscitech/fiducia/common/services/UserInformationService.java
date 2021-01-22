@@ -23,7 +23,7 @@ public class UserInformationService {
     
     private static final String GET_FECHA_CONTABLE_SQL = "SELECT FCO_DIA_APLI_CONTA, FCO_MES_APLI_CONTA, FCO_ANO_APLI_CONTA, FCO_MES_APLI_CONTA, FCO_ANO_APLI_CONTA FROM FECCONT";
     
-    private static final String GET_EMPRESAS_SQL = "SELECT EMP_NUM_EMPRESA, EMP_NOM_EMPRESA, EMP_NOM_AREA, EMP_DIRECCION, EMP_NOM_AUTORIZA, EMP_NOM_FIRMA,EMP_IDIOMA, EMP_ESTILO, EMP_FEC_CAMBIO, EMP_LLAVE_EMPRESA FROM F_EMPRESA WHERE EMP_NUM_EMPRESA = 0";
+    //private static final String GET_EMPRESAS_SQL = "SELECT EMP_NUM_EMPRESA, EMP_NOM_EMPRESA, EMP_NOM_AREA, EMP_DIRECCION, EMP_NOM_AUTORIZA, EMP_NOM_FIRMA,EMP_IDIOMA, EMP_ESTILO, EMP_FEC_CAMBIO, EMP_LLAVE_EMPRESA FROM F_EMPRESA WHERE EMP_NUM_EMPRESA = 0";
 
     private LoggingService logger;
     private int resultadoFuncion = -1;
@@ -75,13 +75,13 @@ public class UserInformationService {
 
             result.setUserName(userId);
             
-            result.setUserId(1); //result.setUserId(new Integer(userData.getString("USU_NUM_USUARIO")));
+            result.setUserId(new Integer(userData.getString("USU_NUM_USUARIO")));
             logger.log(this, Thread.currentThread(), LoggingService.LEVEL.DEBUG, "UserId: " + userData.getString("USU_NUM_USUARIO"));
             
             result.setNombre(userData.getString("FUSU_NOMBRE_USUARIO"));
             result.setPuesto(userData.getString("USU_NOM_PUESTO"));
             
-            result.setPuestoId(2);//result.setPuestoId(new Integer(userData.getString("USU_NUM_PUESTO")));
+            result.setPuestoId(new Integer(userData.getString("USU_NUM_PUESTO")));
             logger.log(this, Thread.currentThread(), LoggingService.LEVEL.DEBUG, "PuestoId: " + userData.getString("USU_NUM_PUESTO"));
             
             userData.close();
@@ -108,7 +108,7 @@ public class UserInformationService {
                 logger.log(this, Thread.currentThread(), LoggingService.LEVEL.WARN, "Unable to get JSON from userInfo", e);
             }
             
-            data = dml.getDataRow(GET_EMPRESAS_SQL); //TODO: Usar objeto, remover o???
+            /*data = dml.getDataRow(GET_EMPRESAS_SQL); //TODO: Usar objeto, remover o???
             if(data != null && data.hasData()) {
                 logger.log(this, Thread.currentThread(), LoggingService.LEVEL.DEBUG, "Corporate information found!");
 
@@ -122,7 +122,7 @@ public class UserInformationService {
                 obj_empresa[7] = data.getString("EMP_ESTILO");
                 obj_empresa[8] = data.getString("EMP_FEC_CAMBIO");
                 obj_empresa[9] = data.getString("EMP_LLAVE_EMPRESA");
-            }
+            }*/
 
             return result;
             

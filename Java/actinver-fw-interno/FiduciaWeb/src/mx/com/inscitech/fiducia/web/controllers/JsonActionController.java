@@ -27,8 +27,6 @@ import org.springframework.web.servlet.mvc.multiaction.MultiActionController;
  * @author Inscitech M�xico inscitech@inscitechmexico.com
  */
 public class JsonActionController extends MultiActionController {
-
-    private static final String FIDUCIAWEB_JSON_SECRET_KEY = "FiduciaWebSecureData369";
     
     protected static String DEFAULT_CONTENT_TYPE = "application/json";
 
@@ -89,7 +87,7 @@ public class JsonActionController extends MultiActionController {
                 response.setContentType("text/html;charset=ISO-8859-1");
             }
         } else {
-            response.setContentType("text/plain;charset=UTF-8");
+            response.setContentType("text/html;charset=ISO-8859-1");
         }
         
         try {
@@ -102,7 +100,7 @@ public class JsonActionController extends MultiActionController {
                 cadenaJSON = JSONObject.fromObject(object).toString();
 
             if(useEncryption) {
-                cadenaJSON = SecurityUtils.build(FIDUCIAWEB_JSON_SECRET_KEY).encrypt(cadenaJSON);
+                cadenaJSON = SecurityUtils.build().encrypt(cadenaJSON);
             }
 
             object = null;

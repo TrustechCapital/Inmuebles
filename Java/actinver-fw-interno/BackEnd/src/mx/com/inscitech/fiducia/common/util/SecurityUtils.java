@@ -1,55 +1,45 @@
 package mx.com.inscitech.fiducia.common.util;
 
-import java.nio.charset.StandardCharsets;
-
 import java.util.Base64;
 
 import javax.crypto.Cipher;
+import javax.crypto.spec.IvParameterSpec;
 import javax.crypto.spec.SecretKeySpec;
 
 import mx.com.inscitech.fiducia.common.services.LoggingService;
 
 public class SecurityUtils {
     
-    private static final String ALGOTITHM = "AES"; //AES/CBC/PKCS5Padding
+    private static final String ALGOTITHM = "AES/CBC/PKCS5Padding";
+    private static final String SECRET_KEY_1 = "FiduciaWebBaNR3g";
+    private static final String SECRET_KEY_2 = "eDrtRV4$345C%&7#";
     
     private LoggingService logger = null;
     
-    private static SecretKeySpec secretKey;
-    private static byte[] key;
-    
-    private SecurityUtils(String secret) {
+    private SecurityUtils() {
         super();
         logger = LoggingService.getInstance();
-        setKey(secret);
     }
     
-    public static SecurityUtils build(String secret) {        
-        return new SecurityUtils(secret);
+    public static SecurityUtils build() {        
+        return new SecurityUtils();
     }
     
-    public void setKey(String myKey) {
-        //MessageDigest md5 = null;
-
+    public String encrypt(String toEncrypt) {
         try {
-            /*key = myKey.getBytes(StandardCharsets.UTF_8);
-            md5 = MessageDigest.getInstance("MD5");
-            key = md5.digest(key);
-            key = Arrays.copyOf(key, 16);
-            secretKey = new SecretKeySpec(key, "AES");*/
             
-            key = Base64.getDecoder().decode(myKey.getBytes());
+            IvParameterSpec ivParam = new IvParameterSpec(SECRET_KEY_1.getBytes("UTF-8"));
+            SecretKeySpec secretKey = new SecretKeySpec(SECRET_KEY_2.getBytes("UTF-8"), "AES");
             
-        } catch (Exception e) {
-            logger.log(this, Thread.currentThread(), LoggingService.LEVEL.ERROR, "Unable to set the encryption Key: " + e.getMessage(), e);
-        }
-    }
-
-    public String encrypt(String strToEncrypt) {
-        try {
             Cipher cipher = Cipher.getInstance(ALGOTITHM);
-            cipher.init(Cipher.ENCRYPT_MODE, secretKey);
-            return Base64.getEncoder().encodeToString(cipher.doFinal(strToEncrypt.getBytes(StandardCharsets.UTF_8)));
+            cipher.init(Cipher.ENCRYPT_MODE, secretKey, ivParam);
+            
+            byte[] encrypted = cipher.doFinal(toEncrypt.getBytes());
+            
+            logger.log(this, Thread.currentThread(), LoggingService.LEVEL.DEBUG, "toEncrypt: " + toEncrypt + " encrypted: " + Base64.getEncoder().encodeToString(encrypted));
+            
+            return Base64.getEncoder().encodeToString(encrypted);
+            
         } catch (Exception e) {
             logger.log(this, Thread.currentThread(), LoggingService.LEVEL.ERROR, "Unable to encrypt the text! Error: " + e.getMessage(), e);
         }
@@ -57,15 +47,7 @@ public class SecurityUtils {
         return null;
     }
 
-    public String decrypt(String strToDecrypt) {
-        try {
-            Cipher cipher = Cipher.getInstance(ALGOTITHM);
-            cipher.init(Cipher.DECRYPT_MODE, secretKey);
-            return new String(cipher.doFinal(Base64.getDecoder().decode(strToDecrypt)));
-        } catch (Exception e) {
-            logger.log(this, Thread.currentThread(), LoggingService.LEVEL.ERROR, "Unable to decrypt the text! Error: " + e.getMessage(), e);
-        }
-        
+    public String decrypt(String toDecrypt) {
         return null;
     }
 
