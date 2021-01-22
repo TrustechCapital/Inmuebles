@@ -1,1 +1,0 @@
-Carpeta donde se almacenan los archivos que se suben al servidor de forma temporal con el fin de que sean procesados

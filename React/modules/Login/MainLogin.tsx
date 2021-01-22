@@ -15,6 +15,7 @@ const useStyles = makeStyles((theme) => ({
         display: 'flex',
         justifyContent: 'flex-start',
         alignItems: 'center',
+        marginTop: '5rem'
     },
     paper: {
         width: '400px',
@@ -43,14 +44,18 @@ const loginInfo = {
     password: '',
 };
 
-const Login = (props: { onLogin: () => void }) => {
+type LoginProps = {
+    onLogin: () => void
+}
+
+const Login: React.FC<LoginProps> = function ({ onLogin }){
     const classes = useStyles();
 
     async function handleLogin(loginData: typeof loginInfo) {
         try {
-            const sessionInfo = await LoginService.login(loginData.username);
+            const sessionInfo = await LoginService.login(loginData.username, loginData.password);
             SessionService.create(sessionInfo);
-            props.onLogin();
+            onLogin();
         } catch (error) {}
     }
 
@@ -64,7 +69,7 @@ const Login = (props: { onLogin: () => void }) => {
                         </Typography>
                         <div className={classes.body}>
                             <FormTextField name="username" label="Usuario" />
-                            <FormTextField name="password" label="Contraseña" />
+                            <FormTextField type="password" name="password" label="Contraseña" />
                             <Button
                                 type="submit"
                                 color="primary"

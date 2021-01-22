@@ -1,7 +1,6 @@
 import SessionInfo from '../models/SessionInfo';
 import User from '../models/User';
 import { Api } from '../core/api';
-import { adminUser, reportsUser, user1 } from '../fixtures/loginData';
 import DateUtils from '../utils/DateUtils';
 
 class LoginService extends Api {
@@ -9,37 +8,53 @@ class LoginService extends Api {
         super({});
     }
 
-    login(username: string): Promise<SessionInfo> {
-        let loginData = null;
+    async login(username: string, password: string = '', fromSso = false): Promise<SessionInfo> {
 
-        // TODO: Autenticar usuario
-        switch (username) {
-            case 'admin':
-                loginData = adminUser;
-                break;
-            case 'audit':
-                loginData = reportsUser;
-                break;
-            case 'user1':
-                loginData = user1;
-                break;
-            default:
-                break;
+        if (!fromSso) {
+            if(!username.trim() || !password.trim()) {
+                throw new Error('El usuario o password es incorrecto');
+            } else {
+                const loginDataResponse = await this.post('/login.do', { username, password }) as any;
+                const loginData = loginDataResponse.data;
+                if(!loginData.data.valid) { //use response to validate what to do
+                    throw new Error('El usuario o password es incorrecto');
+                }                 
+            }
         }
 
-        if (!loginData) {
-            throw new Error('El usuario o password es incorrecto');
-        }
+        const sessionData = await this.post('/session.do', {}) as any;        
+        var sessionInfo = this.getData(sessionData.data);
 
-        return Promise.resolve(loginData).then((loginData) => {
-            const FAKE_LOGIN = new SessionInfo(
-                DateUtils.toDate(loginData.systemDate),
-                new User(loginData.user.username, loginData.user.name),
-                loginData.permissions
-            );
+        return new SessionInfo(
+            DateUtils.toDate(sessionInfo.systemDate),
+            new User(sessionInfo.user.username, sessionInfo.user.name),
+            sessionInfo.permissions
+        );
+    }
 
-            return FAKE_LOGIN;
-        });
+    async ssoLogin(): Promise<SessionInfo | null> {
+        try {
+            const ssoLoginResponse = await this.post<any>('/accessData');
+            var sessionInfo = this.getData(ssoLoginResponse.data);
+            const sessionData = sessionInfo.responseObj;
+            return new SessionInfo(
+                new Date(),
+                new User(sessionData.userName, sessionData.nombre),
+                sessionData.permissions || []
+            );    
+        } catch (error) {
+            return null;    
+        } 
+    }
+
+    getData(fwData:any): any {
+        var CryptoJS = require("crypto-js");
+        var rawData = CryptoJS.enc.Base64.parse(fwData);
+        var key = CryptoJS.enc.Latin1.parse("eDrtRV4$345C%&7#");
+        var iv = CryptoJS.enc.Latin1.parse("FiduciaWebBaNR3g");
+        var plainTextData = CryptoJS.AES.decrypt({ ciphertext: rawData }, key, { iv: iv });
+        var plainText = plainTextData.toString(CryptoJS.enc.Latin1);
+        return JSON.parse(plainText);
     }
 }
 

@@ -7,7 +7,6 @@ import Typography from '@material-ui/core/Typography';
 import Divider from '@material-ui/core/Divider';
 import IconButton from '@material-ui/core/IconButton';
 import ChevronLeftIcon from '@material-ui/icons/ChevronLeft';
-import { SnackbarProvider } from 'notistack';
 
 import AppBar from './AppBar';
 import { DRAWER_WIDTH } from '../../constants/config';
@@ -116,9 +115,7 @@ const Layout: React.FC = (props: any) => {
     return (
         <>
             <div id="confirmation-message-placeholder"></div>
-            <SnackbarProvider maxSnack={3}>
-                <BaseLayout>{props.children}</BaseLayout>
-            </SnackbarProvider>
+            <BaseLayout>{props.children}</BaseLayout>
         </>
     );
 };

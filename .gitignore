@@ -28,6 +28,7 @@ hs_err_pid*
 
 
 #Backend
+Java/actinver-fw-interno/FiduciaBanregioBackend.jws
 Java/actinver-fw-interno/src
 Java/actinver-fw-interno/.data
 Java/actinver-fw-interno/.adf
@@ -49,3 +50,6 @@ React/.next
 React/out
 React/node_modules/
 REact/.env*.local
+lib
+.vs
+/Temp

@@ -8,7 +8,6 @@ import mx.com.inscitech.fiducia.common.beans.UserInfoBean;
 import mx.com.inscitech.fiducia.common.services.LoggingService;
 import mx.com.inscitech.fiducia.common.services.UserInformationService;
 
-import mx.gob.nafin.fiduciario.controller.JsonActionController;
 
 import org.springframework.web.servlet.ModelAndView;
 

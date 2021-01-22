@@ -8,6 +8,9 @@ import java.sql.Date;
 import java.sql.SQLException;
 import java.sql.Types;
 
+import java.time.Duration;
+import java.time.LocalDateTime;
+
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
@@ -23,11 +26,13 @@ import org.springframework.jdbc.core.JdbcTemplate;
 
 /**
  * Clase que deben de extender los procesadores de archivos que son cargados al servidor.
- * @author Inscitech México inscitech@inscitechmexico.com
+ * @author Inscitech M?xico inscitech@inscitechmexico.com
  */
 public abstract class UploadProcessor implements Runnable {
 
     protected LoggingService logger = null;
+
+    protected int processID = 0;
 
     /**
      * Variable en la que se almacenan los archivos que se van a procesar.
@@ -37,16 +42,39 @@ public abstract class UploadProcessor implements Runnable {
     /**
      * Variable que contiene los parametros que utilizara el procesador.
      */
-    protected Map parameters;
+    protected Map parameters = new HashMap();
 
     /**
      * Miembro para el uso del ORM de Spring, JDBCTemplate
      */
     protected JdbcTemplate jdbcTemplate;
 
+    protected boolean started = false;
+    protected boolean finished = false;
+    protected int percent = 0;
+
+    protected String containmentPath = null;
+
+    protected UploadStateMonitorBean stateMonitor = null;
+
+    protected LocalDateTime startedAt = null;
+
+    protected boolean filesFromFS = false;
+    protected boolean asThread = false;
+
     public UploadProcessor() {
         super();
         logger = LoggingService.getNewInstance();
+        stateMonitor = new UploadStateMonitorBean();
+    }
+
+    public void setProcessID(int processID) {
+        this.processID = processID;
+        stateMonitor.setProcessID(processID);
+    }
+
+    public int getProcessID() {
+        return processID;
     }
 
     public void setJdbcTemplate(JdbcTemplate jdbcTemplate) {
@@ -61,19 +89,24 @@ public abstract class UploadProcessor implements Runnable {
         this.files = files;
     }
 
-
     public List getFiles() {
         return files;
     }
-
 
     public void setParameters(Map parameters) {
         this.parameters = parameters;
     }
 
-
     public Map getParameters() {
         return parameters;
+    }
+
+    public void setContainmentPath(String containmentPath) {
+        this.containmentPath = containmentPath;
+    }
+
+    public String getContainmentPath() {
+        return containmentPath;
     }
 
     /**
@@ -84,7 +117,7 @@ public abstract class UploadProcessor implements Runnable {
 
     /**
      * Metodo que se utiliza para ejecutar sentencias SQL previamente definidas como update's, insert's y delete's en el archivo xml de consultas.
-     * @throws mx.com.inscitech.fiducia.BusinessException Cuando la consutla a ejecutar no existe u ocurre un error al ejecutar la sentecia.
+     * @throws mx.gob.nafin.fiduciario.BusinessException Cuando la consutla a ejecutar no existe u ocurre un error al ejecutar la sentecia.
      * @return El numero de registros afectados.
      * @param parametrosRequest Los parametros del request entre los cuales se encuentra el identificador de la consulta a ejecutar
      * en la llave "id" del mapa asi como los demas parametros definidos en el xml.
@@ -108,7 +141,7 @@ public abstract class UploadProcessor implements Runnable {
 
     /**
      * Metodo utilizado para mandar llamar funciones o procedimientos que requieren de parametros de salida.
-     * @throws mx.com.inscitech.fiducia.BusinessException Cuando no es posible ejecutar la operacion
+     * @throws mx.gob.nafin.fiduciario.BusinessException Cuando no es posible ejecutar la operacion
      * @return Una mapa o un objeto con los parametros de salida en caso de existir alguno
      * @param parametrosRequest Los parametros de entrada
      */
@@ -164,7 +197,10 @@ public abstract class UploadProcessor implements Runnable {
                         else
                             cs.registerOutParameter(paramIndex, Types.VARCHAR);
 
-                        logger.log(this, Thread.currentThread(), LoggingService.LEVEL.DEBUG, "Parameter " + paramBean.getName() + " registered as OUT parameter. Index: " + paramIndex);
+                        logger.log(this, Thread.currentThread(), LoggingService.LEVEL.DEBUG,
+                                   "Parameter " + paramBean.getName() + " registered as OUT parameter. Index: " +
+                                   paramIndex);
+
                         paramIndex++;
 
                     } else {
@@ -173,7 +209,8 @@ public abstract class UploadProcessor implements Runnable {
                             cs.setString(paramIndex++, String.valueOf(parameterValue));
                         else if (parameterType.equals("NUMBER"))
                             cs.setInt(paramIndex++, ((Integer) parameterValue).intValue());
-                        else if (parameterValue instanceof Long || parameterValue instanceof Integer || parameterValue instanceof Double) {
+                        else if (parameterValue instanceof Long || parameterValue instanceof Integer ||
+                                 parameterValue instanceof Double) {
                             if (parameterValue instanceof String)
                                 cs.setLong(paramIndex++, Long.parseLong((String) parameterValue));
                             else if (parameterValue instanceof Long)
@@ -183,7 +220,9 @@ public abstract class UploadProcessor implements Runnable {
                             else if (parameterValue instanceof Double)
                                 cs.setDouble(paramIndex++, ((Double) parameterValue).doubleValue());
                         } else if (parameterType.equals("DATE")) {
-                            Date theDate = new Date(DateTimeUtils.parseDateTimeFromPattern(paramBean.getPattern(), (String) parameterValue).getTime());
+                            Date theDate =
+                                new Date(DateTimeUtils.parseDateTimeFromPattern(paramBean.getPattern(),
+                                                                                (String) parameterValue).getTime());
                             cs.setDate(paramIndex++, theDate);
                         } else if (parameterType.equals("DOUBLE"))
                             cs.setBigDecimal(paramIndex++, new BigDecimal(Double.parseDouble((String) parameterValue)));
@@ -193,28 +232,28 @@ public abstract class UploadProcessor implements Runnable {
                             cs.setString(paramIndex++, (String) parameterValue);
 
                         logger.log(this, Thread.currentThread(), LoggingService.LEVEL.DEBUG,
-                                   "Parameter " + paramBean.getName() + " registered as IN parameter type: " + parameterValue.getClass() + " value: " + parameterValue +
-                                   " Index: " + paramIndex);
+                                   "Parameter " + paramBean.getName() + " registered as IN parameter type: " +
+                                   parameterValue.getClass() + " value: " + parameterValue + " Index: " + paramIndex);
 
                     }
                 } else {
                     cs.setNull(paramIndex, Types.NULL);
-                    logger.log(this, Thread.currentThread(), LoggingService.LEVEL.DEBUG, "Parameter " + paramBean.getName() + " registered as NULL. Index: " + paramIndex);
+                    logger.log(this, Thread.currentThread(), LoggingService.LEVEL.DEBUG,
+                               "Parameter " + paramBean.getName() + " registered as NULL. Index: " + paramIndex);
                     paramIndex++;
                 }
             }
 
-            logger.log(this, Thread.currentThread(), LoggingService.LEVEL.DEBUG, "Parameters Registered: " + paramIndex);
+            logger.log(this, Thread.currentThread(), LoggingService.LEVEL.DEBUG,
+                       "Parameters Registered: " + paramIndex);
 
             cs.execute();
 
             for (i = 0; i < pSalida.size(); i++) {
                 paramBean = (ParametroQueryBean) pSalida.get(i);
 
-                if (result == null) {
+                if (result == null)
                     result = new HashMap();
-                }
-                
                 ((Map) result).put(paramBean.getName(), cs.getObject(paramBean.getIndex()));
             }
 
@@ -241,4 +280,90 @@ public abstract class UploadProcessor implements Runnable {
         return result;
     }
 
+
+    public void limpiaRegistrosTransaccion(Integer numTransaccion, String nombreTransaccion) {
+        try {
+            this.ejecutaQuery("DELETE FROM async_transactions WHERE transaction_id = ? AND transaction_name = ?",
+                              new Object[] { numTransaccion, nombreTransaccion });
+        } catch (Exception e) {
+
+        }
+
+    }
+
+    public void grabaErrorTransaccion(Integer numTransaccion, String nombreTransaccion, String error) {
+        try {
+            this.ejecutaQuery("INSERT INTO async_transactions VALUES(?,?,?,?)",
+                              new Object[] { numTransaccion, nombreTransaccion, 0, error });
+        } catch (Exception e) {
+
+        }
+
+    }
+
+    public void grabaTransaccionCompleta(Integer numTransaccion, String nombreTransaccion) {
+        try {
+            this.ejecutaQuery("INSERT INTO async_transactions VALUES(?,?,?,?)",
+                              new Object[] { numTransaccion, nombreTransaccion, 1, null });
+        } catch (Exception e) {
+
+        }
+
+    }
+
+    public void setStarted(boolean started) {
+        this.started = started;
+        stateMonitor.setStarted(started); //Esto es para no cambiar el codigo que ya esta
+        stateMonitor.setStartedAt(DateTimeUtils.formatThisTime());
+        startedAt = LocalDateTime.now();
+    }
+
+    public boolean isStarted() {
+        return started;
+    }
+
+    public void setFinished(boolean finished) {
+        this.finished = finished;
+        stateMonitor.setFinished(started);
+        stateMonitor.setEndedAt(DateTimeUtils.formatThisTime());
+        Duration duration = Duration.between(startedAt, LocalDateTime.now());
+        stateMonitor.setElapsedTime("" + duration.getSeconds() + "s");
+    }
+
+    public boolean isFinished() {
+        return finished;
+    }
+
+    public void setPercent(int percent) {
+        this.percent = percent;
+        stateMonitor.setPercent(percent);
+    }
+
+    public int getPercent() {
+        return percent;
+    }
+
+    public void setSucceeded(boolean succeeded) {
+        stateMonitor.setSucceeded(succeeded);
+    }
+
+    public void setMessage(String theMessage) {
+        stateMonitor.setOutputMessage(theMessage);
+    }
+
+    public void setStateMonitor(UploadStateMonitorBean stateMonitor) {
+        this.stateMonitor = stateMonitor;
+    }
+
+    public UploadStateMonitorBean getStateMonitor() {
+        return stateMonitor;
+    }
+
+    public boolean getFilesFromFS() {
+        return filesFromFS;
+    }
+
+    public boolean doAsThreadThread() {
+        return asThread;
+    }
 }

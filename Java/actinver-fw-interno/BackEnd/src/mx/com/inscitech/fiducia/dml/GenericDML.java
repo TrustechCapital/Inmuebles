@@ -241,6 +241,11 @@ public class GenericDML {
         return getDataRow(strSQL, new Object[] { });
     }
 
+    public DataRow getDataRowX(String strSQL, Object... values) {
+        String dataSource = ConfigurationService.getInstance().getProperty("systemDataSource");
+        return getDataRow(dataSource, strSQL, values);
+    }
+
     public DataRow getDataRow(String strSQL, Object[] values) {
         String dataSource = ConfigurationService.getInstance().getProperty("systemDataSource");
         return getDataRow(dataSource, strSQL, values);
@@ -248,6 +253,10 @@ public class GenericDML {
 
     public DataSet getDataSet(String strSQL) {
         return getDataSet(strSQL, new Object[] { });
+    }
+
+    public DataSet getDataSetX(String strSQL, Object... values) {
+        return getDataSet(strSQL, values);
     }
 
     public DataSet getDataSet(String strSQL, Object[] values) {
@@ -478,11 +487,23 @@ public class GenericDML {
                                    "Setting parameter " + i + " to " + values[k] + " as BigDecimal.", null);
                         ps.setBigDecimal(i, (BigDecimal) values[k]);
 
+                    } else if (values[k] instanceof Integer) {
+
+                        logger.log(this, Thread.currentThread(), LoggingService.LEVEL.DEBUG,
+                                   "Setting parameter " + i + " to " + values[k] + " as BigDecimal.", null);
+                        ps.setInt(i, ((Integer) values[k]).intValue());
+
+                    } else if (values[k] instanceof Long) {
+
+                        logger.log(this, Thread.currentThread(), LoggingService.LEVEL.DEBUG,
+                                   "Setting parameter " + i + " to " + values[k] + " as BigDecimal.", null);
+                        ps.setLong(i, ((Long) values[k]).longValue());
+
                     } else {
 
                         logger.log(this, Thread.currentThread(), LoggingService.LEVEL.DEBUG,
                                    "Setting parameter " + i + " to \"" + values[k] + "\" as String.", null);
-                        ps.setString(i, (String) values[k]);
+                        ps.setString(i, ""+values[k]);
 
                     }
                 }

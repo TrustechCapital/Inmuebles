@@ -1,0 +1,4 @@
+mx\com\inscitech\security\controller\SamlXMLHandlerController.class
+mx\com\inscitech\security\dto\AuthData.class
+mx\com\inscitech\security\SamlHandlerApp.class
+mx\com\inscitech\security\service\SamlHandlerService.class

@@ -4,21 +4,14 @@ import java.math.BigDecimal;
 
 import java.util.List;
 
-import java.util.Map;
-
-import mx.com.inscitech.fiducia.common.services.LoggingService;
-import mx.com.inscitech.fiducia.common.util.DateUtils;
+import mx.com.inscitech.fiducia.BusinessException;
 import mx.com.inscitech.fiducia.domain.FBienesgar;
-import mx.com.inscitech.fiducia.domain.FGarantias;
 import mx.com.inscitech.fiducia.domain.FUnidades;
 import mx.com.inscitech.fiducia.models.LayoutCargaBienes;
 import mx.com.inscitech.fiducia.negocio.bienes.Constants.EstatusIndividualizacionBienes;
 import mx.com.inscitech.fiducia.negocio.bienes.Constants.TiposCargaMasiva;
-import mx.com.inscitech.fiducia.repository.BienesRepository;
 import mx.com.inscitech.fiducia.repository.DetalleBienesRepository;
 import mx.com.inscitech.fiducia.repository.UnidadRepository;
-
-import mx.gob.nafin.fiduciario.BusinessException;
 
 public class OperacionesCargaMasivaBienes {
 
