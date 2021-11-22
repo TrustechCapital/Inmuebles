@@ -55,7 +55,7 @@ public class FUnidades extends DomainObject {
     private String funiSotano = null;
     private String funiSotanoSuperficie = null;
     private BigDecimal funiIndiviso = null;
-    private BigDecimal funiNumeroCatastro = null;
+    private String funiNumeroCatastro = null;
     private BigDecimal funiPrecioCatastro = null;
     private String funiActo1 = null;
     private String funiActo2 = null;
@@ -699,11 +699,11 @@ public class FUnidades extends DomainObject {
         fieldValues += ", ?";
         values.add(this.getFuniMedidas());
 
-        fields += ", FUNI_PRECIO";
+        /*fields += ", FUNI_PRECIO";
         fieldValues += ", ?";
-        values.add(this.getFuniPrecio());
+        values.add(this.getFuniPrecio());*/
 
-        fields += ", FUNI_ULTIMO_AVALUO";
+        fields += ", FUNI_PRECIO";
         fieldValues += ", ?";
         values.add(this.getFuniUltimoAvaluo());
 
@@ -969,7 +969,7 @@ public class FUnidades extends DomainObject {
         result.setFuniSotano((String) objectData.getData("FUNI_SOTANO"));
         result.setFuniSotanoSuperficie((String) objectData.getData("FUNI_SOTANO_SUPERFICIE"));
         result.setFuniIndiviso((BigDecimal) objectData.getData("FUNI_INDIVISO"));
-        result.setFuniNumeroCatastro((BigDecimal) objectData.getData("FUNI_NUMERO_CATASTRO"));
+        result.setFuniNumeroCatastro((String) objectData.getData("FUNI_NUMERO_CATASTRO"));
         result.setFuniPrecioCatastro((BigDecimal) objectData.getData("FUNI_PRECIO_CATASTRO"));
         result.setFuniActo1((String) objectData.getData("FUNI_ACTO1"));
         result.setFuniActo2((String) objectData.getData("FUNI_ACTO2"));
@@ -1076,11 +1076,11 @@ public class FUnidades extends DomainObject {
     }
 
 
-    public void setFuniNumeroCatastro(BigDecimal funiNumeroCatastro) {
+    public void setFuniNumeroCatastro(String funiNumeroCatastro) {
         this.funiNumeroCatastro = funiNumeroCatastro;
     }
 
-    public BigDecimal getFuniNumeroCatastro() {
+    public String getFuniNumeroCatastro() {
         return funiNumeroCatastro;
     }
 

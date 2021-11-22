@@ -5,13 +5,14 @@ import java.math.BigDecimal;
 import java.util.Arrays;
 
 import mx.com.inscitech.fiducia.domain.Anteproy;
+import mx.com.inscitech.fiducia.domain.FEmpresa;
 
 public class AnteproyectoRepository {
     public AnteproyectoRepository() {
         super();
     }
 
-    public Anteproy findByPK(BigDecimal numAnteproyecto) {
+    public Anteproy findByPK(BigDecimal numAnteproyecto) {      
         return (Anteproy) new Anteproy(numAnteproyecto).selectAsObject();
     }
 

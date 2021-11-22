@@ -27,6 +27,7 @@ public class LayoutCargaBienes {
     private String nombreNotario;
     private Integer numeroNotario;
     private Integer status;
+    private Integer SubCuenta;
 
     public LayoutCargaBienes() {
         super();
@@ -37,7 +38,7 @@ public class LayoutCargaBienes {
                              String pais, String colindancia, String medidas, String estacionamiento1,
                              String superficie1, String numeroCatastro, Double valorBien, Integer tipoValorBien,
                              String nombreAdquirente, String escritura, String fechaEscritura, String nombreNotario,
-                             Integer notario, Integer status) {
+                             Integer notario, Integer status,Integer SubCuenta) {
         this.idfideicomiso = idfideicomiso;
         this.idBien = idBien;
         this.edificio = edificio;
@@ -62,6 +63,7 @@ public class LayoutCargaBienes {
         this.nombreNotario = nombreNotario;
         this.numeroNotario = notario;
         this.status = status;
+        this.SubCuenta = SubCuenta;
     }
 
 
@@ -259,5 +261,13 @@ public class LayoutCargaBienes {
     public Integer getStatus() {
         return status;
     }
+    
+    public void setSubCuenta(Integer SubCuenta) {
+        this.SubCuenta = SubCuenta;
+    }
+
+    public Integer getSubCuenta() {
+        return SubCuenta;
+    }    
 
 }

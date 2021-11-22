@@ -41,14 +41,14 @@ public class OperacionesCargaMasivaBienes {
     }
 
 
-    public void ejecutaCarga(Integer pTipoOperacion, Integer pIdFideicomiso,
+    public int ejecutaCarga(Integer pTipoOperacion, Integer pIdFideicomiso,
                              List<LayoutCargaBienes> datosCarga) throws BusinessException {
 
         BigDecimal idFideicomiso = new BigDecimal(pIdFideicomiso);
 
         for (LayoutCargaBienes layoutCarga : datosCarga) {
 
-            BigDecimal idSubcuenta = BigDecimal.valueOf(0);
+            BigDecimal idSubcuenta = BigDecimal.valueOf(layoutCarga.getSubCuenta());
             BigDecimal idBien = new BigDecimal(layoutCarga.getIdBien());
             String idEdificio = layoutCarga.getEdificio();
             String idDepto = layoutCarga.getDepto();
@@ -63,9 +63,10 @@ public class OperacionesCargaMasivaBienes {
                 FBienesgar detalleBien = detalleBienesRepository.findByPk(idFideicomiso, idSubcuenta, idBien);
 
                 if (detalleBien == null) {
-                    throw new BusinessException("400",
+                    return 1;
+                   /* throw new BusinessException("400",
                                                 String.format("El detalle de bien con id %s no existe en el fideicomiso: %s, subcuenta: %s",
-                                                              idBien, idFideicomiso, idSubcuenta));
+                                                              idBien, idFideicomiso, idSubcuenta));*/
                 }
 
                 FUnidades unidad = unidadRepository.findByPk(idFideicomiso, idSubcuenta, idBien, idEdificio, idDepto);
@@ -85,7 +86,8 @@ public class OperacionesCargaMasivaBienes {
                     unidad.setFuniMedidas(layoutCarga.getMedidas().toString());
                     unidad.setFuniEstacionamiento1(layoutCarga.getEstacionamiento1());
                     unidad.setFuniSuperficie1(layoutCarga.getSuperficie1());
-                    unidad.setFuniNumeroCatastro(new BigDecimal(layoutCarga.getNumeroCatastro()));
+                    //Double obj = new Double(layoutCarga.getNumeroCatastro());
+                    unidad.setFuniNumeroCatastro(layoutCarga.getNumeroCatastro());
 
                     if (tipoValorBien == TipoValorBien.COMERCIAL.getValue()) {
                         unidad.setFuniPrecio(valorBien);
@@ -127,11 +129,11 @@ public class OperacionesCargaMasivaBienes {
                     unidadRepository.update(unidad);
                 }
 
-
                 //TODO: insertar en f_fiberaciones o F_PROCESO_LIBERACION ?
             }
 
         }
+        return 0;        
     }
 
 
@@ -211,11 +213,13 @@ public class OperacionesCargaMasivaBienes {
 
         // Estatus
         Integer estatus = getColumnWithDefaultValue(columns.get(23)).intValue();
+        
+        Integer SubCuenta = getColumnWithDefaultValue(columns.get(24)).intValue();
 
         return new LayoutCargaBienes(numFideicomiso, idDetalleBien, edificio, departamento, niveles, calle, colonia,
                                      poblacion, cp, estado, pais, colindancia, medidas, estacionamiento, superficie,
                                      numeroCatastral, valorInmueble, tipoValorInmueble, nombreAdquiriente,
-                                     numeroEscritura, fechaEscritura, nombreNotario, numeroNotario, estatus);
+                                     numeroEscritura, fechaEscritura, nombreNotario, numeroNotario, estatus,SubCuenta);
     }
 
     Double getColumnWithDefaultValue(Object column) {
