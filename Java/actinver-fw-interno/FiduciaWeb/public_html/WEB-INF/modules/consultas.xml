@@ -343,7 +343,7 @@
                 <entry key="cvesReportos" value="SELECT CVE_NUM_SEC_CLAVE,CVE_DESC_CLAVE FROM CLAVES WHERE CVE_NUM_CLAVE=45 AND CVE_NUM_SEC_CLAVE IN (2,3)"/>
                 <entry key="conIns" value="SELECT INS_NUM_INSTRUME,INS_NOM_INSTRUME FROM INSTRUME WHERE INS_CVE_ST_INSTRUM  = 'ACTIVO'"/>
                 <entry key="conTra" value="SELECT TRS_NUM_TRANSAC,TRS_NUM_TRANSAC || ' - '||TRS_NOM_TRANSAC TRS_NUM_NOM_TRANSAC,TRS_NOM_TRANSAC FROM TRANSACC"/>
-                <entry key="conNomFid" value="SELECT CTO_NOM_CONTRATO NOMBRE,CTO_TIPO_ADMON,CTO_CVE_ST_CONTRAT STATUS FROM CONTRATO"/>
+                <entry key="conNomFid" value="SELECT CTO_NOM_CONTRATO NOMBRE,'NO','ACTIVO' STATUS FROM CONTRATO"/>
                 <entry key="conNomProyecto" value="SELECT NVL(ANT_NOM_NEGOCIO,PRS_NOM_PROSPECTO)||' NUM FID RESERVADO '||TO_CHAR(ANT_NUM_CONTRATO)||' '||ANT_CVE_AREA_INST NOMBRE,ANT_TIPO_ADMON CTO_TIPO_ADMON,ANT_SEGUIMIENTO STATUS,                  (SELECT EJE_NOM_EJECUTIVO FROM EJECUTIV WHERE EJE_CVE_BANCA='Promoción' AND EJE_CVE_ST_EJECUTI='ACTIVO' AND PRS_EJEC_ASIG=EJE_NUM_EJEC_ATENC) AS PROMOTOR,                 ANT_CVE_CLASIF_PRO AS PRODUCTO                 FROM ANTEPROY,PROSPECT WHERE ANT_NUM_PROSPECTO(+)=PRS_NUM_PROSPECTO"/>
                 <entry key="conNomCue" value="SELECT CUE_NOM_CTA NOMBRE FROM CUENTACO"/>
                 <entry key="conNomOpe" value="SELECT OPE_NOM_OPERACION NOMBRE FROM OPERACIO"/>
@@ -1371,7 +1371,7 @@
                 <!-- Ejecuta la Carga de Bienes en garantia -->
                 <entry key="qryConsultaUnidades" value="SELECT * FROM (SELECT funi_id_fideicomiso, 
                     funi_id_subcuenta, 
-                    fors_cve_tipo_garantia, 
+                    'INMUEBLES' fors_cve_tipo_garantia, 
                     fors_id_garantia, 
                     funi_id_bien, 
                     funi_id_edificio, 
@@ -3492,14 +3492,14 @@
                                 <value>NumFideicomiso</value>
                             </property>
                             <property name="sqlName">
-                                <value>CTO_NUM_CONTRATO</value>
+                                <value>CAST(CTO_NUM_CONTRATO AS varchar)</value>
                             </property>
                             <property name="clauseType">
                                 <value>AND</value>
                             </property>
                             <property name="conditionType">
                                 <value>=</value>
-                            </property>
+                            </property>                          
                         </bean>
                         <bean class="mx.com.inscitech.fiducia.common.beans.ParametroQueryBean">
                             <property name="name">
@@ -3590,7 +3590,7 @@
                                 <value>order</value>
                             </property>
                             <property name="orderClause">
-                                <value>CTO_NUM_CONTRATO</value>
+                                <value>CTO_NUM_CONTRATO ASC</value>
                             </property>
                             <property name="order">
                                 <value>true</value>
@@ -14048,7 +14048,7 @@
                                 <value>numFideicomiso</value>
                             </property>
                             <property name="sqlName">
-                                <value>CTO_NUM_CONTRATO</value>
+                                <value>CAST(CTO_NUM_CONTRATO AS varchar)</value>
                             </property>
                             <property name="clauseType">
                                 <value>AND</value>
@@ -38014,7 +38014,7 @@
                                 <value>IdFideicomiso</value>
                             </property>
                             <property name="sqlName">
-                                <value>FGAR_ID_FIDEICOMISO</value>
+                                <value>CAST(FGAR_ID_FIDEICOMISO AS VARCHAR)</value>
                             </property>
                             <property name="clauseType">
                                 <value>AND</value>
@@ -39020,13 +39020,13 @@
                                 <value>numFideicomiso</value>
                             </property>
                             <property name="sqlName">
-                                <value>funi_id_fideicomiso</value>
+                                <value>to_char(FUNI_ID_FIDEICOMISO,'9999999999')</value>
                             </property>
                             <property name="clauseType">
                                 <value>AND</value>
                             </property>
                             <property name="conditionType">
-                                <value>=</value>
+                                <value>LIKE</value>
                             </property>
                         </bean>
                         <bean class="mx.com.inscitech.fiducia.common.beans.ParametroQueryBean">

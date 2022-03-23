@@ -20,7 +20,7 @@ public class LayoutCargaBienes {
     private String superficie1;
     private String numeroCatastro;
     private Double valorBien;
-    private Integer tipoValorBien;
+    private String tipoValorBien;
     private String nombreAdquiriente;
     private String escritura;
     private String fechaEscritura;
@@ -36,7 +36,7 @@ public class LayoutCargaBienes {
     public LayoutCargaBienes(Integer idfideicomiso, Integer idBien, String edificio, String depto, String niveles,
                              String calle, String colonia, String poblacion, String codigoPostal, String estado,
                              String pais, String colindancia, String medidas, String estacionamiento1,
-                             String superficie1, String numeroCatastro, Double valorBien, Integer tipoValorBien,
+                             String superficie1, String numeroCatastro, Double valorBien, String tipoValorBien,
                              String nombreAdquirente, String escritura, String fechaEscritura, String nombreNotario,
                              Integer notario, Integer status,Integer SubCuenta) {
         this.idfideicomiso = idfideicomiso;
@@ -196,11 +196,11 @@ public class LayoutCargaBienes {
     }
 
 
-    public void setTipoValorBien(Integer tipoValorBien) {
+    public void setTipoValorBien(String tipoValorBien) {
         this.tipoValorBien = tipoValorBien;
     }
 
-    public Integer getTipoValorBien() {
+    public String getTipoValorBien() {
         return tipoValorBien;
     }
 

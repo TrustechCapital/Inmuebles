@@ -2,10 +2,19 @@ package mx.com.inscitech.fiducia.domain;
 
 import java.math.BigDecimal;
 
+import java.sql.Connection;
+import java.sql.ResultSet;
+
+import java.sql.SQLException;
+
+import java.sql.Statement;
+
 import java.util.ArrayList;
 
 import java.util.Date;
 
+import mx.com.inscitech.fiducia.common.services.ConfigurationService;
+import mx.com.inscitech.fiducia.common.util.ServiceLocator;
 import mx.com.inscitech.fiducia.domain.base.DomainObject;
 import mx.com.inscitech.fiducia.domain.base.FieldInfo;
 import mx.com.inscitech.fiducia.domain.base.PrimaryKey;
@@ -18,6 +27,16 @@ import mx.com.inscitech.fiducia.dml.vo.DataRow;
             columns = { "FUNI_ID_FIDEICOMISO", "FUNI_ID_SUBCUENTA", "FUNI_ID_BIEN", "FUNI_ID_EDIFICIO", "FUNI_ID_DEPTO"
     }, sequences = { "MANUAL" })
 public class FUnidades extends DomainObject {
+
+    public Connection conBD;
+    public Statement stQuery;
+    public ResultSet rsQuery;
+    public ResultSet rsQuery_Secuen;
+    public Statement stQuery_Secuen;
+    public Statement stInstrucc;
+    public String sQuery;
+    public String sInstrucc;
+    public int iRows;
 
     private BigDecimal funiIdFideicomiso = null;
     private BigDecimal funiIdSubcuenta = null;
@@ -67,6 +86,8 @@ public class FUnidades extends DomainObject {
     private String funiAFavor = null;
     private String funiNombreAdquiriente = null;
     private String funiNombreNotario = null;
+    private String funiNomFideicomiso = null;
+    
 
     public FUnidades() {
         super();
@@ -325,6 +346,15 @@ public class FUnidades extends DomainObject {
     public String getFuniNombreNotario() {
         return funiNombreNotario;
     }
+    
+    @FieldInfo(nullable = true, dataType = "VARCHAR2", javaClass = String.class)
+    public void setFuniNomFideicomiso(String funiNomFideicomiso) {
+        this.funiNomFideicomiso = funiNomFideicomiso;
+    }
+
+    public String getFuniNomFideicomiso() {
+        return funiNomFideicomiso;
+    }    
 
     public DMLObject getSelectByPK() {
         if (!retrieveSQL)
@@ -537,6 +567,12 @@ public class FUnidades extends DomainObject {
             values.add(this.getFuniStatus());
         }
 
+        if (this.getFuniNomFideicomiso() != null && "null".equals(this.getFuniNomFideicomiso())) {
+            conditions += " AND FUNI_NOM_FIDEICOMISO IS NULL";
+        } else if (this.getFuniNomFideicomiso() != null) {
+            conditions += " AND FUNI_NOM_FIDEICOMISO = ?";
+            values.add(this.getFuniNomFideicomiso());
+        }
         if (!"".equals(conditions)) {
 
             conditions = conditions.substring(4).trim();
@@ -546,6 +582,73 @@ public class FUnidades extends DomainObject {
         }
 
         return result;
+
+    }
+
+    public boolean OpenBD() {
+        try {
+            conBD = ServiceLocator.getInstance()
+                                  .getDatasource(ConfigurationService.getInstance().getProperty("systemDataSource"))
+                                  .getConnection();
+            return true;
+        } catch (SQLException e) {
+            System.out.print(e);
+            return false;
+        }
+    }
+
+    public void CloseBD() throws SQLException {
+        try {
+            if (conBD != null && conBD.isClosed() == false)
+                conBD.close();
+        } catch (SQLException e) {
+            System.out.print(e);
+        }
+    }
+
+    public String getSelectNomContrato(String sNumContrato) {
+
+        try {
+            if (conBD == null)
+                if (!OpenBD())
+                    return null;
+            if (conBD != null && conBD.isClosed() == true)
+                if (!OpenBD())
+                    return null;
+
+            stQuery = conBD.createStatement(ResultSet.TYPE_SCROLL_INSENSITIVE, ResultSet.CONCUR_READ_ONLY);
+
+            //sQuery="SELECT  TO_CHAR(SYSDATE,'DD/MM/YYYY') FROM DUAL";
+            sQuery = "SELECT DISTINCT CTO_NOM_CONTRATO FROM CONTRATO WHERE CTO_NUM_CONTRATO="+sNumContrato;
+
+            rsQuery = stQuery.executeQuery(sQuery);
+            rsQuery.next();
+            return rsQuery.getString(1);
+
+        } catch (Exception ex) {
+            System.out.println("Error de getSelectNomContrato");
+            System.out.println(ex);
+            return null;
+        } finally {
+            //System.out.println("Cerrando finally de la base de  getFecha");
+            try {
+                if (rsQuery != null)
+                    rsQuery.close();
+            } catch (Exception ex) {
+                System.out.println(ex);
+            }
+            try {
+                if (stQuery != null)
+                    stQuery.close();
+            } catch (Exception ex) {
+                System.out.println(ex);
+            }
+            try {
+                CloseBD();
+            } catch (Exception ex) {
+                System.out.println(ex);
+            }
+        }
 
     }
 
@@ -615,7 +718,8 @@ public class FUnidades extends DomainObject {
         values.add(this.getFuniNombreAdquiriente());
         fields += " FUNI_NOMBRE_NOTARIO = ?, ";
         values.add(this.getFuniNombreNotario());
-
+        //fields += " FUNI_NOM_FIDEICOMISO = ?, ";
+        //values.add(this.getFuniNomFideicomiso());
         for (int i = 0; i < pkValues.size(); i++) {
             values.add(pkValues.get(i));
         }
@@ -632,6 +736,7 @@ public class FUnidades extends DomainObject {
     public DMLObject getInsert() {
         if (!retrieveSQL)
             return null;
+        DMLObject result2 = new DMLObject();
         DMLObject result = new DMLObject();
         String sql = "INSERT INTO F_UNIDADES ( ";
 
@@ -646,10 +751,6 @@ public class FUnidades extends DomainObject {
         fields += ", FUNI_ID_SUBCUENTA";
         fieldValues += ", ?";
         values.add(this.getFuniIdSubcuenta());
-
-        fields += ", FUNI_ID_BIEN";
-        fieldValues += ", ?";
-        values.add(this.getFuniIdBien());
 
         fields += ", FUNI_ID_EDIFICIO";
         fieldValues += ", ?";
@@ -699,13 +800,13 @@ public class FUnidades extends DomainObject {
         fieldValues += ", ?";
         values.add(this.getFuniMedidas());
 
-        /*fields += ", FUNI_PRECIO";
+        fields += ", FUNI_ULTIMO_AVALUO ";
         fieldValues += ", ?";
-        values.add(this.getFuniPrecio());*/
+        values.add(this.getFuniUltimoAvaluo());
 
         fields += ", FUNI_PRECIO";
         fieldValues += ", ?";
-        values.add(this.getFuniUltimoAvaluo());
+        values.add(this.getFuniPrecio());
 
         fields += ", FUNI_FECHA_ULTIMO_AVALUO";
         fieldValues += ", TO_DATE(?, 'dd/MM/yyyy') ";
@@ -827,6 +928,11 @@ public class FUnidades extends DomainObject {
         fieldValues += ", ?";
         values.add(this.getFuniNombreNotario());
 
+        System.out.println("Valor del Nombre de Fideicomiso: "+getSelectNomContrato(this.getFuniIdFideicomiso().toString()));        
+        fields += ", FUNI_NOM_FIDEICOMISO";
+        fieldValues += ", ?";
+        values.add(getSelectNomContrato(this.getFuniIdFideicomiso().toString()));
+        //values.add("(SELECT DISTINCT CTO_NOM_CONTRATO FROM CONTRATO WHERE CTO_NUM_CONTRATO="+this.getFuniIdFideicomiso()+")");
 
         fields = fields.substring(1).trim();
         fieldValues = fieldValues.substring(1).trim();
@@ -921,6 +1027,8 @@ public class FUnidades extends DomainObject {
             equalObjects = false;
         if (equalObjects && !this.getFuniStatus().equals(instance.getFuniStatus()))
             equalObjects = false;
+        if (equalObjects && !this.getFuniNomFideicomiso().equals(instance.getFuniNomFideicomiso()))
+            equalObjects = false;        
         return equalObjects;
     }
 
@@ -981,6 +1089,7 @@ public class FUnidades extends DomainObject {
         result.setFuniAFavor((String) objectData.getData("FUNI_A_FAVOR"));
         result.setFuniNombreAdquiriente((String) objectData.getData("FUNI_NOMBRE_ADQUIRIENTE"));
         result.setFuniNombreNotario((String) objectData.getData("FUNI_NOMBRE_NOTARIO"));
+        result.setFuniNomFideicomiso((String) objectData.getData("FUNI_NOM_FIDEICOMISO"));
 
         return result;
 
