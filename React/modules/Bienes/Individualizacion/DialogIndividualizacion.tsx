@@ -2,19 +2,21 @@ import React, { useState, useEffect } from 'react';
 
 import { makeStyles } from '@material-ui/core/styles';
 import Grid from '@material-ui/core/Grid';
-import { Formik } from 'formik';
-
+import { Formik ,useFormikContext} from 'formik';
 import { ICatalogDialog } from '../../../types';
 import { OperacionesCatalogo, SavingStatus } from '../../../constants';
 import { ClavesModuloBienes } from '../../../constants/bienes';
 import Individualizacion from '../../../models/Individualizacion';
 import CatalogDialog from '../../../sharedComponents/CatalogDialog';
-import GenericTextInput from '../../../sharedComponents/GenericTextInput';
-import GenericForm from '../../../sharedComponents/Forms';
+import { GenericInputProps } from '../../../sharedComponents/GenericTextInput';
+import GenericForm, { FormFieldProperties } from '../../../sharedComponents/Forms';
+import useNombreFideicomiso from '../../../sharedHooks/useNombreFideicomiso';
+
 import { monedasApi } from '../../../core/api/monedas';
 import FormValidator, {
     ValidationHelpers,
 } from '../../../services/FormValidator';
+
 
 const {
     FormTextField,
@@ -38,6 +40,33 @@ const IndividualizacionesFormValidator = new FormValidator<Individualizacion>({
     idDepto: ValidationHelpers.validateRequiredString('La unidad/departamento'),
 });
 
+type IdFideicomisoFieldType = 
+    FormFieldProperties<Individualizacion, GenericInputProps> & {
+        onChangeFideicomiso: (idFideicomiso: number) => {}
+    }
+
+const IdFideicomisoField = (props: IdFideicomisoFieldType) => {
+    const { onChangeFideicomiso, ...other } = props;
+    const {
+        values: { idFideicomiso }
+      } = useFormikContext<Individualizacion>();
+    
+      React.useEffect(() => {
+        
+        if (idFideicomiso) {
+            onChangeFideicomiso(idFideicomiso);
+        }
+
+      }, [idFideicomiso]);
+
+    return (
+        <FormTextField
+            {...other}
+        />
+    )
+}
+
+
 const DialogIndividualizacion: React.FC<ICatalogDialog<Individualizacion>> = ({
     mode,
     model,
@@ -50,6 +79,7 @@ const DialogIndividualizacion: React.FC<ICatalogDialog<Individualizacion>> = ({
     const [monedas, setMonedas] = useState([]);
 
     const classes = useStyles();
+    const [nombreFideicomiso, findNombreFideicomiso] = useNombreFideicomiso([open]);
 
     const allFieldsDisabled = mode === OperacionesCatalogo.Consulta;
     const pkFieldsDisabled =
@@ -95,21 +125,23 @@ const DialogIndividualizacion: React.FC<ICatalogDialog<Individualizacion>> = ({
                             spacing={3}
                         >
                             <Grid item xs={6}>
-                                <FormTextField
+                                <IdFideicomisoField
                                     name="idFideicomiso"
                                     label="Fideicomiso"
                                     helperText="Fideicomiso a asignar bienes"
                                     disabled={pkFieldsDisabled}
-                                    dataType="number"
+                                    dataType="text"
+                                    onChangeFideicomiso={findNombreFideicomiso}
                                 />
                             </Grid>
                             <Grid item xs={6}>
-                                <GenericTextInput
+                            <FormTextField
+                                    name="nombreFideicomiso"
                                     label="Nombre de Fideicomiso"
-                                    readOnly={true}
-                                    value=""
-                                    onChange={() => {}}
-                                />
+                                    disabled={allFieldsDisabled}
+                                    defaultValue={nombreFideicomiso}
+                                />                                
+
                             </Grid>
                         </Grid>
                         <Grid
@@ -122,7 +154,7 @@ const DialogIndividualizacion: React.FC<ICatalogDialog<Individualizacion>> = ({
                                     name="idBien"
                                     label="Número de Detalle de Bien"
                                     disabled={pkFieldsDisabled}
-                                    dataType="number"
+                                    dataType="text"
                                 />
                             </Grid>
                             <Grid item xs={6}>
@@ -130,7 +162,7 @@ const DialogIndividualizacion: React.FC<ICatalogDialog<Individualizacion>> = ({
                                     name="idSubcuenta"
                                     label="Sub Cuenta"
                                     disabled={pkFieldsDisabled}
-                                    dataType="number"
+                                    dataType="text"
                                 />
                             </Grid>
                         </Grid>
@@ -144,6 +176,7 @@ const DialogIndividualizacion: React.FC<ICatalogDialog<Individualizacion>> = ({
                                     name="idEdificio"
                                     label="Edificio"
                                     disabled={pkFieldsDisabled}
+                                    dataType="text"
                                 />
                             </Grid>
                             <Grid item xs={6}>
@@ -151,6 +184,7 @@ const DialogIndividualizacion: React.FC<ICatalogDialog<Individualizacion>> = ({
                                     name="idDepto"
                                     label="Unidad Condominal/Departamento"
                                     disabled={pkFieldsDisabled}
+                                    dataType="text"
                                 />
                             </Grid>
                         </Grid>
@@ -163,7 +197,7 @@ const DialogIndividualizacion: React.FC<ICatalogDialog<Individualizacion>> = ({
                                 <FormTextField
                                     name="niveles"
                                     label="Niveles"
-                                    dataType="number"
+                                    dataType="text"
                                     disabled={allFieldsDisabled}
                                 />
                             </Grid>
@@ -216,6 +250,7 @@ const DialogIndividualizacion: React.FC<ICatalogDialog<Individualizacion>> = ({
                                     name="numeroPais"
                                     label="Pais"
                                     disabled={allFieldsDisabled}
+                                    dataType="text"
                                 />
                             </Grid>
                         </Grid>
@@ -229,6 +264,7 @@ const DialogIndividualizacion: React.FC<ICatalogDialog<Individualizacion>> = ({
                                     name="numeroEstado"
                                     label="Estado"
                                     disabled={allFieldsDisabled}
+                                    dataType="text"
                                 />
                             </Grid>
                             <Grid item xs={6}>
@@ -304,6 +340,7 @@ const DialogIndividualizacion: React.FC<ICatalogDialog<Individualizacion>> = ({
                                     dataType="text"
                                     disabled={allFieldsDisabled}
                                 />
+
                             </Grid>
                         </Grid>
                         <Grid
@@ -315,7 +352,7 @@ const DialogIndividualizacion: React.FC<ICatalogDialog<Individualizacion>> = ({
                                 <FormTextField
                                     name="numeroCatastro"
                                     label="Numero Catastro"
-                                    dataType="number"
+                                    dataType="text"
                                     disabled={allFieldsDisabled}
                                 />
                             </Grid>
@@ -323,7 +360,7 @@ const DialogIndividualizacion: React.FC<ICatalogDialog<Individualizacion>> = ({
                                 <FormTextField
                                     name="precioCatastro"
                                     label="Precio Catastro"
-                                    dataType="number"
+                                    dataType="text"
                                     disabled={allFieldsDisabled}
                                 />
                             </Grid>
@@ -337,6 +374,20 @@ const DialogIndividualizacion: React.FC<ICatalogDialog<Individualizacion>> = ({
                                     disabled={allFieldsDisabled}
                                 />
                             </Grid>
+
+                            <Grid item xs={6}>
+                                <FormCatalogSelectField
+                                    name="tipo"
+                                    useLabelAsValue={true}
+                                    parentCatalogId={
+                                        ClavesModuloBienes.TiposDeBienes
+                                    }
+                                    parentValue={2}
+                                    label="Clave de Bien"
+                                    disabled={allFieldsDisabled}
+                                />
+                            </Grid>
+                         
                         </Grid>
                         <Grid
                             container
@@ -391,8 +442,9 @@ const DialogIndividualizacion: React.FC<ICatalogDialog<Individualizacion>> = ({
                                 <FormTextField
                                     name="folioReal"
                                     label="Folio"
-                                    dataType="text"
-                                    disabled={allFieldsDisabled}
+                                    dataType="money"
+                                    disabled={allFieldsDisabled}   
+                                    
                                 />
                             </Grid>
                         </Grid>

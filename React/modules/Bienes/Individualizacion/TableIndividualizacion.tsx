@@ -151,7 +151,7 @@ const TableBien: React.FC<TableBienProps> = ({ data, onSearch }) => {
                             <Grid item xs={3}>
                                 <GenericTextInput
                                     label="Numero catastral"
-                                    dataType="number"
+                                    dataType="text"
                                     value={state.numeroCatastro}
                                     onChange={(e) =>
                                         dispatch({

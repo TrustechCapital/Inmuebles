@@ -65,6 +65,7 @@ class IndividualizacionModelMapper implements IModelMapper<Individualizacion> {
             cveGrahipo: data.funiCveGrahipo,
             numeroHipoteca: data.funiNumHipoteca,
             aFavor: data.funiAFavor,
+            nombreFideicomiso: data.funiNomFideicomiso,
         });
         return individualizacion;
     }
@@ -139,6 +140,7 @@ class IndividualizacionModelMapper implements IModelMapper<Individualizacion> {
             funiCveGrahipo: individualizacion.cveGrahipo,
             funiNumHipoteca: individualizacion.numeroHipoteca,
             funiAFavor: individualizacion.aFavor,
+            funiNomFideicomiso: individualizacion.nombreFideicomiso,
         };
     }
 }

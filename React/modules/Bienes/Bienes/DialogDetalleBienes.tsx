@@ -177,6 +177,7 @@ const DialogDetalleBienes: React.FC<DialogDetalleBienesProps> = ({
                                     namespace="model"
                                     name="idFideicomiso"
                                     label="Fideicomiso"
+                                    dataType="text"
                                     disabled={true}
                                 />
                             </Grid>
@@ -248,6 +249,7 @@ const DialogDetalleBienes: React.FC<DialogDetalleBienesProps> = ({
                                     namespace="model"
                                     name="importeDelBien"
                                     label="Importe"
+                                    dataType="money"
                                     disabled={allFieldsDisabled}
                                 />
                             </Grid>
@@ -279,6 +281,7 @@ const DialogDetalleBienes: React.FC<DialogDetalleBienesProps> = ({
                                     namespace="model"
                                     name="importeUltimaValuacion"
                                     label="Importe Última Valuación"
+                                    dataType="money"
                                     disabled={true}
                                 />
                             </Grid>
@@ -386,6 +389,7 @@ const DialogDetalleBienes: React.FC<DialogDetalleBienesProps> = ({
                                     namespace="datosRevaluacion"
                                     name="importeRevaluacion"
                                     label="Importe Revaluación"
+                                    dataType="money"
                                     disabled={revaluacionFieldsDisabled}
                                 />
                             </Grid>

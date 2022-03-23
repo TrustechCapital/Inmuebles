@@ -30,7 +30,7 @@ class FideicomisosApi extends Api {
             }
             
         ).then((data: any) => {
-            return (data === null || data.length !== 1) ? '' : data[0].nombre;
+            return (data === null || data.length !== 1) ? 'No existe el Fideicomiso' : data[0].nombre;
         });
     }
 }

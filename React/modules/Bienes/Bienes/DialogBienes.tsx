@@ -123,7 +123,7 @@ const DialogBienes: React.FC<ICatalogDialog<Bien>> = ({
                                     label="Numero Fideicomiso"
                                     helperText="Fideicomiso a asignar bienes"
                                     disabled={pkFieldsDisabled}
-                                    dataType="number"
+                                    dataType="text"
                                     onChangeFideicomiso={findNombreFideicomiso}
                                 />
                             </Grid>
@@ -142,7 +142,7 @@ const DialogBienes: React.FC<ICatalogDialog<Bien>> = ({
                                     label="Subcuenta"
                                     helperText="SubFiso"
                                     disabled={pkFieldsDisabled}
-                                    dataType="number"
+                                    dataType="text"
                                 />
                             </Grid>
                             <Grid item xs={6}>
@@ -164,7 +164,7 @@ const DialogBienes: React.FC<ICatalogDialog<Bien>> = ({
                                     name="importeDelBien"
                                     label="Importe Actualizado"
                                     disabled={allFieldsDisabled}
-                                    dataType="number"
+                                    dataType="money"
                                 />
                             </Grid>
                             <Grid item xs={6}>
@@ -185,7 +185,7 @@ const DialogBienes: React.FC<ICatalogDialog<Bien>> = ({
                                     name="importeUltimaValuacion"
                                     label="Importe Última Valuación"
                                     disabled={allFieldsDisabled}
-                                    dataType="number"
+                                    dataType="money"
                                 />
                             </Grid>
                             <Grid item xs={6}>
@@ -239,7 +239,7 @@ const DialogBienes: React.FC<ICatalogDialog<Bien>> = ({
                                     name="importeDeGarantia"
                                     label="Importe"
                                     disabled={allFieldsDisabled}
-                                    dataType="number"
+                                    dataType="money"
                                     adornment="$"
                                 />
                             </Grid>
@@ -248,7 +248,7 @@ const DialogBienes: React.FC<ICatalogDialog<Bien>> = ({
                                     name="picnorado"
                                     label="Picnorado"
                                     disabled={allFieldsDisabled}
-                                    dataType="number"
+                                    dataType="money"
                                     adornment="$"
                                 />
                             </Grid>

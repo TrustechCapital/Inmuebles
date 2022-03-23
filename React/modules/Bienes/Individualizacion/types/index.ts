@@ -45,3 +45,7 @@ export type MainIndividualizacionesActions = CrudModuleActions<
 > & {
     // Aqui se pueden agregar mas propiedades especificas al modelo
 };
+
+export type FormatoMoneda = {
+    folioReal: number | null | string;
+}

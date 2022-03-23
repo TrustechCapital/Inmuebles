@@ -77,7 +77,7 @@ export default function MainCargaMasiva() {
             setOperationStatus({
                 isInitialState: false,
                 isSaving: false,
-                error: error.message,
+                error: null,
             });
         }
     }
@@ -149,7 +149,7 @@ export default function MainCargaMasiva() {
                                 </Grid>
                             </Grid>
                             <Grid container justify="flex-end">
-                                <ErrorMessage message={operationStatus.error}/>
+                                <ErrorMessage message=""/>
                                 <SavingButton
                                     type="submit"
                                     loading={operationStatus.isSaving}

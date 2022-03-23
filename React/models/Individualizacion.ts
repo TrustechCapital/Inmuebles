@@ -51,6 +51,8 @@ class Individualizacion extends BaseModel {
     cveGrahipo: number | null = null;
     numeroHipoteca: string | null = null;
     aFavor: string | null = null;
+    nombreFideicomiso: string | null = null;
+    setState: any;
 
     constructor(
         idFideicomiso: number | null,
@@ -65,6 +67,8 @@ class Individualizacion extends BaseModel {
         this.idBien = idBien;
         this.idEdificio = idEdificio;
         this.idDepto = idDepto;
+        this.onChange = this.onChange.bind(this);
+
     }
 
     getPKValues() {
@@ -76,6 +80,13 @@ class Individualizacion extends BaseModel {
             idDepto: this.idDepto,
         };
     }
+
+    onChange = (and: { target: { name: any; value: any; }; }) =>{
+        const {name, value} = and.target;
+        this.setState({
+          [name]: value,
+        });
+      }
 }
 
 export default Individualizacion;

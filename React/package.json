@@ -10,10 +10,8 @@
         "export": "next export",
         "start": "next start",
         "zip": "node scripts/zip.js",
-        "zipnix": "cd out && cp -r ../WEB-INF . && zip -r ../FrontendFiduciaWeb-v2.war *",
-        "zipnixw": "cd out; cp -r ../WEB-INF . ; zip -r ../FrontendFiduciaWeb-v2.war *",
-        "publish": "npm run build && npm run export && npm run zipnix",
-        "publishw": "npm run build ; npm run export ; npm run zipnixw"
+        "zipnix": "xcopy /E /I .\\WEB-INF .\\out\\WEB-INF && cd out && zip -r ../FrontendFiduciaWeb-v2.war *",
+        "publish": "npm run build && npm run export && npm run zipnix"
     },
     "keywords": [],
     "author": "",
@@ -32,8 +30,10 @@
         "prop-types": "^15.7.2",
         "react": "^16.13.1",
         "react-cookie": "^4.0.3",
+        "react-currency-format": "^1.0.0",
         "react-dom": "^16.13.1",
         "react-hook-thunk-reducer": "^0.2.4",
+        "react-number-format": "^4.8.0",
         "typeface-roboto": "0.0.75",
         "yup": "^0.29.0"
     },
