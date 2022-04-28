@@ -2,7 +2,7 @@ import React, { useState, useEffect } from 'react';
 
 import { makeStyles } from '@material-ui/core/styles';
 import Grid from '@material-ui/core/Grid';
-import { Formik ,useFormikContext} from 'formik';
+import { Formik, useFormikContext } from 'formik';
 import { ICatalogDialog } from '../../../types';
 import { OperacionesCatalogo, SavingStatus } from '../../../constants';
 import { ClavesModuloBienes } from '../../../constants/bienes';
@@ -40,7 +40,7 @@ const IndividualizacionesFormValidator = new FormValidator<Individualizacion>({
     idDepto: ValidationHelpers.validateRequiredString('La unidad/departamento'),
 });
 
-type IdFideicomisoFieldType = 
+type IdFideicomisoFieldType =
     FormFieldProperties<Individualizacion, GenericInputProps> & {
         onChangeFideicomiso: (idFideicomiso: number) => {}
     }
@@ -49,15 +49,15 @@ const IdFideicomisoField = (props: IdFideicomisoFieldType) => {
     const { onChangeFideicomiso, ...other } = props;
     const {
         values: { idFideicomiso }
-      } = useFormikContext<Individualizacion>();
-    
-      React.useEffect(() => {
-        
+    } = useFormikContext<Individualizacion>();
+
+    React.useEffect(() => {
+
         if (idFideicomiso) {
             onChangeFideicomiso(idFideicomiso);
         }
 
-      }, [idFideicomiso]);
+    }, [idFideicomiso]);
 
     return (
         <FormTextField
@@ -135,12 +135,12 @@ const DialogIndividualizacion: React.FC<ICatalogDialog<Individualizacion>> = ({
                                 />
                             </Grid>
                             <Grid item xs={6}>
-                            <FormTextField
+                                <FormTextField
                                     name="nombreFideicomiso"
                                     label="Nombre de Fideicomiso"
                                     disabled={allFieldsDisabled}
                                     defaultValue={nombreFideicomiso}
-                                />                                
+                                />
 
                             </Grid>
                         </Grid>
@@ -337,7 +337,7 @@ const DialogIndividualizacion: React.FC<ICatalogDialog<Individualizacion>> = ({
                                 <FormTextField
                                     name="precio"
                                     label="Registro Contable"
-                                    dataType="text"
+                                    dataType="money"
                                     disabled={allFieldsDisabled}
                                 />
 
@@ -360,7 +360,7 @@ const DialogIndividualizacion: React.FC<ICatalogDialog<Individualizacion>> = ({
                                 <FormTextField
                                     name="precioCatastro"
                                     label="Precio Catastro"
-                                    dataType="text"
+                                    dataType="money"
                                     disabled={allFieldsDisabled}
                                 />
                             </Grid>
@@ -387,7 +387,7 @@ const DialogIndividualizacion: React.FC<ICatalogDialog<Individualizacion>> = ({
                                     disabled={allFieldsDisabled}
                                 />
                             </Grid>
-                         
+
                         </Grid>
                         <Grid
                             container
@@ -409,7 +409,7 @@ const DialogIndividualizacion: React.FC<ICatalogDialog<Individualizacion>> = ({
                             spacing={3}
                         >
                             <Grid item xs={6}>
-                            <FormTextField
+                                <FormTextField
                                     name="numeroNotario"
                                     label="Numero Notario"
                                     dataType="text"
@@ -443,8 +443,8 @@ const DialogIndividualizacion: React.FC<ICatalogDialog<Individualizacion>> = ({
                                     name="folioReal"
                                     label="Folio"
                                     dataType="money"
-                                    disabled={allFieldsDisabled}   
-                                    
+                                    disabled={allFieldsDisabled}
+
                                 />
                             </Grid>
                         </Grid>
