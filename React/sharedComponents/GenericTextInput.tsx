@@ -79,7 +79,6 @@ const GenericTextInput: FunctionComponent<GenericInputProps> = ({
 
     console.log('onChange: ' + onChange);
 
-    let solonumeros = 0;
     let valueWithDefault = value;
 
     if (valueWithDefault === '' || valueWithDefault === null) {
