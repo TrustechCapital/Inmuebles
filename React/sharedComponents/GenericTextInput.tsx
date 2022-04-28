@@ -47,14 +47,18 @@ const GenericTextInput: FunctionComponent<GenericInputProps> = ({
     const onChange = useCallback(
         (e: any) => {
             let value = e.target.value;
+            console.log('value before: ' + value + ' dataType: ' + dataType);
 
             if (textFieldProps.onChange) {
+                console.log('textFieldProps.onChange');
 
                 if (dataType === 'number' && value !== '') {
+                    console.log('in number');
                     value = Number(value);
                 }
 
                 if (dataType === 'money' && value !== '') {
+                    console.log('in money');
                     value = (parseInt(value)).toFixed(2).replace(/\d(?=(\d{3})+\.)/g, '$&,');
                 }
 
@@ -73,13 +77,10 @@ const GenericTextInput: FunctionComponent<GenericInputProps> = ({
         [textFieldProps.name, dataType]
     );
 
+    console.log('onChange: ' + onChange);
+
     let solonumeros = 0;
-
     let valueWithDefault = value;
-
-    console.log("tipo antes de if:" + dataType);
-    console.log("valor antes de if:" + valueWithDefault);
-    console.log("solonumeroscpd:" + solonumeros);
 
     if (valueWithDefault === '' || valueWithDefault === null) {
         valueWithDefault = defaultValue;
