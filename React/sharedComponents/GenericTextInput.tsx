@@ -47,20 +47,9 @@ const GenericTextInput: FunctionComponent<GenericInputProps> = ({
     const onChange = useCallback(
         (e: any) => {
             let value = e.target.value;
-            console.log('value before: ' + value + ' dataType: ' + dataType);
+            console.log('textFieldProps.onChange');
 
             if (textFieldProps.onChange) {
-                console.log('textFieldProps.onChange');
-
-                if (dataType === 'number' && value !== '') {
-                    console.log('in number');
-                    value = Number(value);
-                }
-
-                if (dataType === 'money' && value !== '') {
-                    console.log('in money');
-                    value = (parseInt(value)).toFixed(2).replace(/\d(?=(\d{3})+\.)/g, '$&,');
-                }
 
                 const newEventData = {
                     ...e,
@@ -76,8 +65,6 @@ const GenericTextInput: FunctionComponent<GenericInputProps> = ({
         },
         [textFieldProps.name, dataType]
     );
-
-    console.log('onChange: ' + onChange);
 
     let valueWithDefault = value;
 

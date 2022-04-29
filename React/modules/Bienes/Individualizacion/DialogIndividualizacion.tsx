@@ -11,6 +11,7 @@ import CatalogDialog from '../../../sharedComponents/CatalogDialog';
 import { GenericInputProps } from '../../../sharedComponents/GenericTextInput';
 import GenericForm, { FormFieldProperties } from '../../../sharedComponents/Forms';
 import useNombreFideicomiso from '../../../sharedHooks/useNombreFideicomiso';
+import CurrencyInput from 'react-currency-input-field';
 
 import { monedasApi } from '../../../core/api/monedas';
 import FormValidator, {
@@ -357,11 +358,13 @@ const DialogIndividualizacion: React.FC<ICatalogDialog<Individualizacion>> = ({
                                 />
                             </Grid>
                             <Grid item xs={6}>
-                                <FormTextField
+                                <CurrencyInput
+                                    id="precioCatastro"
                                     name="precioCatastro"
-                                    label="Precio Catastro"
-                                    dataType="money"
-                                    disabled={allFieldsDisabled}
+                                    placeholder="Precio Catastro"
+                                    defaultValue={0}
+                                    decimalsLimit={2}
+                                    onValueChange={(value, name) => console.log(value, name)}
                                 />
                             </Grid>
                             <Grid item xs={6}>
