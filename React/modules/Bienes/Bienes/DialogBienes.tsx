@@ -41,7 +41,7 @@ const BienesFormValidator = new FormValidator<Bien>({
 });
 
 
-type IdFideicomisoFieldType = 
+type IdFideicomisoFieldType =
     FormFieldProperties<Bien, GenericInputProps> & {
         onChangeFideicomiso: (idFideicomiso: number) => {}
     }
@@ -50,15 +50,15 @@ const IdFideicomisoField = (props: IdFideicomisoFieldType) => {
     const { onChangeFideicomiso, ...other } = props;
     const {
         values: { idFideicomiso }
-      } = useFormikContext<Bien>();
-    
-      React.useEffect(() => {
-        
+    } = useFormikContext<Bien>();
+
+    React.useEffect(() => {
+
         if (idFideicomiso) {
             onChangeFideicomiso(idFideicomiso);
         }
 
-      }, [idFideicomiso]);
+    }, [idFideicomiso]);
 
     return (
         <FormTextField
@@ -83,7 +83,7 @@ const DialogBienes: React.FC<ICatalogDialog<Bien>> = ({
     const allFieldsDisabled = mode === OperacionesCatalogo.Consulta;
     const pkFieldsDisabled =
         allFieldsDisabled || mode === OperacionesCatalogo.Modificacion;
-        
+
     return (
         <Formik
             initialValues={model}
@@ -128,7 +128,7 @@ const DialogBienes: React.FC<ICatalogDialog<Bien>> = ({
                                 />
                             </Grid>
                             <Grid item xs={6}>
-                                <Typography color="textSecondary" variant="body2">Nombre del Fideicomiso:<br/> {nombreFideicomiso}</Typography>
+                                <Typography color="textSecondary" variant="body2">Nombre del Fideicomiso:<br /> {nombreFideicomiso}</Typography>
                             </Grid>
                         </Grid>
                         <Grid
@@ -164,7 +164,8 @@ const DialogBienes: React.FC<ICatalogDialog<Bien>> = ({
                                     name="importeDelBien"
                                     label="Importe Actualizado"
                                     disabled={allFieldsDisabled}
-                                    dataType="money"
+                                    dataType="text"
+                                    adornment='$'
                                 />
                             </Grid>
                             <Grid item xs={6}>
@@ -185,7 +186,8 @@ const DialogBienes: React.FC<ICatalogDialog<Bien>> = ({
                                     name="importeUltimaValuacion"
                                     label="Importe Última Valuación"
                                     disabled={allFieldsDisabled}
-                                    dataType="money"
+                                    dataType="text"
+                                    adornment='$'
                                 />
                             </Grid>
                             <Grid item xs={6}>
@@ -218,7 +220,7 @@ const DialogBienes: React.FC<ICatalogDialog<Bien>> = ({
                                 <GenericSwitch
                                     label="Revalua"
                                     disabled={allFieldsDisabled}
-                                    onChange={() => {}}
+                                    onChange={() => { }}
                                 />
                             </Grid>
                             <Grid item xs={6}>
@@ -239,8 +241,8 @@ const DialogBienes: React.FC<ICatalogDialog<Bien>> = ({
                                     name="importeDeGarantia"
                                     label="Importe"
                                     disabled={allFieldsDisabled}
-                                    dataType="money"
-                                    adornment="$"
+                                    dataType="text"
+                                    adornment='$'
                                 />
                             </Grid>
                             <Grid item xs={6}>
@@ -248,8 +250,8 @@ const DialogBienes: React.FC<ICatalogDialog<Bien>> = ({
                                     name="picnorado"
                                     label="Picnorado"
                                     disabled={allFieldsDisabled}
-                                    dataType="money"
-                                    adornment="$"
+                                    dataType="text"
+                                    adornment='$'
                                 />
                             </Grid>
                         </Grid>

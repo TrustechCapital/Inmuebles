@@ -249,7 +249,8 @@ const DialogDetalleBienes: React.FC<DialogDetalleBienesProps> = ({
                                     namespace="model"
                                     name="importeDelBien"
                                     label="Importe"
-                                    dataType="money"
+                                    dataType="text"
+                                    adornment='$'
                                     disabled={allFieldsDisabled}
                                 />
                             </Grid>
@@ -281,7 +282,8 @@ const DialogDetalleBienes: React.FC<DialogDetalleBienesProps> = ({
                                     namespace="model"
                                     name="importeUltimaValuacion"
                                     label="Importe Última Valuación"
-                                    dataType="money"
+                                    dataType="text"
+                                    adornment='$'
                                     disabled={true}
                                 />
                             </Grid>
@@ -389,7 +391,8 @@ const DialogDetalleBienes: React.FC<DialogDetalleBienesProps> = ({
                                     namespace="datosRevaluacion"
                                     name="importeRevaluacion"
                                     label="Importe Revaluación"
-                                    dataType="money"
+                                    dataType="text"
+                                    adornment='$'
                                     disabled={revaluacionFieldsDisabled}
                                 />
                             </Grid>

@@ -338,7 +338,8 @@ const DialogIndividualizacion: React.FC<ICatalogDialog<Individualizacion>> = ({
                                 <FormTextField
                                     name="precio"
                                     label="Registro Contable"
-                                    dataType="money"
+                                    dataType="text"
+                                    adornment='$'
                                     disabled={allFieldsDisabled}
                                 />
 
@@ -446,7 +447,8 @@ const DialogIndividualizacion: React.FC<ICatalogDialog<Individualizacion>> = ({
                                 <FormTextField
                                     name="folioReal"
                                     label="Folio"
-                                    dataType="money"
+                                    dataType="text"
+                                    adornment='$'
                                     disabled={allFieldsDisabled}
 
                                 />
