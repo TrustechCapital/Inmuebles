@@ -11,7 +11,6 @@ import CatalogDialog from '../../../sharedComponents/CatalogDialog';
 import { GenericInputProps } from '../../../sharedComponents/GenericTextInput';
 import GenericForm, { FormFieldProperties } from '../../../sharedComponents/Forms';
 import useNombreFideicomiso from '../../../sharedHooks/useNombreFideicomiso';
-import CurrencyInput from 'react-currency-input-field';
 
 import { monedasApi } from '../../../core/api/monedas';
 import FormValidator, {
