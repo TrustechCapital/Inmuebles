@@ -22,14 +22,14 @@ export type GenericInputProps = Pick<
     label: string;
     value: any;
     readOnly?: boolean;
-    dataType?: 'text' | 'number' | 'money' | 'string';
+    dataType?: 'text' | 'number';
     adornment?: string;
     fullWidth?: boolean;
 };
 
 const GenericTextInput: FunctionComponent<GenericInputProps> = ({
     label = 'Campo',
-    value = 'valor',
+    value = '',
     readOnly = false,
     dataType = 'text',
     fullWidth = true,
@@ -44,12 +44,16 @@ const GenericTextInput: FunctionComponent<GenericInputProps> = ({
         ) : null,
     };
 
-    const onChange = useCallback(
+    const handleBlur = useCallback(
         (e: any) => {
             let value = e.target.value;
-            console.log('textFieldProps.onChange');
 
             if (textFieldProps.onChange) {
+
+                if (adornment && adornment === '$') {
+                    value = (parseFloat(value)).toFixed(2).replace(/\d(?=(\d{3})+\.)/g, '$&,');
+                    if (value === 'NaN') value = 0.00;
+                }
 
                 const newEventData = {
                     ...e,
@@ -64,7 +68,7 @@ const GenericTextInput: FunctionComponent<GenericInputProps> = ({
             }
         },
         [textFieldProps.name, dataType]
-    );
+    )
 
     let valueWithDefault = value;
 
@@ -81,11 +85,12 @@ const GenericTextInput: FunctionComponent<GenericInputProps> = ({
                 variant="outlined"
                 InputProps={inputProps}
                 type={dataType}
-                onChange={onChange}
                 {...textFieldProps}
+                onBlur={handleBlur}
             />
         </FormControl>
     );
 };
 
 export default GenericTextInput;
+
