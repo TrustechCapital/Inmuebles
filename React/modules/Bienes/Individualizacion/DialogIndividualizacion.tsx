@@ -351,20 +351,21 @@ const DialogIndividualizacion: React.FC<ICatalogDialog<Individualizacion>> = ({
                         >
                             <Grid item xs={6}>
                                 <FormTextField
+                                    id="precioCatastro"
                                     name="numeroCatastro"
                                     label="Numero Catastro"
                                     dataType="text"
                                     disabled={allFieldsDisabled}
+                                    adornment='$'
                                 />
                             </Grid>
                             <Grid item xs={6}>
-                                <CurrencyInput
+                                <FormTextField
                                     id="precioCatastro"
                                     name="precioCatastro"
-                                    placeholder="Precio Catastro"
-                                    defaultValue={0}
-                                    decimalsLimit={2}
-                                    onValueChange={(value, name) => console.log(value, name)}
+                                    label="Precio Catastro"
+                                    dataType="text"
+                                    adornment='$'
                                 />
                             </Grid>
                             <Grid item xs={6}>
