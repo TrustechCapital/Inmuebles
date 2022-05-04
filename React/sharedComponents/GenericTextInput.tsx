@@ -51,7 +51,7 @@ const GenericTextInput: FunctionComponent<GenericInputProps> = ({
             if (textFieldProps.onChange) {
 
                 if (adornment && adornment === '$') {
-                    value = (parseFloat(value)).toFixed(2).replace(/\d(?=(\d{3})+\.)/g, '$&,');
+                    value = (parseFloat(value.replace(/[^0-9.]+/g, ''))).toFixed(2).replace(/\d(?=(\d{3})+\.)/g, '$&,');
                     if (value === 'NaN') value = 0.00;
                 }
 
