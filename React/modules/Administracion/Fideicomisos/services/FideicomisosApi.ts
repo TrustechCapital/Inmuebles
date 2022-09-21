@@ -33,7 +33,7 @@ class FideicomisosApi extends ModelsApi<Fideicomiso>
         parameters: ITableFideicomisosParameters
     ): Promise<FideicomisoResultRow[]> {
         return await this.getRef(
-            'muestraDatosFideicomisos',
+            'muestraDatosFideicomisosBusqueda',
             {
                 NumFideicomiso: parameters.idFideicomiso,
                 Nombre: parameters.nombreFideicomiso,

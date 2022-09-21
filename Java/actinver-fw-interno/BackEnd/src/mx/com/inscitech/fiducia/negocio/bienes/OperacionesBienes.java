@@ -823,7 +823,7 @@ public class OperacionesBienes {
 
 
                 // SE RECUPERA EL PRECIO CONTABLE DE LA UNIDAD (IMPORTE)
-                BigDecimal importe = unidad.getFuniPrecio();
+                BigDecimal importe = new BigDecimal(unidad.getFuniPrecio());
                 BigDecimal folioOperacion = foliosRepository.generaFolio();
 
                 // SALIDA

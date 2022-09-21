@@ -47,7 +47,7 @@ const GenericTextInput: FunctionComponent<GenericInputProps> = ({
     const handleBlur = useCallback(
         (e: any) => {
             let value = e.target.value;
-
+            console.log("valor recibido "+value);
             if (textFieldProps.onChange) {
 
                 if (adornment && adornment === '$') {

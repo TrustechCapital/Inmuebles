@@ -19,7 +19,7 @@ class Bien extends BaseModel {
     fechaFin: Date | null = null;
     estatus: string | null = null;
     esGarantia: boolean = false;
-
+    nombreFideicomiso: string = '';
     constructor(
         idFideicomiso: number | null,
         idSubcuenta: number | null,

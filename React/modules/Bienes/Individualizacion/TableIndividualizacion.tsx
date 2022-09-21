@@ -13,7 +13,6 @@ import GenericTable, {
 } from '../../../sharedComponents/GenericTable';
 import GenericTextInput from '../../../sharedComponents/GenericTextInput';
 import CatalogSelect from '../../../sharedComponents/CatalogSelect';
-import GenericSwitch from '../../../sharedComponents/GenericSwitch';
 import GenericDatePicker from '../../../sharedComponents/GenericDatePicker';
 
 const COLUMNS: IGenericTableColumn<IndividualizacionesResultRow>[] = [
@@ -192,19 +191,6 @@ const TableBien: React.FC<TableBienProps> = ({ data, onSearch }) => {
                             </Grid>
                         </Grid>
                         <Grid container spacing={4}>
-                            <Grid item xs={3}>
-                                <GenericSwitch
-                                    label="Transmitido?"
-                                    checked={state.escriturado}
-                                    onChange={(e, checked) => 
-                                        dispatch({
-                                            type: 'field',
-                                            fieldName: 'escriturado',
-                                            value: checked,
-                                        })
-                                    }
-                                />
-                            </Grid>
                             <Grid item xs={3}>
                                 <GenericDatePicker
                                     label="Fecha Transmisión"

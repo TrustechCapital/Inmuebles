@@ -16,7 +16,7 @@ import FormValidator, {
     ValidationHelpers,
 } from '../../../services/FormValidator';
 import useNombreFideicomiso from '../../../sharedHooks/useNombreFideicomiso';
-import { Typography } from '@material-ui/core';
+
 
 const {
     FormTextField,
@@ -128,8 +128,14 @@ const DialogBienes: React.FC<ICatalogDialog<Bien>> = ({
                                 />
                             </Grid>
                             <Grid item xs={6}>
-                                <Typography color="textSecondary" variant="body2">Nombre del Fideicomiso:<br /> {nombreFideicomiso}</Typography>
-                            </Grid>
+                                <FormTextField
+                                    name="nombreFideicomiso"
+                                    label="Nombre de Fideicomiso"
+                                    disabled={allFieldsDisabled}
+                                    defaultValue={nombreFideicomiso}
+                                />
+
+                            </Grid>                            
                         </Grid>
                         <Grid
                             container

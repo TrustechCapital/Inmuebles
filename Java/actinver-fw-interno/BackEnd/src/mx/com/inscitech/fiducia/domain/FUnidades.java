@@ -53,7 +53,7 @@ public class FUnidades extends DomainObject {
     private String funiClavePais = null;
     private String funiColindancias = null;
     private String funiMedidas = null;
-    private BigDecimal funiPrecio = null;
+    private String funiPrecio = null;
     private BigDecimal funiUltimoAvaluo = null;
     private String funiFechaUltimoAvaluo = null;
     private BigDecimal funiMoneda = null;
@@ -75,7 +75,7 @@ public class FUnidades extends DomainObject {
     private String funiSotanoSuperficie = null;
     private BigDecimal funiIndiviso = null;
     private String funiNumeroCatastro = null;
-    private BigDecimal funiPrecioCatastro = null;
+    private String funiPrecioCatastro = null;
     private String funiActo1 = null;
     private String funiActo2 = null;
     private String funiActo3 = null;
@@ -240,11 +240,11 @@ public class FUnidades extends DomainObject {
     }
 
     @FieldInfo(nullable = true, dataType = "NUMBER", precision = 16, scale = 2, javaClass = BigDecimal.class)
-    public void setFuniPrecio(BigDecimal funiPrecio) {
+    public void setFuniPrecio(String funiPrecio) {
         this.funiPrecio = funiPrecio;
     }
 
-    public BigDecimal getFuniPrecio() {
+    public String getFuniPrecio() {
         return this.funiPrecio;
     }
 
@@ -360,7 +360,17 @@ public class FUnidades extends DomainObject {
         if (!retrieveSQL)
             return null;
         DMLObject result = new DMLObject();
-        String sql = "SELECT * FROM F_UNIDADES ";
+        String sql = "SELECT funi_id_fideicomiso, funi_id_subcuenta, funi_id_bien, funi_id_edificio, funi_id_depto, funi_tipo, funi_niveles,\n" + 
+        " funi_calle_num, funi_nom_colonia, funi_nom_poblacion, funi_codigo_postal, funi_num_estado, funi_num_pais, \n" + 
+        "funi_colindancias, funi_medidas, funi_estacionamiento1, funi_superficie1, funi_estacionamiento2, funi_superficie2, \n" + 
+        "funi_estacionamiento3, funi_superficie3, funi_roof_garden, funi_roof_superficie, funi_sotano, funi_sotano_superficie, \n" + 
+        "funi_indiviso, trim(to_char(to_number(funi_precio, \n" + 
+        "'999999999999999999999.00'), '999,999,999,999,999,999,999.00')) funi_precio,\n" + 
+        "trim(to_char(to_number(funi_precio_catastro, \n" + 
+        "'999999999999999999999.00'), '999,999,999,999,999,999,999.00')) funi_precio_catastro, funi_ultimo_avaluo, funi_fecha_ultimo_avaluo, funi_moneda, funi_acto1, \n" + 
+        "funi_acto2, funi_acto3, funi_acto4, funi_notario, funi_fecha_reversion, funi_localidad_nota, funi_num_escritura, funi_folio_real, \n" + 
+        "funi_fecha_traslado_dominio, funi_status, funi_cve_grahipo, funi_num_hipoteca, funi_a_favor, funi_num_catastro, funi_nom_fideicomiso, \n" + 
+        "funi_numero_catastro, funi_nombre_adquiriente, funi_nombre_notario FROM F_UNIDADES ";
 
         String conditions = "";
         ArrayList values = new ArrayList();
@@ -383,6 +393,8 @@ public class FUnidades extends DomainObject {
 
         conditions = conditions.substring(4).trim();
         sql += "WHERE " + conditions;
+        //System.out.println("Sql selectbypk Unidades"+sql);
+
         result.setSql(sql);
         result.setParameters(values.toArray());
 
@@ -394,7 +406,17 @@ public class FUnidades extends DomainObject {
         if (!retrieveSQL)
             return null;
         DMLObject result = new DMLObject();
-        String sql = "SELECT * FROM F_UNIDADES ";
+        String sql = "SELECT funi_id_fideicomiso, funi_id_subcuenta, funi_id_bien, funi_id_edificio, funi_id_depto, funi_tipo, funi_niveles,\n" + 
+        " funi_calle_num, funi_nom_colonia, funi_nom_poblacion, funi_codigo_postal, funi_num_estado, funi_num_pais, \n" + 
+        "funi_colindancias, funi_medidas, funi_estacionamiento1, funi_superficie1, funi_estacionamiento2, funi_superficie2, \n" + 
+        "funi_estacionamiento3, funi_superficie3, funi_roof_garden, funi_roof_superficie, funi_sotano, funi_sotano_superficie, \n" + 
+        "funi_indiviso, trim(to_char(to_number(funi_precio, \n" + 
+        "'999999999999999999999.00'), '999,999,999,999,999,999,999.00')) funi_precio,\n" + 
+        "trim(to_char(to_number(funi_precio_catastro, \n" + 
+        "'999999999999999999999.00'), '999,999,999,999,999,999,999.00')) funi_precio_catastro, funi_ultimo_avaluo, funi_fecha_ultimo_avaluo, funi_moneda, funi_acto1, \n" + 
+        "funi_acto2, funi_acto3, funi_acto4, funi_notario, funi_fecha_reversion, funi_localidad_nota, funi_num_escritura, funi_folio_real, \n" + 
+        "funi_fecha_traslado_dominio, funi_status, funi_cve_grahipo, funi_num_hipoteca, funi_a_favor, funi_num_catastro, funi_nom_fideicomiso, \n" + 
+        "funi_numero_catastro, funi_nombre_adquiriente, funi_nombre_notario  FROM F_UNIDADES ";
 
         String conditions = "";
         ArrayList values = new ArrayList();
@@ -497,7 +519,7 @@ public class FUnidades extends DomainObject {
             values.add(this.getFuniMedidas());
         }
 
-        if (this.getFuniPrecio() != null && this.getFuniPrecio().longValue() == -999) {
+        if (this.getFuniPrecio() != null && "null".equals(this.getFuniPrecio())) {
             conditions += " AND FUNI_PRECIO IS NULL";
         } else if (this.getFuniPrecio() != null) {
             conditions += " AND FUNI_PRECIO = ?";
@@ -577,6 +599,7 @@ public class FUnidades extends DomainObject {
 
             conditions = conditions.substring(4).trim();
             sql += "WHERE " + conditions;
+            //System.out.println("Sql select Unidades"+sql);
             result.setSql(sql);
             result.setParameters(values.toArray());
         }
@@ -669,10 +692,15 @@ public class FUnidades extends DomainObject {
         pkValues.add(this.getFuniIdSubcuenta());
         conditions += " AND FUNI_ID_BIEN = ?";
         pkValues.add(this.getFuniIdBien());
-        conditions += " AND FUNI_ID_EDIFICIO = ?";
+        
+        fields += " FUNI_ID_EDIFICIO = ?, ";
+        values.add(this.getFuniIdEdificio());
+        fields += " FUNI_ID_DEPTO = ?, ";
+        values.add(this.getFuniIdDepto());        
+        /*conditions += " AND FUNI_ID_EDIFICIO = ?";
         pkValues.add(this.getFuniIdEdificio());
         conditions += " AND FUNI_ID_DEPTO = ?";
-        pkValues.add(this.getFuniIdDepto());
+        pkValues.add(this.getFuniIdDepto());*/
 
         fields += " FUNI_TIPO = ?, ";
         values.add(this.getFuniTipo());
@@ -718,6 +746,27 @@ public class FUnidades extends DomainObject {
         values.add(this.getFuniNombreAdquiriente());
         fields += " FUNI_NOMBRE_NOTARIO = ?, ";
         values.add(this.getFuniNombreNotario());
+        
+        fields += " FUNI_NUMERO_CATASTRO = ?, ";
+        values.add(this.getFuniNumeroCatastro());        
+
+        fields += " FUNI_PRECIO_CATASTRO = ?, ";
+        values.add(this.getFuniPrecioCatastro());        
+
+
+        fields += " FUNI_ESTACIONAMIENTO1 = ?, ";
+        values.add(this.getFuniEstacionamiento1());        
+
+        fields += " FUNI_ROOF_GARDEN = ?, ";
+        values.add(this.getFuniRoofGarden());        
+        fields += " FUNI_SOTANO = ?, ";
+        values.add(this.getFuniSotano());        
+
+        fields += " FUNI_INDIVISO = ?, ";
+        values.add(this.getFuniIndiviso());     
+        fields += " FUNI_FECHA_REVERSION = TO_DATE(?, 'dd/MM/yyyy'), ";
+        values.add(this.getFuniFechaReversion());
+
         //fields += " FUNI_NOM_FIDEICOMISO = ?, ";
         //values.add(this.getFuniNomFideicomiso());
         for (int i = 0; i < pkValues.size(); i++) {
@@ -727,6 +776,8 @@ public class FUnidades extends DomainObject {
         fields = fields.substring(0, fields.length() - 2).trim();
         conditions = conditions.substring(4).trim();
         sql += fields + " WHERE " + conditions;
+        //System.out.println("Sql Update Unidades"+sql);
+        
         result.setSql(sql);
         result.setParameters(values.toArray());
 
@@ -928,6 +979,10 @@ public class FUnidades extends DomainObject {
         fieldValues += ", ?";
         values.add(this.getFuniNombreNotario());
 
+        fields += ", FUNI_FECHA_TRASLADO_DOMINIO";
+        fieldValues += ", TO_DATE(?, 'dd/MM/yyyy') ";
+        values.add(this.getFuniFechaTrasladoDominio());
+
         System.out.println("Valor del Nombre de Fideicomiso: "+getSelectNomContrato(this.getFuniIdFideicomiso().toString()));        
         fields += ", FUNI_NOM_FIDEICOMISO";
         fieldValues += ", ?";
@@ -1056,7 +1111,7 @@ public class FUnidades extends DomainObject {
         result.setFuniClavePais((String) objectData.getData("FUNI_NUM_PAIS"));
         result.setFuniColindancias((String) objectData.getData("FUNI_COLINDANCIAS"));
         result.setFuniMedidas((String) objectData.getData("FUNI_MEDIDAS"));
-        result.setFuniPrecio((BigDecimal) objectData.getData("FUNI_PRECIO"));
+        result.setFuniPrecio((String) objectData.getData("FUNI_PRECIO"));
         result.setFuniUltimoAvaluo((BigDecimal) objectData.getData("FUNI_ULTIMO_AVALUO"));
         result.setFuniFechaUltimoAvaluo((String) objectData.getData("FUNI_FECHA_ULTIMO_AVALUO"));
         result.setFuniMoneda((BigDecimal) objectData.getData("FUNI_MONEDA"));
@@ -1078,7 +1133,7 @@ public class FUnidades extends DomainObject {
         result.setFuniSotanoSuperficie((String) objectData.getData("FUNI_SOTANO_SUPERFICIE"));
         result.setFuniIndiviso((BigDecimal) objectData.getData("FUNI_INDIVISO"));
         result.setFuniNumeroCatastro((String) objectData.getData("FUNI_NUMERO_CATASTRO"));
-        result.setFuniPrecioCatastro((BigDecimal) objectData.getData("FUNI_PRECIO_CATASTRO"));
+        result.setFuniPrecioCatastro((String) objectData.getData("FUNI_PRECIO_CATASTRO"));
         result.setFuniActo1((String) objectData.getData("FUNI_ACTO1"));
         result.setFuniActo2((String) objectData.getData("FUNI_ACTO2"));
         result.setFuniActo3((String) objectData.getData("FUNI_ACTO3"));
@@ -1193,11 +1248,11 @@ public class FUnidades extends DomainObject {
         return funiNumeroCatastro;
     }
 
-    public void setFuniPrecioCatastro(BigDecimal funiPrecioCatastro) {
+    public void setFuniPrecioCatastro(String funiPrecioCatastro) {
         this.funiPrecioCatastro = funiPrecioCatastro;
     }
 
-    public BigDecimal getFuniPrecioCatastro() {
+    public String getFuniPrecioCatastro() {
         return funiPrecioCatastro;
     }
 

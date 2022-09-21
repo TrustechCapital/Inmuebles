@@ -15,11 +15,11 @@ public class UserInformationService {
 
     private static final String GET_USER_INFO_SQL = "SELECT A.FUSU_NOMBRE_USUARIO, A.FPER_ID_PERFIL, A.FUSU_EMAIL, A.FUSU_ULT_ACCESO, B.USU_NUM_USUARIO, " +
                                                     "B.USU_TIPO_USUARIO, B.USU_NUM_PUESTO, B.USU_NOM_PUESTO FROM F_USUARIO A,USUARIOS B WHERE " +
-                                                    "A.FUSU_ID_USUARIO = B.USU_NOM_USUARIO AND A.FUSU_ID_USUARIO = ? AND A.FUSU_STATUS = 'ACTIVO'";
+                                                    "A.FUSU_ID_USUARIO = B.USU_NOM_USUARIO AND A.FUSU_ID_USUARIO = ? AND A.FUSU_STATUS = CAST(1 AS VARCHAR) ";
     
     private static final String GET_USER_INFO_SQL_FW = "SELECT A.FUSU_NOMBRE_USUARIO, A.FPER_ID_PERFIL, A.FUSU_EMAIL, A.FUSU_ULT_ACCESO, B.USU_NUM_USUARIO, " +
                                                     "B.USU_TIPO_USUARIO, B.USU_NUM_PUESTO, B.USU_NOM_PUESTO FROM \"FIDUCIAWEB\".F_USUARIO A, \"FIDUCIAWEB\".USUARIOS B WHERE " +
-                                                    "A.FUSU_ID_USUARIO = B.USU_NOM_USUARIO AND A.FUSU_ID_USUARIO = ? AND A.FUSU_STATUS = 'ACTIVO'";
+                                                    "A.FUSU_ID_USUARIO = B.USU_NOM_USUARIO AND A.FUSU_ID_USUARIO = ? AND A.FUSU_STATUS = CAST(1 AS VARCHAR)";
     
     private static final String GET_FECHA_CONTABLE_SQL = "SELECT FCO_DIA_APLI_CONTA, FCO_MES_APLI_CONTA, FCO_ANO_APLI_CONTA, FCO_MES_APLI_CONTA, FCO_ANO_APLI_CONTA FROM FECCONT";
     

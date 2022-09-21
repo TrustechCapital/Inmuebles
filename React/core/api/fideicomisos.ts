@@ -21,7 +21,7 @@ class FideicomisosApi extends Api {
 
     async getName(numFideicomiso: number): Promise<string> {
         return await this.getRef(
-            'conNomFid',
+            'conNomFid2',
             {
                 numFideicomiso: numFideicomiso
             },

@@ -172,7 +172,8 @@ public class CargaMasivaBienesImpl extends UploadProcessor {
                                     superficie1=excelReader.getStringCellValue(false, "0");
                                     break;                        
                                 case 15:
-                                    numeroCatastro=excelReader.getStringCellValue(false, "0");
+                                    numeroCatastro=excelReader.getStringCellValue(true, "SIN");
+                                    logger.log(this, Thread.currentThread(), LoggingService.LEVEL.DEBUG, "Valor del Catastro: " + excelReader.getStringCellValue(true, "SIN"));
                                     break;                        
                                 case 16:
                                     valorBien=excelReader.getNumericCellValue(false, "0").doubleValue();

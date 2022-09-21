@@ -32,6 +32,7 @@ public class FGarantias extends DomainObject {
     String fgarFecFin = null;
     String fgarCveStatus = null;
     BigDecimal fgarEsGarantia = null;
+    String fgarNomFideicomiso = null;
 
     public FGarantias() {
         super();
@@ -188,6 +189,15 @@ public class FGarantias extends DomainObject {
 
     public BigDecimal getFgarEsGarantia() {
         return this.fgarEsGarantia;
+    }
+
+    @FieldInfo(nullable = true, dataType = "VARCHAR2", javaClass = String.class)
+    public void setFgarNomFideicomiso(String fgarNomFideicomiso) {
+        this.fgarNomFideicomiso = fgarNomFideicomiso;
+    }
+
+    public String getFgarNomFideicomiso() {
+        return this.fgarNomFideicomiso;
     }
 
     public DMLObject getSelectByPK() {
@@ -395,6 +405,9 @@ public class FGarantias extends DomainObject {
         values.add(this.getFgarCveStatus());
         fields += " FGAR_ES_GARANTIA  = ?, ";
         values.add(this.getFgarEsGarantia());
+        fields += " FGAR_NOM_FIDEICOMISO = ?, ";
+        values.add(this.getFgarNomFideicomiso());
+
         for (int i = 0; i < pkValues.size(); i++) {
             values.add(pkValues.get(i));
         }
@@ -491,6 +504,11 @@ public class FGarantias extends DomainObject {
         fieldValues += ", ?";
         values.add(this.getFgarEsGarantia());
 
+        fields += ", FGAR_NOM_FIDEICOMISO";
+        fieldValues += ", ?";
+        values.add(this.getFgarNomFideicomiso());
+
+
         fields = fields.substring(1).trim();
         fieldValues = fieldValues.substring(1).trim();
 
@@ -564,6 +582,9 @@ public class FGarantias extends DomainObject {
             equalObjects = false;
         if (equalObjects && !this.getFgarEsGarantia().equals(instance.getFgarEsGarantia()))
             equalObjects = false;
+        if (equalObjects && !this.getFgarNomFideicomiso().equals(instance.getFgarNomFideicomiso()))
+            equalObjects = false;
+
         return equalObjects;
     }
 
@@ -595,6 +616,7 @@ public class FGarantias extends DomainObject {
         result.setFgarFecFin((String) objectData.getData("FGAR_FEC_FIN"));
         result.setFgarCveStatus((String) objectData.getData("FGAR_CVE_STATUS"));
         result.setFgarEsGarantia((BigDecimal) objectData.getData("FGAR_ES_GARANTIA"));
+        result.setFgarNomFideicomiso((String) objectData.getData("FGAR_NOM_FIDEICOMISO"));
 
         return result;
     }

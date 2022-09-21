@@ -33,6 +33,7 @@ class BienModelMapper implements IModelMapper<Bien> {
             fechaFin: fechaFin,
             estatus: data.fgarCveStatus,
             esGarantia: Boolean(data.fgarEsGarantia),
+            nombreFideicomiso: data.fgarNomFideicomiso,
         });
         return bien;
     }
@@ -73,6 +74,7 @@ class BienModelMapper implements IModelMapper<Bien> {
             fgarFecFin: fechaFin,
             fgarCveStatus: bien.estatus,
             fgarEsGarantia: bien.esGarantia ? 1 : 0,
+            fgarNomFideicomiso : bien.nombreFideicomiso,
         };
     }
 }

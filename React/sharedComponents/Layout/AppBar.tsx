@@ -88,7 +88,7 @@ const AppBar: React.FC<AppBarProps> = ({ menuOpened, onMenuOpen }) => {
                     <MenuIcon />
                 </IconButton>
                 <Typography variant="h6" noWrap className={classes.grow}>
-                    Banregio
+                    BANREGIO
                 </Typography>
                 <div className={classes.sessionInfoWrapper}>
                     <Typography

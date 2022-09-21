@@ -356,7 +356,6 @@ const DialogIndividualizacion: React.FC<ICatalogDialog<Individualizacion>> = ({
                                     label="Numero Catastro"
                                     dataType="text"
                                     disabled={allFieldsDisabled}
-                                    adornment='$'
                                 />
                             </Grid>
                             <Grid item xs={6}>
@@ -365,6 +364,7 @@ const DialogIndividualizacion: React.FC<ICatalogDialog<Individualizacion>> = ({
                                     name="precioCatastro"
                                     label="Precio Catastro"
                                     dataType="text"
+                                    disabled={allFieldsDisabled}
                                     adornment='$'
                                 />
                             </Grid>
@@ -447,7 +447,6 @@ const DialogIndividualizacion: React.FC<ICatalogDialog<Individualizacion>> = ({
                                     name="folioReal"
                                     label="Folio"
                                     dataType="text"
-                                    adornment='$'
                                     disabled={allFieldsDisabled}
 
                                 />
@@ -468,7 +467,7 @@ const DialogIndividualizacion: React.FC<ICatalogDialog<Individualizacion>> = ({
                             <Grid item xs={6}>
                                 <FormDatePickerField
                                     name="fechaReversion"
-                                    label="Fecha Revesrion"
+                                    label="Fecha Reversion"
                                     disabled={allFieldsDisabled}
                                 />
                             </Grid>

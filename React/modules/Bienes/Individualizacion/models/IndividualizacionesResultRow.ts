@@ -9,7 +9,7 @@ class IndividualizacionesResultRow extends ResultRowModel {
     idEdificio = '';
     idDepto = '';
     calleYNumero = '';
-    precio: number | null = null;
+    precio ='';
     moneda = '';
     status = '';
 

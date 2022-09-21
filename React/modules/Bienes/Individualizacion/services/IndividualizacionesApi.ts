@@ -31,7 +31,7 @@ ICrudModuleApi<
         parameters: ITableIndividualizacionesParameters
     ): Promise<IndividualizacionResultRow[]> {
         return await this.getRef(
-            'qryConsultaUnidades',
+            'qryConsultaUnidadesBusqueda',
             {
                 numFideicomiso: parameters.idFideicomiso,
                 idDepto: parameters.idDepto,

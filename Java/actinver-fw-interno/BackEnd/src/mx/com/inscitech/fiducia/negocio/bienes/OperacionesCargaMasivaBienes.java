@@ -110,9 +110,9 @@ public class OperacionesCargaMasivaBienes {
                     unidad.setFuniNumeroCatastro(layoutCarga.getNumeroCatastro());
 
                     //if (tipoValorBien == TipoValorBien.COMERCIAL.getValue()) {
-                        unidad.setFuniPrecio(valorBien);
+                        unidad.setFuniPrecio(layoutCarga.getValorBien().toString());
                     //} else if (tipoValorBien == TipoValorBien.CATASTRAL.getValue()) {
-                        unidad.setFuniPrecioCatastro(valorBien);
+                        unidad.setFuniPrecioCatastro(layoutCarga.getValorBien().toString());
                     //} else if (tipoValorBien == TipoValorBien.AVALUO.getValue()) {
                         unidad.setFuniUltimoAvaluo(valorBien);
                     //}

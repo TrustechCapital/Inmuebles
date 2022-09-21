@@ -215,7 +215,8 @@ public class GenericDataAccessService  {
     }
     
     if(query.toUpperCase().indexOf("SELECT") == 0) isSelect = true;
-    
+    System.out.println("Query ejecutaQuery "+query);
+
     if(isSelect)
       result = jdbcTemplate.query(query, 
                                   parametrosQry.toArray(),
@@ -238,6 +239,7 @@ public class GenericDataAccessService  {
   public List ejecutaConsulta(Map parametrosRequest) throws BusinessException {
     // TODO: Agregar el soporte para subqueries y para between, partir el XML de consultas
     String consultaId = (String)parametrosRequest.get("id");
+    Object estatus = "";
     ArrayList parametrosQry = new ArrayList();
     
     String strParametros = "";
@@ -252,9 +254,39 @@ public class GenericDataAccessService  {
   
     boolean needsWhere = consulta.toUpperCase().indexOf("WHERE") == -1 ? true : false;
     
+    //Se valida si contiene estatus
+    for(int i = 0; i < params.size(); i++){
+      ParametroQueryBean parametro = (ParametroQueryBean)params.get(i);
+        if(consultaId.equals("qryConsultaUnidadesBusqueda")){
+            System.out.println("1.1Parametros Enviados "+parametro.getSqlName());
+            System.out.println("1.Parametros Enviados para buscar el estatus "+parametro.getSqlName().equals("funi_Status"));
+            if(parametro.getSqlName().equals("funi_Status")){
+                System.out.println("1.3 Parametro ubicado");
+                if(parametrosRequest.containsKey(parametro.getName())){
+                    if(!parametro.isOrder()&&!parametro.isGroup()){
+                        estatus=parametrosRequest.get(parametro.getName());          
+                        System.out.println("1.4 Valor Estatus "+estatus);
+                    }
+                }    
+                break;                        
+            }
+        }
+    }
+    
+    System.out.println("Salio de la busqueda de la fecha.");
+    
     for(int i = 0; i < params.size(); i++) {
       ParametroQueryBean parametro = (ParametroQueryBean)params.get(i);
       
+        System.out.println("Valor Es parametro? "+parametro.isOrder());
+        System.out.println("Valor parametro order "+parametro.getOrderClause());
+
+        if(parametro.isOrder()) {
+          orderClause = parametro.getOrderClause();
+        }else if(parametro.isGroup()){
+          groupClause = parametro.getGroupClause();
+        }
+        
       if(parametrosRequest.containsKey(parametro.getName())) {
         Object valor = parametrosRequest.get(parametro.getName());
         
@@ -263,29 +295,62 @@ public class GenericDataAccessService  {
         }else if(parametro.isGroup()){
           groupClause = parametro.getGroupClause();
         }else {
-          if(needsWhere) {
-            consulta += " WHERE ";
-            needsWhere = false;
-            strParametros += " " + parametro.getSqlName() + " " + parametro.getConditionType() + " ?";
-          } else {
-            strParametros += " " + parametro.getClauseType() + " " + parametro.getSqlName() + " " + parametro.getConditionType() + " ?";
-          } 
-          
-          if(parametro.getConditionType().toUpperCase().indexOf("LIKE") != -1) {
-            if(!(valor instanceof String)) throw new BusinessException("801", "El valor del parametro \"" + parametro.getName() + "\" no es valido. Se esperaba String.");
-            valor = "%" + ((String)valor).trim() + "%";
-          }else if(parametro.getConditionType().toUpperCase().indexOf("IN") != -1) {
-            // TODO: Si es numero se envia tal cual, separado por comas, pero para Strings habra que agregarle las comillas a cada elemento
-            valor = "(" + valor + ")";
-          }
-          
-          parametrosQry.add(valor);
+            System.out.println("2.Parametros Enviados para buscar el estatus "+parametro.getSqlName().equals("estatus"));
+
+            if (needsWhere &&(valor!=null&&valor!="")) {
+                consulta += " WHERE ";
+                needsWhere = false;
+                if(!consultaId.equals("qryConsultaUnidadesBusqueda")){
+                    if(valor!=null&&valor!="")
+                        strParametros += " " + parametro.getSqlName() + " " + parametro.getConditionType() + " ?";                    
+                }
+                else{
+                    if(valor!=null&&valor!="")
+                        if(!parametro.getSqlName().equals("fechaEscritura"))
+                            strParametros += " " + parametro.getSqlName() + " " + parametro.getConditionType() + " ?";                    
+                        else
+                            if(estatus.equals("LIBERADO"))
+                                strParametros += " " + parametro.getSqlName() + " " + parametro.getConditionType() + " ?";                    
+                }
+                        
+            } else {
+                
+                if(!consultaId.equals("qryConsultaUnidadesBusqueda")){
+                    if(valor!=null&&valor!="")
+                    strParametros += " " + parametro.getClauseType() + " " + parametro.getSqlName() + " " + parametro.getConditionType() + " ?";                    
+                }
+                else{
+                    if(valor!=null&&valor!="")
+                        if(!parametro.getSqlName().equals("fechaEscritura"))
+                            strParametros += " " + parametro.getClauseType() + " " + parametro.getSqlName() + " " + parametro.getConditionType() + " ?";                    
+                        else
+                            if(estatus.equals("LIBERADO"))
+                                strParametros += " " + parametro.getClauseType() + " " + parametro.getSqlName() + " " + parametro.getConditionType() + " ?";
+                }
+                /*
+                if(valor!=null&&valor!="")
+                    strParametros += " " + parametro.getClauseType() + " " + parametro.getSqlName() + " " + parametro.getConditionType() + " ?";
+                */
+            }
+            
+            if (parametro.getConditionType().toUpperCase().indexOf("LIKE") != -1 && (valor!=null&&valor!="")) {
+                if (!(valor instanceof String)) throw new BusinessException("801", "El valor del parametro \"" + parametro.getName() + "\" no es valido. Se esperaba String.");
+                valor = "%" + ((String) valor).trim() + "%";
+            } else if (parametro.getConditionType().toUpperCase().indexOf("IN") != -1) {
+                // TODO: Si es numero se envia tal cual, separado por comas, pero para Strings habra que agregarle las comillas a cada elemento
+                valor = "(" + valor + ")";
+            }
+            System.out.println("Valor: "+valor);          
+            if(valor!=null&&valor!="")
+                parametrosQry.add(valor);
         }
       }
     }
     
     consulta += " " + strParametros + " " + (orderClause.trim().equals("") ? "" : " ORDER BY " + orderClause);
     consulta += " " + (groupClause.trim().equals("") ? "" : " GROUP BY " + groupClause);
+    System.out.println("Query ejecutaConsulta "+consulta);
+    System.out.println("Valor orderClause "+orderClause);
     
     return jdbcTemplate.query(consulta.trim(), parametrosQry.toArray(), new GenericRowMapper());
   }

@@ -221,6 +221,9 @@ public class FBienesgar extends DomainObject {
         return forsRegimen;
     }
 
+
+
+
     public DMLObject getSelectByPK() {
         if (!retrieveSQL)
             return null;
@@ -538,6 +541,8 @@ public class FBienesgar extends DomainObject {
         fieldValues += ", ?";
         values.add(this.getForsCveStatus());
 
+
+
         fields = fields.substring(1).trim();
         fieldValues = fieldValues.substring(1).trim();
 
@@ -614,6 +619,7 @@ public class FBienesgar extends DomainObject {
             equalObjects = false;
         if (equalObjects && !this.getForsCveStatus().equals(instance.getForsCveStatus()))
             equalObjects = false;
+        
         return equalObjects;
     }
 
