@@ -1,0 +1,73 @@
+0. Instalacion de la BD
+   Ejecutar en el orden señalado en los scripts, en base a lo siguiente:
+   0.1 01_scr_tb.sql
+   0.2 02_scr_datos.sql
+   0.3 03_scr_priv_usu_conexion.sql
+   
+   Lo anterior esta configurado de acuerdo la informacion que nos proporcionaron, esta es:
+   
+	Base de Datos: FIDUCIAWEB
+	Usuario: BRPFIDWEBINM   
+	
+1. Instalar el servidor de aplicaciones
+
+2. Registrar el controlador JDBC de PostgreSQL en el servidor de aplicaciones copiando el contenido de postgresql_jdbc.zip en la ruta: /modules/system/layers/base/org
+
+3. Configurar el datasource en el servidor de aplicaciones modificando el archivo /standalone/configuration/standalone.xml con la siguiente información en el apartado de datasources *:
+	
+	<datasource jta="false" jndi-name="java:/jdbc/fiduciaDS" pool-name="fiduciaDS" enabled="true" use-ccm="false">
+		<connection-url>jdbc:postgresql://localhost/FIDUCIAWEB</connection-url>
+		<driver>org.postgresql</driver>
+		<security>
+			<user-name>BRPFIDWEBINM</user-name>
+			<password>postgres</password>
+		</security>
+		<validation>
+			<check-valid-connection-sql>select 1</check-valid-connection-sql>
+			<validate-on-match>true</validate-on-match>
+			<background-validation>false</background-validation>
+		</validation>
+		<statement>
+			<share-prepared-statements>false</share-prepared-statements>
+		</statement>
+	</datasource>	
+
+    Información del driver:
+
+	<driver name="org.postgresql" module="org.postgresql"/>
+
+* Ver archivo standalone.xml de ejemplo
+
+4. Iniciar el servidor de aplicaciones
+
+5. Configuracion de la Aplicacion 
+
+URL's de la applicación para SSO SAML:
+
+- entityid: URL_BASE/FiduciaBackend/sso/idp
+Ej. https://127.0.0.1:8443/FiduciaBackend/sso/idp
+
+- single sign on service: URL_BASE/FiduciaBackend/google-signin
+Ej. https://127.0.0.1:8443/FiduciaBackend/google-signin
+
+- single logout service: URL_BASE/FiduciaBackend/google-signout
+Ej. https://127.0.0.1:8443/FiduciaBackend/google-signout
+
+Dónde: 
+- eintityId es la URL que indica a Google SAML a dónde se debe de dirigir el usuario una vez que se realice la autenticación.
+- single sign on service es la URL asociada al procesamiento de la información recibida por Google
+- single logout service el la URL que invocará la aplicación para cerrar la sesión con Google. El llamado a esta URL finaliza la sesión a nivel Google, es un "Single-Sign-Out"
+
+6. Una vez que se tenga la informacion del punto 1, entregarla al Proveedor para realizar la modificacion en el archivo de configuracion (WEB-INF/classes/fw.saml.properties) que esta dentro del Aplicativo FiduciaBackend.war
+
+7. El proveedor devolvera los aplicativos configurados
+  7.1 FiduciaBackend.war
+  7.2 FiduciaWeb.war
+  7.3 saml-handler-1.0.jar
+
+8. Los archivos ".war" deberán colocarse en la carpeta de "deployments" dentro del servidor de aplicaciones (/standalone/deployments) para su instalación.
+
+9. El archivo "saml-handler-1.0.jar" podrá ser colocado en la ruta que mejor convenga dada la configuración de infrastructura. Ej. /opt/FiduciaWeb/
+
+10. Ejecutar la aplicación "saml-handler-1.0.jar" empleando via consola, scheduler o similar empleando el comando "java -jar saml-handler-1.0.jar"
+Para ejecutar la aplicación en segundo plano y tener acceso a la salida, se recomienda emplear el comando "nohup java -jar saml-handler-1.0.jar > saml-handler-1.0.out &"

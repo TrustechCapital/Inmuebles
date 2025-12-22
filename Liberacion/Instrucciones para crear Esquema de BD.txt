@@ -1,0 +1,12 @@
+Ejecutar el script de creacion de objetos empleando el script "01.." usando el comando psql. Ej
+
+psql -d FIDUCIAWEB -f 01_scr_tb.sql
+
+donde -D es empleado para especificar la basede datos "FID--"
+y el parámetro -f para esficar el archivo...
+
+En caso de condasd -U
+psql -d FIDUCIAWEB -U postgres -f 01_scr_tb.sql
+
+
+psql -d FIDUCIAWEB -U BNSASDASDas.... -f 01_scr_tb.sql

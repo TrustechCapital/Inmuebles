@@ -1,0 +1,3 @@
+Instrucciones aparte de levantar el servidor jboss
+
+1. Levantar el aplicativo saml-handler-1.0, el cual tambien estara configurado con los parametros devueltos en el archivo Instrucciones para configuracion de SAML

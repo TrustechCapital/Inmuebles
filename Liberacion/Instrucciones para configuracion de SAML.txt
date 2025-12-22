@@ -1,0 +1,36 @@
+Datos a enviar para la configuracion de SAML
+
+1. URL de inicio de sesión único
+ Ejemplo:
+ https://accounts.google.com/o/saml2/idp?idpid=C01c1afyn
+2. ID de entidad
+ Ejemplo:
+ https://accounts.google.com/o/saml2?idpid=C01c1afyn
+
+3. Contenido del Certificado
+ Ejemplo:
+ -----BEGIN CERTIFICATE-----
+MIIDdDCCAlygAwIBAgIGAXff2D8HMA0GCSqGSIb3DQEBCwUAMHsxFDASBgNVBAoTC0dvb2dsZSBJ
+bmMuMRYwFAYDVQQHEw1Nb3VudGFpbiBWaWV3MQ8wDQYDVQQDEwZHb29nbGUxGDAWBgNVBAsTD0dv
+b2dsZSBGb3IgV29yazELMAkGA1UEBhMCVVMxEzARBgNVBAgTCkNhbGlmb3JuaWEwHhcNMjEwMjI2
+MTkzNzA0WhcNMjYwMjI1MTkzNzA0WjB7MRQwEgYDVQQKEwtHb29nbGUgSW5jLjEWMBQGA1UEBxMN
+TW91bnRhaW4gVmlldzEPMA0GA1UEAxMGR29vZ2xlMRgwFgYDVQQLEw9Hb29nbGUgRm9yIFdvcmsx
+CzAJBgNVBAYTAlVTMRMwEQYDVQQIEwpDYWxpZm9ybmlhMIIBIjANBgkqhkiG9w0BAQEFAAOCAQ8A
+MIIBCgKCAQEAqvfLwNua++DrCB6rgb9UIycfLP54TQ9wf7R8rj1J4PC+2db8FiCms9sAUEUcJWfG
+eFNeIg/qWibUQiid2/T6iJqpVHntxcIuhNoImPXrSY3Z3AI8zzswiXKluk6qUD8ZhmoQy/+WbbV+
+uTIWsUX1z0fRNw8bLaNLvycTphfRSfOO3kH3iOKzpThOPyans67E5cyWJyHmRSQrROO6yzlNBDX0
+tTNPoJALSAyGW1ss7YPTX4f10503EPCQZo/f0Dl7PjaiByEIqxsMmdH7QJxk9o/M8P2krC8jZzXo
+9YhH8x10R/IsZgrX58DS3+jKL3kruasjYNdxZh5ykxjokFszMwIDAQABMA0GCSqGSIb3DQEBCwUA
+A4IBAQBa+a2rDJrJ7oUZXWNRMALmcfTqe2XqjF1Csh9dDtK9lczdmM3TRhhhDtpLL+LVOFDjCMoX
+k6QfBTm1i8RZwzsmSek6qV/gyYhcgxlTAmkoHxsSVHDl5WUYQyQw/1u79uW8sE78ZSjI05uZeyTv
+cIKc2KXqt/h7luhob7CuuTPtLU6MrwD7jgAK9lqoh6HPyzQS9zBToCJA1E8spaYAKIO2SyKohPo5
+MMzuE2Z5lbPxVXdUxprl6SElr48UyLL0LMWrizPayQFG6f95EL4en/TBG5Cw5f7anaaQq+e6Rdy1
+MgHafw173klMbqeKjZYaz5RRCX5ABybIBseRR9XR1oS0
+-----END CERTIFICATE-----
+
+4. Huella digital SHA-256
+ Ejemplo:
+ A4:91:54:05:64:E3:B2:0C:52:7A:27:1B:9F:F2:30:9F:AF:80:E4:33:F5:E8:4D:62:9A:5A:52:20:C5:DB:D1:F2
+
+Nota importate para la configuracion de la aplicacion SAML, los siguientes atributos deben de quedar como sigue:
+Ver imagen Atributos SAML
