@@ -1,0 +1,1 @@
+{"ast":null,"code":"import { createContext } from 'react';\nexport var DetalleBienesTableCallbacksContext = /*#__PURE__*/createContext({\n  onNew: function onNew() {},\n  onView: function onView() {},\n  onModify: function onModify() {},\n  onDelete: function onDelete() {},\n  onRevaluacion: function onRevaluacion() {}\n});","map":null,"metadata":{},"sourceType":"module"}

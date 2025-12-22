@@ -1,0 +1,1 @@
+{"ast":null,"code":"import baseConfirm from './BaseConfirmationModal';\nimport ConfirmationModal from './ConfirmationModal';\n\nconst requestConfirmation = (props = {}) => {\n  return baseConfirm(ConfirmationModal, props);\n};\n\nexport { baseConfirm as requestCustomConfirmation, requestConfirmation };","map":null,"metadata":{},"sourceType":"module"}

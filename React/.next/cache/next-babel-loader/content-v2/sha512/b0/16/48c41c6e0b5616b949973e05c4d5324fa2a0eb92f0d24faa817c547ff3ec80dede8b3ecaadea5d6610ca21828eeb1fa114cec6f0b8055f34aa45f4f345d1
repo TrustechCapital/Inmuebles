@@ -1,0 +1,1 @@
+{"ast":null,"code":"import { createContext } from 'react';\nexport var SessionInfoContext = /*#__PURE__*/createContext({\n  sessionInfo: null,\n  modulePermissionsMap: null,\n  onLogout: function onLogout() {}\n});","map":null,"metadata":{},"sourceType":"module"}

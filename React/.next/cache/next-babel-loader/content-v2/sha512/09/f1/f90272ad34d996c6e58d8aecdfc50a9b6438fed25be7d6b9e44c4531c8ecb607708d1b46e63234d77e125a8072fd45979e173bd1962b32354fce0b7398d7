@@ -1,0 +1,1 @@
+{"ast":null,"code":"import CrudActions from './actions';\nimport useCrudModule, { crudModuleInitialState } from './hook';\nimport CrudModuleReducer from './reducer';\nexport { CrudActions, CrudModuleReducer, useCrudModule, crudModuleInitialState };","map":null,"metadata":{},"sourceType":"module"}

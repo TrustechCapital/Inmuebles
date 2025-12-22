@@ -1,0 +1,12 @@
+{
+  "/_app": "pages/_app.js",
+  "/_document": "pages/_document.js",
+  "/administracion": "pages/administracion.html",
+  "/bienes": "pages/bienes.html",
+  "/": "pages/index.html",
+  "/interfases": "pages/interfases.html",
+  "/reportes": "pages/reportes.html",
+  "/seguridad": "pages/seguridad.html",
+  "/_error": "pages/_error.js",
+  "/404": "pages/404.html"
+}

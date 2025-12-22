@@ -1,0 +1,1 @@
+{"ast":null,"code":"export const apiConfig = {\n  returnRejectedPromiseOnError: true,\n  withCredentials: true,\n  timeout: 30000,\n  baseURL: process.env.NEXT_PUBLIC_API_BASE_URL,\n  headers: {}\n};","map":null,"metadata":{},"sourceType":"module"}

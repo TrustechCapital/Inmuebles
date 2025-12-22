@@ -1,0 +1,1 @@
+{"ast":null,"code":"import GenericTable from './GenericTable';\nexport { GenericTableCallbacksContext } from './context';\nexport default GenericTable;","map":null,"metadata":{},"sourceType":"module"}

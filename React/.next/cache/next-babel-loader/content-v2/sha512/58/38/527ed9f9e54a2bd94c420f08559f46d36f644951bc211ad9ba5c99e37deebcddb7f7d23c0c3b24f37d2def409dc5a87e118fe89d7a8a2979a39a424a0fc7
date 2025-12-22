@@ -1,0 +1,1 @@
+{"ast":null,"code":"import { createContext } from 'react';\nexport const GenericTableCallbacksContext = /*#__PURE__*/createContext({\n  onSelect: () => {},\n  onNew: () => {},\n  onView: () => {},\n  onModify: () => {},\n  onDelete: () => {}\n});","map":null,"metadata":{},"sourceType":"module"}

@@ -1,0 +1,1 @@
+{"ast":null,"code":"export { bienesApi } from './BienesApi';\nexport { detalleBienesApi } from './DetalleBienesApi';","map":null,"metadata":{},"sourceType":"module"}

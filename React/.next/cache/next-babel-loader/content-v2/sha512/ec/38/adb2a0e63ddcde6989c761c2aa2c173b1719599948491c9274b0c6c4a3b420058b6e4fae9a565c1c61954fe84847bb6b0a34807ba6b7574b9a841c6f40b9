@@ -1,0 +1,1 @@
+{"ast":null,"code":"import { createMuiTheme } from '@material-ui/core/styles';\nimport deepOrange from '@material-ui/core/colors/deepOrange';\nexport default createMuiTheme({\n  palette: {\n    primary: deepOrange,\n    secondary: {\n      main: '#9575cd'\n    }\n  }\n});","map":null,"metadata":{},"sourceType":"module"}
