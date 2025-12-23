@@ -3,13 +3,11 @@
 -- Name: FIDUCIAWEB; Type: SCHEMA; Schema: -; 
 --
 
-CREATE SCHEMA "FIDUCIAWEB";
-
 --
 -- Name: anteproy; Type: TABLE; Schema: FIDUCIAWEB; 
 --
 
-CREATE TABLE "FIDUCIAWEB".anteproy (
+CREATE TABLE anteproy (
     ant_num_prospecto numeric(10,0) NOT NULL,
     ant_fecha_apertura character varying(10),
     ant_num_promotor numeric(10,0) NOT NULL,
@@ -60,7 +58,7 @@ CREATE TABLE "FIDUCIAWEB".anteproy (
 -- Name: async_transactions; Type: TABLE; Schema: FIDUCIAWEB; 
 --
 
-CREATE TABLE "FIDUCIAWEB".async_transactions (
+CREATE TABLE async_transactions (
     transaction_id text NOT NULL,
     transaction_name text NOT NULL,
     transaction_completed numeric(1,0) NOT NULL,
@@ -72,7 +70,7 @@ CREATE TABLE "FIDUCIAWEB".async_transactions (
 -- Name: claves; Type: TABLE; Schema: FIDUCIAWEB; 
 --
 
-CREATE TABLE "FIDUCIAWEB".claves (
+CREATE TABLE claves (
     cve_num_clave numeric(10,0) NOT NULL,
     cve_num_sec_clave numeric(10,0) NOT NULL,
     cve_desc_clave character varying(50),
@@ -99,7 +97,7 @@ CREATE TABLE "FIDUCIAWEB".claves (
 -- Name: contrato; Type: TABLE; Schema: FIDUCIAWEB; 
 --
 
-CREATE TABLE "FIDUCIAWEB".contrato (
+CREATE TABLE contrato (
     cto_num_contrato numeric(10,0) NOT NULL,
     cto_num_cliente numeric(10,0),
     cto_num_cto_eje numeric(10,0),
@@ -175,7 +173,7 @@ CREATE TABLE "FIDUCIAWEB".contrato (
 -- Name: deposit; Type: TABLE; Schema: FIDUCIAWEB; 
 --
 
-CREATE TABLE "FIDUCIAWEB".deposit (
+CREATE TABLE deposit (
     dpo_folio_rcp numeric(10,0) NOT NULL,
     dpo_folio_opera numeric(10,0) NOT NULL,
     dpo_num_operacion numeric(10,0) NOT NULL,
@@ -242,7 +240,7 @@ CREATE TABLE "FIDUCIAWEB".deposit (
 -- Name: detliqui; Type: TABLE; Schema: FIDUCIAWEB; 
 --
 
-CREATE TABLE "FIDUCIAWEB".detliqui (
+CREATE TABLE detliqui (
     del_folio_opera numeric(10,0) NOT NULL,
     del_num_operacion numeric(10,0) NOT NULL,
     del_num_sec_opera numeric(10,0) NOT NULL,
@@ -296,7 +294,7 @@ CREATE TABLE "FIDUCIAWEB".detliqui (
 -- Name: diasfera; Type: TABLE; Schema: FIDUCIAWEB; 
 --
 
-CREATE TABLE "FIDUCIAWEB".diasfera (
+CREATE TABLE diasfera (
     dfa_num_pais numeric(10,0) NOT NULL,
     dfa_ano_fecha numeric(4,0) NOT NULL,
     dfa_mes_fecha numeric(2,0) NOT NULL,
@@ -321,7 +319,7 @@ CREATE TABLE "FIDUCIAWEB".diasfera (
 -- Name: diasfval; Type: TABLE; Schema: FIDUCIAWEB; 
 --
 
-CREATE TABLE "FIDUCIAWEB".diasfval (
+CREATE TABLE diasfval (
     dfv_num_programa numeric(10,0) NOT NULL,
     dfv_num_emision numeric(10,0) NOT NULL,
     dfv_num_pais numeric(4,0) NOT NULL,
@@ -339,7 +337,7 @@ CREATE TABLE "FIDUCIAWEB".diasfval (
 -- Name: estados; Type: TABLE; Schema: FIDUCIAWEB; 
 --
 
-CREATE TABLE "FIDUCIAWEB".estados (
+CREATE TABLE estados (
     edo_num_pais numeric(10,0) NOT NULL,
     edo_num_estado numeric(10,0) NOT NULL,
     edo_nom_estado character varying(50) NOT NULL,
@@ -360,7 +358,7 @@ CREATE TABLE "FIDUCIAWEB".estados (
 -- Name: f_adquirentes; Type: TABLE; Schema: FIDUCIAWEB; 
 --
 
-CREATE TABLE "FIDUCIAWEB".f_adquirentes (
+CREATE TABLE f_adquirentes (
     fadq_id_fideicomiso numeric(10,0) NOT NULL,
     fadq_id_subcuenta numeric(10,0) NOT NULL,
     fadq_id_bien character varying(50) NOT NULL,
@@ -402,7 +400,7 @@ CREATE TABLE "FIDUCIAWEB".f_adquirentes (
 -- Name: f_bgarliq; Type: TABLE; Schema: FIDUCIAWEB; 
 --
 
-CREATE TABLE "FIDUCIAWEB".f_bgarliq (
+CREATE TABLE f_bgarliq (
     glbe_id_fideicomiso numeric(10,0),
     glbe_id_credito character varying(30),
     glbe_id_tipo_credito character varying(35),
@@ -432,7 +430,7 @@ CREATE TABLE "FIDUCIAWEB".f_bgarliq (
 -- Name: f_bienes; Type: TABLE; Schema: FIDUCIAWEB; 
 --
 
-CREATE TABLE "FIDUCIAWEB".f_bienes (
+CREATE TABLE f_bienes (
     fbif_id_fideicomiso numeric(10,0),
     fbif_id_sub_cuenta numeric(10,0),
     fbif_id_tipo_bien numeric(10,0),
@@ -457,7 +455,7 @@ CREATE TABLE "FIDUCIAWEB".f_bienes (
 -- Name: f_bienesgar; Type: TABLE; Schema: FIDUCIAWEB; 
 --
 
-CREATE TABLE "FIDUCIAWEB".f_bienesgar (
+CREATE TABLE f_bienesgar (
     fgrs_id_fideicomiso numeric(10,0) NOT NULL,
     fgrs_id_subcuenta numeric(10,0) NOT NULL,
     fors_id_garantia numeric(10,0) NOT NULL,
@@ -487,7 +485,7 @@ CREATE TABLE "FIDUCIAWEB".f_bienesgar (
 -- Name: f_carta_liberacion; Type: TABLE; Schema: FIDUCIAWEB; 
 --
 
-CREATE TABLE "FIDUCIAWEB".f_carta_liberacion (
+CREATE TABLE f_carta_liberacion (
     flib_id_fideicomiso numeric(10,0),
     flib_id_subcuenta numeric(10,0),
     flib_id_bien character varying(50),
@@ -532,7 +530,7 @@ CREATE TABLE "FIDUCIAWEB".f_carta_liberacion (
 -- Name: f_epassword; Type: TABLE; Schema: FIDUCIAWEB; 
 --
 
-CREATE TABLE "FIDUCIAWEB".f_epassword (
+CREATE TABLE f_epassword (
     usu_num_usuario numeric(10,0) NOT NULL,
     usu_fec_error timestamp without time zone NOT NULL,
     usu_num_error numeric(10,0) NOT NULL
@@ -543,7 +541,7 @@ CREATE TABLE "FIDUCIAWEB".f_epassword (
 -- Name: f_funcion; Type: TABLE; Schema: FIDUCIAWEB; 
 --
 
-CREATE TABLE "FIDUCIAWEB".f_funcion (
+CREATE TABLE f_funcion (
     ffun_id_funcion numeric(10,0) NOT NULL,
     ffun_nom_menu character varying(100),
     ffun_id_padre numeric(10,0),
@@ -556,7 +554,7 @@ CREATE TABLE "FIDUCIAWEB".f_funcion (
 -- Name: f_garantias; Type: TABLE; Schema: FIDUCIAWEB; 
 --
 
-CREATE TABLE "FIDUCIAWEB".f_garantias (
+CREATE TABLE f_garantias (
     fgar_id_fideicomiso numeric(10,0) NOT NULL,
     fgar_id_subcuenta numeric(10,0) NOT NULL,
     fgar_cve_garantia numeric(10,0) NOT NULL,
@@ -580,7 +578,7 @@ CREATE TABLE "FIDUCIAWEB".f_garantias (
 -- Name: f_garantiash; Type: TABLE; Schema: FIDUCIAWEB; 
 --
 
-CREATE TABLE "FIDUCIAWEB".f_garantiash (
+CREATE TABLE f_garantiash (
     fgar_id_fideicomiso numeric(10,0),
     fgar_id_subcuenta numeric(10,0),
     fgar_cve_garantia numeric(10,0),
@@ -604,7 +602,7 @@ CREATE TABLE "FIDUCIAWEB".f_garantiash (
 -- Name: f_hpassword; Type: TABLE; Schema: FIDUCIAWEB; 
 --
 
-CREATE TABLE "FIDUCIAWEB".f_hpassword (
+CREATE TABLE f_hpassword (
     usu_num_usuario numeric(10,0) NOT NULL,
     usu_sec_password numeric(10,0) NOT NULL,
     usu_password character varying(2048),
@@ -616,7 +614,7 @@ CREATE TABLE "FIDUCIAWEB".f_hpassword (
 -- Name: f_liquidaciones_bienes; Type: TABLE; Schema: FIDUCIAWEB; 
 --
 
-CREATE TABLE "FIDUCIAWEB".f_liquidaciones_bienes (
+CREATE TABLE f_liquidaciones_bienes (
     flb_id_fideicomiso numeric(10,0) NOT NULL,
     flb_id_subcuenta numeric(10,0) NOT NULL,
     flb_id_garantia numeric(10,0) NOT NULL,
@@ -636,7 +634,7 @@ CREATE TABLE "FIDUCIAWEB".f_liquidaciones_bienes (
 -- Name: f_per_fun; Type: TABLE; Schema: FIDUCIAWEB; Owner: postgres
 --
 
-CREATE TABLE "FIDUCIAWEB".f_per_fun (
+CREATE TABLE f_per_fun (
     fper_id_perfil numeric(10,0) NOT NULL,
     ffun_id_funcion numeric(10,0) NOT NULL,
     ffun_lectura numeric(10,0) NOT NULL,
@@ -648,7 +646,7 @@ CREATE TABLE "FIDUCIAWEB".f_per_fun (
 -- Name: f_perfil; Type: TABLE; Schema: FIDUCIAWEB; Owner: postgres
 --
 
-CREATE TABLE "FIDUCIAWEB".f_perfil (
+CREATE TABLE f_perfil (
     fper_id_perfil numeric(10,0) NOT NULL,
     fper_nombre_perfil text NOT NULL
 );
@@ -657,7 +655,7 @@ CREATE TABLE "FIDUCIAWEB".f_perfil (
 -- Name: f_proceso_liberacion; Type: TABLE; Schema: FIDUCIAWEB; 
 --
 
-CREATE TABLE "FIDUCIAWEB".f_proceso_liberacion (
+CREATE TABLE f_proceso_liberacion (
     fpl_id_fideicomiso numeric(10,0) NOT NULL,
     fpl_id_subcuenta numeric(10,0) NOT NULL,
     fpl_id_bien numeric(10,0) NOT NULL,
@@ -705,7 +703,7 @@ CREATE TABLE "FIDUCIAWEB".f_proceso_liberacion (
 -- Name: f_reporte; Type: TABLE; Schema: FIDUCIAWEB; 
 --
 
-CREATE TABLE "FIDUCIAWEB".f_reporte (
+CREATE TABLE f_reporte (
     frco_id_reporte numeric(10,0) NOT NULL,
     frco_nombre_reporte character varying(20),
     frco_status character varying(20),
@@ -717,7 +715,7 @@ CREATE TABLE "FIDUCIAWEB".f_reporte (
 -- Name: f_secuencial_fideicomiso; Type: TABLE; Schema: FIDUCIAWEB; 
 --
 
-CREATE TABLE "FIDUCIAWEB".f_secuencial_fideicomiso (
+CREATE TABLE f_secuencial_fideicomiso (
     fsf_id_cve_fideicomiso character varying(10) NOT NULL,
     fsf_num_secuencial numeric(10,0) NOT NULL,
     fsf_cve_st_scuencial character varying(80)
@@ -728,7 +726,7 @@ CREATE TABLE "FIDUCIAWEB".f_secuencial_fideicomiso (
 -- Name: f_unidades; Type: TABLE; Schema: FIDUCIAWEB; 
 --
 
-CREATE TABLE "FIDUCIAWEB".f_unidades (
+CREATE TABLE f_unidades (
     funi_id_fideicomiso numeric(10,0) NOT NULL,
     funi_id_subcuenta numeric(10,0) NOT NULL,
     funi_id_bien numeric(10,0) NOT NULL,
@@ -785,7 +783,7 @@ CREATE TABLE "FIDUCIAWEB".f_unidades (
 -- Name: f_usuario; Type: TABLE; Schema: FIDUCIAWEB; 
 --
 
-CREATE TABLE "FIDUCIAWEB".f_usuario (
+CREATE TABLE f_usuario (
     fusu_id_usuario character varying(100) NOT NULL,
     fusu_contrasena character varying(30),
     fusu_nombre_usuario character varying(150),
@@ -804,7 +802,7 @@ CREATE TABLE "FIDUCIAWEB".f_usuario (
 -- Name: f_usuarioc; Type: TABLE; Schema: FIDUCIAWEB; 
 --
 
-CREATE TABLE "FIDUCIAWEB".f_usuarioc (
+CREATE TABLE f_usuarioc (
     fusu_id_usuario character varying(20) NOT NULL,
     fusu_contrasena character varying(30),
     fusu_nombre_usuario character varying(150),
@@ -823,7 +821,7 @@ CREATE TABLE "FIDUCIAWEB".f_usuarioc (
 -- Name: feccont; Type: TABLE; Schema: FIDUCIAWEB; 
 --
 
-CREATE TABLE "FIDUCIAWEB".feccont (
+CREATE TABLE feccont (
     fco_cve_tipo_fecha character varying(25) NOT NULL,
     fco_ano_dia numeric(4,0) NOT NULL,
     fco_mes_dia numeric(2,0) NOT NULL,
@@ -853,7 +851,7 @@ CREATE TABLE "FIDUCIAWEB".feccont (
 -- Name: feriados; Type: TABLE; Schema: FIDUCIAWEB; 
 --
 
-CREATE TABLE "FIDUCIAWEB".feriados (
+CREATE TABLE feriados (
     fer_num_pais numeric(10,0) NOT NULL,
     fer_fec_mes numeric(10,0) NOT NULL,
     fer_fec_dia numeric(10,0) NOT NULL,
@@ -873,7 +871,7 @@ CREATE TABLE "FIDUCIAWEB".feriados (
 -- Name: fideicom; Type: TABLE; Schema: FIDUCIAWEB; 
 --
 
-CREATE TABLE "FIDUCIAWEB".fideicom (
+CREATE TABLE fideicom (
     fid_num_contrato numeric(10,0) NOT NULL,
     fid_fideicomitente numeric(10,0) NOT NULL,
     fid_num_pais numeric(10,0),
@@ -909,7 +907,7 @@ CREATE TABLE "FIDUCIAWEB".fideicom (
 -- Name: folios; Type: TABLE; Schema: FIDUCIAWEB; 
 --
 
-CREATE TABLE "FIDUCIAWEB".folios (
+CREATE TABLE folios (
     fol_tipo_folio numeric(10,0) NOT NULL,
     fol_num_folio numeric(10,0),
     fol_cve_st_folio character varying(25),
@@ -921,7 +919,7 @@ CREATE TABLE "FIDUCIAWEB".folios (
 -- Name: funcion; Type: TABLE; Schema: FIDUCIAWEB; 
 --
 
-CREATE TABLE "FIDUCIAWEB".funcion (
+CREATE TABLE funcion (
     fun_id_opcion numeric(10,0) NOT NULL,
     fun_nom_menu character varying(100),
     fun_id_padre numeric(10,0),
@@ -933,7 +931,7 @@ CREATE TABLE "FIDUCIAWEB".funcion (
 -- Name: garantia; Type: TABLE; Schema: FIDUCIAWEB; 
 --
 
-CREATE TABLE "FIDUCIAWEB".garantia (
+CREATE TABLE garantia (
     grn_num_contrato numeric(10,0) NOT NULL,
     grn_sub_contrato numeric(10,0) NOT NULL,
     grn_cve_valores numeric(10,0),
@@ -965,7 +963,7 @@ CREATE TABLE "FIDUCIAWEB".garantia (
 -- Name: garantiah; Type: TABLE; Schema: FIDUCIAWEB; 
 --
 
-CREATE TABLE "FIDUCIAWEB".garantiah (
+CREATE TABLE garantiah (
     grn_num_contrato numeric(10,0) NOT NULL,
     grn_sub_contrato numeric(10,0) NOT NULL,
     grn_cve_valores numeric(10,0),
@@ -997,7 +995,7 @@ CREATE TABLE "FIDUCIAWEB".garantiah (
 -- Name: indices; Type: TABLE; Schema: FIDUCIAWEB; 
 --
 
-CREATE TABLE "FIDUCIAWEB".indices (
+CREATE TABLE indices (
     ind_cve_indice character varying(25) NOT NULL,
     ind_ano_indice numeric(4,0) NOT NULL,
     ind_mes_indice numeric(2,0) NOT NULL,
@@ -1017,7 +1015,7 @@ CREATE TABLE "FIDUCIAWEB".indices (
 -- Name: monedas; Type: TABLE; Schema: FIDUCIAWEB; 
 --
 
-CREATE TABLE "FIDUCIAWEB".monedas (
+CREATE TABLE monedas (
     mon_num_pais numeric(10,0) NOT NULL,
     mon_nom_moneda character varying(50) NOT NULL,
     mon_ano_alta_reg numeric(4,0) NOT NULL,
@@ -1035,7 +1033,7 @@ CREATE TABLE "FIDUCIAWEB".monedas (
 -- Name: movimien; Type: TABLE; Schema: FIDUCIAWEB; 
 --
 
-CREATE TABLE "FIDUCIAWEB".movimien (
+CREATE TABLE movimien (
     mov_ano_movto numeric(4,0) NOT NULL,
     mov_mes_movto numeric(2,0) NOT NULL,
     mov_dia_movto numeric(2,0) NOT NULL,
@@ -1070,7 +1068,7 @@ CREATE TABLE "FIDUCIAWEB".movimien (
 -- Name: notarios; Type: TABLE; Schema: FIDUCIAWEB; 
 --
 
-CREATE TABLE "FIDUCIAWEB".notarios (
+CREATE TABLE notarios (
     not_num_notario numeric(10,0) NOT NULL,
     not_num_ofic_nota numeric(10,0) NOT NULL,
     not_nom_notario character varying(50),
@@ -1110,7 +1108,7 @@ CREATE TABLE "FIDUCIAWEB".notarios (
 -- Name: paises; Type: TABLE; Schema: FIDUCIAWEB; 
 --
 
-CREATE TABLE "FIDUCIAWEB".paises (
+CREATE TABLE paises (
     pai_num_pais numeric(10,0) NOT NULL,
     pai_nom_pais character varying(50),
     pai_abr_pais character varying(30),
@@ -1128,7 +1126,7 @@ CREATE TABLE "FIDUCIAWEB".paises (
 -- Name: planes; Type: TABLE; Schema: FIDUCIAWEB; 
 --
 
-CREATE TABLE "FIDUCIAWEB".planes (
+CREATE TABLE planes (
     pla_cve_fase_prod character varying(36) NOT NULL,
     pla_desc_fase_prod character varying(255),
     pla_cve_per_aplica character varying(25),
@@ -1151,7 +1149,7 @@ CREATE TABLE "FIDUCIAWEB".planes (
 -- Name: puestos; Type: TABLE; Schema: FIDUCIAWEB; 
 --
 
-CREATE TABLE "FIDUCIAWEB".puestos (
+CREATE TABLE puestos (
     pue_num_puesto numeric(10,0) NOT NULL,
     pue_nom_puesto character varying(50)
 );
@@ -1163,7 +1161,7 @@ CREATE TABLE "FIDUCIAWEB".puestos (
 -- Name: reporte_poliza; Type: TABLE; Schema: FIDUCIAWEB; 
 --
 
-CREATE TABLE "FIDUCIAWEB".reporte_poliza (
+CREATE TABLE reporte_poliza (
     ras_num_contrato numeric(10,0) NOT NULL,
     ras_folio_opera numeric(10,0) NOT NULL,
     ras_sec_asiento numeric(10,0) NOT NULL,
@@ -1188,7 +1186,7 @@ CREATE TABLE "FIDUCIAWEB".reporte_poliza (
 -- Name: reportes; Type: TABLE; Schema: FIDUCIAWEB; 
 --
 
-CREATE TABLE "FIDUCIAWEB".reportes (
+CREATE TABLE reportes (
     rep_num_reporte numeric(10,0) NOT NULL,
     rep_nom_fisico_rep character varying(50),
     rep_nom_reporte character varying(50),
@@ -1212,7 +1210,7 @@ CREATE TABLE "FIDUCIAWEB".reportes (
 -- Name: rutinas; Type: TABLE; Schema: FIDUCIAWEB; 
 --
 
-CREATE TABLE "FIDUCIAWEB".rutinas (
+CREATE TABLE rutinas (
     rut_id_rutina character varying(36) NOT NULL,
     rut_nom_rutina character varying(36),
     rut_desc_rutina character varying(255),
@@ -1242,7 +1240,7 @@ CREATE TABLE "FIDUCIAWEB".rutinas (
 -- Name: usuarios; Type: TABLE; Schema: FIDUCIAWEB; 
 --
 
-CREATE TABLE "FIDUCIAWEB".usuarios (
+CREATE TABLE usuarios (
     usu_num_usuario numeric(10,0) NOT NULL,
     usu_nom_usuario character varying(50),
     usu_tipo_usuario character varying(50),
@@ -1276,7 +1274,7 @@ CREATE TABLE "FIDUCIAWEB".usuarios (
 -- Name: ANTEPROY ANTEPROY_PK; Type: CONSTRAINT; Schema: FIDUCIAWEB; 
 --
 
-ALTER TABLE ONLY "FIDUCIAWEB"."ANTEPROY"
+ALTER TABLE ONLY "ANTEPROY"
     ADD CONSTRAINT "ANTEPROY_PK" PRIMARY KEY ("ANT_NUM_PROSPECTO");
 
 
@@ -1284,7 +1282,7 @@ ALTER TABLE ONLY "FIDUCIAWEB"."ANTEPROY"
 -- Name: CLAVES CLAVES_PK; Type: CONSTRAINT; Schema: FIDUCIAWEB; 
 --
 
-ALTER TABLE ONLY "FIDUCIAWEB"."CLAVES"
+ALTER TABLE ONLY "CLAVES"
     ADD CONSTRAINT "CLAVES_PK" PRIMARY KEY ("CVE_NUM_CLAVE", "CVE_NUM_SEC_CLAVE");
 
 
@@ -1292,7 +1290,7 @@ ALTER TABLE ONLY "FIDUCIAWEB"."CLAVES"
 -- Name: CONTRATO CONTRATO_PK; Type: CONSTRAINT; Schema: FIDUCIAWEB; 
 --
 
-ALTER TABLE ONLY "FIDUCIAWEB"."CONTRATO"
+ALTER TABLE ONLY "CONTRATO"
     ADD CONSTRAINT "CONTRATO_PK" PRIMARY KEY ("CTO_NUM_CONTRATO");
 
 
@@ -1300,7 +1298,7 @@ ALTER TABLE ONLY "FIDUCIAWEB"."CONTRATO"
 -- Name: DEPOSIT DEPOSIT_PK; Type: CONSTRAINT; Schema: FIDUCIAWEB; 
 --
 
-ALTER TABLE ONLY "FIDUCIAWEB"."DEPOSIT"
+ALTER TABLE ONLY "DEPOSIT"
     ADD CONSTRAINT "DEPOSIT_PK" PRIMARY KEY ("DPO_FOLIO_RCP", "DPO_FOLIO_OPERA", "DPO_CVE_TIPO_DEP");
 
 
@@ -1308,7 +1306,7 @@ ALTER TABLE ONLY "FIDUCIAWEB"."DEPOSIT"
 -- Name: DETLIQUI DETLIQUI_PK; Type: CONSTRAINT; Schema: FIDUCIAWEB; 
 --
 
-ALTER TABLE ONLY "FIDUCIAWEB"."DETLIQUI"
+ALTER TABLE ONLY "DETLIQUI"
     ADD CONSTRAINT "DETLIQUI_PK" PRIMARY KEY ("DEL_FOLIO_OPERA");
 
 
@@ -1316,7 +1314,7 @@ ALTER TABLE ONLY "FIDUCIAWEB"."DETLIQUI"
 -- Name: DIASFERA DIASFERA_PK; Type: CONSTRAINT; Schema: FIDUCIAWEB; 
 --
 
-ALTER TABLE ONLY "FIDUCIAWEB"."DIASFERA"
+ALTER TABLE ONLY "DIASFERA"
     ADD CONSTRAINT "DIASFERA_PK" PRIMARY KEY ("DFA_NUM_PAIS", "DFA_ANO_FECHA", "DFA_MES_FECHA", "DFA_DIA_FECHA");
 
 
@@ -1324,7 +1322,7 @@ ALTER TABLE ONLY "FIDUCIAWEB"."DIASFERA"
 -- Name: DIASFVAL DIASFVAL_PK; Type: CONSTRAINT; Schema: FIDUCIAWEB; 
 --
 
-ALTER TABLE ONLY "FIDUCIAWEB"."DIASFVAL"
+ALTER TABLE ONLY "DIASFVAL"
     ADD CONSTRAINT "DIASFVAL_PK" PRIMARY KEY ("DFV_NUM_PROGRAMA", "DFV_NUM_EMISION", "DFV_NUM_PAIS");
 
 
@@ -1332,7 +1330,7 @@ ALTER TABLE ONLY "FIDUCIAWEB"."DIASFVAL"
 -- Name: FECCONT FECCONT_PK; Type: CONSTRAINT; Schema: FIDUCIAWEB; 
 --
 
-ALTER TABLE ONLY "FIDUCIAWEB"."FECCONT"
+ALTER TABLE ONLY "FECCONT"
     ADD CONSTRAINT "FECCONT_PK" PRIMARY KEY ("FCO_CVE_TIPO_FECHA");
 
 
@@ -1340,7 +1338,7 @@ ALTER TABLE ONLY "FIDUCIAWEB"."FECCONT"
 -- Name: FERIADOS FERIADOS_PK; Type: CONSTRAINT; Schema: FIDUCIAWEB; 
 --
 
-ALTER TABLE ONLY "FIDUCIAWEB"."FERIADOS"
+ALTER TABLE ONLY "FERIADOS"
     ADD CONSTRAINT "FERIADOS_PK" PRIMARY KEY ("FER_FEC_MES", "FER_FEC_DIA", "FER_FEC_ANO", "FER_NUM_PAIS");
 
 
@@ -1348,7 +1346,7 @@ ALTER TABLE ONLY "FIDUCIAWEB"."FERIADOS"
 -- Name: FIDEICOM FIDEICOM_PK; Type: CONSTRAINT; Schema: FIDUCIAWEB; 
 --
 
-ALTER TABLE ONLY "FIDUCIAWEB"."FIDEICOM"
+ALTER TABLE ONLY "FIDEICOM"
     ADD CONSTRAINT "FIDEICOM_PK" PRIMARY KEY ("FID_NUM_CONTRATO", "FID_FIDEICOMITENTE");
 
 
@@ -1356,7 +1354,7 @@ ALTER TABLE ONLY "FIDUCIAWEB"."FIDEICOM"
 -- Name: FOLIOS FOLIOS_PK; Type: CONSTRAINT; Schema: FIDUCIAWEB; 
 --
 
-ALTER TABLE ONLY "FIDUCIAWEB"."FOLIOS"
+ALTER TABLE ONLY "FOLIOS"
     ADD CONSTRAINT "FOLIOS_PK" PRIMARY KEY ("FOL_TIPO_FOLIO");
 
 
@@ -1364,7 +1362,7 @@ ALTER TABLE ONLY "FIDUCIAWEB"."FOLIOS"
 -- Name: F_SECUENCIAL_FIDEICOMISO FSF_ID_CVE_FIDEICOMISO_PK; Type: CONSTRAINT; Schema: FIDUCIAWEB; 
 --
 
-ALTER TABLE ONLY "FIDUCIAWEB"."F_SECUENCIAL_FIDEICOMISO"
+ALTER TABLE ONLY "F_SECUENCIAL_FIDEICOMISO"
     ADD CONSTRAINT "FSF_ID_CVE_FIDEICOMISO_PK" PRIMARY KEY ("FSF_ID_CVE_FIDEICOMISO", "FSF_NUM_SECUENCIAL");
 
 
@@ -1372,7 +1370,7 @@ ALTER TABLE ONLY "FIDUCIAWEB"."F_SECUENCIAL_FIDEICOMISO"
 -- Name: FUNCION FUNCION_PK; Type: CONSTRAINT; Schema: FIDUCIAWEB; 
 --
 
-ALTER TABLE ONLY "FIDUCIAWEB"."FUNCION"
+ALTER TABLE ONLY "FUNCION"
     ADD CONSTRAINT "FUNCION_PK" PRIMARY KEY ("FUN_ID_OPCION");
 
 
@@ -1380,7 +1378,7 @@ ALTER TABLE ONLY "FIDUCIAWEB"."FUNCION"
 -- Name: F_ADQUIRENTES F_ADQUIRENTES_PK; Type: CONSTRAINT; Schema: FIDUCIAWEB; 
 --
 
-ALTER TABLE ONLY "FIDUCIAWEB"."F_ADQUIRENTES"
+ALTER TABLE ONLY "F_ADQUIRENTES"
     ADD CONSTRAINT "F_ADQUIRENTES_PK" PRIMARY KEY ("FADQ_ID_FIDEICOMISO", "FADQ_ID_SUBCUENTA", "FADQ_ID_BIEN", "FADQ_ID_EDIFICIO", "FADQ_ID_DEPTO", "FADQ_ID_VENTA");
 
 
@@ -1388,7 +1386,7 @@ ALTER TABLE ONLY "FIDUCIAWEB"."F_ADQUIRENTES"
 -- Name: F_BIENESGAR F_BIENESGAR_PK; Type: CONSTRAINT; Schema: FIDUCIAWEB; 
 --
 
-ALTER TABLE ONLY "FIDUCIAWEB"."F_BIENESGAR"
+ALTER TABLE ONLY "F_BIENESGAR"
     ADD CONSTRAINT "F_BIENESGAR_PK" PRIMARY KEY ("FGRS_ID_FIDEICOMISO", "FGRS_ID_SUBCUENTA", "FORS_ID_GARANTIA", "FORS_CVE_TIPO_GARANTIA", "FORS_CVE_TIPO_BIEN");
 
 
@@ -1396,7 +1394,7 @@ ALTER TABLE ONLY "FIDUCIAWEB"."F_BIENESGAR"
 -- Name: F_EPASSWORD F_EPASSWORD_PK; Type: CONSTRAINT; Schema: FIDUCIAWEB; 
 --
 
-ALTER TABLE ONLY "FIDUCIAWEB"."F_EPASSWORD"
+ALTER TABLE ONLY "F_EPASSWORD"
     ADD CONSTRAINT "F_EPASSWORD_PK" PRIMARY KEY ("USU_NUM_USUARIO", "USU_FEC_ERROR");
 
 
@@ -1404,7 +1402,7 @@ ALTER TABLE ONLY "FIDUCIAWEB"."F_EPASSWORD"
 -- Name: F_FUNCION F_FUNCION_PK; Type: CONSTRAINT; Schema: FIDUCIAWEB; 
 --
 
-ALTER TABLE ONLY "FIDUCIAWEB"."F_FUNCION"
+ALTER TABLE ONLY "F_FUNCION"
     ADD CONSTRAINT "F_FUNCION_PK" PRIMARY KEY ("FFUN_ID_FUNCION");
 
 
@@ -1412,7 +1410,7 @@ ALTER TABLE ONLY "FIDUCIAWEB"."F_FUNCION"
 -- Name: F_GARANTIAS F_GARANTIAS_PK; Type: CONSTRAINT; Schema: FIDUCIAWEB; 
 --
 
-ALTER TABLE ONLY "FIDUCIAWEB"."F_GARANTIAS"
+ALTER TABLE ONLY "F_GARANTIAS"
     ADD CONSTRAINT "F_GARANTIAS_PK" PRIMARY KEY ("FGAR_ID_FIDEICOMISO", "FGAR_ID_SUBCUENTA", "FGAR_CVE_GARANTIA");
 
 
@@ -1420,7 +1418,7 @@ ALTER TABLE ONLY "FIDUCIAWEB"."F_GARANTIAS"
 -- Name: F_HPASSWORD F_HPASSWORD_PK; Type: CONSTRAINT; Schema: FIDUCIAWEB; 
 --
 
-ALTER TABLE ONLY "FIDUCIAWEB"."F_HPASSWORD"
+ALTER TABLE ONLY "F_HPASSWORD"
     ADD CONSTRAINT "F_HPASSWORD_PK" PRIMARY KEY ("USU_NUM_USUARIO", "USU_SEC_PASSWORD");
 
 
@@ -1428,7 +1426,7 @@ ALTER TABLE ONLY "FIDUCIAWEB"."F_HPASSWORD"
 -- Name: F_PROCESO_LIBERACION F_PROCESO_LIBERACION_PK; Type: CONSTRAINT; Schema: FIDUCIAWEB; 
 --
 
-ALTER TABLE ONLY "FIDUCIAWEB"."F_PROCESO_LIBERACION"
+ALTER TABLE ONLY "F_PROCESO_LIBERACION"
     ADD CONSTRAINT "F_PROCESO_LIBERACION_PK" PRIMARY KEY ("FPL_ID_FIDEICOMISO", "FPL_ID_SUBCUENTA", "FPL_ID_BIEN", "FPL_ID_EDIFICIO", "FPL_ID_DEPTO");
 
 
@@ -1436,7 +1434,7 @@ ALTER TABLE ONLY "FIDUCIAWEB"."F_PROCESO_LIBERACION"
 -- Name: F_UNIDADES F_UNIDADES_PK; Type: CONSTRAINT; Schema: FIDUCIAWEB; 
 --
 
-ALTER TABLE ONLY "FIDUCIAWEB"."F_UNIDADES"
+ALTER TABLE ONLY "F_UNIDADES"
     ADD CONSTRAINT "F_UNIDADES_PK" PRIMARY KEY ("FUNI_ID_FIDEICOMISO", "FUNI_ID_SUBCUENTA", "FUNI_ID_BIEN", "FUNI_ID_EDIFICIO", "FUNI_ID_DEPTO");
 
 
@@ -1444,7 +1442,7 @@ ALTER TABLE ONLY "FIDUCIAWEB"."F_UNIDADES"
 -- Name: F_USUARIO F_USUARIO_PK; Type: CONSTRAINT; Schema: FIDUCIAWEB; 
 --
 
-ALTER TABLE ONLY "FIDUCIAWEB"."F_USUARIO"
+ALTER TABLE ONLY "F_USUARIO"
     ADD CONSTRAINT "F_USUARIO_PK" PRIMARY KEY ("FUSU_ID_USUARIO");
 
 
@@ -1452,7 +1450,7 @@ ALTER TABLE ONLY "FIDUCIAWEB"."F_USUARIO"
 -- Name: GARANTIAH GARANTIAH_PK; Type: CONSTRAINT; Schema: FIDUCIAWEB; 
 --
 
-ALTER TABLE ONLY "FIDUCIAWEB"."GARANTIAH"
+ALTER TABLE ONLY "GARANTIAH"
     ADD CONSTRAINT "GARANTIAH_PK" PRIMARY KEY ("GRN_SUB_CONTRATO", "GRN_NUM_CONTRATO");
 
 
@@ -1460,7 +1458,7 @@ ALTER TABLE ONLY "FIDUCIAWEB"."GARANTIAH"
 -- Name: GARANTIA GARANTIA_PK; Type: CONSTRAINT; Schema: FIDUCIAWEB; 
 --
 
-ALTER TABLE ONLY "FIDUCIAWEB"."GARANTIA"
+ALTER TABLE ONLY "GARANTIA"
     ADD CONSTRAINT "GARANTIA_PK" PRIMARY KEY ("GRN_SUB_CONTRATO", "GRN_NUM_CONTRATO");
 
 
@@ -1468,7 +1466,7 @@ ALTER TABLE ONLY "FIDUCIAWEB"."GARANTIA"
 -- Name: INDICES INDICES_PK; Type: CONSTRAINT; Schema: FIDUCIAWEB; 
 --
 
-ALTER TABLE ONLY "FIDUCIAWEB"."INDICES"
+ALTER TABLE ONLY "INDICES"
     ADD CONSTRAINT "INDICES_PK" PRIMARY KEY ("IND_CVE_INDICE", "IND_ANO_INDICE", "IND_MES_INDICE", "IND_DIA_INDICE");
 
 
@@ -1476,7 +1474,7 @@ ALTER TABLE ONLY "FIDUCIAWEB"."INDICES"
 -- Name: MONEDAS MONEDAS_PK; Type: CONSTRAINT; Schema: FIDUCIAWEB; 
 --
 
-ALTER TABLE ONLY "FIDUCIAWEB"."MONEDAS"
+ALTER TABLE ONLY "MONEDAS"
     ADD CONSTRAINT "MONEDAS_PK" PRIMARY KEY ("MON_NOM_MONEDA", "MON_NUM_PAIS");
 
 
@@ -1484,7 +1482,7 @@ ALTER TABLE ONLY "FIDUCIAWEB"."MONEDAS"
 -- Name: MOVIMIEN MOVIMIEN_PK; Type: CONSTRAINT; Schema: FIDUCIAWEB; 
 --
 
-ALTER TABLE ONLY "FIDUCIAWEB"."MOVIMIEN"
+ALTER TABLE ONLY "MOVIMIEN"
     ADD CONSTRAINT "MOVIMIEN_PK" PRIMARY KEY ("MOV_ANO_MOVTO", "MOV_MES_MOVTO", "MOV_DIA_MOVTO", "MOV_NUM_CONTRATO", "MOV_SUB_CONTRATO", "MOV_FOLIO_OPERA", "MOV_NUM_MODULO", "MOV_NUM_TRANSAC");
 
 
@@ -1492,7 +1490,7 @@ ALTER TABLE ONLY "FIDUCIAWEB"."MOVIMIEN"
 -- Name: NOTARIOS NOTARIOS_PK; Type: CONSTRAINT; Schema: FIDUCIAWEB; 
 --
 
-ALTER TABLE ONLY "FIDUCIAWEB"."NOTARIOS"
+ALTER TABLE ONLY "NOTARIOS"
     ADD CONSTRAINT "NOTARIOS_PK" PRIMARY KEY ("NOT_NUM_NOTARIO");
 
 
@@ -1500,7 +1498,7 @@ ALTER TABLE ONLY "FIDUCIAWEB"."NOTARIOS"
 -- Name: PAISES PAISES_PK; Type: CONSTRAINT; Schema: FIDUCIAWEB; 
 --
 
-ALTER TABLE ONLY "FIDUCIAWEB"."PAISES"
+ALTER TABLE ONLY "PAISES"
     ADD CONSTRAINT "PAISES_PK" PRIMARY KEY ("PAI_NUM_PAIS");
 
 
@@ -1508,7 +1506,7 @@ ALTER TABLE ONLY "FIDUCIAWEB"."PAISES"
 -- Name: PLANES PLANES_PK; Type: CONSTRAINT; Schema: FIDUCIAWEB; 
 --
 
-ALTER TABLE ONLY "FIDUCIAWEB"."PLANES"
+ALTER TABLE ONLY "PLANES"
     ADD CONSTRAINT "PLANES_PK" PRIMARY KEY ("PLA_CVE_FASE_PROD");
 
 
@@ -1516,7 +1514,7 @@ ALTER TABLE ONLY "FIDUCIAWEB"."PLANES"
 -- Name: PUESTOS PUESTOS_PK; Type: CONSTRAINT; Schema: FIDUCIAWEB; 
 --
 
-ALTER TABLE ONLY "FIDUCIAWEB"."PUESTOS"
+ALTER TABLE ONLY "PUESTOS"
     ADD CONSTRAINT "PUESTOS_PK" PRIMARY KEY ("PUE_NUM_PUESTO");
 
 
@@ -1524,7 +1522,7 @@ ALTER TABLE ONLY "FIDUCIAWEB"."PUESTOS"
 -- Name: REPORTES REPORTES_PK; Type: CONSTRAINT; Schema: FIDUCIAWEB; 
 --
 
-ALTER TABLE ONLY "FIDUCIAWEB"."REPORTES"
+ALTER TABLE ONLY "REPORTES"
     ADD CONSTRAINT "REPORTES_PK" PRIMARY KEY ("REP_NUM_REPORTE");
 
 
@@ -1532,7 +1530,7 @@ ALTER TABLE ONLY "FIDUCIAWEB"."REPORTES"
 -- Name: REPORTE_POLIZA REPORTE_POLIZA_PK; Type: CONSTRAINT; Schema: FIDUCIAWEB; 
 --
 
-ALTER TABLE ONLY "FIDUCIAWEB"."REPORTE_POLIZA"
+ALTER TABLE ONLY "REPORTE_POLIZA"
     ADD CONSTRAINT "REPORTE_POLIZA_PK" PRIMARY KEY ("RAS_NUM_CONTRATO", "RAS_FOLIO_OPERA", "RAS_SEC_ASIENTO", "RAS_NUM_CTAM", "RAS_NUM_SCTA", "RAS_NUM_SSCTA", "RAS_NUM_SSSCTA", "RAS_NUM_SSSSCTA", "RAS_NUM_SSSSSCTA");
 
 
@@ -1540,7 +1538,7 @@ ALTER TABLE ONLY "FIDUCIAWEB"."REPORTE_POLIZA"
 -- Name: RUTINAS RUTINAS_PK; Type: CONSTRAINT; Schema: FIDUCIAWEB; 
 --
 
-ALTER TABLE ONLY "FIDUCIAWEB"."RUTINAS"
+ALTER TABLE ONLY "RUTINAS"
     ADD CONSTRAINT "RUTINAS_PK" PRIMARY KEY ("RUT_ID_RUTINA");
 
 
@@ -1548,7 +1546,7 @@ ALTER TABLE ONLY "FIDUCIAWEB"."RUTINAS"
 -- Name: F_REPORTE SYS_C00180796; Type: CONSTRAINT; Schema: FIDUCIAWEB; 
 --
 
-ALTER TABLE ONLY "FIDUCIAWEB"."F_REPORTE"
+ALTER TABLE ONLY "F_REPORTE"
     ADD CONSTRAINT "SYS_C00180796" PRIMARY KEY ("FRCO_ID_REPORTE");
 
 
@@ -1556,7 +1554,7 @@ ALTER TABLE ONLY "FIDUCIAWEB"."F_REPORTE"
 -- Name: USUARIOS USUARIOS_PK; Type: CONSTRAINT; Schema: FIDUCIAWEB; 
 --
 
-ALTER TABLE ONLY "FIDUCIAWEB"."USUARIOS"
+ALTER TABLE ONLY "USUARIOS"
     ADD CONSTRAINT "USUARIOS_PK" PRIMARY KEY ("USU_NUM_USUARIO");
 
 
@@ -1564,7 +1562,7 @@ ALTER TABLE ONLY "FIDUCIAWEB"."USUARIOS"
 -- Name: anteproy anteproy_pk; Type: CONSTRAINT; Schema: FIDUCIAWEB; 
 --
 
-ALTER TABLE ONLY "FIDUCIAWEB".anteproy
+ALTER TABLE ONLY anteproy
     ADD CONSTRAINT anteproy_pk PRIMARY KEY (ant_num_prospecto);
 
 
@@ -1572,7 +1570,7 @@ ALTER TABLE ONLY "FIDUCIAWEB".anteproy
 -- Name: async_transactions async_transactions_pkey; Type: CONSTRAINT; Schema: FIDUCIAWEB; 
 --
 
-ALTER TABLE ONLY "FIDUCIAWEB".async_transactions
+ALTER TABLE ONLY async_transactions
     ADD CONSTRAINT async_transactions_pkey PRIMARY KEY (transaction_id);
 
 
@@ -1580,7 +1578,7 @@ ALTER TABLE ONLY "FIDUCIAWEB".async_transactions
 -- Name: claves claves_pk; Type: CONSTRAINT; Schema: FIDUCIAWEB; 
 --
 
-ALTER TABLE ONLY "FIDUCIAWEB".claves
+ALTER TABLE ONLY claves
     ADD CONSTRAINT claves_pk PRIMARY KEY (cve_num_clave, cve_num_sec_clave);
 
 
@@ -1588,7 +1586,7 @@ ALTER TABLE ONLY "FIDUCIAWEB".claves
 -- Name: contrato contrato_pk; Type: CONSTRAINT; Schema: FIDUCIAWEB; 
 --
 
-ALTER TABLE ONLY "FIDUCIAWEB".contrato
+ALTER TABLE ONLY contrato
     ADD CONSTRAINT contrato_pk PRIMARY KEY (cto_num_contrato);
 
 
@@ -1596,7 +1594,7 @@ ALTER TABLE ONLY "FIDUCIAWEB".contrato
 -- Name: deposit deposit_pk; Type: CONSTRAINT; Schema: FIDUCIAWEB; 
 --
 
-ALTER TABLE ONLY "FIDUCIAWEB".deposit
+ALTER TABLE ONLY deposit
     ADD CONSTRAINT deposit_pk PRIMARY KEY (dpo_folio_rcp, dpo_folio_opera, dpo_cve_tipo_dep);
 
 
@@ -1604,7 +1602,7 @@ ALTER TABLE ONLY "FIDUCIAWEB".deposit
 -- Name: detliqui detliqui_pk; Type: CONSTRAINT; Schema: FIDUCIAWEB; 
 --
 
-ALTER TABLE ONLY "FIDUCIAWEB".detliqui
+ALTER TABLE ONLY detliqui
     ADD CONSTRAINT detliqui_pk PRIMARY KEY (del_folio_opera);
 
 
@@ -1612,7 +1610,7 @@ ALTER TABLE ONLY "FIDUCIAWEB".detliqui
 -- Name: diasfera diasfera_pk; Type: CONSTRAINT; Schema: FIDUCIAWEB; 
 --
 
-ALTER TABLE ONLY "FIDUCIAWEB".diasfera
+ALTER TABLE ONLY diasfera
     ADD CONSTRAINT diasfera_pk PRIMARY KEY (dfa_num_pais, dfa_ano_fecha, dfa_mes_fecha, dfa_dia_fecha);
 
 
@@ -1620,7 +1618,7 @@ ALTER TABLE ONLY "FIDUCIAWEB".diasfera
 -- Name: diasfval diasfval_pk; Type: CONSTRAINT; Schema: FIDUCIAWEB; 
 --
 
-ALTER TABLE ONLY "FIDUCIAWEB".diasfval
+ALTER TABLE ONLY diasfval
     ADD CONSTRAINT diasfval_pk PRIMARY KEY (dfv_num_programa, dfv_num_emision, dfv_num_pais);
 
 
@@ -1628,7 +1626,7 @@ ALTER TABLE ONLY "FIDUCIAWEB".diasfval
 -- Name: estados estados_pk; Type: CONSTRAINT; Schema: FIDUCIAWEB; 
 --
 
-ALTER TABLE ONLY "FIDUCIAWEB".estados
+ALTER TABLE ONLY estados
     ADD CONSTRAINT estados_pk PRIMARY KEY (edo_num_estado, edo_num_pais);
 
 
@@ -1636,7 +1634,7 @@ ALTER TABLE ONLY "FIDUCIAWEB".estados
 -- Name: f_adquirentes f_adquirentes_pk; Type: CONSTRAINT; Schema: FIDUCIAWEB; 
 --
 
-ALTER TABLE ONLY "FIDUCIAWEB".f_adquirentes
+ALTER TABLE ONLY f_adquirentes
     ADD CONSTRAINT f_adquirentes_pk PRIMARY KEY (fadq_id_fideicomiso, fadq_id_subcuenta, fadq_id_bien, fadq_id_edificio, fadq_id_depto, fadq_id_venta);
 
 
@@ -1644,7 +1642,7 @@ ALTER TABLE ONLY "FIDUCIAWEB".f_adquirentes
 -- Name: f_bienesgar f_bienesgar_pk; Type: CONSTRAINT; Schema: FIDUCIAWEB; 
 --
 
-ALTER TABLE ONLY "FIDUCIAWEB".f_bienesgar
+ALTER TABLE ONLY f_bienesgar
     ADD CONSTRAINT f_bienesgar_pk PRIMARY KEY (fgrs_id_fideicomiso, fgrs_id_subcuenta, fors_id_garantia, fors_cve_tipo_garantia, fors_cve_tipo_bien);
 
 
@@ -1652,7 +1650,7 @@ ALTER TABLE ONLY "FIDUCIAWEB".f_bienesgar
 -- Name: f_epassword f_epassword_pk; Type: CONSTRAINT; Schema: FIDUCIAWEB; 
 --
 
-ALTER TABLE ONLY "FIDUCIAWEB".f_epassword
+ALTER TABLE ONLY f_epassword
     ADD CONSTRAINT f_epassword_pk PRIMARY KEY (usu_num_usuario, usu_fec_error);
 
 
@@ -1660,7 +1658,7 @@ ALTER TABLE ONLY "FIDUCIAWEB".f_epassword
 -- Name: f_funcion f_funcion_pk; Type: CONSTRAINT; Schema: FIDUCIAWEB; 
 --
 
-ALTER TABLE ONLY "FIDUCIAWEB".f_funcion
+ALTER TABLE ONLY f_funcion
     ADD CONSTRAINT f_funcion_pk PRIMARY KEY (ffun_id_funcion);
 
 
@@ -1668,7 +1666,7 @@ ALTER TABLE ONLY "FIDUCIAWEB".f_funcion
 -- Name: f_garantias f_garantias_pk; Type: CONSTRAINT; Schema: FIDUCIAWEB; 
 --
 
-ALTER TABLE ONLY "FIDUCIAWEB".f_garantias
+ALTER TABLE ONLY f_garantias
     ADD CONSTRAINT f_garantias_pk PRIMARY KEY (fgar_id_fideicomiso, fgar_id_subcuenta, fgar_cve_garantia);
 
 
@@ -1676,7 +1674,7 @@ ALTER TABLE ONLY "FIDUCIAWEB".f_garantias
 -- Name: f_hpassword f_hpassword_pk; Type: CONSTRAINT; Schema: FIDUCIAWEB; 
 --
 
-ALTER TABLE ONLY "FIDUCIAWEB".f_hpassword
+ALTER TABLE ONLY f_hpassword
     ADD CONSTRAINT f_hpassword_pk PRIMARY KEY (usu_num_usuario, usu_sec_password);
 
 
@@ -1684,7 +1682,7 @@ ALTER TABLE ONLY "FIDUCIAWEB".f_hpassword
 -- Name: f_liquidaciones_bienes f_liquidaciones_bienes_pk; Type: CONSTRAINT; Schema: FIDUCIAWEB; 
 --
 
-ALTER TABLE ONLY "FIDUCIAWEB".f_liquidaciones_bienes
+ALTER TABLE ONLY f_liquidaciones_bienes
     ADD CONSTRAINT f_liquidaciones_bienes_pk PRIMARY KEY (flb_id_fideicomiso, flb_id_subcuenta, flb_id_garantia, flb_id_bien_garantia, flb_id_liquidacion);
 
 
@@ -1692,7 +1690,7 @@ ALTER TABLE ONLY "FIDUCIAWEB".f_liquidaciones_bienes
 -- Name: f_per_fun f_per_fun_pkey; Type: CONSTRAINT; Schema: FIDUCIAWEB; Owner: postgres
 --
 
-ALTER TABLE ONLY "FIDUCIAWEB".f_per_fun
+ALTER TABLE ONLY f_per_fun
     ADD CONSTRAINT f_per_fun_pkey PRIMARY KEY (fper_id_perfil, ffun_id_funcion);
 
 
@@ -1700,7 +1698,7 @@ ALTER TABLE ONLY "FIDUCIAWEB".f_per_fun
 -- Name: f_perfil f_perfil_pkey; Type: CONSTRAINT; Schema: FIDUCIAWEB; Owner: postgres
 --
 
-ALTER TABLE ONLY "FIDUCIAWEB".f_perfil
+ALTER TABLE ONLY f_perfil
     ADD CONSTRAINT f_perfil_pkey PRIMARY KEY (fper_id_perfil);
 
 
@@ -1708,7 +1706,7 @@ ALTER TABLE ONLY "FIDUCIAWEB".f_perfil
 -- Name: f_proceso_liberacion f_proceso_liberacion_pk; Type: CONSTRAINT; Schema: FIDUCIAWEB; 
 --
 
-ALTER TABLE ONLY "FIDUCIAWEB".f_proceso_liberacion
+ALTER TABLE ONLY f_proceso_liberacion
     ADD CONSTRAINT f_proceso_liberacion_pk PRIMARY KEY (fpl_id_fideicomiso, fpl_id_subcuenta, fpl_id_bien, fpl_id_edificio, fpl_id_depto);
 
 
@@ -1716,7 +1714,7 @@ ALTER TABLE ONLY "FIDUCIAWEB".f_proceso_liberacion
 -- Name: f_unidades f_unidades_pk; Type: CONSTRAINT; Schema: FIDUCIAWEB; 
 --
 
-ALTER TABLE ONLY "FIDUCIAWEB".f_unidades
+ALTER TABLE ONLY f_unidades
     ADD CONSTRAINT f_unidades_pk PRIMARY KEY (funi_id_fideicomiso, funi_id_subcuenta, funi_id_bien, funi_id_edificio, funi_id_depto);
 
 
@@ -1724,7 +1722,7 @@ ALTER TABLE ONLY "FIDUCIAWEB".f_unidades
 -- Name: f_usuario f_usuario_pk; Type: CONSTRAINT; Schema: FIDUCIAWEB; 
 --
 
-ALTER TABLE ONLY "FIDUCIAWEB".f_usuario
+ALTER TABLE ONLY f_usuario
     ADD CONSTRAINT f_usuario_pk PRIMARY KEY (fusu_id_usuario);
 
 
@@ -1732,7 +1730,7 @@ ALTER TABLE ONLY "FIDUCIAWEB".f_usuario
 -- Name: feccont feccont_pk; Type: CONSTRAINT; Schema: FIDUCIAWEB; 
 --
 
-ALTER TABLE ONLY "FIDUCIAWEB".feccont
+ALTER TABLE ONLY feccont
     ADD CONSTRAINT feccont_pk PRIMARY KEY (fco_cve_tipo_fecha);
 
 
@@ -1740,7 +1738,7 @@ ALTER TABLE ONLY "FIDUCIAWEB".feccont
 -- Name: feriados feriados_pk; Type: CONSTRAINT; Schema: FIDUCIAWEB; 
 --
 
-ALTER TABLE ONLY "FIDUCIAWEB".feriados
+ALTER TABLE ONLY feriados
     ADD CONSTRAINT feriados_pk PRIMARY KEY (fer_fec_mes, fer_fec_dia, fer_fec_ano, fer_num_pais);
 
 
@@ -1748,7 +1746,7 @@ ALTER TABLE ONLY "FIDUCIAWEB".feriados
 -- Name: fideicom fideicom_pk; Type: CONSTRAINT; Schema: FIDUCIAWEB; 
 --
 
-ALTER TABLE ONLY "FIDUCIAWEB".fideicom
+ALTER TABLE ONLY fideicom
     ADD CONSTRAINT fideicom_pk PRIMARY KEY (fid_num_contrato, fid_fideicomitente);
 
 
@@ -1756,7 +1754,7 @@ ALTER TABLE ONLY "FIDUCIAWEB".fideicom
 -- Name: folios folios_pk; Type: CONSTRAINT; Schema: FIDUCIAWEB; 
 --
 
-ALTER TABLE ONLY "FIDUCIAWEB".folios
+ALTER TABLE ONLY folios
     ADD CONSTRAINT folios_pk PRIMARY KEY (fol_tipo_folio);
 
 
@@ -1764,7 +1762,7 @@ ALTER TABLE ONLY "FIDUCIAWEB".folios
 -- Name: f_secuencial_fideicomiso fsf_id_cve_fideicomiso_pk; Type: CONSTRAINT; Schema: FIDUCIAWEB; 
 --
 
-ALTER TABLE ONLY "FIDUCIAWEB".f_secuencial_fideicomiso
+ALTER TABLE ONLY f_secuencial_fideicomiso
     ADD CONSTRAINT fsf_id_cve_fideicomiso_pk PRIMARY KEY (fsf_id_cve_fideicomiso, fsf_num_secuencial);
 
 
@@ -1772,7 +1770,7 @@ ALTER TABLE ONLY "FIDUCIAWEB".f_secuencial_fideicomiso
 -- Name: funcion funcion_pk; Type: CONSTRAINT; Schema: FIDUCIAWEB; 
 --
 
-ALTER TABLE ONLY "FIDUCIAWEB".funcion
+ALTER TABLE ONLY funcion
     ADD CONSTRAINT funcion_pk PRIMARY KEY (fun_id_opcion);
 
 
@@ -1780,7 +1778,7 @@ ALTER TABLE ONLY "FIDUCIAWEB".funcion
 -- Name: garantia garantia_pk; Type: CONSTRAINT; Schema: FIDUCIAWEB; 
 --
 
-ALTER TABLE ONLY "FIDUCIAWEB".garantia
+ALTER TABLE ONLY garantia
     ADD CONSTRAINT garantia_pk PRIMARY KEY (grn_sub_contrato, grn_num_contrato);
 
 
@@ -1788,7 +1786,7 @@ ALTER TABLE ONLY "FIDUCIAWEB".garantia
 -- Name: garantiah garantiah_pk; Type: CONSTRAINT; Schema: FIDUCIAWEB; 
 --
 
-ALTER TABLE ONLY "FIDUCIAWEB".garantiah
+ALTER TABLE ONLY garantiah
     ADD CONSTRAINT garantiah_pk PRIMARY KEY (grn_sub_contrato, grn_num_contrato);
 
 
@@ -1796,7 +1794,7 @@ ALTER TABLE ONLY "FIDUCIAWEB".garantiah
 -- Name: indices indices_pk; Type: CONSTRAINT; Schema: FIDUCIAWEB; 
 --
 
-ALTER TABLE ONLY "FIDUCIAWEB".indices
+ALTER TABLE ONLY indices
     ADD CONSTRAINT indices_pk PRIMARY KEY (ind_cve_indice, ind_ano_indice, ind_mes_indice, ind_dia_indice);
 
 
@@ -1804,7 +1802,7 @@ ALTER TABLE ONLY "FIDUCIAWEB".indices
 -- Name: monedas monedas_pk; Type: CONSTRAINT; Schema: FIDUCIAWEB; 
 --
 
-ALTER TABLE ONLY "FIDUCIAWEB".monedas
+ALTER TABLE ONLY monedas
     ADD CONSTRAINT monedas_pk PRIMARY KEY (mon_nom_moneda, mon_num_pais);
 
 
@@ -1812,7 +1810,7 @@ ALTER TABLE ONLY "FIDUCIAWEB".monedas
 -- Name: movimien movimien_pk; Type: CONSTRAINT; Schema: FIDUCIAWEB; 
 --
 
-ALTER TABLE ONLY "FIDUCIAWEB".movimien
+ALTER TABLE ONLY movimien
     ADD CONSTRAINT movimien_pk PRIMARY KEY (mov_ano_movto, mov_mes_movto, mov_dia_movto, mov_num_contrato, mov_sub_contrato, mov_folio_opera, mov_num_modulo, mov_num_transac);
 
 
@@ -1820,7 +1818,7 @@ ALTER TABLE ONLY "FIDUCIAWEB".movimien
 -- Name: notarios notarios_pk; Type: CONSTRAINT; Schema: FIDUCIAWEB; 
 --
 
-ALTER TABLE ONLY "FIDUCIAWEB".notarios
+ALTER TABLE ONLY notarios
     ADD CONSTRAINT notarios_pk PRIMARY KEY (not_num_notario);
 
 
@@ -1828,7 +1826,7 @@ ALTER TABLE ONLY "FIDUCIAWEB".notarios
 -- Name: paises paises_pk; Type: CONSTRAINT; Schema: FIDUCIAWEB; 
 --
 
-ALTER TABLE ONLY "FIDUCIAWEB".paises
+ALTER TABLE ONLY paises
     ADD CONSTRAINT paises_pk PRIMARY KEY (pai_num_pais);
 
 
@@ -1836,7 +1834,7 @@ ALTER TABLE ONLY "FIDUCIAWEB".paises
 -- Name: planes planes_pk; Type: CONSTRAINT; Schema: FIDUCIAWEB; 
 --
 
-ALTER TABLE ONLY "FIDUCIAWEB".planes
+ALTER TABLE ONLY planes
     ADD CONSTRAINT planes_pk PRIMARY KEY (pla_cve_fase_prod);
 
 
@@ -1844,7 +1842,7 @@ ALTER TABLE ONLY "FIDUCIAWEB".planes
 -- Name: puestos puestos_pk; Type: CONSTRAINT; Schema: FIDUCIAWEB; 
 --
 
-ALTER TABLE ONLY "FIDUCIAWEB".puestos
+ALTER TABLE ONLY puestos
     ADD CONSTRAINT puestos_pk PRIMARY KEY (pue_num_puesto);
 
 
@@ -1852,7 +1850,7 @@ ALTER TABLE ONLY "FIDUCIAWEB".puestos
 -- Name: reporte_poliza reporte_poliza_pk; Type: CONSTRAINT; Schema: FIDUCIAWEB; 
 --
 
-ALTER TABLE ONLY "FIDUCIAWEB".reporte_poliza
+ALTER TABLE ONLY reporte_poliza
     ADD CONSTRAINT reporte_poliza_pk PRIMARY KEY (ras_num_contrato, ras_folio_opera, ras_sec_asiento, ras_num_ctam, ras_num_scta, ras_num_sscta, ras_num_ssscta, ras_num_sssscta, ras_num_ssssscta);
 
 
@@ -1860,7 +1858,7 @@ ALTER TABLE ONLY "FIDUCIAWEB".reporte_poliza
 -- Name: reportes reportes_pk; Type: CONSTRAINT; Schema: FIDUCIAWEB; 
 --
 
-ALTER TABLE ONLY "FIDUCIAWEB".reportes
+ALTER TABLE ONLY reportes
     ADD CONSTRAINT reportes_pk PRIMARY KEY (rep_num_reporte);
 
 
@@ -1868,7 +1866,7 @@ ALTER TABLE ONLY "FIDUCIAWEB".reportes
 -- Name: rutinas rutinas_pk; Type: CONSTRAINT; Schema: FIDUCIAWEB; 
 --
 
-ALTER TABLE ONLY "FIDUCIAWEB".rutinas
+ALTER TABLE ONLY rutinas
     ADD CONSTRAINT rutinas_pk PRIMARY KEY (rut_id_rutina);
 
 
@@ -1876,7 +1874,7 @@ ALTER TABLE ONLY "FIDUCIAWEB".rutinas
 -- Name: f_reporte sys_c00180796; Type: CONSTRAINT; Schema: FIDUCIAWEB; 
 --
 
-ALTER TABLE ONLY "FIDUCIAWEB".f_reporte
+ALTER TABLE ONLY f_reporte
     ADD CONSTRAINT sys_c00180796 PRIMARY KEY (frco_id_reporte);
 
 
@@ -1884,5 +1882,5 @@ ALTER TABLE ONLY "FIDUCIAWEB".f_reporte
 -- Name: usuarios usuarios_pk; Type: CONSTRAINT; Schema: FIDUCIAWEB; 
 --
 
-ALTER TABLE ONLY "FIDUCIAWEB".usuarios
+ALTER TABLE ONLY usuarios
     ADD CONSTRAINT usuarios_pk PRIMARY KEY (usu_num_usuario);
