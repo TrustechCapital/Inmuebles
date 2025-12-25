@@ -24,11 +24,11 @@ const useStyles = makeStyles((theme) => ({
     header: {
         padding: '1rem',
         backgroundColor: theme.palette.primary.main,
-        color: theme.palette.common.white,
+        color: theme.palette.common.black,
     },
     body: {
         padding: theme.spacing(2),
-        color: theme.palette.common.white,
+        color: theme.palette.common.black,
         display: 'flex',
         flexFlow: 'column',
     },
