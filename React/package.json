@@ -1,7 +1,7 @@
 {
     "name": "fw-interno-banregio",
     "version": "1.0.0",
-    "description": "",
+    "description": "[![Build Status](https://travis-ci.org/joemccann/dillinger.svg?branch=master)](https://travis-ci.org/joemccann/dillinger) Paso 1: Instalar Node.js [![Node.js](https://nodejs.org/static/images/logo.svg)](https://nodejs.org/en/)",
     "main": "index.js",
     "scripts": {
         "test": "echo \"Error: no test specified\" && exit 1",
@@ -37,12 +37,13 @@
         "yup": "^0.29.0"
     },
     "devDependencies": {
-        "@types/node": "^13.13.5",
-        "@types/react": "^16.9.34",
+        "@types/node": "^13.13.52",
+        "@types/react": "^16.14.68",
         "@types/react-dom": "^16.9.7",
         "@types/yup": "^0.29.0",
         "cross-zip": "^3.1.0",
         "prettier": "2.0.5",
-        "typescript": "^3.8.3"
-    }
+        "typescript": "^3.9.10"
+    },
+    "type": "commonjs"
 }
